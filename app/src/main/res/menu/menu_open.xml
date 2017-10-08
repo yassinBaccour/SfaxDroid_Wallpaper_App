@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:mContext="com.bentenstudio.islamoqhd.activity.DetailsActivity">
+
+    <item
+        android:icon="@mipmap/ic_camera"
+        android:id="@+id/open_camera"
+        android:title="@string/opencamera" />
+
+    <item
+        android:icon="@mipmap/ic_gallery"
+        android:id="@+id/open_gallery"
+        android:title="@string/opengellery" />
+
+    <item
+        android:icon="@mipmap/ic_gallery_open"
+        android:id="@+id/open_web"
+        android:title="@string/openweb" />
+
+</menu>

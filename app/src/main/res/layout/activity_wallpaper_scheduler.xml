@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rootLayout"
+        tools:mContext="com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="#203141" >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <LinearLayout
+            android:id="@+id/container_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical" >
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+         <ScrollView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="50"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNotForget"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/timerWallpaperNotForget"
+            android:gravity="center"
+            android:textColor="#2ecc71"
+            />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/serviceis"
+            android:gravity="center"
+           />
+
+        <TextView
+            android:id="@+id/txtstatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Off"
+            android:textStyle="italic"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_light"
+            />
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#80ecf0f1" />
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <TableRow
+            android:gravity="fill">
+
+        <Button
+            android:drawableTop="@drawable/ic_active_img"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="@string/activeservice"
+            android:id="@+id/buttonActive" />
+
+            <View
+                android:layout_gravity="center"
+                android:layout_width="0.5dp"
+                android:layout_height="60dp"
+                android:background="#80ecf0f1" />
+
+        <Button
+            android:drawableTop="@drawable/ic_close_img"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="@string/closeservice"
+            android:id="@+id/buttonClose" />
+</TableRow>
+        </TableLayout>
+
+        <View
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#80ecf0f1" />
+
+        <TextView
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scheduler_new_days_title" />
+
+        <RadioGroup
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/onehoure"
+                android:id="@+id/radioOneHoure"
+                android:layout_gravity="left"
+                android:checked="true"
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sixhoure"
+                android:id="@+id/radioSixHoure"
+                android:layout_gravity="left"
+                android:checked="false"
+                android:textSize="20dp"
+                android:layout_weight="0.13" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/douzeoure"
+                android:id="@+id/radioDouzeHoure"
+                android:layout_gravity="left"
+                android:checked="false"
+                android:textSize="20dp"
+                android:layout_weight="0.13" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/oneday"
+                android:id="@+id/radioOneDayHoure"
+                android:layout_gravity="left"
+                android:checked="false"
+                android:textSize="20dp"
+                android:layout_weight="0.13" />
+        </RadioGroup>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#80ecf0f1" />
+
+        <View
+            android:id="@+id/divinerBottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#80ecf0f1" />
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        <TableRow
+            android:gravity="fill">
+
+        <Button
+            android:drawableTop="@drawable/ic_img_timer_add_new_drawable"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/AddWallpaper"
+            android:id="@+id/buttonAddLwp"
+            />
+
+            <View
+                android:layout_gravity="center"
+                android:layout_width="0.5dp"
+                android:layout_height="60dp"
+                android:background="#80ecf0f1" />
+
+            <Button
+                android:drawableTop="@drawable/ic_img_timer_fav_drawable"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="@string/ListWallpaper"
+                android:id="@+id/buttonLWPList" />
+
+        </TableRow>
+        </TableLayout>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/TimerActivityHowToUse"
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/TimerActivityDesc"
+            android:id="@+id/textView4"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:textColor="#ecf0f1"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Developped With JobService by Yassin Ba"
+            android:layout_gravity="center_horizontal" />
+
+
+
+    </LinearLayout>
+         </ScrollView>
+        </LinearLayout>
+        </FrameLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </android.support.design.widget.CoordinatorLayout>

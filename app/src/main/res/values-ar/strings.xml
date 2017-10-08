@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">خلفية تموج المياه  الله</string>
+    <string name="lwp_name">خلفية تموج المياه  الله</string>
+    <string name="app_namenospace">allahwallpapers</string>
+    <string-array name="ripple_size">
+        <item>صغيرة</item>
+        <item>متوسطة</item>
+        <item>كبيرة</item>
+    </string-array>
+
+    <string-array name="ripple_size_value">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="ripple_duration">
+        <item>بطيئة</item>
+        <item>متوسط</item>
+        <item>سريع</item>
+    </string-array>
+
+    <string-array name="ripple_duration_value">
+        <item>slow</item>
+        <item>medium</item>
+        <item>fast</item>
+    </string-array>
+
+    <string-array name="ripple_image">
+        <item>Allah 1</item>
+        <item>Allah 2</item>
+        <item>Allah 3</item>
+    </string-array>
+
+    <string-array name="ripple_image_value">
+        <item>Allah 1</item>
+        <item>Allah 2</item>
+        <item>Allah 3</item>
+    </string-array>
+    <string name="title_activity_choose_ripple_lwp">ChooseRippleLwpActivity</string>
+    <string name="txt1">كيفية تطبيق الخلفية المتحرك ؟</string>
+    <string name="txt2">إختيار الخلفية</string>
+    <string name="txt3">كيفية التطبيق يدويا ؟</string>
+    <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
+    <string name="txtrate1">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
+    <string name="txtrate2"> تقييم التطبيقة </string>
+    <string name="txtrate3">ذكرني لاحق</string>
+    <string name="txtrate4">لاأريد </string>
+    <string name="txtrate5">التقيم</string>
+    <string name="txtrate6">اضغط مرتين على الزر للخروج</string>
+    <string name="txt5"> الصوت</string>
+    <string name="txt6">حدد هذا الخيار لسماع صوت قطرة الماء عند لمس الشاشة</string>
+    <string name="txt7">حجم التموج</string>
+    <string name="txt8">تغير حجم التموج</string>
+    <string name="txt9">سرعة التموج</string>
+    <string name="txt10">تغير سرعة التموج</string>
+    <string name="txt11">صوت</string>
+    <string name="txt12">اعدادت التموج</string>
+    <string name="txt13">التقييم</string>
+    <string name="txt14">رجاء التقييم التطبيقة</string>
+    <string name="other">خلفياتي الأخرى</string>
+    <string name="txtGallery">مجموعة الخلفيات الإسلامية</string>
+    <string name="gallery"></string>
+    <string name="catalog_Lab">مصنع</string>
+    <string name="SetWall">تطبيق الخلفية</string>
+    <string name="NoConnection">لست متصل بالإنترنات</string>
+    <string name="setSwallSucess">تم تطبيق الخلفية بنجاح</string>
+    <string name="setSwallNotSucess">خلل في تطبيق الخلفية </string>
+    <string name="otherwallll">آلاف الخلفيات</string>
+    <string name="ratingapp">تقيم التطبيق مع الشكر</string>
+    <!-- Snack Details -->
+    <string name="detail.snack.save.success">Successfully saved wallpaper</string>
+    <string name="detail.snack.save.failure">Try again, Failed to save wallpaper</string>
+    <string name="detail.snack.set.success">Successfully set as wallpaper</string>
+    <string name="detail.snack.set.failure">Try again, Failed to set as wallpaper</string>
+    <string name="detail.snack.button.not_ready">Try again, The resource is not ready to process</string>
+    <!-- Menu Details -->
+    <string name="menu.detail.oneclickwallpaper">تطبيق الخلفية</string>
+    <string name="menu.detail.wall">جعل الصورة خلفية</string>
+    <string name="menu.detail.chooserwall">فتح عبر برنامج الخلفيات</string>
+    <string name="menu.detail.gallery">حفظ الصورة</string>
+    <string name="menu.detail.share.inst">النشر في الإنستقرام </string>
+    <string name="menu.detail.share.fb">النشر في الفيسبوك </string>
+    <string name="menu.detail.share.all">النشر</string>
+    <string name="menu.detail.share.ripple">إستعمال كخلفية تموج</string>
+    <string name="title_activity_tabbed_gallery">TabbedGalleryActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="catalog_title">خلفيات إسلامية</string>
+    <string name="catalog_download">تحميل الخلفيات</string>
+    <string name="catalog_loading">تحميل.....</string>
+    <string name="catalog_New">الجدد </string>
+    <string name="catalog_All">الكل</string>
+    <string name="catalog_Popular">الأحسن</string>
+    <string name="catalog_Category">المجموعات</string>
+    <string name="catalog_LWP">المتحركة</string>
+    <string name="appNotInstalled">التطبيق ليس موجود</string>
+    <string name="setAs">إستعمال</string>
+    <string name="openGallery">فتح ملف الصور</string>
+    <string name="openCamera">تصوير صورة</string>
+    <string name="cardframetitle">إطارات للصور</string>
+    <string name="cardframedesc">ركب صورتك الخاصة عبر إستعمال الإطارات</string>
+    <string name="cardStickerstitle">خطوط و ملصقات</string>
+    <string name="cardStickersdesc">ركب ملصاقات على الصور وأنشرها</string>
+    <string name="ShareUsing">Sالنشر بإستعمال</string>
+    <string name="openGalleryLong">فتح ملف الصور</string>
+    <string name="savepermissiondesc">يجب تفعيل خاصية تسجيل الصور ليعمل البرنامج</string>
+    <string name="permissionok">نعم</string>
+    <string name="permissionnon">لا</string>
+    <string name="lwp_author">yassin Contributors</string>
+    <string name="lwp_desc">Tunis Sfax Developer</string>
+    <string name="nameofallah">أسماء الله الحسنى </string>
+    <string name="setSkyboxLwp">إختيار الخلفية</string>
+    <string name="DescSkyboxLwp">خلفية متحركة لكتابات أسماء الله الحسني في السماء مع تحرك في كل الإتجاهات</string>
+    <string name="TitleSkyboxLwp">أسماء الله الحسنى </string>
+    <string name="DescRippleLwp">مجموعة الخلفيات لتموج المياه عند لمس الشاشة</string>
+    <string name="TitleRippleLwp">تموج المياه</string>
+    <string name="otherMethodRippleTitle">الطريقة الثانية</string>
+    <string name="otherMethodRippleDesc">إفتح صورة في الصفحة الرئسية ثم إضغط على الزر إجعلها خلفية تموج</string>
+    <string name="FirstMethodRippleTitle">الطريقة الأولى</string>
+    <string name="FirstMethodRippleDesc"> إختر صورتك المفضلة ثم إضغط على الزر الأسفل لجعلها خلفية متحركة</string>
+    <string name="TitleDouaLwp"> خلفية دعاء متبدلة  </string>
+    <string name="DescDouaLwp">قم بإختيار خلفية و عند لمس الشاشة أدعية تتبدل تلقائيا</string>
+    <string name="DouaLwpTitle">إختيار الخلفية</string>
+    <string name="DouaLwpProgressDesc">إختيار الخلفية</string>
+    <string name="DouaLwpDownloadCompleted">إنتهاء</string>
+    <string name="main_menu_scheduler_status">خدمة التغيير: %1$s</string>
+    <string name="scheduler_new_days_title">تغير الخلفية كل</string>
+    <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
+    <string name="TitleTimerLwp">خلفيات متبدلة</string>
+    <string name="DescTimerLwp">قم بإختيات خلفياتك المفضلة اللتي ستتبدل علي الشاشة مع التوقيت الزمني المختار</string>
+    <string name="AddWallpaper">إضافة الخلفيات</string>
+    <string name="ListWallpaper">قائمة الصور المحفوظة</string>
+    <string name="TimerActivityDesc">حمل العديد من الخلفيات وذالك عبر إختيارها وقم بإختيار المدة الزمنية لتبديل الخلفية </string>
+    <string name="TimerActivityHowToUse">كيفية الإستعمال</string>
+    <string name="onehoure">ساعة واحدة</string>
+    <string name="sixhoure">ستة ساعات</string>
+    <string name="douzeoure">نصف يوم</string>
+    <string name="oneday">كل يوم</string>
+    <string name="onswitch">تعمل</string>
+    <string name="offswitch">لا تعمل</string>
+    <string name="timerWallpaper">خدمة</string>
+    <string name="serviceis">تغير الخلفية</string>
+    <string name="addwalltitle">إضافة الصور</string>
+    <string name="addwalldesc">يجب عليك زيادة ٤ صور على الأقل لتفعيل الخدمة</string>
+    <string name="addwallok">إضافة</string>
+    <string name="addwallcancel">إلغاء</string>
+    <string name="activeservice">تفعيل الخدمة</string>
+    <string name="closeservice">غلق الخدمة</string>
+    <string name="timerWallpaperNotForget">لانسى غلق الخدمة إذا إستعملة خلفية متحركة أخرى</string>
+    <string name="titleBasmala">الفتح مع البسملة</string>
+    <string name="toastnosound">بسمله بدون صوت</string>
+    <string name="toastwithsound">بسمله بالصوت</string>
+    <string name="toastsanspicture"> بسمله بدون صورة  </string>
+    <string name="toastwithpicture">بسمله بصورة </string>
+    <string name="notifbasmallahactive">بسملة مفعلة </string>
+    <string name="prefPicture">إضهار الصورة المختارة عند الفتح</string>
+    <string name="prefSound">قرائة البسملة صوتيا عند الفتح</string>
+    <string name="select_Category">إختيار الصورة من القائمة</string>
+    <string name="defaultText">  إختر الصورة  </string>
+    <string name="prefAleatoire">صور عشوائية تتبدل تلقائيا عند الفتح</string>
+    <string name="settingtxt">تعديلات</string>
+    <string name="currentPicutre">الصورة الحالية اللتي تظهر عند الفتح</string>
+    <string name="prefnbopentoshow">تفعيل في الفتحة عدد</string>
+    <string name="nbunlockinfo">تحديد عدد مرات فتح الهاتف لضهور الصورة أو قرائة البسملة</string>
+    <string name="openBasmalaTitle">الفتح مع البسملة</string>
+    <string name="openBasmalaDesc">قرائة البسملة عند فتح الهاتف الجوال</string>
+    <string name="openBasmala">فتح</string>
+    <string name="openBasmalaNeedAddPicture">يجب عليك إختيار صورة</string>
+    <string name="needallowpermission">يجب السماح باتصوير على الشاشة</string>
+    <string name="timeShort">قصير</string>
+    <string name="timeMeduim">معتدل</string>
+    <string name="timeFast">سريع</string>
+    <string name="timeTurbo">الأسرع</string>
+    <string name="serviceOn">الخدمة تعمل</string>
+    <string name="serviceOff">الخدمة مغلقة</string>
+    <string name="basmalapicturegallery">الصور</string>
+    <string name="activesbasmalah">تفعيل</string>
+    <string name="closesebasmalae">غلق</string>
+    <string name="imageChnaged">تم تبديل الصورة</string>
+    <string name="sizeFullscreen">الأكبر</string>
+    <string name="sizeBig">كبير</string>
+    <string name="sizeMeduim">معتدل</string>
+    <string name="sizeSmall">صغير</string>
+    <string name="playbasmalaunlocktitle">قرائة البسملة عند فتح الهاتف</string>
+    <string name="colortxt">لون الصورة</string>
+    <string name="sizetxt">كبر الصورة</string>
+    <string name="choosecolor">إختر اللون</string>
+    <string name="btnok">نعم</string>
+    <string name="btncancel">لا</string>
+    <string name="speedInfoFast">السرعة الآن سريعة جدا</string>
+    <string name="txtspeed">السرعة</string>
+    <string name="downloadterminated">إنتهى التحميل</string>
+    <string name="txtcompleted">إنتهى</string>
+    <string name="Writingtxt">لون الكتابة</string>
+    <string name="douatitle1">تحميل الأدعية</string>
+    <string name="douatitle2">الرجاء إنتضار التحميل</string>
+    <string name="nofiletimer">يجب زيادة 4 صور أو كثر</string>
+    <string name="timeron">خدمت تبديل الصور تعمل</string>
+    <string name="nameofallah2dtitle">٩٩ أسماء للله الحسنى</string>
+    <string name="nameofallah2ddesc">خلفية حية لأسماء الله الحسنى اللتي تتبدل على الشاشة عند لمسها</string>
+    <string name="textfont">إختيار الخط</string>
+    <string name="sizeTexteNameofallah">كبر الخط</string>
+    <string name="notchanger">إذ إختيار الخلفية الجديدة لم يتفعل , إضغط على الشاشة ٣ مرات. أو أعد إختيار الصورة من جديد</string>
+    <string name="disableDeleteMode">الرجاء غلق خاصية الفسخ</string>
+    <string name="nothingAtScreen">لاشيئ على الشاشة</string>
+    <string name="noText">لاتوجد كتابة على الشاشة</string>
+    <string name="addNewTextTitle">أضف كتابة</string>
+    <string name="addtextfragment">أضافة الكتابات</string>
+    <string name="resizestickers">يمكنك تكبير و تعديل الملصقات</string>
+    <string name="swipeleftright">للمزيد اسحب إلي اليمين أو اليسار</string>
+    <string name="opencamera"> إلتقاط الصورة عبر الكميرا </string>
+    <string name="opengellery"> فتح ملف صور الهاتف </string>
+    <string name="openweb"> صور البرنامج </string>
+    <string name="issaved">تم حفظ الصورة في الذاكرة</string>
+    <string name="addtochangesize">أضف النص على الصورة لتكبير الكتابة</string>
+    <string name="addtochangebackground">أضف النص على الصورة لتبديل لون خلفية الكتابة</string>
+    <string name="addtochangefont">أضف النص على الصورة لتغير الخط</string>
+    <string name="removepicture"> فسخ الصورة</string>
+    <string name="texturetitle">إختيار الخلفية</string>
+
+</resources>

@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "964602286370",
+    "project_id": "allah-water-rippel-lwp"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964602286370:android:5c8e587c5dc579a8",
+        "android_client_info": {
+          "package_name": "com.sami.rippel.alla"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFcWvWpmQ1RVArbha4pUN9NDGLsF0Cx9s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-78575086-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964602286370:android:1ffaa512845c42e9",
+        "android_client_info": {
+          "package_name": "com.sami.rippel.allah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFcWvWpmQ1RVArbha4pUN9NDGLsF0Cx9s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-78575086-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

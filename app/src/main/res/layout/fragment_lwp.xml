@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <LinearLayout
+        android:id="@+id/layoutbutton"
+        android:layout_width="fill_parent"
+        android:layout_height="800dp"
+        android:orientation="vertical"
+        >
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:orientation="vertical" >
+
+          <android.support.v7.widget.CardView
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/cardViewRippleLWP"
+              style="@style/Material_Card_View"
+              card_view:cardCornerRadius="2dp"
+              card_view:cardElevation="4dp">
+              <LinearLayout
+                  android:background="#ecf0f1"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+                  <ImageView
+                      android:src="@drawable/ic_ripple_lwp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="fill_parent"
+                      android:minWidth="100dp"
+                      android:contentDescription="@null"
+                      android:scaleType="fitXY"
+                      />
+                  <LinearLayout
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+
+                      <LinearLayout
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+
+                          <TextView
+                              style="@style/Material_Card_Title"
+                              tools:text="@string/TitleRippleLwp"
+                              android:text="@string/TitleRippleLwp"
+                              android:id="@+id/txttitleripple" />
+
+                          <TextView
+                              style="@style/Material_Card_Subtitle_16dp"
+                              tools:text="@string/DescRippleLwp"
+                              android:text="@string/DescRippleLwp"
+                              android:id="@+id/txtdescripple" />
+                      </LinearLayout>
+
+                      <View xmlns:android="http://schemas.android.com/apk/res/android"
+
+                          android:layout_width="fill_parent"
+                          android:layout_height="1px"
+                          android:background="@color/divider_grey"
+                          android:visibility="invisible"/>
+
+                      <LinearLayout
+                          android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:paddingLeft="8dp">
+
+                          <TextView style="@style/Material_Action"
+                              android:layout_gravity="bottom"
+                              android:textColor="@color/primary"
+                              android:id="@+id/button1"
+                              android:text="@string/txt2"
+                              tools:text="@string/txt2"/>
+                      </LinearLayout>
+
+                  </LinearLayout>
+              </LinearLayout>
+          </android.support.v7.widget.CardView>
+
+          <android.support.v7.widget.CardView
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/cardViewDoua"
+              style="@style/Material_Card_View"
+              card_view:cardCornerRadius="2dp"
+              card_view:cardElevation="4dp">
+              <LinearLayout
+                  android:background="#ecf0f1"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+                  <ImageView
+                      android:src="@drawable/ic_doua_lwp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="fill_parent"
+                      android:minWidth="100dp"
+                      android:contentDescription="@null"
+                      android:scaleType="fitXY"
+                      android:id="@+id/imageDoua"/>
+
+                  <LinearLayout
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+
+                      <LinearLayout
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+
+                          <TextView android:id="@+id/txttitledoua"
+                              style="@style/Material_Card_Title"
+                              tools:text="@string/TitleDouaLwp"
+                              android:text="@string/TitleDouaLwp" />
+
+                          <TextView android:id="@+id/txtdescdoua"
+                              style="@style/Material_Card_Subtitle_16dp"
+                              tools:text="@string/DescDouaLwp"
+                              android:text="@string/DescDouaLwp" />
+                      </LinearLayout>
+
+                      <View xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:id="@+id/dividerDoua"
+                          android:layout_width="fill_parent"
+                          android:layout_height="1px"
+                          android:background="@color/divider_grey"
+                          android:visibility="invisible"/>
+
+                      <LinearLayout
+                          android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:paddingLeft="8dp">
+
+                          <TextView style="@style/Material_Action"
+                              android:layout_gravity="bottom"
+                              android:textColor="@color/primary"
+                              android:id="@+id/buttonDoua"
+                              android:text="@string/setSkyboxLwp"
+                              tools:text="@string/setSkyboxLwp"/>
+                      </LinearLayout>
+                  </LinearLayout>
+              </LinearLayout>
+          </android.support.v7.widget.CardView>
+          <android.support.v7.widget.CardView
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/cardViewSkyBox"
+              style="@style/Material_Card_View"
+              card_view:cardCornerRadius="2dp"
+              card_view:cardElevation="4dp">
+              <LinearLayout
+                  android:background="#ecf0f1"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+                  <ImageView
+                      android:src="@drawable/ic_skybox"
+                      android:layout_width="wrap_content"
+                      android:layout_height="fill_parent"
+                      android:minWidth="100dp"
+                      android:contentDescription="@null"
+                      android:scaleType="fitXY"
+                      android:id="@+id/imageStikers"/>
+
+                  <LinearLayout
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+
+                      <LinearLayout
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+
+                          <TextView android:id="@+id/txttilekybox"
+                              style="@style/Material_Card_Title"
+                              tools:text="@string/TitleSkyboxLwp"
+                              android:text="@string/TitleSkyboxLwp" />
+
+                          <TextView android:id="@+id/txtdescskybox"
+                              style="@style/Material_Card_Subtitle_16dp"
+                              tools:text="@string/DescSkyboxLwp"
+                              android:text="@string/DescSkyboxLwp" />
+                      </LinearLayout>
+
+                      <View xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:id="@+id/dividerStickers"
+                          android:layout_width="fill_parent"
+                          android:layout_height="1px"
+                          android:background="@color/divider_grey"
+                          android:visibility="invisible"/>
+
+                      <LinearLayout
+                          android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:paddingLeft="8dp">
+
+                          <TextView style="@style/Material_Action"
+                              android:layout_gravity="bottom"
+                              android:textColor="@color/primary"
+                              android:id="@+id/buttonSkybox"
+                              android:text="@string/setSkyboxLwp"
+                              tools:text="@string/setSkyboxLwp"/>
+                      </LinearLayout>
+
+                  </LinearLayout>
+              </LinearLayout>
+          </android.support.v7.widget.CardView>
+          <android.support.v7.widget.CardView
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/cardViewTimer"
+              style="@style/Material_Card_View"
+              android:visibility="visible"
+              card_view:cardCornerRadius="2dp"
+              card_view:cardElevation="4dp">
+              <LinearLayout
+                  android:background="#ecf0f1"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+                  <ImageView
+                      android:src="@drawable/ic_timer_lwp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="fill_parent"
+                      android:minWidth="100dp"
+                      android:contentDescription="@null"
+                      android:scaleType="fitXY"
+                      android:id="@+id/imageTimer"/>
+
+                  <LinearLayout
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+
+                      <LinearLayout
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+
+                          <TextView android:id="@+id/txttitleTimer"
+                              style="@style/Material_Card_Title"
+                              tools:text="@string/TitleTimerLwp"
+                              android:text="@string/TitleTimerLwp" />
+
+                          <TextView android:id="@+id/txtdesctimer"
+                              style="@style/Material_Card_Subtitle_16dp"
+                              tools:text="@string/DescTimerLwp"
+                              android:text="@string/DescTimerLwp" />
+                      </LinearLayout>
+
+                      <View xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:id="@+id/dividerTimer"
+                          android:layout_width="fill_parent"
+                          android:layout_height="1px"
+                          android:background="@color/divider_grey"
+                          android:visibility="invisible"/>
+
+                      <LinearLayout
+                          android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:paddingLeft="8dp">
+
+                          <TextView style="@style/Material_Action"
+                              android:layout_gravity="bottom"
+                              android:textColor="@color/primary"
+                              android:id="@+id/buttonTimer"
+                              android:text="@string/setSkyboxLwp"
+                              tools:text="@string/setSkyboxLwp"/>
+                      </LinearLayout>
+                  </LinearLayout>
+              </LinearLayout>
+          </android.support.v7.widget.CardView>
+          <android.support.v7.widget.CardView
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/cardViewNameofallah2D"
+              style="@style/Material_Card_View"
+              android:visibility="visible"
+              card_view:cardCornerRadius="2dp"
+              card_view:cardElevation="4dp">
+              <LinearLayout
+                  android:background="#ecf0f1"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content">
+                  <ImageView
+                      android:src="@drawable/ic_nameofallah_lwp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="fill_parent"
+                      android:minWidth="100dp"
+                      android:contentDescription="@null"
+                      android:scaleType="fitXY"
+                      android:id="@+id/imagedoua"/>
+
+                  <LinearLayout
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+
+                      <LinearLayout
+                          xmlns:tools="http://schemas.android.com/tools"
+                          android:orientation="vertical"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+
+                          <TextView android:id="@+id/txttitleNameofallah2D"
+                              style="@style/Material_Card_Title"
+                              tools:text="@string/nameofallah2dtitle"
+                              android:text="@string/nameofallah2dtitle" />
+
+                          <TextView android:id="@+id/txtdescNameofallah2D"
+                              style="@style/Material_Card_Subtitle_16dp"
+                              tools:text="@string/nameofallah2ddesc"
+                              android:text="@string/nameofallah2ddesc" />
+                      </LinearLayout>
+
+                      <View xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:id="@+id/dividerNameofallah2D"
+                          android:layout_width="fill_parent"
+                          android:layout_height="1px"
+                          android:background="@color/divider_grey"
+                          android:visibility="invisible"/>
+
+                      <LinearLayout
+                          android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:paddingLeft="8dp">
+
+                          <TextView style="@style/Material_Action"
+                              android:layout_gravity="bottom"
+                              android:textColor="@color/primary"
+                              android:id="@+id/buttonNameofallah2D"
+                              android:text="@string/setSkyboxLwp"
+                              tools:text="@string/setSkyboxLwp"/>
+                      </LinearLayout>
+                  </LinearLayout>
+              </LinearLayout>
+          </android.support.v7.widget.CardView>
+
+          <TextView
+              android:layout_marginTop="20dp"
+              android:layout_marginBottom="20dp"
+              android:gravity="center"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textAppearance="?android:attr/textAppearanceSmall"
+              android:text="About Us"
+              android:textColor="@color/green"
+              android:id="@+id/textViewAbout" />
+
+          <Button
+              android:visibility="gone"
+              android:layout_marginTop="50dp"
+              android:id="@+id/btotherapp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/other" />
+          <Button
+              android:visibility="gone"
+              android:id="@+id/btnRating"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/ratingapp" />
+      </LinearLayout>
+  </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:visibility="visible"
+            android:id="@+id/cardViewBasmala"
+            style="@style/Material_Card_View"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="4dp">
+            <LinearLayout
+                android:background="#ecf0f1"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/ic_card_besmelleh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:minWidth="100dp"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageBasmala"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView android:id="@+id/titleBasmala"
+                            style="@style/Material_Card_Title"
+                            tools:text="@string/openBasmalaTitle"
+                            android:text="@string/openBasmalaTitle" />
+
+                        <TextView android:id="@+id/subtitleBasmala"
+                            style="@style/Material_Card_Subtitle_16dp"
+                            tools:text="@string/openBasmalaDesc"
+                            android:text="@string/openBasmalaDesc" />
+                    </LinearLayout>
+
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="@color/divider_grey"
+                        android:visibility="invisible"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:paddingLeft="8dp">
+
+                        <TextView style="@style/Material_Action"
+                            android:layout_gravity="bottom"
+                            android:textColor="#a82e2e"
+                            android:id="@+id/buttonOpenBasmala"
+                            android:text="@string/openBasmala"
+                            tools:text="@string/openBasmala"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardViewStickers"
+            style="@style/Material_Card_View"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="4dp">
+            <LinearLayout
+                android:background="#ecf0f1"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_card_stikers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:minWidth="100dp"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageStikers"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView android:id="@+id/titleStckers"
+                            style="@style/Material_Card_Title"
+                            tools:text="@string/cardStickerstitle"
+                            android:text="@string/cardStickerstitle" />
+
+                        <TextView android:id="@+id/subtitleStickers"
+                            style="@style/Material_Card_Subtitle_16dp"
+                            tools:text="@string/cardStickersdesc"
+                            android:text="@string/cardStickersdesc" />
+                    </LinearLayout>
+
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/dividerStickers"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="@color/divider_grey"
+                        android:visibility="invisible"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:paddingLeft="8dp">
+
+                        <TextView style="@style/Material_Action"
+                            android:layout_gravity="bottom"
+                            android:textColor="#27ae60"
+                            android:id="@+id/buttonTakeImageActivityStikers"
+                            android:text="@string/openGallery"
+                            tools:text="@string/openGallery"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
+        android:visibility="gone"
+        style="@style/Material_Card_View"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="4dp">
+        <LinearLayout
+            android:background="#ecf0f1"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_card_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:minWidth="100dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:id="@+id/image"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView android:id="@+id/title"
+                        style="@style/Material_Card_Title"
+                        tools:text="Wallpapers Frame"
+                        android:text="@string/cardframetitle" />
+
+                    <TextView android:id="@+id/subtitle"
+                        style="@style/Material_Card_Subtitle_16dp"
+                        tools:text="Choose one picture and one frame and Create your wallpapers"
+                        android:text="@string/cardframedesc" />
+                </LinearLayout>
+
+                <View xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/divider"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px"
+                    android:background="@color/divider_grey"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingLeft="8dp">
+
+                    <TextView style="@style/Material_Action"
+                        android:layout_gravity="bottom"
+                        android:textColor="@color/accent_color"
+                        android:id="@+id/buttonTakeImageActivity"
+                        android:text="@string/openGallery"
+                        tools:text="@string/openGallery"/>
+
+                    <TextView style="@style/Material_Action"
+                        android:layout_gravity="bottom"
+                        android:textColor="@color/accent_color"
+                        android:id="@+id/buttonTakeImageCam"
+                        android:text="@string/openCamera"
+                        tools:text="@string/openCamera"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:visibility="gone"
+            android:id="@+id/cardViewRing"
+            style="@style/Material_Card_View"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="4dp">
+            <LinearLayout
+                android:background="#ecf0f1"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/ic_card_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:minWidth="100dp"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imageRing"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView android:id="@+id/titleRing"
+                            style="@style/Material_Card_Title"
+                            tools:text="Ring"
+                            android:text="@string/cardframetitle" />
+
+                        <TextView android:id="@+id/subtitleRing"
+                            style="@style/Material_Card_Subtitle_16dp"
+                            tools:text="Islamic ring to listning and download"
+                            android:text="@string/cardframedesc" />
+                    </LinearLayout>
+
+                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="@color/divider_grey"
+                        android:visibility="invisible"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:paddingLeft="8dp">
+
+                        <TextView style="@style/Material_Action"
+                            android:layout_gravity="bottom"
+                            android:textColor="@color/accent_color"
+                            android:id="@+id/buttonOpenRingList"
+                            android:text="@string/openGallery"
+                            tools:text="@string/openGallery"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

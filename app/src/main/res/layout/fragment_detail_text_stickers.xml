@@ -1,0 +1,81 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/list_tatoo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:scrollbars="none">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:text="@string/addtextfragment"
+            android:textColor="#27ae60"
+            tools:text="Other" />
+
+        <Button
+            android:id="@+id/buttonAddText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@mipmap/ic_add_text"
+            android:text="" />
+
+        <Button
+            android:id="@+id/buttonAddFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@mipmap/ic_font"
+            android:text="" />
+
+        <Button
+            android:id="@+id/buttonSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@mipmap/ic_size_full_on"
+            android:text="Size" />
+
+        <Button
+            android:id="@+id/buttonBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@mipmap/ic_background"
+            android:text="Size" />
+
+        <Button
+            android:id="@+id/buttonMorePadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@mipmap/ic_more_padding"
+            />
+
+        <Button
+            android:id="@+id/buttonLessPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@mipmap/ic_less_padding"
+            />
+
+        <Button
+            android:id="@+id/buttonResetAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:visibility="gone" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

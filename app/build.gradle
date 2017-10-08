@@ -1,0 +1,107 @@
+apply plugin: 'com.android.application'
+apply from: '../config/quality.gradle'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        applicationId "com.sami.rippel.allah"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 62
+        versionName "6.8"
+        multiDexEnabled true
+        manifestPlaceholders = [HOCKEYAPP_APP_ID: "c479dc18c3dc418daecef942158a0d6a"]
+    }
+
+    productFlavors {
+        dev {
+            minSdkVersion 19
+            resConfigs "fr", "xxhdpi"
+        }
+        prod {
+            // The actual minSdkVersion for the production version.
+            minSdkVersion 15
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    //testCompile 'org.mockito:mockito-core:2.+'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    compile 'com.github.bumptech.glide:glide:4.1.1'
+    compile 'com.flipboard:bottomsheet-core:1.5.3'
+    compile 'com.flipboard:bottomsheet-commons:1.5.3'
+    compile 'io.github.kobakei:ratethisapp:1.0.3'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'net.hockeyapp.android:HockeySDK:5.0.0'
+    compile 'com.mani:ThinDownloadManager:1.2.5'
+    compile 'com.github.medyo:android-about-page:1.2.1'
+    compile 'com.github.QuadFlask:colorpicker:0.0.13'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile ('com.google.android.gms:play-services-analytics:10.2.4')
+            {
+                exclude module: 'play-services-ads'
+            }
+    compile ('com.squareup.retrofit2:retrofit:2.2.0')
+            {
+                exclude group: 'xpp3', module: 'xpp3'
+                exclude group: 'stax', module: 'stax-api'
+                exclude group: 'stax', module: 'stax'
+            }
+    compile ('com.squareup.retrofit2:converter-simplexml:2.1.0')
+            {
+                exclude group: 'xpp3', module: 'xpp3'
+                exclude group: 'stax', module: 'stax-api'
+                exclude group: 'stax', module: 'stax'
+            }
+    compile ('com.squareup.retrofit2:converter-gson:2.2.0')
+            {
+                exclude group: 'xpp3', module: 'xpp3'
+                exclude group: 'stax', module: 'stax-api'
+                exclude group: 'stax', module: 'stax'
+            }
+    compile project.depRajawali
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+}
+
+repositories {
+    jcenter()
+}
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'me.tatarka.retrolambda'
