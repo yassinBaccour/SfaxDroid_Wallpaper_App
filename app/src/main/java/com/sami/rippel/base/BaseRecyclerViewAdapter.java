@@ -10,15 +10,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
+import com.sami.rippel.views.GlideApp;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * Created by yassin baccour on 15/04/2017.
@@ -53,10 +55,10 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             WallpaperObject wallpaperObject = (WallpaperObject)data.get(position);
         if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT)
         {
-            Glide.with(context).load(GetUrlByScreen(wallpaperObject))
+            GlideApp.with(context).load(GetUrlByScreen(wallpaperObject))
                     .thumbnail(0.5f)
                     .override(ViewModel.Current.device.getCellWidht(), ViewModel.Current.device.getCellHeight())
-                    .crossFade()
+                    .transition(withCrossFade())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(((MyItemHolderCategory) holder).mImg);
 
@@ -64,10 +66,10 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             ((MyItemHolderCategory) holder).title.setText(wallpaperObject.getName());
             ((MyItemHolderCategory) holder).desc.setText(wallpaperObject.getDesc());
         }else
-        Glide.with(context).load(GetUrlByScreen(wallpaperObject))
+        GlideApp.with(context).load(GetUrlByScreen(wallpaperObject))
                 .thumbnail(0.5f)
                 .override(ViewModel.Current.device.getCellWidht(), ViewModel.Current.device.getCellHeight())
-                .crossFade()
+                .transition(withCrossFade())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(((MyItemHolderWallpaper) holder).mImg);
     }}

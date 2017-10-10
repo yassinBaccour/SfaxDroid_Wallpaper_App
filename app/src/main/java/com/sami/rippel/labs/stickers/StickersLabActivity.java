@@ -35,7 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
+
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.flask.colorpicker.ColorPickerView;
@@ -52,6 +52,7 @@ import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.StickersListner;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
 import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
+import com.sami.rippel.views.GlideApp;
 
 import net.hockeyapp.android.CrashManager;
 
@@ -302,7 +303,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         if (ViewModel.Current.device.getScreenHeightPixels() < 600)
             mUrl = mUrl.replace("islamicimages", "islamicimagesmini");
 
-        Glide.with(mActivity).asBitmap().load(mUrl).into(new SimpleTarget<Bitmap>() {
+        GlideApp.with(mActivity).asBitmap().load(mUrl).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 resizeTextureAsync(resource, resizeType);
@@ -355,7 +356,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     public void downloadAndPutImageAtScreen(String mUrl) {
         if (!mIsDelete) {
             changeProgressBarVisibility(true);
-            Glide.with(mActivity).asBitmap().load(mUrl)
+            GlideApp.with(mActivity).asBitmap().load(mUrl)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(Bitmap resource,
@@ -378,7 +379,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         mUrl = mUrl.replace("prev_", "");
         if (!mIsDelete) {
             changeProgressBarVisibility(true);
-            Glide.with(mActivity).asBitmap().load(mUrl)
+            GlideApp.with(mActivity).asBitmap().load(mUrl)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(Bitmap resource,

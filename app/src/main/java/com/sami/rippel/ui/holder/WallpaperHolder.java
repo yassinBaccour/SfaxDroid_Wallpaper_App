@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseHolder;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.WallpaperObject;
+import com.sami.rippel.views.GlideApp;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * Created by yassin baccour on 15/04/2017.
@@ -26,17 +28,17 @@ public class WallpaperHolder extends BaseHolder<WallpaperObject> {
 
     @Override
     public void setData(Context context, WallpaperObject wall) {
-        Glide.with(context)
+
+        GlideApp.with(context)
                 .load(GetUrlByScreen(wall))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .thumbnail(0.5f)
                 .override(ViewModel.Current.device.getCellWidht(), ViewModel.Current.device.getCellHeight())
-                .crossFade()
+                .transition(withCrossFade())
                 .into(mImg);
     }
 
-    private String GetUrlByScreen(WallpaperObject wall)
-    {
+    private String GetUrlByScreen(WallpaperObject wall) {
         return ViewModel.Current.getUrlFromWallpaper(wall);
     }
 

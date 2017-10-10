@@ -28,16 +28,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
-import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
+import com.sami.rippel.views.GlideApp;
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadManager;
 import com.thin.downloadmanager.DownloadRequest;
@@ -46,6 +45,8 @@ import com.thin.downloadmanager.RetryPolicy;
 import com.thin.downloadmanager.ThinDownloadManager;
 
 import java.io.File;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class ActivityBasmalaScreen extends AppCompatActivity {
     private static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
@@ -473,8 +474,8 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             case RESULT_CODE:
                 if (data != null) {
                     String path = data.getStringExtra("URL");
-                    Glide.with(this).load(path)
-                            .crossFade()
+                    GlideApp.with(this).load(path)
+                            .transition(withCrossFade())
                             .override(200, 200)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(mImgPreview);

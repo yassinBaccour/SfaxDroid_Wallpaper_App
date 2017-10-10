@@ -18,6 +18,7 @@ import com.sami.rippel.base.BasePagerAdapter;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.ui.activity.DetailsActivity;
+import com.sami.rippel.views.GlideApp;
 import com.sami.rippel.views.TouchImageView;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
         TouchImageView img = new TouchImageView(container.getContext());
         final ProgressBar mProgressBar = (ProgressBar) viewLayout
                 .findViewById(R.id.progressBar);
-        Glide.with(mContext).load(GetUrlByScreen(item.getUrl()))
+        GlideApp.with(mContext).load(GetUrlByScreen(item.getUrl()))
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource,

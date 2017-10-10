@@ -20,16 +20,16 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.Constants;
 import com.sami.rippel.allah.R;
-import com.sami.rippel.utils.downloadsystem.DecompressZip;
+import com.sami.rippel.model.Constants;
+import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.entity.ActionTypeEnum;
 import com.sami.rippel.model.listner.LwpListner;
 import com.sami.rippel.model.listner.WallpaperListner;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.sami.rippel.model.entity.ActionTypeEnum;
+import com.sami.rippel.utils.downloadsystem.DecompressZip;
+import com.sami.rippel.views.GlideApp;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -62,8 +62,7 @@ public class FileUtils {
         this.mFileListner = fileListner;
     }
 
-    public void SetLwpListner(LwpListner lwpListner)
-    {
+    public void SetLwpListner(LwpListner lwpListner) {
         this.mLwpListner = lwpListner;
     }
 
@@ -79,10 +78,10 @@ public class FileUtils {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "IMAGE_" + timeStamp + "_";
-        File image = File.createTempFile(imageFileName,".jpg", getTemporaryDir());
+        File image = File.createTempFile(imageFileName, ".jpg", getTemporaryDir());
         return image;
     }
-    
+
     private void copyFile(File sourceLocation, File targetLocation)
             throws IOException {
 
@@ -117,7 +116,7 @@ public class FileUtils {
             matrix.postRotate(angle);
             return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
                     source.getHeight(), matrix, true);
-        }else
+        } else
             return null;
     }
 
@@ -131,7 +130,7 @@ public class FileUtils {
             } catch (IOException ignored) {
             }
         } else {
-            Glide.with(mContext).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
+            GlideApp.with(mContext).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap resource, Transition<? super Bitmap> glideAnimation) {
                     mSavedPermanent = saveBitmapToStorage(resource, getFileName(url), SAVE_PERMANENT);
@@ -141,14 +140,12 @@ public class FileUtils {
         return mSavedPermanent;
     }
 
-    public boolean deleteFile(final String url)
-    {
+    public boolean deleteFile(final String url) {
         File file = new File(url);
         return file.delete();
     }
 
-    private List<File> getListFiles(File parentDir)
-    {
+    private List<File> getListFiles(File parentDir) {
         ArrayList<File> inFiles = new ArrayList<File>();
         File[] files = parentDir.listFiles();
         if (files != null) {
@@ -163,13 +160,11 @@ public class FileUtils {
         return inFiles;
     }
 
-    public List<File> getPermanentDirListFiles()
-    {
+    public List<File> getPermanentDirListFiles() {
         return getListFiles(getPermanentDir());
     }
 
-    public List<File> getBasmalaStickersFileList()
-    {
+    public List<File> getBasmalaStickersFileList() {
         return getListFiles(getBasmalaFileDirDir());
     }
 
@@ -218,30 +213,37 @@ public class FileUtils {
     }
 
     public void saveToFileToTempsDirAndChooseAction(String url, final ActionTypeEnum action) {
-        final String fileName = getFileName(url);
-        Glide.with(mContext).asBitmap().load(getUrlByScreen(url))
+
+        GlideApp.with(mContext).asBitmap().load(getUrlByScreen(url))
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource,
                                                 Transition<? super Bitmap> glideAnimation) {
-                        saveBitmapToStorage(resource, fileName, SAVE_TEMPORARY);
-                        if (action == ActionTypeEnum.CROP)
-                            mFileListner.onGoToCropActivity();
-                        else if (action == ActionTypeEnum.OPEN_NATIV_CHOOSER)
-                            mFileListner.onOpenNativeSetWallChoose();
-                        else if (action == ActionTypeEnum.MOVE_PERMANENT_DIR)
-                            mFileListner.onMoveFileToPermanentGallery();
-                        else if (action == ActionTypeEnum.SHARE_FB)
-                            mFileListner.onOpenWithFaceBook();
-                        else if (action == ActionTypeEnum.SHARE_INSTA)
-                            mFileListner.onOpenWithInstagram();
-                        else if (action == ActionTypeEnum.SEND_LWP)
-                            mFileListner.onSendToRippleLwp();
-                        else if (action == ActionTypeEnum.SHARE_SNAP_CHAT)
-                            mFileListner.onShareWhitApplication();
-                        else if (action == ActionTypeEnum.SKYBOX_LWP)
-                            mLwpListner.onSendToLwp();
-                        resource.recycle();
+                        boolean isSaved = saveBitmapToStorage(resource, getFileName(url), SAVE_TEMPORARY);
+                        if (isSaved) {
+                            if (action == ActionTypeEnum.CROP)
+                                mFileListner.onGoToCropActivity();
+                            else if (action == ActionTypeEnum.OPEN_NATIV_CHOOSER)
+                                mFileListner.onOpenNativeSetWallChoose();
+                            else if (action == ActionTypeEnum.MOVE_PERMANENT_DIR)
+                                mFileListner.onMoveFileToPermanentGallery();
+                            else if (action == ActionTypeEnum.SHARE_FB)
+                                mFileListner.onOpenWithFaceBook();
+                            else if (action == ActionTypeEnum.SHARE_INSTA)
+                                mFileListner.onOpenWithInstagram();
+                            else if (action == ActionTypeEnum.SEND_LWP)
+                                mFileListner.onSendToRippleLwp();
+                            else if (action == ActionTypeEnum.SHARE_SNAP_CHAT)
+                                mFileListner.onShareWhitApplication();
+                            else if (action == ActionTypeEnum.SKYBOX_LWP)
+                                mLwpListner.onSendToLwp();
+                            resource.recycle();
+
+                        } else {
+                            mFileListner.onFinishActivity();
+                            resource.recycle();
+                        }
+
                     }
                 });
     }
@@ -277,17 +279,16 @@ public class FileUtils {
 
     private File getBasmalaFileDirDir() {
 
-        File zipDestination = new File( mContext.getExternalFilesDir(""), Constants.KEY_BASMALA_FOLDER_CONTAINER);
+        File zipDestination = new File(mContext.getExternalFilesDir(""), Constants.KEY_BASMALA_FOLDER_CONTAINER);
         if (!zipDestination.exists()) {
             zipDestination.mkdirs();
         }
         return zipDestination;
     }
 
-    private File getTemporaryDouaDir()
-    {
+    private File getTemporaryDouaDir() {
         File temporaryDir = new File(Environment.getExternalStorageDirectory(),
-            mContext.getString(R.string.app_namenospace) + "/temp");
+                mContext.getString(R.string.app_namenospace) + "/temp");
         if (!temporaryDir.exists()) {
             temporaryDir.mkdirs();
         }
@@ -304,7 +305,7 @@ public class FileUtils {
         try {
             WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
             int MinimumWidth = wallpaperManager.getDesiredMinimumWidth();
-            int MinimumHeight =  wallpaperManager.getDesiredMinimumHeight();
+            int MinimumHeight = wallpaperManager.getDesiredMinimumHeight();
             if (MinimumWidth > wallpaper.getWidth() &&
                     MinimumHeight > wallpaper.getHeight() && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT) {
                 int xPadding = Math.max(0, MinimumWidth - wallpaper.getWidth()) / 2;
@@ -380,7 +381,7 @@ public class FileUtils {
                     .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
-        }else{
+        } else {
             return "";
         }
     }
@@ -400,8 +401,7 @@ public class FileUtils {
         return BitmapFactory.decodeFile(image.getPath());
     }
 
-    public Boolean isFileExistInDataFolder(String fileName)
-    {
+    public Boolean isFileExistInDataFolder(String fileName) {
         File filesDir = mContext.getExternalFilesDir("");
         File ZipFile = new File(filesDir, fileName);
         return ZipFile.exists();
@@ -419,7 +419,7 @@ public class FileUtils {
             canvas.drawBitmap(resultBitmap, 0, 0, p);
             return resultBitmap;
         } catch (Exception e) {
-           return null;
+            return null;
         }
     }
 

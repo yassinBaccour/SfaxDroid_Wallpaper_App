@@ -209,7 +209,7 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         String url = getCurrentUrl();
         addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.isSavedToStorage(ViewModel.Current.fileUtils
                 .getFileName(url)))
-        .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
@@ -271,7 +271,7 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         hideProgressBar();
         if (!ViewModel.Current.device.ShareFileWithIntentType(this,
                 ViewModel.Current.fileUtils.getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())),
-                intentType));
+                intentType)) ;
         ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.appNotInstalled));
     }
 
@@ -391,12 +391,15 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
     public void onGoToCropActivity() {
         addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.isSavedToStorage(ViewModel.Current.fileUtils
                 .getFileName(getCurrentUrl())))
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(aBoolean -> {
-            if (aBoolean)
-                beginCrop();
-        }));
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aBoolean -> {
+                    if (aBoolean)
+                        beginCrop();
+                    else {
+                        finish();
+                    }
+                }));
     }
 
     @Override
@@ -427,6 +430,12 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
     @Override
     public void onShareWhitApplication() {
         createIntent(IntentTypeEnum.SHNAPCHATINTENT);
+    }
+
+    @Override
+    public void onFinishActivity() {
+        ViewModel.Current.device.showSnackMessage(mRootLayout, "Error Reading Storage");
+        hideProgressBar();
     }
 
     @Override

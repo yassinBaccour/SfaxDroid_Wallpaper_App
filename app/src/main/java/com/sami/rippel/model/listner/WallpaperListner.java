@@ -14,4 +14,6 @@ public interface WallpaperListner {
     void onSendToRippleLwp();
 
     void onShareWhitApplication();
+
+    void onFinishActivity();
 }
