@@ -8,19 +8,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
+
+import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseFragment;
 import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
-import com.sami.rippel.allah.R;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
-import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.entity.TypeCellItemEnum;
+import com.sami.rippel.model.entity.WallpaperObject;
+import com.sami.rippel.model.listner.RecyclerItemClickListener;
+import com.sami.rippel.presenter.CategoryWallpaperPresenter;
+import com.sami.rippel.presenter.WallpaperFragmentContract;
+import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
+import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CategoryFragment extends BaseFragment {
+public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> implements WallpaperFragmentContract.View {
 
     GalleryAdapter mAdapter;
     CategoryFragment mFragment;
@@ -31,6 +36,7 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mFragment = this;
     }
 
@@ -41,10 +47,35 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public void fillForm() {
+
+    }
+
+    @Override
+    public int getFragmentId() {
+        return R.layout.fragment_category;
+    }
+
+    @Override
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return new LinearLayoutManager(getActivity());
+    }
+
+    @Override
+    protected void initEventAndData() {
+        mPresenter.getWallpaper();
+    }
+
+    @Override
+    protected CategoryWallpaperPresenter instantiatePresenter() {
+        return new CategoryWallpaperPresenter(null); //FIXME VIEW MODEL NULL
+    }
+
+    @Override
+    public void showContent(List<WallpaperObject> mList) {
         if (ViewModel.Current.isWallpapersLoaded()) {
             //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("ImageCategoryNew")).findFirst().orElse(null);
             mData.clear();
-            mData = new ArrayList<>(ViewModel.Current.getWallpaperCategoryFromName("ImageCategoryNew").getGetWallpapersList());
+            mData = new ArrayList<>(mList);
             if (getActivity() != null && ViewModel.Current.fileUtils.isConnected(getActivity()) && mData != null && mData.size() > 0) {
                 mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.CATEGORY_NEW_FORMAT);
                 mRecyclerView.setAdapter(mAdapter);
@@ -80,12 +111,32 @@ public class CategoryFragment extends BaseFragment {
     }
 
     @Override
-    public int getFragmentId() {
-        return R.layout.fragment_category;
+    public void showErrorMsg(String msg) {
+
     }
 
     @Override
-    public RecyclerView.LayoutManager getLayoutManager() {
-        return new LinearLayoutManager(getActivity());
+    public void useNightMode(boolean isNight) {
+
+    }
+
+    @Override
+    public void stateError() {
+
+    }
+
+    @Override
+    public void stateEmpty() {
+
+    }
+
+    @Override
+    public void stateLoading() {
+
+    }
+
+    @Override
+    public void stateMain() {
+
     }
 }

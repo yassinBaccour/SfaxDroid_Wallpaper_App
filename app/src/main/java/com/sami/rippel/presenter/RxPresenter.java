@@ -1,5 +1,7 @@
-package com.sami.rippel.base;
+package com.sami.rippel.presenter;
 
+import com.sami.rippel.base.BasePresenter;
+import com.sami.rippel.base.BaseView;
 import com.sami.rippel.utils.RxBus;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -7,26 +9,17 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by yassin baccour on 10/05/2017.
+ * Created by yassine on 11/10/17.
  */
 
-public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivity implements BaseView {
+public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
+
+    protected T mView;
     protected CompositeDisposable mCompositeDisposable;
-    protected T mPresenter;
-
-    protected abstract void initInject();
-
-    @Override
-    protected void onViewCreated() {
-        super.onViewCreated();
-        initInject();
-        if (mPresenter != null)
-            mPresenter.attachView(this);
-    }
 
     protected void unSubscribe() {
         if (mCompositeDisposable != null) {
-            mCompositeDisposable.dispose();
+            mCompositeDisposable.clear();
         }
     }
 
@@ -45,10 +38,13 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     }
 
     @Override
-    protected void onDestroy() {
-        if (mPresenter != null)
-            mPresenter.detachView();
-        super.onDestroy();
+    public void attachView(T view) {
+        this.mView = view;
+    }
+
+    @Override
+    public void detachView() {
+        this.mView = null;
         unSubscribe();
     }
 }

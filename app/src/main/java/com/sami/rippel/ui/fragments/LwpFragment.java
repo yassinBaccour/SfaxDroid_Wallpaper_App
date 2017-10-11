@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sami.rippel.base.SimpleFragment;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.ui.activity.AboutActivty;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
@@ -29,7 +30,7 @@ import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity;
 
 import java.io.IOException;
 
-public class LwpFragment extends Fragment {
+public class LwpFragment extends SimpleFragment {
 
     private AppBarLayout mAppBarLayout;
     private TextView mButtonSkybox;
@@ -185,8 +186,13 @@ public class LwpFragment extends Fragment {
     }
 
     @Override
+    public int getFragmentId() {
+        return R.layout.fragment_lwp;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_lwp, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
         mAppBarLayout = (AppBarLayout) getActivity().findViewById(R.id.app_bar);
         mButtonRippleLWP = (TextView) rootView.findViewById(R.id.button1);
         mButtonSkybox = (TextView) rootView.findViewById(R.id.buttonSkybox);

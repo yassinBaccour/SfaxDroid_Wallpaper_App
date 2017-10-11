@@ -3,7 +3,6 @@ package com.sami.rippel.ui.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -18,27 +17,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.kobakei.ratethisapp.RateThisApp;
 import com.sami.rippel.allah.BuildConfig;
-import com.sami.rippel.base.BaseActivity;
-import com.sami.rippel.model.entity.UpdateApp;
-import com.sami.rippel.model.entity.WallpapersRetrofitObject;
-import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
-import com.sami.rippel.model.Constants;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.allah.WallpaperApplication;
+import com.sami.rippel.base.BaseActivity;
+import com.sami.rippel.model.Constants;
+import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.entity.ServiceErrorFromEnum;
+import com.sami.rippel.model.entity.UpdateApp;
+import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.AdsListner;
 import com.sami.rippel.model.listner.DeviceListner;
-import com.sami.rippel.model.entity.ServiceErrorFromEnum;
-import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
 import com.sami.rippel.utils.RxUtil;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
 import net.hockeyapp.android.CrashManager;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListner, DeviceListner {
     private static long back_pressed;
@@ -60,7 +62,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     @Nullable
     @BindView(R.id.progressBar)
     ProgressBar mProgressLoader;
-
+    RxPermissions rxPermissions;
     public static Boolean isAdsShow = false;
     public static int nbOpenAds = 0;
     private static final int PICK_FROM_FILE = 3;
@@ -70,6 +72,42 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     public boolean isFirstLaunch = false;
     public static boolean stat = false;
     CatalogPagerAdapter mAdapter;
+
+    @Override
+    public void showErrorMsg(String msg) {
+
+    }
+
+    @Override
+    public void useNightMode(boolean isNight) {
+
+    }
+
+    @Override
+    public void stateError() {
+
+    }
+
+    @Override
+    public void stateEmpty() {
+
+    }
+
+    @Override
+    public void stateLoading() {
+
+    }
+
+    @Override
+    public void stateMain() {
+
+    }
+
+    @Override
+    protected void initInject() {
+
+    }
+
     public enum AdsType {
         ShowAds,
         ShowTimedAds,
@@ -82,9 +120,8 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         if (!BuildConfig.DEBUG) {
             StartAppSDK.init(this, "211624686", true);
         }
+        rxPermissions = new RxPermissions(this);
         ViewModel.Current.dataUtils.SetSetting("IsTheFirstRun", false);
-        setContentView(R.layout.activity_view_pager);
-        ButterKnife.bind(this);
         isFirstLaunch = true;
         WallpaperApplication application = (WallpaperApplication) getApplication();
         mTracker = application.getDefaultTracker();
@@ -96,7 +133,17 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         //startUpdateAppIfNeeded();
         mAdapter.ChangeAdapterFragmentViewState(false);
         loadAndSetWallpaperToViewModel();
-        checkPermissionIfSDK23();
+        checkPermission();
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_view_pager;
+    }
+
+    @Override
+    protected void initEventAndData() {
+
     }
 
     @Override
@@ -120,11 +167,9 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         addSubscribe(ViewModel.Current.service.mRetrofitHelper.getUpdateObject()
                 .compose(RxUtil.<UpdateApp>rxSchedulerHelper())
                 .subscribe(updateApp -> {
-                    if (updateApp.isUpdateAppNeeded())
-                    {
+                    if (updateApp.isUpdateAppNeeded()) {
                         onStartCheckUpdateNewWallpapersDataBase();
-                    }
-                    else {
+                    } else {
                         onUpdateNotNeeded();
                     }
                 }, throwable -> {
@@ -132,15 +177,14 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         );
     }
 
-    public void loadAndSetWallpaperToViewModel()
-    {
+    public void loadAndSetWallpaperToViewModel() {
         addSubscribe(ViewModel.Current.service.mRetrofitHelper.getWallpapersList()
                 .compose(RxUtil.<WallpapersRetrofitObject>rxSchedulerHelper())
                 .subscribe(wallpapersRetrofitObject -> {
-                     if (wallpapersRetrofitObject.getCategoryList().size() > 0) {
+                    if (wallpapersRetrofitObject.getCategoryList().size() > 0) {
                         ViewModel.Current.setRetrofitWallpObject(wallpapersRetrofitObject);
                         onFillAdapterWithServiceData();
-                         mAdapter.ChangeAdapterFragmentViewState(true);
+                        mAdapter.ChangeAdapterFragmentViewState(true);
                     }
                 }, throwable -> {
                 })
@@ -198,10 +242,20 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         }
     }
 
-    public void checkPermissionIfSDK23() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            ViewModel.Current.device.checkPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
+    public void checkPermission() {
+
+        rxPermissions
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_WIFI_STATE,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.SET_WALLPAPER_HINTS,
+                        Manifest.permission.WRITE_SETTINGS,
+                        Manifest.permission.SET_WALLPAPER,
+                        Manifest.permission.RECEIVE_BOOT_COMPLETED
+                )
+                .subscribe(granted -> {
+                });
     }
 
     public void showRunAppADS() {
@@ -261,15 +315,13 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         }
     }
 
-    public void showInterstial()
-    {
+    public void showInterstial() {
         StartAppAd.showAd(this);
     }
 
     public void showTimedAdsWhenIOpenPicture() {
 
-        if (nbOpenAds == 3)
-        {
+        if (nbOpenAds == 3) {
 
         }
 
@@ -286,7 +338,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     }
 
     public void checkUpdateNewWallpapers() {
-       loadAndSetWallpaperToViewModel();
+        loadAndSetWallpaperToViewModel();
     }
 
     public enum LwpTypeEnum {

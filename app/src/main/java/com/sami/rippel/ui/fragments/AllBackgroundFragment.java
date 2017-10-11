@@ -9,20 +9,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseFragment;
 import com.sami.rippel.model.Constants;
-import com.sami.rippel.ui.adapter.GalleryAdapter;
-import com.sami.rippel.ui.activity.DetailsActivity;
-import com.sami.rippel.allah.R;
-import com.sami.rippel.model.listner.AdsListner;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
-import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.entity.TypeCellItemEnum;
+import com.sami.rippel.model.entity.WallpaperObject;
+import com.sami.rippel.model.listner.AdsListner;
+import com.sami.rippel.model.listner.RecyclerItemClickListener;
+import com.sami.rippel.presenter.AllWallpaperPresenter;
+import com.sami.rippel.presenter.WallpaperFragmentContract;
+import com.sami.rippel.ui.activity.DetailsActivity;
+import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
+import com.sami.rippel.ui.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class AllBackgroundFragment extends BaseFragment {
+public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> implements WallpaperFragmentContract.View {
 
     GalleryAdapter mAdapter;
     AdsListner mListener = null;
@@ -34,6 +38,7 @@ public class AllBackgroundFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mFragment = this;
     }
 
@@ -43,13 +48,26 @@ public class AllBackgroundFragment extends BaseFragment {
     }
 
     @Override
-    public void fillForm()
-    {
+    public void fillForm() {
+    }
+
+    @Override
+    protected AllWallpaperPresenter instantiatePresenter() {
+        return new AllWallpaperPresenter(null); //FIXME VIEW MODEL NULL
+    }
+
+    @Override
+    protected void initEventAndData() {
+        mPresenter.getWallpaper();
+    }
+
+    @Override
+    public void showContent(List<WallpaperObject> mList) {
         if (ViewModel.Current.isWallpapersLoaded()) {
             //Fixme retrolabda
             //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("All")).findFirst().orElse(null);
             mData.clear();
-            mData = new ArrayList<>(ViewModel.Current.getWallpaperCategoryFromName("All").getGetWallpapersList());
+            mData = new ArrayList<>(mList);
             if (getActivity() != null && ViewModel.Current.fileUtils.isConnected(getActivity()) && mData != null && mData.size() > 0) {
                 mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.GALLERY_CELL);
                 mRecyclerView.setAdapter(mAdapter);
@@ -89,5 +107,35 @@ public class AllBackgroundFragment extends BaseFragment {
     public RecyclerView.LayoutManager getLayoutManager() {
         return new GridLayoutManager(
                 getFragmentActivity(), 3);
+    }
+
+    @Override
+    public void showErrorMsg(String msg) {
+
+    }
+
+    @Override
+    public void useNightMode(boolean isNight) {
+
+    }
+
+    @Override
+    public void stateError() {
+
+    }
+
+    @Override
+    public void stateEmpty() {
+
+    }
+
+    @Override
+    public void stateLoading() {
+
+    }
+
+    @Override
+    public void stateMain() {
+
     }
 }

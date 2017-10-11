@@ -68,7 +68,6 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
-        setContentView(R.layout.activity_details);
         WallpaperApplication application = (WallpaperApplication) getApplication();
         mTracker = application.getDefaultTracker();
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -88,6 +87,16 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         setupViewPager();
         if (Build.VERSION.SDK_INT >= 23)
             ViewModel.Current.device.checkPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_details;
+    }
+
+    @Override
+    protected void initEventAndData() {
+
     }
 
     private void fabClick() {
@@ -448,5 +457,40 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
             }
             mFromRipple = false;
         }
+    }
+
+    @Override
+    public void showErrorMsg(String msg) {
+
+    }
+
+    @Override
+    public void useNightMode(boolean isNight) {
+
+    }
+
+    @Override
+    public void stateError() {
+
+    }
+
+    @Override
+    public void stateEmpty() {
+
+    }
+
+    @Override
+    public void stateLoading() {
+
+    }
+
+    @Override
+    public void stateMain() {
+
+    }
+
+    @Override
+    protected void initInject() {
+
     }
 }

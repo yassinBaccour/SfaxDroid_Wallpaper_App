@@ -125,14 +125,13 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setFlags(
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_islamic_stickers);
+        super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mActivity = this;
         mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
@@ -196,6 +195,16 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
             }
         });
         initRatingApp();
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_islamic_stickers;
+    }
+
+    @Override
+    protected void initEventAndData() {
+
     }
 
     public String imagePath = "";
@@ -1060,6 +1069,41 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         } catch (ExceptionInInitializerError e) {
             return Typeface.DEFAULT;
         }
+    }
+
+    @Override
+    public void showErrorMsg(String msg) {
+
+    }
+
+    @Override
+    public void useNightMode(boolean isNight) {
+
+    }
+
+    @Override
+    public void stateError() {
+
+    }
+
+    @Override
+    public void stateEmpty() {
+
+    }
+
+    @Override
+    public void stateLoading() {
+
+    }
+
+    @Override
+    public void stateMain() {
+
+    }
+
+    @Override
+    protected void initInject() {
+
     }
 
     private class ScaleListener extends
