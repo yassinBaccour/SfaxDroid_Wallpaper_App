@@ -1,4 +1,4 @@
-package com.sami.rippel.presenter;
+package com.sami.rippel.presenter.Contract;
 
 import com.sami.rippel.base.BasePresenter;
 import com.sami.rippel.base.BaseView;

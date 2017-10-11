@@ -2,6 +2,7 @@ package com.sami.rippel.presenter;
 
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.WallpaperObject;
+import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 
 import java.util.List;
 

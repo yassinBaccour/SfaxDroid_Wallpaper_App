@@ -187,6 +187,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
                         mAdapter.ChangeAdapterFragmentViewState(true);
                     }
                 }, throwable -> {
+                    ViewModel.Current.device.showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
                 })
         );
     }

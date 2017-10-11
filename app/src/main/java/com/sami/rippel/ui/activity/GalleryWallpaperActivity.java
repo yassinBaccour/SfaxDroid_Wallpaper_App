@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,14 +17,17 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.sami.rippel.allah.R;
+import com.sami.rippel.base.SimpleActivity;
 import com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaper;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ActionTypeEnum;
+import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperCategory;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.LwpListner;
+import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
@@ -35,7 +39,7 @@ import java.util.List;
 
 import static com.sami.rippel.model.ViewModel.Current;
 
-public class GalleryWallpaperActivity extends AppCompatActivity implements LwpListner {
+public class GalleryWallpaperActivity extends SimpleActivity implements LwpListner, OnStateChangeListener {
 
     private GalleryAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -49,14 +53,14 @@ public class GalleryWallpaperActivity extends AppCompatActivity implements LwpLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setFlags(
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
-        setContentView(R.layout.activity_gellery_wallpaper);
+        super.onCreate(savedInstanceState);
         Current.fileUtils.SetLwpListner(this);
+        ViewModel.Current.registerOnStateChangeListener(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
@@ -66,6 +70,11 @@ public class GalleryWallpaperActivity extends AppCompatActivity implements LwpLi
         mPos = getIntent().getStringExtra(Constants.DETAIL_IMAGE_POS);
         mLwpName = getIntent().getStringExtra(Constants.KEY_LWP_NAME);
         initToolbar(mPos);
+        initData();
+    }
+
+    public void initData()
+    {
         if (mLwpName != null && !mLwpName.isEmpty() && (mLwpName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP) || mLwpName.equals(Constants.KEY_BASMALA_STIKERS))) {
             refreshBitmapAdapter(mLwpName);
             mRecyclerView
@@ -102,6 +111,20 @@ public class GalleryWallpaperActivity extends AppCompatActivity implements LwpLi
         return null;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ViewModel.Current.unregisterOnStateChangeListener(this);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_gellery_wallpaper;
+    }
+
+    @Override
+    protected void initEventAndData() {
+    }
 
     public void fillData() {
         if (mPos != null && !mPos.isEmpty() && Current.isWallpapersLoaded()) {
@@ -326,5 +349,10 @@ public class GalleryWallpaperActivity extends AppCompatActivity implements LwpLi
     protected void onResume() {
         super.onResume();
         checkForCrashes();
+    }
+
+    @Override
+    public void onStateChange(@NonNull StateEnum state) {
+        initData();
     }
 }

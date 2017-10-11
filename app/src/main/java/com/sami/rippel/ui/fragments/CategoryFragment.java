@@ -3,6 +3,7 @@ package com.sami.rippel.ui.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +14,13 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseFragment;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
+import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.presenter.CategoryWallpaperPresenter;
-import com.sami.rippel.presenter.WallpaperFragmentContract;
+import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
 import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
@@ -25,7 +28,7 @@ import com.sami.rippel.ui.adapter.GalleryAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> implements WallpaperFragmentContract.View {
+public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> implements WallpaperFragmentContract.View, OnStateChangeListener {
 
     GalleryAdapter mAdapter;
     CategoryFragment mFragment;
@@ -37,6 +40,7 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ViewModel.Current.registerOnStateChangeListener(this);
         mFragment = this;
     }
 
@@ -68,6 +72,12 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
     @Override
     protected CategoryWallpaperPresenter instantiatePresenter() {
         return new CategoryWallpaperPresenter(null); //FIXME VIEW MODEL NULL
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ViewModel.Current.unregisterOnStateChangeListener(this);
     }
 
     @Override
@@ -138,5 +148,10 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
     @Override
     public void stateMain() {
 
+    }
+
+    @Override
+    public void onStateChange(@NonNull StateEnum state) {
+        mPresenter.getWallpaper();
     }
 }
