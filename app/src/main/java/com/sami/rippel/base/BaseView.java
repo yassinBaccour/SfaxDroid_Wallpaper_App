@@ -6,16 +6,17 @@ package com.sami.rippel.base;
 
 public interface BaseView {
 
-    void showErrorMsg(String msg);
+    //Will be Implemented in All activity
+    //In part of View
+    //can be user in Presenter with mView
+    //Declared in RxPresenter With "protected T mView;"
 
-    void useNightMode(boolean isNight);
+    void showSnackMsg(String msg);
 
-    //=======  State  =======
-    void stateError();
+    void showLoading();
 
-    void stateEmpty();
+    void hideLoading();
 
-    void stateLoading();
+    void showADS();
 
-    void stateMain();
 }

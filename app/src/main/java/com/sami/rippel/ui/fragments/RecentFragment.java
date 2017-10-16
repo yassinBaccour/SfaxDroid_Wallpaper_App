@@ -121,37 +121,27 @@ public class RecentFragment extends BaseFragment<RecentWallpaperPresenter> imple
     }
 
     @Override
-    public void showErrorMsg(String msg) {
-
-    }
-
-    @Override
-    public void useNightMode(boolean isNight) {
-
-    }
-
-    @Override
-    public void stateError() {
-
-    }
-
-    @Override
-    public void stateEmpty() {
-
-    }
-
-    @Override
-    public void stateLoading() {
-
-    }
-
-    @Override
-    public void stateMain() {
-
-    }
-
-    @Override
     public void onStateChange(@NonNull StateEnum state) {
         mPresenter.getWallpaper();
+    }
+
+    @Override
+    public void showSnackMsg(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showADS() {
+
     }
 }

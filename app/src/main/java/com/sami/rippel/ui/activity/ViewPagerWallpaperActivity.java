@@ -71,42 +71,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     private Tracker mTracker;
     public boolean isFirstLaunch = false;
     public static boolean stat = false;
-    CatalogPagerAdapter mAdapter;
-
-    @Override
-    public void showErrorMsg(String msg) {
-
-    }
-
-    @Override
-    public void useNightMode(boolean isNight) {
-
-    }
-
-    @Override
-    public void stateError() {
-
-    }
-
-    @Override
-    public void stateEmpty() {
-
-    }
-
-    @Override
-    public void stateLoading() {
-
-    }
-
-    @Override
-    public void stateMain() {
-
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
+    private CatalogPagerAdapter mAdapter;
 
     public enum AdsType {
         ShowAds,
@@ -393,14 +358,16 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
 
     @Override
     public void onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis())
-            super.onBackPressed();
-        else {
-            rateApplication();
-            Toast.makeText(getBaseContext(), R.string.txtrate6,
-                    Toast.LENGTH_SHORT).show();
+        if (!BuildConfig.DEBUG) {
+            if (back_pressed + 2000 > System.currentTimeMillis())
+                super.onBackPressed();
+            else {
+                rateApplication();
+                Toast.makeText(getBaseContext(), R.string.txtrate6,
+                        Toast.LENGTH_SHORT).show();
+            }
+            back_pressed = System.currentTimeMillis();
         }
-        back_pressed = System.currentTimeMillis();
     }
 
     @Override
@@ -445,5 +412,30 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
             startUpdateAppIfNeeded();
         else if (errorFromEnum == ServiceErrorFromEnum.GET_WALLPAPER_LIST_CALL)
             checkUpdateNewWallpapers();
+    }
+
+    @Override
+    protected void initInject() {
+
+    }
+
+    @Override
+    public void showSnackMsg(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showADS() {
+
     }
 }
