@@ -25,14 +25,13 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     protected ArrayList<WallpaperObject> mData = new ArrayList<>();
     protected RecyclerView mRecyclerView;
     protected ProgressBar mProgressLoader;
+    protected T mPresenter;
 
     public abstract Activity getFragmentActivity();
 
     public abstract void fillForm();
 
     public abstract RecyclerView.LayoutManager getLayoutManager();
-
-    protected T mPresenter;
 
     protected T instantiatePresenter() {
         return null;

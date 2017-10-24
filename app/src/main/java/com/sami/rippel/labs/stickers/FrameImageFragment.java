@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
@@ -38,8 +37,7 @@ public class FrameImageFragment extends Fragment {
                 getActivity(),
                 (view1, pos) -> {
 
-                    if (pos == 0)
-                    {
+                    if (pos == 0) {
                         stickersListner.RemoveFrame();
                     }
                     if (pos > 0 && mAdapter != null && mAdapter.getItemCount() >= 0) {

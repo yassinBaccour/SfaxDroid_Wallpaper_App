@@ -21,10 +21,13 @@ import java.util.Set;
 
 public class WallpaperApplication extends MultiDexApplication {
 
+    private static WallpaperApplication instance;
     private Tracker mTracker;
     private Set<Activity> allActivities;
-    private static WallpaperApplication instance;
 
+    public static synchronized WallpaperApplication getInstance() {
+        return instance;
+    }
 
     synchronized public Tracker getDefaultTracker() {
         if (mTracker == null) {
@@ -32,10 +35,6 @@ public class WallpaperApplication extends MultiDexApplication {
             mTracker = analytics.newTracker(R.xml.global_tracker);
         }
         return mTracker;
-    }
-
-    public static synchronized WallpaperApplication getInstance() {
-        return instance;
     }
 
     @Override

@@ -4,8 +4,6 @@ import com.sami.rippel.base.BasePresenter;
 import com.sami.rippel.base.BaseView;
 import com.sami.rippel.model.entity.WallpaperObject;
 
-import org.rajawali3d.wallpaper.Wallpaper;
-
 import java.util.List;
 
 /**

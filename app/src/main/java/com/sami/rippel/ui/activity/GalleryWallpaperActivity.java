@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -41,6 +40,7 @@ import static com.sami.rippel.model.ViewModel.Current;
 
 public class GalleryWallpaperActivity extends SimpleActivity implements LwpListner, OnStateChangeListener {
 
+    public static boolean isAdsShowedFromRipple = false;
     private GalleryAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
@@ -49,7 +49,6 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
     private String mLwpName;
     private String mPos;
     private String mSelectedUrl;
-    public static boolean isAdsShowedFromRipple = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +72,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
         initData();
     }
 
-    public void initData()
-    {
+    public void initData() {
         if (mLwpName != null && !mLwpName.isEmpty() && (mLwpName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP) || mLwpName.equals(Constants.KEY_BASMALA_STIKERS))) {
             refreshBitmapAdapter(mLwpName);
             mRecyclerView

@@ -19,6 +19,8 @@ import java.io.IOException;
 
 @TargetApi(19)
 public class AnimationServiceApp {
+    private static int incrementation = 0;
+    public Context mContext;
     private ImageView mImageAtScreen;
     private MediaPlayer mMediaPlayer;
     private boolean mRunning = true;
@@ -30,8 +32,6 @@ public class AnimationServiceApp {
     private int mColor;
     private Bitmap mBitmapheader;
     private AlhpaImageAnim mTasking = null;
-    private static int incrementation = 0;
-    public Context mContext;
 
     public AnimationServiceApp(Context mContext) {
         this.mContext = mContext;
@@ -122,7 +122,7 @@ public class AnimationServiceApp {
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 mBitmapheader = ViewModel.Current.fileUtils
                         .changeImageColor(BitmapFactory.decodeFile(mBackgroundFile.getPath(),
-                        options), mColor);
+                                options), mColor);
             }
         } catch (Exception e) {
         }

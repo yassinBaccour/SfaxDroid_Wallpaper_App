@@ -44,17 +44,17 @@ public class ActivityLabBase extends AppCompatActivity implements OnClickListene
             int scrcoords[] = new int[2];
             if (mView != null) {
                 mView.getLocationOnScreen(scrcoords);
-            float x = event.getRawX() + mView.getLeft() - scrcoords[0];
-            float y = event.getRawY() + mView.getTop() - scrcoords[1];
+                float x = event.getRawX() + mView.getLeft() - scrcoords[0];
+                float y = event.getRawY() + mView.getTop() - scrcoords[1];
 
-            if (event.getAction() == MotionEvent.ACTION_UP
-                    && (x < mView.getLeft() || x >= mView.getRight() || y < mView.getTop() || y > mView
-                    .getBottom())) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getWindow().getCurrentFocus()
-                        .getWindowToken(), 0);
+                if (event.getAction() == MotionEvent.ACTION_UP
+                        && (x < mView.getLeft() || x >= mView.getRight() || y < mView.getTop() || y > mView
+                        .getBottom())) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getWindow().getCurrentFocus()
+                            .getWindowToken(), 0);
+                }
             }
-        }
         }
         return ret;
     }

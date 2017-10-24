@@ -2,7 +2,6 @@ package com.sami.rippel.ui.activity;
 
 import android.app.WallpaperManager;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -13,18 +12,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
-import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.livewallpapers.lwpdouachanged.DouaLiveWallpaper;
-import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.Constants;
+import com.sami.rippel.model.ViewModel;
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadManager;
 import com.thin.downloadmanager.DownloadRequest;
@@ -35,9 +33,9 @@ import com.thin.downloadmanager.ThinDownloadManager;
 import java.io.File;
 
 public class DouaLiveWallpaperActivity extends AppCompatActivity {
+    private static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
     private CoordinatorLayout mRootLayout;
     private ThinDownloadManager mDownloadManager;
-    private static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
     private File mZipFile;
     private File mZipDestination;
     private File mBackgroundFile;
@@ -62,13 +60,12 @@ public class DouaLiveWallpaperActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doua_live_wallpaper);
         if (ViewModel.Current.device.getScreenHeightPixels() < 820
                 && ViewModel.Current.device.getScreenWidthPixels() < 500) {
-             mBackgroundUrl = getIntent().getStringExtra(Constants.URL_TO_DOWNLOAD)
-                     .replace("islamicimages", "islamicimagesmini");
-             mZipUrl = Constants.URL_DOUA_PNG.replace("doua.zip", "douamini.zip");
-        } else
-        {
-             mBackgroundUrl = getIntent().getStringExtra(Constants.URL_TO_DOWNLOAD);
-             mZipUrl = Constants.URL_DOUA_PNG;
+            mBackgroundUrl = getIntent().getStringExtra(Constants.URL_TO_DOWNLOAD)
+                    .replace("islamicimages", "islamicimagesmini");
+            mZipUrl = Constants.URL_DOUA_PNG.replace("doua.zip", "douamini.zip");
+        } else {
+            mBackgroundUrl = getIntent().getStringExtra(Constants.URL_TO_DOWNLOAD);
+            mZipUrl = Constants.URL_DOUA_PNG;
         }
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
@@ -131,8 +128,7 @@ public class DouaLiveWallpaperActivity extends AppCompatActivity {
         }
     }
 
-    public void chooseColor()
-    {
+    public void chooseColor() {
         ColorPickerDialogBuilder
                 .with(this)
                 .setTitle(getString(R.string.choosecolor))
@@ -194,8 +190,7 @@ public class DouaLiveWallpaperActivity extends AppCompatActivity {
                 } catch (Exception ignored) {
                 }
             }
-        }
-        else {
+        } else {
             ViewModel.Current.device.showSnackMessage(mRootLayout, "Wait for download");
         }
     }

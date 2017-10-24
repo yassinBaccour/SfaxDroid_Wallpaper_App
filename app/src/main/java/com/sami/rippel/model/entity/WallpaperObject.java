@@ -14,6 +14,17 @@ import java.util.List;
 @Root(name = "wallpaper", strict = false)
 public class WallpaperObject implements Parcelable, Serializable {
 
+    public static final Creator<WallpaperObject> CREATOR = new Creator<WallpaperObject>() {
+        @Override
+        public WallpaperObject createFromParcel(Parcel in) {
+            return new WallpaperObject(in);
+        }
+
+        @Override
+        public WallpaperObject[] newArray(int size) {
+            return new WallpaperObject[size];
+        }
+    };
     @Element(name = "url", required = true)
     private String url;
     @Element(name = "name", required = false)
@@ -22,7 +33,7 @@ public class WallpaperObject implements Parcelable, Serializable {
     private String color;
     @Element(name = "desc", required = false)
     private String desc;
-    @ElementList(name="wallpaper", inline=true, required = false)
+    @ElementList(name = "wallpaper", inline = true, required = false)
     @Path("subcategory")
     private List<WallpaperObject> subWallpapersCategoryList;
 
@@ -38,6 +49,10 @@ public class WallpaperObject implements Parcelable, Serializable {
         return desc;
     }
 
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     public String getColor() {
         return color;
     }
@@ -48,6 +63,10 @@ public class WallpaperObject implements Parcelable, Serializable {
 
     public String getUrl() {
         return url.replace("_preview", "");
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public int getHeight() {
@@ -66,16 +85,8 @@ public class WallpaperObject implements Parcelable, Serializable {
         this.name = name;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public List<WallpaperObject> getSubWallpapersCategoryList() {
         return subWallpapersCategoryList;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public void setSubWallpapersCategoryList(List<WallpaperObject> subWallpapersCategoryList) {
@@ -92,16 +103,4 @@ public class WallpaperObject implements Parcelable, Serializable {
         dest.writeString(name);
         dest.writeString(url);
     }
-
-    public static final Creator<WallpaperObject> CREATOR = new Creator<WallpaperObject>() {
-        @Override
-        public WallpaperObject createFromParcel(Parcel in) {
-            return new WallpaperObject(in);
-        }
-
-        @Override
-        public WallpaperObject[] newArray(int size) {
-            return new WallpaperObject[size];
-        }
-    };
 }

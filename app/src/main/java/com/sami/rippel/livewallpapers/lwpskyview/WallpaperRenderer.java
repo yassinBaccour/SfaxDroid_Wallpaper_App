@@ -5,13 +5,14 @@ import android.view.MotionEvent;
 
 import com.sami.rippel.allah.R;
 
-import org.rajawali3d.materials.Material;
 import org.rajawali3d.math.vector.Vector3;
 import org.rajawali3d.renderer.Renderer;
 
 public class WallpaperRenderer extends Renderer {
 
     String axe = "";
+    private float downX, downY, upX, upY;
+    private int min_distance = 100;
 
     public WallpaperRenderer(Context context) {
         super(context);
@@ -20,9 +21,6 @@ public class WallpaperRenderer extends Renderer {
     @Override
     public void onOffsetsChanged(float v, float v2, float v3, float v4, int i, int i2) {
     }
-
-    private float downX, downY, upX, upY;
-    private int min_distance = 100;
 
     @Override
     public void onTouchEvent(MotionEvent event) {

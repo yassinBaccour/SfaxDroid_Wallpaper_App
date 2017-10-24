@@ -17,8 +17,8 @@ import com.sami.rippel.model.ViewModel;
 import java.io.File;
 
 public class NameOfAllah2DLwp extends WallpaperService {
-    private Paint mPaintOption;
     private static int currentPhoto = 1;
+    private Paint mPaintOption;
 
     @Override
     public void onCreate() {
@@ -38,19 +38,19 @@ public class NameOfAllah2DLwp extends WallpaperService {
     class IslamicEngine extends Engine {
         private final Handler mHandler = new Handler();
         private final Paint mPaint = new Paint();
+        private final SurfaceHolder mHolder = getSurfaceHolder();
         private File mFilesDir = getExternalFilesDir("");
         private int mScreenHeight;
         private int mScreenWidth;
         private Bitmap mBackground;
-        private final SurfaceHolder mHolder = getSurfaceHolder();
         private boolean mVisible;
-        private BitmapFactory.Options mOptions = new BitmapFactory.Options();
-        private int mColor;
         private final Runnable mDrawPattern = new Runnable() {
             public void run() {
                 drawFrame();
             }
         };
+        private BitmapFactory.Options mOptions = new BitmapFactory.Options();
+        private int mColor;
 
         IslamicEngine() {
             mColor = ViewModel.Current.dataUtils.GetSetting("DouaLwpColor", -4522170);
@@ -93,8 +93,7 @@ public class NameOfAllah2DLwp extends WallpaperService {
                     return Typeface.createFromAsset(getAssets(), "arabicfont7.ttf");
                 else
                     return Typeface.createFromAsset(getAssets(), "arabicfont8.ttf");
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
                 return Typeface.DEFAULT;
             }
         }

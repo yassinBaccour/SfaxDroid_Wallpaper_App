@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -17,16 +16,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sami.rippel.base.SimpleFragment;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.ui.activity.AboutActivty;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
-import com.sami.rippel.model.Constants;
 import com.sami.rippel.allah.R;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
-import com.sami.rippel.model.listner.AdsListner;
+import com.sami.rippel.base.SimpleFragment;
 import com.sami.rippel.livewallpapers.lwpskyview.RajawaliExampleWallpaper;
 import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity;
+import com.sami.rippel.model.Constants;
+import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.listner.AdsListner;
+import com.sami.rippel.ui.activity.AboutActivty;
+import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
+import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
 
 import java.io.IOException;
 
@@ -173,8 +172,7 @@ public class LwpFragment extends SimpleFragment {
         resizeTitle();
     }
 
-    public void changeButtonSate(boolean mState)
-    {
+    public void changeButtonSate(boolean mState) {
         mButtonRippleLWP.setEnabled(mState);
         mButtonSkybox.setEnabled(mState);
         mButtonDoua.setEnabled(mState);
@@ -215,7 +213,7 @@ public class LwpFragment extends SimpleFragment {
         mTxtdescdoua = (TextView) rootView.findViewById(R.id.txtdescdoua);
         mTxtdescskybox = (TextView) rootView.findViewById(R.id.txtdescskybox);
         mTxtdescripple = (TextView) rootView.findViewById(R.id.txtdescripple);
-        mTxtdescNameofallah2D    = (TextView) rootView.findViewById(R.id.txtdescNameofallah2D);
+        mTxtdescNameofallah2D = (TextView) rootView.findViewById(R.id.txtdescNameofallah2D);
         return rootView;
     }
 

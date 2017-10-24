@@ -15,7 +15,7 @@ public class FragmentPreferences extends PreferenceFragment implements SharedPre
     private SharedPreferences mSharedPreferences;
 
     private int[] preferencesToLoad() {
-        return new int[] {R.xml.settings};
+        return new int[]{R.xml.settings};
     }
 
     @Override

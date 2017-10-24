@@ -13,30 +13,29 @@ import java.util.List;
 @Root(name = "allahwaterrippleapplication", strict = false)
 public class WallpapersRetrofitObject {
 
+    @ElementList(name = "category", inline = true, required = false)
+    @Path("wallpapers")
+    public List<WallpaperCategory> categoryList;
     @Element(name = "title")
     @Path("wallpapers")
     private String applicationName;
 
-    @ElementList(name = "category", inline = true, required = false)
-    @Path("wallpapers")
-    public List<WallpaperCategory> categoryList;
-
     public WallpapersRetrofitObject() {
-    }
-
-    public void setApplicationName(String applicationName) {
-        this.applicationName = applicationName;
-    }
-
-    public void setCategoryList(List<WallpaperCategory> categoryList) {
-        this.categoryList = categoryList;
     }
 
     public String getApplicationName() {
         return applicationName;
     }
 
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
     public List<WallpaperCategory> getCategoryList() {
         return categoryList;
+    }
+
+    public void setCategoryList(List<WallpaperCategory> categoryList) {
+        this.categoryList = categoryList;
     }
 }

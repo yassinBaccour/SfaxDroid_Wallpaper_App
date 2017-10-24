@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,18 +15,8 @@ import com.sami.rippel.model.listner.StickersListner;
 
 public class HelpFragment extends Fragment {
 
-    enum HelpType {
-        RESIZE_HELPS,
-        ADD_TEXT_HELP,
-        ADD_STICKERS_HELPS,
-        DELETE_STICKERS_HELPS,
-    }
-
-    public void setmState(boolean mState) {
-        this.mState = mState;
-    }
-
     StickersListner stickersListner;
+    boolean mState = false;
     private TextView mTitleTxt;
     private TextView mTextViewDesc1;
     private TextView mTextViewDesc2;
@@ -36,18 +25,20 @@ public class HelpFragment extends Fragment {
     private ImageView mImageView;
     private String mhelpType = "RESIZE_HELPS";
 
+    public static HelpFragment newInstance() {
+        return new HelpFragment();
+    }
+
     public void setMhelpType(String mhelpType) {
         this.mhelpType = mhelpType;
     }
-
-    boolean mState = false;
 
     public boolean ismState() {
         return mState;
     }
 
-    public static HelpFragment newInstance() {
-        return new HelpFragment();
+    public void setmState(boolean mState) {
+        this.mState = mState;
     }
 
     @Override
@@ -77,8 +68,7 @@ public class HelpFragment extends Fragment {
         return rootView;
     }
 
-    public void LoadView(HelpTypeEnum helpTypeEnum)
-    {
+    public void LoadView(HelpTypeEnum helpTypeEnum) {
         if (helpTypeEnum == HelpTypeEnum.HELP1) {
             mImageView.setVisibility(View.VISIBLE);
             mImageView.setImageResource(R.mipmap.ic_help1);
@@ -86,8 +76,7 @@ public class HelpFragment extends Fragment {
             mTitleTxt.setText(getString(R.string.swipeleftright));
         }
 
-        if (helpTypeEnum == HelpTypeEnum.HELP2)
-        {
+        if (helpTypeEnum == HelpTypeEnum.HELP2) {
             mImageView.setVisibility(View.VISIBLE);
             mImageView.setImageResource(R.mipmap.ic_help2);
             mTitleTxt.setVisibility(View.VISIBLE);
@@ -158,5 +147,12 @@ public class HelpFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    enum HelpType {
+        RESIZE_HELPS,
+        ADD_TEXT_HELP,
+        ADD_STICKERS_HELPS,
+        DELETE_STICKERS_HELPS,
     }
 }

@@ -14,7 +14,7 @@ import android.util.Log;
 
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.utils.FileUtils;
-import com.sami.rippel.allah.WallpaperApplication;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -40,7 +40,7 @@ public class RetrieveWallpaperService extends JobService {
         editor.apply();
     }
 
-    private class RetrieveWallpaperAsync extends AsyncTask<JobParameters, Void, JobParameters>{
+    private class RetrieveWallpaperAsync extends AsyncTask<JobParameters, Void, JobParameters> {
         private final JobService jobService;
 
         public RetrieveWallpaperAsync(JobService jobService) {
@@ -52,7 +52,7 @@ public class RetrieveWallpaperService extends JobService {
             Log.d("WallpaperService", "Wallpaper changed");
             int nbFile = mFileUtils.getPermanentDirListFiles().size();
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            int currentWallpaper = sharedPref.getInt("currentWallpaper",0);
+            int currentWallpaper = sharedPref.getInt("currentWallpaper", 0);
             if (nbFile > 0) {
                 if (currentWallpaper >= nbFile) {
                     updateSchedulerSettings(0);

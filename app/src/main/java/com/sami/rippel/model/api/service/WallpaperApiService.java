@@ -4,7 +4,6 @@ import com.sami.rippel.model.entity.UpdateApp;
 import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 
 import io.reactivex.Flowable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**

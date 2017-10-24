@@ -2,7 +2,6 @@ package com.sami.rippel.ui.activity;
 
 import android.app.WallpaperManager;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,18 +13,16 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.flask.colorpicker.ColorPickerView;
-import com.flask.colorpicker.OnColorSelectedListener;
-import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.sami.rippel.allah.R;
-import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.livewallpapers.nameofallah2d.NameOfAllah2DLwp;
 import com.sami.rippel.model.Constants;
+import com.sami.rippel.model.ViewModel;
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadManager;
 import com.thin.downloadmanager.DownloadRequest;
@@ -36,6 +33,8 @@ import com.thin.downloadmanager.ThinDownloadManager;
 import java.io.File;
 
 public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
+    NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1
+            mDownloadStatusListener = new NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1();
     private CoordinatorLayout mRootLayout;
     private File mBackgroundFile;
     private ProgressBar mProgress1;
@@ -58,9 +57,6 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
     private Button mButtonSizeMeduim;
     private Button mButtonSizeSmall;
     private boolean mClickable = false;
-
-    NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1
-            mDownloadStatusListener = new NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +111,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
                 .setDownloadContext("Doua LWP Background")
                 .setStatusListener(mDownloadStatusListener);
         boolean result = mBackgroundFile.delete();
-        if (!result)
-        {
+        if (!result) {
             ViewModel.Current.device.showSnackMessage(mRootLayout, "Error deleteing temps file");
         }
         if (mDownloadManager.query(mDownloadId2) == DownloadManager.STATUS_NOT_FOUND)
@@ -140,8 +135,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
                     getResources().getDrawable(R.drawable.ic_size_full_on), null, null);
     }
 
-    public void setTextViewTypeFace()
-    {
+    public void setTextViewTypeFace() {
         mTxtfont1.setTypeface(Typeface.createFromAsset(getAssets(), "arabicfont1.otf"));
         mTxtfont2.setTypeface(Typeface.createFromAsset(getAssets(), "arabicfont2.ttf"));
         mTxtfont3.setTypeface(Typeface.createFromAsset(getAssets(), "arabicfont3.ttf"));
@@ -153,8 +147,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
     }
 
 
-    private void initTextViewListner()
-    {
+    private void initTextViewListner() {
         mTxtfont1.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 1);
             resetTextViewBackground();
@@ -204,8 +197,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
         });
     }
 
-    private void resetTextViewBackground()
-    {
+    private void resetTextViewBackground() {
         mTxtfont1.setTextColor(Color.WHITE);
         mTxtfont2.setTextColor(Color.WHITE);
         mTxtfont3.setTextColor(Color.WHITE);
@@ -282,11 +274,11 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
                             ViewModel.Current.fileUtils
                                     .covertBitmapToDrawable(NameOfAllah2DLiveWallpaperActivity.this,
-                                    ViewModel.Current.fileUtils.
-                                            changeImageColor(ViewModel.Current.fileUtils.
-                                                            convertDrawableToBitmap(getResources()
-                                                                    .getDrawable(R.drawable.ic_palette))
-                                                    , selectedColor))
+                                            ViewModel.Current.fileUtils.
+                                                    changeImageColor(ViewModel.Current.fileUtils.
+                                                                    convertDrawableToBitmap(getResources()
+                                                                            .getDrawable(R.drawable.ic_palette))
+                                                            , selectedColor))
                             , null, null);
                 })
                 .setNegativeButton(getString(R.string.btncancel), (dialog, which) -> {

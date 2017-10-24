@@ -29,9 +29,9 @@ import rajawali.renderer.PostProcessingRenderer.PostProcessingQuality;
 import rajawali.renderer.RajawaliRenderer;
 
 public class IslamicWallpaperRenderer extends RajawaliRenderer {
+    private final int QUAD_SEGMENTS = 40;
     private TouchRippleFilter mFilter;
     private long frameCount;
-    private final int QUAD_SEGMENTS = 40;
     private Point mScreenSize;
     private boolean changingBG = false;
     private boolean enableSound = false;

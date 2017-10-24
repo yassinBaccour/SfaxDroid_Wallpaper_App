@@ -43,7 +43,14 @@ import net.hockeyapp.android.CrashManager;
 import butterknife.BindView;
 
 public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListner, DeviceListner {
+    private static final int PICK_FROM_FILE = 3;
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    public static Boolean isAdsShow = false;
+    public static int nbOpenAds = 0;
+    public static boolean stat = false;
     private static long back_pressed;
+    public boolean isFirstLaunch = false;
     @Nullable
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -63,20 +70,8 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     @BindView(R.id.progressBar)
     ProgressBar mProgressLoader;
     RxPermissions rxPermissions;
-    public static Boolean isAdsShow = false;
-    public static int nbOpenAds = 0;
-    private static final int PICK_FROM_FILE = 3;
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private Tracker mTracker;
-    public boolean isFirstLaunch = false;
-    public static boolean stat = false;
     private CatalogPagerAdapter mAdapter;
-
-    public enum AdsType {
-        ShowAds,
-        ShowTimedAds,
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -307,13 +302,6 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         loadAndSetWallpaperToViewModel();
     }
 
-    public enum LwpTypeEnum {
-        RIPPLE_TYPE,
-        SKYBOX_TYPE,
-        DOUA_TYPE,
-        TIMER_TYPE,
-    }
-
     private void checkForCrashes() {
         CrashManager.register(this);
     }
@@ -437,5 +425,17 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     @Override
     public void showADS() {
 
+    }
+
+    public enum AdsType {
+        ShowAds,
+        ShowTimedAds,
+    }
+
+    public enum LwpTypeEnum {
+        RIPPLE_TYPE,
+        SKYBOX_TYPE,
+        DOUA_TYPE,
+        TIMER_TYPE,
     }
 }

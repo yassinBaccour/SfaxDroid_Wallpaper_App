@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import com.sami.rippel.allah.R;
 
 public class WallpaperPreferenceActivity extends Activity {
@@ -18,8 +19,8 @@ public class WallpaperPreferenceActivity extends Activity {
         }
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                .replace(R.id.settings_fragment_container, new FragmentPreferences(), FragmentPreferences.class.getName())
-                .commit();
+                    .replace(R.id.settings_fragment_container, new FragmentPreferences(), FragmentPreferences.class.getName())
+                    .commit();
         }
     }
 

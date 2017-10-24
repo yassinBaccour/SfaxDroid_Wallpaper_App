@@ -92,7 +92,7 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
-                   mView.onSaveTempsDorAndDoAction(aBoolean, actionToDo);
+                    mView.onSaveTempsDorAndDoAction(aBoolean, actionToDo);
                 })
         );
     }

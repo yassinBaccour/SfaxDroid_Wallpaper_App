@@ -71,6 +71,9 @@ import io.reactivex.schedulers.Schedulers;
 @SuppressLint("NewApi")
 public class StickersLabActivity extends BaseActivity implements StickersListner {
     private static final int PICTURE_TAKEN_FROM_GALLERY = 1;
+    private static final int SHARE_REQUEST_CODE = 23123;
+    private static final int PICK_USER_PROFILE_IMAGE = 1000;
+    private static long back_pressed;
     @BindView(R.id.progressBar)
     public ProgressBar mProgressLoader;
     @BindView(R.id.ImageRotate)
@@ -99,6 +102,9 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     public LinearLayout mLinearButtionEdition;
     @BindView(R.id.imageview_frame)
     public ImageView mImageview_frame;
+    public int mTxtSize = 20;
+    public String mFabDefault = Constants.KEY_DEFAULT;
+    public String imagePath = "";
     private Activity mActivity;
     private Matrix mMatrix = new Matrix();
     private Bitmap mBitmapDrawing;
@@ -106,7 +112,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     private boolean mIsDelete = false;
     private int mRotateAngle = 0;
     private float mScale = 1f;
-    private static long back_pressed;
     private ScaleGestureDetector mScaleGestureDetector;
     private ArrayList<myView> mAllImageAtScreenList = new ArrayList<>();
     private ArrayList<ImageView> mArrayListImageeView = new ArrayList<>();
@@ -117,10 +122,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     private HelpFragment helpFragment;
     private int mCurrentPos = 0;
     private int mCurrentFont = 1;
-    private static final int SHARE_REQUEST_CODE = 23123;
-    private static final int PICK_USER_PROFILE_IMAGE = 1000;
-    public int mTxtSize = 20;
-    public String mFabDefault = Constants.KEY_DEFAULT;
     private int mPaddingLeftRight = 10;
 
     @Override
@@ -206,8 +207,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     protected void initEventAndData() {
 
     }
-
-    public String imagePath = "";
 
     public void startCameraActivity() throws IOException {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
