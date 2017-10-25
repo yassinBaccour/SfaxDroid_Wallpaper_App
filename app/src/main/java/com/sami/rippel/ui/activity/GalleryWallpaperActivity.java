@@ -58,18 +58,6 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
         super.onCreate(savedInstanceState);
-        Current.fileUtils.SetLwpListner(this);
-        ViewModel.Current.registerOnStateChangeListener(this);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(
-                getApplicationContext(), 3));
-        mRecyclerView.setHasFixedSize(true);
-        mPos = getIntent().getStringExtra(Constants.DETAIL_IMAGE_POS);
-        mLwpName = getIntent().getStringExtra(Constants.KEY_LWP_NAME);
-        initToolbar(mPos);
-        initData();
     }
 
     public void initData() {
@@ -122,6 +110,18 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
 
     @Override
     protected void initEventAndData() {
+        Current.fileUtils.SetLwpListner(this);
+        ViewModel.Current.registerOnStateChangeListener(this);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mRecyclerView = (RecyclerView) findViewById(R.id.list);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(
+                getApplicationContext(), 3));
+        mRecyclerView.setHasFixedSize(true);
+        mPos = getIntent().getStringExtra(Constants.DETAIL_IMAGE_POS);
+        mLwpName = getIntent().getStringExtra(Constants.KEY_LWP_NAME);
+        initToolbar(mPos);
+        initData();
     }
 
     public void fillData() {

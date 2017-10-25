@@ -5,11 +5,10 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -20,6 +19,7 @@ import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.sami.rippel.allah.R;
+import com.sami.rippel.base.SimpleActivity;
 import com.sami.rippel.livewallpapers.lwpdouachanged.DouaLiveWallpaper;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
@@ -32,32 +32,53 @@ import com.thin.downloadmanager.ThinDownloadManager;
 
 import java.io.File;
 
-public class DouaLiveWallpaperActivity extends AppCompatActivity {
+import butterknife.BindView;
+
+public class DouaLiveWallpaperActivity extends SimpleActivity {
+
     private static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
+    @Nullable
+    @BindView(R.id.rootLayout)
     private CoordinatorLayout mRootLayout;
+    @Nullable
+    @BindView(R.id.progress1)
+    private ProgressBar mProgress1;
+    @Nullable
+    @BindView(R.id.progressTxt1)
+    private TextView mProgress1Txt;
+    @Nullable
+    @BindView(R.id.txtstatusDownload)
+    private TextView mTxtstatusDownload;
+    @Nullable
+    @BindView(R.id.toolbar)
+    private Toolbar mToolbar;
+    @Nullable
+    @BindView(R.id.fab)
+    private FloatingActionButton mFab;
+    @Nullable
+    @BindView(R.id.buttonColor)
+    private Button mButtonColor;
+
     private ThinDownloadManager mDownloadManager;
     private File mZipFile;
     private File mZipDestination;
     private File mBackgroundFile;
-    private ProgressBar mProgress1;
-    private TextView mProgress1Txt;
-    private TextView mTxtstatusDownload;
     private int mDownloadId1;
     private int mDownloadId2;
     private DownloadRequest mDownloadRequest2;
-    private Toolbar mToolbar;
-    private String mBackgroundUrl = "";
-    private String mZipUrl = "";
-    private FloatingActionButton mFab;
-    private Button mButtonColor;
     private boolean mIsClickable = false;
     private MyDownloadDownloadStatusListenerV1
             myDownloadStatusListener = new MyDownloadDownloadStatusListenerV1();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doua_live_wallpaper);
+    protected int getLayout() {
+        return R.layout.activity_doua_live_wallpaper;
+    }
+
+    @Override
+    protected void initEventAndData() {
+        String mZipUrl = "";
+        String mBackgroundUrl = "";
         if (ViewModel.Current.device.getScreenHeightPixels() < 820
                 && ViewModel.Current.device.getScreenWidthPixels() < 500) {
             mBackgroundUrl = getIntent().getStringExtra(Constants.URL_TO_DOWNLOAD)
@@ -67,13 +88,6 @@ public class DouaLiveWallpaperActivity extends AppCompatActivity {
             mBackgroundUrl = getIntent().getStringExtra(Constants.URL_TO_DOWNLOAD);
             mZipUrl = Constants.URL_DOUA_PNG;
         }
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
-        mProgress1Txt = (TextView) findViewById(R.id.progressTxt1);
-        mTxtstatusDownload = (TextView) findViewById(R.id.txtstatusDownload);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
-        mProgress1 = (ProgressBar) findViewById(R.id.progress1);
-        mButtonColor = (Button) findViewById(R.id.buttonColor);
         mProgress1.setMax(100);
         mProgress1.setProgress(0);
         mDownloadManager = new ThinDownloadManager(DOWNLOAD_THREAD_POOL_SIZE);
@@ -112,9 +126,8 @@ public class DouaLiveWallpaperActivity extends AppCompatActivity {
                 mDownloadId2 = mDownloadManager.add(mDownloadRequest2);
             }
         }
+
         mProgress1Txt.setText(getString(R.string.DouaLwpProgressDesc));
-
-
         mButtonColor.setOnClickListener(v -> chooseColor());
     }
 

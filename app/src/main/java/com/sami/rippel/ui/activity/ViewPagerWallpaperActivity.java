@@ -43,14 +43,7 @@ import net.hockeyapp.android.CrashManager;
 import butterknife.BindView;
 
 public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListner, DeviceListner {
-    private static final int PICK_FROM_FILE = 3;
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    public static Boolean isAdsShow = false;
-    public static int nbOpenAds = 0;
-    public static boolean stat = false;
-    private static long back_pressed;
-    public boolean isFirstLaunch = false;
+
     @Nullable
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -69,6 +62,15 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     @Nullable
     @BindView(R.id.progressBar)
     ProgressBar mProgressLoader;
+
+    private static final int PICK_FROM_FILE = 3;
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    public static Boolean isAdsShow = false;
+    public static int nbOpenAds = 0;
+    public static boolean stat = false;
+    private static long back_pressed;
+    public boolean isFirstLaunch = false;
     RxPermissions rxPermissions;
     private Tracker mTracker;
     private CatalogPagerAdapter mAdapter;

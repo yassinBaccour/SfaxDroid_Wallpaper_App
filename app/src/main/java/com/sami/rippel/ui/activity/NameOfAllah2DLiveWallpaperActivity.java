@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.sami.rippel.allah.R;
+import com.sami.rippel.base.SimpleActivity;
 import com.sami.rippel.livewallpapers.nameofallah2d.NameOfAllah2DLwp;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
@@ -32,11 +33,9 @@ import com.thin.downloadmanager.ThinDownloadManager;
 
 import java.io.File;
 
-public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
-    NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1
-            mDownloadStatusListener = new NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1();
+public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
+
     private CoordinatorLayout mRootLayout;
-    private File mBackgroundFile;
     private ProgressBar mProgress1;
     private TextView mProgress1Txt;
     private TextView mTxtstatusDownload;
@@ -48,7 +47,6 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
     private TextView mTxtfont6;
     private TextView mTxtfont7;
     private TextView mTxtfont8;
-    private int mDownloadId2;
     private Toolbar mToolbar;
     private FloatingActionButton mFab;
     private Button mButtonColor;
@@ -57,12 +55,19 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
     private Button mButtonSizeMeduim;
     private Button mButtonSizeSmall;
     private boolean mClickable = false;
+    private int mDownloadId2;
+    private File mBackgroundFile;
+
+    NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1
+            mDownloadStatusListener = new NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nameofallah_live_wallpaper);
+    protected int getLayout() {
+        return R.layout.activity_nameofallah_live_wallpaper;
+    }
 
+    @Override
+    protected void initEventAndData() {
         ThinDownloadManager mDownloadManager = new ThinDownloadManager(Constants.DOWNLOAD_THREAD_POOL_SIZE);
 
         String mBackgroundUrl = "";
@@ -322,7 +327,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends AppCompatActivity {
         }
     }
 
-    class MyDownloadDownloadStatusListenerV1 implements DownloadStatusListenerV1 {
+    private class MyDownloadDownloadStatusListenerV1 implements DownloadStatusListenerV1 {
 
         @Override
         public void onDownloadComplete(DownloadRequest request) {
