@@ -1,0 +1,4 @@
+ext {
+    appVersionCode = 62
+    appVersionName = "6.8"
+}
