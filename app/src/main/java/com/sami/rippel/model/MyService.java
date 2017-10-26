@@ -17,8 +17,7 @@ public class MyService {
     public Retrofit retrofit;
     public RetrofitHelper mRetrofitHelper;
 
-    public MyService()
-    {
+    public MyService() {
         mRetrofitHelper = new RetrofitHelper(getWallpaperApiService());
     }
 

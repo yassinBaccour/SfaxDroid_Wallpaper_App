@@ -22,6 +22,7 @@ import java.util.List;
 
 public class ViewModel {
     public static ViewModel Current;
+    private final List<OnStateChangeListener> mStateListeners = new ArrayList<>();
     public FileUtils fileUtils;
     public MyDevice device;
     public MyService service;
@@ -71,8 +72,6 @@ public class ViewModel {
         this.retrofitWallpObject = retrofitWallpObject;
         onStateChange();
     }
-
-    private final List<OnStateChangeListener> mStateListeners = new ArrayList<>();
 
     //Save State listner to update List when retrofitWallpObject is updated
     public void registerOnStateChangeListener(OnStateChangeListener listener) {

@@ -12,5 +12,6 @@ public abstract class BaseHolder<T> extends RecyclerView.ViewHolder implements V
     public BaseHolder(View itemView) {
         super(itemView);
     }
+
     public abstract void setData(Context context, T data);
 }

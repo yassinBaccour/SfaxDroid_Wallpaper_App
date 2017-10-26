@@ -58,6 +58,37 @@ public class FileUtils {
         this.mContext = context;
     }
 
+    public static Bitmap rotateBitmap(Bitmap source, float angle) {
+        if (!source.isRecycled()) {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(angle);
+            return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
+                    source.getHeight(), matrix, true);
+        } else
+            return null;
+    }
+
+    static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth,
+                                              int reqHeight) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        int inSampleSize = 1;
+        if (height > reqHeight) {
+            inSampleSize = Math.round((float) height / (float) reqHeight);
+        }
+        int expectedWidth = width / inSampleSize;
+        if (expectedWidth > reqWidth) {
+            inSampleSize = Math.round((float) width / (float) reqWidth);
+        }
+        options.inSampleSize = inSampleSize;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(path, options);
+    }
+
     public void SetListner(WallpaperListner fileListner) {
         this.mFileListner = fileListner;
     }
@@ -110,16 +141,6 @@ public class FileUtils {
         }
     }
 
-    public static Bitmap rotateBitmap(Bitmap source, float angle) {
-        if (!source.isRecycled()) {
-            Matrix matrix = new Matrix();
-            matrix.postRotate(angle);
-            return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
-                    source.getHeight(), matrix, true);
-        } else
-            return null;
-    }
-
     public boolean savePermanentFile(final String url) {
         final boolean savedFinal;
         File temp = getTemporaryFile(getFileName(url));
@@ -167,7 +188,6 @@ public class FileUtils {
     public List<File> getBasmalaStickersFileList() {
         return getListFiles(getBasmalaFileDirDir());
     }
-
 
     public boolean saveBitmapToStorage(Bitmap bitmap, String fileName,
                                        int saveOption) {
@@ -350,27 +370,6 @@ public class FileUtils {
         DecompressZip decomp = new DecompressZip(zipFile.getPath(),
                 destination.getPath() + File.separator);
         decomp.unzip();
-    }
-
-    static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth,
-                                              int reqHeight) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        int inSampleSize = 1;
-        if (height > reqHeight) {
-            inSampleSize = Math.round((float) height / (float) reqHeight);
-        }
-        int expectedWidth = width / inSampleSize;
-        if (expectedWidth > reqWidth) {
-            inSampleSize = Math.round((float) width / (float) reqWidth);
-        }
-        options.inSampleSize = inSampleSize;
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(path, options);
     }
 
     String getPath(Activity ac, Uri uri) {

@@ -4,27 +4,29 @@ import java.io.File;
 
 public class ApplicationHandler {
 
-	public enum IMAGES{
-		Cache,
-		FrameImages
-	}
-	private static ApplicationHandler handler;
-	private ApplicationHandler() {
-	}
+    private static ApplicationHandler handler;
 
-	public File getOrCreateFolder(String folder, IMAGES imagePath){
+    private ApplicationHandler() {
+    }
 
-		String strImageFolder = folder + File.separator + imagePath.name();
-		File imageFolder = new File(strImageFolder);
-		if(!imageFolder.exists()){
-			imageFolder.mkdirs();
-		}
-		return imageFolder;
-	}
+    public static ApplicationHandler getInstance() {
+        if (handler == null)
+            handler = new ApplicationHandler();
+        return handler;
+    }
 
-	public static ApplicationHandler getInstance() {
-		if (handler == null)
-			handler = new ApplicationHandler();
-		return handler;
-	}
+    public File getOrCreateFolder(String folder, IMAGES imagePath) {
+
+        String strImageFolder = folder + File.separator + imagePath.name();
+        File imageFolder = new File(strImageFolder);
+        if (!imageFolder.exists()) {
+            imageFolder.mkdirs();
+        }
+        return imageFolder;
+    }
+
+    public enum IMAGES {
+        Cache,
+        FrameImages
+    }
 }

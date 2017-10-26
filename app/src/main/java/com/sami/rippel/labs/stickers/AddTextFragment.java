@@ -21,25 +21,18 @@ public class AddTextFragment extends Fragment {
     Button mAddText;
     EditText mTxt;
     TextView textViewAddText;
+    boolean mState = false;
 
-    enum TextStyleEnum {
-        BOLD_ITALIC,
-        BOLD,
-        ITALIC,
-        NORMAL
+    public static AddTextFragment newInstance() {
+        return new AddTextFragment();
     }
+
     public boolean ismState() {
         return mState;
     }
 
     public void setmState(boolean mState) {
         this.mState = mState;
-    }
-
-    boolean mState = false;
-
-    public static AddTextFragment newInstance() {
-        return new AddTextFragment();
     }
 
     public String getStringFromEditText() {
@@ -60,8 +53,7 @@ public class AddTextFragment extends Fragment {
         return rootView;
     }
 
-    public void setTextStyle(TextStyleEnum textStyle)
-    {
+    public void setTextStyle(TextStyleEnum textStyle) {
         if (textStyle == TextStyleEnum.BOLD_ITALIC)
             mTxt.setTypeface(null, Typeface.BOLD_ITALIC);
         if (textStyle == TextStyleEnum.BOLD)
@@ -92,5 +84,12 @@ public class AddTextFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    enum TextStyleEnum {
+        BOLD_ITALIC,
+        BOLD,
+        ITALIC,
+        NORMAL
     }
 }

@@ -1,5 +1,8 @@
 package com.sami.rippel.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import com.sami.rippel.utils.RxBus;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -15,6 +18,16 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     protected T mPresenter;
 
     protected abstract void initInject();
+
+    protected T instantiatePresenter() {
+        return null;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPresenter = instantiatePresenter();
+    }
 
     @Override
     protected void onViewCreated() {

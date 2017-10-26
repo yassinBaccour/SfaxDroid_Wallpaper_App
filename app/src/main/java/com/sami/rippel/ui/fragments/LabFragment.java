@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.labs.basmala.ActivityBasmalaScreen;
+import com.sami.rippel.labs.stickers.StickersLabActivity;
 import com.sami.rippel.model.listner.AdsListner;
 import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
-import com.sami.rippel.labs.stickers.StickersLabActivity;
 
 public class LabFragment extends Fragment {
 
@@ -43,8 +43,7 @@ public class LabFragment extends Fragment {
 
         mButtonTakeImageActivityStikers = (TextView) rootView.findViewById(R.id.buttonTakeImageActivityStikers);
         mButtonTakeImageCam.setOnClickListener(view -> {
-            if (mListener != null)
-            {
+            if (mListener != null) {
                 mListener.onOpenScreenTracker("FrameActivity");
                 mListener.onOpenCameraChooser();
             }
@@ -57,8 +56,7 @@ public class LabFragment extends Fragment {
         });
         mButtonTakeImageActivityStikers.setOnClickListener(view -> {
             ViewPagerWallpaperActivity.isAdsShow = true;
-            if (mListener != null)
-            {
+            if (mListener != null) {
                 mListener.onOpenScreenTracker("StikerActivity");
             }
             Intent intent = new Intent(

@@ -7,7 +7,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -34,6 +34,8 @@ import com.sami.rippel.model.entity.IntentTypeEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.DeviceListner;
 import com.sami.rippel.model.listner.WallpaperListner;
+import com.sami.rippel.presenter.Contract.DetailContract;
+import com.sami.rippel.presenter.DetailPresenter;
 import com.sami.rippel.ui.adapter.DetailPagerAdapter;
 import com.soundcloud.android.crop.Crop;
 
@@ -42,23 +44,38 @@ import net.hockeyapp.android.CrashManager;
 import java.io.File;
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailsActivity extends BaseActivity implements WallpaperListner, DeviceListner {
-    private DetailPagerAdapter mAdapter;
-    private ArrayList<WallpaperObject> mPagerData = new ArrayList<>();
-    private Toolbar mToolbar;
-    private ViewPager mViewPager;
-    private ProgressBar mProgressBar;
-    private BottomSheetLayout mBottomSheet;
-    private CoordinatorLayout mRootLayout;
+public class DetailsActivity extends BaseActivity<DetailPresenter> implements WallpaperListner, DeviceListner, DetailContract.View {
+
+    @Nullable
+    @BindView(R.id.toolbar)
+    public Toolbar mToolbar;
+    @Nullable
+    @BindView(R.id.viewpager)
+    public ViewPager mViewPager;
+    @Nullable
+    @BindView(R.id.progressBar)
+    public ProgressBar mProgressBar;
+    @Nullable
+    @BindView(R.id.bottomsheetLayout)
+    public BottomSheetLayout mBottomSheet;
+    @Nullable
+    @BindView(R.id.rootLayout)
+    public CoordinatorLayout mRootLayout;
+    @Nullable
+    @BindView(R.id.fab)
+    public FloatingActionButton mFab;
+
     private Tracker mTracker;
     private int mPos;
     private String mFrom = "";
-    public boolean mFromRipple = false;
-    private FloatingActionButton mFab;
+    private boolean mFromRipple = false;
+    private DetailPagerAdapter mAdapter;
+    private ArrayList<WallpaperObject> mPagerData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +87,6 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         }
         WallpaperApplication application = (WallpaperApplication) getApplication();
         mTracker = application.getDefaultTracker();
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mBottomSheet = (BottomSheetLayout) findViewById(R.id.bottomsheetLayout);
-        mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         ViewModel.Current.fileUtils.SetListner(this);
         ViewModel.Current.device.setmDeviceListner(this);
@@ -87,6 +99,22 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         setupViewPager();
         if (Build.VERSION.SDK_INT >= 23)
             ViewModel.Current.device.checkPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    public void initToolbar() {
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setTitle(
+                    getString(R.string.SetWall));
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    protected DetailPresenter instantiatePresenter() {
+        return new DetailPresenter(null);
     }
 
     @Override
@@ -103,13 +131,13 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         if (mFrom != null && !mFrom.isEmpty()) {
             switch (mFrom) {
                 case Constants.KEY_ADD_TIMER_LWP:
-                    saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR, getCurrentUrl());
                     break;
                 case Constants.KEY_ADDED_LIST_TIMER_LWP:
-                    saveTempsDorAndDoAction(ActionTypeEnum.DELETE_CURRENT_PICTURE);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.DELETE_CURRENT_PICTURE, getCurrentUrl());
                     break;
                 case Constants.KEY_RIPPLE_LWP:
-                    saveTempsDorAndDoAction(ActionTypeEnum.SEND_LWP);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SEND_LWP, getCurrentUrl());
                     break;
             }
         } else {
@@ -151,17 +179,6 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         finish();
     }
 
-    public void initToolbar() {
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            getSupportActionBar().setTitle(
-                    getString(R.string.SetWall));
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
     private void showMenuSheet(MenuSheetView.MenuType menuType) {
         MenuSheetView menuSheetView = new MenuSheetView(this, menuType, "", getMenuSheetListener());
         menuSheetView.inflateMenu(R.menu.menu_details);
@@ -185,67 +202,59 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         return item -> {
             switch (item.getItemId()) {
                 case R.id.buttonWallpaper:
-                    saveTempsDorAndDoAction(ActionTypeEnum.CROP);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.CROP, getCurrentUrl());
                     break;
                 case R.id.buttonChooser:
-                    saveTempsDorAndDoAction(ActionTypeEnum.OPEN_NATIV_CHOOSER);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.OPEN_NATIV_CHOOSER, getCurrentUrl());
                     break;
                 case R.id.buttonSave:
-                    saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR, getCurrentUrl());
                     break;
                 case R.id.buttonSareInsta:
-                    saveTempsDorAndDoAction(ActionTypeEnum.SHARE_INSTA);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_INSTA, getCurrentUrl());
                     break;
                 case R.id.buttonSareFb:
-                    saveTempsDorAndDoAction(ActionTypeEnum.SHARE_FB);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_FB, getCurrentUrl());
                     break;
                 case R.id.buttonShare:
-                    saveTempsDorAndDoAction(ActionTypeEnum.SHARE_SNAP_CHAT);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_SNAP_CHAT, getCurrentUrl());
                     break;
                 case R.id.buttonRipple:
-                    saveTempsDorAndDoAction(ActionTypeEnum.SEND_LWP);
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SEND_LWP, getCurrentUrl());
                     break;
-                //case R.id.buttonFastWallpaper:
-                //saveTempsDorAndDoAction(ActionTypeEnum.JUST_WALLPAPER);
-                //break;
             }
             dismissMenuSheet();
             return true;
         };
     }
 
-    public void saveTempsDorAndDoAction(ActionTypeEnum actionToDo) {
-        String url = getCurrentUrl();
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.isSavedToStorage(ViewModel.Current.fileUtils
-                .getFileName(url)))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        if (actionToDo == ActionTypeEnum.OPEN_NATIV_CHOOSER)
-                            shareAll();
-                        if (actionToDo == ActionTypeEnum.SHARE_FB)
-                            createIntent(IntentTypeEnum.FACEBOOKINTENT);
-                        if (actionToDo == ActionTypeEnum.SHARE_INSTA)
-                            createIntent(IntentTypeEnum.INTAGRAMINTENT);
-                        if (actionToDo == ActionTypeEnum.SEND_LWP)
-                            sendToRippleLwp();
-                        if (actionToDo == ActionTypeEnum.SHARE_SNAP_CHAT)
-                            createIntent(IntentTypeEnum.SHNAPCHATINTENT);
-                        if (actionToDo == ActionTypeEnum.CROP)
-                            beginCrop();
-                        if (actionToDo == ActionTypeEnum.MOVE_PERMANENT_DIR)
-                            saveFileToPermanentGallery();
-                        if (actionToDo == ActionTypeEnum.DELETE_CURRENT_PICTURE)
-                            deleteCurrentPicture();
-                        if (actionToDo == ActionTypeEnum.JUST_WALLPAPER)
-                            setAsWallpaper();
-                    } else {
-                        mProgressBar.setVisibility(View.VISIBLE);
-                        ViewModel.Current.fileUtils.saveToFileToTempsDirAndChooseAction(url, actionToDo);
-                    }
-                })
-        );
+    @Override
+    public void onSaveTempsDorAndDoAction(Boolean aBoolean, ActionTypeEnum actionToDo) {
+        if (aBoolean) {
+            if (actionToDo == ActionTypeEnum.OPEN_NATIV_CHOOSER)
+                shareAll();
+            if (actionToDo == ActionTypeEnum.SHARE_FB)
+                createIntent(IntentTypeEnum.FACEBOOKINTENT);
+            if (actionToDo == ActionTypeEnum.SHARE_INSTA)
+                createIntent(IntentTypeEnum.INTAGRAMINTENT);
+            if (actionToDo == ActionTypeEnum.SEND_LWP)
+                sendToRippleLwp();
+            if (actionToDo == ActionTypeEnum.SHARE_SNAP_CHAT)
+                createIntent(IntentTypeEnum.SHNAPCHATINTENT);
+            if (actionToDo == ActionTypeEnum.CROP)
+                beginCrop();
+            if (actionToDo == ActionTypeEnum.MOVE_PERMANENT_DIR)
+                mPresenter.saveFileToPermanentGallery(getCurrentUrl(), this);
+            if (actionToDo == ActionTypeEnum.DELETE_CURRENT_PICTURE)
+                deleteCurrentPicture();
+            if (actionToDo == ActionTypeEnum.JUST_WALLPAPER) {
+
+                mPresenter.setAsWallpaper(getCurrentUrl());
+            }
+        } else {
+            mProgressBar.setVisibility(View.VISIBLE);
+            ViewModel.Current.fileUtils.saveToFileToTempsDirAndChooseAction(getCurrentUrl(), actionToDo);
+        }
     }
 
     private String getCurrentUrl() {
@@ -253,7 +262,7 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
     }
 
     private void beginCrop() {
-        hideProgressBar();
+        hideLoading();
         String url = getCurrentUrl();
         int screenWidth = getScreenPoint().x;
         int screenHeight = getScreenPoint().y;
@@ -262,10 +271,6 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
         Crop.of(source, destination).withAspect(screenWidth, screenHeight)
                 .start(this);
-    }
-
-    public void hideProgressBar() {
-        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -277,47 +282,16 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
     }
 
     private void createIntent(IntentTypeEnum intentType) {
-        hideProgressBar();
+        hideLoading();
         if (!ViewModel.Current.device.ShareFileWithIntentType(this,
                 ViewModel.Current.fileUtils.getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())),
                 intentType)) ;
         ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.appNotInstalled));
     }
 
-    public void setAsWallpaper() {
-        hideProgressBar();
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.device.decodeBitmapAndSetAsLiveWallpaper(ViewModel.Current.fileUtils.
-                getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl()))))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(t -> {
-                    if (t)
-                        ViewModel.Current.device.showSnackMessage(mRootLayout, "Success");
-                    else
-                        ViewModel.Current.device.showSnackMessage(mRootLayout, "Error");
-                })
-        );
-    }
-
-
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
-
-            addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.setAsWallpaper(MediaStore.Images.Media.getBitmap(
-                    this.getContentResolver(), Crop.getOutput(result))))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .onErrorReturn(error -> false)
-                    .subscribe(setSuccess -> {
-                        if (setSuccess) {
-                            ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.detail_snack_set_success));
-                            showADS();
-                        } else {
-                            ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.detail_snack_set_failure));
-                        }
-                    })
-            );
-
+            mPresenter.handleCrop(result, this);
         } else if (resultCode == Crop.RESULT_ERROR) {
             ViewModel.Current.device.showSnackMessage(mRootLayout, Crop.getError(result).getMessage());
         }
@@ -344,10 +318,6 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         }
     }
 
-    public void showADS() {
-        ViewModel.Current.device.trackAction(mTracker, "ADS", "ShowAdsAfterImageAction");
-    }
-
     public Point getScreenPoint() {
         WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
@@ -357,34 +327,15 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
         return size;
     }
 
-    public void saveFileToPermanentGallery() {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.savePermanentFile(getCurrentUrl()))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        ViewModel.Current.device.showSnackMessage(mRootLayout,
-                                getString(R.string.detail_snack_save_success));
-                    } else {
-                        ViewModel.Current.device.showSnackMessage(mRootLayout,
-                                getString(R.string.detail_snack_save_failure));
-                        ViewModel.Current.device.checkPermission(this,
-                                android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    }
-                    hideProgressBar();
-                })
-        );
-    }
-
     public void shareAll() {
-        hideProgressBar();
+        hideLoading();
         ViewModel.Current.device.shareFileAll(this,
                 ViewModel.Current.fileUtils.
                         getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())));
     }
 
     public void sendToRippleLwp() {
-        hideProgressBar();
+        hideLoading();
         mFromRipple = true;
         //ViewModel.Current.device.clearCurrentWallpaper();
         ViewModel.Current.dataUtils
@@ -413,7 +364,7 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
 
     @Override
     public void onMoveFileToPermanentGallery() {
-        saveFileToPermanentGallery();
+        mPresenter.saveFileToPermanentGallery(getCurrentUrl(), this);
     }
 
     @Override
@@ -444,7 +395,7 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
     @Override
     public void onFinishActivity() {
         ViewModel.Current.device.showSnackMessage(mRootLayout, "Error Reading Storage");
-        hideProgressBar();
+        hideLoading();
     }
 
     @Override
@@ -460,33 +411,23 @@ public class DetailsActivity extends BaseActivity implements WallpaperListner, D
     }
 
     @Override
-    public void showErrorMsg(String msg) {
-
+    public void showSnackMsg(String msg) {
+        ViewModel.Current.device.showSnackMessage(mRootLayout, msg);
     }
 
     @Override
-    public void useNightMode(boolean isNight) {
-
+    public void showLoading() {
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void stateError() {
-
+    public void hideLoading() {
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void stateEmpty() {
-
-    }
-
-    @Override
-    public void stateLoading() {
-
-    }
-
-    @Override
-    public void stateMain() {
-
+    public void showADS() {
+        ViewModel.Current.device.trackAction(mTracker, "ADS", "ShowAdsAfterImageAction");
     }
 
     @Override

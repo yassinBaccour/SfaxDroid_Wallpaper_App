@@ -29,27 +29,16 @@ public class Constants {
     //Labs
     public static final String GT_DOUA_PNG_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DouaPng/";
     public static final String GT_FOLDER_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FrameImages/";
-
-    public static Bitmap currentBitmaps;
-    public static String FilePath = "";
-
     public static final String RATING_MESSAGE = "ratingmessage";
     public static final String RATING_NON = "Non";
     public static final String RATING_YES = "Oui";
-
     public static final int MIN_WIDHT = 600;
     public static final int MIN_HEIGHT = 1000;
-
     public static final String PNG_ZIP_FILE_NAME = "doua.zip";
     public static final String DOUA_PNG_BACKFROUND_FILE_NAME = "doua.jpg";
     public static final String PNG_ZIP_DOUA_EXTRACTED_FOLDER = "DouaFolder";
-
     public static final String PNG_BASMALA_STICKERS_FILE_NAME = "basmala.zip";
-
     public static final String URL_TO_DOWNLOAD = "URLTODOWNLOAD";
-    public static Boolean ifBackground_changed = false;
-    public static int nb_incrementation_after_change = 0;
-
     public static final String KEY_LWP_NAME = "LwpName";
     public static final String KEY_DOUA_LWP = "DouaLWP";
     public static final String KEY_ADD_TIMER_LWP = "TimerLWPadd";
@@ -60,7 +49,6 @@ public class Constants {
     public static final String KEY_NAME_OF_ALLAH_2_D = "NameOfAllah2DLWP";
     public static final String KEY_BASMALA_PREFERENCES_PATH = "KeySettingBasmalaImgPath";
     public static final String KEY_TEXTURE = "keyTexture";
-
     //FIXME unmodifiableSet of NAME_OF_ALLAH_TAB
     public static final List<String> NAME_OF_ALLAH_TAB = Arrays.asList("الرحمن", "الرحيم", "الملك", "القدوس", "السلام", "المؤمن"
             , "المهيمن", "العزيز", "الجبار", "المتكبر", "الخالق", "البارئ", "المصور",
@@ -80,17 +68,17 @@ public class Constants {
             "المانع", "الضار", "النافع", "النور", "الهادي", "البديع",
             "الباقي", "الوارث", "الرشيد", "الصبور"
     );
-
     public static final String KEY_DEFAULT = "STICKERS";
     public static final String KEY_TEXT = "TEXT";
     public static final String KEY_HELP = "HELP";
-
     public static final String SQUARE_TYPE = "square";
     public static final String LANDSCAPE_TYPE = "landscape";
-
     public static final String CATEGORY_STIKERS = "Stikers";
     public static final String CATEGORY_FLOWER = "flower";
-
     public static final String PREVIEW_JPG = "_preview.jpg";
     public static final String PNG_FORMAT = ".png";
+    public static Bitmap currentBitmaps;
+    public static String FilePath = "";
+    public static Boolean ifBackground_changed = false;
+    public static int nb_incrementation_after_change = 0;
 }

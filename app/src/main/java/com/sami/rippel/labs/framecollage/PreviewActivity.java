@@ -42,18 +42,11 @@ import java.io.IOException;
 import java.util.Random;
 
 public class PreviewActivity extends ActivityLabBase implements OnTouchListener {
-    private enum ShareTo {
-        facebook,
-        instagram,
-        AppSystem,
-        ImgSystem
-    }
-
-    private Matrix matrix = new Matrix();
-    private Matrix savedMatrix = new Matrix();
     private static final int NONE = 0;
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
+    private Matrix matrix = new Matrix();
+    private Matrix savedMatrix = new Matrix();
     private int mode = NONE;
     private int key = 0;
     private PointF start = new PointF();
@@ -356,6 +349,13 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+
+    private enum ShareTo {
+        facebook,
+        instagram,
+        AppSystem,
+        ImgSystem
     }
 }
 

@@ -115,8 +115,7 @@ public class MyDevice {
                         wallpaperManager.setBitmap(mBackground);
                     mBitmap.recycle();
                     return true;
-                }
-                else
+                } else
                     return false;
             } catch (IOException ignored) {
                 return false;
