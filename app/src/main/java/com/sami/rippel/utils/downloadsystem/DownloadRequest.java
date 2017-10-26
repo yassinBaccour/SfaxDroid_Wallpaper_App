@@ -7,31 +7,17 @@ import java.util.HashMap;
 public class DownloadRequest implements Comparable<DownloadRequest> {
 
     /**
-     * Priority values.  Requests will be processed from higher priorities to
-     * lower priorities, in FIFO order.
-     */
-    public enum Priority {
-        LOW,
-        NORMAL,
-        HIGH,
-        IMMEDIATE
-    }
-
-    /**
      * Tells the current download state of this request
      */
     private int mDownloadState;
-
     /**
      * Download Id assigned to this request
      */
     private int mDownloadId;
-
     /**
      * The URI resource that this request is to download
      */
     private Uri mUri;
-
     /**
      * The destination path on the device where the downloaded files needs to be put
      * It can be either External Directory ( SDcard ) or
@@ -40,27 +26,18 @@ public class DownloadRequest implements Comparable<DownloadRequest> {
      * this permission android.permission.WRITE_EXTERNAL_STORAGE declared.
      */
     private Uri mDestinationURI;
-
     private RetryPolicy mRetryPolicy;
-
     /**
      * Whether or not this request has been canceled.
      */
     private boolean mCancelled = false;
-
     private boolean mDeleteDestinationFileOnFailure = true;
-
     private DownloadRequestQueue mRequestQueue;
-
     private DownloadStatusListener mDownloadListener;
-
     private DownloadStatusListenerV1 mDownloadStatusListenerV1;
-
     private Object mDownloadContext;
-
     private HashMap<String, String> mCustomHeader;
     private Priority mPriority = Priority.NORMAL;
-
     public DownloadRequest(Uri uri) {
         if (uri == null) {
             throw new NullPointerException();
@@ -163,7 +140,7 @@ public class DownloadRequest implements Comparable<DownloadRequest> {
     /**
      * Gets the status listener. For internal use.
      *
-     * @return  the status listener
+     * @return the status listener
      */
     DownloadStatusListenerV1 getStatusListener() {
         return mDownloadStatusListenerV1;
@@ -227,14 +204,14 @@ public class DownloadRequest implements Comparable<DownloadRequest> {
         mCancelled = true;
     }
 
-    //Package-private methods.
-
     /**
      * Returns true if this request has been canceled.
      */
     public boolean isCancelled() {
         return mCancelled;
     }
+
+    //Package-private methods.
 
     /**
      * Returns all custom headers set by user
@@ -259,5 +236,16 @@ public class DownloadRequest implements Comparable<DownloadRequest> {
         return left == right ?
                 this.mDownloadId - other.mDownloadId :
                 right.ordinal() - left.ordinal();
+    }
+
+    /**
+     * Priority values.  Requests will be processed from higher priorities to
+     * lower priorities, in FIFO order.
+     */
+    public enum Priority {
+        LOW,
+        NORMAL,
+        HIGH,
+        IMMEDIATE
     }
 }

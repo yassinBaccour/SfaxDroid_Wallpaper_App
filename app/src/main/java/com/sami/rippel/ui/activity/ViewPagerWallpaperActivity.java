@@ -43,7 +43,7 @@ import net.hockeyapp.android.CrashManager;
 import butterknife.BindView;
 
 public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListner, DeviceListner {
-    private static long back_pressed;
+
     @Nullable
     @BindView(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -62,56 +62,18 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     @Nullable
     @BindView(R.id.progressBar)
     ProgressBar mProgressLoader;
-    RxPermissions rxPermissions;
-    public static Boolean isAdsShow = false;
-    public static int nbOpenAds = 0;
+
     private static final int PICK_FROM_FILE = 3;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    private Tracker mTracker;
-    public boolean isFirstLaunch = false;
+    public static Boolean isAdsShow = false;
+    public static int nbOpenAds = 0;
     public static boolean stat = false;
-    CatalogPagerAdapter mAdapter;
-
-    @Override
-    public void showErrorMsg(String msg) {
-
-    }
-
-    @Override
-    public void useNightMode(boolean isNight) {
-
-    }
-
-    @Override
-    public void stateError() {
-
-    }
-
-    @Override
-    public void stateEmpty() {
-
-    }
-
-    @Override
-    public void stateLoading() {
-
-    }
-
-    @Override
-    public void stateMain() {
-
-    }
-
-    @Override
-    protected void initInject() {
-
-    }
-
-    public enum AdsType {
-        ShowAds,
-        ShowTimedAds,
-    }
+    private static long back_pressed;
+    public boolean isFirstLaunch = false;
+    RxPermissions rxPermissions;
+    private Tracker mTracker;
+    private CatalogPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -342,13 +304,6 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         loadAndSetWallpaperToViewModel();
     }
 
-    public enum LwpTypeEnum {
-        RIPPLE_TYPE,
-        SKYBOX_TYPE,
-        DOUA_TYPE,
-        TIMER_TYPE,
-    }
-
     private void checkForCrashes() {
         CrashManager.register(this);
     }
@@ -393,14 +348,16 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
 
     @Override
     public void onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis())
-            super.onBackPressed();
-        else {
-            rateApplication();
-            Toast.makeText(getBaseContext(), R.string.txtrate6,
-                    Toast.LENGTH_SHORT).show();
+        if (!BuildConfig.DEBUG) {
+            if (back_pressed + 2000 > System.currentTimeMillis())
+                super.onBackPressed();
+            else {
+                rateApplication();
+                Toast.makeText(getBaseContext(), R.string.txtrate6,
+                        Toast.LENGTH_SHORT).show();
+            }
+            back_pressed = System.currentTimeMillis();
         }
-        back_pressed = System.currentTimeMillis();
     }
 
     @Override
@@ -445,5 +402,42 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
             startUpdateAppIfNeeded();
         else if (errorFromEnum == ServiceErrorFromEnum.GET_WALLPAPER_LIST_CALL)
             checkUpdateNewWallpapers();
+    }
+
+    @Override
+    protected void initInject() {
+
+    }
+
+    @Override
+    public void showSnackMsg(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showADS() {
+
+    }
+
+    public enum AdsType {
+        ShowAds,
+        ShowTimedAds,
+    }
+
+    public enum LwpTypeEnum {
+        RIPPLE_TYPE,
+        SKYBOX_TYPE,
+        DOUA_TYPE,
+        TIMER_TYPE,
     }
 }

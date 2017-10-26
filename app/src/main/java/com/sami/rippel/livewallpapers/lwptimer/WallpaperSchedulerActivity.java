@@ -7,7 +7,6 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,10 +26,11 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
-import com.sami.rippel.model.Constants;
+
 import com.sami.rippel.allah.R;
+import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,9 +110,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
                             null);
                     mButtonClose.setTextColor(Color.WHITE);
 
-                }
-                else
-                {
+                } else {
                     ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.nofiletimer));
                 }
 
@@ -158,8 +156,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         }
     }
 
-    public void openAddWallpaperActivity()
-    {
+    public void openAddWallpaperActivity() {
         Intent intent = new Intent(
                 WallpaperSchedulerActivity.this,
                 GalleryWallpaperActivity.class);
@@ -192,8 +189,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
             return 30000;
     }
 
-    public void setWallpaperFromFile()
-    {
+    public void setWallpaperFromFile() {
         File myFile = ViewModel.Current.fileUtils.getPermanentDirListFiles().get(0);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -232,19 +228,15 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
                 mScheduler.schedule(jobInfo);
                 setWallpaperFromFile();
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public void showDialogNoMinFiles()
-    {
+    public void showDialogNoMinFiles() {
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.addwalltitle))
                 .setMessage(getString(R.string.addwalldesc))
@@ -296,24 +288,19 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean result) {
             mProgressBar.setVisibility(View.GONE);
             try {
-            if (result)
-            {
-                mTxtstatus.setText(getString(R.string.onswitch));
-                mTxtNotForget.setVisibility(View.VISIBLE);
-                mTxtstatus.setTextColor(getResources().getColor(R.color.green));
-                ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.timeron));
-            }
-            else
-            {
-                Activity activity = WallpaperSchedulerActivity.this;
-                if (activity != null)
-                {
-                    showDialogNoMinFiles();
+                if (result) {
+                    mTxtstatus.setText(getString(R.string.onswitch));
+                    mTxtNotForget.setVisibility(View.VISIBLE);
+                    mTxtstatus.setTextColor(getResources().getColor(R.color.green));
+                    ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.timeron));
+                } else {
+                    Activity activity = WallpaperSchedulerActivity.this;
+                    if (activity != null) {
+                        showDialogNoMinFiles();
+                    }
                 }
-            }
 
-            } catch (Exception ignored)
-            {
+            } catch (Exception ignored) {
             }
         }
 
@@ -323,6 +310,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onProgressUpdate(Void... values) { }
+        protected void onProgressUpdate(Void... values) {
+        }
     }
 }

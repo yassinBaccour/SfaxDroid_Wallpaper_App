@@ -4,13 +4,14 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
 import com.sami.rippel.allah.R;
+import com.sami.rippel.model.listner.AdsListner;
 import com.sami.rippel.ui.fragments.AllBackgroundFragment;
 import com.sami.rippel.ui.fragments.CategoryFragment;
 import com.sami.rippel.ui.fragments.LabFragment;
 import com.sami.rippel.ui.fragments.LwpFragment;
 import com.sami.rippel.ui.fragments.RecentFragment;
-import com.sami.rippel.model.listner.AdsListner;
 
 import java.util.ArrayList;
 
@@ -32,31 +33,30 @@ public class CatalogPagerAdapter extends FragmentPagerAdapter {
         listeTitre.add(context.getString(R.string.catalog_Lab));
     }
 
-    public void ChooseFragmentToExcecuteAction(int position)
-    {
-        switch (position){
+    public void ChooseFragmentToExcecuteAction(int position) {
+        switch (position) {
             case 0:
                 break;
             case 1:
                 if (mRecentFragment != null)
-                mRecentFragment.downloadPicture();
+                    mRecentFragment.downloadPicture();
                 break;
             case 2:
                 if (mAllBackgroundFragment != null)
-                mAllBackgroundFragment.downloadPicture();
+                    mAllBackgroundFragment.downloadPicture();
                 break;
             case 3:
                 if (mCategoryFragment != null)
-                mCategoryFragment.downloadPicture();
+                    mCategoryFragment.downloadPicture();
                 break;
             case 4:
-               break;
+                break;
         }
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 mLwpFragment = LwpFragment.newInstance();
                 mLwpFragment.setListener(ads);
@@ -91,9 +91,8 @@ public class CatalogPagerAdapter extends FragmentPagerAdapter {
         return listeTitre.get(position);
     }
 
-    public void ChangeAdapterFragmentViewState(boolean mState)
-    {
+    public void ChangeAdapterFragmentViewState(boolean mState) {
         if (mLwpFragment != null)
-        mLwpFragment.changeButtonSate(mState);
+            mLwpFragment.changeButtonSate(mState);
     }
 }

@@ -14,6 +14,8 @@ public class WallpaperCategory {
 
     @Element(name = "title", required = true)
     public String title;
+    @ElementList(name = "wallpaper", inline = true, required = false)
+    public List<WallpaperObject> getWallpapersList;
 
     public String getTitle() {
         return title;
@@ -22,9 +24,6 @@ public class WallpaperCategory {
     public List<WallpaperObject> getGetWallpapersList() {
         return getWallpapersList;
     }
-
-    @ElementList(name="wallpaper", inline=true, required = false)
-    public List<WallpaperObject> getWallpapersList;
 
 
 }

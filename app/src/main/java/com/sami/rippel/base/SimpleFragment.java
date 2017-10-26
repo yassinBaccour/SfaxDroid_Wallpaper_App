@@ -21,8 +21,8 @@ public abstract class SimpleFragment extends Fragment {
     protected View rootView;
     protected Activity mActivity;
     protected Context mContext;
-    private Unbinder mUnBinder;
     protected boolean isInited = false;
+    private Unbinder mUnBinder;
 
     public abstract int getFragmentId();
 

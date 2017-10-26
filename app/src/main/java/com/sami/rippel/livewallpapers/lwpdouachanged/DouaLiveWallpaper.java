@@ -15,8 +15,8 @@ import com.sami.rippel.model.ViewModel;
 import java.io.File;
 
 public class DouaLiveWallpaper extends WallpaperService {
-    private Paint mPaintOption;
     public static int mCurrentPhoto = 1;
+    private Paint mPaintOption;
 
     @Override
     public Engine onCreateEngine() {
@@ -27,7 +27,7 @@ public class DouaLiveWallpaper extends WallpaperService {
         private final SurfaceHolder mHolder = getSurfaceHolder();
         private final Handler mHandler = new Handler();
         private final Paint mPaint = new Paint();
-        private final Runnable mDrawPattern = this::drawFrame;
+        BitmapFactory.Options mOptions = new BitmapFactory.Options();
         private float mTouchX = -1;
         private float mTouchY = -1;
         private File mFilesDir = getExternalFilesDir("");
@@ -36,8 +36,8 @@ public class DouaLiveWallpaper extends WallpaperService {
         private Bitmap mBackground;
         private Bitmap mLogoDoua;
         private boolean mVisible;
+        private final Runnable mDrawPattern = this::drawFrame;
         private int mColor;
-        BitmapFactory.Options mOptions = new BitmapFactory.Options();
 
         IslamicEngine() {
             mColor = ViewModel.Current.dataUtils.GetSetting("DouaLwpColor", -4522170);
@@ -106,7 +106,7 @@ public class DouaLiveWallpaper extends WallpaperService {
             if (mBackground != null)
                 mBackground.recycle();
             if (mLogoDoua != null)
-            mLogoDoua.recycle();
+                mLogoDoua.recycle();
         }
 
         @Override
@@ -115,8 +115,7 @@ public class DouaLiveWallpaper extends WallpaperService {
             drawFrame();
         }
 
-        private String getPrefix()
-        {
+        private String getPrefix() {
             if (mCurrentPhoto < 10) {
                 return "i_000";
             } else {
@@ -127,8 +126,8 @@ public class DouaLiveWallpaper extends WallpaperService {
         @Override
         public void onTouchEvent(MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                Constants.nb_incrementation_after_change =  Constants.nb_incrementation_after_change + 1;
-                if (mScreenWidth > 0 && mScreenWidth > 0 && Constants.ifBackground_changed &&  Constants.nb_incrementation_after_change == 5) {
+                Constants.nb_incrementation_after_change = Constants.nb_incrementation_after_change + 1;
+                if (mScreenWidth > 0 && mScreenWidth > 0 && Constants.ifBackground_changed && Constants.nb_incrementation_after_change == 5) {
                     Constants.nb_incrementation_after_change = 0;
                     Constants.ifBackground_changed = false;
                     mBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
@@ -176,10 +175,10 @@ public class DouaLiveWallpaper extends WallpaperService {
                 if (!mBackground.isRecycled()) {
                     c.drawBitmap(mBackground, 0, 0, null);
                 }
-                    int debut = mScreenWidth / 2 - mLogoDoua.getWidth() / 2;
-                    int fin = mScreenHeight / 2 - mLogoDoua.getHeight() / 2;
-                    c.drawBitmap(mLogoDoua, debut, fin, mPaintOption);
-                    c.restore();
+                int debut = mScreenWidth / 2 - mLogoDoua.getWidth() / 2;
+                int fin = mScreenHeight / 2 - mLogoDoua.getHeight() / 2;
+                c.drawBitmap(mLogoDoua, debut, fin, mPaintOption);
+                c.restore();
                 //Constants.ifBackground_changed = false;
             }
         }

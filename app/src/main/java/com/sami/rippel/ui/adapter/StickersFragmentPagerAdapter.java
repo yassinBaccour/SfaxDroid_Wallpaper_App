@@ -15,21 +15,19 @@ import com.sami.rippel.model.listner.StickersListner;
 public class StickersFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private StickersListner stickersListner;
-
-    public NonVectorStickersImageFragment getmNonVectorFragment() {
-        return mNonVectorFragment;
-    }
-
     private NonVectorStickersImageFragment mNonVectorFragment;
     private VectorStickersImageFragment mVectorFragment;
     private FlowerStickersImageFragment mFlowerFragment;
     private TextStickersImageFragment mTextFragment;
     private FrameImageFragment mFrameImageFragment;
-
     public StickersFragmentPagerAdapter(FragmentManager fragmentManager,
                                         Context context, StickersListner stickersListner) {
         super(fragmentManager);
         this.stickersListner = stickersListner;
+    }
+
+    public NonVectorStickersImageFragment getmNonVectorFragment() {
+        return mNonVectorFragment;
     }
 
     @Override

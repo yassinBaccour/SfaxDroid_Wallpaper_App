@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.sami.rippel.allah.WallpaperApplication;
 
@@ -47,5 +46,6 @@ public abstract class SimpleActivity extends AppCompatActivity {
     }
 
     protected abstract int getLayout();
+
     protected abstract void initEventAndData();
 }
