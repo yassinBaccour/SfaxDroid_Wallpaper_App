@@ -56,7 +56,7 @@ public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
                                                 Transition<? super Drawable> glideAnimation) {
                         mDetailImage.setImageDrawable(resource);
                         mProgressBar.setVisibility(View.GONE);
-                        ((DetailsActivity) mContext).hideProgressBar();
+                        ((DetailsActivity) mContext).hideLoading();
                     }
                 });
         container.addView(viewLayout);

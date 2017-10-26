@@ -39,25 +39,25 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
     private static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
     @Nullable
     @BindView(R.id.rootLayout)
-    private CoordinatorLayout mRootLayout;
+    public CoordinatorLayout mRootLayout;
     @Nullable
     @BindView(R.id.progress1)
-    private ProgressBar mProgress1;
+    public ProgressBar mProgress1;
     @Nullable
     @BindView(R.id.progressTxt1)
-    private TextView mProgress1Txt;
+    public TextView mProgress1Txt;
     @Nullable
     @BindView(R.id.txtstatusDownload)
-    private TextView mTxtstatusDownload;
+    public TextView mTxtstatusDownload;
     @Nullable
     @BindView(R.id.toolbar)
-    private Toolbar mToolbar;
+    public Toolbar mToolbar;
     @Nullable
     @BindView(R.id.fab)
-    private FloatingActionButton mFab;
+    public FloatingActionButton mFab;
     @Nullable
     @BindView(R.id.buttonColor)
-    private Button mButtonColor;
+    public Button mButtonColor;
 
     private ThinDownloadManager mDownloadManager;
     private File mZipFile;
