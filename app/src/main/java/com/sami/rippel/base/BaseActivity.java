@@ -26,13 +26,13 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = instantiatePresenter();
     }
 
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
         initInject();
+        mPresenter = instantiatePresenter();
         if (mPresenter != null)
             mPresenter.attachView(this);
     }

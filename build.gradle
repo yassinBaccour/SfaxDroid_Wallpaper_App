@@ -7,12 +7,13 @@ if (file('local.gradle').exists()) {
 buildscript {
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.google.gms:google-services:3.0.0'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
     }
 }
 
@@ -25,6 +26,7 @@ allprojects {
             url "https://maven.google.com"
         }
         jcenter()
+        google()
     }
 }
 
@@ -32,9 +34,9 @@ allprojects {
 ext {
     minSdkVersion = 15
     targetSdkVersion = 24
-    compileSdkVersion = 25
-    buildToolsVersion = '26.0.2'
-    supportVersion = '25.3.1'
+    compileSdkVersion = 27
+    buildToolsVersion = '27.0.2'
+    supportVersion = '27.0.2'
     glideVersion = '4.1.1'
     glideAnnotationVersion = '4.1.1'
     bottomsheetVersion = '1.5.3'
@@ -46,10 +48,10 @@ ext {
     colorpickerVersion = '0.0.13'
     butterknifeVersion = '8.5.1'
     analyticsVersion = '10.2.4'
-    retrofit2Version = '2.2.0'
-    simplexmlConverterVersion = '2.1.0'
-    converterGsonVersion = '2.2.0'
-    rxjavaVersion = '2.0.7'
+    retrofit2Version = '2.3.0'
+    simplexmlConverterVersion = '2.3.0'
+    converterGsonVersion = '2.3.0'
+    rxjavaVersion = '2.1.7'
     rxandroidVersion = '2.0.1'
     retrofitRxAdapterVersion = '1.0.0'
 }
