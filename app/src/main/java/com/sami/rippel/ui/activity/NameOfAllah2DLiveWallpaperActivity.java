@@ -128,16 +128,16 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
         int size = ViewModel.Current.dataUtils.GetSetting("nameofallahtextsize", 1);
         if (size == 1)
             mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_small_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_small_on), null, null);
         else if (size == 2)
             mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_meduim_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_meduim_on), null, null);
         else if (size == 3)
             mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_big_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_big_on), null, null);
         else if (size == 4)
             mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_full_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_full_on), null, null);
     }
 
     public void setTextViewTypeFace() {
@@ -219,40 +219,40 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
             ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 1);
             resetBtnSizeBackground();
             mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_small_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_small_on), null, null);
         });
 
         mButtonSizeMeduim.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 2);
             resetBtnSizeBackground();
             mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_meduim_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_meduim_on), null, null);
         });
 
         mButtonSizeBig.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 3);
             resetBtnSizeBackground();
             mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_big_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_big_on), null, null);
         });
 
         mButtonSizeFullScreen.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 4);
             resetBtnSizeBackground();
             mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_full_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_full_on), null, null);
         });
     }
 
     public void resetBtnSizeBackground() {
         mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_small), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_small), null, null);
         mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_meduim), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_meduim), null, null);
         mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_big), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_big), null, null);
         mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_full), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_full), null, null);
     }
 
     public void initToolbar() {
@@ -282,7 +282,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
                                             ViewModel.Current.fileUtils.
                                                     changeImageColor(ViewModel.Current.fileUtils.
                                                                     convertDrawableToBitmap(getResources()
-                                                                            .getDrawable(R.drawable.ic_palette))
+                                                                            .getDrawable(R.mipmap.ic_palette))
                                                             , selectedColor))
                             , null, null);
                 })

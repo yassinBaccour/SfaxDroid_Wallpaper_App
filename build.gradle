@@ -39,7 +39,7 @@ ext {
     glideAnnotationVersion = '4.1.1'
     bottomsheetVersion = '1.5.3'
     ratethisapp = '1.0.3'
-    multidexVersion = '1.0.1'
+    multidexVersion = '1.0.2'
     hockeyappVersion = '5.0.0'
     thinDownloadManagerVersion = '1.2.5'
     medyoVersion = '1.2.1'

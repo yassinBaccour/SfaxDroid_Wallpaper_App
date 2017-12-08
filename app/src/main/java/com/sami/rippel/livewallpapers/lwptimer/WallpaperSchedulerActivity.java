@@ -100,12 +100,12 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
                 if (nbFile > 3) {
                     new ActiveServiceAndSetFirstWallpapersInBackground().execute("");
                     mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                            getResources().getDrawable(R.drawable.ic_active_img_on),
+                            getResources().getDrawable(R.mipmap.ic_active_img_on),
                             null,
                             null);
                     mButtonActive.setTextColor(getResources().getColor(R.color.redflatui));
                     mButtonClose.setCompoundDrawablesWithIntrinsicBounds(null,
-                            getResources().getDrawable(R.drawable.ic_close_img),
+                            getResources().getDrawable(R.mipmap.ic_close_img),
                             null,
                             null);
                     mButtonClose.setTextColor(Color.WHITE);
@@ -120,12 +120,12 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         mButtonClose.setOnClickListener(view -> {
             removeJob();
             mButtonClose.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_close_img_on),
+                    getResources().getDrawable(R.mipmap.ic_close_img_on),
                     null,
                     null);
             mButtonClose.setTextColor(getResources().getColor(R.color.redflatui));
             mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_active_img),
+                    getResources().getDrawable(R.mipmap.ic_active_img),
                     null,
                     null);
             mButtonActive.setTextColor(Color.WHITE);
@@ -139,7 +139,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
             mTxtNotForget.setVisibility(View.VISIBLE);
             mTxtstatus.setTextColor(getResources().getColor(R.color.green));
             mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_active_img_on),
+                    getResources().getDrawable(R.mipmap.ic_active_img_on),
                     null,
                     null);
             mButtonActive.setTextColor(getResources().getColor(R.color.redflatui));
@@ -149,7 +149,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
             mTxtstatus.setTextColor(getResources().getColor(R.color.red));
             setCheckedTime(0);
             mButtonClose.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_close_img_on),
+                    getResources().getDrawable(R.mipmap.ic_close_img_on),
                     null,
                     null);
             mButtonClose.setTextColor(getResources().getColor(R.color.redflatui));

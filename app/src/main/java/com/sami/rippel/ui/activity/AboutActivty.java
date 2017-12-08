@@ -38,7 +38,7 @@ public class AboutActivty extends AppCompatActivity {
 
         View aboutPage = new AboutPage(this)
                 .isRTL(false)
-                .setImage(R.drawable.header)
+                .setImage(R.mipmap.header)
                 .setDescription("Islamic Live Wallpaper")
                 .addItem(new Element().setTitle("Version " + pInfo.versionName))
                 .addEmail("yassin123441@gmail.com")

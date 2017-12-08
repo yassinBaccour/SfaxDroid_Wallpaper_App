@@ -9,5 +9,5 @@
         android:layout_height="80dp"
         android:padding="5dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"/>
 </LinearLayout>

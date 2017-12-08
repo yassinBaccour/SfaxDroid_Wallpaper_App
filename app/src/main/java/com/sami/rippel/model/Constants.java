@@ -18,7 +18,7 @@ public class Constants {
     public static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
     public static final String DETAIL_IMAGE_POS = "pos";
     public static final String LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER = "listFileToSendToDetailViewPager";
-
+    public static final String APP_PACKAGE = "market://details?id=com.sami.rippel.allah";
     //XML
     public static final String BASE_URL = "http://androidsporttv.com/islamicimages/RetorFitFormat/";
 
@@ -81,4 +81,11 @@ public class Constants {
     public static String FilePath = "";
     public static Boolean ifBackground_changed = false;
     public static int nb_incrementation_after_change = 0;
+
+    public static final String URL_BIG_WALLPAPER_FOLDER = "/islamicimages/";
+    public static final String URL_SMALL_WALLPAPER_FOLDER = "/islamicimagesmini/";
+
+    public static final String FB_PACKAGE = "com.facebook.katana";
+    public static final String INSTAGRAM_PACKAGE = "com.instagram.android";
+    public static final String SNAP_PACKAGE = "com.instagram.android";
 }

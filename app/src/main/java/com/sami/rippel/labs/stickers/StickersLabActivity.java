@@ -162,7 +162,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
                     hideTextFragment();
                 } else if (mFabDefault.equals(Constants.KEY_HELP)) {
                     mfab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.primary)));
-                    mfab.setImageDrawable(getResources().getDrawable(R.drawable.ic_add_white_18dp));
+                    mfab.setImageDrawable(getResources().getDrawable(R.mipmap.ic_add_white_18dp));
                     hideTextFragment();
                 }
             } else {

@@ -159,7 +159,7 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
                             ViewModel.Current.fileUtils.covertBitmapToDrawable(DouaLiveWallpaperActivity.this,
                                     ViewModel.Current.fileUtils.
                                             changeImageColor(ViewModel.Current.fileUtils.
-                                                            convertDrawableToBitmap(getResources().getDrawable(R.drawable.ic_palette))
+                                                            convertDrawableToBitmap(getResources().getDrawable(R.mipmap.ic_palette))
                                                     , selectedColor))
                             , null, null);
                 })

@@ -40,11 +40,11 @@ public class ViewModel {
 
     public String GetIntentNameFromType(IntentTypeEnum intentType) {
         if (intentType == IntentTypeEnum.FACEBOOKINTENT) {
-            return "com.facebook.katana";
+            return Constants.FB_PACKAGE;
         } else if (intentType == IntentTypeEnum.INTAGRAMINTENT) {
-            return "com.instagram.android";
+            return Constants.INSTAGRAM_PACKAGE;
         } else if (intentType == IntentTypeEnum.SHNAPCHATINTENT) {
-            return "com.snapchat.android";
+            return Constants.SNAP_PACKAGE;
         } else
             return null;
     }
@@ -119,7 +119,7 @@ public class ViewModel {
     public String getUrlFromWallpaperList(int pos, List<WallpaperObject> myList) {
         String url = "";
         if (ViewModel.Current.device.getScreenHeightPixels() < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
-            url = myList.get(pos).getPreviewUrl().replace("/islamicimages/", "/islamicimagesmini/");
+            url = myList.get(pos).getPreviewUrl().replace(Constants.URL_BIG_WALLPAPER_FOLDER, Constants.URL_SMALL_WALLPAPER_FOLDER);
         else
             url = myList.get(pos).getPreviewUrl();
         return url;
@@ -128,7 +128,7 @@ public class ViewModel {
     public String getUrlFromWallpaper(WallpaperObject wall) {
         String url = "";
         if (ViewModel.Current.device.getScreenHeightPixels() < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
-            url = wall.getPreviewUrl().replace("/islamicimages/", "/islamicimagesmini/");
+            url = wall.getPreviewUrl().replace(Constants.URL_BIG_WALLPAPER_FOLDER, Constants.URL_SMALL_WALLPAPER_FOLDER);
         else
             url = wall.getPreviewUrl();
         return url;
@@ -137,7 +137,7 @@ public class ViewModel {
     public String getUrlByScreenSize(String urlToChange) {
         String url = "";
         if (ViewModel.Current.device.getScreenHeightPixels() < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
-            url = urlToChange.replace("/islamicimages/", "/islamicimagesmini/");
+            url = urlToChange.replace(Constants.URL_BIG_WALLPAPER_FOLDER, Constants.URL_SMALL_WALLPAPER_FOLDER);
         else
             url = urlToChange;
         return url;

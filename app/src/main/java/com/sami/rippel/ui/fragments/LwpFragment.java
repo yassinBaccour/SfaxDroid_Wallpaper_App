@@ -121,10 +121,7 @@ public class LwpFragment extends SimpleFragment {
                 mListener.onTrackAction("LwpFragment", "TimerLWP");
             }
             ViewPagerWallpaperActivity.isAdsShow = true;
-            Intent intent = new Intent(
-                    getActivity(),
-                    WallpaperSchedulerActivity.class);
-            startActivity(intent);
+            openWallpaperSchedulerActivity();
         });
 
         if (ViewModel.Current.device.getScreenWidthPixels() < 1000
@@ -146,7 +143,7 @@ public class LwpFragment extends SimpleFragment {
         mBtnRating.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri
-                    .parse("market://details?id=com.sami.rippel.allah"));
+                    .parse(Constants.APP_PACKAGE));
             startActivity(intent);
         });
 
@@ -169,7 +166,14 @@ public class LwpFragment extends SimpleFragment {
             startActivity(intent);
         });
 
-        resizeTitle();
+        resizeTitleForSmallDevice();
+    }
+
+    private void openWallpaperSchedulerActivity() {
+        Intent intent = new Intent(
+                getActivity(),
+                WallpaperSchedulerActivity.class);
+        startActivity(intent);
     }
 
     public void changeButtonSate(boolean mState) {
@@ -217,7 +221,7 @@ public class LwpFragment extends SimpleFragment {
         return rootView;
     }
 
-    public void resizeTitle() {
+    public void resizeTitleForSmallDevice() {
         if (ViewModel.Current.device.getScreenWidthPixels() < 500
                 && ViewModel.Current.device.getScreenHeightPixels() < 820) {
             //TITLE LWP

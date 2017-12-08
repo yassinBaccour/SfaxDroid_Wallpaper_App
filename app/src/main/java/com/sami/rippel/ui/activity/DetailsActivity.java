@@ -149,13 +149,13 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         if (mFrom != null && !mFrom.isEmpty()) {
             switch (mFrom) {
                 case Constants.KEY_ADD_TIMER_LWP:
-                    mFab.setImageResource(R.drawable.ic_download);
+                    mFab.setImageResource(R.mipmap.ic_download);
                     break;
                 case Constants.KEY_ADDED_LIST_TIMER_LWP:
-                    mFab.setImageResource(R.drawable.ic_delete);
+                    mFab.setImageResource(R.mipmap.ic_delete);
                     break;
                 case Constants.KEY_RIPPLE_LWP:
-                    mFab.setImageResource(R.drawable.ic_ripple_fab);
+                    mFab.setImageResource(R.mipmap.ic_ripple_fab);
                     break;
             }
         }
@@ -417,12 +417,14 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     @Override
     public void showLoading() {
-        mProgressBar.setVisibility(View.VISIBLE);
+        if (mProgressBar != null)
+            mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        mProgressBar.setVisibility(View.GONE);
+        if (mProgressBar != null)
+            mProgressBar.setVisibility(View.GONE);
     }
 
     @Override

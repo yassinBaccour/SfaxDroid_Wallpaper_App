@@ -3,6 +3,7 @@
     package="com.sami.rippel.allah">
 
     <uses-feature android:glEsVersion="0x00020000" />
+    <uses-feature android:name="android.software.live_wallpaper" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -14,7 +15,6 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission android:name="android.permission.BIND_WALLPAPER" />
-    <uses-feature android:name="android.software.live_wallpaper" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -22,11 +22,12 @@
     <uses-permission android:name="android.permission.REAL_GET_TASKS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+
     <application
         android:name=".WallpaperApplication"
-        android:largeHeap="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
 
         <provider
@@ -36,26 +37,31 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
         <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener" >
+
+        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <activity android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
+
+        <activity
+            android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
             android:theme="@android:style/Theme" />
 
-        <activity android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent" />
 
-        <activity android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
-            android:theme="@android:style/Theme"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme" />
 
 
         <meta-data
@@ -107,7 +113,7 @@
         </service>
         <service
             android:name="com.sami.rippel.livewallpapers.lwpdouachanged.DouaLiveWallpaper"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
@@ -121,7 +127,7 @@
 
         <service
             android:name="com.sami.rippel.livewallpapers.nameofallah2d.NameOfAllah2DLwp"
-            android:icon="@drawable/ic_launcher"
+            android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
@@ -184,14 +190,15 @@
 
         <activity android:name="com.sami.rippel.ui.activity.AboutActivty" />
 
-        <service android:name="com.sami.rippel.labs.basmala.LockService"
+        <service
+            android:name="com.sami.rippel.labs.basmala.LockService"
             android:permission="android.permission.READ_PHONE_STATE">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </service>
 
-        <receiver android:name="com.sami.rippel.labs.basmala.ScreenReceiver" >
+        <receiver android:name="com.sami.rippel.labs.basmala.ScreenReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
@@ -203,13 +210,13 @@
         <activity
             android:name="com.sami.rippel.labs.basmala.ActivityBasmalaScreen"
             android:label="Besmellah"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
             android:name="com.sami.rippel.ui.activity.NameOfAllah2DLiveWallpaperActivity"
             android:label="Nameofallah"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 </manifest>

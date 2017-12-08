@@ -32,7 +32,7 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content">
                   <ImageView
-                      android:src="@drawable/ic_ripple_lwp"
+                      android:src="@mipmap/ic_ripple_lwp"
                       android:layout_width="wrap_content"
                       android:layout_height="fill_parent"
                       android:minWidth="100dp"
@@ -100,7 +100,7 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content">
                   <ImageView
-                      android:src="@drawable/ic_doua_lwp"
+                      android:src="@mipmap/ic_doua_lwp"
                       android:layout_width="wrap_content"
                       android:layout_height="fill_parent"
                       android:minWidth="100dp"
@@ -165,7 +165,7 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content">
                   <ImageView
-                      android:src="@drawable/ic_skybox"
+                      android:src="@mipmap/ic_skybox"
                       android:layout_width="wrap_content"
                       android:layout_height="fill_parent"
                       android:minWidth="100dp"
@@ -232,7 +232,7 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content">
                   <ImageView
-                      android:src="@drawable/ic_timer_lwp"
+                      android:src="@mipmap/ic_timer_lwp"
                       android:layout_width="wrap_content"
                       android:layout_height="fill_parent"
                       android:minWidth="100dp"
@@ -298,7 +298,7 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content">
                   <ImageView
-                      android:src="@drawable/ic_nameofallah_lwp"
+                      android:src="@mipmap/ic_nameofallah_lwp"
                       android:layout_width="wrap_content"
                       android:layout_height="fill_parent"
                       android:minWidth="100dp"

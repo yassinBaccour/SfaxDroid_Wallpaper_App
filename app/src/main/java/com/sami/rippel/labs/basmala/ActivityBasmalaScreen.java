@@ -140,12 +140,12 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             mTextViewServiceInfo.setText(getString(R.string.serviceOn));
             mButtonActive.setText(getString(R.string.closesebasmalae));
             mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_close_basmallah), null, null);
+                    getResources().getDrawable(R.mipmap.ic_close_basmallah), null, null);
         } else {
             mTextViewServiceInfo.setText(getString(R.string.serviceOff));
             mButtonActive.setText(getString(R.string.activesbasmalah));
             mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_active_besmelleh), null, null);
+                    getResources().getDrawable(R.mipmap.ic_active_besmelleh), null, null);
         }
     }
 
@@ -225,7 +225,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                     mTextViewServiceInfo.setText(getString(R.string.serviceOn));
                     mButtonActive.setText(getString(R.string.closesebasmalae));
                     mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                            getResources().getDrawable(R.drawable.ic_close_basmallah), null, null);
+                            getResources().getDrawable(R.mipmap.ic_close_basmallah), null, null);
 
                 } else if (isLockRunning) {
                     stopService(new Intent(getApplicationContext(),
@@ -233,7 +233,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                     mTextViewServiceInfo.setText(getString(R.string.serviceOff));
                     mButtonActive.setText(getString(R.string.activesbasmalah));
                     mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                            getResources().getDrawable(R.drawable.ic_active_besmelleh), null, null);
+                            getResources().getDrawable(R.mipmap.ic_active_besmelleh), null, null);
                 } else {
                     ViewModel.Current.device.showSnackMessage(mRootLayout, "Permission not accepted");
                 }
@@ -277,28 +277,28 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             ViewModel.Current.dataUtils.SetSetting("size", 0);
             resetBtnSizeBackground();
             mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_small_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_small_on), null, null);
         });
 
         mButtonSizeMeduim.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("size", 1);
             resetBtnSizeBackground();
             mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_meduim_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_meduim_on), null, null);
         });
 
         mButtonSizeBig.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("size", 2);
             resetBtnSizeBackground();
             mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_big_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_big_on), null, null);
         });
 
         mButtonSizeFullScreen.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("size", 3);
             resetBtnSizeBackground();
             mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_full_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_full_on), null, null);
         });
     }
 
@@ -344,30 +344,30 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         resetBtnSpeedBackground();
         if (speed == 0)
             mBtnSpeedSlow.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_speed_slow_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_speed_slow_on), null, null);
         else if (speed == 1)
             mBtnSpeedMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_speed_meduim_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_speed_meduim_on), null, null);
         else if (speed == 2)
             mBtnSpeedFast.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_speed_fast_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_speed_fast_on), null, null);
         else if (speed == 3)
             mButtonTurbo.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_turbo_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_turbo_on), null, null);
 
         resetBtnSizeBackground();
         if (size == 0)
             mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_small_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_small_on), null, null);
         else if (size == 1)
             mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_meduim_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_meduim_on), null, null);
         else if (size == 2)
             mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_big_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_big_on), null, null);
         else if (size == 3)
             mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_size_full_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_size_full_on), null, null);
     }
 
     private void setSpeedUIDrawableAndListner() {
@@ -376,14 +376,14 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             ViewModel.Current.dataUtils.SetSetting("speed", 0);
             resetBtnSpeedBackground();
             mBtnSpeedSlow.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_speed_slow_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_speed_slow_on), null, null);
         });
 
         mBtnSpeedMeduim.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("speed", 1);
             resetBtnSpeedBackground();
             mBtnSpeedMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_speed_meduim_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_speed_meduim_on), null, null);
         });
 
 
@@ -391,37 +391,37 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             ViewModel.Current.dataUtils.SetSetting("speed", 2);
             resetBtnSpeedBackground();
             mBtnSpeedFast.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_speed_fast_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_speed_fast_on), null, null);
         });
 
         mButtonTurbo.setOnClickListener(v -> {
             ViewModel.Current.dataUtils.SetSetting("speed", 3);
             resetBtnSpeedBackground();
             mButtonTurbo.setCompoundDrawablesWithIntrinsicBounds(null,
-                    getResources().getDrawable(R.drawable.ic_turbo_on), null, null);
+                    getResources().getDrawable(R.mipmap.ic_turbo_on), null, null);
         });
     }
 
     public void resetBtnSpeedBackground() {
         mBtnSpeedSlow.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_speed_slow), null, null);
+                getResources().getDrawable(R.mipmap.ic_speed_slow), null, null);
         mBtnSpeedMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_speed_meduim), null, null);
+                getResources().getDrawable(R.mipmap.ic_speed_meduim), null, null);
         mBtnSpeedFast.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_speed_fast), null, null);
+                getResources().getDrawable(R.mipmap.ic_speed_fast), null, null);
         mButtonTurbo.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_turbo), null, null);
+                getResources().getDrawable(R.mipmap.ic_turbo), null, null);
     }
 
     public void resetBtnSizeBackground() {
         mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_small), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_small), null, null);
         mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_meduim), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_meduim), null, null);
         mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_big), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_big), null, null);
         mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
-                getResources().getDrawable(R.drawable.ic_size_full), null, null);
+                getResources().getDrawable(R.mipmap.ic_size_full), null, null);
     }
 
     public void onResume() {
@@ -563,7 +563,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                             ViewModel.Current.fileUtils.covertBitmapToDrawable(mAct,
                                     ViewModel.Current.fileUtils.
                                             changeImageColor(ViewModel.Current.fileUtils.
-                                                            convertDrawableToBitmap(getResources().getDrawable(R.drawable.ic_palette))
+                                                            convertDrawableToBitmap(getResources().getDrawable(R.mipmap.ic_palette))
                                                     , selectedColor))
                             , null, null);
                 })

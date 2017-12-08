@@ -4,17 +4,17 @@
     tools:mContext="com.bentenstudio.islamoqhd.activity.DetailsActivity">
 
     <item
-        android:icon="@drawable/ic_gallery"
+        android:icon="@mipmap/ic_gallery"
         android:id="@+id/image_gallery"
         android:title="@string/removepicture" />
 
     <item
-        android:icon="@drawable/ic_save"
+        android:icon="@mipmap/ic_save"
         android:id="@+id/imageview_save"
         android:title="@string/menu.detail.gallery" />
 
     <item
-        android:icon="@drawable/ic_share"
+        android:icon="@mipmap/ic_share"
         android:id="@+id/buttonSareFb"
         android:title="@string/menu.detail.share.all" />
 </menu>

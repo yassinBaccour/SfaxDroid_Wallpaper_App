@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@drawable/ic_card_besmelleh"
+                    android:src="@mipmap/ic_card_besmelleh"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:minWidth="100dp"
@@ -91,7 +91,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@drawable/ic_card_stikers"
+                    android:src="@mipmap/ic_card_stikers"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:minWidth="100dp"
@@ -159,7 +159,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:src="@drawable/ic_card_frame"
+                android:src="@mipmap/ic_card_frame"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:minWidth="100dp"
@@ -237,7 +237,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@drawable/ic_card_frame"
+                    android:src="@mipmap/ic_card_frame"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:minWidth="100dp"

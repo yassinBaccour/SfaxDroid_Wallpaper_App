@@ -241,7 +241,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_slow"
+                            android:drawableTop="@mipmap/ic_speed_slow"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonShort"
@@ -260,7 +260,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_meduim_on"
+                            android:drawableTop="@mipmap/ic_speed_meduim_on"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonMeduim"
@@ -279,7 +279,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_fast"
+                            android:drawableTop="@mipmap/ic_speed_fast"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonFast"
@@ -298,7 +298,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_fast"
+                            android:drawableTop="@mipmap/ic_speed_fast"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonTurbo"
@@ -335,7 +335,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_slow"
+                            android:drawableTop="@mipmap/ic_speed_slow"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonSizeSmall"
@@ -354,7 +354,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_meduim_on"
+                            android:drawableTop="@mipmap/ic_speed_meduim_on"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonSizeMeduim"
@@ -373,7 +373,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_fast"
+                            android:drawableTop="@mipmap/ic_speed_fast"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonSizeBig"
@@ -392,7 +392,7 @@
                         <Button
                             android:paddingTop="10dp"
                             android:paddingBottom="10dp"
-                            android:drawableTop="@drawable/ic_speed_fast"
+                            android:drawableTop="@mipmap/ic_speed_fast"
                             android:background="@android:color/transparent"
                             android:layout_weight="1"
                             android:id="@+id/buttonSizeFullScreen"
@@ -421,7 +421,7 @@
                 <Button
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:drawableTop="@drawable/ic_palette"
+                    android:drawableTop="@mipmap/ic_palette"
                     android:background="@android:color/transparent"
                     android:layout_weight="1"
                     android:id="@+id/buttonColor"

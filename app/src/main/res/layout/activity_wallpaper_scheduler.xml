@@ -80,7 +80,7 @@
             android:gravity="fill">
 
         <Button
-            android:drawableTop="@drawable/ic_active_img"
+            android:drawableTop="@mipmap/ic_active_img"
             android:background="@android:color/transparent"
             android:layout_weight="1"
             android:paddingTop="10dp"
@@ -98,7 +98,7 @@
                 android:background="#80ecf0f1" />
 
         <Button
-            android:drawableTop="@drawable/ic_close_img"
+            android:drawableTop="@mipmap/ic_close_img"
             android:background="@android:color/transparent"
             android:layout_weight="1"
             android:layout_gravity="center"

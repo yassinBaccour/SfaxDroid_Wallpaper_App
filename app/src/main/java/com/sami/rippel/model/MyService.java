@@ -21,17 +21,6 @@ public class MyService {
         mRetrofitHelper = new RetrofitHelper(getWallpaperApiService());
     }
 
-    /*
-    public static Retrofit getRetrofitInstance() {
-        return new Retrofit.Builder().baseUrl(Constants.BASE_URL)
-                .addConverterFactory(SimpleXmlConverterFactory.create()).build();
-    }
-
-    public static WallpaperApiService getApiService() {
-        return getRetrofitInstance().create(WallpaperApiService.class);
-    }
-    */
-
     public WallpaperApiService getWallpaperApiService() {
         return createRetrofitXMlConverter().create(WallpaperApiService.class);
     }

@@ -118,8 +118,8 @@
                                 android:layout_marginLeft="30dp"
                                 android:layout_marginTop="5dp"
                                 android:background="@android:color/transparent"
-                                android:drawableTop="@drawable/ic_palette"
-                                app:srcCompat="@drawable/ic_palette" />
+                                android:drawableTop="@mipmap/ic_palette"
+                                app:srcCompat="@mipmap/ic_palette" />
 
 
                         </LinearLayout>

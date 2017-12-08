@@ -4,32 +4,32 @@
     tools:mContext="com.bentenstudio.islamoqhd.activity.DetailsActivity">
 
     <item
-        android:icon="@drawable/ic_crop"
+        android:icon="@mipmap/ic_crop"
         android:id="@+id/buttonWallpaper"
         android:title="@string/menu.detail.wall" />
 
     <item
-        android:icon="@drawable/ic_chooser"
+        android:icon="@mipmap/ic_chooser"
         android:id="@+id/buttonChooser"
         android:title="@string/menu.detail.chooserwall" />
 
     <item
-        android:icon="@drawable/ic_save"
+        android:icon="@mipmap/ic_save"
         android:id="@+id/buttonSave"
         android:title="@string/menu.detail.gallery" />
 
     <item
-        android:icon="@drawable/ic_insta"
+        android:icon="@mipmap/ic_insta"
         android:id="@+id/buttonSareInsta"
         android:title="@string/menu.detail.share.inst" />
 
     <item
-        android:icon="@drawable/ic_fb"
+        android:icon="@mipmap/ic_fb"
         android:id="@+id/buttonSareFb"
         android:title="@string/menu.detail.share.fb" />
 
     <item
-        android:icon="@drawable/ic_share"
+        android:icon="@mipmap/ic_share"
         android:id="@+id/buttonShare"
         android:title="@string/menu.detail.share.all" />
 
