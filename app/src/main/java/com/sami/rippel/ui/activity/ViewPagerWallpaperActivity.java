@@ -210,12 +210,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
         rxPermissions
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.ACCESS_WIFI_STATE,
-                        Manifest.permission.ACCESS_NETWORK_STATE,
-                        Manifest.permission.SET_WALLPAPER_HINTS,
-                        Manifest.permission.WRITE_SETTINGS,
-                        Manifest.permission.SET_WALLPAPER,
-                        Manifest.permission.RECEIVE_BOOT_COMPLETED
+                        Manifest.permission.WRITE_SETTINGS
                 )
                 .subscribe(granted -> {
                 });

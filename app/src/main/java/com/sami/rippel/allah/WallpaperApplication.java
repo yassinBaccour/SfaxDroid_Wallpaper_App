@@ -41,7 +41,6 @@ public class WallpaperApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        //InitCanary();
         ViewModel.Current = new ViewModel(new MyDevice(getApplicationContext()),
                 new FileUtils(getApplicationContext()),
                 new MyService(),
