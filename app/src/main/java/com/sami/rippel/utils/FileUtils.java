@@ -17,7 +17,6 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -274,7 +273,7 @@ public class FileUtils {
     }
 
     private File getTemporaryDir() {
-        File temporaryDir = new File(Environment.getExternalStorageDirectory(),
+        File temporaryDir = new File(mContext.getFilesDir(),
                 mContext.getString(R.string.app_namenospace) + "/temp");
         if (!temporaryDir.exists()) {
             temporaryDir.mkdirs();
@@ -288,9 +287,8 @@ public class FileUtils {
 
     private File getPermanentDir() {
         File permanentDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                mContext.getString(R.string.app_namenospace));
+                mContext.getFilesDir(),
+                mContext.getString(R.string.app_namenospace) + "/MyWallpaper");
         if (!permanentDir.exists()) {
             permanentDir.mkdirs();
         }
@@ -299,7 +297,7 @@ public class FileUtils {
 
     private File getBasmalaFileDirDir() {
 
-        File zipDestination = new File(mContext.getExternalFilesDir(""), Constants.KEY_BASMALA_FOLDER_CONTAINER);
+        File zipDestination = new File(mContext.getFilesDir(), Constants.KEY_BASMALA_FOLDER_CONTAINER);
         if (!zipDestination.exists()) {
             zipDestination.mkdirs();
         }
@@ -307,7 +305,7 @@ public class FileUtils {
     }
 
     private File getTemporaryDouaDir() {
-        File temporaryDir = new File(Environment.getExternalStorageDirectory(),
+        File temporaryDir = new File(mContext.getFilesDir(),
                 mContext.getString(R.string.app_namenospace) + "/temp");
         if (!temporaryDir.exists()) {
             temporaryDir.mkdirs();
