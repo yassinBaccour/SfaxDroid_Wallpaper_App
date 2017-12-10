@@ -257,10 +257,14 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         });
 
         mFab.setOnClickListener(v -> {
-            AnimationServiceApp app = new AnimationServiceApp(getApplicationContext());
-            app.stopAnimationIfRunning();
-            app.startPreviewAnimation();
-            ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.speedInfoFast));
+            if (mPictureCheckbox.isChecked()) {
+                AnimationServiceApp app = new AnimationServiceApp(getApplicationContext());
+                app.stopAnimationIfRunning();
+                app.startPreviewAnimation();
+                ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.speedInfoFast));
+            } else {
+                ViewModel.Current.device.showSnackMessage(mRootLayout, "Check : " + mPictureCheckbox.getText());
+            }
         });
 
         mButtonGallery.setOnClickListener(v -> startDownloadIfNeed());
@@ -492,9 +496,9 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
     }
 
     public void startDownloadIfNeed() {
-        File filesDir = getExternalFilesDir("");
-        mZipDestination = new File(filesDir, Constants.KEY_BASMALA_FOLDER_CONTAINER);
-        mZipFile = new File(filesDir, Constants.PNG_BASMALA_STICKERS_FILE_NAME);
+
+        mZipDestination = ViewModel.Current.fileUtils.getBasmalServiceDirZipDestination();
+        mZipFile = ViewModel.Current.fileUtils.getBasmalServiceDirZipFile();
         if (!mZipFile.exists()) {
             if (ViewModel.Current.device.getScreenHeightPixels() < 820
                     && ViewModel.Current.device.getScreenWidthPixels() < 500) {
@@ -505,8 +509,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             mDownloadManager = new ThinDownloadManager(DOWNLOAD_THREAD_POOL_SIZE);
             RetryPolicy retryPolicy = new DefaultRetryPolicy();
             final DownloadRequest downloadRequest1 = new DownloadRequest(Uri.parse(mZipUrl))
-                    .setDestinationURI(Uri.parse(filesDir + "/"
-                            + Constants.PNG_BASMALA_STICKERS_FILE_NAME)).setPriority(DownloadRequest.Priority.LOW)
+                    .setDestinationURI(Uri.parse(mZipFile.getPath())).setPriority(DownloadRequest.Priority.LOW)
                     .setRetryPolicy(retryPolicy)
                     .setDownloadContext("Basmala LWP Resources")
                     .setStatusListener(mDownloadStatusListener);

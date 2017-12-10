@@ -188,6 +188,18 @@ public class FileUtils {
         return getListFiles(getBasmalaFileDirDir());
     }
 
+    public File getBasmalServiceDirZipDestination()
+    {
+        File temporaryDir = getTemporaryDir();
+       return new File(temporaryDir, Constants.KEY_BASMALA_FOLDER_CONTAINER);
+    }
+
+    public File getBasmalServiceDirZipFile()
+    {
+        File temporaryDir = getTemporaryDir();
+        return new File(temporaryDir, Constants.PNG_BASMALA_STICKERS_FILE_NAME);
+    }
+
     public boolean saveBitmapToStorage(Bitmap bitmap, String fileName,
                                        int saveOption) {
         File temporaryDir = getTemporaryDir();
@@ -256,7 +268,6 @@ public class FileUtils {
                                 mFileListner.onShareWhitApplication();
                             else if (action == ActionTypeEnum.SKYBOX_LWP)
                                 mLwpListner.onSendToLwp();
-                            resource.recycle();
 
                         } else {
                             mFileListner.onFinishActivity();
@@ -297,7 +308,7 @@ public class FileUtils {
 
     private File getBasmalaFileDirDir() {
 
-        File zipDestination = new File(mContext.getFilesDir(), Constants.KEY_BASMALA_FOLDER_CONTAINER);
+        File zipDestination = new File(getTemporaryDir(), Constants.KEY_BASMALA_FOLDER_CONTAINER);
         if (!zipDestination.exists()) {
             zipDestination.mkdirs();
         }
@@ -305,7 +316,7 @@ public class FileUtils {
     }
 
     private File getTemporaryDouaDir() {
-        File temporaryDir = new File(mContext.getFilesDir(),
+        File temporaryDir = new File(getTemporaryDir(),
                 mContext.getString(R.string.app_namenospace) + "/temp");
         if (!temporaryDir.exists()) {
             temporaryDir.mkdirs();
@@ -399,10 +410,8 @@ public class FileUtils {
     }
 
     public Boolean isFileExistInDataFolder(String fileName) {
-        File filesDir = mContext.getExternalFilesDir("");
-        File ZipFile = new File(filesDir, fileName);
+        File ZipFile = new File(getTemporaryDir(), fileName);
         return ZipFile.exists();
-
     }
 
     public Bitmap changeImageColor(Bitmap sourceBitmap, int color) {

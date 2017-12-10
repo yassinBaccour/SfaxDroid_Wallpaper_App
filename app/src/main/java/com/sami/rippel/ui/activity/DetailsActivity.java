@@ -239,8 +239,6 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
                 createIntent(IntentTypeEnum.INTAGRAMINTENT);
             if (actionToDo == ActionTypeEnum.SEND_LWP)
                 sendToRippleLwp();
-            if (actionToDo == ActionTypeEnum.SHARE_SNAP_CHAT)
-                createIntent(IntentTypeEnum.SHNAPCHATINTENT);
             if (actionToDo == ActionTypeEnum.CROP)
                 beginCrop();
             if (actionToDo == ActionTypeEnum.MOVE_PERMANENT_DIR)
@@ -248,7 +246,6 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
             if (actionToDo == ActionTypeEnum.DELETE_CURRENT_PICTURE)
                 deleteCurrentPicture();
             if (actionToDo == ActionTypeEnum.JUST_WALLPAPER) {
-
                 mPresenter.setAsWallpaper(getCurrentUrl());
             }
         } else {
@@ -285,8 +282,9 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         hideLoading();
         if (!ViewModel.Current.device.ShareFileWithIntentType(this,
                 ViewModel.Current.fileUtils.getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())),
-                intentType)) ;
-        ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.appNotInstalled));
+                intentType)) {
+            ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.appNotInstalled));
+        }
     }
 
     private void handleCrop(int resultCode, Intent result) {
