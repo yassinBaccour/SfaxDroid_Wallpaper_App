@@ -2,6 +2,7 @@ package com.sami.rippel.labs.stickers;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,11 +18,9 @@ import com.sami.rippel.model.listner.StickersListner;
 
 public class AddTextFragment extends Fragment {
 
-    StickersListner stickersListner;
-    Button mAddText;
-    EditText mTxt;
-    TextView textViewAddText;
-    boolean mState = false;
+    private EditText mTxt;
+    private TextView textViewAddText;
+    private boolean mState = false;
 
     public static AddTextFragment newInstance() {
         return new AddTextFragment();
@@ -44,11 +43,13 @@ public class AddTextFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
         mTxt = (EditText) rootView.findViewById(R.id.editText);
         textViewAddText = (TextView) rootView.findViewById(R.id.textViewAddText);
-        textViewAddText.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "arabicfont5.ttf"));
+        if (getActivity() != null) {
+            textViewAddText.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "arabicfont5.ttf"));
+        }
         mState = true;
         return rootView;
     }
@@ -67,7 +68,7 @@ public class AddTextFragment extends Fragment {
     }
 
     public void setListener(StickersListner stickersListner) {
-        this.stickersListner = stickersListner;
+        StickersListner stickersListner1 = stickersListner;
     }
 
     @Override

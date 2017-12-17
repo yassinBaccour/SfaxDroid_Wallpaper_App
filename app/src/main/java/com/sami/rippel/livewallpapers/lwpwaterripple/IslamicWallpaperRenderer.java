@@ -66,7 +66,7 @@ public class IslamicWallpaperRenderer extends RajawaliRenderer {
         }
     }
 
-    public Flowable<Bitmap> LoadTexture(Bitmap myBackground) {
+    private Flowable<Bitmap> LoadTexture(Bitmap myBackground) {
 
         return Flowable.just(myBackground).flatMap(btm -> Flowable.fromCallable(() ->
         {
@@ -79,7 +79,7 @@ public class IslamicWallpaperRenderer extends RajawaliRenderer {
 
     public void initScene() {
         Flowable.fromCallable(() -> BitmapFactory.decodeFile(Constants.FilePath))
-                .flatMap(x -> LoadTexture(x))
+                .flatMap(this::LoadTexture)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmapTexture -> {
@@ -177,17 +177,17 @@ public class IslamicWallpaperRenderer extends RajawaliRenderer {
         super.onTouchEvent(event);
     }
 
-    public void setSound(boolean on) {
+    void setSound(boolean on) {
         enableSound = on;
     }
 
-    public void setRippleSize(float val) {
+    void setRippleSize(float val) {
         if (mFilter != null)
             mFilter.setRippleSize(val);
         rippleSize = val;
     }
 
-    public void setRippleSpeed(float val) {
+    void setRippleSpeed(float val) {
         if (mFilter != null)
             mFilter.setRippleSpeed(val);
         rippleSpeed = val;

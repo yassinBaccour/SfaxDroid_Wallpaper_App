@@ -951,10 +951,11 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
             case 456:
                 if (data != null) {
                     Bundle extras = data.getExtras();
-                    String mUrl = extras.getString("urltoopen");
-                    String mType = extras.getString("type");
+                    if (extras != null)
+                    {
                     mRotateAngle = 0;
-                    downloadAndPutTextureAtScreen(mUrl, mType);
+                    downloadAndPutTextureAtScreen(extras.getString("urltoopen", ""), extras.getString("type", ""));
+                    }
                 }
         }
     }

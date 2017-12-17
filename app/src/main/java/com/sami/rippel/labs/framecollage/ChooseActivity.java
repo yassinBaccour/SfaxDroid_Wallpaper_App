@@ -87,18 +87,14 @@ public class ChooseActivity extends ActivityLabBase {
                 mGridView
                         .addOnItemTouchListener(new RecyclerItemClickListener(
                                 getApplicationContext(),
-                                new RecyclerItemClickListener.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(View view,
-                                                            int position) {
-                                        Intent previewActivity = new Intent(getApplicationContext(),
-                                                PreviewActivity.class);
-                                        previewActivity.putExtra("ImageUrl",
-                                                mData.get(position).getUrl().replace("prev_", "").replace("jpg", "png")
-                                                        .trim());
-                                        previewActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(previewActivity);
-                                    }
+                                (view, position) -> {
+                                    Intent previewActivity = new Intent(getApplicationContext(),
+                                            PreviewActivity.class);
+                                    previewActivity.putExtra("ImageUrl",
+                                            mData.get(position).getUrl().replace("prev_", "").replace("jpg", "png")
+                                                    .trim());
+                                    previewActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(previewActivity);
                                 }));
             }
             mProgressLoader.setVisibility(View.GONE);

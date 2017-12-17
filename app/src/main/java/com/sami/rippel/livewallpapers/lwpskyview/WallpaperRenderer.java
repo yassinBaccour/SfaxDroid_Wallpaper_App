@@ -10,9 +10,9 @@ import org.rajawali3d.renderer.Renderer;
 
 public class WallpaperRenderer extends Renderer {
 
-    String axe = "";
-    private float downX, downY, upX, upY;
-    private int min_distance = 100;
+    private String axe = "";
+    private float downX;
+    private float downY;
 
     public WallpaperRenderer(Context context) {
         super(context);
@@ -30,10 +30,11 @@ public class WallpaperRenderer extends Renderer {
                 downY = event.getY();
             }
             case MotionEvent.ACTION_UP: {
-                upX = event.getX();
-                upY = event.getY();
+                float upX = event.getX();
+                float upY = event.getY();
                 float deltaX = downX - upX;
                 float deltaY = downY - upY;
+                int min_distance = 100;
                 if (Math.abs(deltaX) > Math.abs(deltaY)) {
                     if (Math.abs(deltaX) > min_distance) {
                         // left or right
@@ -43,8 +44,6 @@ public class WallpaperRenderer extends Renderer {
                         if (deltaX > 0) {
                             axe = "RighToLeft";
                         }
-                    } else {
-                        //not long enough swipe...
                     }
                 }
                 //VERTICAL SCROLL
@@ -57,8 +56,6 @@ public class WallpaperRenderer extends Renderer {
                         if (deltaY > 0) {
                             axe = "BottomToTop";
                         }
-                    } else {
-                        //not long enough swipe...
                     }
                 }
             }
@@ -70,15 +67,21 @@ public class WallpaperRenderer extends Renderer {
     protected void onRender(long ellapsedRealtime, double deltaTime) {
         super.onRender(ellapsedRealtime, deltaTime);
         try {
-            if (axe.equals("LefttoRigh"))
-                getCurrentCamera().rotate(Vector3.Axis.Y, -0.1);
-            else if (axe.equals("RighToLeft"))
-                getCurrentCamera().rotate(Vector3.Axis.Y, +0.1);
-            else if (axe.equals("TopToBottom"))
-                getCurrentCamera().rotate(Vector3.Axis.X, -0.1);
-            else if (axe.equals("BottomToTop"))
-                getCurrentCamera().rotate(Vector3.Axis.X, +0.1);
-        } catch (Exception e) {
+            switch (axe) {
+                case "LefttoRigh":
+                    getCurrentCamera().rotate(Vector3.Axis.Y, -0.1);
+                    break;
+                case "RighToLeft":
+                    getCurrentCamera().rotate(Vector3.Axis.Y, +0.1);
+                    break;
+                case "TopToBottom":
+                    getCurrentCamera().rotate(Vector3.Axis.X, -0.1);
+                    break;
+                case "BottomToTop":
+                    getCurrentCamera().rotate(Vector3.Axis.X, +0.1);
+                    break;
+            }
+        } catch (Exception ignored) {
         }
     }
 
@@ -87,7 +90,7 @@ public class WallpaperRenderer extends Renderer {
         //Material mAtlasMaterial = new Material();
         try {
             getCurrentScene().setSkybox(R.drawable.night); //FIXME BITMAP TO TEXTURE
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         /*
         try {

@@ -1,6 +1,7 @@
 package com.sami.rippel.labs.stickers;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,8 +24,8 @@ import java.util.List;
 
 public class FlowerStickersImageFragment extends Fragment {
 
-    StickersListner stickersListner;
-    RecyclerView mListView;
+    private StickersListner stickersListner;
+    private RecyclerView mListView;
     private GalleryAdapter mAdapter;
     private ArrayList<WallpaperObject> mData = new ArrayList<>();
 
@@ -33,7 +34,7 @@ public class FlowerStickersImageFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mListView.addOnItemTouchListener(new RecyclerItemClickListener(
                 getActivity(),
                 (view1, pos) -> {
@@ -65,7 +66,7 @@ public class FlowerStickersImageFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail_stickers, container, false);
         mListView = (RecyclerView) rootView.findViewById(R.id.list_tatoo);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

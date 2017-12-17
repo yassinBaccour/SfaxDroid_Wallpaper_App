@@ -38,17 +38,13 @@ import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class WallpaperSchedulerActivity extends AppCompatActivity {
-    private final int mJobId = 1;
     private Toolbar mToolbar;
     private TextView mTxtstatus;
     private TextView mTxtNotForget;
     private CoordinatorLayout mRootLayout;
-    private Button mBtnAddWallpaper;
-    private Button mBtnListWallpaper;
     private Button mButtonActive;
     private Button mButtonClose;
     private RadioGroup mRadioSexGroup;
-    private RadioButton mRadioSelectedButton;
     private RadioButton mRadioOneHoure;
     private RadioButton mRadioSixHoure;
     private RadioButton mRadioDouzeHoure;
@@ -68,8 +64,8 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         mRadioDouzeHoure = (RadioButton) findViewById(R.id.radioDouzeHoure);
         mRadioOneDayHoure = (RadioButton) findViewById(R.id.radioOneDayHoure);
         mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
-        mBtnAddWallpaper = (Button) findViewById(R.id.buttonAddLwp);
-        mBtnListWallpaper = (Button) findViewById(R.id.buttonLWPList);
+        Button mBtnAddWallpaper = (Button) findViewById(R.id.buttonAddLwp);
+        Button mBtnListWallpaper = (Button) findViewById(R.id.buttonLWPList);
         mTxtstatus = (TextView) findViewById(R.id.txtstatus);
         mRadioSexGroup = (RadioGroup) findViewById(R.id.radioGroup);
         mButtonActive = (Button) findViewById(R.id.buttonActive);
@@ -218,8 +214,9 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
             int nbFile = ViewModel.Current.fileUtils.getPermanentDirListFiles().size();
             if (nbFile > 3) {
                 int selectedId = mRadioSexGroup.getCheckedRadioButtonId();
-                mRadioSelectedButton = (RadioButton) findViewById(selectedId);
+                RadioButton mRadioSelectedButton = (RadioButton) findViewById(selectedId);
                 String selectedText = mRadioSelectedButton.getText().toString();
+                int mJobId = 1;
                 JobInfo jobInfo = new JobInfo.Builder(
                         mJobId, new ComponentName(WallpaperSchedulerActivity.this, RetrieveWallpaperService.class))
                         .setPeriodic(getSelectedTime(selectedText))

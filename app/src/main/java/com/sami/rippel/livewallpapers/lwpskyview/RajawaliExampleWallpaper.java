@@ -21,15 +21,7 @@ public class RajawaliExampleWallpaper extends Wallpaper {
         try {
             final Class rendererClass = Class.forName(mSharedPreferences.getString("renderer_class", WallpaperRenderer.class.getCanonicalName()));
             mRenderer = (ISurfaceRenderer) rendererClass.getConstructor(Context.class).newInstance(this);
-        } catch (NoSuchMethodException e) {
-            useFallback = true;
-        } catch (InvocationTargetException e) {
-            useFallback = true;
-        } catch (InstantiationException e) {
-            useFallback = true;
-        } catch (IllegalAccessException e) {
-            useFallback = true;
-        } catch (ClassNotFoundException e) {
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             useFallback = true;
         }
         if (useFallback) mRenderer = new WallpaperRenderer(this);

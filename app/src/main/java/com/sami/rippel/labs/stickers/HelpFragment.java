@@ -15,8 +15,7 @@ import com.sami.rippel.model.listner.StickersListner;
 
 public class HelpFragment extends Fragment {
 
-    StickersListner stickersListner;
-    boolean mState = false;
+    private boolean mState = false;
     private TextView mTitleTxt;
     private TextView mTextViewDesc1;
     private TextView mTextViewDesc2;
@@ -131,7 +130,7 @@ public class HelpFragment extends Fragment {
     }
 
     public void setListener(StickersListner stickersListner) {
-        this.stickersListner = stickersListner;
+        StickersListner stickersListner1 = stickersListner;
     }
 
     @Override

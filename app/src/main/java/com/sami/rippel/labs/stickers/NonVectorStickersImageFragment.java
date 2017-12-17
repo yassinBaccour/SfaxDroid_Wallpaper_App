@@ -1,6 +1,7 @@
 package com.sami.rippel.labs.stickers;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,8 +23,8 @@ import java.util.List;
 
 public class NonVectorStickersImageFragment extends Fragment {
 
-    StickersListner stickersListner;
-    RecyclerView mListView;
+    private StickersListner stickersListner;
+    private RecyclerView mListView;
     private GalleryAdapter mAdapter;
     private ArrayList<WallpaperObject> mData = new ArrayList<>();
 
@@ -33,19 +34,15 @@ public class NonVectorStickersImageFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mListView.addOnItemTouchListener(new RecyclerItemClickListener(
                 getActivity(),
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view,
-                                            int pos) {
-                        if (pos >= 0 && mAdapter != null && mAdapter.getItemCount() >= 0) {
+                (view1, pos) -> {
+                    if (pos >= 0 && mAdapter != null && mAdapter.getItemCount() >= 0) {
 
-                            String url = mAdapter.GetPreviewUrl(pos).replace("_preview.jpg", ".png");
-                            if (stickersListner != null && url != null && !url.isEmpty()) {
-                                stickersListner.downloadAndPutImageAtScreen(url);
-                            }
+                        String url = mAdapter.GetPreviewUrl(pos).replace("_preview.jpg", ".png");
+                        if (stickersListner != null && url != null && !url.isEmpty()) {
+                            stickersListner.downloadAndPutImageAtScreen(url);
                         }
                     }
                 }));
@@ -53,14 +50,14 @@ public class NonVectorStickersImageFragment extends Fragment {
             stickersListner.hideProgressLoader();
     }
 
-    public void fillList(String mPrefix) {
+    public void fillList() {
         if (ViewModel.Current.isWallpapersLoaded()) {
             mData.clear();
             mData = new ArrayList<WallpaperObject>();
             List<WallpaperObject> mImageListByType = ViewModel.Current.getWallpaperCategoryFromName("Stikers")
                     .getGetWallpapersList();
             for (WallpaperObject wall : mImageListByType) {
-                if (wall.getName() != null && wall.getName().equals(mPrefix))
+                if (wall.getName() != null && wall.getName().equals("nonvector"))
                     mData.add(wall);
             }
             mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.TYPE_ONE);
@@ -69,13 +66,13 @@ public class NonVectorStickersImageFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail_stickers, container, false);
         mListView = (RecyclerView) rootView.findViewById(R.id.list_tatoo);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mListView.setLayoutManager(layoutManager);
         mListView.setHasFixedSize(true);
-        fillList("nonvector");
+        fillList();
         return rootView;
     }
 

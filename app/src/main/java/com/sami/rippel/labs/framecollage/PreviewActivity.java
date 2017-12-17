@@ -53,7 +53,6 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
     private PointF mid = new PointF();
     private float oldDist = 1f;
     private float d = 0f;
-    private float newRot = 0f;
     private float[] lastEvent = null;
     private ImageView mView1, mView2;
     private FrameLayout mFramelayout;
@@ -212,7 +211,7 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
                         matrix.postScale(scale, scale, mid.x, mid.y);
                     }
                     if (lastEvent != null && event.getPointerCount() == 2) {
-                        newRot = rotation(event);
+                        float newRot = rotation(event);
                         float r = newRot - d;
                         float[] values = new float[9];
                         matrix.getValues(values);

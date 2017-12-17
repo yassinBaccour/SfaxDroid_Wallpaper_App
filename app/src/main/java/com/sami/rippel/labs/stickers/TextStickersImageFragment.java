@@ -1,6 +1,7 @@
 package com.sami.rippel.labs.stickers;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,21 +14,21 @@ import com.sami.rippel.model.listner.StickersListner;
 
 public class TextStickersImageFragment extends Fragment {
 
-    StickersListner stickersListner;
-    Button mButtonAddText;
-    Button mButtonAddFilter;
-    Button mButtonResetAll;
-    Button mButtonSize;
-    Button mButtonBackground;
-    Button mButtonMorePadding;
-    Button mButtonLessPadding;
+    private StickersListner stickersListner;
+    private Button mButtonAddText;
+    private Button mButtonAddFilter;
+    private Button mButtonResetAll;
+    private Button mButtonSize;
+    private Button mButtonBackground;
+    private Button mButtonMorePadding;
+    private Button mButtonLessPadding;
 
     public static TextStickersImageFragment newInstance() {
         return new TextStickersImageFragment();
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mButtonAddText.setOnClickListener(x -> {
             if (stickersListner != null) stickersListner.addTextFromFragment();
         });
@@ -52,7 +53,7 @@ public class TextStickersImageFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_detail_text_stickers, container, false);
         mButtonAddText = (Button) rootView.findViewById(R.id.buttonAddText);
         mButtonAddFilter = (Button) rootView.findViewById(R.id.buttonAddFilter);

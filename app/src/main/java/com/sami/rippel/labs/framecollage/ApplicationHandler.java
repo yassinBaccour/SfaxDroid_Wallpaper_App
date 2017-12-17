@@ -15,12 +15,14 @@ public class ApplicationHandler {
         return handler;
     }
 
-    public File getOrCreateFolder(String folder, IMAGES imagePath) {
+    File getOrCreateFolder(String folder, IMAGES imagePath) {
 
         String strImageFolder = folder + File.separator + imagePath.name();
         File imageFolder = new File(strImageFolder);
         if (!imageFolder.exists()) {
-            imageFolder.mkdirs();
+           boolean isCreated = imageFolder.mkdirs();
+           if (!isCreated)
+               return null;
         }
         return imageFolder;
     }

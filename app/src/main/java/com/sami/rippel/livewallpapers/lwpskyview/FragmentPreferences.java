@@ -12,8 +12,6 @@ import com.sami.rippel.allah.R;
  */
 public class FragmentPreferences extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
 
-    private SharedPreferences mSharedPreferences;
-
     private int[] preferencesToLoad() {
         return new int[]{R.xml.settings};
     }
@@ -21,7 +19,7 @@ public class FragmentPreferences extends PreferenceFragment implements SharedPre
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSharedPreferences = getPreferenceManager().getSharedPreferences();
+        SharedPreferences mSharedPreferences = getPreferenceManager().getSharedPreferences();
         // Load defined preferences
         for (int preferenceResource : preferencesToLoad()) {
             addPreferencesFromResource(preferenceResource);

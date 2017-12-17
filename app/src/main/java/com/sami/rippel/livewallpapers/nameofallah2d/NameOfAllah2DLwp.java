@@ -70,11 +70,11 @@ public class NameOfAllah2DLwp extends WallpaperService {
                 mPaintOption.setTypeface(getTypeFace());
         }
 
-        public int getTexSize() {
+        int getTexSize() {
             return ViewModel.Current.sharedPrefsUtils.GetSetting("nameofallahtextsize", 1) * 20;
         }
 
-        public Typeface getTypeFace() {
+        Typeface getTypeFace() {
             try {
                 int mTypefacenum = ViewModel.Current.sharedPrefsUtils.GetSetting("nameofallahfontstyle", 1);
                 if (mTypefacenum == 1)
