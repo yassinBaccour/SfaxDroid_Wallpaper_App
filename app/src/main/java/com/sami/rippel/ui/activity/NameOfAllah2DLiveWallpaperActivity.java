@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -125,7 +123,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
         mProgress1Txt.setText(getString(R.string.DouaLwpProgressDesc));
         mButtonColor.setOnClickListener(x -> chooseColor());
         mFab.setOnClickListener(v -> openLiveWallpapersDoua());
-        int size = ViewModel.Current.dataUtils.GetSetting("nameofallahtextsize", 1);
+        int size = ViewModel.Current.sharedPrefsUtils.GetSetting("nameofallahtextsize", 1);
         if (size == 1)
             mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_small_on), null, null);
@@ -154,49 +152,49 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
 
     private void initTextViewListner() {
         mTxtfont1.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 1);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 1);
             resetTextViewBackground();
             mTxtfont1.setTextColor(Color.GREEN);
         });
 
         mTxtfont2.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 2);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 2);
             resetTextViewBackground();
             mTxtfont2.setTextColor(Color.GREEN);
         });
 
         mTxtfont3.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 3);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 3);
             resetTextViewBackground();
             mTxtfont3.setTextColor(Color.GREEN);
         });
 
         mTxtfont4.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 4);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 4);
             resetTextViewBackground();
             mTxtfont4.setTextColor(Color.GREEN);
         });
 
         mTxtfont5.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 5);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 5);
             resetTextViewBackground();
             mTxtfont5.setTextColor(Color.GREEN);
         });
 
         mTxtfont6.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 6);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 6);
             resetTextViewBackground();
             mTxtfont6.setTextColor(Color.GREEN);
         });
 
         mTxtfont7.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 7);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 7);
             resetTextViewBackground();
             mTxtfont7.setTextColor(Color.GREEN);
         });
 
         mTxtfont8.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahfontstyle", 8);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahfontstyle", 8);
             resetTextViewBackground();
             mTxtfont8.setTextColor(Color.GREEN);
         });
@@ -216,28 +214,28 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
 
     private void initSizeListner() {
         mButtonSizeSmall.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 1);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahtextsize", 1);
             resetBtnSizeBackground();
             mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_small_on), null, null);
         });
 
         mButtonSizeMeduim.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 2);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahtextsize", 2);
             resetBtnSizeBackground();
             mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_meduim_on), null, null);
         });
 
         mButtonSizeBig.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 3);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahtextsize", 3);
             resetBtnSizeBackground();
             mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_big_on), null, null);
         });
 
         mButtonSizeFullScreen.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("nameofallahtextsize", 4);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("nameofallahtextsize", 4);
             resetBtnSizeBackground();
             mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_full_on), null, null);
@@ -275,12 +273,12 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
                 .setOnColorSelectedListener(selectedColor -> {
                 })
                 .setPositiveButton(getString(R.string.btnok), (dialog, selectedColor, allColors) -> {
-                    ViewModel.Current.dataUtils.SetSetting("DouaLwpColor", selectedColor);
+                    ViewModel.Current.sharedPrefsUtils.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
-                            ViewModel.Current.fileUtils
+                            ViewModel.Current.bitmapUtils
                                     .covertBitmapToDrawable(NameOfAllah2DLiveWallpaperActivity.this,
-                                            ViewModel.Current.fileUtils.
-                                                    changeImageColor(ViewModel.Current.fileUtils.
+                                            ViewModel.Current.bitmapUtils.
+                                                    changeImageColor(ViewModel.Current.bitmapUtils.
                                                                     convertDrawableToBitmap(getResources()
                                                                             .getDrawable(R.mipmap.ic_palette))
                                                             , selectedColor))
@@ -347,7 +345,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
         @Override
         public void onProgress(DownloadRequest request, long totalBytes, long downloadedBytes, int progress) {
             int id = request.getDownloadId();
-            mProgress1Txt.setText(progress + "%" + "  " + ViewModel.Current.GetBytesDownloaded(progress, totalBytes));
+            mProgress1Txt.setText(progress + "%" + "  " + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
             mProgress1.setProgress(progress);
         }
     }

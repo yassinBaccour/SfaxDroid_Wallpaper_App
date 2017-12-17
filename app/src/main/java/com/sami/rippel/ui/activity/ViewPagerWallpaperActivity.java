@@ -83,7 +83,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
             StartAppSDK.init(this, "211624686", true);
         }
         rxPermissions = new RxPermissions(this);
-        ViewModel.Current.dataUtils.SetSetting("IsTheFirstRun", false);
+        ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
         isFirstLaunch = true;
         WallpaperApplication application = (WallpaperApplication) getApplication();
         mTracker = application.getDefaultTracker();
@@ -168,13 +168,13 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
             @Override
             public void onYesClicked() {
                 RateThisApp.stopRateDialog(ViewPagerWallpaperActivity.this);
-                ViewModel.Current.dataUtils.SetSetting(Constants.RATING_MESSAGE,
+                ViewModel.Current.sharedPrefsUtils.SetSetting(Constants.RATING_MESSAGE,
                         Constants.RATING_NON);
             }
 
             @Override
             public void onNoClicked() {
-                ViewModel.Current.dataUtils.SetSetting(Constants.RATING_MESSAGE,
+                ViewModel.Current.sharedPrefsUtils.SetSetting(Constants.RATING_MESSAGE,
                         Constants.RATING_NON);
             }
 
@@ -187,20 +187,20 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     }
 
     public void manageNbRunApp() {
-        int nbRun = ViewModel.Current.dataUtils.GetSetting("NbRun", 0);
-        if (ViewModel.Current.dataUtils.GetSetting("IsSecondRun", "null").equals("null")) {
-            ViewModel.Current.dataUtils.SetSetting("IsSecondRun",
+        int nbRun = ViewModel.Current.sharedPrefsUtils.GetSetting("NbRun", 0);
+        if (ViewModel.Current.sharedPrefsUtils.GetSetting("IsSecondRun", "null").equals("null")) {
+            ViewModel.Current.sharedPrefsUtils.SetSetting("IsSecondRun",
                     "Second");
             nbRun = nbRun + 1;
-            ViewModel.Current.dataUtils.SetSetting("NbRun",
+            ViewModel.Current.sharedPrefsUtils.SetSetting("NbRun",
                     nbRun);
         } else if (nbRun == 3) {
-            ViewModel.Current.dataUtils.SetSetting("NbRun",
+            ViewModel.Current.sharedPrefsUtils.SetSetting("NbRun",
                     0);
             showRunAppADS();
         } else {
             nbRun = nbRun + 1;
-            ViewModel.Current.dataUtils.SetSetting("NbRun",
+            ViewModel.Current.sharedPrefsUtils.SetSetting("NbRun",
                     nbRun);
         }
     }
@@ -253,7 +253,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     }
 
     public void rateApplication() {
-        if (ViewModel.Current.dataUtils.GetSetting(Constants.RATING_MESSAGE, Constants.RATING_YES).equals(Constants.RATING_YES)) {
+        if (ViewModel.Current.sharedPrefsUtils.GetSetting(Constants.RATING_MESSAGE, Constants.RATING_YES).equals(Constants.RATING_YES)) {
             RateThisApp.showRateDialog(this);
         }
     }

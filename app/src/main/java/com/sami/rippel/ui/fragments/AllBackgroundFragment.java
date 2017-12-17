@@ -78,7 +78,7 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
             //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("All")).findFirst().orElse(null);
             mData.clear();
             mData = new ArrayList<>(mList);
-            if (getActivity() != null && ViewModel.Current.fileUtils.isConnected(getActivity()) && mData != null && mData.size() > 0) {
+            if (getActivity() != null && ViewModel.Current.device.isConnected(getActivity()) && mData != null && mData.size() > 0) {
                 mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.GALLERY_CELL);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView

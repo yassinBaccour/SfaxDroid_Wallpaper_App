@@ -1,5 +1,6 @@
 package com.sami.rippel.labs.basmala;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -78,8 +79,8 @@ public class ScreenReceiver extends BroadcastReceiver {
     public void ScreenOnAction(Context paramContext, Intent paramIntent) {
         ActivityManager am = (ActivityManager) paramContext
                 .getSystemService(Context.ACTIVITY_SERVICE);
-        for (int i = 0; i < ListePackage.length; i++) {
-            if (ListePackage[i].equals(GetComponentInfo(am, paramContext)) || ListePackage[i].equals(GetListOfTask(am, paramContext))) {
+        for (String aListePackage : ListePackage) {
+            if (aListePackage.equals(GetComponentInfo(am, paramContext)) || aListePackage.equals(GetListOfTask(am, paramContext))) {
                 wasScreenOn = true;
                 StopService(paramContext);
             }
@@ -90,6 +91,7 @@ public class ScreenReceiver extends BroadcastReceiver {
         }
     }
 
+    @SuppressLint("UnsafeProtectedBroadcastReceiver")
     public void onReceive(final Context paramContext, Intent paramIntent) {
         try {
             SharedPreferences pref = paramContext.getSharedPreferences(
@@ -103,7 +105,7 @@ public class ScreenReceiver extends BroadcastReceiver {
                     ScreenOffAction(paramContext);
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
     }

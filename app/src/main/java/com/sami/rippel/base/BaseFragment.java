@@ -77,7 +77,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     }
 
     public void downloadPicture() {
-        if (getFragmentActivity() != null && ViewModel.Current.fileUtils.isConnected(getFragmentActivity()))
+        if (getFragmentActivity() != null && ViewModel.Current.device.isConnected(getFragmentActivity()))
             fillForm();
     }
 

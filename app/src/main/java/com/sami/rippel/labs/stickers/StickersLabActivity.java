@@ -142,7 +142,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         mFragmentText = new AddTextFragment();
         mFragmentText.setListener(this);
 
-        if (ViewModel.Current.dataUtils.GetSetting("clicked", false)) {
+        if (ViewModel.Current.sharedPrefsUtils.GetSetting("clicked", false)) {
             mImageViewAddHelp.setVisibility(View.GONE);
         }
         mDeleteBtn.setVisibility(View.GONE);
@@ -155,7 +155,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
                     } else {
                         showMenuSheetSelectPicture(MenuSheetView.MenuType.LIST);
                         mImageViewAddHelp.setVisibility(View.GONE);
-                        ViewModel.Current.dataUtils.SetSetting("clicked", true);
+                        ViewModel.Current.sharedPrefsUtils.SetSetting("clicked", true);
                     }
                 } else if (mFabDefault.equals(Constants.KEY_TEXT)) {
                     addTextToView(mFragmentText.getStringFromEditText());
@@ -174,7 +174,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         mRotateBtn.setOnClickListener(view -> {
             mRotateAngle = mRotateAngle + 90;
             mImageViewGalleryImage.setImageBitmap(
-                    ViewModel.Current.fileUtils.rotateBitmap(((BitmapDrawable) mImageViewGalleryImage.getDrawable()).getBitmap(), mRotateAngle));
+                    ViewModel.Current.bitmapUtils.rotateBitmap(((BitmapDrawable) mImageViewGalleryImage.getDrawable()).getBitmap(), mRotateAngle));
         });
 
         mDeleteBtn.setOnClickListener(view -> {
@@ -279,10 +279,10 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
 
     private void setColorToDrawablePalette(int selectedColor) {
         mImagePalette.setImageDrawable(
-                ViewModel.Current.fileUtils
+                ViewModel.Current.bitmapUtils
                         .covertBitmapToDrawable(StickersLabActivity.this,
-                                ViewModel.Current.fileUtils.
-                                        changeImageColor(ViewModel.Current.fileUtils.
+                                ViewModel.Current.bitmapUtils.
+                                        changeImageColor(ViewModel.Current.bitmapUtils.
                                                         convertDrawableToBitmap(getResources()
                                                                 .getDrawable(R.mipmap.ic_palette))
                                                 , selectedColor)));
@@ -320,7 +320,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     }
 
     public void changeColorAndSetImage(Bitmap bitmap) {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.changeImageColor(bitmap, mColor))
+        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.bitmapUtils.changeImageColor(bitmap, mColor))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap1 -> {
@@ -445,8 +445,8 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     }
 
     private void createAndOpenHelpFragment(String helpKey) {
-        if (ViewModel.Current.dataUtils.GetSetting(helpKey, true)) {
-            ViewModel.Current.dataUtils.SetSetting(helpKey, false);
+        if (ViewModel.Current.sharedPrefsUtils.GetSetting(helpKey, true)) {
+            ViewModel.Current.sharedPrefsUtils.SetSetting(helpKey, false);
             helpFragment = new HelpFragment();
             helpFragment.setListener(StickersLabActivity.this);
             helpFragment.setMhelpType(helpKey);
@@ -516,7 +516,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     }
 
     public int getTypeFaceStyle() {
-        String type = ViewModel.Current.dataUtils.GetSetting("TypeFace", "NORMAL");
+        String type = ViewModel.Current.sharedPrefsUtils.GetSetting("TypeFace", "NORMAL");
         if (type.equals("NORMAL"))
             return Typeface.NORMAL;
         if (type.equals("BOLD"))
@@ -809,7 +809,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
             int y = (mRelativeLayoutMain.getHeight() - mImageViewGalleryImage
                     .getHeight()) / 2;
 
-            return ViewModel.Current.fileUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
+            return ViewModel.Current.bitmapUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
                     mImageViewGalleryImage.getWidth(),
                     mImageViewGalleryImage.getHeight()), -mRotateAngle);
 
@@ -819,7 +819,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
             int y = (mRelativeLayoutMain.getHeight() - mImageview_frame
                     .getHeight()) / 2;
 
-            return ViewModel.Current.fileUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
+            return ViewModel.Current.bitmapUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
                     mImageview_frame.getWidth(),
                     mImageview_frame.getHeight()), 0);
         }
@@ -839,7 +839,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     }
 
     public void rateApplication() {
-        if (ViewModel.Current.dataUtils.GetSetting("rating", "non").equals("non")) {
+        if (ViewModel.Current.sharedPrefsUtils.GetSetting("rating", "non").equals("non")) {
             RateThisApp.showRateDialog(this);
         }
     }
@@ -855,13 +855,13 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
             @Override
             public void onYesClicked() {
                 RateThisApp.stopRateDialog(StickersLabActivity.this);
-                ViewModel.Current.dataUtils.SetSetting("rating",
+                ViewModel.Current.sharedPrefsUtils.SetSetting("rating",
                         "yes");
             }
 
             @Override
             public void onNoClicked() {
-                ViewModel.Current.dataUtils.SetSetting("rating",
+                ViewModel.Current.sharedPrefsUtils.SetSetting("rating",
                         "non");
             }
 
@@ -960,7 +960,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     }
 
     void reduceImageSizeAsync() {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.setReducedImageSize(imagePath))
+        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.bitmapUtils.setReducedImageSize(imagePath))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap -> {

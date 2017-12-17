@@ -137,7 +137,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
             listFileToSendToDetailViewPager.clear();
             listFileToSendToDetailViewPager = new ArrayList<WallpaperObject>(getWallpaperCategory().getGetWallpapersList());
         }
-        if (Current.fileUtils.isConnected(getApplicationContext()) && listFileToSendToDetailViewPager != null && listFileToSendToDetailViewPager.size() > 0 && Current.isWallpapersLoaded()) {
+        if (Current.device.isConnected(getApplicationContext()) && listFileToSendToDetailViewPager != null && listFileToSendToDetailViewPager.size() > 0 && Current.isWallpapersLoaded()) {
             mAdapter = new GalleryAdapter(GalleryWallpaperActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.GALLERY_CELL);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView

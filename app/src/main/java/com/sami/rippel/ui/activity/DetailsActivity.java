@@ -336,12 +336,12 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         hideLoading();
         mFromRipple = true;
         //ViewModel.Current.device.clearCurrentWallpaper();
-        ViewModel.Current.dataUtils
+        ViewModel.Current.sharedPrefsUtils
                 .SetSetting(Constants.CHANGE_IMAGE_KEY, Constants.CUSTOM_LWP);
         ViewModel.Current.device.openRippleLwp(this);
         Constants.FilePath = ViewModel.Current.fileUtils
                 .getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())).getPath();
-        ViewModel.Current.dataUtils.SetSetting(Constants.CHANGE_IMAGE_KEY,
+        ViewModel.Current.sharedPrefsUtils.SetSetting(Constants.CHANGE_IMAGE_KEY,
                 Constants.CUSTOM_LWP);
     }
 

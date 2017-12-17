@@ -63,7 +63,7 @@ public class AddTextFragment extends Fragment {
         if (textStyle == TextStyleEnum.NORMAL)
             mTxt.setTypeface(null, Typeface.NORMAL);
 
-        ViewModel.Current.dataUtils.SetSetting("TypeFace", textStyle.toString());
+        ViewModel.Current.sharedPrefsUtils.SetSetting("TypeFace", textStyle.toString());
     }
 
     public void setListener(StickersListner stickersListner) {

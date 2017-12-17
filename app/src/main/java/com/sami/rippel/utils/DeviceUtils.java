@@ -12,6 +12,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -50,7 +52,7 @@ import java.util.Set;
  * Created by yassin baccour on 30/10/2016.
  */
 
-public class MyDevice {
+public class DeviceUtils {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     public WindowManager mWindowManager;
@@ -63,7 +65,7 @@ public class MyDevice {
             "QMOBILE Z14", "HUAWEI ALE-L21", "LENOVO LENOVO PB1-750M", "WIKO LENNY3", "HUAWEI HUAWEI KII-L21",
             "QMOBILE QMOBILE S2 PLUS", "SONY D6503", "LGE LG-H502"};
 
-    public MyDevice(Context mContext) {
+    public DeviceUtils(Context mContext) {
         this.mContext = mContext;
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
     }
@@ -211,7 +213,7 @@ public class MyDevice {
 
     public void openChooseActivityWithPhoto(Activity ac, Intent dataIntent) {
         if (ac != null && dataIntent.getData() != null) {
-            Constants.currentBitmaps = ViewModel.Current.fileUtils.getPreview(ViewModel.Current.fileUtils.getPath(ac, dataIntent.getData()));
+            Constants.currentBitmaps = ViewModel.Current.bitmapUtils.getPreview(ViewModel.Current.fileUtils.getPath(ac, dataIntent.getData()));
             Intent intent = new Intent(ac, ChooseActivity.class);
             ac.startActivity(intent);
         }
@@ -220,7 +222,7 @@ public class MyDevice {
     public void openChooseActivityFromCamera(Activity ac) {
         File file = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "image.jpg");
-        Constants.currentBitmaps = ViewModel.Current.fileUtils.decodeSampledBitmapFromFile(
+        Constants.currentBitmaps = ViewModel.Current.bitmapUtils.decodeSampledBitmapFromFile(
                 file.getAbsolutePath(), 1000, 700);
         file.delete();
         Intent intent1 = new Intent(ac, ChooseActivity.class);
@@ -393,6 +395,60 @@ public class MyDevice {
             return 133;
         } else {
             return 200;
+        }
+    }
+
+    public String GetBytesDownloaded(int progress, long totalBytes) {
+        long bytesCompleted = (progress * totalBytes) / 100;
+        if (totalBytes >= 1000000) {
+            return ("" + (String.format("%.1f", (float) bytesCompleted / 1000000)) + "/" + (String.format("%.1f", (float) totalBytes / 1000000)) + "MB");
+        }
+        if (totalBytes >= 1000) {
+            return ("" + (String.format("%.1f", (float) bytesCompleted / 1000)) + "/" + (String.format("%.1f", (float) totalBytes / 1000)) + "Kb");
+
+        } else {
+            return ("" + bytesCompleted + "/" + totalBytes);
+        }
+    }
+
+    public Boolean isConnected(Context con) {
+
+        try {
+            ConnectivityManager connectivityManager = (ConnectivityManager) con.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo wifiInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            NetworkInfo mobileInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if (wifiInfo.isConnected() || mobileInfo.isConnected()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("CheckConnectivity Exception: " + e.getMessage());
+        }
+
+        return false;
+    }
+
+    public boolean setWallpaper(Bitmap wallpaper) {
+        try {
+            WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
+            int MinimumWidth = wallpaperManager.getDesiredMinimumWidth();
+            int MinimumHeight = wallpaperManager.getDesiredMinimumHeight();
+            if (MinimumWidth > wallpaper.getWidth() &&
+                    MinimumHeight > wallpaper.getHeight() && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT) {
+                int xPadding = Math.max(0, MinimumWidth - wallpaper.getWidth()) / 2;
+                int yPadding = Math.max(0, MinimumHeight - wallpaper.getHeight()) / 2;
+                Bitmap paddedWallpaper = Bitmap.createBitmap(MinimumWidth, MinimumHeight, Bitmap.Config.ARGB_8888);
+                int[] pixels = new int[wallpaper.getWidth() * wallpaper.getHeight()];
+                wallpaper.getPixels(pixels, 0, wallpaper.getWidth(), 0, 0, wallpaper.getWidth(), wallpaper.getHeight());
+                paddedWallpaper.setPixels(pixels, 0, wallpaper.getWidth(), xPadding, yPadding, wallpaper.getWidth(), wallpaper.getHeight());
+                wallpaperManager.setBitmap(paddedWallpaper);
+                return true;
+            } else {
+                wallpaperManager.setBitmap(wallpaper);
+                return true;
+            }
+        } catch (IOException e) {
+            return false;
         }
     }
 }

@@ -154,11 +154,11 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
                     }
                 })
                 .setPositiveButton(getString(R.string.btnok), (dialog, selectedColor, allColors) -> {
-                    ViewModel.Current.dataUtils.SetSetting("DouaLwpColor", selectedColor);
+                    ViewModel.Current.sharedPrefsUtils.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
-                            ViewModel.Current.fileUtils.covertBitmapToDrawable(DouaLiveWallpaperActivity.this,
-                                    ViewModel.Current.fileUtils.
-                                            changeImageColor(ViewModel.Current.fileUtils.
+                            ViewModel.Current.bitmapUtils.covertBitmapToDrawable(DouaLiveWallpaperActivity.this,
+                                    ViewModel.Current.bitmapUtils.
+                                            changeImageColor(ViewModel.Current.bitmapUtils.
                                                             convertDrawableToBitmap(getResources().getDrawable(R.mipmap.ic_palette))
                                                     , selectedColor))
                             , null, null);
@@ -248,12 +248,12 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
             int id = request.getDownloadId();
             if (id == mDownloadId1) {
                 mProgress1Txt.setText(progress + "%" + "  "
-                        + ViewModel.Current.GetBytesDownloaded(progress, totalBytes));
+                        + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
                 mProgress1.setProgress(progress);
             }
             if (id == mDownloadId2) {
                 mProgress1Txt.setText(progress + "%" + "  "
-                        + ViewModel.Current.GetBytesDownloaded(progress, totalBytes));
+                        + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
                 mProgress1.setProgress(progress);
             }
         }

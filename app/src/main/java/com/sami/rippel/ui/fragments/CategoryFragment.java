@@ -86,7 +86,7 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
             //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("ImageCategoryNew")).findFirst().orElse(null);
             mData.clear();
             mData = new ArrayList<>(mList);
-            if (getActivity() != null && ViewModel.Current.fileUtils.isConnected(getActivity()) && mData != null && mData.size() > 0) {
+            if (getActivity() != null && ViewModel.Current.device.isConnected(getActivity()) && mData != null && mData.size() > 0) {
                 mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.CATEGORY_NEW_FORMAT);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView

@@ -9,9 +9,10 @@ import com.sami.rippel.model.entity.WallpaperCategory;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.utils.DataUtils;
+import com.sami.rippel.utils.BitmapUtils;
+import com.sami.rippel.utils.SharedPrefsUtils;
 import com.sami.rippel.utils.FileUtils;
-import com.sami.rippel.utils.MyDevice;
+import com.sami.rippel.utils.DeviceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +25,19 @@ public class ViewModel {
     public static ViewModel Current;
     private final List<OnStateChangeListener> mStateListeners = new ArrayList<>();
     public FileUtils fileUtils;
-    public MyDevice device;
+    public BitmapUtils bitmapUtils;
+    public DeviceUtils device;
     public MyService service;
-    public DataUtils dataUtils;
+    public SharedPrefsUtils sharedPrefsUtils;
     public WallpapersRetrofitObject retrofitWallpObject;
     protected StateEnum mState = StateEnum.COMPLETED;
 
-    public ViewModel(MyDevice device, FileUtils fileUtils, MyService service, DataUtils dataUtils) {
+    public ViewModel(DeviceUtils device, FileUtils fileUtils, MyService service, SharedPrefsUtils sharedPrefsUtils, BitmapUtils bitmapUtils) {
         this.device = device;
         this.fileUtils = fileUtils;
         this.service = service;
-        this.dataUtils = dataUtils;
+        this.sharedPrefsUtils = sharedPrefsUtils;
+        this.bitmapUtils = bitmapUtils;
         ViewModel.Current = this;
     }
 
@@ -49,20 +52,7 @@ public class ViewModel {
             return null;
     }
 
-    public Bitmap setReducedImageSize(String imagePath) {
 
-        int targetImageViewWidth = Current.device.getScreenHeightPixels();
-        int targetImageViewHeight = Current.device.getScreenWidthPixels();
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(imagePath, bmOptions);
-        int cameraImageWidth = bmOptions.outWidth;
-        int cameraImageHeight = bmOptions.outHeight;
-        int scaleFactor = Math.min(cameraImageWidth / targetImageViewWidth, cameraImageHeight / targetImageViewHeight);
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(imagePath, bmOptions);
-    }
 
     public WallpapersRetrofitObject getRetrofitWallpObject() {
         return retrofitWallpObject;
@@ -98,22 +88,8 @@ public class ViewModel {
         }
     }
 
-
     public boolean isWallpapersLoaded() {
         return retrofitWallpObject != null && retrofitWallpObject.getCategoryList().size() > 0;
-    }
-
-    public String GetBytesDownloaded(int progress, long totalBytes) {
-        long bytesCompleted = (progress * totalBytes) / 100;
-        if (totalBytes >= 1000000) {
-            return ("" + (String.format("%.1f", (float) bytesCompleted / 1000000)) + "/" + (String.format("%.1f", (float) totalBytes / 1000000)) + "MB");
-        }
-        if (totalBytes >= 1000) {
-            return ("" + (String.format("%.1f", (float) bytesCompleted / 1000)) + "/" + (String.format("%.1f", (float) totalBytes / 1000)) + "Kb");
-
-        } else {
-            return ("" + bytesCompleted + "/" + totalBytes);
-        }
     }
 
     public String getUrlFromWallpaperList(int pos, List<WallpaperObject> myList) {

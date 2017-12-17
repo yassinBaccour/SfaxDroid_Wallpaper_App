@@ -9,12 +9,12 @@ import com.sami.rippel.model.Constants;
  * Created by yassin baccour on 15/04/2017.
  */
 
-public class DataUtils {
+public class SharedPrefsUtils {
     private Context mContext;
     private SharedPreferences mPref;
     private SharedPreferences.Editor prefsEditor;
 
-    public DataUtils(Context mContext) {
+    public SharedPrefsUtils(Context mContext) {
         this.mContext = mContext;
         mPref = mContext.getSharedPreferences(Constants.PREFERENCESNAME,
                 Context.MODE_PRIVATE);

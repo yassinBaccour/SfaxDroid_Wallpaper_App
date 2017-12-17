@@ -57,37 +57,6 @@ public class FileUtils {
         this.mContext = context;
     }
 
-    public static Bitmap rotateBitmap(Bitmap source, float angle) {
-        if (!source.isRecycled()) {
-            Matrix matrix = new Matrix();
-            matrix.postRotate(angle);
-            return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
-                    source.getHeight(), matrix, true);
-        } else
-            return null;
-    }
-
-    static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth,
-                                              int reqHeight) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        int inSampleSize = 1;
-        if (height > reqHeight) {
-            inSampleSize = Math.round((float) height / (float) reqHeight);
-        }
-        int expectedWidth = width / inSampleSize;
-        if (expectedWidth > reqWidth) {
-            inSampleSize = Math.round((float) width / (float) reqWidth);
-        }
-        options.inSampleSize = inSampleSize;
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(path, options);
-    }
-
     public void SetListner(WallpaperListner fileListner) {
         this.mFileListner = fileListner;
     }
@@ -330,50 +299,12 @@ public class FileUtils {
         mContext.sendBroadcast(intent);
     }
 
-    private boolean setWallpaper(Bitmap wallpaper) {
-        try {
-            WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
-            int MinimumWidth = wallpaperManager.getDesiredMinimumWidth();
-            int MinimumHeight = wallpaperManager.getDesiredMinimumHeight();
-            if (MinimumWidth > wallpaper.getWidth() &&
-                    MinimumHeight > wallpaper.getHeight() && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT) {
-                int xPadding = Math.max(0, MinimumWidth - wallpaper.getWidth()) / 2;
-                int yPadding = Math.max(0, MinimumHeight - wallpaper.getHeight()) / 2;
-                Bitmap paddedWallpaper = Bitmap.createBitmap(MinimumWidth, MinimumHeight, Bitmap.Config.ARGB_8888);
-                int[] pixels = new int[wallpaper.getWidth() * wallpaper.getHeight()];
-                wallpaper.getPixels(pixels, 0, wallpaper.getWidth(), 0, 0, wallpaper.getWidth(), wallpaper.getHeight());
-                paddedWallpaper.setPixels(pixels, 0, wallpaper.getWidth(), xPadding, yPadding, wallpaper.getWidth(), wallpaper.getHeight());
-                wallpaperManager.setBitmap(paddedWallpaper);
-                return true;
-            } else {
-                wallpaperManager.setBitmap(wallpaper);
-                return true;
-            }
-        } catch (IOException e) {
-            return false;
-        }
-    }
+
 
     public boolean setAsWallpaper(Bitmap bitmap) {
-        return setWallpaper(bitmap);
+        return ViewModel.Current.device.setWallpaper(bitmap);
     }
 
-    public Boolean isConnected(Context con) {
-
-        try {
-            ConnectivityManager connectivityManager = (ConnectivityManager) con.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo wifiInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            NetworkInfo mobileInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-            if (wifiInfo.isConnected() || mobileInfo.isConnected()) {
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println("CheckConnectivity Exception: " + e.getMessage());
-        }
-
-        return false;
-    }
 
     public void unzipFile(File zipFile, File destination) {
         DecompressZip decomp = new DecompressZip(zipFile.getPath(),
@@ -381,7 +312,7 @@ public class FileUtils {
         decomp.unzip();
     }
 
-    String getPath(Activity ac, Uri uri) {
+    public String getPath(Activity ac, Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         if (projection != null) {
             Cursor cursor = ac.managedQuery(uri, projection, null, null, null);
@@ -394,58 +325,13 @@ public class FileUtils {
         }
     }
 
-    Bitmap getPreview(String fileName) {
-        File image = new File(fileName);
-        BitmapFactory.Options bounds = new BitmapFactory.Options();
-        bounds.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(image.getPath(), bounds);
-        if ((bounds.outWidth == -1) || (bounds.outHeight == -1)) {
-            return null;
-        }
-        //int originalSize = (bounds.outHeight > bounds.outWidth) ? bounds.outHeight
-        //        : bounds.outWidth;
-        //BitmapFactory.Options opts = new BitmapFactory.Options();
-        //opts.inSampleSize = originalSize / 20;
-        return BitmapFactory.decodeFile(image.getPath());
-    }
+
 
     public Boolean isFileExistInDataFolder(String fileName) {
         File ZipFile = new File(getTemporaryDir(), fileName);
         return ZipFile.exists();
     }
 
-    public Bitmap changeImageColor(Bitmap sourceBitmap, int color) {
-        try {
-            Bitmap resultBitmap = Bitmap.createBitmap(sourceBitmap, 0, 0,
-                    sourceBitmap.getWidth() - 1, sourceBitmap.getHeight() - 1);
-            Paint p = new Paint();
-            ColorFilter filter = new LightingColorFilter(color, 1);
-            p.setColorFilter(filter);
-            Canvas canvas = new Canvas(resultBitmap);
-            canvas.drawBitmap(resultBitmap, 0, 0, p);
-            return resultBitmap;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
 
-    public Drawable covertBitmapToDrawable(Context context, Bitmap bitmap) {
-        Drawable d = new BitmapDrawable(context.getResources(), bitmap);
-        return d;
-    }
-
-    public Bitmap convertDrawableToBitmap(Drawable drawable) {
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        }
-
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
-    }
 }

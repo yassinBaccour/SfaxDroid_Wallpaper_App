@@ -40,7 +40,7 @@ public class DouaLiveWallpaper extends WallpaperService {
         private int mColor;
 
         IslamicEngine() {
-            mColor = ViewModel.Current.dataUtils.GetSetting("DouaLwpColor", -4522170);
+            mColor = ViewModel.Current.sharedPrefsUtils.GetSetting("DouaLwpColor", -4522170);
             final Paint mPaint = this.mPaint;
             mPaint.setColor(0xffffffff);
             mPaint.setAntiAlias(true);
@@ -48,7 +48,7 @@ public class DouaLiveWallpaper extends WallpaperService {
             mPaint.setStrokeCap(Paint.Cap.ROUND);
             mPaint.setStyle(Paint.Style.STROKE);
             mOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            mLogoDoua = ViewModel.Current.fileUtils.changeImageColor(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
+            mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
                     mOptions), mColor);
             mPaintOption = new Paint();
         }
@@ -138,8 +138,8 @@ public class DouaLiveWallpaper extends WallpaperService {
                 if (mLogoDoua != null) {
                     mLogoDoua.recycle();
                 }
-                mColor = ViewModel.Current.dataUtils.GetSetting("DouaLwpColor", -4522170);
-                mLogoDoua = ViewModel.Current.fileUtils.changeImageColor(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
+                mColor = ViewModel.Current.sharedPrefsUtils.GetSetting("DouaLwpColor", -4522170);
+                mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
                         mOptions), mColor);
                 if (mCurrentPhoto == 58) {
                     mCurrentPhoto = 0;

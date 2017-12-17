@@ -53,7 +53,7 @@ public class NameOfAllah2DLwp extends WallpaperService {
         private int mColor;
 
         IslamicEngine() {
-            mColor = ViewModel.Current.dataUtils.GetSetting("DouaLwpColor", -4522170);
+            mColor = ViewModel.Current.sharedPrefsUtils.GetSetting("DouaLwpColor", -4522170);
             final Paint mPaint = this.mPaint;
             mPaint.setColor(0xffffffff);
             mPaint.setAntiAlias(true);
@@ -71,12 +71,12 @@ public class NameOfAllah2DLwp extends WallpaperService {
         }
 
         public int getTexSize() {
-            return ViewModel.Current.dataUtils.GetSetting("nameofallahtextsize", 1) * 20;
+            return ViewModel.Current.sharedPrefsUtils.GetSetting("nameofallahtextsize", 1) * 20;
         }
 
         public Typeface getTypeFace() {
             try {
-                int mTypefacenum = ViewModel.Current.dataUtils.GetSetting("nameofallahfontstyle", 1);
+                int mTypefacenum = ViewModel.Current.sharedPrefsUtils.GetSetting("nameofallahfontstyle", 1);
                 if (mTypefacenum == 1)
                     return Typeface.createFromAsset(getAssets(), "arabicfont1.otf");
                 if (mTypefacenum == 2)
@@ -173,7 +173,7 @@ public class NameOfAllah2DLwp extends WallpaperService {
                             mScreenWidth, mScreenHeight, true);
                 }
 
-                mColor = ViewModel.Current.dataUtils.GetSetting("DouaLwpColor", -4522170);
+                mColor = ViewModel.Current.sharedPrefsUtils.GetSetting("DouaLwpColor", -4522170);
                 mPaintOption.setColor(mColor);
 
                 if (currentPhoto == 98) {

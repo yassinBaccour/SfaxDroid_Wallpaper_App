@@ -37,27 +37,25 @@ public class AnimationServiceApp {
         this.mContext = mContext;
     }
 
-    public void initPref() {
-        mSoundPreferences = ViewModel.Current.dataUtils.GetSetting("sound", "on");
-        mPicturePreferences = ViewModel.Current.dataUtils.GetSetting("eye", "on");
-        mRandomPref = ViewModel.Current.dataUtils.GetSetting("random", "off");
-        mVitessePref = ViewModel.Current.dataUtils.GetSetting("speed", 2);
-        mSizePref = ViewModel.Current.dataUtils.GetSetting("size", 3);
-        mColor = ViewModel.Current.dataUtils.GetSetting("color", 3);
+    private void initPref() {
+        mSoundPreferences = ViewModel.Current.sharedPrefsUtils.GetSetting("sound", "on");
+        mPicturePreferences = ViewModel.Current.sharedPrefsUtils.GetSetting("eye", "on");
+        mRandomPref = ViewModel.Current.sharedPrefsUtils.GetSetting("random", "off");
+        mVitessePref = ViewModel.Current.sharedPrefsUtils.GetSetting("speed", 2);
+        mSizePref = ViewModel.Current.sharedPrefsUtils.GetSetting("size", 3);
+        mColor = ViewModel.Current.sharedPrefsUtils.GetSetting("color", 3);
     }
 
-    public void initMusic() {
+    private void initMusic() {
         mMediaPlayer = MediaPlayer.create(mContext, R.raw.b);
         try {
             mMediaPlayer.prepare();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void startPreviewAnimation() {
+    void startPreviewAnimation() {
         mImageAtScreen = new ImageView(mContext);
         initPref();
         mVitessePref = 3;
@@ -66,7 +64,7 @@ public class AnimationServiceApp {
         staranimation();
     }
 
-    public void startAnimation() {
+    void startAnimation() {
         mImageAtScreen = new ImageView(mContext);
         initPref();
         initMusic();
@@ -113,22 +111,22 @@ public class AnimationServiceApp {
         }
     }
 
-    public void initialiseCurrentDrawable() {
+    private void initialiseCurrentDrawable() {
         try {
-            File mBackgroundFile = new File(ViewModel.Current.dataUtils
+            File mBackgroundFile = new File(ViewModel.Current.sharedPrefsUtils
                     .GetSetting(Constants.KEY_BASMALA_PREFERENCES_PATH, ""));
             if (mBackgroundFile.exists()) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-                mBitmapheader = ViewModel.Current.fileUtils
+                mBitmapheader = ViewModel.Current.bitmapUtils
                         .changeImageColor(BitmapFactory.decodeFile(mBackgroundFile.getPath(),
                                 options), mColor);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
-    public void InitialiseIncrementationDrawable() {
+    private void InitialiseIncrementationDrawable() {
 
     }
 
@@ -144,7 +142,7 @@ public class AnimationServiceApp {
         }
     }
 
-    public void stopAnimationIfRunning() {
+    void stopAnimationIfRunning() {
 
         if (mTasking != null) {
             mTasking.cancel(true);
@@ -156,13 +154,12 @@ public class AnimationServiceApp {
                 mImageAtScreen = null;
                 if (!mBitmapheader.isRecycled())
                     mBitmapheader.recycle();
-            } else {
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
-    public void stopPlayer() {
+    void stopPlayer() {
         if (mMediaPlayer != null && mMediaPlayer.isPlaying())
             mMediaPlayer.stop();
     }

@@ -74,15 +74,14 @@ public class ChooseActivity extends ActivityLabBase {
 
     protected void FillForm() {
         if (ViewModel.Current.isWallpapersLoaded()) {
-            FileUtils mFileUtils = new FileUtils(getApplicationContext());
-            //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("ImageFrame")).findFirst().orElse(null);
+             //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("ImageFrame")).findFirst().orElse(null);
             mData.clear();
             mData = new ArrayList<WallpaperObject>(ViewModel.Current.getWallpaperCategoryFromName("ImageFrame").getGetWallpapersList());
             if (mData != null && mData.size() > 0)
                 mGridView.setLayoutManager(new GridLayoutManager(
                         getApplicationContext(), 2));
             mGridView.setHasFixedSize(true);
-            if (mFileUtils.isConnected(getApplicationContext()) && mData != null && mData.size() > 0) {
+            if (ViewModel.Current.device.isConnected(getApplicationContext()) && mData != null && mData.size() > 0) {
                 GalleryAdapter mAdapter = new GalleryAdapter(ChooseActivity.this, mData, TypeCellItemEnum.FRAME_CELL);
                 mGridView.setAdapter(mAdapter);
                 mGridView

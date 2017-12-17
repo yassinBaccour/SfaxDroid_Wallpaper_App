@@ -7,9 +7,10 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.sami.rippel.model.MyService;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.utils.DataUtils;
+import com.sami.rippel.utils.BitmapUtils;
+import com.sami.rippel.utils.SharedPrefsUtils;
 import com.sami.rippel.utils.FileUtils;
-import com.sami.rippel.utils.MyDevice;
+import com.sami.rippel.utils.DeviceUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,10 +42,11 @@ public class WallpaperApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        ViewModel.Current = new ViewModel(new MyDevice(getApplicationContext()),
+        ViewModel.Current = new ViewModel(new DeviceUtils(getApplicationContext()),
                 new FileUtils(getApplicationContext()),
                 new MyService(),
-                new DataUtils(getApplicationContext()));
+                new SharedPrefsUtils(getApplicationContext()),
+                new BitmapUtils());
     }
 
     @Override

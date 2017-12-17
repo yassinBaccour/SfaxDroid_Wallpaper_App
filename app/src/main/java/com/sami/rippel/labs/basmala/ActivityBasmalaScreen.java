@@ -80,11 +80,9 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
     private LinearLayout mLayoutDownload;
     private File mZipFile;
     private File mZipDestination;
-    private String mZipUrl = "";
     private View mDivinerBottom;
     private FloatingActionButton mFab;
     private boolean mIsServiceCanBeUsed = false;
-    private ThinDownloadManager mDownloadManager;
     private ActivityBasmalaScreen.MyDownloadDownloadStatusListenerV1
             mDownloadStatusListener = new ActivityBasmalaScreen.MyDownloadDownloadStatusListenerV1();
 
@@ -166,47 +164,40 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 if (s.length() != 0)
-                    ViewModel.Current.dataUtils.SetSetting("NbOuv",
+                    ViewModel.Current.sharedPrefsUtils.SetSetting("NbOuv",
                             Integer.parseInt(mEditTextNbOpen.getText().toString()));
             }
         });
 
-        mCheckBoxNbUnlock.setOnClickListener(new OnClickListener() {
+        mCheckBoxNbUnlock.setOnClickListener(v -> {
+            if (!mCheckBoxNbUnlock.isChecked()) {
+                mEditTextNbOpen.setEnabled(false);
+                mEditTextNbOpen.setText("0");
+                ViewModel.Current.sharedPrefsUtils.SetSetting("NbOuv", 0);
 
-            @Override
-            public void onClick(View v) {
-                if (!mCheckBoxNbUnlock.isChecked()) {
-                    mEditTextNbOpen.setEnabled(false);
-                    mEditTextNbOpen.setText("0");
-                    ViewModel.Current.dataUtils.SetSetting("NbOuv", 0);
-
-                } else if (mCheckBoxNbUnlock.isChecked()) {
-                    mEditTextNbOpen.setEnabled(true);
-                }
+            } else if (mCheckBoxNbUnlock.isChecked()) {
+                mEditTextNbOpen.setEnabled(true);
             }
         });
 
-        mSoundCheckbox.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mSoundCheckbox.isChecked()) {
-                    ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.toastnosound));
-                    ViewModel.Current.dataUtils.SetSetting("sound", "off");
-                } else if (mSoundCheckbox.isChecked()) {
-                    ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.toastwithsound));
-                    ViewModel.Current.dataUtils.SetSetting("sound", "on");
-                }
+        mSoundCheckbox.setOnClickListener(v -> {
+            if (!mSoundCheckbox.isChecked()) {
+                ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.toastnosound));
+                ViewModel.Current.sharedPrefsUtils.SetSetting("sound", "off");
+            } else if (mSoundCheckbox.isChecked()) {
+                ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.toastwithsound));
+                ViewModel.Current.sharedPrefsUtils.SetSetting("sound", "on");
             }
         });
 
         mPictureCheckbox.setOnClickListener(v -> {
             if (!mPictureCheckbox.isChecked()) {
                 ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.toastsanspicture));
-                ViewModel.Current.dataUtils.SetSetting("eye", "off");
+                ViewModel.Current.sharedPrefsUtils.SetSetting("eye", "off");
             } else if (mPictureCheckbox.isChecked()) {
                 if (ViewModel.Current.fileUtils.isFileExistInDataFolder(Constants.PNG_BASMALA_STICKERS_FILE_NAME)) {
                     ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.toastwithpicture));
-                    ViewModel.Current.dataUtils.SetSetting("eye", "on");
+                    ViewModel.Current.sharedPrefsUtils.SetSetting("eye", "on");
                 } else {
                     mPictureCheckbox.setChecked(false);
                     ViewModel.Current.device.showSnackMessage(mRootLayout,
@@ -215,38 +206,35 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             }
         });
 
-        mButtonActive.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isLockRunning = ViewModel.Current.device.isMyServiceRunning(LockService.class, mAct);
-                if (!isLockRunning && mIsServiceCanBeUsed) {
-                    startService(new Intent(getApplicationContext(),
-                            LockService.class));
-                    mTextViewServiceInfo.setText(getString(R.string.serviceOn));
-                    mButtonActive.setText(getString(R.string.closesebasmalae));
-                    mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                            getResources().getDrawable(R.mipmap.ic_close_basmallah), null, null);
+        mButtonActive.setOnClickListener(v -> {
+            boolean isLockRunning = ViewModel.Current.device.isMyServiceRunning(LockService.class, mAct);
+            if (!isLockRunning && mIsServiceCanBeUsed) {
+                startService(new Intent(getApplicationContext(),
+                        LockService.class));
+                mTextViewServiceInfo.setText(getString(R.string.serviceOn));
+                mButtonActive.setText(getString(R.string.closesebasmalae));
+                mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
+                        getResources().getDrawable(R.mipmap.ic_close_basmallah), null, null);
 
-                } else if (isLockRunning) {
-                    stopService(new Intent(getApplicationContext(),
-                            LockService.class));
-                    mTextViewServiceInfo.setText(getString(R.string.serviceOff));
-                    mButtonActive.setText(getString(R.string.activesbasmalah));
-                    mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
-                            getResources().getDrawable(R.mipmap.ic_active_besmelleh), null, null);
-                } else {
-                    ViewModel.Current.device.showSnackMessage(mRootLayout, "Permission not accepted");
-                }
+            } else if (isLockRunning) {
+                stopService(new Intent(getApplicationContext(),
+                        LockService.class));
+                mTextViewServiceInfo.setText(getString(R.string.serviceOff));
+                mButtonActive.setText(getString(R.string.activesbasmalah));
+                mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
+                        getResources().getDrawable(R.mipmap.ic_active_besmelleh), null, null);
+            } else {
+                ViewModel.Current.device.showSnackMessage(mRootLayout, "Permission not accepted");
             }
         });
 
         mPhotoAleatoire.setOnClickListener(v -> {
             if (!mPhotoAleatoire.isChecked()) {
-                ViewModel.Current.dataUtils.SetSetting("random", "off");
+                ViewModel.Current.sharedPrefsUtils.SetSetting("random", "off");
                 mLinearLayoutChoosePicture.setVisibility(View.VISIBLE);
             } else if (mPhotoAleatoire.isChecked()) {
                 if (ViewModel.Current.fileUtils.isFileExistInDataFolder(Constants.PNG_BASMALA_STICKERS_FILE_NAME)) {
-                    ViewModel.Current.dataUtils.SetSetting("random", "on");
+                    ViewModel.Current.sharedPrefsUtils.SetSetting("random", "on");
                     mLinearLayoutChoosePicture.setVisibility(View.INVISIBLE);
                 } else {
                     mPhotoAleatoire.setChecked(false);
@@ -278,28 +266,28 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
 
     private void initSizeListner() {
         mButtonSizeSmall.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("size", 0);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("size", 0);
             resetBtnSizeBackground();
             mButtonSizeSmall.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_small_on), null, null);
         });
 
         mButtonSizeMeduim.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("size", 1);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("size", 1);
             resetBtnSizeBackground();
             mButtonSizeMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_meduim_on), null, null);
         });
 
         mButtonSizeBig.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("size", 2);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("size", 2);
             resetBtnSizeBackground();
             mButtonSizeBig.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_big_on), null, null);
         });
 
         mButtonSizeFullScreen.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("size", 3);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("size", 3);
             resetBtnSizeBackground();
             mButtonSizeFullScreen.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_size_full_on), null, null);
@@ -307,14 +295,14 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
     }
 
     private void initPreferences() {
-        String soundPref = ViewModel.Current.dataUtils.GetSetting("sound", "on");
-        String picturePref = ViewModel.Current.dataUtils.GetSetting("eye", "off");
-        String randomPref = ViewModel.Current.dataUtils.GetSetting("random", "off");
-        int nbOuverture = ViewModel.Current.dataUtils.GetSetting("NbOuv", 0);
-        int speed = ViewModel.Current.dataUtils.GetSetting("speed", 1);
-        int size = ViewModel.Current.dataUtils.GetSetting("size", 3);
-
-        mEditTextNbOpen.setText(nbOuverture + "");
+        String soundPref = ViewModel.Current.sharedPrefsUtils.GetSetting("sound", "on");
+        String picturePref = ViewModel.Current.sharedPrefsUtils.GetSetting("eye", "off");
+        String randomPref = ViewModel.Current.sharedPrefsUtils.GetSetting("random", "off");
+        int nbOuverture = ViewModel.Current.sharedPrefsUtils.GetSetting("NbOuv", 0);
+        int speed = ViewModel.Current.sharedPrefsUtils.GetSetting("speed", 1);
+        int size = ViewModel.Current.sharedPrefsUtils.GetSetting("size", 3);
+        String nbOuvertureTxt = nbOuverture + "";
+        mEditTextNbOpen.setText(nbOuvertureTxt);
         if (soundPref.equals("on")) {
             mSoundCheckbox.setChecked(true);
         } else if (soundPref.equals("off")) {
@@ -377,14 +365,14 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
     private void setSpeedUIDrawableAndListner() {
 
         mBtnSpeedSlow.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("speed", 0);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("speed", 0);
             resetBtnSpeedBackground();
             mBtnSpeedSlow.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_speed_slow_on), null, null);
         });
 
         mBtnSpeedMeduim.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("speed", 1);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("speed", 1);
             resetBtnSpeedBackground();
             mBtnSpeedMeduim.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_speed_meduim_on), null, null);
@@ -392,14 +380,14 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
 
 
         mBtnSpeedFast.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("speed", 2);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("speed", 2);
             resetBtnSpeedBackground();
             mBtnSpeedFast.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_speed_fast_on), null, null);
         });
 
         mButtonTurbo.setOnClickListener(v -> {
-            ViewModel.Current.dataUtils.SetSetting("speed", 3);
+            ViewModel.Current.sharedPrefsUtils.SetSetting("speed", 3);
             resetBtnSpeedBackground();
             mButtonTurbo.setCompoundDrawablesWithIntrinsicBounds(null,
                     getResources().getDrawable(R.mipmap.ic_turbo_on), null, null);
@@ -452,7 +440,6 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                     dialog.dismiss();
                     requestPermissions();
                 });
-        return;
     }
 
     public void requestPermissions() {
@@ -483,7 +470,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                             .override(200, 200)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(mImgPreview);
-                    ViewModel.Current.dataUtils.SetSetting(Constants.KEY_BASMALA_PREFERENCES_PATH, path);
+                    ViewModel.Current.sharedPrefsUtils.SetSetting(Constants.KEY_BASMALA_PREFERENCES_PATH, path);
                     ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.imageChnaged));
                 }
                 break;
@@ -500,13 +487,14 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         mZipDestination = ViewModel.Current.fileUtils.getBasmalServiceDirZipDestination();
         mZipFile = ViewModel.Current.fileUtils.getBasmalServiceDirZipFile();
         if (!mZipFile.exists()) {
+            String mZipUrl = "";
             if (ViewModel.Current.device.getScreenHeightPixels() < 820
                     && ViewModel.Current.device.getScreenWidthPixels() < 500) {
                 mZipUrl = Constants.URL_BASMALA_PNG.replace("basmala.zip", "basmalamini.zip");
             } else {
                 mZipUrl = Constants.URL_BASMALA_PNG;
             }
-            mDownloadManager = new ThinDownloadManager(DOWNLOAD_THREAD_POOL_SIZE);
+            ThinDownloadManager mDownloadManager = new ThinDownloadManager(DOWNLOAD_THREAD_POOL_SIZE);
             RetryPolicy retryPolicy = new DefaultRetryPolicy();
             final DownloadRequest downloadRequest1 = new DownloadRequest(Uri.parse(mZipUrl))
                     .setDestinationURI(Uri.parse(mZipFile.getPath())).setPriority(DownloadRequest.Priority.LOW)
@@ -561,11 +549,11 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                     }
                 })
                 .setPositiveButton(getString(R.string.btnok), (dialog, selectedColor, allColors) -> {
-                    ViewModel.Current.dataUtils.SetSetting("color", selectedColor);
+                    ViewModel.Current.sharedPrefsUtils.SetSetting("color", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
-                            ViewModel.Current.fileUtils.covertBitmapToDrawable(mAct,
-                                    ViewModel.Current.fileUtils.
-                                            changeImageColor(ViewModel.Current.fileUtils.
+                            ViewModel.Current.bitmapUtils.covertBitmapToDrawable(mAct,
+                                    ViewModel.Current.bitmapUtils.
+                                            changeImageColor(ViewModel.Current.bitmapUtils.
                                                             convertDrawableToBitmap(getResources().getDrawable(R.mipmap.ic_palette))
                                                     , selectedColor))
                             , null, null);
@@ -582,7 +570,8 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         public void onDownloadComplete(DownloadRequest request) {
             final int id = request.getDownloadId();
             if (id == mDownloadId1) {
-                mProgress1Txt.setText(request.getDownloadContext() + getString(R.string.DouaLwpDownloadCompleted));
+                String progressTxt = request.getDownloadContext() + getString(R.string.DouaLwpDownloadCompleted);
+                mProgress1Txt.setText(progressTxt);
                 ViewModel.Current.fileUtils.unzipFile(mZipFile, mZipDestination);
                 mLayoutDownload.setVisibility(View.GONE);
                 mButtonGallery.setEnabled(true);
@@ -594,7 +583,8 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         public void onDownloadFailed(DownloadRequest request, int errorCode, String errorMessage) {
             final int id = request.getDownloadId();
             if (id == mDownloadId1) {
-                mProgress1Txt.setText(" Failed: ErrorCode " + errorCode + ", " + errorMessage);
+                String errorTxt = " Failed: ErrorCode " + errorCode + ", " + errorMessage;
+                mProgress1Txt.setText(errorTxt);
                 mProgress1.setProgress(0);
                 mButtonGallery.setEnabled(true);
             }
@@ -604,8 +594,9 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         public void onProgress(DownloadRequest request, long totalBytes, long downloadedBytes, int progress) {
             int id = request.getDownloadId();
             if (id == mDownloadId1) {
-                mProgress1Txt.setText(progress + "%" + "  "
-                        + ViewModel.Current.GetBytesDownloaded(progress, totalBytes));
+                String progressTxt = progress + "%" + "  "
+                        + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes);
+                        mProgress1Txt.setText(progressTxt);
                 mProgress1.setProgress(progress);
             }
         }
