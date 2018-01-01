@@ -262,4 +262,5 @@
     <string name="addtochangefont">You need add Text before</string>
     <string name="removepicture">Delete Picture</string>
     <string name="texturetitle">Choose Texture</string>
+    <string name="scroll_up">Scroll Up</string>
 </resources>

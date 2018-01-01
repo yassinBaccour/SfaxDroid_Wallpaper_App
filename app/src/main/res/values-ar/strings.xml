@@ -219,5 +219,6 @@
     <string name="addtochangefont">أضف النص على الصورة لتغير الخط</string>
     <string name="removepicture"> فسخ الصورة</string>
     <string name="texturetitle">إختيار الخلفية</string>
+    <string name="scroll_up">إلى الأعلى</string>
 
 </resources>

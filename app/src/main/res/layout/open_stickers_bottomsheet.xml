@@ -20,7 +20,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
-            android:text="Scroll Up"
+            android:text="@string/scroll_up"
             android:textColor="@color/primary_dark"
             android:textSize="20dp" />
 
