@@ -14,6 +14,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BasePagerAdapter;
+import com.sami.rippel.base.BaseView;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.ui.activity.DetailsActivity;
@@ -25,12 +26,14 @@ import java.util.ArrayList;
 public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
     private Context mContext;
     private int mResourceId;
+    private BaseView baseView;
 
     public DetailPagerAdapter(Context context, int resourceId,
-                              ArrayList<WallpaperObject> data) {
+                              ArrayList<WallpaperObject> data, BaseView baseView) {
         super(data);
         this.mContext = context;
         this.mResourceId = resourceId;
+        this.baseView = baseView;
     }
 
     @Override
@@ -47,16 +50,14 @@ public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
         final TouchImageView mDetailImage = (TouchImageView) viewLayout
                 .findViewById(R.id.detailImage);
         TouchImageView img = new TouchImageView(container.getContext());
-        final ProgressBar mProgressBar = (ProgressBar) viewLayout
-                .findViewById(R.id.progressBar);
+        baseView.showLoading();
         GlideApp.with(mContext).load(GetUrlByScreen(item.getUrl()))
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource,
                                                 Transition<? super Drawable> glideAnimation) {
                         mDetailImage.setImageDrawable(resource);
-                        mProgressBar.setVisibility(View.GONE);
-                        ((DetailsActivity) mContext).hideLoading();
+                        baseView.hideLoading();
                     }
                 });
         container.addView(viewLayout);

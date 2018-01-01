@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -69,7 +71,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 @SuppressLint("NewApi")
-public class StickersLabActivity extends BaseActivity implements StickersListner {
+public class StickersLabActivity extends BaseActivity implements StickersListner, View.OnClickListener {
     private static final int PICTURE_TAKEN_FROM_GALLERY = 1;
     private static final int SHARE_REQUEST_CODE = 23123;
     private static final int PICK_USER_PROFILE_IMAGE = 1000;
@@ -88,9 +90,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     public CoordinatorLayout mRootLayout;
     @BindView(R.id.capture_id_rl)
     public RelativeLayout mRelativeLayoutMain;
-    @BindView(R.id.bottomsheetLayout)
-    public BottomSheetLayout mBottomSheet;
-    @BindView(R.id.viewpager)
+     @BindView(R.id.viewpager)
     public ViewPager mViewPager;
     @BindView(R.id.fab)
     public FloatingActionButton mfab;
@@ -123,6 +123,8 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
     private int mCurrentPos = 0;
     private int mCurrentFont = 1;
     private int mPaddingLeftRight = 10;
+    private BottomSheetDialog SelectPictureDialog;
+    private BottomSheetDialog FinishDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +143,8 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         mImagePalette.setVisibility(View.GONE);
         mFragmentText = new AddTextFragment();
         mFragmentText.setListener(this);
+         initOpenBottomSheet();
+        initStickersBottomSheet();
 
         if (ViewModel.Current.sharedPrefsUtils.GetSetting("clicked", false)) {
             mImageViewAddHelp.setVisibility(View.GONE);
@@ -150,10 +154,13 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         mfab.setOnClickListener(v -> {
             if (!mIsDelete) {
                 if (mFabDefault.equals(Constants.KEY_DEFAULT)) {
+
                     if (mImageViewGalleryImage.getVisibility() == View.VISIBLE) {
-                        showMenuSheet(MenuSheetView.MenuType.LIST);
+                        //showMenuSheet(MenuSheetView.MenuType.LIST);
+                        FinishDialog.show();
                     } else {
-                        showMenuSheetSelectPicture(MenuSheetView.MenuType.LIST);
+                        SelectPictureDialog.show();
+                        //showMenuSheetSelectPicture(MenuSheetView.MenuType.LIST);
                         mImageViewAddHelp.setVisibility(View.GONE);
                         ViewModel.Current.sharedPrefsUtils.SetSetting("clicked", true);
                     }
@@ -678,23 +685,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
             mBitmapMain.recycle();
     }
 
-    private void showMenuSheet(MenuSheetView.MenuType menuType) {
-        MenuSheetView menuSheetView = new MenuSheetView(this, menuType, "", getMenuSheetListener());
-        menuSheetView.inflateMenu(R.menu.menu_stickers);
-        mBottomSheet.showWithSheetView(menuSheetView);
-    }
 
-    private void showMenuSheetSelectPicture(MenuSheetView.MenuType menuType) {
-        MenuSheetView menuSheetView = new MenuSheetView(this, menuType, "", getMenuOpencameraListener());
-        menuSheetView.inflateMenu(R.menu.menu_open);
-        mBottomSheet.showWithSheetView(menuSheetView);
-    }
-
-    private void dismissMenuSheet() {
-        if (mBottomSheet.isSheetShowing()) {
-            mBottomSheet.dismissSheet();
-        }
-    }
 
     public void openGalleryIntent() {
         Intent gallerypickerIntent1 = new Intent(Intent.ACTION_PICK);
@@ -708,48 +699,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
         mRotateBtn.setVisibility(View.GONE);
     }
 
-    public MenuSheetView.OnMenuItemClickListener getMenuSheetListener() {
-        return item -> {
-            switch (item.getItemId()) {
-                case R.id.image_gallery:
-                    recycleBitmap();
-                    removeCurrentPicture();
-                    break;
-                case R.id.imageview_save:
-                    saveImage();
-                    break;
-                case R.id.buttonSareFb:
-                    saveImageAndShare();
-                    break;
-            }
-            dismissMenuSheet();
-            return true;
-        };
-    }
-
-    public MenuSheetView.OnMenuItemClickListener getMenuOpencameraListener() {
-        return item -> {
-            switch (item.getItemId()) {
-                case R.id.open_camera:
-                    try {
-                        startCameraActivity();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case R.id.open_gallery:
-                    openGalleryIntent();
-                    break;
-                case R.id.open_web:
-                    Intent intent = new Intent(StickersLabActivity.this, GalleryWallpaperActivity.class);
-                    intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_TEXTURE);
-                    startActivityForResult(intent, 456);
-                    break;
-            }
-            dismissMenuSheet();
-            return true;
-        };
-    }
 
     public void saveImage() {
         mBitmapDrawing = Bitmap.createBitmap(mRelativeLayoutMain.getWidth(),
@@ -1096,6 +1045,43 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
 
     }
 
+    @Override
+    public void onClick(View view) {
+
+            switch (view.getId()) {
+                case R.id.open_camera:
+                    try {
+                        startCameraActivity();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case R.id.open_gallery:
+                    openGalleryIntent();
+                    break;
+                case R.id.open_web:
+                    Intent intent = new Intent(StickersLabActivity.this, GalleryWallpaperActivity.class);
+                    intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_TEXTURE);
+                    startActivityForResult(intent, 456);
+                    break;
+                case R.id.image_gallery:
+                    recycleBitmap();
+                    removeCurrentPicture();
+                    break;
+                case R.id.imageview_save:
+                    saveImage();
+                    break;
+                case R.id.buttonSareFb:
+                    saveImageAndShare();
+                    break;
+                case R.id.parentlayout:
+                    SelectPictureDialog.dismiss();
+                    FinishDialog.dismiss();
+            }
+        SelectPictureDialog.dismiss();
+       FinishDialog.dismiss();
+    }
+
     private class ScaleListener extends
             ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
@@ -1135,4 +1121,44 @@ public class StickersLabActivity extends BaseActivity implements StickersListner
             ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.issaved));
         }
     }
+
+    public void initOpenBottomSheet() {
+        View selectPicturbottomsheet = getLayoutInflater().inflate(R.layout.open_stickers_bottomsheet, null);
+
+        SelectPictureDialog = new BottomSheetDialog(this);
+        SelectPictureDialog.setContentView(selectPicturbottomsheet);
+        SelectPictureDialog.setCanceledOnTouchOutside(false);
+        SelectPictureDialog.setCancelable(false);
+
+        Button xxx =  (Button) selectPicturbottomsheet.findViewById(R.id.open_camera);
+        xxx.setOnClickListener(this);
+        Button yyy =  (Button) selectPicturbottomsheet.findViewById(R.id.open_gallery);
+        yyy.setOnClickListener(this);
+        Button zzz = (Button) selectPicturbottomsheet.findViewById(R.id.open_web);
+        zzz.setOnClickListener(this);
+
+        LinearLayout lll =  (LinearLayout) selectPicturbottomsheet.findViewById(R.id.parentlayout);
+        lll.setOnClickListener(this);
+
+    }
+
+    public void initStickersBottomSheet() {
+        View finishBottomsheet = getLayoutInflater().inflate(R.layout.stickers_bottomsheet, null);
+
+        FinishDialog = new BottomSheetDialog(this);
+        FinishDialog.setContentView(finishBottomsheet);
+        FinishDialog.setCanceledOnTouchOutside(false);
+        FinishDialog.setCancelable(false);
+
+        Button xxx =   (Button) finishBottomsheet.findViewById(R.id.image_gallery);
+        xxx.setOnClickListener(this);
+        Button yyy =   (Button) finishBottomsheet.findViewById(R.id.imageview_save);
+        yyy.setOnClickListener(this);
+        Button zzz = (Button) finishBottomsheet.findViewById(R.id.buttonSareFb);
+        zzz.setOnClickListener(this);
+
+        LinearLayout lll =  (LinearLayout) finishBottomsheet.findViewById(R.id.parentlayout);
+        lll.setOnClickListener(this);
+    }
+
 }

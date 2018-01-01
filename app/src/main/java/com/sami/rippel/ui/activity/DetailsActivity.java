@@ -193,7 +193,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     private void setupViewPager() {
         mAdapter = new DetailPagerAdapter(this, R.layout.layout_detail_pager,
-                mPagerData);
+                mPagerData, this);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(mPos);
     }
