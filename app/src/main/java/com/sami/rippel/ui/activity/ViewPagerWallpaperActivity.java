@@ -79,8 +79,9 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkForCrashes();
-        if (!BuildConfig.DEBUG) {
-            StartAppSDK.init(this, "211624686", true);
+        if ( BuildConfig.DEBUG) {
+            StartAppSDK.init(this, "211624686", false);
+            StartAppAd.disableSplash();
         }
         rxPermissions = new RxPermissions(this);
         ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
@@ -314,10 +315,8 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
                 break;
 
             case CAMERA_CAPTURE_IMAGE_REQUEST_CODE:
-                if (resultCode == RESULT_OK) {
-                    stat = true;
-                    ViewModel.Current.device.openChooseActivityFromCamera(this);
-                }
+                stat = true;
+                ViewModel.Current.device.openChooseActivityFromCamera(this);
                 break;
             case 123:
                 Log.d("permission", "ok");
@@ -401,27 +400,22 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
 
     @Override
     protected void initInject() {
-
     }
 
     @Override
     public void showSnackMsg(String msg) {
-
     }
 
     @Override
     public void showLoading() {
-
     }
 
     @Override
     public void hideLoading() {
-
     }
 
     @Override
     public void showADS() {
-
     }
 
     public enum AdsType {
