@@ -167,7 +167,6 @@
     <orderEntry type="library" name="com.google.firebase:firebase-iid-10.2.4" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-base-10.2.4" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-analytics-impl-10.2.4" level="project" />
-    <orderEntry type="library" name="net.hockeyapp.android:HockeySDK-5.0.4" level="project" />
     <orderEntry type="library" name="org.reactivestreams:reactive-streams:1.0.1@jar" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:runtime-1.0.3" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-27.0.2" level="project" />
@@ -204,6 +203,7 @@
     <orderEntry type="library" name="com.github.bumptech.glide:glide:4.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:recyclerview-v7-27.0.2" level="project" />
     <orderEntry type="library" name="com.jakewharton:butterknife-annotations:8.5.1@jar" level="project" />
+    <orderEntry type="library" name="net.hockeyapp.android:HockeySDK-5.1.0" level="project" />
     <orderEntry type="library" name="io.github.kobakei:ratethisapp-1.2.0" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.7@jar" level="project" />
     <orderEntry type="library" name="com.squareup.okio:okio:1.13.0@jar" level="project" />

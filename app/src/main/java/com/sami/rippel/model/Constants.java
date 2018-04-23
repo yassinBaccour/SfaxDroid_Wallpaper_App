@@ -47,6 +47,8 @@ public class Constants {
     public static final String KEY_BASMALA_STIKERS = "BasmalaStikers";
     public static final String KEY_BASMALA_FOLDER_CONTAINER = "BasmalaFolder";
     public static final String KEY_NAME_OF_ALLAH_2_D = "NameOfAllah2DLWP";
+    public static final String KEY_DOUA_FOLDER_CONTAINER = "Doua3DFolder";
+
     public static final String KEY_BASMALA_PREFERENCES_PATH = "KeySettingBasmalaImgPath";
     public static final String KEY_TEXTURE = "keyTexture";
     //FIXME unmodifiableSet of NAME_OF_ALLAH_TAB

@@ -30,7 +30,6 @@ public class DouaLiveWallpaper extends WallpaperService {
         BitmapFactory.Options mOptions = new BitmapFactory.Options();
         private float mTouchX = -1;
         private float mTouchY = -1;
-        private File mFilesDir = getExternalFilesDir("");
         private int mScreenHeight;
         private int mScreenWidth;
         private Bitmap mBackground;
@@ -48,7 +47,7 @@ public class DouaLiveWallpaper extends WallpaperService {
             mPaint.setStrokeCap(Paint.Cap.ROUND);
             mPaint.setStyle(Paint.Style.STROKE);
             mOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
+            mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
                     mOptions), mColor);
             mPaintOption = new Paint();
         }
@@ -83,7 +82,7 @@ public class DouaLiveWallpaper extends WallpaperService {
                 mBackground.recycle();
                 mBackground = null;
             }
-            Bitmap btm = BitmapFactory.decodeFile(mFilesDir + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
+            Bitmap btm = BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
                     mOptions);
             if (btm != null) {
                 mBackground = Bitmap.createScaledBitmap(btm, width, height, true);
@@ -130,7 +129,7 @@ public class DouaLiveWallpaper extends WallpaperService {
                 if (mScreenWidth > 0 && mScreenWidth > 0 && Constants.ifBackground_changed && Constants.nb_incrementation_after_change == 5) {
                     Constants.nb_incrementation_after_change = 0;
                     Constants.ifBackground_changed = false;
-                    mBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
+                    mBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
                             mOptions), mScreenWidth, mScreenHeight, true);
                 }
                 mTouchX = event.getX();
@@ -139,7 +138,7 @@ public class DouaLiveWallpaper extends WallpaperService {
                     mLogoDoua.recycle();
                 }
                 mColor = ViewModel.Current.sharedPrefsUtils.GetSetting("DouaLwpColor", -4522170);
-                mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(mFilesDir + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
+                mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
                         mOptions), mColor);
                 if (mCurrentPhoto == 58) {
                     mCurrentPhoto = 0;

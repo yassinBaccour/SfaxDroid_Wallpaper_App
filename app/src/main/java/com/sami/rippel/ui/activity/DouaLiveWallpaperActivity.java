@@ -95,7 +95,7 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
         mFab.setEnabled(false);
         mFab.setOnClickListener(e -> openLiveWallpapersDoua());
         RetryPolicy mRetryPolicy = new DefaultRetryPolicy();
-        File mFilesDir = getExternalFilesDir("");
+        File mFilesDir = ViewModel.Current.fileUtils.getTemporaryDouaDir();
         mZipFile = new File(mFilesDir, Constants.PNG_ZIP_FILE_NAME);
         mBackgroundFile = new File(mFilesDir, Constants.DOUA_PNG_BACKFROUND_FILE_NAME);
         mZipDestination = new File(mFilesDir, "DouaFolder");
@@ -233,11 +233,11 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
         @Override
         public void onDownloadFailed(DownloadRequest request, int errorCode, String errorMessage) {
             final int id = request.getDownloadId();
-            if (id == mDownloadId1) {
+            if (id == mDownloadId1  && mProgress1Txt != null && mProgress1 != null) {
                 mProgress1Txt.setText(" Failed: ErrorCode " + errorCode + ", " + errorMessage);
                 mProgress1.setProgress(0);
             }
-            if (id == mDownloadId2) {
+            if (id == mDownloadId2 && mProgress1Txt != null && mProgress1 != null) {
                 mProgress1Txt.setText(" Failed: ErrorCode " + errorCode + ", " + errorMessage);
                 mProgress1.setProgress(0);
             }
@@ -246,12 +246,12 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
         @Override
         public void onProgress(DownloadRequest request, long totalBytes, long downloadedBytes, int progress) {
             int id = request.getDownloadId();
-            if (id == mDownloadId1) {
+            if (id == mDownloadId1 && mProgress1Txt != null && mProgress1 != null) {
                 mProgress1Txt.setText(progress + "%" + "  "
                         + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
                 mProgress1.setProgress(progress);
             }
-            if (id == mDownloadId2) {
+            if (id == mDownloadId2 && mProgress1Txt != null && mProgress1 != null) {
                 mProgress1Txt.setText(progress + "%" + "  "
                         + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
                 mProgress1.setProgress(progress);

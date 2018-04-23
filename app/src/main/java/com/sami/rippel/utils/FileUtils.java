@@ -261,6 +261,16 @@ public class FileUtils {
         return temporaryDir;
     }
 
+    private File getDouaFileDir()
+    {
+        File temporaryDir = new File(mContext.getFilesDir(),
+                mContext.getString(R.string.app_namenospace) + "/temp");
+        if (!temporaryDir.exists()) {
+            temporaryDir.mkdirs();
+        }
+        return temporaryDir;
+    }
+
     public File getTemporaryFile(String fileName) {
         return new File(getTemporaryDir(), fileName);
     }
@@ -284,13 +294,12 @@ public class FileUtils {
         return zipDestination;
     }
 
-    private File getTemporaryDouaDir() {
-        File temporaryDir = new File(getTemporaryDir(),
-                mContext.getString(R.string.app_namenospace) + "/temp");
-        if (!temporaryDir.exists()) {
-            temporaryDir.mkdirs();
+    public File getTemporaryDouaDir() {
+        File zipDestination = new File(getTemporaryDir(), Constants.KEY_DOUA_FOLDER_CONTAINER);
+        if (!zipDestination.exists()) {
+            zipDestination.mkdirs();
         }
-        return temporaryDir;
+        return zipDestination;
     }
 
     private void scanFile(File file) {
