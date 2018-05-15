@@ -86,10 +86,6 @@ dependencies {
     implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
-    implementation("com.google.android.gms:play-services-analytics:$rootProject.ext.analyticsVersion")
-            {
-                exclude module: 'play-services-ads'
-            }
     implementation("com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit2Version")
             {
                 exclude group: 'xpp3', module: 'xpp3'
@@ -119,5 +115,4 @@ repositories {
     jcenter()
 }
 
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'me.tatarka.retrolambda'

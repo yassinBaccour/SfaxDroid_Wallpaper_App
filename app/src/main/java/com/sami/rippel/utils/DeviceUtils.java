@@ -30,8 +30,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.labs.framecollage.ChooseActivity;
 import com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaper;
@@ -82,13 +80,6 @@ public class DeviceUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void trackAction(Tracker mTracker, String category, String name) {
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory(category)
-                .setAction(name)
-                .build());
     }
 
     private boolean appInstalledOrNot(String uri) {

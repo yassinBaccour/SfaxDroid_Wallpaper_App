@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sami.rippel.allah">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.sami.rippel.allah">
 
     <uses-feature android:glEsVersion="0x00020000" />
     <uses-feature android:name="android.software.live_wallpaper" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+            android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+            tools:node="replace" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission android:name="android.permission.BIND_WALLPAPER" />
@@ -22,141 +23,113 @@
     <uses-permission android:name="android.permission.REAL_GET_TASKS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
-
     <application
-        android:name=".WallpaperApplication"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:largeHeap="true"
-        android:theme="@style/AppTheme">
+            android:name=".WallpaperApplication"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:largeHeap="true"
+            android:theme="@style/AppTheme">
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/provider_paths" />
         </provider>
 
-        <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
-        <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
-
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <activity
-            android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
-            android:theme="@android:style/Theme" />
-
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent" />
-
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme" />
-
-
         <meta-data
-            android:name="net.hockeyapp.android.appIdentifier"
-            android:value="${HOCKEYAPP_APP_ID}" />
+                android:name="net.hockeyapp.android.appIdentifier"
+                android:value="${HOCKEYAPP_APP_ID}" />
 
         <activity
-            android:name="com.sami.rippel.livewallpapers.lwpskyview.WallpaperPreferenceActivity"
-            android:exported="true"
-            android:label="@string/app_name" />
+                android:name="com.sami.rippel.livewallpapers.lwpskyview.WallpaperPreferenceActivity"
+                android:exported="true"
+                android:label="@string/app_name" />
 
         <service
-            android:name="com.sami.rippel.livewallpapers.lwpskyview.RajawaliExampleWallpaper"
-            android:enabled="true"
-            android:label="Wallpaper Example"
-            android:permission="android.permission.BIND_WALLPAPER">
+                android:name="com.sami.rippel.livewallpapers.lwpskyview.RajawaliExampleWallpaper"
+                android:enabled="true"
+                android:label="Wallpaper Example"
+                android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
 
             <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/rajawali_example_wallpaper" />
+                    android:name="android.service.wallpaper"
+                    android:resource="@xml/rajawali_example_wallpaper" />
         </service>
 
         <activity
-            android:name="com.sami.rippel.ui.activity.DetailsActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/SetWall"
-            android:screenOrientation="portrait" />
+                android:name="com.sami.rippel.ui.activity.DetailsActivity"
+                android:hardwareAccelerated="true"
+                android:label="@string/SetWall"
+                android:screenOrientation="portrait" />
 
         <meta-data
-            android:name="com.sami.rippel.views.GlideConfiguration"
-            android:value="GlideModule" />
+                android:name="com.sami.rippel.views.GlideConfiguration"
+                android:value="GlideModule" />
 
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
         <service
-            android:name="com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaper"
-            android:label="@string/lwp_name"
-            android:permission="android.permission.BIND_WALLPAPER">
+                android:name="com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaper"
+                android:label="@string/lwp_name"
+                android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
 
             <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/wallpaper" />
+                    android:name="android.service.wallpaper"
+                    android:resource="@xml/wallpaper" />
         </service>
         <service
-            android:name="com.sami.rippel.livewallpapers.lwpdouachanged.DouaLiveWallpaper"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
+                android:name="com.sami.rippel.livewallpapers.lwpdouachanged.DouaLiveWallpaper"
+                android:icon="@mipmap/ic_launcher"
+                android:label="@string/app_name"
+                android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
 
             <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/livewallpaper" />
+                    android:name="android.service.wallpaper"
+                    android:resource="@xml/livewallpaper" />
         </service>
-
         <service
-            android:name="com.sami.rippel.livewallpapers.nameofallah2d.NameOfAllah2DLwp"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
+                android:name="com.sami.rippel.livewallpapers.nameofallah2d.NameOfAllah2DLwp"
+                android:icon="@mipmap/ic_launcher"
+                android:label="@string/app_name"
+                android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
-
             <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/livewallpaper" />
+                    android:name="android.service.wallpaper"
+                    android:resource="@xml/livewallpaper" />
         </service>
-
 
         <activity
-            android:name="com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaperSettings"
-            android:label="Settings">
+                android:name="com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaperSettings"
+                android:label="Settings">
             <intent-filter>
                 <category android:name="android.intent.category.PREFERENCE" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sami.rippel.ui.activity.GalleryWallpaperActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/gallery"
-            android:screenOrientation="portrait" />
+                android:name="com.sami.rippel.ui.activity.GalleryWallpaperActivity"
+                android:hardwareAccelerated="true"
+                android:label="@string/gallery"
+                android:screenOrientation="portrait" />
         <activity
-            android:name="com.sami.rippel.ui.activity.ViewPagerWallpaperActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+                android:name="com.sami.rippel.ui.activity.ViewPagerWallpaperActivity"
+                android:hardwareAccelerated="true"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -164,35 +137,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sami.rippel.labs.framecollage.ChooseActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+                android:name="com.sami.rippel.labs.framecollage.ChooseActivity"
+                android:hardwareAccelerated="true"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait" />
         <activity
-            android:name="com.sami.rippel.labs.framecollage.PreviewActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+                android:name="com.sami.rippel.labs.framecollage.PreviewActivity"
+                android:hardwareAccelerated="true"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait" />
         <activity
-            android:name="com.sami.rippel.labs.stickers.StickersLabActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape" />
+                android:name="com.sami.rippel.labs.stickers.StickersLabActivity"
+                android:hardwareAccelerated="true"
+                android:label="@string/app_name"
+                android:screenOrientation="landscape" />
         <activity android:name="com.sami.rippel.ui.activity.DouaLiveWallpaperActivity" />
         <activity
-            android:name="com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity"
-            android:theme="@style/AppTheme" />
+                android:name="com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity"
+                android:theme="@style/AppTheme" />
 
         <service
-            android:name="com.sami.rippel.livewallpapers.lwptimer.RetrieveWallpaperService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
+                android:name="com.sami.rippel.livewallpapers.lwptimer.RetrieveWallpaperService"
+                android:exported="true"
+                android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <activity android:name="com.sami.rippel.ui.activity.AboutActivty" />
 
         <service
-            android:name="com.sami.rippel.labs.basmala.LockService"
-            android:permission="android.permission.READ_PHONE_STATE">
+                android:name="com.sami.rippel.labs.basmala.LockService"
+                android:permission="android.permission.READ_PHONE_STATE">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -208,15 +181,15 @@
         </receiver>
 
         <activity
-            android:name="com.sami.rippel.labs.basmala.ActivityBasmalaScreen"
-            android:label="Besmellah"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+                android:name="com.sami.rippel.labs.basmala.ActivityBasmalaScreen"
+                android:label="Besmellah"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name="com.sami.rippel.ui.activity.NameOfAllah2DLiveWallpaperActivity"
-            android:label="Nameofallah"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+                android:name="com.sami.rippel.ui.activity.NameOfAllah2DLiveWallpaperActivity"
+                android:label="Nameofallah"
+                android:screenOrientation="portrait"
+                android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 </manifest>

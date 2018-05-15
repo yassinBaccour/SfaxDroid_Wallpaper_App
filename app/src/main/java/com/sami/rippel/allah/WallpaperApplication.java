@@ -1,20 +1,17 @@
 package com.sami.rippel.allah;
 
-import android.app.Activity;
-import android.support.multidex.MultiDexApplication;
-
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
 import com.sami.rippel.model.MyService;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.utils.BitmapUtils;
-import com.sami.rippel.utils.SharedPrefsUtils;
-import com.sami.rippel.utils.FileUtils;
 import com.sami.rippel.utils.DeviceUtils;
+import com.sami.rippel.utils.FileUtils;
+import com.sami.rippel.utils.SharedPrefsUtils;
+
+import android.app.Activity;
+import android.support.multidex.MultiDexApplication;
 
 import java.util.HashSet;
 import java.util.Set;
-//import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by yassin baccour on 15/05/2016.
@@ -23,20 +20,13 @@ import java.util.Set;
 public class WallpaperApplication extends MultiDexApplication {
 
     private static WallpaperApplication instance;
-    private Tracker mTracker;
+
     private Set<Activity> allActivities;
 
     public static synchronized WallpaperApplication getInstance() {
         return instance;
     }
 
-    synchronized public Tracker getDefaultTracker() {
-        if (mTracker == null) {
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            mTracker = analytics.newTracker(R.xml.global_tracker);
-        }
-        return mTracker;
-    }
 
     @Override
     public void onCreate() {
@@ -53,7 +43,6 @@ public class WallpaperApplication extends MultiDexApplication {
     public void onTerminate() {
         super.onTerminate();
         ViewModel.Current = null;
-        mTracker = null;
     }
 
     public void InitCanary() {

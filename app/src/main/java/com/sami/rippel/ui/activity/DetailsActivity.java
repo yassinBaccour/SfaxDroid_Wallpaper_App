@@ -1,5 +1,25 @@
 package com.sami.rippel.ui.activity;
 
+import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.flipboard.bottomsheet.commons.MenuSheetView;
+import com.flipboard.bottomsheet.commons.MenuSheetView.OnMenuItemClickListener;
+import com.sami.rippel.allah.R;
+import com.sami.rippel.allah.WallpaperApplication;
+import com.sami.rippel.base.BaseActivity;
+import com.sami.rippel.model.Constants;
+import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.entity.ActionTypeEnum;
+import com.sami.rippel.model.entity.IntentTypeEnum;
+import com.sami.rippel.model.entity.WallpaperObject;
+import com.sami.rippel.model.listner.DeviceListner;
+import com.sami.rippel.model.listner.WallpaperListner;
+import com.sami.rippel.presenter.Contract.DetailContract;
+import com.sami.rippel.presenter.DetailPresenter;
+import com.sami.rippel.ui.adapter.DetailPagerAdapter;
+import com.soundcloud.android.crop.Crop;
+
+import net.hockeyapp.android.CrashManager;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -20,27 +40,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.flipboard.bottomsheet.commons.MenuSheetView;
-import com.flipboard.bottomsheet.commons.MenuSheetView.OnMenuItemClickListener;
-import com.google.android.gms.analytics.Tracker;
-import com.sami.rippel.allah.R;
-import com.sami.rippel.allah.WallpaperApplication;
-import com.sami.rippel.base.BaseActivity;
-import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.entity.ActionTypeEnum;
-import com.sami.rippel.model.entity.IntentTypeEnum;
-import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.model.listner.DeviceListner;
-import com.sami.rippel.model.listner.WallpaperListner;
-import com.sami.rippel.presenter.Contract.DetailContract;
-import com.sami.rippel.presenter.DetailPresenter;
-import com.sami.rippel.ui.adapter.DetailPagerAdapter;
-import com.soundcloud.android.crop.Crop;
-
-import net.hockeyapp.android.CrashManager;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -54,27 +53,36 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     @Nullable
     @BindView(R.id.toolbar)
     public Toolbar mToolbar;
+
     @Nullable
     @BindView(R.id.viewpager)
     public ViewPager mViewPager;
+
     @Nullable
     @BindView(R.id.progressBar)
     public ProgressBar mProgressBar;
+
     @Nullable
     @BindView(R.id.bottomsheetLayout)
     public BottomSheetLayout mBottomSheet;
+
     @Nullable
     @BindView(R.id.rootLayout)
     public CoordinatorLayout mRootLayout;
+
     @Nullable
     @BindView(R.id.fab)
     public FloatingActionButton mFab;
 
-    private Tracker mTracker;
+
     private int mPos;
+
     private String mFrom = "";
+
     private boolean mFromRipple = false;
+
     private DetailPagerAdapter mAdapter;
+
     private ArrayList<WallpaperObject> mPagerData = new ArrayList<>();
 
     @Override
@@ -86,7 +94,6 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
         WallpaperApplication application = (WallpaperApplication) getApplication();
-        mTracker = application.getDefaultTracker();
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         ViewModel.Current.fileUtils.SetListner(this);
         ViewModel.Current.device.setmDeviceListner(this);
@@ -97,8 +104,9 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         setFabImageResource();
         mFab.setOnClickListener(e -> fabClick());
         setupViewPager();
-        if (Build.VERSION.SDK_INT >= 23)
+        if (Build.VERSION.SDK_INT >= 23) {
             ViewModel.Current.device.checkPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
     }
 
     public void initToolbar() {
@@ -231,20 +239,27 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     @Override
     public void onSaveTempsDorAndDoAction(Boolean aBoolean, ActionTypeEnum actionToDo) {
         if (aBoolean) {
-            if (actionToDo == ActionTypeEnum.OPEN_NATIV_CHOOSER)
+            if (actionToDo == ActionTypeEnum.OPEN_NATIV_CHOOSER) {
                 shareAll();
-            if (actionToDo == ActionTypeEnum.SHARE_FB)
+            }
+            if (actionToDo == ActionTypeEnum.SHARE_FB) {
                 createIntent(IntentTypeEnum.FACEBOOKINTENT);
-            if (actionToDo == ActionTypeEnum.SHARE_INSTA)
+            }
+            if (actionToDo == ActionTypeEnum.SHARE_INSTA) {
                 createIntent(IntentTypeEnum.INTAGRAMINTENT);
-            if (actionToDo == ActionTypeEnum.SEND_LWP)
+            }
+            if (actionToDo == ActionTypeEnum.SEND_LWP) {
                 sendToRippleLwp();
-            if (actionToDo == ActionTypeEnum.CROP)
+            }
+            if (actionToDo == ActionTypeEnum.CROP) {
                 beginCrop();
-            if (actionToDo == ActionTypeEnum.MOVE_PERMANENT_DIR)
+            }
+            if (actionToDo == ActionTypeEnum.MOVE_PERMANENT_DIR) {
                 mPresenter.saveFileToPermanentGallery(getCurrentUrl(), this);
-            if (actionToDo == ActionTypeEnum.DELETE_CURRENT_PICTURE)
+            }
+            if (actionToDo == ActionTypeEnum.DELETE_CURRENT_PICTURE) {
                 deleteCurrentPicture();
+            }
             if (actionToDo == ActionTypeEnum.JUST_WALLPAPER) {
                 mPresenter.setAsWallpaper(getCurrentUrl());
             }
@@ -306,7 +321,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent result) {
+            Intent result) {
         if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
             beginCrop();
         } else if (requestCode == Crop.REQUEST_CROP) {
@@ -352,9 +367,9 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
-                    if (aBoolean)
+                    if (aBoolean) {
                         beginCrop();
-                    else {
+                    } else {
                         finish();
                     }
                 }));
@@ -415,19 +430,20 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     @Override
     public void showLoading() {
-        if (mProgressBar != null)
+        if (mProgressBar != null) {
             mProgressBar.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
     public void hideLoading() {
-        if (mProgressBar != null)
+        if (mProgressBar != null) {
             mProgressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void showADS() {
-        ViewModel.Current.device.trackAction(mTracker, "ADS", "ShowAdsAfterImageAction");
     }
 
     @Override

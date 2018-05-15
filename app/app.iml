@@ -32,7 +32,6 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/dev/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/dev/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/dev/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/google-services/dev/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/dev/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/dev/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/devDebug/res" type="java-resource" />
@@ -71,13 +70,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/dev/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/dev/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/dev/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDev/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDev/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDev/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDev/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDev/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDev/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testDev/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDev/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDev/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDev/assets" type="java-test-resource" />
@@ -85,6 +77,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDev/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDev/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDev/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDev/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDev/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDev/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDev/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDev/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDev/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testDev/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -160,19 +159,13 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.squareup.retrofit2:converter-gson:2.3.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-27.0.2" level="project" />
-    <orderEntry type="library" name="__local_aars__:D.\Dropbox\Android\Sfaxdroid Account\AllahWaterRipple\app\libs\StartAppInApp-3.8.2.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-tagmanager-v4-impl-10.2.4" level="project" />
     <orderEntry type="library" name="com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0@jar" level="project" />
     <orderEntry type="library" name="com.github.QuadFlask:colorpicker-0.0.13" level="project" />
-    <orderEntry type="library" name="com.google.firebase:firebase-iid-10.2.4" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-base-10.2.4" level="project" />
-    <orderEntry type="library" name="com.google.firebase:firebase-analytics-impl-10.2.4" level="project" />
-    <orderEntry type="library" name="org.reactivestreams:reactive-streams:1.0.1@jar" level="project" />
+    <orderEntry type="library" name="io.reactivex.rxjava2:rxjava:2.1.9@jar" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:runtime-1.0.3" level="project" />
     <orderEntry type="library" name="com.android.support:support-vector-drawable-27.0.2" level="project" />
-    <orderEntry type="library" name="io.reactivex.rxjava2:rxjava:2.1.7@jar" level="project" />
+    <orderEntry type="library" name="__local_aars__:/home/yassine/MyYa/WaterRipple/app/libs/main.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.github.medyo:android-about-page-1.2.2" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-analytics-impl-10.2.4" level="project" />
     <orderEntry type="library" name="com.android.support:cardview-v7-27.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="org.hamcrest:hamcrest-core:1.3@jar" level="project" />
     <orderEntry type="library" name="com.squareup.okhttp3:okhttp:3.8.0@jar" level="project" />
@@ -181,25 +174,19 @@
     <orderEntry type="library" name="com.android.support:support-core-ui-27.0.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-27.0.2" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:disklrucache:4.4.0@jar" level="project" />
-    <orderEntry type="library" name="__local_aars__:D.\Dropbox\Android\Sfaxdroid Account\AllahWaterRipple\app\libs\main.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-tasks-10.2.4" level="project" />
     <orderEntry type="library" name="com.android.support:support-fragment-27.0.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-27.0.2" level="project" />
-    <orderEntry type="library" name="com.google.firebase:firebase-common-10.2.4" level="project" />
-    <orderEntry type="library" name="com.google.firebase:firebase-core-10.2.4" level="project" />
-    <orderEntry type="library" name="com.android.support:multidex-1.0.3" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-27.0.2" level="project" />
+    <orderEntry type="library" name="com.android.support:multidex-1.0.3" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:gifdecoder:4.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-27.0.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-annotations:27.0.2@jar" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:annotations:4.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:design-27.0.2" level="project" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12@jar" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-analytics-10.2.4" level="project" />
     <orderEntry type="library" name="com.flipboard:bottomsheet-commons-1.5.3" level="project" />
-    <orderEntry type="library" name="com.google.firebase:firebase-analytics-10.2.4" level="project" />
-    <orderEntry type="library" name="com.flipboard:bottomsheet-core-1.5.3" level="project" />
     <orderEntry type="library" name="com.android.support:transition-27.0.2" level="project" />
+    <orderEntry type="library" name="com.flipboard:bottomsheet-core-1.5.3" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:glide:4.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:recyclerview-v7-27.0.2" level="project" />
     <orderEntry type="library" name="com.jakewharton:butterknife-annotations:8.5.1@jar" level="project" />
@@ -207,15 +194,15 @@
     <orderEntry type="library" name="io.github.kobakei:ratethisapp-1.2.0" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.7@jar" level="project" />
     <orderEntry type="library" name="com.squareup.okio:okio:1.13.0@jar" level="project" />
-    <orderEntry type="library" name="__local_aars__:D.\Dropbox\Android\Sfaxdroid Account\AllahWaterRipple\app\libs\rajawalilib.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:retrofit:2.3.0@jar" level="project" />
     <orderEntry type="library" name="com.squareup.retrofit2:converter-simplexml:2.3.0@jar" level="project" />
     <orderEntry type="library" name="org.simpleframework:simple-xml:2.7.1@jar" level="project" />
     <orderEntry type="library" name="com.mani:ThinDownloadManager-1.2.5" level="project" />
+    <orderEntry type="library" name="__local_aars__:/home/yassine/MyYa/WaterRipple/app/libs/rajawalilib.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:common:1.0.3@jar" level="project" />
     <orderEntry type="library" name="com.tbruyelle.rxpermissions2:rxpermissions-0.9.4" level="project" />
-    <orderEntry type="library" name="io.reactivex.rxjava2:rxandroid-2.0.1" level="project" />
-    <orderEntry type="library" name="com.google.android.gms:play-services-basement-10.2.4" level="project" />
+    <orderEntry type="library" name="io.reactivex.rxjava2:rxandroid-2.0.2" level="project" />
+    <orderEntry type="library" name="org.reactivestreams:reactive-streams:1.0.2@jar" level="project" />
     <orderEntry type="library" name="org.rajawali3d:rajawali-1.1.346-SNAPSHOT" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-27.0.2" level="project" />
     <orderEntry type="library" name="com.soundcloud.android:android-crop-1.0.1" level="project" />

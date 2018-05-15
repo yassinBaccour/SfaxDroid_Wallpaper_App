@@ -13,7 +13,6 @@ buildscript {
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.7.0'
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 
@@ -52,6 +51,6 @@ ext {
     simplexmlConverterVersion = '2.3.0'
     converterGsonVersion = '2.3.0'
     rxjavaVersion = '2.1.7'
-    rxandroidVersion = '2.0.1'
+    rxandroidVersion = '2.0.2'
     retrofitRxAdapterVersion = '1.0.0'
 }
