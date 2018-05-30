@@ -12,7 +12,7 @@ buildscript {
 
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.7.0'
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
     }
 }
 
@@ -32,9 +32,9 @@ allprojects {
 
 ext {
     minSdkVersion = 15
-    targetSdkVersion = 24
+    targetSdkVersion = 22
     compileSdkVersion = 27
-    buildToolsVersion = '27.0.2'
+    buildToolsVersion = '27.0.3'
     supportVersion = '27.0.2'
     glideVersion = '4.4.0'
     glideAnnotationVersion = '4.4.0'
