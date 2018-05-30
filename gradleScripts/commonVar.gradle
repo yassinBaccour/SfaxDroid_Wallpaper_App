@@ -1,4 +1,4 @@
 ext {
-    appVersionCode = 62
-    appVersionName = "6.8"
+    appVersionCode = 63
+    appVersionName = "6.9"
 }
