@@ -12,7 +12,7 @@ buildscript {
 
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.7.0'
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.1.4'
     }
 }
 
@@ -34,8 +34,8 @@ ext {
     minSdkVersion = 15
     targetSdkVersion = 22
     compileSdkVersion = 27
-    buildToolsVersion = '27.0.3'
-    supportVersion = '27.0.2'
+    buildToolsVersion = '28.0.2'
+    supportVersion = '27.1.1'
     glideVersion = '4.4.0'
     glideAnnotationVersion = '4.4.0'
     bottomsheetVersion = '1.5.3'
@@ -51,6 +51,6 @@ ext {
     simplexmlConverterVersion = '2.3.0'
     converterGsonVersion = '2.3.0'
     rxjavaVersion = '2.1.7'
-    rxandroidVersion = '2.0.1'
+    rxandroidVersion = '2.0.2'
     retrofitRxAdapterVersion = '1.0.0'
 }
