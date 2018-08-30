@@ -3,6 +3,4 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:thumbnail="@mipmap/ic_launcher"
     android:author="@string/lwp_author"
-    android:description="@string/lwp_desc"
-    android:settingsActivity="com.sami.rippel.livewallpapers.rajawliwallpaper.WallpaperPreferenceActivity"
-    />
+    android:description="@string/lwp_desc" />

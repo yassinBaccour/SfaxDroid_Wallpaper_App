@@ -58,7 +58,6 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
                 .subscribe(setSuccess -> {
                     if (setSuccess) {
                         mView.showSnackMsg(context.getString(R.string.detail_snack_set_success));
-                        mView.showADS();
                     } else {
                         mView.showSnackMsg(context.getString(R.string.detail_snack_set_failure));
                     }

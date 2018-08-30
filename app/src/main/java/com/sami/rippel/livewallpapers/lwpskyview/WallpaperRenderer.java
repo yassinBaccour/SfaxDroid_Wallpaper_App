@@ -37,7 +37,6 @@ public class WallpaperRenderer extends Renderer {
                 int min_distance = 100;
                 if (Math.abs(deltaX) > Math.abs(deltaY)) {
                     if (Math.abs(deltaX) > min_distance) {
-                        // left or right
                         if (deltaX < 0) {
                             axe = "LefttoRigh";
                         }
@@ -46,10 +45,8 @@ public class WallpaperRenderer extends Renderer {
                         }
                     }
                 }
-                //VERTICAL SCROLL
                 else {
                     if (Math.abs(deltaY) > min_distance) {
-                        // top or down
                         if (deltaY < 0) {
                             axe = "TopToBottom";
                         }
@@ -87,25 +84,9 @@ public class WallpaperRenderer extends Renderer {
 
     @Override
     protected void initScene() {
-        //Material mAtlasMaterial = new Material();
         try {
-            getCurrentScene().setSkybox(R.drawable.night); //FIXME BITMAP TO TEXTURE
+            getCurrentScene().setSkybox(R.drawable.night);
         } catch (Exception ignored) {
         }
-        /*
-        try {
-            Bitmap vvv = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.n_70);
-        int Texture [] = { R.drawable.n_70 };
-        mAtlasMaterial.addTexture(new Texture("eee", vvv));
-        mAtlasMaterial.setColorInfluence(0);
-        } catch (ATexture.TextureException e) {
-            e.printStackTrace();
-        }
-        Plane plane2 = new Plane();
-        plane2.setTransparent(true);
-        plane2.setMaterial(mAtlasMaterial);
-        plane2.setPosition(.2f, .2f, 2);
-        getCurrentScene().addChild(plane2);
-        */
     }
 }

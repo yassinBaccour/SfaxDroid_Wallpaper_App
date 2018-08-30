@@ -10,7 +10,7 @@ import org.rajawali3d.wallpaper.Wallpaper;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class RajawaliExampleWallpaper extends Wallpaper {
+public class SkyNameOfAllahLiveWallpaper extends Wallpaper {
 
     private ISurfaceRenderer mRenderer;
 

@@ -33,7 +33,6 @@ public class IslamicWallpaperRenderer extends RajawaliRenderer {
     private TouchRippleFilter mFilter;
     private long frameCount;
     private Point mScreenSize;
-    private boolean changingBG = false;
     private boolean enableSound = false;
     private float rippleSize = 96;
     private float rippleSpeed = 4;
@@ -49,11 +48,11 @@ public class IslamicWallpaperRenderer extends RajawaliRenderer {
 
     private void InitSound(Context context) {
         try {
-            AudioManager amanager = (AudioManager) context
+            AudioManager audioManager = (AudioManager) context
                     .getSystemService(Context.AUDIO_SERVICE);
-            int maxVolume = amanager
+            int maxVolume = audioManager
                     .getStreamMaxVolume(AudioManager.STREAM_ALARM);
-            amanager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
+            audioManager.setStreamVolume(AudioManager.STREAM_ALARM, maxVolume, 0);
             mp = new MediaPlayer();
             mp.setAudioStreamType(AudioManager.STREAM_ALARM);
             AssetFileDescriptor afd = context.getResources().openRawResourceFd(
@@ -108,6 +107,8 @@ public class IslamicWallpaperRenderer extends RajawaliRenderer {
                             }
                         }
                     }
+                }, throwable -> {
+
                 });
     }
 
@@ -148,7 +149,7 @@ public class IslamicWallpaperRenderer extends RajawaliRenderer {
     @Override
     public void onTouchEvent(MotionEvent event) {
         try {
-            if (!changingBG && event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 mFilter.addTouch(event.getX() / mScreenSize.x,
                         1.0f - (event.getY() / mScreenSize.y),
                         frameCount * .05f);

@@ -39,7 +39,7 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewModel.Current.registerOnStateChangeListener(this);
         mFragment = this;
@@ -135,11 +135,6 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
 
     @Override
     public void hideLoading() {
-
-    }
-
-    @Override
-    public void showADS() {
 
     }
 }

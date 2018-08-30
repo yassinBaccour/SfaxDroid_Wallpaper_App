@@ -40,7 +40,6 @@ import static com.sami.rippel.model.ViewModel.Current;
 
 public class GalleryWallpaperActivity extends SimpleActivity implements LwpListner, OnStateChangeListener {
 
-    public static boolean isAdsShowedFromRipple = false;
     private GalleryAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
@@ -68,11 +67,8 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
                             getApplicationContext(),
                             (view, position) -> {
                                 if (mLwpName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP)) {
-                                    Intent intent = new Intent(
-                                            GalleryWallpaperActivity.this,
-                                            DetailsActivity.class);
-                                    intent.putParcelableArrayListExtra(
-                                            Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
+                                    Intent intent = new Intent(GalleryWallpaperActivity.this, DetailsActivity.class);
+                                    intent.putParcelableArrayListExtra(Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
                                     intent.putExtra(Constants.DETAIL_IMAGE_POS, position);
                                     intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_ADDED_LIST_TIMER_LWP);
                                     startActivityForResult(intent, 90);
@@ -112,9 +108,9 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
     protected void initEventAndData() {
         Current.fileUtils.SetLwpListner(this);
         ViewModel.Current.registerOnStateChangeListener(this);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mRecyclerView = (RecyclerView) findViewById(R.id.list);
+        mToolbar = findViewById(R.id.toolbar);
+        mProgressBar = findViewById(R.id.progressBar);
+        mRecyclerView = findViewById(R.id.list);
         mRecyclerView.setLayoutManager(new GridLayoutManager(
                 getApplicationContext(), 3));
         mRecyclerView.setHasFixedSize(true);
@@ -126,16 +122,12 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
 
     public void fillData() {
         if (mPos != null && !mPos.isEmpty() && Current.isWallpapersLoaded()) {
-            //Fixme retrolambda limitation
-            //WallpaperObject wallpaper = Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("ImageCategoryNew")).findFirst().orElse(null).getGetWallpapersList().stream().filter(x -> x.getName().equals(mPos)).findFirst().orElse(null);
             WallpaperObject wallpaper = ViewModel.Current.GetWallpaperFromCategoryNameAndPos("ImageCategoryNew", mPos);
             listFileToSendToDetailViewPager.clear();
-            listFileToSendToDetailViewPager = new ArrayList<WallpaperObject>(wallpaper.getSubWallpapersCategoryList());
+            listFileToSendToDetailViewPager = new ArrayList<>(wallpaper.getSubWallpapersCategoryList());
         } else if (mLwpName != null && !mLwpName.isEmpty() && Current.isWallpapersLoaded()) {
-            //Fixme retrolambda not support steam only in android 7 or above
-            //WallpaperCategory wallpaperCategory = Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals(getNameFind())).findFirst().orElse(null);
             listFileToSendToDetailViewPager.clear();
-            listFileToSendToDetailViewPager = new ArrayList<WallpaperObject>(getWallpaperCategory().getGetWallpapersList());
+            listFileToSendToDetailViewPager = new ArrayList<>(getWallpaperCategory().getGetWallpapersList());
         }
         if (Current.device.isConnected(getApplicationContext()) && listFileToSendToDetailViewPager != null && listFileToSendToDetailViewPager.size() > 0 && Current.isWallpapersLoaded()) {
             mAdapter = new GalleryAdapter(GalleryWallpaperActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.GALLERY_CELL);
@@ -200,9 +192,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
                                             Intent intent = this.getIntent();
                                             this.setResult(RESULT_OK, intent);
                                             intent.putExtra("urltoopen", listFileToSendToDetailViewPager.get(position).getUrl());
-                                            //intent.putExtra("type", listFileToSendToDetailViewPager.get(position).getName());
                                             intent.putExtra("type", Constants.SQUARE_TYPE);
-
                                             finish();
                                             break;
                                         }
@@ -244,10 +234,10 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
             myFileList = Current.fileUtils.getPermanentDirListFiles();
         }
         if (myFileList != null) {
-            for (File f : myFileList) {
+            for (File file : myFileList) {
                 WallpaperObject imageModel = new WallpaperObject();
-                imageModel.setName("Image " + f.getName());
-                imageModel.setUrl(f.getPath());
+                imageModel.setName("Image " + file.getName());
+                imageModel.setUrl(file.getPath());
                 listFileToSendToDetailViewPager.add(imageModel);
             }
             mAdapter = new GalleryAdapter(GalleryWallpaperActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.BITMAP_CELL);

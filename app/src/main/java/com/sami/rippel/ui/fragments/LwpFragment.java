@@ -18,12 +18,12 @@ import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.SimpleFragment;
-import com.sami.rippel.livewallpapers.lwpskyview.RajawaliExampleWallpaper;
+import com.sami.rippel.livewallpapers.lwpskyview.SkyNameOfAllahLiveWallpaper;
 import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.AdsListener;
-import com.sami.rippel.ui.activity.AboutActivty;
+import com.sami.rippel.ui.activity.AboutActivity;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
 import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
 
@@ -77,20 +77,13 @@ public class LwpFragment extends SimpleFragment {
                 if (mListener != null) {
                     mListener.onTrackAction("LwpFragment", "OpenSkyBox");
                 }
-                ViewPagerWallpaperActivity.isAdsShow = true;
 
                 Intent intent = new Intent(
                         WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
                 intent.putExtra(
                         WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
                         new ComponentName(getActivity(),
-                                RajawaliExampleWallpaper.class));
-                 /*
-                Intent intent = new Intent(
-                        getActivity(),
-                        GalleryWallpaperActivity.class);
-                intent.putExtra("LWP", "Skybox");
-                 */
+                                SkyNameOfAllahLiveWallpaper.class));
                 startActivity(intent);
 
             } catch (Exception e) {
@@ -125,7 +118,8 @@ public class LwpFragment extends SimpleFragment {
 
         if (ViewModel.Current.device.getScreenWidthPixels() < 1000
                 && ViewModel.Current.device.getScreenHeightPixels() < 1700) {
-            mCardViewSkyBox.setVisibility(View.GONE);
+            //FIXME TODO
+            mCardViewSkyBox.setVisibility(View.VISIBLE);
         }
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -149,7 +143,7 @@ public class LwpFragment extends SimpleFragment {
         mTextViewAbout.setOnClickListener(v -> {
             Intent intent = new Intent(
                     getActivity(),
-                    AboutActivty.class);
+                    AboutActivity.class);
             startActivity(intent);
         });
 

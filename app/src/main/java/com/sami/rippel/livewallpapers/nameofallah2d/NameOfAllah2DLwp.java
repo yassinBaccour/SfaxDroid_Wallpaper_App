@@ -163,7 +163,7 @@ public class NameOfAllah2DLwp extends WallpaperService {
         public void onTouchEvent(MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 Constants.nb_incrementation_after_change = Constants.nb_incrementation_after_change + 1;
-                if (mScreenWidth > 0 && mScreenWidth > 0
+                if (mScreenWidth > 0
                         && Constants.ifBackground_changed
                         && Constants.nb_incrementation_after_change == 5) {
                     Constants.nb_incrementation_after_change = 0;

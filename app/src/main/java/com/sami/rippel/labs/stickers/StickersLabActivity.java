@@ -211,7 +211,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     @Override
     protected void initEventAndData() {
-
+//Nothing
     }
 
     public void startCameraActivity() throws IOException {
@@ -615,7 +615,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     private void setupViewPager() {
         StickersFragmentPagerAdapter mAdapterViewPager =
-                new StickersFragmentPagerAdapter(getSupportFragmentManager(), this, this);
+                new StickersFragmentPagerAdapter(getSupportFragmentManager(), this);
         mViewPager.setAdapter(mAdapterViewPager);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -1036,11 +1036,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     @Override
     public void hideLoading() {
-
-    }
-
-    @Override
-    public void showADS() {
 
     }
 

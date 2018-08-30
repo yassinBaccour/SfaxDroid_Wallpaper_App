@@ -50,9 +50,9 @@
                 android:label="@string/app_name" />
 
         <service
-                android:name="com.sami.rippel.livewallpapers.lwpskyview.RajawaliExampleWallpaper"
+                android:name="com.sami.rippel.livewallpapers.lwpskyview.SkyNameOfAllahLiveWallpaper"
                 android:enabled="true"
-                android:label="Wallpaper Example"
+                android:label="Sky Name Of Allah"
                 android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
@@ -85,7 +85,7 @@
 
             <meta-data
                     android:name="android.service.wallpaper"
-                    android:resource="@xml/wallpaper" />
+                    android:resource="@xml/lwp_water_ripple" />
         </service>
         <service
                 android:name="com.sami.rippel.livewallpapers.lwpdouachanged.DouaLiveWallpaper"
@@ -98,7 +98,7 @@
 
             <meta-data
                     android:name="android.service.wallpaper"
-                    android:resource="@xml/livewallpaper" />
+                    android:resource="@xml/lwp_doua" />
         </service>
         <service
                 android:name="com.sami.rippel.livewallpapers.nameofallah2d.NameOfAllah2DLwp"
@@ -110,7 +110,7 @@
             </intent-filter>
             <meta-data
                     android:name="android.service.wallpaper"
-                    android:resource="@xml/livewallpaper" />
+                    android:resource="@xml/lwp_doua" />
         </service>
 
         <activity
@@ -161,7 +161,7 @@
                 android:exported="true"
                 android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name="com.sami.rippel.ui.activity.AboutActivty" />
+        <activity android:name="com.sami.rippel.ui.activity.AboutActivity" />
 
         <service
                 android:name="com.sami.rippel.labs.basmala.LockService"

@@ -11,7 +11,6 @@ buildscript {
     }
 
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
         classpath 'com.android.tools.build:gradle:3.1.4'
     }
 }
@@ -31,8 +30,8 @@ allprojects {
 
 
 ext {
-    minSdkVersion = 15
-    targetSdkVersion = 26
+    minSdkVersion = 19
+    targetSdkVersion = 27
     compileSdkVersion = 27
     buildToolsVersion = '28.0.2'
     supportVersion = '27.1.1'
@@ -45,12 +44,10 @@ ext {
     thinDownloadManagerVersion = '1.2.5'
     medyoVersion = '1.2.2'
     colorpickerVersion = '0.0.13'
-    butterknifeVersion = '8.5.1'
     analyticsVersion = '10.2.4'
     retrofit2Version = '2.3.0'
     simplexmlConverterVersion = '2.3.0'
     converterGsonVersion = '2.3.0'
-    rxjavaVersion = '2.1.7'
-    rxandroidVersion = '2.0.2'
-    retrofitRxAdapterVersion = '1.0.0'
+    rxjavaVersion = '2.2.1'
+    rxandroidVersion = '2.4.0'
 }

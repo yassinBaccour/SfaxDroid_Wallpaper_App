@@ -16,7 +16,7 @@ public class IslamicWallpaperSettings extends PreferenceActivity implements
         super.onCreate(icicle);
         getPreferenceManager().setSharedPreferencesName(
                 Constants.PREFERENCESNAME);
-        addPreferencesFromResource(R.xml.settings);
+        addPreferencesFromResource(R.xml.lwp_sky_view_settings);
         findPreference("recommend_1").setOnPreferenceClickListener(this);
     }
 

@@ -127,7 +127,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     @Override
     protected void initEventAndData() {
-
+//Nothing
     }
 
     private void fabClick() {
@@ -321,8 +321,6 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
             beginCrop();
         } else if (requestCode == Crop.REQUEST_CROP) {
             handleCrop(resultCode, result);
-        } else {
-            showADS();
         }
     }
 
@@ -411,9 +409,6 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         super.onResume();
         checkForCrashes();
         if (mFromRipple) {
-            if (GalleryWallpaperActivity.isAdsShowedFromRipple) {
-                showADS();
-            }
             mFromRipple = false;
         }
     }
@@ -435,10 +430,6 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         if (mProgressBar != null) {
             mProgressBar.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void showADS() {
     }
 
     @Override

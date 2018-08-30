@@ -29,6 +29,7 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ServiceErrorFromEnum;
 import com.sami.rippel.model.entity.UpdateApp;
+import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.model.listner.DeviceListner;
 import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
@@ -118,7 +119,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
 
     @Override
     protected void initEventAndData() {
-
+//Nothing
     }
 
     @Override
@@ -281,15 +282,11 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
 
     public void showInterstial() {
         if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
+            //mInterstitialAd.show();
         }
     }
 
     public void showTimedAdsWhenIOpenPicture() {
-
-        if (nbOpenAds == 3) {
-
-        }
 
         if (nbOpenAds == 4) {
             nbOpenAds = 0;
@@ -421,10 +418,6 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
 
     @Override
     public void hideLoading() {
-    }
-
-    @Override
-    public void showADS() {
     }
 
     public enum AdsType {

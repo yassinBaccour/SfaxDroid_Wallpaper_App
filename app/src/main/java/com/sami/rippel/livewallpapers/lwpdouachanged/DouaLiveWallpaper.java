@@ -12,8 +12,6 @@ import android.view.SurfaceHolder;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 
-import java.io.File;
-
 public class DouaLiveWallpaper extends WallpaperService {
     public static int mCurrentPhoto = 1;
     private Paint mPaintOption;
@@ -82,11 +80,11 @@ public class DouaLiveWallpaper extends WallpaperService {
                 mBackground.recycle();
                 mBackground = null;
             }
-            Bitmap btm = BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
+            Bitmap bitmap = BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
                     mOptions);
-            if (btm != null) {
-                mBackground = Bitmap.createScaledBitmap(btm, width, height, true);
-                btm.recycle();
+            if (bitmap != null) {
+                mBackground = Bitmap.createScaledBitmap(bitmap, width, height, true);
+                bitmap.recycle();
             }
             if (mBackground != null)
                 drawFrame();
@@ -126,7 +124,7 @@ public class DouaLiveWallpaper extends WallpaperService {
         public void onTouchEvent(MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 Constants.nb_incrementation_after_change = Constants.nb_incrementation_after_change + 1;
-                if (mScreenWidth > 0 && mScreenWidth > 0 && Constants.ifBackground_changed && Constants.nb_incrementation_after_change == 5) {
+                if (mScreenWidth > 0 && Constants.ifBackground_changed && Constants.nb_incrementation_after_change == 5) {
                     Constants.nb_incrementation_after_change = 0;
                     Constants.ifBackground_changed = false;
                     mBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
@@ -178,7 +176,6 @@ public class DouaLiveWallpaper extends WallpaperService {
                 int fin = mScreenHeight / 2 - mLogoDoua.getHeight() / 2;
                 c.drawBitmap(mLogoDoua, debut, fin, mPaintOption);
                 c.restore();
-                //Constants.ifBackground_changed = false;
             }
         }
     }

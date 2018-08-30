@@ -9,7 +9,9 @@ import rajawali.wallpaper.Wallpaper;
 
 public class IslamicWallpaper extends Wallpaper implements
         SharedPreferences.OnSharedPreferenceChangeListener {
+
     private IslamicWallpaperRenderer mRenderer;
+
     private SharedPreferences mPref;
 
     public Engine onCreateEngine() {
@@ -46,26 +48,26 @@ public class IslamicWallpaper extends Wallpaper implements
         }
     }
 
-    public void SetRippleSpeedKey(SharedPreferences pref, String key) {
-        if (pref.getString(key, "slow").equalsIgnoreCase("slow"))
+    public void SetRippleSpeedKey(SharedPreferences sharedPreferences, String key) {
+        if (sharedPreferences.getString(key, "slow").equalsIgnoreCase("slow"))
             mRenderer.setRippleSpeed(4f);
-        else if (pref.getString(key, "medium").equalsIgnoreCase("medium"))
+        else if (sharedPreferences.getString(key, "medium").equalsIgnoreCase("medium"))
             mRenderer.setRippleSpeed(5.5f);
-        else if (pref.getString(key, "fast").equalsIgnoreCase("fast"))
+        else if (sharedPreferences.getString(key, "fast").equalsIgnoreCase("fast"))
             mRenderer.setRippleSpeed(8);
     }
 
-    public void SetRippleSize(SharedPreferences pref, String key) {
-        if (pref.getString(key, "small").equalsIgnoreCase("small"))
+    public void SetRippleSize(SharedPreferences sharedPreferences, String key) {
+        if (sharedPreferences.getString(key, "small").equalsIgnoreCase("small"))
             mRenderer.setRippleSize(96);
-        else if (pref.getString(key, "medium").equalsIgnoreCase("medium"))
+        else if (sharedPreferences.getString(key, "medium").equalsIgnoreCase("medium"))
             mRenderer.setRippleSize(72);
-        else if (pref.getString(key, "large").equalsIgnoreCase("large"))
+        else if (sharedPreferences.getString(key, "large").equalsIgnoreCase("large"))
             mRenderer.setRippleSize(52);
     }
 
-    public void SetRippleSound(SharedPreferences pref, String key) {
-        mRenderer.setSound(pref.getBoolean(key, false));
+    public void SetRippleSound(SharedPreferences sharedPreferences, String key) {
+        mRenderer.setSound(sharedPreferences.getBoolean(key, false));
     }
 
 }

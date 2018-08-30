@@ -16,7 +16,9 @@ public interface WallpaperFragmentContract {
     }
 
     interface Presenter extends BasePresenter<View> {
+
         void getWallpaper();
+
     }
 
 }

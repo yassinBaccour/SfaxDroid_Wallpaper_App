@@ -17,6 +17,4 @@ public interface BaseView {
 
     void hideLoading();
 
-    void showADS();
-
 }

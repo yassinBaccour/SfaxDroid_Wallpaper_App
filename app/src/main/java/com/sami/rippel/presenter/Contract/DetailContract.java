@@ -18,6 +18,7 @@ public interface DetailContract {
     }
 
     interface Presenter extends BasePresenter<View> {
+
         void setAsWallpaper(String url);
 
         void handleCrop(Intent result, Context context);

@@ -2,6 +2,7 @@ package com.sami.rippel.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,17 +47,17 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mProgressLoader = (ProgressBar) getFragmentActivity().findViewById(R.id.progressBar);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recentContainer);
+        mProgressLoader = getFragmentActivity().findViewById(R.id.progressBar);
+        mRecyclerView = rootView.findViewById(R.id.recentContainer);
         mRecyclerView.setLayoutManager(getLayoutManager());
         mRecyclerView.setHasFixedSize(true);
         return rootView;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (mPresenter != null) {
             mPresenter.attachView(this);
         }
@@ -72,22 +73,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
         super.onDestroyView();
     }
 
-    public void setListener(AdsListener l) {
-        mListener = l;
+    public void setListener(AdsListener adsListener) {
+        mListener = adsListener;
     }
 
     public void downloadPicture() {
         if (getFragmentActivity() != null && ViewModel.Current.device.isConnected(getFragmentActivity()))
             fillForm();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 }
