@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.entity.HelpTypeEnum;
-import com.sami.rippel.model.listner.StickersListner;
+import com.sami.rippel.model.listner.StickersListener;
 
 public class HelpFragment extends Fragment {
 
@@ -129,8 +129,8 @@ public class HelpFragment extends Fragment {
         mTextViewDesc4.setText(textViewDesc4);
     }
 
-    public void setListener(StickersListner stickersListner) {
-        StickersListner stickersListner1 = stickersListner;
+    public void setListener(StickersListener stickersListner) {
+        StickersListener stickersListner1 = stickersListner;
     }
 
     @Override

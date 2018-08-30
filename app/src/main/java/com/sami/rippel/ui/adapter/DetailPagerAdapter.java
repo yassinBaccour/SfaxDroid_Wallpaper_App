@@ -2,12 +2,11 @@ package com.sami.rippel.ui.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.ViewPager;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -17,7 +16,6 @@ import com.sami.rippel.base.BasePagerAdapter;
 import com.sami.rippel.base.BaseView;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.ui.activity.DetailsActivity;
 import com.sami.rippel.views.GlideApp;
 import com.sami.rippel.views.TouchImageView;
 
@@ -37,12 +35,13 @@ public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         final WallpaperObject item = getItem(position);
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -71,8 +70,8 @@ public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager) container).removeView((RelativeLayout) object);
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        container.removeView((RelativeLayout) object);
     }
 
 }

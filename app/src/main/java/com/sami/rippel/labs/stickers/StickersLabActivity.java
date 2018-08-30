@@ -42,8 +42,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
-import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.kobakei.ratethisapp.RateThisApp;
 import com.myandroid.views.MultiTouchListener;
 import com.myandroid.views.myView;
@@ -51,7 +49,7 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.listner.StickersListner;
+import com.sami.rippel.model.listner.StickersListener;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
 import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
 import com.sami.rippel.views.GlideApp;
@@ -71,7 +69,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 @SuppressLint("NewApi")
-public class StickersLabActivity extends BaseActivity implements StickersListner, View.OnClickListener {
+public class StickersLabActivity extends BaseActivity implements StickersListener, View.OnClickListener {
     private static final int PICTURE_TAKEN_FROM_GALLERY = 1;
     private static final int SHARE_REQUEST_CODE = 23123;
     private static final int PICK_USER_PROFILE_IMAGE = 1000;

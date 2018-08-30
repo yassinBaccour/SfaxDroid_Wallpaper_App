@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.CardView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -22,7 +21,7 @@ import com.sami.rippel.livewallpapers.lwpskyview.RajawaliExampleWallpaper;
 import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.listner.AdsListner;
+import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.ui.activity.AboutActivty;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
 import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
@@ -31,7 +30,6 @@ import java.io.IOException;
 
 public class LwpFragment extends SimpleFragment {
 
-    private AppBarLayout mAppBarLayout;
     private TextView mButtonSkybox;
     private TextView mButtonRippleLWP;
     private TextView mButtonDoua;
@@ -52,7 +50,7 @@ public class LwpFragment extends SimpleFragment {
     private Button mBtotherapp;
     private CardView mCardViewSkyBox;
     private CardView mCardViewTimer;
-    private AdsListner mListener = null;
+    private AdsListener mListener = null;
 
     public static LwpFragment newInstance() {
         return new LwpFragment();
@@ -99,7 +97,7 @@ public class LwpFragment extends SimpleFragment {
                     Intent intent = new Intent();
                     intent.setAction(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER);
                     startActivity(intent);
-                } catch (Exception exception) {
+                } catch (Exception ignored) {
                 }
             }
         });
@@ -195,29 +193,28 @@ public class LwpFragment extends SimpleFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mAppBarLayout = (AppBarLayout) getActivity().findViewById(R.id.app_bar);
-        mButtonRippleLWP = (TextView) rootView.findViewById(R.id.button1);
-        mButtonSkybox = (TextView) rootView.findViewById(R.id.buttonSkybox);
-        mButtonDoua = (TextView) rootView.findViewById(R.id.buttonDoua);
-        mButtonTimer = (TextView) rootView.findViewById(R.id.buttonTimer);
-        mBtotherapp = (Button) rootView.findViewById(R.id.btotherapp);
-        mBtnRating = (Button) rootView.findViewById(R.id.btnRating);
-        mButtonNameofallah2D = (TextView) rootView.findViewById(R.id.buttonNameofallah2D);
-        mCardViewSkyBox = (CardView) rootView.findViewById(R.id.cardViewSkyBox);
-        mCardViewTimer = (CardView) rootView.findViewById(R.id.cardViewTimer);
-        mTextViewAbout = (TextView) rootView.findViewById(R.id.textViewAbout);
+        mButtonRippleLWP = rootView.findViewById(R.id.button1);
+        mButtonSkybox = rootView.findViewById(R.id.buttonSkybox);
+        mButtonDoua = rootView.findViewById(R.id.buttonDoua);
+        mButtonTimer = rootView.findViewById(R.id.buttonTimer);
+        mBtotherapp = rootView.findViewById(R.id.btotherapp);
+        mBtnRating = rootView.findViewById(R.id.btnRating);
+        mButtonNameofallah2D = rootView.findViewById(R.id.buttonNameofallah2D);
+        mCardViewSkyBox = rootView.findViewById(R.id.cardViewSkyBox);
+        mCardViewTimer = rootView.findViewById(R.id.cardViewTimer);
+        mTextViewAbout = rootView.findViewById(R.id.textViewAbout);
         //LWP TITLE
-        mTxttitleTimer = (TextView) rootView.findViewById(R.id.txttitleTimer);
-        mTxttitledoua = (TextView) rootView.findViewById(R.id.txttitledoua);
-        mTxttilekybox = (TextView) rootView.findViewById(R.id.txttilekybox);
-        mTxttitleripple = (TextView) rootView.findViewById(R.id.txttitleripple);
-        mTxttitleNameofallah2D = (TextView) rootView.findViewById(R.id.txttitleNameofallah2D);
+        mTxttitleTimer = rootView.findViewById(R.id.txttitleTimer);
+        mTxttitledoua = rootView.findViewById(R.id.txttitledoua);
+        mTxttilekybox = rootView.findViewById(R.id.txttilekybox);
+        mTxttitleripple = rootView.findViewById(R.id.txttitleripple);
+        mTxttitleNameofallah2D = rootView.findViewById(R.id.txttitleNameofallah2D);
         //LWP DESC
-        mTxtdesctimer = (TextView) rootView.findViewById(R.id.txtdesctimer);
-        mTxtdescdoua = (TextView) rootView.findViewById(R.id.txtdescdoua);
-        mTxtdescskybox = (TextView) rootView.findViewById(R.id.txtdescskybox);
-        mTxtdescripple = (TextView) rootView.findViewById(R.id.txtdescripple);
-        mTxtdescNameofallah2D = (TextView) rootView.findViewById(R.id.txtdescNameofallah2D);
+        mTxtdesctimer = rootView.findViewById(R.id.txtdesctimer);
+        mTxtdescdoua = rootView.findViewById(R.id.txtdescdoua);
+        mTxtdescskybox = rootView.findViewById(R.id.txtdescskybox);
+        mTxtdescripple = rootView.findViewById(R.id.txtdescripple);
+        mTxtdescNameofallah2D = rootView.findViewById(R.id.txtdescNameofallah2D);
         return rootView;
     }
 
@@ -244,22 +241,11 @@ public class LwpFragment extends SimpleFragment {
                 .getInstance(getActivity());
         try {
             myWallpaperManager.clear();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
-    public void setListener(AdsListner l) {
-        mListener = l;
+    public void setListener(AdsListener adsListener) {
+        mListener = adsListener;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
 }

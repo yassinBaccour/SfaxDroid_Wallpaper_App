@@ -30,8 +30,8 @@ import java.util.List;
 
 public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> implements WallpaperFragmentContract.View, OnStateChangeListener {
 
-    GalleryAdapter mAdapter;
-    CategoryFragment mFragment;
+    private GalleryAdapter mAdapter;
+    private CategoryFragment mFragment;
 
     public static CategoryFragment newInstance() {
         return new CategoryFragment();
@@ -83,7 +83,6 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
     @Override
     public void showContent(List<WallpaperObject> mList) {
         if (ViewModel.Current.isWallpapersLoaded()) {
-            //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("ImageCategoryNew")).findFirst().orElse(null);
             mData.clear();
             mData = new ArrayList<>(mList);
             if (getActivity() != null && ViewModel.Current.device.isConnected(getActivity()) && mData != null && mData.size() > 0) {
@@ -94,11 +93,11 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
                                 getActivity(),
                                 (view, position) -> {
                                     if (position >= 0) {
-                                        String CategorName = mAdapter.GetName(position);
+                                        String categorName = mAdapter.GetName(position);
                                         if (mListener != null) {
                                             ViewPagerWallpaperActivity.nbOpenAds++;
                                             mListener.onOpenScreenTracker("CategoryGallery");
-                                            mListener.onTrackAction("CategoryOpen", CategorName);
+                                            mListener.onTrackAction("CategoryOpen", categorName);
                                         }
                                         Intent intent = new Intent(
                                                 getActivity(),
@@ -106,8 +105,8 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
                                         intent.putParcelableArrayListExtra(
                                                 Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData);
 
-                                        if (!CategorName.isEmpty())
-                                            intent.putExtra(Constants.DETAIL_IMAGE_POS, CategorName);
+                                        if (!categorName.isEmpty())
+                                            intent.putExtra(Constants.DETAIL_IMAGE_POS, categorName);
                                         startActivity(intent);
                                     }
                                 }));

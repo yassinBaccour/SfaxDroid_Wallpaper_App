@@ -17,7 +17,7 @@ import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.model.listner.AdsListner;
+import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.presenter.AllWallpaperPresenter;
@@ -31,9 +31,8 @@ import java.util.List;
 
 public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> implements WallpaperFragmentContract.View, OnStateChangeListener {
 
-    GalleryAdapter mAdapter;
-    AdsListner mListener = null;
-    AllBackgroundFragment mFragment;
+    private AdsListener mListener = null;
+    private AllBackgroundFragment mFragment;
 
     public static AllBackgroundFragment newInstance() {
         return new AllBackgroundFragment();
@@ -79,7 +78,7 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
             mData.clear();
             mData = new ArrayList<>(mList);
             if (getActivity() != null && ViewModel.Current.device.isConnected(getActivity()) && mData != null && mData.size() > 0) {
-                mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.GALLERY_CELL);
+                GalleryAdapter mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.GALLERY_CELL);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView
                         .addOnItemTouchListener(new RecyclerItemClickListener(

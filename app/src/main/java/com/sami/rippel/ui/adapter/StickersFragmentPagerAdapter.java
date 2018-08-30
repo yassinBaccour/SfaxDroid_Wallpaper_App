@@ -10,18 +10,15 @@ import com.sami.rippel.labs.stickers.FrameImageFragment;
 import com.sami.rippel.labs.stickers.NonVectorStickersImageFragment;
 import com.sami.rippel.labs.stickers.TextStickersImageFragment;
 import com.sami.rippel.labs.stickers.VectorStickersImageFragment;
-import com.sami.rippel.model.listner.StickersListner;
+import com.sami.rippel.model.listner.StickersListener;
 
 public class StickersFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private StickersListner stickersListner;
+    private StickersListener stickersListner;
     private NonVectorStickersImageFragment mNonVectorFragment;
-    private VectorStickersImageFragment mVectorFragment;
-    private FlowerStickersImageFragment mFlowerFragment;
-    private TextStickersImageFragment mTextFragment;
-    private FrameImageFragment mFrameImageFragment;
+
     public StickersFragmentPagerAdapter(FragmentManager fragmentManager,
-                                        Context context, StickersListner stickersListner) {
+                                        Context context, StickersListener stickersListner) {
         super(fragmentManager);
         this.stickersListner = stickersListner;
     }
@@ -38,19 +35,19 @@ public class StickersFragmentPagerAdapter extends FragmentPagerAdapter {
                 mNonVectorFragment.setListener(stickersListner);
                 return mNonVectorFragment;
             case 1:
-                mVectorFragment = VectorStickersImageFragment.newInstance();
+                VectorStickersImageFragment mVectorFragment = VectorStickersImageFragment.newInstance();
                 mVectorFragment.setListener(stickersListner);
                 return mVectorFragment;
             case 2:
-                mFlowerFragment = FlowerStickersImageFragment.newInstance();
+                FlowerStickersImageFragment mFlowerFragment = FlowerStickersImageFragment.newInstance();
                 mFlowerFragment.setListener(stickersListner);
                 return mFlowerFragment;
             case 3:
-                mTextFragment = TextStickersImageFragment.newInstance();
+                TextStickersImageFragment mTextFragment = TextStickersImageFragment.newInstance();
                 mTextFragment.setListener(stickersListner);
                 return mTextFragment;
             case 4:
-                mFrameImageFragment = FrameImageFragment.newInstance();
+                FrameImageFragment mFrameImageFragment = FrameImageFragment.newInstance();
                 mFrameImageFragment.setListener(stickersListner);
                 return mFrameImageFragment;
         }

@@ -15,7 +15,7 @@ import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.RecyclerItemClickListener;
-import com.sami.rippel.model.listner.StickersListner;
+import com.sami.rippel.model.listner.StickersListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class NonVectorStickersImageFragment extends Fragment {
 
-    private StickersListner stickersListner;
+    private StickersListener stickersListner;
     private RecyclerView mListView;
     private GalleryAdapter mAdapter;
     private ArrayList<WallpaperObject> mData = new ArrayList<>();
@@ -76,7 +76,7 @@ public class NonVectorStickersImageFragment extends Fragment {
         return rootView;
     }
 
-    public void setListener(StickersListner stickersListner) {
+    public void setListener(StickersListener stickersListner) {
         this.stickersListner = stickersListner;
     }
 

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.sami.rippel.allah.R;
-import com.sami.rippel.model.listner.AdsListner;
+import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.ui.fragments.AllBackgroundFragment;
 import com.sami.rippel.ui.fragments.CategoryFragment;
 import com.sami.rippel.ui.fragments.LabFragment;
@@ -17,13 +17,13 @@ import java.util.ArrayList;
 
 public class CatalogPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<String> listeTitre = new ArrayList<>();
-    private AdsListner ads;
+    private AdsListener ads;
     private LwpFragment mLwpFragment;
     private AllBackgroundFragment mAllBackgroundFragment;
     private RecentFragment mRecentFragment;
     private CategoryFragment mCategoryFragment;
 
-    public CatalogPagerAdapter(FragmentManager fragmentManager, Context context, AdsListner adsListner) {
+    public CatalogPagerAdapter(FragmentManager fragmentManager, Context context, AdsListener adsListner) {
         super(fragmentManager);
         this.ads = adsListner;
         listeTitre.add(context.getString(R.string.catalog_LWP));

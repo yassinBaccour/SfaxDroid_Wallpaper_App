@@ -26,10 +26,9 @@ public class MyService {
     }
 
     private Retrofit createRetrofitXMlConverter() {
-        Retrofit retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())  //Pour info j'utilise l'adapter de jakewharton
-                .addConverterFactory(SimpleXmlConverterFactory.create()).build();  //Comme convertisseur j'utilise celui du xml converter
-        return retrofit;
+                .addConverterFactory(SimpleXmlConverterFactory.create()).build();
     }
 }

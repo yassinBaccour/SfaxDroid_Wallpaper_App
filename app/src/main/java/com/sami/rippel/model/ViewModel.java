@@ -1,8 +1,5 @@
 package com.sami.rippel.model;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.sami.rippel.model.entity.IntentTypeEnum;
 import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.WallpaperCategory;
@@ -10,9 +7,9 @@ import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.BitmapUtils;
-import com.sami.rippel.utils.SharedPrefsUtils;
-import com.sami.rippel.utils.FileUtils;
 import com.sami.rippel.utils.DeviceUtils;
+import com.sami.rippel.utils.FileUtils;
+import com.sami.rippel.utils.SharedPrefsUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -30,7 +30,6 @@ import java.util.List;
 
 public class RecentFragment extends BaseFragment<RecentWallpaperPresenter> implements WallpaperFragmentContract.View, OnStateChangeListener {
 
-    private GalleryAdapter mAdapter;
     private RecentFragment mFragment;
 
     public static RecentFragment newInstance() {
@@ -65,12 +64,10 @@ public class RecentFragment extends BaseFragment<RecentWallpaperPresenter> imple
     @Override
     public void showContent(List<WallpaperObject> mList) {
         if (ViewModel.Current.isWallpapersLoaded()) {
-            //WallpaperCategory wallpaperCategory = ViewModel.Current.retrofitWallpObject.getCategoryList().stream().filter(x -> x.getTitle().equals("New")).findFirst().orElse(null);
             mData.clear();
             mData = new ArrayList<>(mList);
             if (getActivity() != null && ViewModel.Current.device.isConnected(getActivity()) && mData != null && mData.size() > 0) {
-                mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.GALLERY_CELL);
-                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setAdapter(new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.GALLERY_CELL));
                 mRecyclerView
                         .addOnItemTouchListener(new RecyclerItemClickListener(
                                 getActivity(),

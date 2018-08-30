@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.model.listner.AdsListner;
+import com.sami.rippel.model.listner.AdsListener;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 
 public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView {
-    protected AdsListner mListener = null;
+    protected AdsListener mListener = null;
     protected ArrayList<WallpaperObject> mData = new ArrayList<>();
     protected RecyclerView mRecyclerView;
     protected ProgressBar mProgressLoader;
@@ -72,7 +72,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
         super.onDestroyView();
     }
 
-    public void setListener(AdsListner l) {
+    public void setListener(AdsListener l) {
         mListener = l;
     }
 

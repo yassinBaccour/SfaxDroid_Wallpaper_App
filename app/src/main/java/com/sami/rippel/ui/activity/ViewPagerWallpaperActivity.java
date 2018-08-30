@@ -1,23 +1,5 @@
 package com.sami.rippel.ui.activity;
 
-import com.kobakei.ratethisapp.RateThisApp;
-import com.sami.rippel.allah.BuildConfig;
-import com.sami.rippel.allah.R;
-import com.sami.rippel.allah.WallpaperApplication;
-import com.sami.rippel.base.BaseActivity;
-import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.entity.ServiceErrorFromEnum;
-import com.sami.rippel.model.entity.UpdateApp;
-import com.sami.rippel.model.entity.WallpapersRetrofitObject;
-import com.sami.rippel.model.listner.AdsListner;
-import com.sami.rippel.model.listner.DeviceListner;
-import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
-import com.sami.rippel.utils.RxUtil;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-
-import net.hockeyapp.android.CrashManager;
-
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
@@ -36,9 +18,30 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.kobakei.ratethisapp.RateThisApp;
+import com.sami.rippel.allah.BuildConfig;
+import com.sami.rippel.allah.R;
+import com.sami.rippel.base.BaseActivity;
+import com.sami.rippel.model.Constants;
+import com.sami.rippel.model.ViewModel;
+import com.sami.rippel.model.entity.ServiceErrorFromEnum;
+import com.sami.rippel.model.entity.UpdateApp;
+import com.sami.rippel.model.entity.WallpapersRetrofitObject;
+import com.sami.rippel.model.listner.AdsListener;
+import com.sami.rippel.model.listner.DeviceListner;
+import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
+import com.sami.rippel.utils.RxUtil;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import net.hockeyapp.android.CrashManager;
+
 import butterknife.BindView;
 
-public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListner, DeviceListner {
+public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListener, DeviceListner {
 
     @Nullable
     @BindView(R.id.collapsingToolbarLayout)
@@ -78,33 +81,40 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
 
     private static long back_pressed;
 
-    public boolean isFirstLaunch = false;
-
-    RxPermissions rxPermissions;
+    private RxPermissions rxPermissions;
 
     private CatalogPagerAdapter mAdapter;
+
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkForCrashes();
-        if (BuildConfig.DEBUG) {
-            //StartAppSDK.init(this, "211624686", false);
-            //StartAppAd.disableSplash();
-        }
         rxPermissions = new RxPermissions(this);
+        setupAds();
         ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
-        isFirstLaunch = true;
-        WallpaperApplication application = (WallpaperApplication) getApplication();
         setupToolBar();
         setupViewPager();
         initRatingApp();
-        initAdsSDK();
         manageNbRunApp();
         //startUpdateAppIfNeeded();
         mAdapter.ChangeAdapterFragmentViewState(false);
         loadAndSetWallpaperToViewModel();
         checkPermission();
+    }
+
+    private void setupAds() {
+        MobileAds.initialize(this, "ca-app-pub-6263632629106733~1726613607");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-6263632629106733/6333632738");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
     }
 
     @Override
@@ -159,9 +169,6 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
                     ViewModel.Current.device.showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
                 })
         );
-    }
-
-    public void initAdsSDK() {
     }
 
     public void initRatingApp() {
@@ -279,7 +286,9 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListn
     }
 
     public void showInterstial() {
-        //StartAppAd.showAd(this);
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
     }
 
     public void showTimedAdsWhenIOpenPicture() {

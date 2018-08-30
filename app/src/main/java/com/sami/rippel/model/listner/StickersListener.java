@@ -3,7 +3,7 @@ package com.sami.rippel.model.listner;
 /**
  * Created by yassin baccour on 16/05/2016.
  */
-public interface StickersListner {
+public interface StickersListener {
 
     void hideProgressLoader();
 

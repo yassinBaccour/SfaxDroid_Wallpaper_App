@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.sami.rippel.allah.R;
-import com.sami.rippel.model.listner.StickersListner;
+import com.sami.rippel.model.listner.StickersListener;
 
 public class TextStickersImageFragment extends Fragment {
 
-    private StickersListner stickersListner;
+    private StickersListener stickersListner;
     private Button mButtonAddText;
     private Button mButtonAddFilter;
     private Button mButtonResetAll;
@@ -65,7 +65,7 @@ public class TextStickersImageFragment extends Fragment {
         return rootView;
     }
 
-    public void setListener(StickersListner stickersListner) {
+    public void setListener(StickersListener stickersListner) {
         this.stickersListner = stickersListner;
     }
 }

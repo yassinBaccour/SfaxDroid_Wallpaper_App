@@ -8,13 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.listner.StickersListner;
+import com.sami.rippel.model.listner.StickersListener;
 
 public class AddTextFragment extends Fragment {
 
@@ -67,8 +66,8 @@ public class AddTextFragment extends Fragment {
         ViewModel.Current.sharedPrefsUtils.SetSetting("TypeFace", textStyle.toString());
     }
 
-    public void setListener(StickersListner stickersListner) {
-        StickersListner stickersListner1 = stickersListner;
+    public void setListener(StickersListener stickersListner) {
+        StickersListener stickersListner1 = stickersListner;
     }
 
     @Override

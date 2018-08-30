@@ -19,11 +19,12 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  */
 //J'utilise plus le holder commun
 public class BitmapHolder extends BaseHolder<File> {
-    public ImageView mImg;
+
+    private ImageView mImg;
 
     public BitmapHolder(View itemView) {
         super(itemView);
-        mImg = (ImageView) itemView.findViewById(R.id.item_img);
+        mImg = itemView.findViewById(R.id.item_img);
     }
 
     @Override
