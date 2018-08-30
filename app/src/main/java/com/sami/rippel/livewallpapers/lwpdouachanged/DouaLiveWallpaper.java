@@ -27,7 +27,7 @@ public class DouaLiveWallpaper extends WallpaperService {
         private final SurfaceHolder mHolder = getSurfaceHolder();
         private final Handler mHandler = new Handler();
         private final Paint mPaint = new Paint();
-        BitmapFactory.Options mOptions = new BitmapFactory.Options();
+        private BitmapFactory.Options mOptions = new BitmapFactory.Options();
         private float mTouchX = -1;
         private float mTouchY = -1;
         private int mScreenHeight;

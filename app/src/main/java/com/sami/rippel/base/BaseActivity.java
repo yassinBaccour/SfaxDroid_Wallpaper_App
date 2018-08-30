@@ -3,11 +3,8 @@ package com.sami.rippel.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.sami.rippel.utils.RxBus;
-
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by yassin baccour on 10/05/2017.
@@ -50,12 +47,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
         mCompositeDisposable.add(subscription);
     }
 
-    protected <U> void addRxBusSubscribe(Class<U> eventType, Consumer<U> act) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(RxBus.getDefault().toDefaultFlowable(eventType, act));
-    }
 
     @Override
     protected void onDestroy() {

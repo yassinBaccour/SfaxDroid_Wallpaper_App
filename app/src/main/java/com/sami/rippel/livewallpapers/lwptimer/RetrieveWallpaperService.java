@@ -20,7 +20,8 @@ import java.io.IOException;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class RetrieveWallpaperService extends JobService {
-    FileUtils mFileUtils = new FileUtils(this);
+
+    private FileUtils mFileUtils = new FileUtils(this);
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -72,7 +73,7 @@ public class RetrieveWallpaperService extends JobService {
                                 wallpaperManager.setBitmap(background);
                             bitmap.recycle();
                         }
-                    } catch (IOException ioe) {
+                    } catch (IOException ignored) {
                     }
                 }
                 currentWallpaper = currentWallpaper + 1;

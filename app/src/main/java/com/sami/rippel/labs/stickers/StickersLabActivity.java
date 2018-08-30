@@ -62,44 +62,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 @SuppressLint("NewApi")
 public class StickersLabActivity extends BaseActivity implements StickersListener, View.OnClickListener {
+
     private static final int PICTURE_TAKEN_FROM_GALLERY = 1;
     private static final int SHARE_REQUEST_CODE = 23123;
     private static final int PICK_USER_PROFILE_IMAGE = 1000;
-    private static long back_pressed;
-    @BindView(R.id.progressBar)
     public ProgressBar mProgressLoader;
-    @BindView(R.id.ImageRotate)
     public ImageView mRotateBtn;
-    @BindView(R.id.ImageDelete)
     public ImageView mDeleteBtn;
-    @BindView(R.id.imageview_from_gallery)
     public ImageView mImageViewGalleryImage;
-    @BindView(R.id.ImagePalette)
     public ImageView mImagePalette;
-    @BindView(R.id.rootLayout)
     public CoordinatorLayout mRootLayout;
-    @BindView(R.id.capture_id_rl)
     public RelativeLayout mRelativeLayoutMain;
-     @BindView(R.id.viewpager)
     public ViewPager mViewPager;
-    @BindView(R.id.fab)
     public FloatingActionButton mfab;
-    @BindView(R.id.surfaceView)
     public SurfaceView mSurfaceView;
-    @BindView(R.id.imageViewAddHelp)
     public ImageView mImageViewAddHelp;
-    @BindView(R.id.linearButtionEdition)
-    public LinearLayout mLinearButtionEdition;
-    @BindView(R.id.imageview_frame)
-    public ImageView mImageview_frame;
+    public LinearLayout mLinearButtonEdition;
+    public ImageView mImageViewFrame;
     public int mTxtSize = 20;
     public String mFabDefault = Constants.KEY_DEFAULT;
     public String imagePath = "";
@@ -112,7 +97,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     private float mScale = 1f;
     private ScaleGestureDetector mScaleGestureDetector;
     private ArrayList<myView> mAllImageAtScreenList = new ArrayList<>();
-    private ArrayList<ImageView> mArrayListImageeView = new ArrayList<>();
+    private ArrayList<ImageView> mArrayListImageView = new ArrayList<>();
     private ArrayList<TextView> mArrayListTextView = new ArrayList<>();
     private int mColor = -4522170;
     private boolean mChangeColorMode = false;
@@ -124,6 +109,22 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     private BottomSheetDialog SelectPictureDialog;
     private BottomSheetDialog FinishDialog;
 
+    private void initView() {
+        mProgressLoader = findViewById(R.id.progressBar);
+        mRotateBtn = findViewById(R.id.ImageRotate);
+        mDeleteBtn = findViewById(R.id.ImageDelete);
+        mImageViewGalleryImage = findViewById(R.id.imageview_from_gallery);
+        mImagePalette = findViewById(R.id.ImagePalette);
+        mRootLayout = findViewById(R.id.rootLayout);
+        mRelativeLayoutMain = findViewById(R.id.capture_id_rl);
+        mViewPager = findViewById(R.id.viewpager);
+        mfab = findViewById(R.id.fab);
+        mSurfaceView = findViewById(R.id.surfaceView);
+        mImageViewAddHelp = findViewById(R.id.imageViewAddHelp);
+        mLinearButtonEdition = findViewById(R.id.linearButtionEdition);
+        mImageViewFrame = findViewById(R.id.imageview_frame);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -133,7 +134,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         }
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
+        initView();
         mActivity = this;
         mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
         SurfaceHolder mSurfaceHolder = mSurfaceView.getHolder();
@@ -412,9 +413,9 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(bitmap -> {
-                                mImageview_frame.setImageBitmap(bitmap);
-                                mImageview_frame.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                                mImageview_frame.setVisibility(View.VISIBLE);
+                                mImageViewFrame.setImageBitmap(bitmap);
+                                mImageViewFrame.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                mImageViewFrame.setVisibility(View.VISIBLE);
                                 changeProgressBarVisibility(false);
                             }));
         }
@@ -599,7 +600,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     @Override
     public void RemoveFrame() {
-        mImageview_frame.setVisibility(View.GONE);
+        mImageViewFrame.setVisibility(View.GONE);
         changeProgressBarVisibility(false);
     }
 
@@ -653,10 +654,10 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         mImagePalette.setEnabled(mState);
 
         if (mState) {
-            mLinearButtionEdition.setVisibility(View.VISIBLE);
+            mLinearButtonEdition.setVisibility(View.VISIBLE);
             mSurfaceView.setVisibility(View.VISIBLE);
         } else {
-            mLinearButtionEdition.setVisibility(View.GONE);
+            mLinearButtonEdition.setVisibility(View.GONE);
             mSurfaceView.setVisibility(View.GONE);
         }
 
@@ -705,7 +706,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
                 mBitmapDrawing.getWidth(), mBitmapDrawing.getHeight());
         Canvas b = new Canvas(mBitmapDrawing);
         mRelativeLayoutMain.draw(b);
-        if (mImageview_frame.getVisibility() == View.GONE) {
+        if (mImageViewFrame.getVisibility() == View.GONE) {
             int x = (mRelativeLayoutMain.getWidth() - mImageViewGalleryImage
                     .getWidth()) / 2;
             int y = (mRelativeLayoutMain.getHeight() - mImageViewGalleryImage
@@ -714,14 +715,14 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
                     mImageViewGalleryImage.getWidth(),
                     mImageViewGalleryImage.getHeight());
         } else {
-            int x = (mRelativeLayoutMain.getWidth() - mImageview_frame
+            int x = (mRelativeLayoutMain.getWidth() - mImageViewFrame
                     .getWidth()) / 2;
-            int y = (mRelativeLayoutMain.getHeight() - mImageview_frame
+            int y = (mRelativeLayoutMain.getHeight() - mImageViewFrame
                     .getHeight()) / 2;
 
             mBitmapMain = Bitmap.createBitmap(mBitmapDrawing, x, y,
-                    mImageview_frame.getWidth(),
-                    mImageview_frame.getHeight());
+                    mImageViewFrame.getWidth(),
+                    mImageViewFrame.getHeight());
         }
         new SaveFile(mBitmapMain)
                 .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -749,7 +750,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         Canvas b = new Canvas(mBitmapDrawing);
         mRelativeLayoutMain.draw(b);
 
-        if (mImageview_frame.getVisibility() == View.GONE) {
+        if (mImageViewFrame.getVisibility() == View.GONE) {
 
             int x = (mRelativeLayoutMain.getWidth() - mImageViewGalleryImage
                     .getWidth()) / 2;
@@ -761,14 +762,14 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
                     mImageViewGalleryImage.getHeight()), -mRotateAngle);
 
         } else {
-            int x = (mRelativeLayoutMain.getWidth() - mImageview_frame
+            int x = (mRelativeLayoutMain.getWidth() - mImageViewFrame
                     .getWidth()) / 2;
-            int y = (mRelativeLayoutMain.getHeight() - mImageview_frame
+            int y = (mRelativeLayoutMain.getHeight() - mImageViewFrame
                     .getHeight()) / 2;
 
             return ViewModel.Current.bitmapUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
-                    mImageview_frame.getWidth(),
-                    mImageview_frame.getHeight()), 0);
+                    mImageViewFrame.getWidth(),
+                    mImageViewFrame.getHeight()), 0);
         }
     }
 
@@ -860,7 +861,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     public void onBackPressed() {
         recycleBitmap();
         if (mFragmentText != null && mFragmentText.ismState()) {
-            mFragmentText.setmState(false);
+            mFragmentText.setState(false);
             enableDisableView(true);
             mFabDefault = Constants.KEY_DEFAULT;
         }
@@ -1087,8 +1088,8 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
             mScale *= detector.getScaleFactor();
             mScale = Math.max(0.1f, Math.min(mScale, 5.0f));
             mMatrix.setScale(mScale, mScale);
-            for (int i = 0; i < mArrayListImageeView.size(); i++) {
-                mArrayListImageeView.get(i).setImageMatrix(mMatrix);
+            for (int i = 0; i < mArrayListImageView.size(); i++) {
+                mArrayListImageView.get(i).setImageMatrix(mMatrix);
             }
             return true;
         }

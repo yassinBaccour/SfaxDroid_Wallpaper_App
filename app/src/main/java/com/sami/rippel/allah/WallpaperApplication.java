@@ -1,14 +1,14 @@
 package com.sami.rippel.allah;
 
+import android.app.Activity;
+import android.support.multidex.MultiDexApplication;
+
 import com.sami.rippel.model.MyService;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.utils.BitmapUtils;
 import com.sami.rippel.utils.DeviceUtils;
 import com.sami.rippel.utils.FileUtils;
 import com.sami.rippel.utils.SharedPrefsUtils;
-
-import android.app.Activity;
-import android.support.multidex.MultiDexApplication;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -45,15 +45,6 @@ public class WallpaperApplication extends MultiDexApplication {
         ViewModel.Current = null;
     }
 
-    public void InitCanary() {
-        /*
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        LeakCanary.install(this);
-        */
-    }
-
     public void addActivity(Activity act) {
         if (allActivities == null) {
             allActivities = new HashSet<>();
@@ -65,17 +56,5 @@ public class WallpaperApplication extends MultiDexApplication {
         if (allActivities != null) {
             allActivities.remove(act);
         }
-    }
-
-    public void exitApp() {
-        if (allActivities != null) {
-            synchronized (allActivities) {
-                for (Activity act : allActivities) {
-                    act.finish();
-                }
-            }
-        }
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(0);
     }
 }

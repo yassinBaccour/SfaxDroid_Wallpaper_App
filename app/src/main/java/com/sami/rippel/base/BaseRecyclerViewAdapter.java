@@ -2,6 +2,7 @@ package com.sami.rippel.base;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +41,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
 
     public abstract TypeCellItemEnum getRecycleViewBindType();
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType), parent, false);  //cherche le type de cellule depuis la classe fille
         if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT)
             return new MyItemHolderCategory(view, context);
@@ -50,7 +52,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (data.get(position) instanceof WallpaperObject) {
             WallpaperObject wallpaperObject = (WallpaperObject) data.get(position);
             if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT) {
@@ -88,24 +90,22 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
 
         MyItemHolderWallpaper(View itemView) {
             super(itemView);
-            mImg = (ImageView) itemView.findViewById(R.id.item_img);
+            mImg = itemView.findViewById(R.id.item_img);
         }
     }
 
 
     private static class MyItemHolderCategory extends RecyclerView.ViewHolder {
-        ImageView mImg;
-        LinearLayout ln;
-        TextView title, desc;
-        Context context;
+        private ImageView mImg;
+        private LinearLayout ln;
+        private TextView title, desc;
 
         MyItemHolderCategory(View itemView, Context context) {
             super(itemView);
-            mImg = (ImageView) itemView.findViewById(R.id.item_img);
-            ln = (LinearLayout) itemView.findViewById(R.id.contentImg);
-            title = (TextView) itemView.findViewById(R.id.title);
-            desc = (TextView) itemView.findViewById(R.id.subtitle);
-            this.context = context;
+            mImg = itemView.findViewById(R.id.item_img);
+            ln = itemView.findViewById(R.id.contentImg);
+            title = itemView.findViewById(R.id.title);
+            desc = itemView.findViewById(R.id.subtitle);
         }
     }
 }

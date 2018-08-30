@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
@@ -32,33 +31,16 @@ import com.thin.downloadmanager.ThinDownloadManager;
 
 import java.io.File;
 
-import butterknife.BindView;
-
 public class DouaLiveWallpaperActivity extends SimpleActivity {
 
     private static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
-    @Nullable
-    @BindView(R.id.rootLayout)
     public CoordinatorLayout mRootLayout;
-    @Nullable
-    @BindView(R.id.progress1)
     public ProgressBar mProgress1;
-    @Nullable
-    @BindView(R.id.progressTxt1)
     public TextView mProgress1Txt;
-    @Nullable
-    @BindView(R.id.txtstatusDownload)
-    public TextView mTxtstatusDownload;
-    @Nullable
-    @BindView(R.id.toolbar)
+    public TextView mTxtStatusDownload;
     public Toolbar mToolbar;
-    @Nullable
-    @BindView(R.id.fab)
     public FloatingActionButton mFab;
-    @Nullable
-    @BindView(R.id.buttonColor)
     public Button mButtonColor;
-
     private ThinDownloadManager mDownloadManager;
     private File mZipFile;
     private File mZipDestination;
@@ -69,6 +51,17 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
     private boolean mIsClickable = false;
     private MyDownloadDownloadStatusListenerV1
             myDownloadStatusListener = new MyDownloadDownloadStatusListenerV1();
+
+    @Override
+    protected void onViewCreated() {
+        mRootLayout = findViewById(R.id.rootLayout);
+        mProgress1 = findViewById(R.id.progress1);
+        mProgress1Txt = findViewById(R.id.progressTxt1);
+        mTxtStatusDownload = findViewById(R.id.txtstatusDownload);
+        mToolbar = findViewById(R.id.toolbar);
+        mFab = findViewById(R.id.fab);
+        mButtonColor = findViewById(R.id.buttonColor);
+    }
 
     @Override
     protected int getLayout() {
@@ -225,7 +218,7 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
                 //openLiveWallpapersDoua();
                 mFab.setEnabled(true);
                 mProgress1Txt.setText(getString(R.string.downloadterminated));
-                mTxtstatusDownload.setText(getString(R.string.txtcompleted));
+                mTxtStatusDownload.setText(getString(R.string.txtcompleted));
                 mIsClickable = true;
             }
         }

@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply from: '../config/quality.gradle'
-apply from: '../gradleScripts/commonVar.gradle'
 
 
 android {
@@ -11,8 +10,8 @@ android {
         applicationId "com.sami.rippel.allah"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode appVersionCode
-        versionName appVersionName
+        versionCode 65
+        versionName "7.1"
         multiDexEnabled true
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "c479dc18c3dc418daecef942158a0d6a"]
     }
@@ -83,8 +82,7 @@ dependencies {
     implementation "com.mani:ThinDownloadManager:$rootProject.ext.thinDownloadManagerVersion"
     implementation "com.github.medyo:android-about-page:$rootProject.ext.medyoVersion"
     implementation "com.github.QuadFlask:colorpicker:$rootProject.ext.colorpickerVersion"
-    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
     implementation("com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit2Version")
             {

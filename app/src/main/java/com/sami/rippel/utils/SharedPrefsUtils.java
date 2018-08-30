@@ -10,12 +10,10 @@ import com.sami.rippel.model.Constants;
  */
 
 public class SharedPrefsUtils {
-    private Context mContext;
     private SharedPreferences mPref;
     private SharedPreferences.Editor prefsEditor;
 
     public SharedPrefsUtils(Context mContext) {
-        this.mContext = mContext;
         mPref = mContext.getSharedPreferences(Constants.PREFERENCESNAME,
                 Context.MODE_PRIVATE);
         prefsEditor = mPref.edit();

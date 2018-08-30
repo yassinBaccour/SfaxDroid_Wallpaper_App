@@ -23,8 +23,8 @@ import java.util.List;
 
 public class FrameImageFragment extends Fragment {
 
-    StickersListener stickersListner;
-    RecyclerView mListView;
+    private StickersListener stickersListner;
+    private RecyclerView mListView;
     private GalleryAdapter mAdapter;
     private ArrayList<WallpaperObject> mData = new ArrayList<>();
 

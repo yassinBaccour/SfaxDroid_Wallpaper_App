@@ -1,5 +1,24 @@
 package com.sami.rippel.ui.activity;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Point;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.view.Display;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
+
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.flipboard.bottomsheet.commons.MenuSheetView.OnMenuItemClickListener;
@@ -20,60 +39,26 @@ import com.soundcloud.android.crop.Crop;
 
 import net.hockeyapp.android.CrashManager;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Point;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.Display;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ProgressBar;
-
 import java.io.File;
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class DetailsActivity extends BaseActivity<DetailPresenter> implements WallpaperListner, DeviceListner, DetailContract.View {
 
-    @Nullable
-    @BindView(R.id.toolbar)
     public Toolbar mToolbar;
 
-    @Nullable
-    @BindView(R.id.viewpager)
     public ViewPager mViewPager;
 
-    @Nullable
-    @BindView(R.id.progressBar)
     public ProgressBar mProgressBar;
 
-    @Nullable
-    @BindView(R.id.bottomsheetLayout)
     public BottomSheetLayout mBottomSheet;
 
-    @Nullable
-    @BindView(R.id.rootLayout)
     public CoordinatorLayout mRootLayout;
 
-    @Nullable
-    @BindView(R.id.fab)
     public FloatingActionButton mFab;
-
 
     private int mPos;
 
@@ -85,16 +70,26 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     private ArrayList<WallpaperObject> mPagerData = new ArrayList<>();
 
+    private void initView() {
+        mFab = findViewById(R.id.fab);
+        mRootLayout = findViewById(R.id.rootLayout);
+        mBottomSheet = findViewById(R.id.bottomsheetLayout);
+        mProgressBar = findViewById(R.id.progressBar);
+        mViewPager = findViewById(R.id.viewpager);
+        mToolbar = findViewById(R.id.toolbar);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initView();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setFlags(
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
         WallpaperApplication application = (WallpaperApplication) getApplication();
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mFab = findViewById(R.id.fab);
         ViewModel.Current.fileUtils.SetListner(this);
         ViewModel.Current.device.setmDeviceListner(this);
         mPagerData = getIntent().getParcelableArrayListExtra(Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER);

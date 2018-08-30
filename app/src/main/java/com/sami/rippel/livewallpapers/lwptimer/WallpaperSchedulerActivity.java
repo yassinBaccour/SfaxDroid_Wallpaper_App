@@ -56,22 +56,22 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpaper_scheduler);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         initToolbar();
         mScheduler = (JobScheduler) getApplicationContext().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        mRadioOneHoure = (RadioButton) findViewById(R.id.radioOneHoure);
-        mRadioSixHoure = (RadioButton) findViewById(R.id.radioSixHoure);
-        mRadioDouzeHoure = (RadioButton) findViewById(R.id.radioDouzeHoure);
-        mRadioOneDayHoure = (RadioButton) findViewById(R.id.radioOneDayHoure);
-        mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
-        Button mBtnAddWallpaper = (Button) findViewById(R.id.buttonAddLwp);
-        Button mBtnListWallpaper = (Button) findViewById(R.id.buttonLWPList);
-        mTxtstatus = (TextView) findViewById(R.id.txtstatus);
-        mRadioSexGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        mButtonActive = (Button) findViewById(R.id.buttonActive);
-        mButtonClose = (Button) findViewById(R.id.buttonClose);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mTxtNotForget = (TextView) findViewById(R.id.txtNotForget);
+        mRadioOneHoure = findViewById(R.id.radioOneHoure);
+        mRadioSixHoure = findViewById(R.id.radioSixHoure);
+        mRadioDouzeHoure = findViewById(R.id.radioDouzeHoure);
+        mRadioOneDayHoure = findViewById(R.id.radioOneDayHoure);
+        mRootLayout = findViewById(R.id.rootLayout);
+        Button mBtnAddWallpaper = findViewById(R.id.buttonAddLwp);
+        Button mBtnListWallpaper = findViewById(R.id.buttonLWPList);
+        mTxtstatus = findViewById(R.id.txtstatus);
+        mRadioSexGroup = findViewById(R.id.radioGroup);
+        mButtonActive = findViewById(R.id.buttonActive);
+        mButtonClose = findViewById(R.id.buttonClose);
+        mProgressBar = findViewById(R.id.progressBar);
+        mTxtNotForget = findViewById(R.id.txtNotForget);
         mTxtNotForget.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
         mRadioSexGroup.setOnCheckedChangeListener((radioGroup, i) -> {

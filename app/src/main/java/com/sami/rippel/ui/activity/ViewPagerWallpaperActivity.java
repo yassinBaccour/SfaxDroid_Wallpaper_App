@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -30,7 +29,6 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ServiceErrorFromEnum;
 import com.sami.rippel.model.entity.UpdateApp;
-import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.model.listner.DeviceListner;
 import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
@@ -39,33 +37,19 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import net.hockeyapp.android.CrashManager;
 
-import butterknife.BindView;
-
 public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListener, DeviceListner {
 
-    @Nullable
-    @BindView(R.id.collapsingToolbarLayout)
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
-    @Nullable
-    @BindView(R.id.rootLayout)
-    CoordinatorLayout mRootLayout;
+    private CoordinatorLayout mRootLayout;
 
-    @Nullable
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    private Toolbar mToolbar;
 
-    @Nullable
-    @BindView(R.id.toolbarTabs)
-    TabLayout mTabLayout;
+    private TabLayout mTabLayout;
 
-    @Nullable
-    @BindView(R.id.viewpager)
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
 
-    @Nullable
-    @BindView(R.id.progressBar)
-    ProgressBar mProgressLoader;
+    private ProgressBar mProgressLoader;
 
     private static final int PICK_FROM_FILE = 3;
 
@@ -94,6 +78,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
         rxPermissions = new RxPermissions(this);
         setupAds();
         ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
+        initView();
         setupToolBar();
         setupViewPager();
         initRatingApp();
@@ -102,6 +87,15 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
         mAdapter.ChangeAdapterFragmentViewState(false);
         loadAndSetWallpaperToViewModel();
         checkPermission();
+    }
+
+    private void initView() {
+        mCollapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
+        mRootLayout = findViewById(R.id.rootLayout);
+        mToolbar = findViewById(R.id.toolbar);
+        mTabLayout = findViewById(R.id.toolbarTabs);
+        mViewPager = findViewById(R.id.viewpager);
+        mProgressLoader = findViewById(R.id.progressBar);
     }
 
     private void setupAds() {
@@ -158,7 +152,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
 
     public void loadAndSetWallpaperToViewModel() {
         addSubscribe(ViewModel.Current.service.mRetrofitHelper.getWallpapersList()
-                .compose(RxUtil.<WallpapersRetrofitObject>rxSchedulerHelper())
+                .compose(RxUtil.rxSchedulerHelper())
                 .subscribe(wallpapersRetrofitObject -> {
                     if (wallpapersRetrofitObject.getCategoryList().size() > 0) {
                         ViewModel.Current.setRetrofitWallpObject(wallpapersRetrofitObject);

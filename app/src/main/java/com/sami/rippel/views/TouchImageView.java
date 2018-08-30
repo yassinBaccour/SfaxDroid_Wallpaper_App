@@ -33,8 +33,6 @@ public class TouchImageView extends ImageView {
     private float normalizedScale;
     private Matrix matrix, prevMatrix;
     private State state;
-
-    ;
     private float minScale;
     private float maxScale;
     private float superMinScale;

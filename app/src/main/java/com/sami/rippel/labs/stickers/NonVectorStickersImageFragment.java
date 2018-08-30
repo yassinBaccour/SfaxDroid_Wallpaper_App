@@ -29,8 +29,7 @@ public class NonVectorStickersImageFragment extends Fragment {
     private ArrayList<WallpaperObject> mData = new ArrayList<>();
 
     public static NonVectorStickersImageFragment newInstance() {
-        NonVectorStickersImageFragment fragment = new NonVectorStickersImageFragment();
-        return fragment;
+        return new NonVectorStickersImageFragment();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class NonVectorStickersImageFragment extends Fragment {
     public void fillList() {
         if (ViewModel.Current.isWallpapersLoaded()) {
             mData.clear();
-            mData = new ArrayList<WallpaperObject>();
+            mData = new ArrayList<>();
             List<WallpaperObject> mImageListByType = ViewModel.Current.getWallpaperCategoryFromName("Stikers")
                     .getGetWallpapersList();
             for (WallpaperObject wall : mImageListByType) {

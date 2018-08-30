@@ -8,9 +8,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.sami.rippel.allah.WallpaperApplication;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by yassine on 11/10/17.
  */
@@ -18,13 +15,11 @@ import butterknife.Unbinder;
 public abstract class SimpleActivity extends AppCompatActivity {
 
     protected Activity mContext;
-    private Unbinder mUnBinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
-        mUnBinder = ButterKnife.bind(this);
         mContext = this;
         onViewCreated();
         WallpaperApplication.getInstance().addActivity(this);
@@ -42,7 +37,6 @@ public abstract class SimpleActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         WallpaperApplication.getInstance().removeActivity(this);
-        mUnBinder.unbind();
     }
 
     protected abstract int getLayout();

@@ -12,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.presenter.Contract.DetailContract;
 
 import java.io.File;
 
@@ -41,8 +40,7 @@ public class BitmapUtils {
         BitmapFactory.decodeFile(imagePath, bmOptions);
         int cameraImageWidth = bmOptions.outWidth;
         int cameraImageHeight = bmOptions.outHeight;
-        int scaleFactor = Math.min(cameraImageWidth / targetImageViewWidth, cameraImageHeight / targetImageViewHeight);
-        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inSampleSize = Math.min(cameraImageWidth / targetImageViewWidth, cameraImageHeight / targetImageViewHeight);
         bmOptions.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(imagePath, bmOptions);
     }
@@ -100,8 +98,7 @@ public class BitmapUtils {
 
 
     public Drawable covertBitmapToDrawable(Context context, Bitmap bitmap) {
-        Drawable d = new BitmapDrawable(context.getResources(), bitmap);
-        return d;
+        return new BitmapDrawable(context.getResources(), bitmap);
     }
 
 

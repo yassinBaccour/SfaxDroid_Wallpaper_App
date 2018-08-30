@@ -18,7 +18,6 @@ import com.sami.rippel.model.listner.StickersListener;
 public class AddTextFragment extends Fragment {
 
     private EditText mTxt;
-    private TextView textViewAddText;
     private boolean mState = false;
 
     public static AddTextFragment newInstance() {
@@ -29,7 +28,7 @@ public class AddTextFragment extends Fragment {
         return mState;
     }
 
-    public void setmState(boolean mState) {
+    public void setState(boolean mState) {
         this.mState = mState;
     }
 
@@ -38,14 +37,14 @@ public class AddTextFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
-        mTxt = (EditText) rootView.findViewById(R.id.editText);
-        textViewAddText = (TextView) rootView.findViewById(R.id.textViewAddText);
+        mTxt = rootView.findViewById(R.id.editText);
+        TextView textViewAddText = (TextView) rootView.findViewById(R.id.textViewAddText);
         if (getActivity() != null) {
             textViewAddText.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "arabicfont5.ttf"));
         }
