@@ -1,7 +1,6 @@
 package com.sami.rippel.livewallpapers.lwptimer;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.WallpaperManager;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -291,10 +290,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
                     mTxtstatus.setTextColor(getResources().getColor(R.color.green));
                     ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.timeron));
                 } else {
-                    Activity activity = WallpaperSchedulerActivity.this;
-                    if (activity != null) {
-                        showDialogNoMinFiles();
-                    }
+                    showDialogNoMinFiles();
                 }
 
             } catch (Exception ignored) {

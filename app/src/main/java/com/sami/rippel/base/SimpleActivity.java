@@ -26,9 +26,6 @@ public abstract class SimpleActivity extends AppCompatActivity {
         initEventAndData();
     }
 
-    protected void setToolBar(Toolbar toolbar, String title) {
-    }
-
     protected void onViewCreated() {
 
     }

@@ -1,7 +1,6 @@
 package com.sami.rippel.ui.activity;
 
 import android.app.WallpaperManager;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.widget.ProgressBar;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.SimpleActivity;
-import com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaper;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ActionTypeEnum;
@@ -279,7 +277,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
         boolean isSavedToStorage = Current.fileUtils.isSavedToStorage(Current.fileUtils
                 .getFileName(url));
         if (isSavedToStorage) {
-            sendToRippleLwp();
+            //sendToRippleLwp();
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
             Current.fileUtils.saveToFileToTempsDirAndChooseAction(url, actionToDo);
@@ -289,12 +287,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
     public void sendToRippleLwp() {
         Constants.FilePath = Current.fileUtils.getTemporaryFile(Current.fileUtils.getFileName(mSelectedUrl)).getPath();
         try {
-            Intent intent = new Intent(
-                    WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-            intent.putExtra(
-                    WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                    new ComponentName(this, IslamicWallpaper.class));
-            startActivity(intent);
+
         } catch (Exception e) {
             try {
                 Intent intent = new Intent();
@@ -330,7 +323,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
 
     @Override
     public void onSendToLwp() {
-        sendToRippleLwp();
+        //sendToRippleLwp();
     }
 
     @Override

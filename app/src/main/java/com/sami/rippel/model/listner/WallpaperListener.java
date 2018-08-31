@@ -1,6 +1,6 @@
 package com.sami.rippel.model.listner;
 
-public interface WallpaperListner {
+public interface WallpaperListener {
     void onGoToCropActivity();
 
     void onMoveFileToPermanentGallery();

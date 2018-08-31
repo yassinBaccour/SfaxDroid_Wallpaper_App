@@ -18,7 +18,6 @@ import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.views.GlideApp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
@@ -28,9 +27,10 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  */
 
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    //yassin classe abstraite pour l'adapter et pour le holder, avec type generique T
+
     protected Context context;
-    protected List<T> data = new ArrayList<>();
+
+    protected List<T> data;
 
     public BaseRecyclerViewAdapter(Context context, List<T> data) {
         this.context = context;

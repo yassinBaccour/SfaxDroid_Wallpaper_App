@@ -26,8 +26,6 @@ public class DouaLiveWallpaper extends WallpaperService {
         private final Handler mHandler = new Handler();
         private final Paint mPaint = new Paint();
         private BitmapFactory.Options mOptions = new BitmapFactory.Options();
-        private float mTouchX = -1;
-        private float mTouchY = -1;
         private int mScreenHeight;
         private int mScreenWidth;
         private Bitmap mBackground;
@@ -130,8 +128,6 @@ public class DouaLiveWallpaper extends WallpaperService {
                     mBackground = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
                             mOptions), mScreenWidth, mScreenHeight, true);
                 }
-                mTouchX = event.getX();
-                mTouchY = event.getY();
                 if (mLogoDoua != null) {
                     mLogoDoua.recycle();
                 }

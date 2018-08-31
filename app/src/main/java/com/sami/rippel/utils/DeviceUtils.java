@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.WallpaperManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,7 +31,6 @@ import android.view.WindowManager;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.labs.framecollage.ChooseActivity;
-import com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaper;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.IntentTypeEnum;
@@ -157,6 +155,7 @@ public class DeviceUtils {
         Log.d("Total Memory :", mTotalMemoryMegaByte + "");
     }
 
+    /*
     public void openRippleLwp(Activity ac) {
         try {
             Intent intent = new Intent(
@@ -174,6 +173,7 @@ public class DeviceUtils {
             }
         }
     }
+    */
 
     public void shareFileAll(Activity ac, File file) {
         Intent intent = new Intent(Intent.ACTION_ATTACH_DATA);

@@ -31,7 +31,7 @@ import com.sami.rippel.model.entity.ActionTypeEnum;
 import com.sami.rippel.model.entity.IntentTypeEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.DeviceListner;
-import com.sami.rippel.model.listner.WallpaperListner;
+import com.sami.rippel.model.listner.WallpaperListener;
 import com.sami.rippel.presenter.Contract.DetailContract;
 import com.sami.rippel.presenter.DetailPresenter;
 import com.sami.rippel.ui.adapter.DetailPagerAdapter;
@@ -46,7 +46,7 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class DetailsActivity extends BaseActivity<DetailPresenter> implements WallpaperListner, DeviceListner, DetailContract.View {
+public class DetailsActivity extends BaseActivity<DetailPresenter> implements WallpaperListener, DeviceListner, DetailContract.View {
 
     public Toolbar mToolbar;
 
@@ -244,7 +244,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
                 createIntent(IntentTypeEnum.INTAGRAMINTENT);
             }
             if (actionToDo == ActionTypeEnum.SEND_LWP) {
-                sendToRippleLwp();
+                //sendToRippleLwp();
             }
             if (actionToDo == ActionTypeEnum.CROP) {
                 beginCrop();
@@ -340,6 +340,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
                         getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())));
     }
 
+    /*
     public void sendToRippleLwp() {
         hideLoading();
         mFromRipple = true;
@@ -352,6 +353,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         ViewModel.Current.sharedPrefsUtils.SetSetting(Constants.CHANGE_IMAGE_KEY,
                 Constants.CUSTOM_LWP);
     }
+    */
 
     @Override
     public void onGoToCropActivity() {
@@ -390,7 +392,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     @Override
     public void onSendToRippleLwp() {
-        sendToRippleLwp();
+        //sendToRippleLwp();
     }
 
     @Override

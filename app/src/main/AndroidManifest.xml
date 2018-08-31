@@ -11,23 +11,29 @@
             tools:node="replace" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <uses-permission android:name="android.permission.BIND_WALLPAPER" />
+    <uses-permission
+        android:name="android.permission.BIND_WALLPAPER"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.REAL_GET_TASKS" />
+    <uses-permission
+        android:name="android.permission.REAL_GET_TASKS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
             android:name=".WallpaperApplication"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
-            android:largeHeap="true"
+            android:allowBackup="false"
             android:theme="@style/AppTheme">
 
         <provider
@@ -43,11 +49,6 @@
         <meta-data
                 android:name="net.hockeyapp.android.appIdentifier"
                 android:value="${HOCKEYAPP_APP_ID}" />
-
-        <activity
-                android:name="com.sami.rippel.livewallpapers.lwpskyview.WallpaperPreferenceActivity"
-                android:exported="true"
-                android:label="@string/app_name" />
 
         <service
                 android:name="com.sami.rippel.livewallpapers.lwpskyview.SkyNameOfAllahLiveWallpaper"

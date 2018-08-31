@@ -1,21 +1,10 @@
 package com.sami.rippel.utils;
 
 import android.app.Activity;
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -26,7 +15,7 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ActionTypeEnum;
 import com.sami.rippel.model.listner.LwpListner;
-import com.sami.rippel.model.listner.WallpaperListner;
+import com.sami.rippel.model.listner.WallpaperListener;
 import com.sami.rippel.utils.downloadsystem.DecompressZip;
 import com.sami.rippel.views.GlideApp;
 
@@ -49,7 +38,7 @@ public class FileUtils {
     private static final int SAVE_TEMPORARY = 0;
     private static final int SAVE_PERMANENT = 1;
     private Context mContext;
-    private WallpaperListner mFileListner;
+    private WallpaperListener wallpaperListener;
     private LwpListner mLwpListner;
     private boolean mSavedPermanent = false;
 
@@ -57,8 +46,8 @@ public class FileUtils {
         this.mContext = context;
     }
 
-    public void SetListner(WallpaperListner fileListner) {
-        this.mFileListner = fileListner;
+    public void SetListner(WallpaperListener fileListner) {
+        this.wallpaperListener = fileListner;
     }
 
     public void SetLwpListner(LwpListner lwpListner) {
@@ -222,27 +211,25 @@ public class FileUtils {
                         boolean isSaved = saveBitmapToStorage(resource, getFileName(url), SAVE_TEMPORARY);
                         if (isSaved) {
                             if (action == ActionTypeEnum.CROP)
-                                mFileListner.onGoToCropActivity();
+                                wallpaperListener.onGoToCropActivity();
                             else if (action == ActionTypeEnum.OPEN_NATIV_CHOOSER)
-                                mFileListner.onOpenNativeSetWallChoose();
+                                wallpaperListener.onOpenNativeSetWallChoose();
                             else if (action == ActionTypeEnum.MOVE_PERMANENT_DIR)
-                                mFileListner.onMoveFileToPermanentGallery();
+                                wallpaperListener.onMoveFileToPermanentGallery();
                             else if (action == ActionTypeEnum.SHARE_FB)
-                                mFileListner.onOpenWithFaceBook();
+                                wallpaperListener.onOpenWithFaceBook();
                             else if (action == ActionTypeEnum.SHARE_INSTA)
-                                mFileListner.onOpenWithInstagram();
+                                wallpaperListener.onOpenWithInstagram();
                             else if (action == ActionTypeEnum.SEND_LWP)
-                                mFileListner.onSendToRippleLwp();
+                                wallpaperListener.onSendToRippleLwp();
                             else if (action == ActionTypeEnum.SHARE_SNAP_CHAT)
-                                mFileListner.onShareWhitApplication();
+                                wallpaperListener.onShareWhitApplication();
                             else if (action == ActionTypeEnum.SKYBOX_LWP)
                                 mLwpListner.onSendToLwp();
-
                         } else {
-                            mFileListner.onFinishActivity();
+                            wallpaperListener.onFinishActivity();
                             resource.recycle();
                         }
-
                     }
                 });
     }

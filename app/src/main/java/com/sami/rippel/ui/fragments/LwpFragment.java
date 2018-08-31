@@ -116,16 +116,16 @@ public class LwpFragment extends SimpleFragment {
             openWallpaperSchedulerActivity();
         });
 
-        if (ViewModel.Current.device.getScreenWidthPixels() < 1000
-                && ViewModel.Current.device.getScreenHeightPixels() < 1700) {
-            //FIXME TODO
-            mCardViewSkyBox.setVisibility(View.VISIBLE);
+        if (ViewModel.Current.device.getScreenWidthPixels() < 710
+                && ViewModel.Current.device.getScreenHeightPixels() < 1200) {
+            mCardViewSkyBox.setVisibility(View.GONE);
         }
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mCardViewTimer.setVisibility(View.VISIBLE);
-        } else
+        } else {
             mCardViewTimer.setVisibility(View.GONE);
+        }
 
         mBtotherapp.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
