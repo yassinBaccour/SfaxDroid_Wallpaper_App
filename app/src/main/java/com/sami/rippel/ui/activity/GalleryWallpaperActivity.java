@@ -23,7 +23,7 @@ import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperCategory;
 import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.model.listner.LwpListner;
+import com.sami.rippel.model.listner.LwpListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
@@ -36,7 +36,7 @@ import java.util.List;
 
 import static com.sami.rippel.model.ViewModel.Current;
 
-public class GalleryWallpaperActivity extends SimpleActivity implements LwpListner, OnStateChangeListener {
+public class GalleryWallpaperActivity extends SimpleActivity implements LwpListener, OnStateChangeListener {
 
     private GalleryAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -104,7 +104,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListn
 
     @Override
     protected void initEventAndData() {
-        Current.fileUtils.SetLwpListner(this);
+        Current.fileUtils.SetLwpListener(this);
         ViewModel.Current.registerOnStateChangeListener(this);
         mToolbar = findViewById(R.id.toolbar);
         mProgressBar = findViewById(R.id.progressBar);

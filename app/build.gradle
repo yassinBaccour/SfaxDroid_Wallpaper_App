@@ -10,8 +10,8 @@ android {
         applicationId "com.sami.rippel.allah"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 65
-        versionName "7.1"
+        versionCode 67
+        versionName "7.2"
         multiDexEnabled true
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "c479dc18c3dc418daecef942158a0d6a"]
     }
@@ -25,7 +25,7 @@ android {
             resConfigs "fr", "xxhdpi"
         }
         prod {
-            minSdkVersion 15
+            minSdkVersion 19
             dimension "minApi"
         }
         arab {
@@ -41,8 +41,8 @@ android {
         }
         release {
             debuggable false
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

@@ -21,7 +21,7 @@ public class WallpaperApplication extends MultiDexApplication {
 
     private static WallpaperApplication instance;
 
-    private Set<Activity> allActivities;
+    private Set<Activity> mAllActivities;
 
     public static synchronized WallpaperApplication getInstance() {
         return instance;
@@ -46,15 +46,15 @@ public class WallpaperApplication extends MultiDexApplication {
     }
 
     public void addActivity(Activity act) {
-        if (allActivities == null) {
-            allActivities = new HashSet<>();
+        if (mAllActivities == null) {
+            mAllActivities = new HashSet<>();
         }
-        allActivities.add(act);
+        mAllActivities.add(act);
     }
 
     public void removeActivity(Activity act) {
-        if (allActivities != null) {
-            allActivities.remove(act);
+        if (mAllActivities != null) {
+            mAllActivities.remove(act);
         }
     }
 }

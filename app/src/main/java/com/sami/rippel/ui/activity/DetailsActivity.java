@@ -90,7 +90,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         }
         WallpaperApplication application = (WallpaperApplication) getApplication();
         mFab = findViewById(R.id.fab);
-        ViewModel.Current.fileUtils.SetListner(this);
+        ViewModel.Current.fileUtils.SetListener(this);
         ViewModel.Current.device.setmDeviceListner(this);
         mPagerData = getIntent().getParcelableArrayListExtra(Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER);
         mPos = getIntent().getIntExtra(Constants.DETAIL_IMAGE_POS, 0);

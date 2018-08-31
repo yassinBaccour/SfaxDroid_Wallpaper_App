@@ -58,7 +58,7 @@ public class LwpFragment extends SimpleFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         mButtonRippleLWP.setOnClickListener(v -> {
             if (mListener != null) {

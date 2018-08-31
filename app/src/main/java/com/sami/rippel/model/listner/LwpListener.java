@@ -1,5 +1,5 @@
 package com.sami.rippel.model.listner;
 
-public interface LwpListner {
+public interface LwpListener {
     void onSendToLwp();
 }

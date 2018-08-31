@@ -28,8 +28,6 @@ import com.sami.rippel.base.BaseActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ServiceErrorFromEnum;
-import com.sami.rippel.model.entity.UpdateApp;
-import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.model.listner.DeviceListner;
 import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
@@ -139,7 +137,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
         assert mProgressLoader != null;
         mProgressLoader.setVisibility(View.VISIBLE);
         addSubscribe(ViewModel.Current.service.mRetrofitHelper.getUpdateObject()
-                .compose(RxUtil.<UpdateApp>rxSchedulerHelper())
+                .compose(RxUtil.rxSchedulerHelper())
                 .subscribe(updateApp -> {
                     if (updateApp.isUpdateAppNeeded()) {
                         onStartCheckUpdateNewWallpapersDataBase();
@@ -276,13 +274,13 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
         if (isAdsShow) {
             isAdsShow = false;
             onTrackAction("ADS", AdsType.ShowAds.toString());
-            showInterstial();
+            showinterstial();
         }
     }
 
-    public void showInterstial() {
+    public void showinterstial() {
         if (mInterstitialAd.isLoaded()) {
-            //mInterstitialAd.show();
+            mInterstitialAd.show();
         }
     }
 
@@ -290,7 +288,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
 
         if (nbOpenAds == 4) {
             nbOpenAds = 0;
-            showInterstial();
+            showinterstial();
             onTrackAction("ADS", AdsType.ShowTimedAds.toString());
         }
 

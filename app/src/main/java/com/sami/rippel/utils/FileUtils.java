@@ -14,7 +14,7 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ActionTypeEnum;
-import com.sami.rippel.model.listner.LwpListner;
+import com.sami.rippel.model.listner.LwpListener;
 import com.sami.rippel.model.listner.WallpaperListener;
 import com.sami.rippel.utils.downloadsystem.DecompressZip;
 import com.sami.rippel.views.GlideApp;
@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by yassin baccour on 30/10/2016.
@@ -39,19 +40,19 @@ public class FileUtils {
     private static final int SAVE_PERMANENT = 1;
     private Context mContext;
     private WallpaperListener wallpaperListener;
-    private LwpListner mLwpListner;
+    private LwpListener lwpListener;
     private boolean mSavedPermanent = false;
 
     public FileUtils(Context context) {
         this.mContext = context;
     }
 
-    public void SetListner(WallpaperListener fileListner) {
-        this.wallpaperListener = fileListner;
+    public void SetListener(WallpaperListener wallpaperListener) {
+        this.wallpaperListener = wallpaperListener;
     }
 
-    public void SetLwpListner(LwpListner lwpListner) {
-        this.mLwpListner = lwpListner;
+    public void SetLwpListener(LwpListener lwpListener) {
+        this.lwpListener = lwpListener;
     }
 
     public String getFileName(String path) {
@@ -64,10 +65,9 @@ public class FileUtils {
 
     public File createImageFile() throws IOException {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
         String imageFileName = "IMAGE_" + timeStamp + "_";
-        File image = File.createTempFile(imageFileName, ".jpg", getTemporaryDir());
-        return image;
+        return File.createTempFile(imageFileName, ".jpg", getTemporaryDir());
     }
 
     private void copyFile(File sourceLocation, File targetLocation)
@@ -225,7 +225,7 @@ public class FileUtils {
                             else if (action == ActionTypeEnum.SHARE_SNAP_CHAT)
                                 wallpaperListener.onShareWhitApplication();
                             else if (action == ActionTypeEnum.SKYBOX_LWP)
-                                mLwpListner.onSendToLwp();
+                                lwpListener.onSendToLwp();
                         } else {
                             wallpaperListener.onFinishActivity();
                             resource.recycle();
