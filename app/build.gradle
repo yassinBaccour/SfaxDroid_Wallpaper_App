@@ -10,8 +10,8 @@ android {
         applicationId "com.sami.rippel.allah"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 67
-        versionName "7.2"
+        versionCode 71
+        versionName "7.6"
         multiDexEnabled true
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "c479dc18c3dc418daecef942158a0d6a"]
     }

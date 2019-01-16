@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class ExtendedViewPager extends ViewPager {
+
     public ExtendedViewPager(Context mContext) {
         super(mContext);
     }

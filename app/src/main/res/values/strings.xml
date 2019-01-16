@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Allah Water Ripple LWP</string>
+    <string name="app_name">Arabic Wallpaper HD</string>
     <string name="app_namenospace">allahwallpapers</string>
-    <!-- Name in Live Wallpaper Picker list -->
     <string name="lwp_name">Allah Ripple LWP</string>
     <string-array name="ripple_size">
         <item>Small</item>

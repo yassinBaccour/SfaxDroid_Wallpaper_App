@@ -222,9 +222,11 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
                 case R.id.buttonShare:
                     mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_SNAP_CHAT, getCurrentUrl());
                     break;
+                    /*
                 case R.id.buttonRipple:
                     mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SEND_LWP, getCurrentUrl());
                     break;
+                    */
             }
             dismissMenuSheet();
             return true;

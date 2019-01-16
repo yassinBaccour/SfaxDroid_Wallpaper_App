@@ -1,6 +1,5 @@
 package com.sami.rippel.model;
 
-import com.sami.rippel.model.api.service.WallpaperApiService;
 import com.sami.rippel.model.entity.UpdateApp;
 import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 

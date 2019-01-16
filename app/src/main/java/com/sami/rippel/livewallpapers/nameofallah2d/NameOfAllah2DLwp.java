@@ -21,16 +21,6 @@ public class NameOfAllah2DLwp extends WallpaperService {
     private Paint mPaintOption;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
     public Engine onCreateEngine() {
         return new IslamicEngine();
     }
@@ -76,20 +66,20 @@ public class NameOfAllah2DLwp extends WallpaperService {
 
         Typeface getTypeFace() {
             try {
-                int mTypefacenum = ViewModel.Current.sharedPrefsUtils.GetSetting("nameofallahfontstyle", 1);
-                if (mTypefacenum == 1)
+                int mTypefaceNum = ViewModel.Current.sharedPrefsUtils.GetSetting("nameofallahfontstyle", 1);
+                if (mTypefaceNum == 1)
                     return Typeface.createFromAsset(getAssets(), "arabicfont1.otf");
-                if (mTypefacenum == 2)
+                if (mTypefaceNum == 2)
                     return Typeface.createFromAsset(getAssets(), "arabicfont2.ttf");
-                else if (mTypefacenum == 3)
+                else if (mTypefaceNum == 3)
                     return Typeface.createFromAsset(getAssets(), "arabicfont3.ttf");
-                else if (mTypefacenum == 4)
+                else if (mTypefaceNum == 4)
                     return Typeface.createFromAsset(getAssets(), "arabicfont4.otf");
-                else if (mTypefacenum == 5)
+                else if (mTypefaceNum == 5)
                     return Typeface.createFromAsset(getAssets(), "arabicfont5.ttf");
-                else if (mTypefacenum == 6)
+                else if (mTypefaceNum == 6)
                     return Typeface.createFromAsset(getAssets(), "arabicfont6.ttf");
-                else if (mTypefacenum == 7)
+                else if (mTypefaceNum == 7)
                     return Typeface.createFromAsset(getAssets(), "arabicfont7.ttf");
                 else
                     return Typeface.createFromAsset(getAssets(), "arabicfont8.ttf");

@@ -155,30 +155,13 @@ public class DeviceUtils {
         Log.d("Total Memory :", mTotalMemoryMegaByte + "");
     }
 
-    /*
-    public void openRippleLwp(Activity ac) {
-        try {
-            Intent intent = new Intent(
-                    WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-            intent.putExtra(
-                    WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                    new ComponentName(mContext, IslamicWallpaper.class));
-            ac.startActivity(intent);
-        } catch (Exception e) {
-            try {
-                Intent intent = new Intent();
-                intent.setAction(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER);
-                ac.startActivity(intent);
-            } catch (Exception ignored) {
-            }
-        }
-    }
-    */
-
     public void shareFileAll(Activity ac, File file) {
         Intent intent = new Intent(Intent.ACTION_ATTACH_DATA);
-        intent.setDataAndType(Uri.fromFile(file), "image/jpg");
+        intent.setDataAndType(FileProvider.getUriForFile(mContext,
+                mContext.getApplicationContext().getPackageName()
+                        + ".provider", file), "image/jpg");
         intent.putExtra("mimeType", "image/jpg");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         ac.startActivityForResult(Intent.createChooser(intent, mContext.getString(R.string.setAs)), 200);
     }
 

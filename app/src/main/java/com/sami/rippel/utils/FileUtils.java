@@ -321,13 +321,8 @@ public class FileUtils {
         }
     }
 
-
-
     public Boolean isFileExistInDataFolder(String fileName) {
         File ZipFile = new File(getTemporaryDir(), fileName);
         return ZipFile.exists();
     }
-
-
-
 }

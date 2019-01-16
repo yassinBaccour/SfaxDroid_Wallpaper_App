@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fond d\'écran animé Arabesque</string>
+    <string name="app_name">Arabic Wallpaper HD</string>
     <string name="app_namenospace">allahwallpapers</string>
-    <!-- Name in Live Wallpaper Picker list -->
     <string name="lwp_name">Allah Fond écran</string>
     <string-array name="ripple_size">
-        <item>Petit</item>
+    <item>Petit</item>
         <item>Moyen</item>
         <item>Grand</item>
     </string-array>

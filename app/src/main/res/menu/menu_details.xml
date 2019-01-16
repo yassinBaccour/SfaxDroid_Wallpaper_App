@@ -28,9 +28,4 @@
         android:id="@+id/buttonSareFb"
         android:title="@string/menu.detail.share.fb" />
 
-    <item
-        android:icon="@mipmap/ic_ripple"
-        android:id="@+id/buttonRipple"
-        android:title="@string/menu.detail.share.ripple" />
-
 </menu>

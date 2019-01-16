@@ -19,7 +19,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -83,36 +82,36 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
     private View mDivinerBottom;
     private FloatingActionButton mFab;
     private boolean mIsServiceCanBeUsed = false;
-    private ActivityBasmalaScreen.MyDownloadDownloadStatusListenerV1
-            mDownloadStatusListener = new ActivityBasmalaScreen.MyDownloadDownloadStatusListenerV1();
+    private MyDownloadStatusListener
+            mDownloadStatusListener = new MyDownloadStatusListener();
 
     public void initUI() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
-        mBtnSpeedMeduim = (Button) findViewById(R.id.buttonMeduim);
-        mBtnSpeedSlow = (Button) findViewById(R.id.buttonShort);
-        mBtnSpeedFast = (Button) findViewById(R.id.buttonFast);
-        mButtonGallery = (Button) findViewById(R.id.buttonGallery);
-        mButtonTurbo = (Button) findViewById(R.id.buttonTurbo);
-        mSoundCheckbox = (CheckBox) findViewById(R.id.checkBoxSound);
-        mPictureCheckbox = (CheckBox) findViewById(R.id.checkBoxImage);
-        mCheckBoxNbUnlock = (CheckBox) findViewById(R.id.checkBoxNbUnlock);
-        mImgPreview = (ImageView) findViewById(R.id.imageView1);
-        mPhotoAleatoire = (CheckBox) findViewById(R.id.checkBoxAleatoire);
-        mLinearLayoutChoosePicture = (LinearLayout) findViewById(R.id.linearLayoutChoosePicture);
-        mEditTextNbOpen = (EditText) findViewById(R.id.editTextNbOpen);
-        mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
-        mTextViewServiceInfo = (TextView) findViewById(R.id.textViewServiceInfo);
-        mProgress1Txt = (TextView) findViewById(R.id.progressTxt1);
-        mLayoutDownload = (LinearLayout) findViewById(R.id.layoutDownload);
-        mDivinerBottom = (View) findViewById(R.id.divinerBottom);
-        mProgress1 = (ProgressBar) findViewById(R.id.progress1);
-        mButtonActive = (Button) findViewById(R.id.button1);
-        mButtonSizeFullScreen = (Button) findViewById(R.id.buttonSizeFullScreen);
-        mButtonSizeBig = (Button) findViewById(R.id.buttonSizeBig);
-        mButtonSizeMeduim = (Button) findViewById(R.id.buttonSizeMeduim);
-        mButtonSizeSmall = (Button) findViewById(R.id.buttonSizeSmall);
-        mButtonColor = (Button) findViewById(R.id.buttonColor);
+        mToolbar = findViewById(R.id.toolbar);
+        mFab = findViewById(R.id.fab);
+        mBtnSpeedSlow = findViewById(R.id.buttonShort);
+        mBtnSpeedFast = findViewById(R.id.buttonFast);
+        mButtonGallery = findViewById(R.id.buttonGallery);
+        mButtonTurbo = findViewById(R.id.buttonTurbo);
+        mSoundCheckbox = findViewById(R.id.checkBoxSound);
+        mPictureCheckbox = findViewById(R.id.checkBoxImage);
+        mCheckBoxNbUnlock = findViewById(R.id.checkBoxNbUnlock);
+        mImgPreview = findViewById(R.id.imageView1);
+        mPhotoAleatoire = findViewById(R.id.checkBoxAleatoire);
+        mLinearLayoutChoosePicture = findViewById(R.id.linearLayoutChoosePicture);
+        mEditTextNbOpen = findViewById(R.id.editTextNbOpen);
+        mRootLayout = findViewById(R.id.rootLayout);
+        mTextViewServiceInfo = findViewById(R.id.textViewServiceInfo);
+        mLayoutDownload = findViewById(R.id.layoutDownload);
+        mDivinerBottom = findViewById(R.id.divinerBottom);
+        mProgress1 = findViewById(R.id.progress1);
+        mButtonActive = findViewById(R.id.button1);
+        mButtonSizeFullScreen = findViewById(R.id.buttonSizeFullScreen);
+        mButtonSizeBig = findViewById(R.id.buttonSizeBig);
+        mButtonSizeMeduim = findViewById(R.id.buttonSizeMeduim);
+        mButtonSizeSmall = findViewById(R.id.buttonSizeSmall);
+        mButtonColor = findViewById(R.id.buttonColor);
+        mBtnSpeedMeduim = findViewById(R.id.buttonMeduim);
+        mProgress1Txt = findViewById(R.id.progressTxt1);
         mProgress1.setMax(100);
         mProgress1.setProgress(0);
     }
@@ -123,11 +122,11 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         setContentView(R.layout.activity_basmallah);
         mAct = this;
         initUI();
-        initToolbar();
+        initToolBar();
         initPreferences();
-        initListner();
+        initListener();
         initUIifServiceRunning();
-        setSpeedUIDrawableAndListner();
+        setSpeedUIDrawableAndListener();
         ViewModel.Current.device.checkPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         mLayoutDownload.setVisibility(View.GONE);
         mDivinerBottom.setVisibility(View.GONE);
@@ -147,7 +146,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         }
     }
 
-    private void initListner() {
+    private void initListener() {
 
         mEditTextNbOpen.addTextChangedListener(new TextWatcher() {
 
@@ -261,10 +260,10 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
 
         mButtonColor.setOnClickListener(v -> chooseColor());
 
-        initSizeListner();
+        initSizeListener();
     }
 
-    private void initSizeListner() {
+    private void initSizeListener() {
         mButtonSizeSmall.setOnClickListener(v -> {
             ViewModel.Current.sharedPrefsUtils.SetSetting("size", 0);
             resetBtnSizeBackground();
@@ -295,26 +294,24 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
     }
 
     private void initPreferences() {
-        String soundPref = ViewModel.Current.sharedPrefsUtils.GetSetting("sound", "on");
+        String soundPref = ViewModel.Current.sharedPrefsUtils.GetSetting("sound", "off");
         String picturePref = ViewModel.Current.sharedPrefsUtils.GetSetting("eye", "off");
         String randomPref = ViewModel.Current.sharedPrefsUtils.GetSetting("random", "off");
-        int nbOuverture = ViewModel.Current.sharedPrefsUtils.GetSetting("NbOuv", 0);
+        int nbOpen = ViewModel.Current.sharedPrefsUtils.GetSetting("NbOuv", 0);
         int speed = ViewModel.Current.sharedPrefsUtils.GetSetting("speed", 1);
         int size = ViewModel.Current.sharedPrefsUtils.GetSetting("size", 3);
-        String nbOuvertureTxt = nbOuverture + "";
-        mEditTextNbOpen.setText(nbOuvertureTxt);
+        String nbOpenTxt = nbOpen + "";
+        mEditTextNbOpen.setText(nbOpenTxt);
         if (soundPref.equals("on")) {
             mSoundCheckbox.setChecked(true);
         } else if (soundPref.equals("off")) {
             mSoundCheckbox.setChecked(false);
         }
-        // Picture pref
         if (picturePref.equals("on")) {
             mPictureCheckbox.setChecked(true);
         } else if (picturePref.equals("off")) {
             mPictureCheckbox.setChecked(false);
         }
-        // Random pref
         if (randomPref.equals("on")) {
             mPhotoAleatoire.setChecked(true);
             mLinearLayoutChoosePicture.setVisibility(View.INVISIBLE);
@@ -323,7 +320,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             mLinearLayoutChoosePicture.setVisibility(View.VISIBLE);
         }
         // Nb open Pref
-        if (nbOuverture > 0) {
+        if (nbOpen > 0) {
             mCheckBoxNbUnlock.setChecked(true);
             mEditTextNbOpen.setEnabled(true);
         } else {
@@ -362,7 +359,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                     getResources().getDrawable(R.mipmap.ic_size_full_on), null, null);
     }
 
-    private void setSpeedUIDrawableAndListner() {
+    private void setSpeedUIDrawableAndListener() {
 
         mBtnSpeedSlow.setOnClickListener(v -> {
             ViewModel.Current.sharedPrefsUtils.SetSetting("speed", 0);
@@ -517,7 +514,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
         startActivityForResult(intent, RESULT_CODE);
     }
 
-    public void initToolbar() {
+    public void initToolBar() {
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -564,7 +561,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
                 .show();
     }
 
-    public class MyDownloadDownloadStatusListenerV1 implements DownloadStatusListenerV1 {
+    public class MyDownloadStatusListener implements DownloadStatusListenerV1 {
 
         @Override
         public void onDownloadComplete(DownloadRequest request) {

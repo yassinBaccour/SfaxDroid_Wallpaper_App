@@ -46,7 +46,7 @@ public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(mResourceId, container, false);
-        final TouchImageView mDetailImage = (TouchImageView) viewLayout
+        final TouchImageView mDetailImage = viewLayout
                 .findViewById(R.id.detailImage);
         TouchImageView img = new TouchImageView(container.getContext());
         baseView.showLoading();

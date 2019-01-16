@@ -11,68 +11,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:visibility="visible"
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardViewBasmala"
             style="@style/Material_Card_View"
+            android:visibility="gone"
             card_view:cardCornerRadius="2dp"
             card_view:cardElevation="4dp">
+
             <LinearLayout
-                android:background="#ecf0f1"
-                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="#ecf0f1"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:src="@mipmap/ic_card_besmelleh"
+                    android:id="@+id/imageBasmala"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:minWidth="100dp"
                     android:contentDescription="@null"
+                    android:minWidth="100dp"
                     android:scaleType="fitXY"
-                    android:id="@+id/imageBasmala"/>
+                    android:src="@mipmap/ic_card_besmelleh" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        xmlns:tools="http://schemas.android.com/tools"
-                        android:orientation="vertical"
+                    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        <TextView android:id="@+id/titleBasmala"
+                        <TextView
+                            android:id="@+id/titleBasmala"
                             style="@style/Material_Card_Title"
-                            tools:text="@string/openBasmalaTitle"
-                            android:text="@string/openBasmalaTitle" />
+                            android:text="@string/openBasmalaTitle"
+                            tools:text="@string/openBasmalaTitle" />
 
-                        <TextView android:id="@+id/subtitleBasmala"
+                        <TextView
+                            android:id="@+id/subtitleBasmala"
                             style="@style/Material_Card_Subtitle_16dp"
-                            tools:text="@string/openBasmalaDesc"
-                            android:text="@string/openBasmalaDesc" />
+                            android:text="@string/openBasmalaDesc"
+                            tools:text="@string/openBasmalaDesc" />
                     </LinearLayout>
 
                     <View xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="fill_parent"
                         android:layout_height="1px"
                         android:background="@color/divider_grey"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible" />
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
+                        android:orientation="horizontal"
                         android:paddingLeft="8dp">
 
-                        <TextView style="@style/Material_Action"
-                            android:layout_gravity="bottom"
-                            android:textColor="#a82e2e"
+                        <TextView
                             android:id="@+id/buttonOpenBasmala"
+                            style="@style/Material_Action"
+                            android:layout_gravity="bottom"
                             android:text="@string/openBasmala"
-                            tools:text="@string/openBasmala"/>
+                            android:textColor="#a82e2e"
+                            tools:text="@string/openBasmala" />
                     </LinearLayout>
 
                 </LinearLayout>

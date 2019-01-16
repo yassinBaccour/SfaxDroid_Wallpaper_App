@@ -2,8 +2,6 @@ package com.sami.rippel.model;
 
 import android.content.Context;
 
-import com.sami.rippel.model.api.service.WallpaperApiService;
-
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
@@ -28,7 +26,7 @@ public class MyService {
     private Retrofit createRetrofitXMlConverter() {
         return new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())  //Pour info j'utilise l'adapter de jakewharton
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(SimpleXmlConverterFactory.create()).build();
     }
 }

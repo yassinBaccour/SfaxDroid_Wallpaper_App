@@ -1,4 +1,0 @@
-<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"
-   
-    android:settingsActivity="com.sami.rippel.livewallpapers.lwpwaterripple.IslamicWallpaperSettings"
-    android:thumbnail="@mipmap/ic_logo" />
