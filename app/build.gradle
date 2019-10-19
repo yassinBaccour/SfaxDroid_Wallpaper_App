@@ -1,12 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
-
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion "28.0.3"
-
     defaultConfig {
         applicationId "com.sami.rippel.allah"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -114,7 +110,4 @@ dependencies {
 apply plugin: 'com.google.gms.google-services'
 //apply plugin: 'com.google.firebase.firebase-perf'
 
-repositories {
-    jcenter()
-}
 
