@@ -60,7 +60,7 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     testImplementation 'junit:junit:4.12'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
@@ -69,7 +69,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
     implementation "com.flipboard:bottomsheet-core:$rootProject.ext.bottomsheetVersion"
     implementation "com.flipboard:bottomsheet-commons:$rootProject.ext.bottomsheetVersion"
     implementation "io.github.kobakei:ratethisapp:$rootProject.ext.ratethisapp"
@@ -101,8 +100,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'com.google.android.gms:play-services-ads:18.2.0'
-    api project.depRajawali
-}
+ }
 
 apply plugin: 'com.google.gms.google-services'
 

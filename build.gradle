@@ -1,7 +1,3 @@
-project.ext.set('depRajawali', 'org.rajawali3d:rajawali:1.1.346-SNAPSHOT@aar')
-if (file('local.gradle').exists()) {
-    apply from: 'local.gradle'
-}
 
 buildscript {
     repositories {
