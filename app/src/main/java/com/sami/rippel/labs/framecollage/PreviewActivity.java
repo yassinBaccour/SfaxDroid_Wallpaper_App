@@ -12,9 +12,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -34,7 +36,6 @@ import com.myandroid.views.MultiTouchListener;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.views.GlideApp;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -94,7 +95,7 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
         mView1.setImageBitmap(Constants.currentBitmaps);
         mView1.setScaleType(ImageView.ScaleType.CENTER);
         mProgressBar.setVisibility(View.VISIBLE);
-        GlideApp.with(this).load(GetUrlByScreen(mImageUrl)).into(new SimpleTarget<Drawable>() {
+        Glide.with(this).load(GetUrlByScreen(mImageUrl)).into(new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(Drawable resource,
                                         Transition<? super Drawable> glideAnimation) {

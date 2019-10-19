@@ -1,6 +1,6 @@
 package com.sami.rippel.model.listner;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.sami.rippel.model.entity.StateEnum;
 

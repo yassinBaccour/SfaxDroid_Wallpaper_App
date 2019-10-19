@@ -4,13 +4,16 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.tabs.TabLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +37,6 @@ import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
 import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import net.hockeyapp.android.CrashManager;
 
 public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListener, DeviceListner {
 
@@ -98,7 +100,8 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
     }
 
     private void setupAds() {
-        MobileAds.initialize(this, "ca-app-pub-6263632629106733~1726613607");
+        MobileAds.initialize(this, initializationStatus -> {
+        });
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-6263632629106733/6333632738");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
@@ -303,11 +306,11 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
     }
 
     private void checkForCrashes() {
-        CrashManager.register(this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
             return;
         }

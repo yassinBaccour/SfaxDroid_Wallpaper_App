@@ -4,11 +4,11 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,7 +28,6 @@ import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
-import net.hockeyapp.android.CrashManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -310,7 +309,6 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
     }
 
     private void checkForCrashes() {
-        CrashManager.register(this);
     }
 
     @Override

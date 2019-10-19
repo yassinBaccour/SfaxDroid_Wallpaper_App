@@ -2,8 +2,8 @@ package com.sami.rippel.base;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.views.GlideApp;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         if (data.get(position) instanceof WallpaperObject) {
             WallpaperObject wallpaperObject = (WallpaperObject) data.get(position);
             if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT) {
-                GlideApp.with(context).load(GetUrlByScreen(wallpaperObject))
+                Glide.with(context).load(GetUrlByScreen(wallpaperObject))
                         .thumbnail(0.5f)
                         .override(ViewModel.Current.device.getCellWidht(), ViewModel.Current.device.getCellHeight())
                         .transition(withCrossFade())
@@ -67,7 +67,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
                 ((MyItemHolderCategory) holder).title.setText(wallpaperObject.getName());
                 ((MyItemHolderCategory) holder).desc.setText(wallpaperObject.getDesc());
             } else
-                GlideApp.with(context).load(GetUrlByScreen(wallpaperObject))
+                Glide.with(context).load(GetUrlByScreen(wallpaperObject))
                         .thumbnail(0.5f)
                         .override(ViewModel.Current.device.getCellWidht(), ViewModel.Current.device.getCellHeight())
                         .transition(withCrossFade())

@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sami.rippel.allah.R;
@@ -17,8 +18,6 @@ import com.sami.rippel.model.entity.ActionTypeEnum;
 import com.sami.rippel.model.listner.LwpListener;
 import com.sami.rippel.model.listner.WallpaperListener;
 import com.sami.rippel.utils.downloadsystem.DecompressZip;
-import com.sami.rippel.views.GlideApp;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -108,7 +107,7 @@ public class FileUtils {
             } catch (IOException ignored) {
             }
         } else {
-            GlideApp.with(mContext).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
+            Glide.with(mContext).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap resource, Transition<? super Bitmap> glideAnimation) {
                     mSavedPermanent = saveBitmapToStorage(resource, getFileName(url), SAVE_PERMANENT);
@@ -203,7 +202,7 @@ public class FileUtils {
 
     public void saveToFileToTempsDirAndChooseAction(String url, final ActionTypeEnum action) {
 
-        GlideApp.with(mContext).asBitmap().load(getUrlByScreen(url))
+        Glide.with(mContext).asBitmap().load(getUrlByScreen(url))
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource,

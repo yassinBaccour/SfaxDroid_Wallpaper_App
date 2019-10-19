@@ -9,12 +9,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
@@ -35,8 +37,7 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
-import com.sami.rippel.views.GlideApp;
-import com.thin.downloadmanager.DefaultRetryPolicy;
+ import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadManager;
 import com.thin.downloadmanager.DownloadRequest;
 import com.thin.downloadmanager.DownloadStatusListenerV1;
@@ -462,7 +463,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
             case RESULT_CODE:
                 if (data != null) {
                     String path = data.getStringExtra("URL");
-                    GlideApp.with(this).load(path)
+                    Glide.with(this).load(path)
                             .transition(withCrossFade())
                             .override(200, 200)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)

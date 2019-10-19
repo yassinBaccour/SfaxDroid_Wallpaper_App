@@ -7,12 +7,12 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +37,6 @@ import com.sami.rippel.presenter.DetailPresenter;
 import com.sami.rippel.ui.adapter.DetailPagerAdapter;
 import com.soundcloud.android.crop.Crop;
 
-import net.hockeyapp.android.CrashManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -165,7 +164,6 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     }
 
     private void checkForCrashes() {
-        CrashManager.register(this);
     }
 
     public void deleteCurrentPicture() {

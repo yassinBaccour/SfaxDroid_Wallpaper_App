@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +15,7 @@
         android:layout_marginRight="3dp"
         android:orientation="vertical" >
 
-          <android.support.v7.widget.CardView
+          <androidx.cardview.widget.CardView
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:id="@+id/cardViewRippleLWP"
               style="@style/Material_Card_View"
@@ -81,9 +81,9 @@
 
                   </LinearLayout>
               </LinearLayout>
-          </android.support.v7.widget.CardView>
+          </androidx.cardview.widget.CardView>
 
-          <android.support.v7.widget.CardView
+          <androidx.cardview.widget.CardView
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:id="@+id/cardViewDoua"
               style="@style/Material_Card_View"
@@ -148,8 +148,8 @@
                       </LinearLayout>
                   </LinearLayout>
               </LinearLayout>
-          </android.support.v7.widget.CardView>
-          <android.support.v7.widget.CardView
+          </androidx.cardview.widget.CardView>
+          <androidx.cardview.widget.CardView
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:id="@+id/cardViewSkyBox"
               style="@style/Material_Card_View"
@@ -214,8 +214,8 @@
 
                   </LinearLayout>
               </LinearLayout>
-          </android.support.v7.widget.CardView>
-          <android.support.v7.widget.CardView
+          </androidx.cardview.widget.CardView>
+          <androidx.cardview.widget.CardView
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:id="@+id/cardViewTimer"
               style="@style/Material_Card_View"
@@ -281,8 +281,8 @@
                       </LinearLayout>
                   </LinearLayout>
               </LinearLayout>
-          </android.support.v7.widget.CardView>
-          <android.support.v7.widget.CardView
+          </androidx.cardview.widget.CardView>
+          <androidx.cardview.widget.CardView
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:id="@+id/cardViewNameofallah2D"
               style="@style/Material_Card_View"
@@ -347,7 +347,7 @@
                       </LinearLayout>
                   </LinearLayout>
               </LinearLayout>
-          </android.support.v7.widget.CardView>
+          </androidx.cardview.widget.CardView>
 
           <TextView
               android:layout_marginTop="20dp"
@@ -375,4 +375,4 @@
               android:text="@string/ratingapp" />
       </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

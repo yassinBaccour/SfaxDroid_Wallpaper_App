@@ -1,7 +1,7 @@
 package com.sami.rippel.allah;
 
 import android.app.Activity;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.sami.rippel.model.MyService;
 import com.sami.rippel.model.ViewModel;
@@ -26,7 +26,6 @@ public class WallpaperApplication extends MultiDexApplication {
     public static synchronized WallpaperApplication getInstance() {
         return instance;
     }
-
 
     @Override
     public void onCreate() {

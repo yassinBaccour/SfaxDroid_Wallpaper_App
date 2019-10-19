@@ -18,11 +18,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewPager;
+
+import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.content.FileProvider;
+import androidx.viewpager.widget.ViewPager;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
@@ -52,9 +54,7 @@ import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.StickersListener;
 import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
 import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
-import com.sami.rippel.views.GlideApp;
 
-import net.hockeyapp.android.CrashManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -317,7 +317,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         if (ViewModel.Current.device.getScreenHeightPixels() < 600)
             mUrl = mUrl.replace("islamicimages", "islamicimagesmini");
 
-        GlideApp.with(mActivity).asBitmap().load(mUrl).into(new SimpleTarget<Bitmap>() {
+        Glide.with(mActivity).asBitmap().load(mUrl).into(new SimpleTarget<Bitmap>() {
             @Override
             public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                 resizeTextureAsync(resource, resizeType);
@@ -370,7 +370,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     public void downloadAndPutImageAtScreen(String mUrl) {
         if (!mIsDelete) {
             changeProgressBarVisibility(true);
-            GlideApp.with(mActivity).asBitmap().load(mUrl)
+            Glide.with(mActivity).asBitmap().load(mUrl)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(Bitmap resource,
@@ -393,7 +393,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         mUrl = mUrl.replace("prev_", "");
         if (!mIsDelete) {
             changeProgressBarVisibility(true);
-            GlideApp.with(mActivity).asBitmap().load(mUrl)
+            Glide.with(mActivity).asBitmap().load(mUrl)
                     .into(new SimpleTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(Bitmap resource,
@@ -939,7 +939,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     }
 
     private void checkForCrashes() {
-        CrashManager.register(this);
     }
 
     public void hideTextFragment() {

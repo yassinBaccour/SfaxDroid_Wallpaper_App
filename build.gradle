@@ -8,11 +8,17 @@ buildscript {
     repositories {
         jcenter()
         google()
+        //maven {
+            //url 'https://maven.fabric.io/public'
+        //}
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
-    }
+        classpath 'com.android.tools.build:gradle:3.5.1'
+        //classpath 'com.google.gms:google-services:4.3.2'
+        //classpath 'com.google.firebase:perf-plugin:1.3.1'
+        //classpath 'io.fabric.tools:gradle:1.31.2'
+     }
 }
 
 allprojects {
@@ -28,19 +34,17 @@ allprojects {
     }
 }
 
-
 ext {
     minSdkVersion = 19
-    targetSdkVersion = 27
-    compileSdkVersion = 27
+    targetSdkVersion = 28
+    compileSdkVersion = 28
     buildToolsVersion = '28.0.2'
-    supportVersion = '27.1.1'
+    supportVersion = '28.0.0'
     glideVersion = '4.4.0'
     glideAnnotationVersion = '4.4.0'
     bottomsheetVersion = '1.5.3'
     ratethisapp = '1.2.0'
     multidexVersion = '1.0.3'
-    hockeyappVersion = '5.1.0'
     thinDownloadManagerVersion = '1.2.5'
     medyoVersion = '1.2.2'
     colorpickerVersion = '0.0.13'

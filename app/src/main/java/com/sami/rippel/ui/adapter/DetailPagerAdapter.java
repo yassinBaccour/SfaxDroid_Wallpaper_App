@@ -2,13 +2,14 @@ package com.sami.rippel.ui.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sami.rippel.allah.R;
@@ -16,7 +17,6 @@ import com.sami.rippel.base.BasePagerAdapter;
 import com.sami.rippel.base.BaseView;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.views.GlideApp;
 import com.sami.rippel.views.TouchImageView;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class DetailPagerAdapter extends BasePagerAdapter<WallpaperObject> {
                 .findViewById(R.id.detailImage);
         TouchImageView img = new TouchImageView(container.getContext());
         baseView.showLoading();
-        GlideApp.with(mContext).load(GetUrlByScreen(item.getUrl()))
+        Glide.with(mContext).load(GetUrlByScreen(item.getUrl()))
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource,

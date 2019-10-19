@@ -1,8 +1,8 @@
-<android.support.v7.widget.RecyclerView
+<androidx.recyclerview.widget.RecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/list_tatoo"
         android:layout_width="80dp"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:scrollbars="none">
-</android.support.v7.widget.RecyclerView>
+</androidx.recyclerview.widget.RecyclerView>

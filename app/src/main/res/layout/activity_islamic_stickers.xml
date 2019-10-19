@@ -1,6 +1,6 @@
 
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rootLayout"
@@ -73,7 +73,7 @@
                 </RelativeLayout>
             </FrameLayout>
 
-            <android.support.v4.widget.NestedScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/scrollButtionEdition"
                 android:layout_width="70dp"
                 android:layout_height="match_parent"
@@ -109,7 +109,7 @@
                         android:layout_margin="@dimen/fab_margin"
                         android:src="@mipmap/ic_palette_stickers" />
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -120,7 +120,7 @@
 
         </RelativeLayout>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,4 +129,4 @@
             android:src="@mipmap/ic_add_white_18dp"
             app:backgroundTint="@color/primary" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
