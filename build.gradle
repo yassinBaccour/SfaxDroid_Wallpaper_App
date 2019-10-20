@@ -17,14 +17,15 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenLocal()
-        maven { url "https://jitpack.io" }
-        maven {
-            url "https://maven.google.com"
-        }
         jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
         google()
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
 
 ext {

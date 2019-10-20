@@ -7,8 +7,8 @@ android {
         applicationId "com.sami.rippel.allah"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 71
-        versionName "7.6"
+        versionCode 72
+        versionName "7.7"
         multiDexEnabled true
     }
 
@@ -57,6 +57,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -73,7 +77,6 @@ dependencies {
     implementation "io.github.kobakei:ratethisapp:$rootProject.ext.ratethisapp"
     implementation "com.mani:ThinDownloadManager:$rootProject.ext.thinDownloadManagerVersion"
     implementation "com.github.medyo:android-about-page:$rootProject.ext.medyoVersion"
-    implementation "com.github.QuadFlask:colorpicker:$rootProject.ext.colorpickerVersion"
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
