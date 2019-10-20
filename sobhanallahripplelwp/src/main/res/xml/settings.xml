@@ -1,0 +1,46 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="PicRipples"
+    android:title="Settings" >
+
+  
+     <PreferenceCategory
+        android:title="@string/txt11">
+    <CheckBoxPreference 
+        android:title="@string/txt5"
+        android:key="sound_on"
+        android:summary="@string/txt6"
+        android:defaultValue="false"
+        />    
+        </PreferenceCategory>
+     <PreferenceCategory
+        android:title="@string/txt12">
+    <ListPreference 
+        android:title="@string/txt7"
+        android:entries="@array/ripple_size"
+        android:entryValues="@array/ripple_size_value"
+        android:summary="@string/txt8"
+        android:defaultValue="small"
+        android:key="ripple_size"
+        />
+    
+    <ListPreference 
+        android:title="@string/txt9"
+        android:entries="@array/ripple_duration"
+        android:entryValues="@array/ripple_duration_value"
+        android:summary="@string/txt10"
+        android:defaultValue="slow"
+        android:key="ripple_speed"/>
+    </PreferenceCategory>        
+    
+     
+
+        <PreferenceCategory 
+            android:title="@string/txt13"
+            >
+            <Preference
+                android:title="@string/txt14"
+                android:key="recommend_1"/>
+         
+        </PreferenceCategory>
+
+</PreferenceScreen>
