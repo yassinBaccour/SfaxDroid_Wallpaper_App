@@ -7,8 +7,8 @@ android {
         applicationId "com.yassin.sfax.sobhanallahlwp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 23
-        versionName "10.1"
+        versionCode 24
+        versionName "10.2"
     }
 
     buildTypes {
