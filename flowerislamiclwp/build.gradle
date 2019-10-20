@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-        compileSdkVersion 28
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "com.yassin.sfax.sobhanallahlwp"
-        minSdkVersion 24
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 23
         versionName "10.1"
     }

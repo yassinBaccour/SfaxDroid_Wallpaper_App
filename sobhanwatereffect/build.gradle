@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.yassin.sobhanallahwatereffect"
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 27
         versionName "3.7"
     }

@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.yassin.sfax.tawakkolalaallah"
-        minSdkVersion 7
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 16
         versionName "2.5"
     }
