@@ -23,8 +23,8 @@ class WallpaperPagerAdapter(var context: Context, var resourceId: Int) : PagerAd
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val viewLayout = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(resourceId, container, false)
-        val drawableRes = context.getResources().getIdentifier("img_" + String.format("%05d", position, Locale.US), "drawable",
-                context.getPackageName())
+        val drawableRes = context.resources.getIdentifier("img_" + String.format("%05d", position, Locale.US), "drawable",
+                context.packageName)
         Picasso.get().load(drawableRes).into(viewLayout.findViewById<ImageView>(R.id.detailImage))
         viewLayout.findViewById<Button>(R.id.btn_set_wallpaper).setOnClickListener { setAsWallpaper(drawableRes) }
         container.addView(viewLayout)

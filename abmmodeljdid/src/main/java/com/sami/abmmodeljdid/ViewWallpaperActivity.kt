@@ -11,7 +11,7 @@ class ViewWallpaperActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_picture)
-        findViewById<ViewPager>(R.id.view_pager_wallpaper).setAdapter(adapter)
+        findViewById<ViewPager>(R.id.view_pager_wallpaper).adapter = adapter
     }
 
 }
