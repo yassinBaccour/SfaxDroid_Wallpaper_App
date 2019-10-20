@@ -1,1 +1,1 @@
-include ':app', ':flowerislamiclwp'
+include ':app', ':flowerislamiclwp', ':islamicbasmallah', ':twakkal_lwp'

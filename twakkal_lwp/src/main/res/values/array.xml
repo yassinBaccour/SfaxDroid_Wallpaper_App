@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="syncFrequency">
+    
+        <item name="18">Tawakalto ala allah 1</item>
+        <item name="19">Tawakalto ala allah 2</item>
+        <item name="20">Tawakalto ala allah 3</item>
+        <item name="21">Tawakalto ala allah 4</item>
+        <item name="22">Tawakalto ala allah 5</item>
+        <item name="23">Tawakalto ala allah 6</item>
+        <item name="18">Tawakalto ala allah 7</item>
+        <item name="19">Tawakalto ala allah 8</item>
+        <item name="20">Tawakalto ala allah 9</item>
+        <item name="21">Tawakalto ala allah 10</item>
+        <item name="22">Tawakalto ala allah 11</item>
+       
+    </string-array>
+    <string-array name="syncFrequencyValues">
+        
+		<item name="18">Style 18</item>   
+		<item name="19">Style 19</item>   
+		<item name="20">Style 20</item>   
+	    <item name="21">Style 21</item>   
+	    <item name="22">Style 22</item>   
+	    <item name="23">Style 23</item> 
+	    <item name="18">Style 24</item>   
+		<item name="19">Style 25</item>   
+		<item name="20">Style 26</item>   
+	    <item name="21">Style 27</item>   
+	    <item name="22">Style 28</item>   
+	    
+    </string-array>
+     
+</resources>
