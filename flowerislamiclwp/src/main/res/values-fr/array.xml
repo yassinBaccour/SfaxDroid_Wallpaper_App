@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="syncFrequency">
+     
+        <item name="18">sobhan allah 1</item>
+        <item name="19">sobhan allah 2</item>
+        <item name="20">sobhan allah 3</item>
+        <item name="21">sobhan allah 4</item>
+        <item name="22">sobhan allah 5</item>
+        <item name="23">sobhan allah 6</item>
+    </string-array>
+    <string-array name="syncFrequencyValues">
+   
+	   <item name="18">Style 18</item>   
+		<item name="19">Style 19</item>   
+		<item name="20">Style 20</item>   
+	    <item name="21">Style 21</item>   
+	    <item name="22">Style 22</item>   
+	    <item name="23">Style 23</item> 
+    </string-array>
+     
+</resources>

@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/pref_update_setting" >
+        <ListPreference
+            android:key="prefSyncFrequency"
+            android:entries="@array/syncFrequency"
+            android:summary="@string/pref_sync_frequency_summary"
+            android:entryValues="@array/syncFrequencyValues"
+            android:title="@string/pref_sync_frequency" />
+        <CheckBoxPreference
+		     android:key="checkBox1"
+		     android:title="@string/txt5" 
+		     android:defaultValue="true"/>
+        <CheckBoxPreference
+		     android:key="checkBox2"
+		     android:title="@string/txt6" 
+		     android:defaultValue="true"/>
+        
+    </PreferenceCategory>
+ 
+</PreferenceScreen>

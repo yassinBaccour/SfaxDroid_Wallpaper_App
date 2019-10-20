@@ -78,7 +78,6 @@ dependencies {
     implementation "com.mani:ThinDownloadManager:$rootProject.ext.thinDownloadManagerVersion"
     implementation "com.github.medyo:android-about-page:$rootProject.ext.medyoVersion"
     implementation 'com.github.bumptech.glide:glide:4.10.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
@@ -87,7 +86,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation 'com.google.android.gms:play-services-ads:18.2.0'
- }
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+}
 
 apply plugin: 'com.google.gms.google-services'
 
