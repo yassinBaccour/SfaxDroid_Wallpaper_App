@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+       <string-array name="syncFrequency">
+        <item name="4">التغير البطيء جداً للصور</item>
+        <item name="1">التغير البطيء  للصور</item>
+        <item name="2">التغير العادي للصور</item>
+        <item name="3">التغير السريع للصور</item>
+    </string-array>
+    <string-array name="syncFrequencyValues">
+          <item name="1">speed1</item>
+          <item name="2">speed2</item>
+          <item name="3">speed3</item>
+          <item name="4">speed4</item>
+    </string-array>  
+</resources>

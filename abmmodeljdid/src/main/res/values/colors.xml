@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="image_border_start">#ffcccccc</color>
+    <color name="image_border_end">#ffcccccc</color>
+    <color name="image_border_center">#ffcccccc</color>
+    <color name="default_back_color">#ffffffff</color>
+    <color name="button_backgound">#3498db</color>
+    <color name="background_color">#B6B6B6</color>
+    <color name="primary">#7f8c8d</color>
+    <color name="primary_dark">#7f8c8d</color>
+    <color name="accent">#2c3e50</color>
+</resources>

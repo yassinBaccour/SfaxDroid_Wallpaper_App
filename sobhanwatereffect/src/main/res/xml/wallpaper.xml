@@ -1,0 +1,3 @@
+<wallpaper xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:settingsActivity="com.yassin.sobhanallahwatereffect.IslamicWallpaperSettings"
+    android:thumbnail="@drawable/ic_launcher" />
