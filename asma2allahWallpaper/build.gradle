@@ -7,8 +7,8 @@ android {
         applicationId "com.sfaxman.islamwallpaper"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 28
-        versionName "3.6"
+        versionCode 16
+        versionName "2.5"
     }
 
     buildTypes {

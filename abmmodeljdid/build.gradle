@@ -8,8 +8,8 @@ android {
         applicationId "com.sami.abmmodeljdid"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 28
-        versionName "3.6"
+        versionCode 29
+        versionName "3.7"
     }
 
     buildTypes {
