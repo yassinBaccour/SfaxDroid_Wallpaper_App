@@ -20,14 +20,12 @@ public class CatalogPagerAdapter extends FragmentPagerAdapter {
     private AdsListener ads;
     private LwpFragment mLwpFragment;
     private AllBackgroundFragment mAllBackgroundFragment;
-    private RecentFragment mRecentFragment;
     private CategoryFragment mCategoryFragment;
 
     public CatalogPagerAdapter(FragmentManager fragmentManager, Context context, AdsListener adsListner) {
-        super(fragmentManager);
+        super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.ads = adsListner;
         listeTitre.add(context.getString(R.string.catalog_LWP));
-        listeTitre.add(context.getString(R.string.catalog_New));
         listeTitre.add(context.getString(R.string.catalog_All));
         listeTitre.add(context.getString(R.string.catalog_Category));
         listeTitre.add(context.getString(R.string.catalog_Lab));
@@ -38,18 +36,12 @@ public class CatalogPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 break;
             case 1:
-                if (mRecentFragment != null)
-                    mRecentFragment.downloadPicture();
-                break;
-            case 2:
                 if (mAllBackgroundFragment != null)
                     mAllBackgroundFragment.downloadPicture();
                 break;
-            case 3:
+            case 2:
                 if (mCategoryFragment != null)
                     mCategoryFragment.downloadPicture();
-                break;
-            case 4:
                 break;
         }
     }
@@ -62,28 +54,23 @@ public class CatalogPagerAdapter extends FragmentPagerAdapter {
                 mLwpFragment.setListener(ads);
                 return mLwpFragment;
             case 1:
-                mRecentFragment = RecentFragment.newInstance();
-                mRecentFragment.setListener(ads);
-                return mRecentFragment;
-            case 2:
                 mAllBackgroundFragment = AllBackgroundFragment.newInstance();
                 mAllBackgroundFragment.setListener(ads);
                 return mAllBackgroundFragment;
-            case 3:
+            case 2:
                 mCategoryFragment = CategoryFragment.newInstance();
                 mCategoryFragment.setListener(ads);
                 return mCategoryFragment;
-            case 4:
+            default:
                 LabFragment lab = LabFragment.newInstance();
                 lab.setListener(ads);
                 return lab;
         }
-        return null;
-    }
+     }
 
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 
     @Override
