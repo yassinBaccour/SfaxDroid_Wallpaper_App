@@ -31,7 +31,7 @@ import com.thin.downloadmanager.ThinDownloadManager;
 
 import java.io.File;
 
-public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
+public class NameOfAllah2DActivity extends SimpleActivity {
 
     private CoordinatorLayout mRootLayout;
     private ProgressBar mProgress1;
@@ -56,8 +56,8 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
     private int mDownloadId2;
     private File mBackgroundFile;
 
-    NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1
-            mDownloadStatusListener = new NameOfAllah2DLiveWallpaperActivity.MyDownloadDownloadStatusListenerV1();
+    NameOfAllah2DActivity.MyDownloadDownloadStatusListenerV1
+            mDownloadStatusListener = new NameOfAllah2DActivity.MyDownloadDownloadStatusListenerV1();
 
     @Override
     protected int getLayout() {
@@ -276,7 +276,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
                     ViewModel.Current.sharedPrefsUtils.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
                             ViewModel.Current.bitmapUtils
-                                    .covertBitmapToDrawable(NameOfAllah2DLiveWallpaperActivity.this,
+                                    .covertBitmapToDrawable(NameOfAllah2DActivity.this,
                                             ViewModel.Current.bitmapUtils.
                                                     changeImageColor(ViewModel.Current.bitmapUtils.
                                                                     convertDrawableToBitmap(getResources()
@@ -308,7 +308,7 @@ public class NameOfAllah2DLiveWallpaperActivity extends SimpleActivity {
                         WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
                 intent.putExtra(
                         WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                        new ComponentName(NameOfAllah2DLiveWallpaperActivity.this,
+                        new ComponentName(NameOfAllah2DActivity.this,
                                 NameOfAllah2DLwp.class));
                 startActivity(intent);
                 //finish();

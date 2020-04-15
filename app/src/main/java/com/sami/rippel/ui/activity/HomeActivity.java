@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +40,7 @@ import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 
-public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListener, DeviceListner {
+public class HomeActivity extends BaseActivity implements AdsListener, DeviceListner {
 
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
@@ -177,7 +179,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
         RateThisApp.setCallback(new RateThisApp.Callback() {
             @Override
             public void onYesClicked() {
-                RateThisApp.stopRateDialog(ViewPagerWallpaperActivity.this);
+                RateThisApp.stopRateDialog(HomeActivity.this);
                 ViewModel.Current.sharedPrefsUtils.SetSetting(Constants.RATING_MESSAGE,
                         Constants.RATING_NON);
             }
@@ -216,7 +218,6 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
     }
 
     public void checkPermission() {
-
         rxPermissions
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -270,18 +271,17 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
     }
 
     public void onTrackAction(String category, String name) {
-
     }
 
     public void showFirstTimeAndOneTimeAds() {
         if (isAdsShow) {
             isAdsShow = false;
             onTrackAction("ADS", AdsType.ShowAds.toString());
-            showinterstial();
+            showInterstitial();
         }
     }
 
-    public void showinterstial() {
+    public void showInterstitial() {
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
         }
@@ -291,7 +291,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
 
         if (nbOpenAds == 4) {
             nbOpenAds = 0;
-            showinterstial();
+            showInterstitial();
             onTrackAction("ADS", AdsType.ShowTimedAds.toString());
         }
 
@@ -362,7 +362,7 @@ public class ViewPagerWallpaperActivity extends BaseActivity implements AdsListe
 
     @Override
     public void onRequestPermissions() {
-        ActivityCompat.requestPermissions(ViewPagerWallpaperActivity.this,
+        ActivityCompat.requestPermissions(HomeActivity.this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.ACCESS_WIFI_STATE,

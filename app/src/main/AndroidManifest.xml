@@ -96,12 +96,12 @@
         </service>
 
         <activity
-            android:name="com.sami.rippel.ui.activity.GalleryWallpaperActivity"
+            android:name="com.sami.rippel.ui.activity.GalleryActivity"
             android:hardwareAccelerated="true"
             android:label="@string/gallery"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.sami.rippel.ui.activity.ViewPagerWallpaperActivity"
+            android:name="com.sami.rippel.ui.activity.HomeActivity"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -125,7 +125,7 @@
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
-        <activity android:name="com.sami.rippel.ui.activity.DouaLiveWallpaperActivity" />
+        <activity android:name="com.sami.rippel.ui.activity.DouaLwpActivity" />
         <activity
             android:name="com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity"
             android:theme="@style/AppTheme" />
@@ -135,7 +135,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <activity android:name="com.sami.rippel.ui.activity.AboutActivity" />
         <activity
-            android:name="com.sami.rippel.ui.activity.NameOfAllah2DLiveWallpaperActivity"
+            android:name="com.sami.rippel.ui.activity.NameOfAllah2DActivity"
             android:label="Nameofallah"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />

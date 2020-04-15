@@ -52,7 +52,7 @@ import com.sami.rippel.base.BaseActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.StickersListener;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
+import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
 
 
@@ -1053,7 +1053,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
                     openGalleryIntent();
                     break;
                 case R.id.open_web:
-                    Intent intent = new Intent(StickersLabActivity.this, GalleryWallpaperActivity.class);
+                    Intent intent = new Intent(StickersLabActivity.this, GalleryActivity.class);
                     intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_TEXTURE);
                     startActivityForResult(intent, 456);
                     break;

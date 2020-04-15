@@ -23,7 +23,7 @@ import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.presenter.AllWallpaperPresenter;
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.ui.activity.DetailsActivity;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
+import com.sami.rippel.ui.activity.HomeActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
                                 (view, position) -> {
                                     if (mFragment.getView() != null && position >= 0) {
                                         if (mListener != null) {
-                                            ViewPagerWallpaperActivity.nbOpenAds++;
+                                            HomeActivity.nbOpenAds++;
                                             mListener.onTrackAction("AllFragment", "OpenWallpapers");
                                         }
                                         Intent intent = new Intent(

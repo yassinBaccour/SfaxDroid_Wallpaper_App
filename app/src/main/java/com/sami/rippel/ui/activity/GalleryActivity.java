@@ -35,7 +35,7 @@ import java.util.List;
 
 import static com.sami.rippel.model.ViewModel.Current;
 
-public class GalleryWallpaperActivity extends SimpleActivity implements LwpListener, OnStateChangeListener {
+public class GalleryActivity extends SimpleActivity implements LwpListener, OnStateChangeListener {
 
     private GalleryAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -64,7 +64,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
                             getApplicationContext(),
                             (view, position) -> {
                                 if (mLwpName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP)) {
-                                    Intent intent = new Intent(GalleryWallpaperActivity.this, DetailsActivity.class);
+                                    Intent intent = new Intent(GalleryActivity.this, DetailsActivity.class);
                                     intent.putParcelableArrayListExtra(Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
                                     intent.putExtra(Constants.DETAIL_IMAGE_POS, position);
                                     intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_ADDED_LIST_TIMER_LWP);
@@ -127,7 +127,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
             listFileToSendToDetailViewPager = new ArrayList<>(getWallpaperCategory().getGetWallpapersList());
         }
         if (Current.device.isConnected(getApplicationContext()) && listFileToSendToDetailViewPager != null && listFileToSendToDetailViewPager.size() > 0 && Current.isWallpapersLoaded()) {
-            mAdapter = new GalleryAdapter(GalleryWallpaperActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.GALLERY_CELL);
+            mAdapter = new GalleryAdapter(GalleryActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.GALLERY_CELL);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView
                     .addOnItemTouchListener(new RecyclerItemClickListener(
@@ -135,7 +135,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
                             (view, position) -> {
                                 if (mPos != null && !mPos.isEmpty()) {
                                     Intent intent = new Intent(
-                                            GalleryWallpaperActivity.this,
+                                            GalleryActivity.this,
                                             DetailsActivity.class);
                                     intent.putParcelableArrayListExtra(
                                             Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
@@ -146,8 +146,8 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
                                     switch (mLwpName) {
                                         case Constants.KEY_DOUA_LWP: {
                                             Intent intent = new Intent(
-                                                    GalleryWallpaperActivity.this,
-                                                    DouaLiveWallpaperActivity.class);
+                                                    GalleryActivity.this,
+                                                    DouaLwpActivity.class);
                                             intent.putExtra(Constants.URL_TO_DOWNLOAD, mSelectedUrl);
                                             startActivity(intent);
                                             break;
@@ -157,7 +157,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
                                             break;
                                         case Constants.KEY_ADD_TIMER_LWP: {
                                             Intent intent = new Intent(
-                                                    GalleryWallpaperActivity.this,
+                                                    GalleryActivity.this,
                                                     DetailsActivity.class);
                                             intent.putParcelableArrayListExtra(
                                                     Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
@@ -168,7 +168,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
                                         }
                                         case Constants.KEY_RIPPLE_LWP: {
                                             Intent intent = new Intent(
-                                                    GalleryWallpaperActivity.this,
+                                                    GalleryActivity.this,
                                                     DetailsActivity.class);
                                             intent.putParcelableArrayListExtra(
                                                     Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
@@ -179,8 +179,8 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
                                         }
                                         case Constants.KEY_NAME_OF_ALLAH_2_D: {
                                             Intent intent = new Intent(
-                                                    GalleryWallpaperActivity.this,
-                                                    NameOfAllah2DLiveWallpaperActivity.class);
+                                                    GalleryActivity.this,
+                                                    NameOfAllah2DActivity.class);
                                             intent.putExtra(Constants.URL_TO_DOWNLOAD, mSelectedUrl);
                                             startActivity(intent);
                                             break;
@@ -237,7 +237,7 @@ public class GalleryWallpaperActivity extends SimpleActivity implements LwpListe
                 imageModel.setUrl(file.getPath());
                 listFileToSendToDetailViewPager.add(imageModel);
             }
-            mAdapter = new GalleryAdapter(GalleryWallpaperActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.BITMAP_CELL);
+            mAdapter = new GalleryAdapter(GalleryActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.BITMAP_CELL);
             mRecyclerView.setAdapter(mAdapter);
         }
     }

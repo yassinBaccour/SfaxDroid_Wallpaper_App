@@ -21,8 +21,8 @@ import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.presenter.CategoryWallpaperPresenter;
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
+import com.sami.rippel.ui.activity.GalleryActivity;
+import com.sami.rippel.ui.activity.HomeActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
@@ -95,13 +95,13 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
                                     if (position >= 0) {
                                         String categorName = mAdapter.GetName(position);
                                         if (mListener != null) {
-                                            ViewPagerWallpaperActivity.nbOpenAds++;
+                                            HomeActivity.nbOpenAds++;
                                             mListener.onOpenScreenTracker("CategoryGallery");
                                             mListener.onTrackAction("CategoryOpen", categorName);
                                         }
                                         Intent intent = new Intent(
                                                 getActivity(),
-                                                GalleryWallpaperActivity.class);
+                                                GalleryActivity.class);
                                         intent.putParcelableArrayListExtra(
                                                 Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData);
 

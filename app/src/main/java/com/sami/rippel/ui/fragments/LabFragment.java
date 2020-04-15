@@ -14,7 +14,7 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.labs.basmala.ActivityBasmalaScreen;
 import com.sami.rippel.labs.stickers.StickersLabActivity;
 import com.sami.rippel.model.listner.AdsListener;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
+import com.sami.rippel.ui.activity.HomeActivity;
 
 public class LabFragment extends Fragment {
 
@@ -50,7 +50,7 @@ public class LabFragment extends Fragment {
             }
         });
         mButtonTakeImageActivityStikers.setOnClickListener(view -> {
-            ViewPagerWallpaperActivity.isAdsShow = true;
+            HomeActivity.isAdsShow = true;
             if (mListener != null) {
                 mListener.onOpenScreenTracker("StikerActivity");
             }

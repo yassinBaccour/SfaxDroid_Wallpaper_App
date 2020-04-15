@@ -35,7 +35,7 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.IntentTypeEnum;
 import com.sami.rippel.model.listner.DeviceListner;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
+import com.sami.rippel.ui.activity.HomeActivity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -138,7 +138,7 @@ public class DeviceUtils {
         }
     }
 
-    public void checkDeviceMemory(ViewPagerWallpaperActivity.LwpTypeEnum typeLwp) {
+    public void checkDeviceMemory(HomeActivity.LwpTypeEnum typeLwp) {
         Double mTotalMemoryMegaByte = 0.0;
         ActivityManager mActManager = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {

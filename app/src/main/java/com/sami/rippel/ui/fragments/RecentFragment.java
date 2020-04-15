@@ -3,10 +3,12 @@ package com.sami.rippel.ui.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +24,7 @@ import com.sami.rippel.model.listner.RecyclerItemClickListener;
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.presenter.RecentWallpaperPresenter;
 import com.sami.rippel.ui.activity.DetailsActivity;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
+import com.sami.rippel.ui.activity.HomeActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
 import java.util.ArrayList;
@@ -30,20 +32,10 @@ import java.util.List;
 
 public class RecentFragment extends BaseFragment<RecentWallpaperPresenter> implements WallpaperFragmentContract.View, OnStateChangeListener {
 
-    private RecentFragment mFragment;
-
-    public static RecentFragment newInstance() {
-        Bundle args = new Bundle();
-        RecentFragment fragment = new RecentFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewModel.Current.registerOnStateChangeListener(this);
-        mFragment = this;
     }
 
     @Override
@@ -72,11 +64,11 @@ public class RecentFragment extends BaseFragment<RecentWallpaperPresenter> imple
                         .addOnItemTouchListener(new RecyclerItemClickListener(
                                 getActivity(),
                                 (view, position) -> {
-                                    if (mFragment.getView() != null && position >= 0 && mData.size() > 0) {
+                                    if (getView() != null && position >= 0 && mData.size() > 0) {
                                         if (mListener != null) {
                                             mListener.onTrackAction("RecentFragment", "OpenWallpapers");
                                         }
-                                        ViewPagerWallpaperActivity.nbOpenAds = ViewPagerWallpaperActivity.nbOpenAds + 1;
+                                        HomeActivity.nbOpenAds = HomeActivity.nbOpenAds + 1;
                                         Intent intent = new Intent(
                                                 getActivity(),
                                                 DetailsActivity.class);
@@ -87,7 +79,7 @@ public class RecentFragment extends BaseFragment<RecentWallpaperPresenter> imple
                                     }
                                 }));
             } else {
-                if (mFragment.getView() != null) {
+                if (getView() != null) {
                     Toast.makeText(getActivity(), getString(R.string.NoConnection),
                             Toast.LENGTH_SHORT).show();
                 }
@@ -124,7 +116,6 @@ public class RecentFragment extends BaseFragment<RecentWallpaperPresenter> imple
 
     @Override
     public void showSnackMsg(String msg) {
-
     }
 
     @Override

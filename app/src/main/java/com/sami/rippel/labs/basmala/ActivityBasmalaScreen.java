@@ -36,7 +36,7 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
+import com.sami.rippel.ui.activity.GalleryActivity;
  import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadManager;
 import com.thin.downloadmanager.DownloadRequest;
@@ -510,7 +510,7 @@ public class ActivityBasmalaScreen extends AppCompatActivity {
     }
 
     public void openGallery() {
-        Intent intent = new Intent(ActivityBasmalaScreen.this, GalleryWallpaperActivity.class);
+        Intent intent = new Intent(ActivityBasmalaScreen.this, GalleryActivity.class);
         intent.putExtra("LwpName", Constants.KEY_BASMALA_STIKERS);
         startActivityForResult(intent, RESULT_CODE);
     }

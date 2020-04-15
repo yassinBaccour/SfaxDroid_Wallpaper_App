@@ -31,7 +31,7 @@ import com.thin.downloadmanager.ThinDownloadManager;
 
 import java.io.File;
 
-public class DouaLiveWallpaperActivity extends SimpleActivity {
+public class DouaLwpActivity extends SimpleActivity {
 
     private static final int DOWNLOAD_THREAD_POOL_SIZE = 4;
     public CoordinatorLayout mRootLayout;
@@ -149,7 +149,7 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
                 .setPositiveButton(getString(R.string.btnok), (dialog, selectedColor, allColors) -> {
                     ViewModel.Current.sharedPrefsUtils.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
-                            ViewModel.Current.bitmapUtils.covertBitmapToDrawable(DouaLiveWallpaperActivity.this,
+                            ViewModel.Current.bitmapUtils.covertBitmapToDrawable(DouaLwpActivity.this,
                                     ViewModel.Current.bitmapUtils.
                                             changeImageColor(ViewModel.Current.bitmapUtils.
                                                             convertDrawableToBitmap(getResources().getDrawable(R.mipmap.ic_palette))
@@ -184,7 +184,7 @@ public class DouaLiveWallpaperActivity extends SimpleActivity {
                         WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
                 intent.putExtra(
                         WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                        new ComponentName(DouaLiveWallpaperActivity.this,
+                        new ComponentName(DouaLwpActivity.this,
                                 DouaLiveWallpaper.class));
                 startActivity(intent);
                 //finish();

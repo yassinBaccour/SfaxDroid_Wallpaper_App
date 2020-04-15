@@ -29,7 +29,7 @@ import android.widget.TextView;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
+import com.sami.rippel.ui.activity.GalleryActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -84,7 +84,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         mBtnListWallpaper.setOnClickListener(view -> {
             Intent intent = new Intent(
                     WallpaperSchedulerActivity.this,
-                    GalleryWallpaperActivity.class);
+                    GalleryActivity.class);
             intent.putExtra("LwpName", Constants.KEY_ADDED_LIST_TIMER_LWP);
             startActivity(intent);
         });
@@ -154,7 +154,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
     public void openAddWallpaperActivity() {
         Intent intent = new Intent(
                 WallpaperSchedulerActivity.this,
-                GalleryWallpaperActivity.class);
+                GalleryActivity.class);
         intent.putExtra("LwpName", Constants.KEY_ADD_TIMER_LWP);
         startActivity(intent);
     }

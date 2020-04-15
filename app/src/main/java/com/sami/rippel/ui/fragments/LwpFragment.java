@@ -24,8 +24,8 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.ui.activity.AboutActivity;
-import com.sami.rippel.ui.activity.GalleryWallpaperActivity;
-import com.sami.rippel.ui.activity.ViewPagerWallpaperActivity;
+import com.sami.rippel.ui.activity.GalleryActivity;
+import com.sami.rippel.ui.activity.HomeActivity;
 
 import java.io.IOException;
 
@@ -66,7 +66,7 @@ public class LwpFragment extends SimpleFragment {
             }
             Intent intent = new Intent(
                     getActivity(),
-                    GalleryWallpaperActivity.class);
+                    GalleryActivity.class);
             intent.putExtra("LwpName", "RippleLwp");
             startActivity(intent);
         });
@@ -100,10 +100,10 @@ public class LwpFragment extends SimpleFragment {
             if (mListener != null) {
                 mListener.onTrackAction("LwpFragment", "DouaLWP");
             }
-            ViewPagerWallpaperActivity.isAdsShow = true;
+            HomeActivity.isAdsShow = true;
             Intent intent = new Intent(
                     getActivity(),
-                    GalleryWallpaperActivity.class);
+                    GalleryActivity.class);
             intent.putExtra("LwpName", "DouaLWP");
             startActivity(intent);
         });
@@ -112,7 +112,7 @@ public class LwpFragment extends SimpleFragment {
             if (mListener != null) {
                 mListener.onTrackAction("LwpFragment", "TimerLWP");
             }
-            ViewPagerWallpaperActivity.isAdsShow = true;
+            HomeActivity.isAdsShow = true;
             openWallpaperSchedulerActivity();
         });
 
@@ -151,10 +151,10 @@ public class LwpFragment extends SimpleFragment {
             if (mListener != null) {
                 mListener.onTrackAction("LwpFragment", "NameOfAllah2D");
             }
-            ViewPagerWallpaperActivity.isAdsShow = true;
+            HomeActivity.isAdsShow = true;
             Intent intent = new Intent(
                     getActivity(),
-                    GalleryWallpaperActivity.class);
+                    GalleryActivity.class);
             intent.putExtra("LwpName", "NameOfAllah2DLWP");
             startActivity(intent);
         });
