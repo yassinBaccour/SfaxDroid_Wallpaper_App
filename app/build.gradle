@@ -2,9 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
+
     compileSdkVersion rootProject.ext.compileSdkVersion
+
     defaultConfig {
-        applicationId "com.sami.rippel.allah"
+        applicationId "com"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 72
@@ -12,19 +14,7 @@ android {
         multiDexEnabled true
     }
 
-    flavorDimensions "minApi"
-
-    productFlavors {
-        prod {
-            minSdkVersion 19
-            dimension "minApi"
-        }
-    }
-
     buildTypes {
-        debug {
-            debuggable true
-        }
         release {
             debuggable false
             minifyEnabled false
@@ -32,6 +22,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "app"
+
+    productFlavors {
+
+        sfaxdroidProd {
+            applicationIdSuffix = ".sami.rippel.allah"
+            minSdkVersion 19
+            dimension "app"
+        }
+
+        arabic {
+            applicationIdSuffix = ".sami.rippel.allah"
+            minSdkVersion 19
+            dimension "app"
+            resConfigs('ar', 'xxhdpi')
+        }
+    }
+
 
     packagingOptions {
         exclude 'META-INF/ASL2.0'
@@ -65,28 +74,28 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "com.flipboard:bottomsheet-core:$rootProject.ext.bottomsheetVersion"
     implementation "com.flipboard:bottomsheet-commons:$rootProject.ext.bottomsheetVersion"
     implementation "io.github.kobakei:ratethisapp:$rootProject.ext.ratethisapp"
     implementation "com.mani:ThinDownloadManager:$rootProject.ext.thinDownloadManagerVersion"
     implementation "com.github.medyo:android-about-page:$rootProject.ext.medyoVersion"
-    implementation 'com.github.bumptech.glide:glide:4.10.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.1'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
-    implementation 'com.google.android.gms:play-services-ads:18.2.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.google.android.gms:play-services-ads:19.0.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
