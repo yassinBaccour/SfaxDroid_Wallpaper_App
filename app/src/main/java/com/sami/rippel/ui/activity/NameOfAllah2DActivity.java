@@ -76,29 +76,29 @@ public class NameOfAllah2DActivity extends SimpleActivity {
         else
             mBackgroundUrl = getIntent().getStringExtra(Constants.URL_TO_DOWNLOAD);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mRootLayout = (CoordinatorLayout) findViewById(R.id.rootLayout);
-        mProgress1Txt = (TextView) findViewById(R.id.progressTxt1);
-        mTxtstatusDownload = (TextView) findViewById(R.id.txtstatusDownload);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
-        mProgress1 = (ProgressBar) findViewById(R.id.progress1);
-        mButtonColor = (Button) findViewById(R.id.buttonColor);
+        mToolbar = findViewById(R.id.toolbar);
+        mRootLayout = findViewById(R.id.rootLayout);
+        mProgress1Txt = findViewById(R.id.progressTxt1);
+        mTxtstatusDownload = findViewById(R.id.txtstatusDownload);
+        mFab = findViewById(R.id.fab);
+        mProgress1 = findViewById(R.id.progress1);
+        mButtonColor = findViewById(R.id.buttonColor);
         mProgress1.setMax(100);
         mProgress1.setProgress(0);
 
-        mTxtfont1 = (TextView) findViewById(R.id.txtfont1);
-        mTxtfont2 = (TextView) findViewById(R.id.txtfont2);
-        mTxtfont3 = (TextView) findViewById(R.id.txtfont3);
-        mTxtfont4 = (TextView) findViewById(R.id.txtfont4);
-        mTxtfont5 = (TextView) findViewById(R.id.txtfont5);
-        mTxtfont6 = (TextView) findViewById(R.id.txtfont6);
-        mTxtfont7 = (TextView) findViewById(R.id.txtfont7);
-        mTxtfont8 = (TextView) findViewById(R.id.txtfont8);
+        mTxtfont1 = findViewById(R.id.txtfont1);
+        mTxtfont2 = findViewById(R.id.txtfont2);
+        mTxtfont3 = findViewById(R.id.txtfont3);
+        mTxtfont4 = findViewById(R.id.txtfont4);
+        mTxtfont5 = findViewById(R.id.txtfont5);
+        mTxtfont6 = findViewById(R.id.txtfont6);
+        mTxtfont7 = findViewById(R.id.txtfont7);
+        mTxtfont8 = findViewById(R.id.txtfont8);
 
-        mButtonSizeFullScreen = (Button) findViewById(R.id.buttonSizeFullScreen);
-        mButtonSizeBig = (Button) findViewById(R.id.buttonSizeBig);
-        mButtonSizeMeduim = (Button) findViewById(R.id.buttonSizeMeduim);
-        mButtonSizeSmall = (Button) findViewById(R.id.buttonSizeSmall);
+        mButtonSizeFullScreen = findViewById(R.id.buttonSizeFullScreen);
+        mButtonSizeBig = findViewById(R.id.buttonSizeBig);
+        mButtonSizeMeduim = findViewById(R.id.buttonSizeMeduim);
+        mButtonSizeSmall = findViewById(R.id.buttonSizeSmall);
         setTextViewTypeFace();
         initSizeListner();
         initTextViewListner();

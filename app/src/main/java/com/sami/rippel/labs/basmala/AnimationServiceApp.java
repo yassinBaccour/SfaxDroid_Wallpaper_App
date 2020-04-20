@@ -22,7 +22,7 @@ public class AnimationServiceApp {
     private static int incrementation = 0;
     public Context mContext;
     private ImageView mImageAtScreen;
-    private MediaPlayer mMediaPlayer;
+    //private MediaPlayer mMediaPlayer;
     private boolean mRunning = true;
     private String mSoundPreferences;
     private String mPicturePreferences;
@@ -47,12 +47,15 @@ public class AnimationServiceApp {
     }
 
     private void initMusic() {
+        /*
         mMediaPlayer = MediaPlayer.create(mContext, R.raw.b);
         try {
             mMediaPlayer.prepare();
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
+
+         */
     }
 
     void startPreviewAnimation() {
@@ -132,7 +135,7 @@ public class AnimationServiceApp {
 
     private void staranimation() {
         if (mSoundPreferences.equals("on")) {
-            mMediaPlayer.start();
+            //mMediaPlayer.start();
         }
         if (mPicturePreferences.equals("on")) {
             if (mTasking == null) {
@@ -160,8 +163,11 @@ public class AnimationServiceApp {
     }
 
     void stopPlayer() {
+        /*
         if (mMediaPlayer != null && mMediaPlayer.isPlaying())
             mMediaPlayer.stop();
+
+         */
     }
 
     public class AlhpaImageAnim extends AsyncTask<Void, Integer, Void> {

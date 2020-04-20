@@ -206,14 +206,14 @@
 
                     <TextView style="@style/Material_Action"
                         android:layout_gravity="bottom"
-                        android:textColor="@color/accent_color"
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/buttonTakeImageActivity"
                         android:text="@string/openGallery"
                         tools:text="@string/openGallery"/>
 
                     <TextView style="@style/Material_Action"
                         android:layout_gravity="bottom"
-                        android:textColor="@color/accent_color"
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/buttonTakeImageCam"
                         android:text="@string/openCamera"
                         tools:text="@string/openCamera"/>
@@ -283,7 +283,7 @@
 
                         <TextView style="@style/Material_Action"
                             android:layout_gravity="bottom"
-                            android:textColor="@color/accent_color"
+                            android:textColor="@color/colorAccent"
                             android:id="@+id/buttonOpenRingList"
                             android:text="@string/openGallery"
                             tools:text="@string/openGallery"/>

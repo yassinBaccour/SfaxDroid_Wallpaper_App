@@ -8,31 +8,26 @@
         <item>متوسطة</item>
         <item>كبيرة</item>
     </string-array>
-
     <string-array name="ripple_size_value">
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
     </string-array>
-
     <string-array name="ripple_duration">
         <item>بطيئة</item>
         <item>متوسط</item>
         <item>سريع</item>
     </string-array>
-
     <string-array name="ripple_duration_value">
         <item>slow</item>
         <item>medium</item>
         <item>fast</item>
     </string-array>
-
     <string-array name="ripple_image">
         <item>Allah 1</item>
         <item>Allah 2</item>
         <item>Allah 3</item>
     </string-array>
-
     <string-array name="ripple_image_value">
         <item>Allah 1</item>
         <item>Allah 2</item>

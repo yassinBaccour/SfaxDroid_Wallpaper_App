@@ -63,13 +63,11 @@
     <string name="setSwallSucess">Fond d\'ecran appliqué avec succès</string>
     <string name="setSwallNotSucess">Refaire</string>
     <string name="otherwallll">1000 Wallpapers</string>
-    <!-- Snack Details -->
     <string name="detail.snack.save.success">Photo sauvegarder</string>
     <string name="detail.snack.save.failure">Réessayer l\'operation</string>
     <string name="detail.snack.set.success">Appliqué avec succès</string>
     <string name="detail.snack.set.failure">Réessayer l\'operation</string>
     <string name="detail.snack.button.not_ready">Réessayer l\'operation</string>
-    <!-- Menu Details -->
     <string name="menu.detail.oneclickwallpaper">Juste appliquer le fond</string>
     <string name="menu.detail.wall">Recadrer et appliquer le fond</string>
     <string name="menu.detail.chooserwall">Appliquer avec l\'éditeur photo</string>

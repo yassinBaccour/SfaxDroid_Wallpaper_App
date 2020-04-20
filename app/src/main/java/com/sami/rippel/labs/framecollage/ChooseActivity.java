@@ -39,7 +39,7 @@ public class ChooseActivity extends ActivityLabBase {
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                     WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
-        setContentView(R.layout.grid_view_activity);
+        setContentView(R.layout.activity_choose);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mProgressLoader = (ProgressBar) findViewById(R.id.progressBar);
         InitToolbar();

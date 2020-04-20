@@ -23,7 +23,7 @@ import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.flipboard.bottomsheet.commons.MenuSheetView.OnMenuItemClickListener;
 import com.sami.rippel.allah.R;
-import com.sami.rippel.allah.WallpaperApplication;
+import com.sami.rippel.WallpaperApplication;
 import com.sami.rippel.base.BaseActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;

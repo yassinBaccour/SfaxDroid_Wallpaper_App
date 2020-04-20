@@ -1,4 +1,4 @@
-package com.sami.rippel.allah;
+package com.sami.rippel;
 
 import android.app.Activity;
 import androidx.multidex.MultiDexApplication;

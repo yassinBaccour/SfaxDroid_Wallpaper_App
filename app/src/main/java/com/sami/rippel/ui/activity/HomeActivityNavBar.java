@@ -4,28 +4,24 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.core.app.ActivityCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
-
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.tabs.TabLayout;
 import com.kobakei.ratethisapp.RateThisApp;
 import com.sami.rippel.allah.BuildConfig;
 import com.sami.rippel.allah.R;
@@ -40,17 +36,13 @@ import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 
-public class HomeActivity extends BaseActivity implements AdsListener, DeviceListner {
+public class HomeActivityNavBar extends BaseActivity implements AdsListener, DeviceListner {
 
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private CoordinatorLayout mRootLayout;
 
     private Toolbar mToolbar;
-
-    private TabLayout mTabLayout;
-
-    private ViewPager mViewPager;
 
     private ProgressBar mProgressLoader;
 
@@ -70,8 +62,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
 
     private RxPermissions rxPermissions;
 
-    private CatalogPagerAdapter mAdapter;
-
     private InterstitialAd mInterstitialAd;
 
     @Override
@@ -83,10 +73,8 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
         initView();
         setupToolBar();
-        setupViewPager();
         initRatingApp();
         manageNbRunApp();
-        mAdapter.ChangeAdapterFragmentViewState(false);
         loadAndSetWallpaperToViewModel();
         checkPermission();
     }
@@ -95,8 +83,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         mCollapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
         mRootLayout = findViewById(R.id.rootLayout);
         mToolbar = findViewById(R.id.toolbar);
-        mTabLayout = findViewById(R.id.toolbarTabs);
-        mViewPager = findViewById(R.id.viewpager);
         mProgressLoader = findViewById(R.id.progressBar);
     }
 
@@ -121,7 +107,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
 
     @Override
     protected void initEventAndData() {
-//Nothing
     }
 
     @Override
@@ -160,7 +145,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
                     if (wallpapersRetrofitObject.getCategoryList().size() > 0) {
                         ViewModel.Current.setRetrofitWallpObject(wallpapersRetrofitObject);
                         onFillAdapterWithServiceData();
-                        mAdapter.ChangeAdapterFragmentViewState(true);
                     }
                 }, throwable -> {
                     ViewModel.Current.device.showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
@@ -178,7 +162,7 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         RateThisApp.setCallback(new RateThisApp.Callback() {
             @Override
             public void onYesClicked() {
-                RateThisApp.stopRateDialog(HomeActivity.this);
+                RateThisApp.stopRateDialog(HomeActivityNavBar.this);
                 ViewModel.Current.sharedPrefsUtils.SetSetting(Constants.RATING_MESSAGE,
                         Constants.RATING_NON);
             }
@@ -239,28 +223,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
-    }
-
-    private void setupViewPager() {
-        mAdapter = new CatalogPagerAdapter(getSupportFragmentManager(), this, this);
-        mViewPager.setAdapter(mAdapter);
-        mTabLayout.setupWithViewPager(mViewPager);
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (mAdapter != null) {
-                    mAdapter.ChooseFragmentToExcecuteAction(position);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
     }
 
     public void rateApplication() {
@@ -361,7 +323,7 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
 
     @Override
     public void onRequestPermissions() {
-        ActivityCompat.requestPermissions(HomeActivity.this,
+        ActivityCompat.requestPermissions(HomeActivityNavBar.this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.ACCESS_WIFI_STATE,

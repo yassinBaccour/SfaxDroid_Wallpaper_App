@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import com.sami.rippel.allah.WallpaperApplication;
+import com.sami.rippel.WallpaperApplication;
 
 /**
  * Created by yassine on 11/10/17.

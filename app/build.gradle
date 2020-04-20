@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
 
@@ -27,20 +30,23 @@ android {
 
     productFlavors {
 
-        sfaxdroidProd {
+        waterRippleLwp {
             applicationIdSuffix = ".sami.rippel.allah"
             minSdkVersion 19
             dimension "app"
+            versionCode 144012
+            versionName "4.1.1"
         }
 
-        arabic {
-            applicationIdSuffix = ".sami.rippel.allah"
+        scaryallwhotouch {
+            applicationIdSuffix = ".liliagame.scaryallwhotouch"
             minSdkVersion 19
             dimension "app"
             resConfigs('ar', 'xxhdpi')
+            versionCode 144012
+            versionName "4.1.1"
         }
     }
-
 
     packagingOptions {
         exclude 'META-INF/ASL2.0'
@@ -74,18 +80,20 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    testImplementation 'junit:junit:4.13'
-    implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    kapt libraries.glideCompîler
+    implementation libraries.kotlin
+    implementation libraries.ktx
+    implementation libraries.appcompat
+    implementation libraries.multidex
+    implementation libraries.material
+    implementation libraries.cardview
+    implementation libraries.recyclerview
+    implementation libraries.glide
     implementation "com.flipboard:bottomsheet-core:$rootProject.ext.bottomsheetVersion"
     implementation "com.flipboard:bottomsheet-commons:$rootProject.ext.bottomsheetVersion"
     implementation "io.github.kobakei:ratethisapp:$rootProject.ext.ratethisapp"
     implementation "com.mani:ThinDownloadManager:$rootProject.ext.thinDownloadManagerVersion"
     implementation "com.github.medyo:android-about-page:$rootProject.ext.medyoVersion"
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'

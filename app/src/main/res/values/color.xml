@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#2c3e50</color>
-    <color name="primary_dark">#2c3e50</color>
-    <color name="accent">#2980b9</color>
+    <color name="blue_gray">#2c3e50</color>
+    <color name="primary">@color/blue_gray</color>
+    <color name="primary_dark">@color/blue_gray</color>
     <color name="backgroundMain">#2d3941</color>
-    <color name="colorPrimary">#2c3e50</color>
-    <color name="colorPrimaryDark">#2c3e50</color>
-    <color name="colorAccent">#2980b9</color>
-    <color name="material_blue_500">#5677fc</color>
-    <color name="nav_item_icon_tint_color">#cecece</color>
-    <color name="nav_item_text_color">#cecece</color>
+    <color name="colorAccent">#009688</color>
     <color name="black_alpha_30">#4D000000</color>
-    <color name="black_alpha_60">#a0000000</color>
-    <color name="about_background">#a0ffffff</color>
-    <color name="blue">#303F9F</color>
-    <color name="accent_color">#009688</color>
-    <color name="statusBarColor">@color/blue</color>
     <color name="navigationBarColor">@android:color/black</color>
-    <color name="drawerArrowColor">@android:color/white</color>
     <color name="divider_grey">#D4D4D4</color>
     <color name="green">#8BC34A</color>
     <color name="red">#F44336</color>
