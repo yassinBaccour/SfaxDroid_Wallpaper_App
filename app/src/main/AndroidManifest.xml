@@ -100,16 +100,7 @@
             android:hardwareAccelerated="true"
             android:label="@string/gallery"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.sami.rippel.ui.activity.HomeActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
         <activity
             android:name="com.sami.rippel.labs.framecollage.ChooseActivity"
             android:hardwareAccelerated="true"
@@ -126,6 +117,7 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity android:name="com.sami.rippel.ui.activity.DouaLwpActivity" />
+
         <activity
             android:name="com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity"
             android:theme="@style/AppTheme" />

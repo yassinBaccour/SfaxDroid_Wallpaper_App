@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.activity;
+package com.sami.rippel.feature.singleview;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,16 +14,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.tabs.TabLayout;
 import com.kobakei.ratethisapp.RateThisApp;
-import com.sami.rippel.allah.BuildConfig;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseActivity;
 import com.sami.rippel.model.Constants;
@@ -31,7 +30,6 @@ import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ServiceErrorFromEnum;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.model.listner.DeviceListner;
-import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
 import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
@@ -79,6 +77,16 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
         checkPermission();
     }
 
+    private void loadFragment() {
+        AllInOneFragment mAllBackgroundFragment = AllInOneFragment.Companion.newInstance();
+        mAllBackgroundFragment.setListener(this);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.content_main, mAllBackgroundFragment, "mAllBackgroundFragment.class");
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     private void initView() {
         mCollapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
         mRootLayout = findViewById(R.id.rootLayout);
@@ -102,7 +110,7 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_home;
+        return R.layout.activity_home_nav;
     }
 
     @Override
@@ -144,6 +152,7 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
                 .subscribe(wallpapersRetrofitObject -> {
                     if (wallpapersRetrofitObject.getCategoryList().size() > 0) {
                         ViewModel.Current.setRetrofitWallpObject(wallpapersRetrofitObject);
+                        loadFragment();
                         onFillAdapterWithServiceData();
                     }
                 }, throwable -> {
@@ -216,13 +225,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
 
     private void setupToolBar() {
         setSupportActionBar(mToolbar);
-        mCollapsingToolbarLayout.setTitle(" ");
-        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
     }
 
     public void rateApplication() {
@@ -309,16 +311,14 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
 
     @Override
     public void onBackPressed() {
-        if (!BuildConfig.DEBUG) {
-            if (back_pressed + 2000 > System.currentTimeMillis()) {
-                super.onBackPressed();
-            } else {
-                rateApplication();
-                Toast.makeText(getBaseContext(), R.string.txtrate6,
-                        Toast.LENGTH_SHORT).show();
-            }
-            back_pressed = System.currentTimeMillis();
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            rateApplication();
+            Toast.makeText(getBaseContext(), R.string.txtrate6,
+                    Toast.LENGTH_SHORT).show();
         }
+        back_pressed = System.currentTimeMillis();
     }
 
     @Override

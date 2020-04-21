@@ -3,6 +3,8 @@ package com.sami.rippel.model.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.IntegerRes;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Path;
@@ -14,17 +16,26 @@ import java.util.List;
 @Root(name = "wallpaper", strict = false)
 public class WallpaperObject implements Parcelable, Serializable {
 
-    public static final Creator<WallpaperObject> CREATOR = new Creator<WallpaperObject>() {
-        @Override
-        public WallpaperObject createFromParcel(Parcel in) {
-            return new WallpaperObject(in);
-        }
+    public WallpaperObject(String name, String desc, int resourceColor, int resourceUri) {
+        this.name = name;
+        this.desc = desc;
+        this.resourcecolor = resourceColor;
+        this.resourceUri = resourceUri;
+    }
 
-        @Override
-        public WallpaperObject[] newArray(int size) {
-            return new WallpaperObject[size];
-        }
-    };
+    public int getResourceUri() {
+        return resourceUri;
+    }
+
+    public int getResourcecolor() {
+        return resourcecolor;
+    }
+
+    @IntegerRes
+    private int resourceUri;
+    @IntegerRes
+    private int resourcecolor;
+
     @Element(name = "url", required = true)
     private String url;
     @Element(name = "name", required = false)
@@ -103,4 +114,16 @@ public class WallpaperObject implements Parcelable, Serializable {
         dest.writeString(name);
         dest.writeString(url);
     }
+
+    public static final Creator<WallpaperObject> CREATOR = new Creator<WallpaperObject>() {
+        @Override
+        public WallpaperObject createFromParcel(Parcel in) {
+            return new WallpaperObject(in);
+        }
+
+        @Override
+        public WallpaperObject[] newArray(int size) {
+            return new WallpaperObject[size];
+        }
+    };
 }

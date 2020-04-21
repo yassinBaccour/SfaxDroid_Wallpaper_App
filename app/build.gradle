@@ -89,6 +89,7 @@ dependencies {
     implementation libraries.cardview
     implementation libraries.recyclerview
     implementation libraries.glide
+    implementation libraries.constraintlayout
     implementation "com.flipboard:bottomsheet-core:$rootProject.ext.bottomsheetVersion"
     implementation "com.flipboard:bottomsheet-commons:$rootProject.ext.bottomsheetVersion"
     implementation "io.github.kobakei:ratethisapp:$rootProject.ext.ratethisapp"
