@@ -8,7 +8,7 @@ import com.sami.rippel.model.entity.WallpaperObject
 
 class ArticleListAdapter(
     private var articleList: List<ItemWrapperList<Any>>,
-    private var openWallpaper: (WallpaperObject) -> Unit,
+    private var openWallpaper: (WallpaperObject, Int) -> Unit,
     private val openCategory: (WallpaperObject, CarouselTypeEnum) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -22,7 +22,7 @@ class ArticleListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is WallpaperImgVH -> holder.bind(
-                articleList[position].getObject() as WallpaperObject,
+                articleList[position].getObject() as WallpaperObject, position,
                 openWallpaper
             )
             is HorizontalCarouselVH -> holder.bindView(

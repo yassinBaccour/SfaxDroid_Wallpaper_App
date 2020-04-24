@@ -1,6 +1,8 @@
 package com.sami.rippel.feature.singleview
 
 import android.app.Activity
+import android.app.WallpaperManager
+import android.content.ComponentName
 import android.content.Intent
 import android.view.MotionEvent
 import android.widget.Toast
@@ -9,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
 import com.sami.rippel.base.BaseFragment
+import com.sami.rippel.livewallpapers.lwpskyview.SkyNameOfAllahLiveWallpaper
+import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity
 import com.sami.rippel.model.Constants
 import com.sami.rippel.model.ViewModel
 import com.sami.rippel.model.entity.StateEnum
@@ -18,7 +22,6 @@ import com.sami.rippel.presenter.AllWallpaperPresenter
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract
 import com.sami.rippel.ui.activity.DetailsActivity
 import com.sami.rippel.ui.activity.GalleryActivity
-import com.sami.rippel.ui.activity.HomeActivity
 import java.util.*
 
 class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
@@ -46,20 +49,75 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         mPresenter?.getWallpaper()
     }
 
-    private fun openWallpaper(wallpaperObject: WallpaperObject) {
+    private fun openWallpaper(wallpaperObject: WallpaperObject, pos: Int) {
         showDetailViewActivity(wallpaperObject)
     }
 
     private fun openCategory(wallpaperObject: WallpaperObject, carouselTypeEnum: CarouselTypeEnum) {
         when (carouselTypeEnum) {
             is CarouselTypeEnum.LIVEWALLPAPER -> {
+                when (wallpaperObject.liveWallpaper) {
+                    is LiveWallpaper.DouaLwp -> {
+                        HomeActivityNavBar.isAdsShow = true
+                        val intent = Intent(
+                            activity,
+                            GalleryActivity::class.java
+                        )
+                        intent.putExtra("LwpName", "DouaLWP")
+                        startActivity(intent)
+                    }
+                    is LiveWallpaper.NameOfAllah -> {
+                        HomeActivityNavBar.isAdsShow = true
+                        try {
+                            if (mListener != null) {
+                                mListener.onTrackAction("LwpFragment", "OpenSkyBox")
+                            }
+                            val intent = Intent(
+                                WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
+                            )
+                            intent.putExtra(
+                                WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                                ComponentName(
+                                    activity!!,
+                                    SkyNameOfAllahLiveWallpaper::class.java
+                                )
+                            )
+                            startActivity(intent)
+                        } catch (e: Exception) {
+                            try {
+                                val intent = Intent()
+                                intent.action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
+                                startActivity(intent)
+                            } catch (ignored: Exception) {
+                            }
+                        }
+                    }
+                    is LiveWallpaper.TimerLwp -> {
+                        HomeActivityNavBar.isAdsShow = true
+                        val intent = Intent(
+                            activity,
+                            WallpaperSchedulerActivity::class.java
+                        )
+                        startActivity(intent)
+                    }
+                    is LiveWallpaper.NameOfAllah2D -> {
+                        HomeActivityNavBar.isAdsShow = true
+                        HomeActivityNavBar.isAdsShow = true
+                        val intent = Intent(
+                            activity,
+                            GalleryActivity::class.java
+                        )
+                        intent.putExtra("LwpName", "NameOfAllah2DLWP")
+                        startActivity(intent)
+                    }
+                }
             }
             is CarouselTypeEnum.CATEGORY -> {
-                val categorName: String = wallpaperObject.name
+                val categoryName: String = wallpaperObject.name
                 if (mListener != null) {
-                    HomeActivity.nbOpenAds++
+                    HomeActivityNavBar.nbOpenAds++
                     mListener.onOpenScreenTracker("CategoryGallery")
-                    mListener.onTrackAction("CategoryOpen", categorName)
+                    mListener.onTrackAction("CategoryOpen", categoryName)
                 }
                 val intent = Intent(
                     activity,
@@ -69,9 +127,9 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                     Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData
                 )
 
-                if (!categorName.isEmpty()) intent.putExtra(
+                if (categoryName.isNotEmpty()) intent.putExtra(
                     Constants.DETAIL_IMAGE_POS,
-                    categorName
+                    categoryName
                 )
                 startActivity(intent)
             }
@@ -86,51 +144,36 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                 getString(R.string.TitleDouaLwp),
                 getString(R.string.DescDouaLwp),
                 resources.getColor(R.color.primary),
-                R.mipmap.ic_doua_lwp
+                R.mipmap.ic_doua_lwp,
+                LiveWallpaper.DouaLwp
             ), WallpaperObject(
                 getString(R.string.TitleSkyboxLwp),
                 getString(R.string.DescSkyboxLwp),
                 resources.getColor(R.color.primary),
-                R.mipmap.ic_skybox
+                R.mipmap.ic_skybox,
+                LiveWallpaper.NameOfAllah
             ), WallpaperObject(
                 getString(R.string.TitleTimerLwp),
                 getString(R.string.DescTimerLwp),
                 resources.getColor(R.color.primary),
-                R.mipmap.ic_timer_lwp
+                R.mipmap.ic_timer_lwp,
+                LiveWallpaper.TimerLwp
             ), WallpaperObject(
                 getString(R.string.nameofallah2dtitle),
                 getString(R.string.nameofallah2ddesc),
                 resources.getColor(R.color.primary),
-                R.mipmap.ic_nameofallah_lwp
+                R.mipmap.ic_nameofallah_lwp,
+                LiveWallpaper.NameOfAllah2D
             )
         )
         val lwp = CarouselView("Live Wallpaper 4K", lwpList, CarouselTypeEnum.LIVEWALLPAPER)
         listItem.add(6, ItemWrapperList(lwp, ArticleListAdapter.TYPE_CAROUSEL))
 
-        val catList: List<WallpaperObject> = listOf(
-            WallpaperObject(
-                getString(R.string.TitleDouaLwp),
-                getString(R.string.DescDouaLwp),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_doua_lwp
-            ), WallpaperObject(
-                getString(R.string.TitleSkyboxLwp),
-                getString(R.string.DescSkyboxLwp),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_skybox
-            ), WallpaperObject(
-                getString(R.string.TitleTimerLwp),
-                getString(R.string.DescTimerLwp),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_timer_lwp
-            ), WallpaperObject(
-                getString(R.string.nameofallah2dtitle),
-                getString(R.string.nameofallah2ddesc),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_nameofallah_lwp
-            )
-        )
-        val cat = CarouselView("All Category", catList, CarouselTypeEnum.CATEGORY)
+        val wallpaperObjects =
+            ViewModel.Current.getWallpaperCategoryFromName("ImageCategoryNew")
+                .getGetWallpapersList()
+
+        val cat = CarouselView("All Category", wallpaperObjects, CarouselTypeEnum.CATEGORY)
         listItem.add(13, ItemWrapperList(cat, ArticleListAdapter.TYPE_CAROUSEL))
 
         return listItem
@@ -145,8 +188,8 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                 ) && mData != null && mData.size > 0
             ) {
                 adapter = ArticleListAdapter(
-                    getWallpaperList(mList),
-                    { catItem -> openWallpaper(catItem) },
+                    getWallpaperList(mData),
+                    { catItem, pos -> openWallpaper(catItem, pos) },
                     { catItem, type -> openCategory(catItem, type) }
                 )
                 mRecyclerView.adapter = adapter
@@ -178,7 +221,9 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
 
     private fun showDetailViewActivity(wallpaperObject: WallpaperObject) {
         if (view != null) {
-            HomeActivity.nbOpenAds++
+
+            val pos = mData.indexOfFirst { it.url == wallpaperObject.url }
+            HomeActivityNavBar.nbOpenAds++
             mListener?.onTrackAction("AllFragment", "OpenWallpapers")
             Intent(
                 activity,
@@ -190,7 +235,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                 )
                 putExtra(
                     Constants.DETAIL_IMAGE_POS,
-                    0
+                    pos
                 )
                 startActivity(this)
             }

@@ -14,18 +14,17 @@ class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val mImg: ImageView = itemView.findViewById(R.id.item_img_wallpaper)
 
-    fun bind(wallpaperObject: WallpaperObject, openWallpaper: (WallpaperObject) -> Unit) {
+    fun bind(
+        wallpaperObject: WallpaperObject,
+        pos: Int,
+        openWallpaper: (WallpaperObject, Int) -> Unit
+    ) {
         Glide.with(itemView.context).load(getUrlByScreen(wallpaperObject))
-            .thumbnail(0.5f)
-            .override(
-                ViewModel.Current.device.cellWidht,
-                ViewModel.Current.device.cellHeight
-            )
             .transition(DrawableTransitionOptions.withCrossFade())
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(mImg)
 
-        mImg.setOnClickListener {openWallpaper(wallpaperObject)}
+        mImg.setOnClickListener { openWallpaper(wallpaperObject, pos) }
     }
 
     private fun getUrlByScreen(wall: WallpaperObject): String? {

@@ -1,9 +1,11 @@
 package com.sami.rippel.feature.singleview
 
+import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,6 +19,7 @@ class WallpaperCarrouselItemVH(itemView: View) : RecyclerView.ViewHolder(itemVie
     private val mImg: ImageView = itemView.findViewById(R.id.imgCarrouselImage)
     private val title: TextView = itemView.findViewById(R.id.txt_carrousel_title)
     private val desc: TextView = itemView.findViewById(R.id.txt_carrousel_desc)
+    private val root: ConstraintLayout = itemView.findViewById(R.id.rootItemCarousel)
 
     fun bind(
         wallpaperObject: WallpaperObject,
@@ -26,15 +29,21 @@ class WallpaperCarrouselItemVH(itemView: View) : RecyclerView.ViewHolder(itemVie
 
         title.text = wallpaperObject.name
         desc.text = wallpaperObject.desc
-        Glide.with(itemView.context).load(wallpaperObject.resourceUri)
-            .thumbnail(0.5f)
-            .override(
-                ViewModel.Current.device.cellWidht,
-                ViewModel.Current.device.cellHeight
-            )
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(mImg)
+
+
+        if (wallpaperObject.resourceUri > 0) {
+            Glide.with(itemView.context).load(wallpaperObject.resourceUri)
+                .thumbnail(0.5f)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(mImg)
+        } else {
+            Glide.with(itemView.context)
+                .load(wallpaperObject.url.replace("category_new", "category_preview_new"))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(mImg)
+        }
 
         itemView.setOnClickListener {
             clickListener(wallpaperObject, type)

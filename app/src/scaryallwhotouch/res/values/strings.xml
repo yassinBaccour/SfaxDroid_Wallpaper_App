@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">4k Ramadan Wallpaper</string>
+    <string name="DescSkyboxLwp">3D Live Wallpaper with 99 Names of Allah</string>
+    <string name="TitleSkyboxLwp">Name Of Allah</string>
 </resources>

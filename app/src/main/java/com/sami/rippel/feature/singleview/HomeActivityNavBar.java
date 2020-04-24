@@ -2,15 +2,14 @@ package com.sami.rippel.feature.singleview;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
@@ -43,6 +42,8 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     private Toolbar mToolbar;
 
     private ProgressBar mProgressLoader;
+
+    private ImageView mPrivacy;
 
     private static final int PICK_FROM_FILE = 3;
 
@@ -82,8 +83,7 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
         mAllBackgroundFragment.setListener(this);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.content_main, mAllBackgroundFragment, "mAllBackgroundFragment.class");
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.add(R.id.content_main, mAllBackgroundFragment, "Home.class");
         fragmentTransaction.commit();
     }
 
@@ -92,13 +92,20 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
         mRootLayout = findViewById(R.id.rootLayout);
         mToolbar = findViewById(R.id.toolbar);
         mProgressLoader = findViewById(R.id.progressBar);
+        mPrivacy = findViewById(R.id.imgPrivacy);
+
+        mPrivacy.setOnClickListener(x -> {
+            Intent intent = new Intent(this,
+                    PrivacyActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void setupAds() {
         MobileAds.initialize(this, initializationStatus -> {
         });
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-6263632629106733/6333632738");
+        mInterstitialAd.setAdUnitId(getString(R.string.intertitial));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -106,6 +113,7 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
+
     }
 
     @Override

@@ -24,7 +24,7 @@ class CarouselItemAdapter(
             TYPE_CATEGORY ->
                 return WallpaperCarrouselItemVH(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.lit_item_carrousel,
+                        R.layout.lit_item_carrousel_cat,
                         parent, false
                     )
                 )

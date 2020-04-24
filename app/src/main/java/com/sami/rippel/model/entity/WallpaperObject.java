@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.IntegerRes;
 
+import com.sami.rippel.feature.singleview.LiveWallpaper;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Path;
@@ -16,15 +18,24 @@ import java.util.List;
 @Root(name = "wallpaper", strict = false)
 public class WallpaperObject implements Parcelable, Serializable {
 
-    public WallpaperObject(String name, String desc, int resourceColor, int resourceUri) {
+    public WallpaperObject(String name, String desc, int resourceColor, int resourceUri, LiveWallpaper liveWallpaper) {
         this.name = name;
         this.desc = desc;
         this.resourcecolor = resourceColor;
         this.resourceUri = resourceUri;
+        this.liveWallpaper = liveWallpaper;
     }
 
     public int getResourceUri() {
         return resourceUri;
+    }
+
+    public LiveWallpaper getLiveWallpaper() {
+        return liveWallpaper;
+    }
+
+    public void setLiveWallpaper(LiveWallpaper liveWallpaper) {
+        this.liveWallpaper = liveWallpaper;
     }
 
     public int getResourcecolor() {
@@ -35,6 +46,8 @@ public class WallpaperObject implements Parcelable, Serializable {
     private int resourceUri;
     @IntegerRes
     private int resourcecolor;
+
+    LiveWallpaper liveWallpaper;
 
     @Element(name = "url", required = true)
     private String url;
