@@ -20,8 +20,8 @@ android {
     buildTypes {
         release {
             debuggable false
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -43,8 +43,8 @@ android {
             minSdkVersion 19
             dimension "app"
             resConfigs('ar', 'xxhdpi')
-            versionCode 10
-            versionName "2.0"
+            versionCode 11
+            versionName "2.1"
         }
     }
 
@@ -80,8 +80,6 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     kapt libraries.glideCompîler
     implementation libraries.kotlin
     implementation libraries.ktx
@@ -92,22 +90,22 @@ dependencies {
     implementation libraries.recyclerview
     implementation libraries.glide
     implementation libraries.constraintlayout
+    implementation libraries.retrofit
+    implementation libraries.servicesAds
+    implementation libraries.crashlytics
+    implementation libraries.firebaseAnalytics
     implementation "com.flipboard:bottomsheet-core:$rootProject.ext.bottomsheetVersion"
     implementation "com.flipboard:bottomsheet-commons:$rootProject.ext.bottomsheetVersion"
     implementation "io.github.kobakei:ratethisapp:$rootProject.ext.ratethisapp"
     implementation "com.mani:ThinDownloadManager:$rootProject.ext.thinDownloadManagerVersion"
     implementation "com.github.medyo:android-about-page:$rootProject.ext.medyoVersion"
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
-    implementation 'com.google.android.gms:play-services-ads:19.0.1'
-    implementation 'com.google.firebase:firebase-analytics:17.3.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

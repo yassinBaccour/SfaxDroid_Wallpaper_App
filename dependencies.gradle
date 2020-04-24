@@ -6,7 +6,7 @@ ext {
 
     libraries = [
             leakCanary           : 'com.squareup.leakcanary:leakcanary-android:2.1',
-            servicesAds          : 'com.google.android.gms:play-services-ads:19.0.1',
+            servicesAds          : 'com.google.android.gms:play-services-ads:19.1.0',
             glideCompîler        : 'com.github.bumptech.glide:compiler:4.11.0',
             glide                : 'com.github.bumptech.glide:glide:4.11.0',
             timber               : 'com.jakewharton.timber:timber:4.7.1',
@@ -20,7 +20,7 @@ ext {
             firebaseCore         : 'com.google.firebase:firebase-core:17.2.0',
             firebaseMessaging    : 'com.google.firebase:firebase-messaging:20.1.0',
             firebasePerf         : 'com.google.firebase:firebase-perf:19.0.4',
-            firebaseAnalytics    : 'com.google.firebase:firebase-analytics:17.2.1',
+            firebaseAnalytics    : 'com.google.firebase:firebase-analytics:17.3.0',
             crashlytics          : 'com.crashlytics.sdk.android:crashlytics:2.10.1',
             multidex             : 'androidx.multidex:multidex:2.0.1',
             cardview             : 'androidx.cardview:cardview:1.0.0',
@@ -38,7 +38,7 @@ ext {
             appcompat            : 'androidx.appcompat:appcompat:1.2.0-beta01',
             batch                : 'com.batch.android:batch-sdk:1.14+',
             material             : 'com.google.android.material:material:1.0.0',
-            retrofit             : 'com.squareup.retrofit2:retrofit:2.6.2',
+            retrofit             : 'com.squareup.retrofit2:retrofit:2.8.1',
             retrofit2Converter   : "com.squareup.retrofit2:converter-gson:2.6.1",
             okhttp3Logging       : "com.squareup.okhttp3:logging-interceptor:3.12.1",
             picasso              : 'com.squareup.picasso:picasso:2.71828',
