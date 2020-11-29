@@ -20,5 +20,7 @@ android {
 }
 
 dependencies {
-    implementation files('libs/rajawalilib.jar')
+    compile files('libs/rajawalilib.jar')
+    implementation project(':common-layouts')
+    implementation project(':common-ui-resources')
 }

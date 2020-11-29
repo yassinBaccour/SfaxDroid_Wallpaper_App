@@ -17,4 +17,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    dependencies {
+        implementation project(':common-layouts')
+        implementation project(':common-ui-resources')
+    }
 }

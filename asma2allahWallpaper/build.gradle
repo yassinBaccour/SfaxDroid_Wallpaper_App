@@ -18,3 +18,8 @@ android {
         }
     }
 }
+
+dependencies {
+    implementation project(':common-layouts')
+    implementation project(':common-ui-resources')
+}
