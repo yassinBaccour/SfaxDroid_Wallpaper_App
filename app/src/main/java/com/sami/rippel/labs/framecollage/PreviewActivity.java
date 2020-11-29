@@ -308,13 +308,13 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
         }
         if (shareto == ShareTo.ImgSystem) {
             Intent intent = new Intent(Intent.ACTION_ATTACH_DATA);
-            intent.setDataAndType(Uri.fromFile(file), "image/jpg");
-            intent.putExtra("mimeType", "image/jpg");
+            intent.setDataAndType(Uri.fromFile(file), "ic_icon_image/jpg");
+            intent.putExtra("mimeType", "ic_icon_image/jpg");
             startActivityForResult(Intent.createChooser(intent, "Set As"), 200);
         } else {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-            shareIntent.setType("image/*");
+            shareIntent.setType("ic_icon_image/*");
             shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
             if (shareto == ShareTo.AppSystem) {
                 startActivity(Intent.createChooser(shareIntent, "ShareFileWithIntentType Image"));

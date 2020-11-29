@@ -49,15 +49,15 @@ public class IslamicWallpaper extends Wallpaper implements
 	public void SetRippleBackground(SharedPreferences pref, String key) {
 		if (pref.getString(Constants.ChangeImageKey, "nothing")
 				.equalsIgnoreCase("Allah 1")) {
-			mRenderer.chageBackground(R.drawable.ic_leilehaillaallah);
+			mRenderer.changeBackground(R.drawable.ic_leilehaillaallah);
 		}
 		if (pref.getString(Constants.ChangeImageKey, "nothing")
 				.equalsIgnoreCase("Allah 2")) {
-			mRenderer.chageBackground(R.drawable.ic_leilehaillaallah2);
+			mRenderer.changeBackground(R.drawable.ic_leilehaillaallah2);
 		}
 		if (pref.getString(Constants.ChangeImageKey, "nothing")
 				.equalsIgnoreCase("Allah 3")) {
-			mRenderer.chageBackground(R.drawable.ic_leilehaillaallah3);
+			mRenderer.changeBackground(R.drawable.ic_leilehaillaallah3);
 		}
 	}
 

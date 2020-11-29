@@ -159,8 +159,8 @@ public class DeviceUtils {
         Intent intent = new Intent(Intent.ACTION_ATTACH_DATA);
         intent.setDataAndType(FileProvider.getUriForFile(mContext,
                 mContext.getApplicationContext().getPackageName()
-                        + ".provider", file), "image/jpg");
-        intent.putExtra("mimeType", "image/jpg");
+                        + ".provider", file), "ic_icon_image/jpg");
+        intent.putExtra("mimeType", "ic_icon_image/jpg");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         ac.startActivityForResult(Intent.createChooser(intent, mContext.getString(R.string.setAs)), 200);
     }
@@ -169,7 +169,7 @@ public class DeviceUtils {
         if (appInstalledOrNot(ViewModel.Current.GetIntentNameFromType(intentType))) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-            shareIntent.setType("image/*");
+            shareIntent.setType("ic_icon_image/*");
             Uri photoURI = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".provider", file);
             shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
             shareIntent.setPackage(ViewModel.Current.GetIntentNameFromType(intentType));
@@ -195,7 +195,7 @@ public class DeviceUtils {
 
     public void openChooseActivityFromCamera(Activity ac) {
         File file = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "image.jpg");
+                + File.separator + "ic_icon_image.jpg");
         Constants.currentBitmaps = ViewModel.Current.bitmapUtils.decodeSampledBitmapFromFile(
                 file.getAbsolutePath(), 1000, 700);
         file.delete();
@@ -206,7 +206,7 @@ public class DeviceUtils {
     public void openFileChooser(Activity ac, int requestCode) {
         if (Environment.getExternalStorageState().equals("mounted")) {
             Intent intent = new Intent();
-            intent.setType("image/*");
+            intent.setType("ic_icon_image/*");
             intent.setAction(Intent.ACTION_PICK);
             ac.startActivityForResult(
                     Intent.createChooser(intent, "Select Picture:"),
@@ -217,7 +217,7 @@ public class DeviceUtils {
     public void openCameraChooser(Activity ac, int requestCode) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "image.jpg");
+                + File.separator + "ic_icon_image.jpg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
         ac.startActivityForResult(intent, requestCode);
     }

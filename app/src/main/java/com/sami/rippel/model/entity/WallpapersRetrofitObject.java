@@ -14,10 +14,10 @@ import java.util.List;
 public class WallpapersRetrofitObject {
 
     @ElementList(name = "category", inline = true, required = false)
-    @Path("wallpapers")
+    @Path("ic_wallpaper")
     public List<WallpaperCategory> categoryList;
     @Element(name = "title")
-    @Path("wallpapers")
+    @Path("ic_wallpaper")
     private String applicationName;
 
     public WallpapersRetrofitObject() {

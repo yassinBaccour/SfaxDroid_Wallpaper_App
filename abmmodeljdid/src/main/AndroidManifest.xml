@@ -23,7 +23,7 @@
             android:label="@string/app_name" />
 
         <service
-            android:name="com.sami.abmmodeljdid.ServiceNameOfAllah"
+            android:name="com.sami.abmmodeljdid.WallpaperAppService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
@@ -36,7 +36,7 @@
         </service>
 
         <activity
-            android:name="com.sami.abmmodeljdid.SetWallpaperActivity"
+            android:name="com.sami.abmmodeljdid.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>

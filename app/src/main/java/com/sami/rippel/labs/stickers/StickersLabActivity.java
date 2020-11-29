@@ -688,7 +688,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     public void openGalleryIntent() {
         Intent gallerypickerIntent1 = new Intent(Intent.ACTION_PICK);
-        gallerypickerIntent1.setType("image/*");
+        gallerypickerIntent1.setType("ic_icon_image/*");
         startActivityForResult(gallerypickerIntent1,
                 PICTURE_TAKEN_FROM_GALLERY);
     }
@@ -779,7 +779,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         if (mPathOfBmp != null && !mPathOfBmp.isEmpty()) {
             Uri bmpUri = Uri.parse(mPathOfBmp);
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-            sharingIntent.setType("image/*");
+            sharingIntent.setType("ic_icon_image/*");
             sharingIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
             startActivityForResult(Intent.createChooser(sharingIntent,
                     getString(R.string.ShareUsing)), SHARE_REQUEST_CODE);

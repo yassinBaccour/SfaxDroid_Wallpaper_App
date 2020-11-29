@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sami.rippel.sobhana.SetWallpaperActivity"
+            android:name="com.sami.rippel.sobhana.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>

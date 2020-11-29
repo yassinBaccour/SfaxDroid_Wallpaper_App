@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sami.rippel.lailahailaahhah.SetWallpaperActivity"
+            android:name="com.sami.rippel.lailahailaahhah.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>

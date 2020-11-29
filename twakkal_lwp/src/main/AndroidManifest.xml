@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yassin.sfax.tawakkolalaallah"
     android:versionCode="15"
-    android:versionName="2.4" >
+    android:versionName="2.4">
 
- 
+
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
- 
+
     <uses-feature
         android:name="android.software.live_wallpaper"
         android:required="true" />
@@ -14,45 +14,38 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme" >
-      
+        android:theme="@style/Theme">
+
 
         <service
             android:name="com.yassin.sfax.tawakkolalaallah.LiveWallpaper"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER" >
+            android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
 
             <meta-data
                 android:name="android.service.wallpaper"
-                android:resource="@xml/livewallpaper" />
+                android:resource="@xml/live_wallpaper" />
         </service>
 
         <activity
             android:name="com.yassin.sfax.tawakkolalaallah.MyPreferencesActivity"
             android:exported="true"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
-            android:name="com.yassin.sfax.tawakkolalaallah.SetWallpaperActivity"
+            android:name="com.yassin.sfax.tawakkolalaallah.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-             >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.app.sfax.four.MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait" >
-        </activity>
+
     </application>
 
 </manifest>

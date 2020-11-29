@@ -34,21 +34,25 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:paddingStart="5.0dip"
-            android:src="@drawable/pb_setwall" />
+            android:src="@drawable/pb_setwall"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="5.0dip" />
 
         <ImageView
             android:id="@+id/imageViewPrevPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="5.0dip"
-            android:src="@drawable/pb_prev" />
+            android:src="@drawable/pb_prev"
+            android:paddingRight="5.0dip" />
 
         <ImageView
             android:id="@+id/imageViewNextPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="5.0dip"
-            android:src="@drawable/pb_next" />
+            android:src="@drawable/pb_next"
+            android:paddingLeft="5.0dip" />
     </LinearLayout>
 
     <SeekBar

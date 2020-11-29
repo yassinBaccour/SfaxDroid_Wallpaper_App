@@ -536,7 +536,7 @@ public class TouchImageView extends ImageView {
      *
      * @param x            x-coordinate of touch event
      * @param y            y-coordinate of touch event
-     * @param clipToBitmap Touch event may occur within view, but outside image content.
+     * @param clipToBitmap Touch event may occur within view, but outside ic_icon_image content.
      *                     True, to clip return value to the bounds of the bitmap size.
      * @return Coordinates of the point touched, in the coordinate system of the
      * original drawable.
@@ -789,8 +789,8 @@ public class TouchImageView extends ImageView {
         }
 
         /**
-         * Interpolate between where the image should start and end in order to
-         * translate the image so that the point that is touched is what ends up
+         * Interpolate between where the ic_icon_image should start and end in order to
+         * translate the ic_icon_image so that the point that is touched is what ends up
          * centered at the end of the zoom.
          *
          * @param t
@@ -829,7 +829,7 @@ public class TouchImageView extends ImageView {
 
     /**
      * Fling launches sequential runnables which apply the fling graphic to the
-     * image. The values for the translation are interpolated by the Scroller.
+     * ic_icon_image. The values for the translation are interpolated by the Scroller.
      *
      * @author Ortiz
      */
