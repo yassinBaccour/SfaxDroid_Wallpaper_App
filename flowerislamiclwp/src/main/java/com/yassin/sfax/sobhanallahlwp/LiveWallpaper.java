@@ -49,7 +49,7 @@ public class LiveWallpaper extends WallpaperService {
             wallpaperItems = new ArrayList<>();
             wallpaperItems.add(new AnimatedItem(10, 50));
             background = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.sbh1);
+                    R.drawable.wallpaper_one);
             cloud = BitmapFactory.decodeResource(getResources(),
                     R.drawable.sbh1t);
             chuy1 = BitmapFactory.decodeResource(getResources(),
@@ -83,7 +83,7 @@ public class LiveWallpaper extends WallpaperService {
             switch (sharedPrefs.getString("prefSyncFrequency", "")) {
                 case "Style 18":
                     background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.sbh1);
+                            R.drawable.wallpaper_one);
                     cloud = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh1t);
                     chuy1 = BitmapFactory.decodeResource(getResources(),
@@ -113,7 +113,7 @@ public class LiveWallpaper extends WallpaperService {
                     break;
                 case "Style 19":
                     background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.sbh2);
+                            R.drawable.wallpaper_two);
                     cloud = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
                     chuy1 = BitmapFactory.decodeResource(getResources(),
@@ -143,7 +143,7 @@ public class LiveWallpaper extends WallpaperService {
                     break;
                 case "Style 20":
                     background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.sbh3);
+                            R.drawable.wallpaper_three);
                     cloud = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh3t);
                     chuy1 = BitmapFactory.decodeResource(getResources(),
@@ -172,7 +172,7 @@ public class LiveWallpaper extends WallpaperService {
                     break;
                 case "Style 21":
                     background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.sbh4);
+                            R.drawable.wallpaper_four);
                     cloud = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
                     chuy1 = BitmapFactory.decodeResource(getResources(),
@@ -201,7 +201,7 @@ public class LiveWallpaper extends WallpaperService {
                     break;
                 case "Style 22":
                     background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.sbh5);
+                            R.drawable.wallpaper_five);
                     cloud = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh5t);
                     chuy1 = BitmapFactory.decodeResource(getResources(),

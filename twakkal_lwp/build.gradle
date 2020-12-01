@@ -24,6 +24,5 @@ android {
         implementation project(':common-layouts')
         implementation project(':base-android')
         implementation project(':common-resources')
-
     }
 }

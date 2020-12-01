@@ -1,8 +1,0 @@
-<resources>
-
-    <style name="Theme" parent="android:Theme">
-        <item name="android:background">@null</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
-</resources>

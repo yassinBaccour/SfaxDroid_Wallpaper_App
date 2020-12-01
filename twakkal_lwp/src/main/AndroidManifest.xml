@@ -34,11 +34,11 @@
         <activity
             android:name="com.yassin.sfax.tawakkolalaallah.MyPreferencesActivity"
             android:exported="true"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name="com.yassin.sfax.tawakkolalaallah.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

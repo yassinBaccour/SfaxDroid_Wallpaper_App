@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="my_statusbar_color">#388E3C</color>
-    <color name="button_color">#34495e</color>
-    <color name="primary">#27ae60</color>
-    <color name="primary_dark">#27ae60</color>
-    <color name="accent">#2980b9</color>
-</resources>

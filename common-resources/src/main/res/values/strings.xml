@@ -44,6 +44,9 @@
     <string name="txt12">Ripple Settings</string>
     <string name="txt13">Recommendations</string>
     <string name="txt14">please Rate us</string>
+    <string name="txt15">Enable Rain</string>
+    <string name="txt16">Enable Touch</string>
+
 
     <string name="pref_sync_frequency">Choose models</string>
     <string name="pref_sync_frequency_summary">choose a wallpapers models</string>

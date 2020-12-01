@@ -15,7 +15,7 @@ class MainActivity : BaseActivity() {
         buttonSetWallpaper.setOnClickListener {
             Utils.openLiveWallpaper<LiveWallpaper>(this)
         }
-        btRating.setOnClickListener {
+        btnRating.setOnClickListener {
             Utils.ratingApplication(this)
         }
     }

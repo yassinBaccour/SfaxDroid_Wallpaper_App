@@ -21,13 +21,6 @@
     <string name="txt6">Annuler l animation 2</string>
 
 
-    <string name="txt8">Apropo de la publicité</string>
-    <string name="txt9">apercu rapide des photos</string>
-    <string name="txt10">Alle dans la galery des fond d ecean</string>
-    <string name="txt11">fond d ecrant appliqué avec succée</string>
-
-    <string name="txt22"> l application contient un peut de publicité , les publicités aident a developper plus d application gratuite </string>
-
 
     <string name="pref_sync_frequency">choisir un modele</string>
     <string name="pref_sync_frequency_summary">choisir un modele d animaton</string>

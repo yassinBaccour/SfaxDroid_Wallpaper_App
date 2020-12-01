@@ -8,6 +8,6 @@ public class MyPreferencesActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.livewallpaper_settings);
+        addPreferencesFromResource(R.xml.settings);
     }
 }

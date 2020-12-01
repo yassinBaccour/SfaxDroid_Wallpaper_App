@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<style name="Theme" parent="android:Theme">
-		<item name="android:background">@null</item>
-		<item name="android:windowNoTitle">true</item>
-	</style>	
-	 <style name="myImageView">
-        <item name="android:background">@drawable/image_border</item>
-        <item name="android:padding">3.0dip</item>
-        <item name="android:scaleType">fitCenter</item>
+
+    <style name="Theme" parent="android:Theme">
+        <item name="android:background">@null</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
+
 </resources>

@@ -92,15 +92,15 @@ public class WallpaperAppService extends WallpaperService {
 
         void draw() {
             final SurfaceHolder holder = getSurfaceHolder();
-            Canvas c = null;
+            Canvas canvas = null;
             try {
-                c = holder.lockCanvas();
-                if (c != null) {
-                    draw(c);
+                canvas = holder.lockCanvas();
+                if (canvas != null) {
+                    draw(canvas);
                 }
             } finally {
-                if (c != null) {
-                    holder.unlockCanvasAndPost(c);
+                if (canvas != null) {
+                    holder.unlockCanvasAndPost(canvas);
                 }
             }
             mHandler.removeCallbacks(mDrawRunnable);
