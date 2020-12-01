@@ -40,7 +40,9 @@ android {
 
 dependencies {
     implementation project(':common-layouts')
-    implementation project(':common-ui-resources')
+    implementation project(':base-android')
+    implementation project(':common-resources')
+
 }
 
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txtrate1">\n if you like this application Please rating , rating help me to develop more Islamic Application \n </string>
+    <string name="txtrate2">Rate the application</string>
+    <string name="txtrate3">Remind me later</string>
+    <string name="txtrate4">Do not ask again</string>
+    <string name="txtrate5">Rate my application</string>
+    <string name="txtrate6">Simultaneously press two times the back button to exit</string>
+    <string name="txt1">Set the wallpaper manually</string>
+
+</resources>

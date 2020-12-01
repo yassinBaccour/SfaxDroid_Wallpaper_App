@@ -11,7 +11,7 @@
         android:theme="@style/Theme">
 
         <service
-            android:name="com.sami.rippel.besmelleh.MyWallpaper"
+            android:name="com.sami.rippel.besmelleh.WallpaperEngine"
             android:label="@string/lwp_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
@@ -24,7 +24,7 @@
         </service>
 
         <activity
-            android:name="com.sami.rippel.besmelleh.MyWallpaperSettings"
+            android:name="com.sami.rippel.besmelleh.WallpaperSettings"
             android:exported="true"
             android:label="Settings">
             <intent-filter>

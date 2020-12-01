@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="choose">Choose picture</string>
+
+    <string-array name="ripple_image">
+        <item>Allah 1</item>
+        <item>Allah 2</item>
+        <item>Allah 3</item>
+    </string-array>
+    <string-array name="ripple_image_value">
+        <item>Allah 1</item>
+        <item>Allah 2</item>
+        <item>Allah 3</item>
+    </string-array>
+
+    <string-array name="ripple_size">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+    <string-array name="ripple_size_value">
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+    </string-array>
+    <string-array name="ripple_duration">
+        <item>Slow</item>
+        <item>Medium</item>
+        <item>Fast</item>
+    </string-array>
+    <string-array name="ripple_duration_value">
+        <item>slow</item>
+        <item>medium</item>
+        <item>fast</item>
+    </string-array>
+    <string name="txt2">Set the wallpaper</string>
+    <string name="txt5">Enable Sound</string>
+    <string name="txt6">Select This Option For Sweet Sound Of Water Drop On Screen Touch</string>
+    <string name="txt7">Ripple Size</string>
+    <string name="txt8">Change Size Of Ripples</string>
+    <string name="txt9">Ripple Speed</string>
+    <string name="txt10">Change Speed Of Ripples</string>
+    <string name="txt11">Sound</string>
+    <string name="txt12">Ripple Settings</string>
+    <string name="txt13">Recommendations</string>
+    <string name="txt14">please Rate us</string>
+
+    <string name="pref_sync_frequency">Choose models</string>
+    <string name="pref_sync_frequency_summary">choose a wallpapers models</string>
+    <string name="pref_update_setting">Models Settings</string>
+
+</resources>

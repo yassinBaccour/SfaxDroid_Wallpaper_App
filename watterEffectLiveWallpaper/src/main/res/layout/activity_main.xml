@@ -1,83 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary">
 
-    <LinearLayout
-        android:id="@+id/layoutbutton"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textViewChoose"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="30dp"
-        android:orientation="vertical">
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/choose"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintBottom_toTopOf="@+id/radioChooseWallpaper"
+        app:layout_constraintEnd_toEndOf="@+id/radioChooseWallpaper"
+        app:layout_constraintStart_toStartOf="@+id/radioChooseWallpaper"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/choose"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+    <RadioGroup
+        android:id="@+id/radioChooseWallpaper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btnSetWallpaper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChoose">
 
-        <RadioGroup
-            android:id="@+id/radioChooseWallpaper"
+        <RadioButton
+            android:id="@+id/wallp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:drawableTop="@drawable/ic_mokup2" />
 
-            <RadioButton
-                android:id="@+id/wallp2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableTop="@drawable/ic_mokup2" />
-
-            <RadioButton
-                android:id="@+id/wallp1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:drawableTop="@drawable/ic_mokup1" />
-
-            <RadioButton
-                android:id="@+id/wallp3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:drawableTop="@drawable/ic_mokup3" />
-        </RadioGroup>
-
-        <Button
-            android:id="@+id/btnSetWallpaper"
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/wallp1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt2" />
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:drawableTop="@drawable/ic_mokup1" />
 
-        <Button
-            android:id="@+id/btotherapp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/other"
-            android:visibility="gone" />
+        <RadioButton
+            android:id="@+id/wallp3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:drawableTop="@drawable/ic_mokup3" />
+    </RadioGroup>
 
-        <ImageView
-            android:id="@+id/imageViewPub"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/layoutbutton"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ic_pub" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnSetWallpaper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt2"
+        app:layout_constraintEnd_toEndOf="@+id/radioChooseWallpaper"
+        app:layout_constraintStart_toStartOf="@+id/radioChooseWallpaper"
+        app:layout_constraintTop_toBottomOf="@+id/radioChooseWallpaper" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imageViewPub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layoutbutton"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_pub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSetWallpaper" />
+
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/layoutbutton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_logo" />
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

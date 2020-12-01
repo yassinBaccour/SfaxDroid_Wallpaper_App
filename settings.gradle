@@ -1,3 +1,5 @@
 include ':app', ':flowerislamiclwp', ':islamicbasmallah', ':twakkal_lwp', ':watterEffectLiveWallpaper', ':abmmodeljdid', ':asma2allahWallpaper', ':sobhanallahripplelwp', 'lailahailaahhah'
 include ':common-layouts'
-include ':app:common-ui-resources'
+include ':base-android'
+include ':common-resources'
+include ':base-rajawali-engine'

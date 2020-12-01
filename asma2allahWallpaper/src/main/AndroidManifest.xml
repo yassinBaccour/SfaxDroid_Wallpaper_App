@@ -34,10 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.app.girlsgallery.four.MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleInstance" />
     </application>
 
 </manifest>

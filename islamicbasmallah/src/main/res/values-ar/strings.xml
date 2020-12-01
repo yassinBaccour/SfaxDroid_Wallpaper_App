@@ -2,45 +2,4 @@
 <resources>
     <string name="app_name">خلفية تموج المياه بسم الله</string>
     <string name="lwp_name">خلفية تموج المياه بسم الله</string>
-    <string-array name="ripple_size">
-        <item>صغيرة</item>
-        <item>متوسطة</item>
-        <item>كبيرة</item>
-    </string-array>
-    <string-array name="ripple_size_value">
-        <item>صغيرة</item>
-        <item>متوسطة</item>
-        <item>كبيرة</item>
-    </string-array>
-    <string-array name="ripple_duration">
-        <item>بطيئة</item>
-        <item>متوسط</item>
-        <item>سريع</item>
-    </string-array>
-    <string-array name="ripple_duration_value">
-        <item>بطيئة</item>
-        <item>متوسط</item>
-        <item>سريع</item>
-    </string-array>
-    <string name="txt1">كيفية تطبيق الخلفية المتحرك ؟</string>
-    <string name="txt2">تطبيق الخلفية المتحرك</string>
-    <string name="txt3">كيفية التطبيق يدويا ؟</string>
-    <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
-    <string name="txtrate1">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
-    <string name="txtrate2"> تقييم التطبيقة </string>
-    <string name="txtrate3">ذكرني لاحق</string>
-    <string name="txtrate4">لا تسألني مرة أخرى</string>
-    <string name="txtrate5">تقييم التطبيقة </string>
-    <string name="txtrate6">اضغط مرتين على الزر للخروج</string>
-    <string name="txt5"> الصوت</string>
-    <string name="txt6">حدد هذا الخيار لسماع صوت قطرة الماء عند لمس الشاشة</string>
-    <string name="txt7">حجم التموج</string>
-    <string name="txt8">تغير حجم التموج</string>
-    <string name="txt9">سرعة التموج</string>
-    <string name="txt10">تغير سرعة التموج</string>
-    <string name="txt11">صوت</string>
-    <string name="txt12">اعدادت التموج</string>
-    <string name="txt13">التقييم</string>
-    <string name="txt14">رجاء التقييم التطبيقة</string>
-    <string name="txt15">خلفياتي الأخرى</string>
 </resources>

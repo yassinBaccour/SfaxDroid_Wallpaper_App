@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- General -->
     <skip />
-    <!-- Application name -->
     <string name="app_name"> سبحان الله    خلفيات متحركة  </string>
-	<string name="livewallpaper_settings">تعديلاة</string>
-	<string name="livewallpaper_settings_title">تعديلاة  خلفيات إسلامية متحرك</string>
-	<string name="livewallpaper_settings_summary">إختيارالصورة</string>
-	<string name="livewallpaper_movement_title">Motion</string>
-	<string name="livewallpaper_movement_summary">تطبيق</string>
-	<string name="menu_settings">تعديلاة</string>
+    <string name="livewallpaper_settings">تعديلاة</string>
+    <string name="livewallpaper_settings_title">تعديلاة  خلفيات إسلامية متحرك</string>
+    <string name="livewallpaper_settings_summary">إختيارالصورة</string>
+    <string name="livewallpaper_movement_title">Motion</string>
+    <string name="livewallpaper_movement_summary">تطبيق</string>
+    <string name="menu_settings">تعديلاة</string>
     <string name="title_activity_main">MainActivity</string>
- 
+
     <string name="txt1">كيفية التطبيق يدويا</string>
     <string name="txt2">تطبيق الخلفية المتحرك</string>
-    <string name="txt3">كيفية تطبيق الخلفية المتحرك ؟</string>  
-    <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->  سبحان الله    خلفيات متحركة</string> 
+    <string name="txt3">كيفية تطبيق الخلفية المتحرك ؟</string>
+    <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->  سبحان الله    خلفيات متحركة</string>
     <string name="txt5">إلخاء التحركات الأولي</string>
     <string name="txt6">إلخاء التحركات الثانية</string>
-    
-    
-      <string name="txt8"> حول الإشهار في البرنامج</string>
-  <string name="txt9">الختفيات المتواجدة في البرنامج</string>  
-  <string name="txt10">الدخول إلي الخلفيات العادية</string>
-  <string name="txt11">تم تثبية الخلفية بنجاح</string>
-  
-   <string name="txt22">
+
+
+    <string name="txt8"> حول الإشهار في البرنامج</string>
+    <string name="txt9">الختفيات المتواجدة في البرنامج</string>
+    <string name="txt10">الدخول إلي الخلفيات العادية</string>
+    <string name="txt11">تم تثبية الخلفية بنجاح</string>
+
+    <string name="txt22">
 يجد البعض من الإشهار فى التطبقات , الإشهارات نساهم في صنع العديد من التطبقات </string>
- 
-  
+
     <string name="pref_sync_frequency">إختيارالصورة</string>
     <string name="pref_sync_frequency_summary"> الرجاء إختيارالصورة </string>
     <string name="pref_update_setting">تعديلاة الصور</string>
-    
-       <string name="txt12">تقييم البرنامج جزاك الله خيراً</string>
+
+    <string name="txt12">تقييم البرنامج جزاك الله خيراً</string>
     <string name="txt13">المزيد من الخلفيات</string>
-    
+
 </resources>

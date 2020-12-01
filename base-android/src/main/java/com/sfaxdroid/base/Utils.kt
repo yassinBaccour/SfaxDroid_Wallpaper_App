@@ -1,0 +1,50 @@
+package com.sfaxdroid.base
+
+import android.app.WallpaperManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
+
+class Utils {
+    companion object {
+
+        fun openPub(context: Context) {
+            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("market://details?id=com.sami.rippel.allah")
+            })
+        }
+
+        fun ratingApplication(context: Context) {
+            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("market://details?id=" + context.packageName)
+            })
+        }
+
+        inline fun <reified T : Any> openLiveWallpaper(context: Context) {
+            try {
+                context.startActivity(Intent(
+                    WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
+                ).apply {
+                    putExtra(
+                        WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                        ComponentName(
+                            context,
+                            T::class.java
+                        )
+                    )
+                })
+            } catch (exception: Exception) {
+                context.startActivity(Intent().apply {
+                    action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
+                })
+                Toast.makeText(
+                    context, R.string.txt1,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+}

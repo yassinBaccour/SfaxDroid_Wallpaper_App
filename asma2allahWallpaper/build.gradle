@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -21,5 +23,7 @@ android {
 
 dependencies {
     implementation project(':common-layouts')
-    implementation project(':common-ui-resources')
+    implementation project(':base-android')
+    implementation project(':common-resources')
+
 }

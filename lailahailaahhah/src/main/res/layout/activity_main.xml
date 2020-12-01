@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#27ae60" >
-  <LinearLayout
-        android:id="@+id/layoutbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+    android:background="#27ae60">
+
+
     <TextView
-        android:id="@+id/textView1"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewChoose"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:gravity="center_horizontal"
         android:text="@string/choose"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        app:layout_constraintBottom_toTopOf="@+id/radioWallpaper"
+        app:layout_constraintEnd_toEndOf="@+id/radioWallpaper"
+        app:layout_constraintStart_toStartOf="@+id/radioWallpaper"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/radioWallpaper"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChoose">
 
         <RadioButton
             android:id="@+id/wallp3"
@@ -45,33 +51,24 @@
             android:drawableTop="@drawable/ic_mokup3" />
     </RadioGroup>
 
-    <LinearLayout
-        android:id="@+id/layoutbutton"
+    <Button
+        android:id="@+id/buttonSetWallpaper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt2"
+        app:layout_constraintEnd_toEndOf="@+id/radioWallpaper"
+        app:layout_constraintStart_toStartOf="@+id/radioWallpaper"
+        app:layout_constraintTop_toBottomOf="@+id/radioWallpaper" />
+
+    <ImageView
+        android:id="@+id/imageViewPub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/buttonSetWallpaper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/txt2" />
-
-        <Button
-            android:id="@+id/btnOtherApp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/other" />
-        
-          <ImageView
-          android:id="@+id/imageViewPub"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_above="@+id/layoutbutton"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="10dp"
-          android:src="@drawable/ic_pub" />
-    </LinearLayout>
-</LinearLayout>
-</ScrollView>
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_pub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSetWallpaper" />
+</androidx.constraintlayout.widget.ConstraintLayout>

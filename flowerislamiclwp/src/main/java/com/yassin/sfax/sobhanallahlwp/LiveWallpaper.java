@@ -13,6 +13,8 @@ import android.service.wallpaper.WallpaperService;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+import com.sfaxdroid.base.AnimatedItem;
+
 public class LiveWallpaper extends WallpaperService {
 
     @Override
@@ -29,7 +31,7 @@ public class LiveWallpaper extends WallpaperService {
                 drawFrame();
             }
         };
-        private final ArrayList<WallpaperItem> wallpaperItems;
+        private final ArrayList<AnimatedItem> wallpaperItems;
         private int new_cloud_iteration = 0;
         private int currentItem = 0;
         private Bitmap background, cloud, chuy1, chuy2, chuy3, chuy4;
@@ -45,7 +47,7 @@ public class LiveWallpaper extends WallpaperService {
             paint.setStrokeCap(Paint.Cap.ROUND);
             paint.setStyle(Paint.Style.STROKE);
             wallpaperItems = new ArrayList<>();
-            wallpaperItems.add(new WallpaperItem(10, 50));
+            wallpaperItems.add(new AnimatedItem(10, 50));
             background = BitmapFactory.decodeResource(getResources(),
                     R.drawable.sbh1);
             cloud = BitmapFactory.decodeResource(getResources(),
@@ -343,7 +345,7 @@ public class LiveWallpaper extends WallpaperService {
             int screen_width = c.getWidth();
             int screen_height = c.getHeight();
             if (new_cloud_iteration > 200 + (int) (Math.random() * 1000 % 100)) {
-                wallpaperItems.add(new WallpaperItem(
+                wallpaperItems.add(new AnimatedItem(
                         (int) (Math.random() * 1000 % screen_width), 0));
                 new_cloud_iteration = 0;
             }

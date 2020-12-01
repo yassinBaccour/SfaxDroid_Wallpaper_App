@@ -24,10 +24,10 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.sfaxdroid.base.BaseActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
-    private static long backPressed;
     private Editor prefsEditor;
     private InterstitialAd mInterstitialAd;
 
@@ -202,14 +202,4 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (backPressed + 2000 > System.currentTimeMillis())
-            super.onBackPressed();
-        else {
-            Toast.makeText(getBaseContext(), R.string.txtrate6,
-                    Toast.LENGTH_SHORT).show();
-        }
-        backPressed = System.currentTimeMillis();
-    }
 }
