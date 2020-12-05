@@ -3,16 +3,16 @@
         <ListPreference
             android:entries="@array/syncFrequency"
             android:entryValues="@array/syncFrequencyValues"
-            android:key="prefSyncFrequency"
+            android:key="themePref"
             android:summary="@string/pref_sync_frequency_summary"
             android:title="@string/pref_sync_frequency" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="checkBox1"
+            android:key="rainingPref"
             android:title="@string/txt15" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="checkBox2"
+            android:key="touchingPref"
             android:title="@string/txt16" />
     </PreferenceCategory>
 </PreferenceScreen>

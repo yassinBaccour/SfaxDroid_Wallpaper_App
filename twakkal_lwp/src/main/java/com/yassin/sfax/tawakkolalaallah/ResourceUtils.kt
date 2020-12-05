@@ -15,47 +15,47 @@ class ResourceUtils {
             } else when (pref) {
                 "Style 1" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw41
+                    R.drawable.style1_touching
                 )
                 "Style 2" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style2_touching
                 )
                 "Style 3" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style3_touching
                 )
                 "Style 4" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw41
+                    R.drawable.style4_touching
                 )
                 "Style 5" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style5_touching
                 )
                 "Style 6" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw61
+                    R.drawable.style6_touching
                 )
                 "Style 7" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style7_touching
                 )
                 "Style 8" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw61
+                    R.drawable.style8_touching
                 )
                 "Style 9" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style9_touching
                 )
                 "Style 10" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style10_touching
                 )
                 else -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style11_touching
                 )
             }
         }
@@ -69,52 +69,52 @@ class ResourceUtils {
             } else when (pref) {
                 "Style 1" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw41
+                    R.drawable.style1_raining
                 )
                 "Style 2" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw41
+                    R.drawable.style2_raining
                 )
                 "Style 3" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style3_raining
                 )
                 "Style 4" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw41
+                    R.drawable.style4_raining
                 )
                 "Style 5" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style5_raining
                 )
                 "Style 6" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw61
+                    R.drawable.style6_raining
                 )
                 "Style 7" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style7_raining
                 )
                 "Style 8" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw61
+                    R.drawable.style8_raining
                 )
                 "Style 9" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style9_raining
                 )
                 "Style 10" -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style10_raining
                 )
                 else -> BitmapFactory.decodeResource(
                     context.resources,
-                    R.drawable.tw21
+                    R.drawable.style11_raining
                 )
             }
         }
 
-        fun getBackground(context: Context, pref: String): Bitmap? {
+        fun getBackground(context: Context, pref: String): Bitmap {
             return when (pref) {
                 "Style 1" -> BitmapFactory.decodeResource(
                     context.resources,
