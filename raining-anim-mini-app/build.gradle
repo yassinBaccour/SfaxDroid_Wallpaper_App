@@ -6,17 +6,35 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.yassin.sfax.tawakkolalaallah"
+        applicationId "com"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 17
-        versionName "2.6"
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+
+    flavorDimensions "app"
+
+    productFlavors {
+
+        tawakkol {
+            applicationIdSuffix = ".yassin.sfax.tawakkolalaallah"
+            dimension "app"
+            versionCode 17
+            versionName "2.6"
+        }
+
+        flower {
+            applicationIdSuffix = ".yassin.sfax.sobhanallahlwp"
+            dimension "app"
+            versionCode 17
+            versionName "2.6"
         }
     }
 

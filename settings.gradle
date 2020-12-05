@@ -1,4 +1,4 @@
-include ':app', ':flowerislamiclwp', ':twakkal_lwp', ':water-ripple-mini-app', ':abmmodeljdid'
+include ':app', ':flowerislamiclwp', ':raining-anim-mini-app', ':water-ripple-mini-app', ':abmmodeljdid'
 include ':common-layouts'
 include ':base-android'
 include ':common-resources'
