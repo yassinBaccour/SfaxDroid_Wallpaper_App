@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"
-    android:author="@string/author"
-    android:description="@string/description"
-    android:settingsActivity="com.sfaxman.islamwallpaper.Setting"
-    android:thumbnail="@drawable/ic_launcher" />

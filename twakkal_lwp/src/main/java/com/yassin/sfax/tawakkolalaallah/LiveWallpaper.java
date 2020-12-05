@@ -33,8 +33,7 @@ public class LiveWallpaper extends WallpaperService {
         };
         private final ArrayList<AnimatedItem> animatedItems;
         private int newCloudIteration = 0;
-        private int currentItem = 0;
-        private Bitmap background, img0, img1, img2, img3, img4;
+        private Bitmap background, rainingItem, touchingItem;
         final SurfaceHolder surfaceHolder = getSurfaceHolder();
         private boolean mVisible;
 
@@ -48,16 +47,10 @@ public class LiveWallpaper extends WallpaperService {
             animatedItems = new ArrayList<>();
             animatedItems.add(new AnimatedItem(10, 50));
             background = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.tw1);
-            img0 = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.wallpaper1);
+            rainingItem = BitmapFactory.decodeResource(getResources(),
                     R.drawable.tw41);
-            img1 = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.tw41);
-            img2 = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.tw41);
-            img3 = BitmapFactory.decodeResource(getResources(),
-                    R.drawable.tw41);
-            img4 = BitmapFactory.decodeResource(getResources(),
+            touchingItem = BitmapFactory.decodeResource(getResources(),
                     R.drawable.tw41);
         }
 
@@ -75,323 +68,18 @@ public class LiveWallpaper extends WallpaperService {
 
         @Override
         public void onVisibilityChanged(boolean visible) {
+
             SharedPreferences sharedPrefs = PreferenceManager
                     .getDefaultSharedPreferences(LiveWallpaper.this);
+
             boolean Anim1 = sharedPrefs.getBoolean("checkBox1", true);
             boolean Anim2 = sharedPrefs.getBoolean("checkBox2", true);
-            switch (sharedPrefs.getString("prefSyncFrequency", "NULL")) {
-                case "Style 18":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw1);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 19":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw2);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 20":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw3);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 21":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw4);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw41);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 22":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw5);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 23":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw6);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw61);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw61);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw61);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw61);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw61);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 24":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw7);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 25":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw8);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
 
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 26":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw9);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 27":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw10);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
+            String syncFreq = sharedPrefs.getString("prefSyncFrequency", "NULL");
 
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-                case "Style 28":
-                    background = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw11);
-                    img0 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img1 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img2 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img3 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-                    img4 = BitmapFactory.decodeResource(getResources(),
-                            R.drawable.tw21);
-
-                    if (!Anim1) {
-                        img0 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    if (!Anim2) {
-                        img1 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img2 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img3 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                        img4 = BitmapFactory.decodeResource(getResources(),
-                                R.drawable.none);
-                    }
-                    break;
-            }
+            background = ResourceUtils.Companion.getBackground(getBaseContext(), syncFreq);
+            rainingItem = ResourceUtils.Companion.getRainingItem(getBaseContext(), syncFreq, Anim1);
+            touchingItem = ResourceUtils.Companion.getTouchingItem(getBaseContext(), syncFreq, Anim2);
 
             mVisible = visible;
             if (visible) {
@@ -456,44 +144,44 @@ public class LiveWallpaper extends WallpaperService {
 
         void drawPattern(Canvas canvas) {
             canvas.save();
+            drawBackground(canvas);
+            drawRainingItem(canvas);
+            drawTouchingItem(canvas);
+        }
+
+        private void drawBackground(Canvas canvas) {
             canvas.drawColor(0xff000000);
+            canvas.drawBitmap(background, 0, 0, null);
+        }
+
+        private void drawRainingItem(Canvas canvas) {
             int screenWidth = canvas.getWidth();
-            int screenHeight = canvas.getHeight();
             if (newCloudIteration > 200 + (int) (Math.random() * 1000 % 100)) {
                 animatedItems.add(new AnimatedItem(
                         (int) (Math.random() * 1000 % screenWidth), 0));
                 newCloudIteration = 0;
             }
             newCloudIteration++;
-            canvas.drawBitmap(background, 0, 0, null);
+            int screenHeight = canvas.getHeight();
             for (int i = 0; i < animatedItems.size(); i++) {
-                canvas.drawBitmap(img0, animatedItems.get(i).x - img0.getWidth() / 2,
-                        animatedItems.get(i).y - img0.getHeight() / 2, null);
+                canvas.drawBitmap(rainingItem, animatedItems.get(i).x - rainingItem.getWidth() / 2,
+                        animatedItems.get(i).y - rainingItem.getHeight() / 2, null);
                 animatedItems.get(i).y++;
                 if (animatedItems.get(i).y > screenHeight) {
                     animatedItems.remove(i);
                     i--;
                 }
             }
-            if (mTouchX >= 0 && mTouchY >= 0) {
-                if (currentItem == 0) {
-                    canvas.drawBitmap(img1, mTouchX - img1.getWidth() / 2, mTouchY
-                            - img1.getHeight() / 2, null);
-                } else if (currentItem == 1) {
-                    canvas.drawBitmap(img2, mTouchX - img2.getWidth() / 2, mTouchY
-                            - img2.getHeight() / 2, null);
-                } else if (currentItem == 2) {
-                    canvas.drawBitmap(img3, mTouchX - img3.getWidth() / 2, mTouchY
-                            - img3.getHeight() / 2, null);
-                } else if (currentItem == 3) {
-                    canvas.drawBitmap(img4, mTouchX - img4.getWidth() / 2, mTouchY
-                            - img4.getHeight() / 2, null);
-                }
-                currentItem++;
-                if (currentItem >= 4)
-                    currentItem = 0;
-            }
-            canvas.restore();
         }
+
+        private void drawTouchingItem(Canvas canvas) {
+            if (mTouchX >= 0 && mTouchY >= 0) {
+                canvas.drawBitmap(touchingItem, mTouchX - touchingItem.getWidth() / 2, mTouchY
+                        - touchingItem.getHeight() / 2, null);
+                canvas.restore();
+            }
+        }
+
+
     }
 }

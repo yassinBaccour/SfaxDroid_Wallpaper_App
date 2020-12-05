@@ -2,21 +2,21 @@
 <resources>
     <string-array name="syncFrequency">
         
-        <item name="18">الخلفية رقم ١</item>
-        <item name="19">الخلفية رقم ٢</item>
-        <item name="20">الخلفية رقم ٣</item>
-        <item name="21">الخلفية رقم ٤</item>
-        <item name="22">الخلفية رقم ٥</item>
-        <item name="23">الخلفية رقم ٦ </item>
+        <item name="1">الخلفية رقم ١</item>
+        <item name="2">الخلفية رقم ٢</item>
+        <item name="3">الخلفية رقم ٣</item>
+        <item name="4">الخلفية رقم ٤</item>
+        <item name="5">الخلفية رقم ٥</item>
+        <item name="6">الخلفية رقم ٦ </item>
     </string-array>
     <string-array name="syncFrequencyValues">
        
-		<item name="18">Style 18</item>   
-		<item name="19">Style 19</item>   
-		<item name="20">Style 20</item>   
-	    <item name="21">Style 21</item>   
-	    <item name="22">Style 22</item>   
-	    <item name="23">Style 23</item> 
+		<item name="1">Style 1</item>
+		<item name="2">Style 2</item>
+		<item name="3">Style 3</item>
+	    <item name="4">Style 4</item>
+	    <item name="5">Style 5</item>
+	    <item name="6">Style 6</item>
     </string-array>
      
 </resources>

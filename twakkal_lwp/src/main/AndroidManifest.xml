@@ -1,8 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yassin.sfax.tawakkolalaallah"
-    android:versionCode="15"
-    android:versionName="2.4">
-
+    package="com.yassin.sfax.tawakkolalaallah">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
@@ -16,7 +13,6 @@
         android:label="@string/app_name"
         android:theme="@style/Theme">
 
-
         <service
             android:name="com.yassin.sfax.tawakkolalaallah.LiveWallpaper"
             android:icon="@drawable/ic_launcher"
@@ -28,7 +24,7 @@
 
             <meta-data
                 android:name="android.service.wallpaper"
-                android:resource="@xml/live_wallpaper" />
+                android:resource="@xml/wallpaper" />
         </service>
 
         <activity

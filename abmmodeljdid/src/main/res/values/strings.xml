@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">أسماء الله الحسنى متغيرة</string>
     <string name="author">SfaxDroid</string>
     <string name="description">أسماء الله الحسنى متغيرة</string>
     <string name="txt1"> كيفية التطبيق يدويا ؟ </string>
@@ -19,7 +18,7 @@
     <string name="pref_sync_frequency_summary2">الرجاء إختيارمجموعة الصور</string>
     <string name="pref_update_setting2">مجموعة الصور</string>
     <string name="txt10">الذهاب إلى مجموعة الصور مع التكبير</string>
-    <string name="txt11">succes to set wallpaper</string>
+    <string name="txt11">Success to set wallpaper</string>
     <string name="txt12">تقييم البرنامج جزاك الله خيراً</string>
     <string name="txt13">المزيد من الخلفيات</string>
     <string name="txtrate6">اضغط مرتين على الزر للخروج</string>

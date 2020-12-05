@@ -34,7 +34,7 @@ public class LiveWallpaper extends WallpaperService {
         private final ArrayList<AnimatedItem> wallpaperItems;
         private int new_cloud_iteration = 0;
         private int currentItem = 0;
-        private Bitmap background, cloud, chuy1, chuy2, chuy3, chuy4;
+        private Bitmap background, img0, img1, img2, img3, img4;
         private final SurfaceHolder holder = getSurfaceHolder();
         private boolean mVisible;
 
@@ -50,15 +50,15 @@ public class LiveWallpaper extends WallpaperService {
             wallpaperItems.add(new AnimatedItem(10, 50));
             background = BitmapFactory.decodeResource(getResources(),
                     R.drawable.wallpaper_one);
-            cloud = BitmapFactory.decodeResource(getResources(),
+            img0 = BitmapFactory.decodeResource(getResources(),
                     R.drawable.sbh1t);
-            chuy1 = BitmapFactory.decodeResource(getResources(),
+            img1 = BitmapFactory.decodeResource(getResources(),
                     R.drawable.sbh1t);
-            chuy2 = BitmapFactory.decodeResource(getResources(),
+            img2 = BitmapFactory.decodeResource(getResources(),
                     R.drawable.sbh1t);
-            chuy3 = BitmapFactory.decodeResource(getResources(),
+            img3 = BitmapFactory.decodeResource(getResources(),
                     R.drawable.sbh1t);
-            chuy4 = BitmapFactory.decodeResource(getResources(),
+            img4 = BitmapFactory.decodeResource(getResources(),
                     R.drawable.sbh1t);
         }
 
@@ -84,29 +84,29 @@ public class LiveWallpaper extends WallpaperService {
                 case "Style 18":
                     background = BitmapFactory.decodeResource(getResources(),
                             R.drawable.wallpaper_one);
-                    cloud = BitmapFactory.decodeResource(getResources(),
+                    img0 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh1t);
-                    chuy1 = BitmapFactory.decodeResource(getResources(),
+                    img1 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh1t);
-                    chuy2 = BitmapFactory.decodeResource(getResources(),
+                    img2 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh1t);
-                    chuy3 = BitmapFactory.decodeResource(getResources(),
+                    img3 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh1t);
-                    chuy4 = BitmapFactory.decodeResource(getResources(),
+                    img4 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh1t);
 
                     if (!Anim1) {
-                        cloud = BitmapFactory.decodeResource(getResources(),
+                        img0 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     if (!Anim2) {
-                        chuy1 = BitmapFactory.decodeResource(getResources(),
+                        img1 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy2 = BitmapFactory.decodeResource(getResources(),
+                        img2 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy3 = BitmapFactory.decodeResource(getResources(),
+                        img3 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy4 = BitmapFactory.decodeResource(getResources(),
+                        img4 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
 
@@ -114,29 +114,29 @@ public class LiveWallpaper extends WallpaperService {
                 case "Style 19":
                     background = BitmapFactory.decodeResource(getResources(),
                             R.drawable.wallpaper_two);
-                    cloud = BitmapFactory.decodeResource(getResources(),
+                    img0 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy1 = BitmapFactory.decodeResource(getResources(),
+                    img1 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy2 = BitmapFactory.decodeResource(getResources(),
+                    img2 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy3 = BitmapFactory.decodeResource(getResources(),
+                    img3 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy4 = BitmapFactory.decodeResource(getResources(),
+                    img4 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
 
                     if (!Anim1) {
-                        cloud = BitmapFactory.decodeResource(getResources(),
+                        img0 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     if (!Anim2) {
-                        chuy1 = BitmapFactory.decodeResource(getResources(),
+                        img1 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy2 = BitmapFactory.decodeResource(getResources(),
+                        img2 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy3 = BitmapFactory.decodeResource(getResources(),
+                        img3 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy4 = BitmapFactory.decodeResource(getResources(),
+                        img4 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
 
@@ -144,116 +144,116 @@ public class LiveWallpaper extends WallpaperService {
                 case "Style 20":
                     background = BitmapFactory.decodeResource(getResources(),
                             R.drawable.wallpaper_three);
-                    cloud = BitmapFactory.decodeResource(getResources(),
+                    img0 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh3t);
-                    chuy1 = BitmapFactory.decodeResource(getResources(),
+                    img1 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh3t);
-                    chuy2 = BitmapFactory.decodeResource(getResources(),
+                    img2 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh3t);
-                    chuy3 = BitmapFactory.decodeResource(getResources(),
+                    img3 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh3t);
-                    chuy4 = BitmapFactory.decodeResource(getResources(),
+                    img4 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh3t);
 
                     if (!Anim1) {
-                        cloud = BitmapFactory.decodeResource(getResources(),
+                        img0 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     if (!Anim2) {
-                        chuy1 = BitmapFactory.decodeResource(getResources(),
+                        img1 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy2 = BitmapFactory.decodeResource(getResources(),
+                        img2 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy3 = BitmapFactory.decodeResource(getResources(),
+                        img3 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy4 = BitmapFactory.decodeResource(getResources(),
+                        img4 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     break;
                 case "Style 21":
                     background = BitmapFactory.decodeResource(getResources(),
                             R.drawable.wallpaper_four);
-                    cloud = BitmapFactory.decodeResource(getResources(),
+                    img0 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy1 = BitmapFactory.decodeResource(getResources(),
+                    img1 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy2 = BitmapFactory.decodeResource(getResources(),
+                    img2 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy3 = BitmapFactory.decodeResource(getResources(),
+                    img3 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
-                    chuy4 = BitmapFactory.decodeResource(getResources(),
+                    img4 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh2t);
 
                     if (!Anim1) {
-                        cloud = BitmapFactory.decodeResource(getResources(),
+                        img0 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     if (!Anim2) {
-                        chuy1 = BitmapFactory.decodeResource(getResources(),
+                        img1 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy2 = BitmapFactory.decodeResource(getResources(),
+                        img2 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy3 = BitmapFactory.decodeResource(getResources(),
+                        img3 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy4 = BitmapFactory.decodeResource(getResources(),
+                        img4 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     break;
                 case "Style 22":
                     background = BitmapFactory.decodeResource(getResources(),
                             R.drawable.wallpaper_five);
-                    cloud = BitmapFactory.decodeResource(getResources(),
+                    img0 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh5t);
-                    chuy1 = BitmapFactory.decodeResource(getResources(),
+                    img1 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh5t);
-                    chuy2 = BitmapFactory.decodeResource(getResources(),
+                    img2 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh5t);
-                    chuy3 = BitmapFactory.decodeResource(getResources(),
+                    img3 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh5t);
-                    chuy4 = BitmapFactory.decodeResource(getResources(),
+                    img4 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh5t);
 
                     if (!Anim1) {
-                        cloud = BitmapFactory.decodeResource(getResources(),
+                        img0 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     if (!Anim2) {
-                        chuy1 = BitmapFactory.decodeResource(getResources(),
+                        img1 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy2 = BitmapFactory.decodeResource(getResources(),
+                        img2 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy3 = BitmapFactory.decodeResource(getResources(),
+                        img3 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy4 = BitmapFactory.decodeResource(getResources(),
+                        img4 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     break;
                 case "Style 23":
                     background = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh6);
-                    cloud = BitmapFactory.decodeResource(getResources(),
+                    img0 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh6t);
-                    chuy1 = BitmapFactory.decodeResource(getResources(),
+                    img1 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh6t);
-                    chuy2 = BitmapFactory.decodeResource(getResources(),
+                    img2 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh6t);
-                    chuy3 = BitmapFactory.decodeResource(getResources(),
+                    img3 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh6t);
-                    chuy4 = BitmapFactory.decodeResource(getResources(),
+                    img4 = BitmapFactory.decodeResource(getResources(),
                             R.drawable.sbh6t);
 
                     if (!Anim1) {
-                        cloud = BitmapFactory.decodeResource(getResources(),
+                        img0 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     if (!Anim2) {
-                        chuy1 = BitmapFactory.decodeResource(getResources(),
+                        img1 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy2 = BitmapFactory.decodeResource(getResources(),
+                        img2 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy3 = BitmapFactory.decodeResource(getResources(),
+                        img3 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
-                        chuy4 = BitmapFactory.decodeResource(getResources(),
+                        img4 = BitmapFactory.decodeResource(getResources(),
                                 R.drawable.none);
                     }
                     break;
@@ -294,20 +294,20 @@ public class LiveWallpaper extends WallpaperService {
         }
 
         private void RecycleBitmap() {
-            if (cloud != null)
-                cloud.recycle();
+            if (img0 != null)
+                img0.recycle();
 
-            if (chuy1 != null)
-                chuy1.recycle();
+            if (img1 != null)
+                img1.recycle();
 
-            if (chuy2 != null)
-                chuy2.recycle();
+            if (img2 != null)
+                img2.recycle();
 
-            if (chuy3 != null)
-                chuy3.recycle();
+            if (img3 != null)
+                img3.recycle();
 
-            if (chuy4 != null)
-                chuy4.recycle();
+            if (img4 != null)
+                img4.recycle();
 
             if (background != null)
                 background.recycle();
@@ -353,8 +353,8 @@ public class LiveWallpaper extends WallpaperService {
             c.drawBitmap(background, 0, 0, null);
 
             for (int i = 0; i < wallpaperItems.size(); i++) {
-                c.drawBitmap(cloud, wallpaperItems.get(i).x - cloud.getWidth() / 2,
-                        wallpaperItems.get(i).y - cloud.getHeight() / 2, null);
+                c.drawBitmap(img0, wallpaperItems.get(i).x - img0.getWidth() / 2,
+                        wallpaperItems.get(i).y - img0.getHeight() / 2, null);
                 wallpaperItems.get(i).y++;
                 if (wallpaperItems.get(i).y > screen_height) {
                     wallpaperItems.remove(i);
@@ -363,17 +363,17 @@ public class LiveWallpaper extends WallpaperService {
             }
             if (mTouchX >= 0 && mTouchY >= 0) {
                 if (currentItem == 0) {
-                    c.drawBitmap(chuy1, mTouchX - chuy1.getWidth() / 2, mTouchY
-                            - chuy1.getHeight() / 2, null);
+                    c.drawBitmap(img1, mTouchX - img1.getWidth() / 2, mTouchY
+                            - img1.getHeight() / 2, null);
                 } else if (currentItem == 1) {
-                    c.drawBitmap(chuy2, mTouchX - chuy2.getWidth() / 2, mTouchY
-                            - chuy2.getHeight() / 2, null);
+                    c.drawBitmap(img2, mTouchX - img2.getWidth() / 2, mTouchY
+                            - img2.getHeight() / 2, null);
                 } else if (currentItem == 2) {
-                    c.drawBitmap(chuy3, mTouchX - chuy3.getWidth() / 2, mTouchY
-                            - chuy3.getHeight() / 2, null);
+                    c.drawBitmap(img3, mTouchX - img3.getWidth() / 2, mTouchY
+                            - img3.getHeight() / 2, null);
                 } else if (currentItem == 3) {
-                    c.drawBitmap(chuy4, mTouchX - chuy4.getWidth() / 2, mTouchY
-                            - chuy4.getHeight() / 2, null);
+                    c.drawBitmap(img4, mTouchX - img4.getWidth() / 2, mTouchY
+                            - img4.getHeight() / 2, null);
                 }
                 currentItem++;
                 if (currentItem >= 4)

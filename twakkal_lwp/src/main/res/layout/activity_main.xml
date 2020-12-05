@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/tw2"
+    android:background="@drawable/wallpaper2"
     android:orientation="vertical">
 
     <Button
         android:id="@+id/buttonSetWallpaper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/txt2"
         app:layout_constraintBottom_toTopOf="@+id/buttonRating"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,6 +21,9 @@
         android:id="@+id/buttonRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/txt12"
         app:layout_constraintBottom_toTopOf="@+id/imageViewPub"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,12 +34,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_pub"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
