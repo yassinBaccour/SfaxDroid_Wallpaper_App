@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="themeEntries">
+        <item name="1">Tawakalto ala allah 1</item>
+        <item name="2">Tawakalto ala allah 2</item>
+        <item name="3">Tawakalto ala allah 3</item>
+        <item name="4">Tawakalto ala allah 4</item>
+        <item name="5">Tawakalto ala allah 5</item>
+        <item name="6">Tawakalto ala allah 6</item>
+        <item name="7">Tawakalto ala allah 7</item>
+        <item name="8">Tawakalto ala allah 8</item>
+        <item name="9">Tawakalto ala allah 9</item>
+        <item name="10">Tawakalto ala allah 10</item>
+        <item name="11">Tawakalto ala allah 11</item>
+    </string-array>
+</resources>

@@ -1,8 +1,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/pref_update_setting">
         <ListPreference
-            android:entries="@array/syncFrequency"
-            android:entryValues="@array/syncFrequencyValues"
+            android:entries="@array/themeEntries"
+            android:entryValues="@array/themeValues"
             android:key="themePref"
             android:summary="@string/pref_sync_frequency_summary"
             android:title="@string/pref_sync_frequency" />
