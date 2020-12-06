@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    compileSdkVersion androidCompileSdkVersion
 
     defaultConfig {
         applicationId "com"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
     }
 
     buildTypes {

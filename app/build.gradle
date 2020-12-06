@@ -3,16 +3,16 @@ apply plugin: 'io.fabric'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    compileSdkVersion androidCompileSdkVersion
 
     defaultConfig {
         applicationId "com"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 73
-        versionName "7.8"
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
         multiDexEnabled true
     }
 
@@ -31,7 +31,6 @@ android {
 
         waterRippleLwp {
             applicationIdSuffix = ".sami.rippel.allah"
-            minSdkVersion 19
             dimension "app"
             versionCode 144012
             versionName "4.1.1"
@@ -39,7 +38,6 @@ android {
 
         scaryallwhotouch {
             applicationIdSuffix = ".liliagame.scarewhotouchme"
-            minSdkVersion 19
             dimension "app"
             resConfigs('ar', 'xxhdpi')
             versionCode 11
@@ -93,11 +91,11 @@ dependencies {
     implementation libraries.servicesAds
     implementation libraries.crashlytics
     implementation libraries.firebaseAnalytics
-    implementation "com.flipboard:bottomsheet-core:$rootProject.ext.bottomsheetVersion"
-    implementation "com.flipboard:bottomsheet-commons:$rootProject.ext.bottomsheetVersion"
-    implementation "io.github.kobakei:ratethisapp:$rootProject.ext.ratethisapp"
-    implementation "com.mani:ThinDownloadManager:$rootProject.ext.thinDownloadManagerVersion"
-    implementation "com.github.medyo:android-about-page:$rootProject.ext.medyoVersion"
+    implementation "com.flipboard:bottomsheet-core:1.5.3"
+    implementation "com.flipboard:bottomsheet-commons:1.5.3"
+    implementation "io.github.kobakei:ratethisapp:1.2.0"
+    implementation "com.mani:ThinDownloadManager:1.2.5"
+    implementation "com.github.medyo:android-about-page:1.2.2"
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'

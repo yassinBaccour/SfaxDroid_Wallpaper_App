@@ -1,0 +1,10 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_update_setting">
+        <ListPreference
+            android:entries="@array/syncFrequency"
+            android:entryValues="@array/syncFrequencyValues"
+            android:key="prefSyncFrequency"
+            android:summary="@string/pref_sync_frequency_summary"
+            android:title="@string/pref_sync_frequency" />
+    </PreferenceCategory>
+</PreferenceScreen>

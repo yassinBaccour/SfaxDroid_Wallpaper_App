@@ -1,5 +1,5 @@
 include ':app'
-include ':abmmodeljdid'
+include ':change-background-mini-app'
 include ':water-ripple-mini-app'
 include ':raining-anim-mini-app'
 include ':common-layouts'
