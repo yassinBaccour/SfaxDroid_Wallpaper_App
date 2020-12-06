@@ -22,6 +22,8 @@ import com.sami.rippel.base.SimpleActivity;
 import com.sami.rippel.livewallpapers.lwpdouachanged.DouaLiveWallpaper;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
+import com.sfaxdroid.app.ZipUtils;
+import com.sfaxdroid.base.BitmapUtils;
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadManager;
 import com.thin.downloadmanager.DownloadRequest;
@@ -149,9 +151,9 @@ public class DouaLwpActivity extends SimpleActivity {
                 .setPositiveButton(getString(R.string.btnok), (dialog, selectedColor, allColors) -> {
                     ViewModel.Current.sharedPrefsUtils.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
-                            ViewModel.Current.bitmapUtils.covertBitmapToDrawable(DouaLwpActivity.this,
-                                    ViewModel.Current.bitmapUtils.
-                                            changeImageColor(ViewModel.Current.bitmapUtils.
+                            BitmapUtils.covertBitmapToDrawable(DouaLwpActivity.this,
+                                    BitmapUtils.
+                                            changeImageColor(BitmapUtils.
                                                             convertDrawableToBitmap(getResources().getDrawable(R.mipmap.ic_palette))
                                                     , selectedColor))
                             , null, null);
@@ -208,7 +210,7 @@ public class DouaLwpActivity extends SimpleActivity {
             final int id = request.getDownloadId();
             if (id == mDownloadId1) {
                 mProgress1Txt.setText(request.getDownloadContext() + getString(R.string.DouaLwpDownloadCompleted));
-                ViewModel.Current.fileUtils.unzipFile(mZipFile, mZipDestination);
+                ZipUtils.Companion.unzipFile(mZipFile, mZipDestination);
                 if (mZipFile.exists()) {
                     mBackgroundFile.delete();
                 }
@@ -241,12 +243,12 @@ public class DouaLwpActivity extends SimpleActivity {
             int id = request.getDownloadId();
             if (id == mDownloadId1 && mProgress1Txt != null && mProgress1 != null) {
                 mProgress1Txt.setText(progress + "%" + "  "
-                        + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
+                        + ViewModel.Current.device.getBytesDownloaded(progress, totalBytes));
                 mProgress1.setProgress(progress);
             }
             if (id == mDownloadId2 && mProgress1Txt != null && mProgress1 != null) {
                 mProgress1Txt.setText(progress + "%" + "  "
-                        + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
+                        + ViewModel.Current.device.getBytesDownloaded(progress, totalBytes));
                 mProgress1.setProgress(progress);
             }
         }

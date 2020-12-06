@@ -6,10 +6,10 @@ import com.sami.rippel.model.entity.WallpaperCategory;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.utils.BitmapUtils;
 import com.sami.rippel.utils.DeviceUtils;
 import com.sami.rippel.utils.FileUtils;
 import com.sami.rippel.utils.SharedPrefsUtils;
+import com.sfaxdroid.base.BitmapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,19 +22,17 @@ public class ViewModel {
     public static ViewModel Current;
     private final List<OnStateChangeListener> mStateListeners = new ArrayList<>();
     public FileUtils fileUtils;
-    public BitmapUtils bitmapUtils;
     public DeviceUtils device;
     public MyService service;
     public SharedPrefsUtils sharedPrefsUtils;
     public WallpapersRetrofitObject retrofitWallpObject;
     protected StateEnum mState = StateEnum.COMPLETED;
 
-    public ViewModel(DeviceUtils device, FileUtils fileUtils, MyService service, SharedPrefsUtils sharedPrefsUtils, BitmapUtils bitmapUtils) {
+    public ViewModel(DeviceUtils device, FileUtils fileUtils, MyService service, SharedPrefsUtils sharedPrefsUtils) {
         this.device = device;
         this.fileUtils = fileUtils;
         this.service = service;
         this.sharedPrefsUtils = sharedPrefsUtils;
-        this.bitmapUtils = bitmapUtils;
         ViewModel.Current = this;
     }
 
@@ -48,7 +46,6 @@ public class ViewModel {
         } else
             return null;
     }
-
 
 
     public WallpapersRetrofitObject getRetrofitWallpObject() {

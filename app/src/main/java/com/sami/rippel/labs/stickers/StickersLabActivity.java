@@ -21,10 +21,14 @@ import android.provider.MediaStore.Images.Media;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.ViewPager;
+
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
@@ -54,6 +58,7 @@ import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.StickersListener;
 import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
+import com.sfaxdroid.base.BitmapUtils;
 
 
 import java.io.ByteArrayOutputStream;
@@ -142,7 +147,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         mImagePalette.setVisibility(View.GONE);
         mFragmentText = new AddTextFragment();
         mFragmentText.setListener(this);
-         initOpenBottomSheet();
+        initOpenBottomSheet();
         initStickersBottomSheet();
 
         if (ViewModel.Current.sharedPrefsUtils.GetSetting("clicked", false)) {
@@ -180,7 +185,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         mRotateBtn.setOnClickListener(view -> {
             mRotateAngle = mRotateAngle + 90;
             mImageViewGalleryImage.setImageBitmap(
-                    ViewModel.Current.bitmapUtils.rotateBitmap(((BitmapDrawable) mImageViewGalleryImage.getDrawable()).getBitmap(), mRotateAngle));
+                    BitmapUtils.rotateBitmap(((BitmapDrawable) mImageViewGalleryImage.getDrawable()).getBitmap(), mRotateAngle));
         });
 
         mDeleteBtn.setOnClickListener(view -> {
@@ -285,10 +290,10 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     private void setColorToDrawablePalette(int selectedColor) {
         mImagePalette.setImageDrawable(
-                ViewModel.Current.bitmapUtils
+                BitmapUtils
                         .covertBitmapToDrawable(StickersLabActivity.this,
-                                ViewModel.Current.bitmapUtils.
-                                        changeImageColor(ViewModel.Current.bitmapUtils.
+                                BitmapUtils.
+                                        changeImageColor(BitmapUtils.
                                                         convertDrawableToBitmap(getResources()
                                                                 .getDrawable(R.mipmap.ic_palette))
                                                 , selectedColor)));
@@ -326,7 +331,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     }
 
     public void changeColorAndSetImage(Bitmap bitmap) {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.bitmapUtils.changeImageColor(bitmap, mColor))
+        addSubscribe(Flowable.fromCallable(() -> BitmapUtils.changeImageColor(bitmap, mColor))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap1 -> {
@@ -685,7 +690,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     }
 
 
-
     public void openGalleryIntent() {
         Intent gallerypickerIntent1 = new Intent(Intent.ACTION_PICK);
         gallerypickerIntent1.setType("ic_icon_image/*");
@@ -757,7 +761,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
             int y = (mRelativeLayoutMain.getHeight() - mImageViewGalleryImage
                     .getHeight()) / 2;
 
-            return ViewModel.Current.bitmapUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
+            return BitmapUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
                     mImageViewGalleryImage.getWidth(),
                     mImageViewGalleryImage.getHeight()), -mRotateAngle);
 
@@ -767,7 +771,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
             int y = (mRelativeLayoutMain.getHeight() - mImageViewFrame
                     .getHeight()) / 2;
 
-            return ViewModel.Current.bitmapUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
+            return BitmapUtils.rotateBitmap(Bitmap.createBitmap(mBitmapDrawing, x, y,
                     mImageViewFrame.getWidth(),
                     mImageViewFrame.getHeight()), 0);
         }
@@ -899,17 +903,16 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
             case 456:
                 if (data != null) {
                     Bundle extras = data.getExtras();
-                    if (extras != null)
-                    {
-                    mRotateAngle = 0;
-                    downloadAndPutTextureAtScreen(extras.getString("urltoopen", ""), extras.getString("type", ""));
+                    if (extras != null) {
+                        mRotateAngle = 0;
+                        downloadAndPutTextureAtScreen(extras.getString("urltoopen", ""), extras.getString("type", ""));
                     }
                 }
         }
     }
 
     void reduceImageSizeAsync() {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.bitmapUtils.setReducedImageSize(imagePath))
+        addSubscribe(Flowable.fromCallable(() -> BitmapUtils.setReducedImageSize(imagePath, ViewModel.Current.device.getScreenHeightPixels(), ViewModel.Current.device.getScreenWidthPixels()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap -> {
@@ -1041,38 +1044,38 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     @Override
     public void onClick(View view) {
 
-            switch (view.getId()) {
-                case R.id.open_camera:
-                    try {
-                        startCameraActivity();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case R.id.open_gallery:
-                    openGalleryIntent();
-                    break;
-                case R.id.open_web:
-                    Intent intent = new Intent(StickersLabActivity.this, GalleryActivity.class);
-                    intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_TEXTURE);
-                    startActivityForResult(intent, 456);
-                    break;
-                case R.id.image_gallery:
-                    recycleBitmap();
-                    removeCurrentPicture();
-                    break;
-                case R.id.imageview_save:
-                    saveImage();
-                    break;
-                case R.id.buttonSareFb:
-                    saveImageAndShare();
-                    break;
-                case R.id.parentlayout:
-                    SelectPictureDialog.dismiss();
-                    FinishDialog.dismiss();
-            }
+        switch (view.getId()) {
+            case R.id.open_camera:
+                try {
+                    startCameraActivity();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.open_gallery:
+                openGalleryIntent();
+                break;
+            case R.id.open_web:
+                Intent intent = new Intent(StickersLabActivity.this, GalleryActivity.class);
+                intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_TEXTURE);
+                startActivityForResult(intent, 456);
+                break;
+            case R.id.image_gallery:
+                recycleBitmap();
+                removeCurrentPicture();
+                break;
+            case R.id.imageview_save:
+                saveImage();
+                break;
+            case R.id.buttonSareFb:
+                saveImageAndShare();
+                break;
+            case R.id.parentlayout:
+                SelectPictureDialog.dismiss();
+                FinishDialog.dismiss();
+        }
         SelectPictureDialog.dismiss();
-       FinishDialog.dismiss();
+        FinishDialog.dismiss();
     }
 
     private class ScaleListener extends
@@ -1123,14 +1126,14 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         SelectPictureDialog.setCanceledOnTouchOutside(false);
         SelectPictureDialog.setCancelable(false);
 
-        Button xxx =  (Button) selectPicturbottomsheet.findViewById(R.id.open_camera);
+        Button xxx = (Button) selectPicturbottomsheet.findViewById(R.id.open_camera);
         xxx.setOnClickListener(this);
-        Button yyy =  (Button) selectPicturbottomsheet.findViewById(R.id.open_gallery);
+        Button yyy = (Button) selectPicturbottomsheet.findViewById(R.id.open_gallery);
         yyy.setOnClickListener(this);
         Button zzz = (Button) selectPicturbottomsheet.findViewById(R.id.open_web);
         zzz.setOnClickListener(this);
 
-        LinearLayout lll =  (LinearLayout) selectPicturbottomsheet.findViewById(R.id.parentlayout);
+        LinearLayout lll = (LinearLayout) selectPicturbottomsheet.findViewById(R.id.parentlayout);
         lll.setOnClickListener(this);
 
     }
@@ -1143,14 +1146,14 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         FinishDialog.setCanceledOnTouchOutside(false);
         FinishDialog.setCancelable(false);
 
-        Button xxx =   (Button) finishBottomsheet.findViewById(R.id.image_gallery);
+        Button xxx = (Button) finishBottomsheet.findViewById(R.id.image_gallery);
         xxx.setOnClickListener(this);
-        Button yyy =   (Button) finishBottomsheet.findViewById(R.id.imageview_save);
+        Button yyy = (Button) finishBottomsheet.findViewById(R.id.imageview_save);
         yyy.setOnClickListener(this);
         Button zzz = (Button) finishBottomsheet.findViewById(R.id.buttonSareFb);
         zzz.setOnClickListener(this);
 
-        LinearLayout lll =  (LinearLayout) finishBottomsheet.findViewById(R.id.parentlayout);
+        LinearLayout lll = (LinearLayout) finishBottomsheet.findViewById(R.id.parentlayout);
         lll.setOnClickListener(this);
     }
 

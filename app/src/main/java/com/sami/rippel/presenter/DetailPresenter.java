@@ -50,7 +50,7 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
 
     @Override
     public void handleCrop(Intent result, Context context) {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.setAsWallpaper(MediaStore.Images.Media.getBitmap(
+        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.device.setWallpaper(MediaStore.Images.Media.getBitmap(
                 context.getContentResolver(), Crop.getOutput(result))))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

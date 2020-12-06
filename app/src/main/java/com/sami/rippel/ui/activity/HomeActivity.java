@@ -128,7 +128,7 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
     protected void onResume() {
         super.onResume();
         checkForCrashes();
-        ViewModel.Current.device.setmDeviceListner(this);
+        ViewModel.Current.device.setDeviceListner(this);
         showFirstTimeAndOneTimeAds();
         showTimedAdsWhenIOpenPicture();
         onOpenScreenTracker("ViewPager");
@@ -327,16 +327,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
                 Log.d("permission", "ok");
                 break;
         }
-    }
-
-    @Override
-    public void onOpenGalleryChooser() {
-        ViewModel.Current.device.openFileChooser(this, PICK_FROM_FILE);
-    }
-
-    @Override
-    public void onOpenCameraChooser() {
-        ViewModel.Current.device.openCameraChooser(this, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
     }
 
     @Override

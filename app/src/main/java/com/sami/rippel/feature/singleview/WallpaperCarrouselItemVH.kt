@@ -19,7 +19,6 @@ class WallpaperCarrouselItemVH(itemView: View) : RecyclerView.ViewHolder(itemVie
     private val mImg: ImageView = itemView.findViewById(R.id.imgCarrouselImage)
     private val title: TextView = itemView.findViewById(R.id.txt_carrousel_title)
     private val desc: TextView = itemView.findViewById(R.id.txt_carrousel_desc)
-    private val root: ConstraintLayout = itemView.findViewById(R.id.rootItemCarousel)
 
     fun bind(
         wallpaperObject: WallpaperObject,

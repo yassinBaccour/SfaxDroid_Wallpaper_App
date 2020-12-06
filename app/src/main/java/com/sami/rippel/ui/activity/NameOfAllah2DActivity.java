@@ -6,10 +6,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -22,6 +26,7 @@ import com.sami.rippel.base.SimpleActivity;
 import com.sami.rippel.livewallpapers.nameofallah2d.NameOfAllah2DLwp;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
+import com.sfaxdroid.base.BitmapUtils;
 import com.thin.downloadmanager.DefaultRetryPolicy;
 import com.thin.downloadmanager.DownloadManager;
 import com.thin.downloadmanager.DownloadRequest;
@@ -275,10 +280,10 @@ public class NameOfAllah2DActivity extends SimpleActivity {
                 .setPositiveButton(getString(R.string.btnok), (dialog, selectedColor, allColors) -> {
                     ViewModel.Current.sharedPrefsUtils.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
-                            ViewModel.Current.bitmapUtils
+                            BitmapUtils
                                     .covertBitmapToDrawable(NameOfAllah2DActivity.this,
-                                            ViewModel.Current.bitmapUtils.
-                                                    changeImageColor(ViewModel.Current.bitmapUtils.
+                                            BitmapUtils.
+                                                    changeImageColor(BitmapUtils.
                                                                     convertDrawableToBitmap(getResources()
                                                                             .getDrawable(R.mipmap.ic_palette))
                                                             , selectedColor))
@@ -345,7 +350,7 @@ public class NameOfAllah2DActivity extends SimpleActivity {
         @Override
         public void onProgress(DownloadRequest request, long totalBytes, long downloadedBytes, int progress) {
             int id = request.getDownloadId();
-            mProgress1Txt.setText(progress + "%" + "  " + ViewModel.Current.device.GetBytesDownloaded(progress, totalBytes));
+            mProgress1Txt.setText(progress + "%" + "  " + ViewModel.Current.device.getBytesDownloaded(progress, totalBytes));
             mProgress1.setProgress(progress);
         }
     }

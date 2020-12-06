@@ -13,11 +13,10 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ActionTypeEnum;
 import com.sami.rippel.model.listner.LwpListener;
 import com.sami.rippel.model.listner.WallpaperListener;
-import com.sami.rippel.utils.downloadsystem.DecompressZip;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -145,14 +144,12 @@ public class FileUtils {
         return getListFiles(getBasmalaFileDirDir());
     }
 
-    public File getBasmalServiceDirZipDestination()
-    {
+    public File getBasmalServiceDirZipDestination() {
         File temporaryDir = getTemporaryDir();
-       return new File(temporaryDir, Constants.KEY_BASMALA_FOLDER_CONTAINER);
+        return new File(temporaryDir, Constants.KEY_BASMALA_FOLDER_CONTAINER);
     }
 
-    public File getBasmalServiceDirZipFile()
-    {
+    public File getBasmalServiceDirZipFile() {
         File temporaryDir = getTemporaryDir();
         return new File(temporaryDir, Constants.PNG_BASMALA_STICKERS_FILE_NAME);
     }
@@ -191,18 +188,19 @@ public class FileUtils {
         }
     }
 
-    private String getUrlByScreen(String url) {
+    private String getUrlByScreen(String url, int screenHeightPixels, int screenWidthPixels) {
         String finalUrl = "";
-        if (ViewModel.Current.device.getScreenHeightPixels() < 820 && ViewModel.Current.device.getScreenWidthPixels() < 500)
+        if (screenHeightPixels < 820 && screenWidthPixels < 500)
             finalUrl = url.replace("/islamicimages/", "/islamicimagesmini/");
         else
             finalUrl = url;
         return finalUrl;
     }
 
-    public void saveToFileToTempsDirAndChooseAction(String url, final ActionTypeEnum action) {
+    public void saveToFileToTempsDirAndChooseAction(String url, final ActionTypeEnum action, int screenHeightPixels, int screenWidthPixels) {
 
-        Glide.with(mContext).asBitmap().load(getUrlByScreen(url))
+        Glide.with(mContext).asBitmap().load(getUrlByScreen(url, screenHeightPixels, screenWidthPixels
+        ))
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource,
@@ -247,8 +245,7 @@ public class FileUtils {
         return temporaryDir;
     }
 
-    private File getDouaFileDir()
-    {
+    private File getDouaFileDir() {
         File temporaryDir = new File(mContext.getFilesDir(),
                 mContext.getString(R.string.app_namenospace) + "/temp");
         if (!temporaryDir.exists()) {
@@ -292,19 +289,6 @@ public class FileUtils {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         intent.setData(Uri.fromFile(file));
         mContext.sendBroadcast(intent);
-    }
-
-
-
-    public boolean setAsWallpaper(Bitmap bitmap) {
-        return ViewModel.Current.device.setWallpaper(bitmap);
-    }
-
-
-    public void unzipFile(File zipFile, File destination) {
-        DecompressZip decomp = new DecompressZip(zipFile.getPath(),
-                destination.getPath() + File.separator);
-        decomp.unzip();
     }
 
     public String getPath(Activity ac, Uri uri) {

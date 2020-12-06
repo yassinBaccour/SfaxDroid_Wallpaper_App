@@ -27,7 +27,6 @@ import java.util.*
 class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
     WallpaperFragmentContract.View, OnStateChangeListener {
 
-
     private var adapter: ArticleListAdapter? = null
 
     override fun getFragmentActivity(): Activity {
@@ -251,9 +250,6 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         }
     }
 
-    override fun getFragmentId(): Int {
-        return R.layout.fragment_all_background
-    }
 
     override fun getLayoutManager(): LayoutManager {
         return GridLayoutManager(
@@ -280,10 +276,12 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
     override fun showSnackMsg(msg: String) {}
     override fun showLoading() {}
     override fun hideLoading() {}
+    override val fragmentId = R.layout.fragment_all_background
 
     companion object {
         fun newInstance(): AllInOneFragment {
             return AllInOneFragment()
         }
     }
+
 }

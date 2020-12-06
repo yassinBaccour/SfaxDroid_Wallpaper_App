@@ -15,7 +15,7 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.model.listner.RecyclerItemClickListener;
+import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.model.listner.StickersListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 

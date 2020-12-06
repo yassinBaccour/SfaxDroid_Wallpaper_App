@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
+import com.sfaxdroid.base.BitmapUtils;
 
 public class DouaLiveWallpaper extends WallpaperService {
     public static int mCurrentPhoto = 1;
@@ -43,7 +44,7 @@ public class DouaLiveWallpaper extends WallpaperService {
             mPaint.setStrokeCap(Paint.Cap.ROUND);
             mPaint.setStyle(Paint.Style.STROKE);
             mOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
+            mLogoDoua = BitmapUtils.changeImageColor(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
                     mOptions), mColor);
             mPaintOption = new Paint();
         }
@@ -132,7 +133,7 @@ public class DouaLiveWallpaper extends WallpaperService {
                     mLogoDoua.recycle();
                 }
                 mColor = ViewModel.Current.sharedPrefsUtils.GetSetting("DouaLwpColor", -4522170);
-                mLogoDoua = ViewModel.Current.bitmapUtils.changeImageColor(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
+                mLogoDoua = BitmapUtils.changeImageColor(BitmapFactory.decodeFile(ViewModel.Current.fileUtils.getTemporaryDouaDir() + "/" + Constants.PNG_ZIP_DOUA_EXTRACTED_FOLDER + "/" + getPrefix() + mCurrentPhoto + ".png",
                         mOptions), mColor);
                 if (mCurrentPhoto == 58) {
                     mCurrentPhoto = 0;

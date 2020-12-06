@@ -90,7 +90,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         WallpaperApplication application = (WallpaperApplication) getApplication();
         mFab = findViewById(R.id.fab);
         ViewModel.Current.fileUtils.SetListener(this);
-        ViewModel.Current.device.setmDeviceListner(this);
+        ViewModel.Current.device.setDeviceListner(this);
         mPagerData = getIntent().getParcelableArrayListExtra(Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER);
         mPos = getIntent().getIntExtra(Constants.DETAIL_IMAGE_POS, 0);
         mFrom = getIntent().getStringExtra(Constants.KEY_LWP_NAME);
@@ -260,7 +260,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
             }
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
-            ViewModel.Current.fileUtils.saveToFileToTempsDirAndChooseAction(getCurrentUrl(), actionToDo);
+            ViewModel.Current.fileUtils.saveToFileToTempsDirAndChooseAction(getCurrentUrl(), actionToDo, ViewModel.Current.device.getScreenHeightPixels(), ViewModel.Current.device.getScreenWidthPixels());
         }
     }
 
@@ -290,7 +290,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     private void createIntent(IntentTypeEnum intentType) {
         hideLoading();
-        if (!ViewModel.Current.device.ShareFileWithIntentType(this,
+        if (!ViewModel.Current.device.shareFileWithIntentType(this,
                 ViewModel.Current.fileUtils.getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())),
                 intentType)) {
             ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.appNotInstalled));
@@ -335,7 +335,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     public void shareAll() {
         hideLoading();
-        ViewModel.Current.device.shareFileAll(this,
+        ViewModel.Current.device.shareAllFile(this,
                 ViewModel.Current.fileUtils.
                         getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())));
     }

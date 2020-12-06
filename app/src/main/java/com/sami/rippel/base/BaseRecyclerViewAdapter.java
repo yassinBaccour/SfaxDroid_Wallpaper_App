@@ -2,8 +2,10 @@ package com.sami.rippel.base;
 
 import android.content.Context;
 import android.graphics.Color;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +60,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT) {
                 Glide.with(context).load(GetUrlByScreen(wallpaperObject))
                         .thumbnail(0.5f)
-                        .override(ViewModel.Current.device.getCellWidht(), ViewModel.Current.device.getCellHeight())
+                        .override(ViewModel.Current.device.getCellWidth(), ViewModel.Current.device.getCellHeight())
                         .transition(withCrossFade())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(((MyItemHolderCategory) holder).mImg);
@@ -69,7 +71,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             } else
                 Glide.with(context).load(GetUrlByScreen(wallpaperObject))
                         .thumbnail(0.5f)
-                        .override(ViewModel.Current.device.getCellWidht(), ViewModel.Current.device.getCellHeight())
+                        .override(ViewModel.Current.device.getCellWidth(), ViewModel.Current.device.getCellHeight())
                         .transition(withCrossFade())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(((MyItemHolderWallpaper) holder).mImg);

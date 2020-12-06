@@ -18,7 +18,7 @@ import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.model.listner.RecyclerItemClickListener;
+import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.presenter.CategoryWallpaperPresenter;
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.ui.activity.GalleryActivity;

@@ -1,4 +1,4 @@
-package com.sami.rippel.utils.downloadsystem;
+package com.sfaxdroid.app.downloadsystem;
 
 public interface DownloadManager {
 

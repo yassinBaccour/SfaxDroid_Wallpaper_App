@@ -4,11 +4,13 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,7 +27,7 @@ import com.sami.rippel.model.entity.WallpaperCategory;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.LwpListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.model.listner.RecyclerItemClickListener;
+import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 
 
@@ -279,7 +281,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
             //sendToRippleLwp();
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
-            Current.fileUtils.saveToFileToTempsDirAndChooseAction(url, actionToDo);
+            Current.fileUtils.saveToFileToTempsDirAndChooseAction(url, actionToDo, ViewModel.Current.device.getScreenHeightPixels(), ViewModel.Current.device.getScreenWidthPixels());
         }
     }
 
@@ -299,6 +301,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 90:
                 if (resultCode == RESULT_OK) {

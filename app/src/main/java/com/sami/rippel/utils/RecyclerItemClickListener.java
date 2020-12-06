@@ -1,4 +1,4 @@
-package com.sami.rippel.model.listner;
+package com.sami.rippel.utils;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;

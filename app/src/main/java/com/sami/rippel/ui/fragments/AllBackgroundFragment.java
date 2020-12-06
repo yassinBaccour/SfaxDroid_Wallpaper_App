@@ -3,10 +3,12 @@ package com.sami.rippel.ui.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,7 +21,7 @@ import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.model.listner.RecyclerItemClickListener;
+import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.presenter.AllWallpaperPresenter;
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.ui.activity.DetailsActivity;

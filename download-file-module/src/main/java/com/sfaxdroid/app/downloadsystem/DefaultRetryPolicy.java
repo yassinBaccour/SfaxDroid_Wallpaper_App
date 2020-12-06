@@ -1,4 +1,4 @@
-package com.sami.rippel.utils.downloadsystem;
+package com.sfaxdroid.app.downloadsystem;
 
 /**
  * Created by maniselvaraj on 15/4/15.

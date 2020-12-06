@@ -1,4 +1,4 @@
-package com.sami.rippel.utils;
+package com.sfaxdroid.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,7 +11,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-import com.sami.rippel.model.ViewModel;
 
 import java.io.File;
 
@@ -31,10 +30,8 @@ public class BitmapUtils {
             return null;
     }
 
-    public Bitmap setReducedImageSize(String imagePath) {
+    public static Bitmap setReducedImageSize(String imagePath, int targetImageViewWidth, int targetImageViewHeight) {
 
-        int targetImageViewWidth = ViewModel.Current.device.getScreenHeightPixels();
-        int targetImageViewHeight = ViewModel.Current.device.getScreenWidthPixels();
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         bmOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(imagePath, bmOptions);
@@ -46,8 +43,8 @@ public class BitmapUtils {
     }
 
 
-    static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth,
-                                              int reqHeight) {
+    public static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth,
+                                                     int reqHeight) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(path, options);
@@ -67,7 +64,7 @@ public class BitmapUtils {
         return BitmapFactory.decodeFile(path, options);
     }
 
-    public Bitmap getPreview(String fileName) {
+    public static Bitmap getPreview(String fileName) {
         File image = new File(fileName);
         BitmapFactory.Options bounds = new BitmapFactory.Options();
         bounds.inJustDecodeBounds = true;
@@ -75,14 +72,10 @@ public class BitmapUtils {
         if ((bounds.outWidth == -1) || (bounds.outHeight == -1)) {
             return null;
         }
-        //int originalSize = (bounds.outHeight > bounds.outWidth) ? bounds.outHeight
-        //        : bounds.outWidth;
-        //BitmapFactory.Options opts = new BitmapFactory.Options();
-        //opts.inSampleSize = originalSize / 20;
         return BitmapFactory.decodeFile(image.getPath());
     }
 
-    public Bitmap convertDrawableToBitmap(Drawable drawable) {
+    public static Bitmap convertDrawableToBitmap(Drawable drawable) {
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
@@ -97,12 +90,12 @@ public class BitmapUtils {
     }
 
 
-    public Drawable covertBitmapToDrawable(Context context, Bitmap bitmap) {
+    public static Drawable covertBitmapToDrawable(Context context, Bitmap bitmap) {
         return new BitmapDrawable(context.getResources(), bitmap);
     }
 
 
-    public Bitmap changeImageColor(Bitmap sourceBitmap, int color) {
+    public static Bitmap changeImageColor(Bitmap sourceBitmap, int color) {
         try {
             Bitmap resultBitmap = Bitmap.createBitmap(sourceBitmap, 0, 0,
                     sourceBitmap.getWidth() - 1, sourceBitmap.getHeight() - 1);

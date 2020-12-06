@@ -6,6 +6,8 @@ package com.sami.rippel.base;
 
 public interface BaseView {
     void showSnackMsg(String msg);
+
     void showLoading();
+
     void hideLoading();
 }

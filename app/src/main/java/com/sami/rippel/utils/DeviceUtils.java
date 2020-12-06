@@ -10,23 +10,23 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
-import android.text.TextUtils;
+
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
+
 import android.view.WindowManager;
 
 import com.sami.rippel.allah.R;
@@ -35,14 +35,10 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.IntentTypeEnum;
 import com.sami.rippel.model.listner.DeviceListner;
-import com.sami.rippel.ui.activity.HomeActivity;
+import com.sfaxdroid.base.BitmapUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by yassin baccour on 30/10/2016.
@@ -50,7 +46,6 @@ import java.util.Set;
 
 public class DeviceUtils {
 
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     public WindowManager mWindowManager;
     private Context mContext;
     private DeviceListner mDeviceListner;
@@ -66,8 +61,8 @@ public class DeviceUtils {
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
     }
 
-    public void setmDeviceListner(DeviceListner mDeviceListner) {
-        this.mDeviceListner = mDeviceListner;
+    public void setDeviceListner(DeviceListner listner) {
+        this.mDeviceListner = listner;
     }
 
     public void clearCurrentWallpaper() {
@@ -116,46 +111,7 @@ public class DeviceUtils {
         }
     }
 
-    public void checkNativeLibraryLoaded() {
-        try {
-            Set<String> mLibs = new HashSet<String>();
-            String mFile = "/proc/" + android.os.Process.myPid() + "/maps";
-            BufferedReader mReader = new BufferedReader(new FileReader(mFile));
-            String line;
-            while ((line = mReader.readLine()) != null) {
-                if (line.endsWith(".so")) {
-                    int n = line.lastIndexOf(" ");
-                    mLibs.add(line.substring(n + 1));
-                }
-            }
-            Log.d("Ldd", mLibs.size() + " libraries:");
-            for (String lib : mLibs) {
-                if (lib.contains("libbufferutil"))
-                    Log.d("Ldd", lib);
-            }
-        } catch (IOException e) {
-            // Do some error handling...
-        }
-    }
-
-    public void checkDeviceMemory(HomeActivity.LwpTypeEnum typeLwp) {
-        Double mTotalMemoryMegaByte = 0.0;
-        ActivityManager mActManager = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            mActManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-        }
-        ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-        mActManager.getMemoryInfo(memInfo);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            mTotalMemoryMegaByte = ((memInfo.totalMem / 1024.0) / 1024.0);
-            if (mTotalMemoryMegaByte < 500.0 && mTotalMemoryMegaByte > 100.00) {
-                Log.d("TotalMemory :", mTotalMemoryMegaByte + "");
-            }
-        }
-        Log.d("Total Memory :", mTotalMemoryMegaByte + "");
-    }
-
-    public void shareFileAll(Activity ac, File file) {
+    public void shareAllFile(Activity ac, File file) {
         Intent intent = new Intent(Intent.ACTION_ATTACH_DATA);
         intent.setDataAndType(FileProvider.getUriForFile(mContext,
                 mContext.getApplicationContext().getPackageName()
@@ -165,7 +121,7 @@ public class DeviceUtils {
         ac.startActivityForResult(Intent.createChooser(intent, mContext.getString(R.string.setAs)), 200);
     }
 
-    public Boolean ShareFileWithIntentType(Activity ac, File file, IntentTypeEnum intentType) {
+    public Boolean shareFileWithIntentType(Activity ac, File file, IntentTypeEnum intentType) {
         if (appInstalledOrNot(ViewModel.Current.GetIntentNameFromType(intentType))) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
@@ -185,18 +141,18 @@ public class DeviceUtils {
         snackbar.show();
     }
 
-    public void openChooseActivityWithPhoto(Activity ac, Intent dataIntent) {
-        if (ac != null && dataIntent.getData() != null) {
-            Constants.currentBitmaps = ViewModel.Current.bitmapUtils.getPreview(ViewModel.Current.fileUtils.getPath(ac, dataIntent.getData()));
-            Intent intent = new Intent(ac, ChooseActivity.class);
-            ac.startActivity(intent);
+    public void openChooseActivityWithPhoto(Activity activity, Intent dataIntent) {
+        if (activity != null && dataIntent.getData() != null) {
+            Constants.currentBitmaps = BitmapUtils.getPreview(ViewModel.Current.fileUtils.getPath(activity, dataIntent.getData()));
+            Intent intent = new Intent(activity, ChooseActivity.class);
+            activity.startActivity(intent);
         }
     }
 
     public void openChooseActivityFromCamera(Activity ac) {
         File file = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "ic_icon_image.jpg");
-        Constants.currentBitmaps = ViewModel.Current.bitmapUtils.decodeSampledBitmapFromFile(
+        Constants.currentBitmaps = BitmapUtils.decodeSampledBitmapFromFile(
                 file.getAbsolutePath(), 1000, 700);
         file.delete();
         Intent intent1 = new Intent(ac, ChooseActivity.class);
@@ -237,22 +193,20 @@ public class DeviceUtils {
                 .show();
     }
 
-    public void checkPermission(Activity ac, String permissionName) {
-        if (ContextCompat.checkSelfPermission(ac,
+    public void checkPermission(Activity activity, String permissionName) {
+        if (ContextCompat.checkSelfPermission(activity,
                 permissionName)
                 != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(ac,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
                     permissionName)) {
                 showMessageOKCancel(mContext.getString(R.string.savepermissiondesc),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (mDeviceListner != null)
-                                    mDeviceListner.onRequestPermissions();
-                            }
-                        }, ac);
+                        (dialog, which) -> {
+                            if (mDeviceListner != null)
+                                mDeviceListner.onRequestPermissions();
+                        }, activity);
             } else {
-                requestPermissions(ac, REQUEST_CODE_ASK_PERMISSIONS);
+                int REQUEST_CODE_ASK_PERMISSIONS = 123;
+                requestPermissions(activity, REQUEST_CODE_ASK_PERMISSIONS);
             }
         }
     }
@@ -266,78 +220,6 @@ public class DeviceUtils {
             }
         }
         return false;
-    }
-
-    public Boolean isDeviceCompatibleWaterRipple() {
-        String deviceName = getDeviceName();
-        for (String x : mNotCompatibleRippleDeviceList) {
-            if (x.equals(deviceName))
-                return false;
-        }
-        return true;
-    }
-
-    private String getDeviceName() {
-        String manufacturer = Build.MANUFACTURER;
-        String model = Build.MODEL;
-        if (model.startsWith(manufacturer)) {
-            return capitalize(model);
-        }
-        return capitalize(manufacturer) + " " + model;
-    }
-
-    private String capitalize(String str) {
-        if (TextUtils.isEmpty(str)) {
-            return str;
-        }
-        char[] arr = str.toCharArray();
-        boolean capitalizeNext = true;
-        String phrase = "";
-        for (char c : arr) {
-            if (capitalizeNext && Character.isLetter(c)) {
-                phrase += Character.toUpperCase(c);
-                capitalizeNext = false;
-                continue;
-            } else if (Character.isWhitespace(c)) {
-                capitalizeNext = true;
-            }
-            phrase += c;
-        }
-        return phrase;
-    }
-
-    public int[] getRealScreenSize(Activity activity) {
-        int[] size = new int[2];
-        int screenWidth = 0, screenHeight = 0;
-        WindowManager w = activity.getWindowManager();
-        Display d = w.getDefaultDisplay();
-        DisplayMetrics metrics = new DisplayMetrics();
-        d.getMetrics(metrics);
-        // since SDK_INT = 1;
-        screenWidth = metrics.widthPixels;
-        screenHeight = metrics.heightPixels;
-        // includes window decorations (statusbar bar/menu bar)
-        if (Build.VERSION.SDK_INT >= 14 && Build.VERSION.SDK_INT < 17)
-            try {
-                screenWidth = (Integer) Display.class.getMethod("getRawWidth")
-                        .invoke(d);
-                screenHeight = (Integer) Display.class
-                        .getMethod("getRawHeight").invoke(d);
-            } catch (Exception ignored) {
-            }
-        // includes window decorations (statusbar bar/menu bar)
-        if (Build.VERSION.SDK_INT >= 17)
-            try {
-                Point realSize = new Point();
-                Display.class.getMethod("getRealSize", Point.class).invoke(d,
-                        realSize);
-                screenWidth = realSize.x;
-                screenHeight = realSize.y;
-            } catch (Exception ignored) {
-            }
-        size[0] = screenWidth;
-        size[1] = screenHeight;
-        return size;
     }
 
     private DisplayMetrics getDisplayMetrics() {
@@ -356,7 +238,7 @@ public class DeviceUtils {
         return getDisplayMetrics().widthPixels;
     }
 
-    public int getCellWidht() {
+    public int getCellWidth() {
         if (ViewModel.Current.device.getScreenHeightPixels() < 820 && ViewModel.Current.device.getScreenWidthPixels() < 500) {
             return 133;
         } else {
@@ -372,7 +254,7 @@ public class DeviceUtils {
         }
     }
 
-    public String GetBytesDownloaded(int progress, long totalBytes) {
+    public String getBytesDownloaded(int progress, long totalBytes) {
         long bytesCompleted = (progress * totalBytes) / 100;
         if (totalBytes >= 1000000) {
             return ("" + (String.format("%.1f", (float) bytesCompleted / 1000000)) + "/" + (String.format("%.1f", (float) totalBytes / 1000000)) + "MB");
@@ -395,6 +277,7 @@ public class DeviceUtils {
             if (wifiInfo.isConnected() || mobileInfo.isConnected()) {
                 return true;
             }
+
         } catch (Exception e) {
             System.out.println("CheckConnectivity Exception: " + e.getMessage());
         }
