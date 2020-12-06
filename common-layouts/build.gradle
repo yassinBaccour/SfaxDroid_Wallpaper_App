@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply from: '../dependencies.gradle'
 
 android {
-    
+
     compileSdkVersion androidCompileSdkVersion
 
     defaultConfig {
@@ -15,8 +15,5 @@ android {
             minifyEnabled false
         }
     }
-
 }
 
-dependencies {
-}

@@ -46,20 +46,14 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
-
-    dependencies {
-        implementation fileTree(dir: 'libs', include: ['*.jar'])
-        implementation 'com.google.android.gms:play-services-ads:19.5.0'
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10"
-        implementation 'com.squareup.picasso:picasso:2.71828'
-    }
 }
 
 dependencies {
     implementation project(':common-layouts')
     implementation project(':base-android')
     implementation project(':common-resources')
-
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
 }
 
 
