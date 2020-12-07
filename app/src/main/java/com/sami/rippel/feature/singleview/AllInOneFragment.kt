@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
 import com.sami.rippel.base.BaseFragment
-import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity
+import com.sfaxdroid.timer.WallpaperSchedulerActivity
 import com.sami.rippel.model.Constants
 import com.sami.rippel.model.ViewModel
 import com.sami.rippel.model.entity.StateEnum
@@ -94,7 +94,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                         HomeActivityNavBar.isAdsShow = true
                         val intent = Intent(
                             activity,
-                            WallpaperSchedulerActivity::class.java
+                            com.sfaxdroid.timer.WallpaperSchedulerActivity::class.java
                         )
                         startActivity(intent)
                     }

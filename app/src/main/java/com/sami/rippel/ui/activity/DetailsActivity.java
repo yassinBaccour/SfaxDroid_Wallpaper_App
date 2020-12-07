@@ -39,6 +39,7 @@ import com.sami.rippel.model.listner.WallpaperListener;
 import com.sami.rippel.presenter.Contract.DetailContract;
 import com.sami.rippel.presenter.DetailPresenter;
 import com.sami.rippel.ui.adapter.DetailPagerAdapter;
+import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.Utils;
 import com.soundcloud.android.crop.Crop;
 
@@ -137,14 +138,14 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     private void fabClick() {
         if (mFrom != null && !mFrom.isEmpty()) {
             switch (mFrom) {
-                case Constants.KEY_ADD_TIMER_LWP:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR, getCurrentUrl());
+                case com.sfaxdroid.base.Constants.KEY_ADD_TIMER_LWP:
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
-                case Constants.KEY_ADDED_LIST_TIMER_LWP:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.DELETE_CURRENT_PICTURE, getCurrentUrl());
+                case com.sfaxdroid.base.Constants.KEY_ADDED_LIST_TIMER_LWP:
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.DELETE_CURRENT_PICTURE, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
                 case Constants.KEY_RIPPLE_LWP:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SEND_LWP, getCurrentUrl());
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SEND_LWP, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
             }
         } else {
@@ -155,10 +156,10 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     public void setFabImageResource() {
         if (mFrom != null && !mFrom.isEmpty()) {
             switch (mFrom) {
-                case Constants.KEY_ADD_TIMER_LWP:
+                case com.sfaxdroid.base.Constants.KEY_ADD_TIMER_LWP:
                     mFab.setImageResource(R.mipmap.ic_download);
                     break;
-                case Constants.KEY_ADDED_LIST_TIMER_LWP:
+                case com.sfaxdroid.base.Constants.KEY_ADDED_LIST_TIMER_LWP:
                     mFab.setImageResource(R.mipmap.ic_delete);
                     break;
                 case Constants.KEY_RIPPLE_LWP:
@@ -172,7 +173,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     }
 
     public void deleteCurrentPicture() {
-        if (ViewModel.Current.fileUtils.deleteFile(getCurrentUrl())) {
+        if (FileUtils.Companion.deleteFile(getCurrentUrl())) {
             finishWithResult();
         } else {
             ViewModel.Current.device.showSnackMessage(mRootLayout, "Error Deleting file");
@@ -208,22 +209,22 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         return item -> {
             switch (item.getItemId()) {
                 case R.id.buttonWallpaper:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.CROP, getCurrentUrl());
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.CROP, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
                 case R.id.buttonChooser:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.OPEN_NATIV_CHOOSER, getCurrentUrl());
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.OPEN_NATIV_CHOOSER, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
                 case R.id.buttonSave:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR, getCurrentUrl());
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.MOVE_PERMANENT_DIR, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
                 case R.id.buttonSareInsta:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_INSTA, getCurrentUrl());
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_INSTA, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
                 case R.id.buttonSareFb:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_FB, getCurrentUrl());
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_FB, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
                 case R.id.buttonShare:
-                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_SNAP_CHAT, getCurrentUrl());
+                    mPresenter.saveTempsDorAndDoAction(ActionTypeEnum.SHARE_SNAP_CHAT, getCurrentUrl(), this, getString(R.string.app_namenospace));
                     break;
                     /*
                 case R.id.buttonRipple:
@@ -261,7 +262,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
                 deleteCurrentPicture();
             }
             if (actionToDo == ActionTypeEnum.JUST_WALLPAPER) {
-                mPresenter.setAsWallpaper(getCurrentUrl());
+                mPresenter.setAsWallpaper(getCurrentUrl(), this, getString(R.string.app_namenospace));
             }
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
@@ -278,8 +279,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
         String url = getCurrentUrl();
         int screenWidth = getScreenPoint().x;
         int screenHeight = getScreenPoint().y;
-        Uri source = Uri.fromFile(ViewModel.Current.fileUtils.getTemporaryFile(ViewModel.Current.fileUtils
-                .getFileName(url)));
+        Uri source = Uri.fromFile(FileUtils.Companion.getTemporaryFile(FileUtils.Companion.getFileName(url), this, getString(com.sfaxdroid.timer.R.string.app_namenospace)));
         Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
         Crop.of(source, destination).withAspect(screenWidth, screenHeight)
                 .start(this);
@@ -296,7 +296,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     private void createIntent(IntentTypeEnum intentType) {
         hideLoading();
         if (!ViewModel.Current.device.shareFileWithIntentType(this,
-                ViewModel.Current.fileUtils.getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())),
+                FileUtils.Companion.getTemporaryFile(FileUtils.Companion.getFileName(getCurrentUrl()), this, getString(com.sfaxdroid.timer.R.string.app_namenospace)),
                 intentType)) {
             ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.appNotInstalled));
         }
@@ -342,8 +342,8 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
     public void shareAll() {
         hideLoading();
         ViewModel.Current.device.shareAllFile(this,
-                ViewModel.Current.fileUtils.
-                        getTemporaryFile(ViewModel.Current.fileUtils.getFileName(getCurrentUrl())));
+                FileUtils.Companion.
+                        getTemporaryFile(FileUtils.Companion.getFileName(getCurrentUrl()), this, getString(com.sfaxdroid.timer.R.string.app_namenospace)));
     }
 
     /*
@@ -363,8 +363,8 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     @Override
     public void onGoToCropActivity() {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.isSavedToStorage(ViewModel.Current.fileUtils
-                .getFileName(getCurrentUrl())))
+        addSubscribe(Flowable.fromCallable(() -> FileUtils.Companion.isSavedToStorage(
+                FileUtils.Companion.getFileName(getCurrentUrl()), this, getString(com.sfaxdroid.timer.R.string.app_namenospace)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {

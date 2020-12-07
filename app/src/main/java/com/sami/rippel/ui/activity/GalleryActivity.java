@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 
 import com.sami.rippel.allah.R;
 import com.sfaxdoird.anim.word.NameOfAllah2DActivity;
+import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.SimpleActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
@@ -61,17 +62,17 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
     }
 
     public void initData() {
-        if (mLwpName != null && !mLwpName.isEmpty() && (mLwpName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP) || mLwpName.equals(Constants.KEY_BASMALA_STIKERS))) {
+        if (mLwpName != null && !mLwpName.isEmpty() && (mLwpName.equals(com.sfaxdroid.base.Constants.KEY_ADDED_LIST_TIMER_LWP) || mLwpName.equals(Constants.KEY_BASMALA_STIKERS))) {
             refreshBitmapAdapter(mLwpName);
             mRecyclerView
                     .addOnItemTouchListener(new RecyclerItemClickListener(
                             getApplicationContext(),
                             (view, position) -> {
-                                if (mLwpName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP)) {
+                                if (mLwpName.equals(com.sfaxdroid.base.Constants.KEY_ADDED_LIST_TIMER_LWP)) {
                                     Intent intent = new Intent(GalleryActivity.this, DetailsActivity.class);
                                     intent.putParcelableArrayListExtra(Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
                                     intent.putExtra(Constants.DETAIL_IMAGE_POS, position);
-                                    intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_ADDED_LIST_TIMER_LWP);
+                                    intent.putExtra(Constants.KEY_LWP_NAME, com.sfaxdroid.base.Constants.KEY_ADDED_LIST_TIMER_LWP);
                                     startActivityForResult(intent, 90);
                                 } else if (mLwpName.equals(Constants.KEY_BASMALA_STIKERS)) {
                                     WallpaperObject lwp = listFileToSendToDetailViewPager.get(position);
@@ -159,14 +160,14 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                                         case "SkyBoxLwp":
                                             saveTempsDorAndDoAction(ActionTypeEnum.SKYBOX_LWP, mSelectedUrl);
                                             break;
-                                        case Constants.KEY_ADD_TIMER_LWP: {
+                                        case com.sfaxdroid.base.Constants.KEY_ADD_TIMER_LWP: {
                                             Intent intent = new Intent(
                                                     GalleryActivity.this,
                                                     DetailsActivity.class);
                                             intent.putParcelableArrayListExtra(
                                                     Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, listFileToSendToDetailViewPager);
                                             intent.putExtra(Constants.DETAIL_IMAGE_POS, position);
-                                            intent.putExtra(Constants.KEY_LWP_NAME, Constants.KEY_ADD_TIMER_LWP);
+                                            intent.putExtra(Constants.KEY_LWP_NAME, com.sfaxdroid.base.Constants.KEY_ADD_TIMER_LWP);
                                             startActivity(intent);
                                             break;
                                         }
@@ -216,7 +217,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                 case Constants.KEY_RIPPLE_LWP:
                     return "All";
                 //isAdsShowedFromRipple = true;
-                case Constants.KEY_ADD_TIMER_LWP:
+                case com.sfaxdroid.base.Constants.KEY_ADD_TIMER_LWP:
                     return "All";
                 case Constants.KEY_TEXTURE:
                     return "ImageDouaLwp";
@@ -230,9 +231,9 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
         List<File> myFileList = null;
         listFileToSendToDetailViewPager.clear();
         if (fileName.equals(Constants.KEY_BASMALA_STIKERS)) {
-            myFileList = Current.fileUtils.getBasmalaStickersFileList();
-        } else if (fileName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP)) {
-            myFileList = Current.fileUtils.getPermanentDirListFiles();
+            myFileList = FileUtils.Companion.getBasmalaStickersFileList(getBaseContext(), getBaseContext().getString(R.string.app_namenospace));
+        } else if (fileName.equals(com.sfaxdroid.base.Constants.KEY_ADDED_LIST_TIMER_LWP)) {
+            myFileList = FileUtils.Companion.getPermanentDirListFiles(getBaseContext(), getBaseContext().getString(R.string.app_namenospace));
         }
         if (myFileList != null) {
             for (File file : myFileList) {
@@ -249,9 +250,9 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
     public String getActivityTitle() {
         if (mLwpName != null && mLwpName.equals(Constants.KEY_DOUA_LWP))
             return getString(R.string.DouaLwpTitle);
-        else if (mLwpName != null && mLwpName.equals(Constants.KEY_ADD_TIMER_LWP))
+        else if (mLwpName != null && mLwpName.equals(com.sfaxdroid.base.Constants.KEY_ADD_TIMER_LWP))
             return getString(R.string.DouaLwpTitle);
-        else if (mLwpName != null && mLwpName.equals(Constants.KEY_ADDED_LIST_TIMER_LWP))
+        else if (mLwpName != null && mLwpName.equals(com.sfaxdroid.base.Constants.KEY_ADDED_LIST_TIMER_LWP))
             return getString(R.string.TitleActionBarTimerLwpAdded);
         else if (mLwpName != null && mLwpName.equals(Constants.KEY_RIPPLE_LWP))
             return getString(R.string.DouaLwpTitle);
@@ -277,8 +278,8 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
     }
 
     public void saveTempsDorAndDoAction(ActionTypeEnum actionToDo, String url) {
-        boolean isSavedToStorage = Current.fileUtils.isSavedToStorage(Current.fileUtils
-                .getFileName(url));
+        boolean isSavedToStorage = FileUtils.Companion.isSavedToStorage(
+                FileUtils.Companion.getFileName(url), this, getString(com.sfaxdroid.timer.R.string.app_namenospace));
         if (isSavedToStorage) {
             //sendToRippleLwp();
         } else {
@@ -288,7 +289,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
     }
 
     public void sendToRippleLwp() {
-        Constants.FilePath = Current.fileUtils.getTemporaryFile(Current.fileUtils.getFileName(mSelectedUrl)).getPath();
+        Constants.FilePath = FileUtils.Companion.getTemporaryFile(FileUtils.Companion.getFileName(mSelectedUrl), this, getString(com.sfaxdroid.timer.R.string.app_namenospace)).getPath();
         try {
 
         } catch (Exception e) {
@@ -304,12 +305,10 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 90:
-                if (resultCode == RESULT_OK) {
-                    refreshBitmapAdapter(mLwpName);
-                }
-                break;
+        if (requestCode == 90) {
+            if (resultCode == RESULT_OK) {
+                refreshBitmapAdapter(mLwpName);
+            }
         }
     }
 

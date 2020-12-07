@@ -1,4 +1,4 @@
-package com.sami.rippel.livewallpapers.lwptimer;
+package com.sfaxdroid.timer;
 
 import android.annotation.TargetApi;
 import android.app.WallpaperManager;
@@ -28,10 +28,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.sami.rippel.allah.R;
-import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.ui.activity.GalleryActivity;
+import com.google.android.material.snackbar.Snackbar;
+import com.sfaxdroid.base.Constants;
+import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.Utils;
 
 import java.io.File;
@@ -85,16 +84,22 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         mBtnAddWallpaper.setOnClickListener(view -> openAddWallpaperActivity());
 
         mBtnListWallpaper.setOnClickListener(view -> {
-            Intent intent = new Intent(
-                    WallpaperSchedulerActivity.this,
-                    GalleryActivity.class);
-            intent.putExtra("LwpName", Constants.KEY_ADDED_LIST_TIMER_LWP);
-            startActivity(intent);
+            Intent intent = null;
+            try {
+                intent = new Intent(
+                        WallpaperSchedulerActivity.this,
+                        Class.forName("com.sami.rippel.ui.activity.GalleryActivity"));
+                intent.putExtra("LwpName", Constants.KEY_ADDED_LIST_TIMER_LWP);
+                startActivity(intent);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         });
 
         mButtonActive.setOnClickListener(view -> {
-            if (ViewModel.Current.fileUtils.getPermanentDirListFiles() != null) {
-                int nbFile = ViewModel.Current.fileUtils.getPermanentDirListFiles().size();
+            if (FileUtils.Companion.getPermanentDirListFiles(this, getString(R.string.app_namenospace)) != null) {
+                int nbFile = FileUtils.Companion.getPermanentDirListFiles(this, getString(R.string.app_namenospace)).size();
                 if (nbFile > 3) {
                     new ActiveServiceAndSetFirstWallpapersInBackground().execute("");
                     mButtonActive.setCompoundDrawablesWithIntrinsicBounds(null,
@@ -109,7 +114,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
                     mButtonClose.setTextColor(Color.WHITE);
 
                 } else {
-                    ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.nofiletimer));
+                    showSnackMessage(mRootLayout, getString(R.string.nofiletimer));
                 }
 
             }
@@ -154,12 +159,21 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
         }
     }
 
+    public void showSnackMessage(CoordinatorLayout mRootLayout, String message) {
+        Snackbar snackbar = Snackbar
+                .make(mRootLayout, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
     public void openAddWallpaperActivity() {
-        Intent intent = new Intent(
-                WallpaperSchedulerActivity.this,
-                GalleryActivity.class);
-        intent.putExtra("LwpName", Constants.KEY_ADD_TIMER_LWP);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(
+                    WallpaperSchedulerActivity.this,
+                    Class.forName("com.sami.rippel.ui.activity.GalleryActivity"));
+            intent.putExtra("LwpName", Constants.KEY_ADD_TIMER_LWP);
+            startActivity(intent);
+        } catch (ClassNotFoundException ignored) {
+        }
     }
 
     public void setCheckedTime(long time) {
@@ -188,7 +202,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
     }
 
     public void setWallpaperFromFile() {
-        File myFile = ViewModel.Current.fileUtils.getPermanentDirListFiles().get(0);
+        File myFile = FileUtils.Companion.getPermanentDirListFiles(this, getString(R.string.app_namenospace)).get(0);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         if (myFile.exists()) {
@@ -212,8 +226,8 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
 
 
     public boolean activeJob() {
-        if (ViewModel.Current.fileUtils.getPermanentDirListFiles() != null) {
-            int nbFile = ViewModel.Current.fileUtils.getPermanentDirListFiles().size();
+        if (FileUtils.Companion.getPermanentDirListFiles(this, getString(R.string.app_namenospace)) != null) {
+            int nbFile = FileUtils.Companion.getPermanentDirListFiles(this, getString(R.string.app_namenospace)).size();
             if (nbFile > 3) {
                 int selectedId = mRadioSexGroup.getCheckedRadioButtonId();
                 RadioButton mRadioSelectedButton = (RadioButton) findViewById(selectedId);
@@ -241,7 +255,6 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
                 .setMessage(getString(R.string.addwalldesc))
                 .setPositiveButton(getString(R.string.addwallok), (arg0, arg1) -> openAddWallpaperActivity())
                 .setNegativeButton(getString(R.string.addwallcancel), (arg0, arg1) -> {
-                    // Some stuff to do when cancel got clicked
                 })
                 .show();
     }
@@ -291,7 +304,7 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
                     mTxtstatus.setText(getString(R.string.onswitch));
                     mTxtNotForget.setVisibility(View.VISIBLE);
                     mTxtstatus.setTextColor(getResources().getColor(R.color.green));
-                    ViewModel.Current.device.showSnackMessage(mRootLayout, getString(R.string.timeron));
+                    showSnackMessage(mRootLayout, getString(R.string.timeron));
                 } else {
                     showDialogNoMinFiles();
                 }

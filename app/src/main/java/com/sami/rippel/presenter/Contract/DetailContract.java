@@ -19,12 +19,12 @@ public interface DetailContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void setAsWallpaper(String url);
+        void setAsWallpaper(String url, Context context, String appName);
 
         void handleCrop(Intent result, Context context);
 
         void saveFileToPermanentGallery(String url, Activity context);
 
-        void saveTempsDorAndDoAction(ActionTypeEnum actionToDo, String url);
+        void saveTempsDorAndDoAction(ActionTypeEnum actionToDo, String url, Context context, String appName);
     }
 }

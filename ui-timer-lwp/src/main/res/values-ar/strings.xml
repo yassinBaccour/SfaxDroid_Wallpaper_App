@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
+    <string name="TitleTimerLwp">خلفيات متبدلة</string>
+    <string name="DescTimerLwp">قم بإختيات خلفياتك المفضلة اللتي ستتبدل علي الشاشة مع التوقيت الزمني المختار</string>
+    <string name="AddWallpaper">إضافة الخلفيات</string>
+    <string name="ListWallpaper">قائمة الصور المحفوظة</string>
+    <string name="TimerActivityDesc">حمل العديد من الخلفيات وذالك عبر إختيارها وقم بإختيار المدة الزمنية لتبديل الخلفية </string>
+    <string name="TimerActivityHowToUse">كيفية الإستعمال</string>
+    <string name="onehoure">ساعة واحدة</string>
+    <string name="sixhoure">ستة ساعات</string>
+    <string name="douzeoure">نصف يوم</string>
+    <string name="oneday">كل يوم</string>
+    <string name="onswitch">تعمل</string>
+    <string name="offswitch">لا تعمل</string>
+    <string name="timerWallpaper">خدمة</string>
+    <string name="serviceis">تغير الخلفية</string>
+    <string name="addwalltitle">إضافة الصور</string>
+    <string name="addwalldesc">يجب عليك زيادة ٤ صور على الأقل لتفعيل الخدمة</string>
+    <string name="addwallok">إضافة</string>
+    <string name="addwallcancel">إلغاء</string>
+    <string name="activeservice">تفعيل الخدمة</string>
+    <string name="closeservice">غلق الخدمة</string>
+    <string name="timerWallpaperNotForget">لانسى غلق الخدمة إذا إستعملة خلفية متحركة أخرى</string>
+    <string name="timeron">خدمت تبديل الصور تعمل</string>
+    <string name="nofiletimer">يجب زيادة 4 صور أو كثر</string>
+
+</resources>

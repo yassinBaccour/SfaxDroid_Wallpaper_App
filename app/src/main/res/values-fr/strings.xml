@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Arabic Wallpaper HD</string>
-    <string name="app_namenospace">allahwallpapers</string>
     <string name="lwp_name">Allah Fond écran</string>
     <string-array name="ripple_size">
     <item>Petit</item>
@@ -120,30 +119,6 @@
     <string name="DouaLwpDownloadCompleted">Completed</string>
     <string name="main_menu_scheduler_status">Current Status: %1$s</string>
     <string name="scheduler_new_days_title">Changer chaque :</string>
-    <string name="TitleActionBarTimerLwpAdded">Wallpapers télécharger</string>
-    <string name="TitleTimerLwp">Périodique</string>
-    <string name="DescTimerLwp">Changement de l\'arrière-plan automatiquement avec la période de temps choisie </string>
-    <string name="AddWallpaper">Ajouter des Wallpapers</string>
-    <string name="ListWallpaper">Liste des images sauvegarder</string>
-    <string name="TimerActivityDesc">Ajouter 4 photo minimum dans la liste des photo et choisissez le temps que vous voulez que lapplication change la photo puis activez le service</string>
-    <string name="TimerActivityHowToUse">Comment sa marche ?</string>
-    <string name="onehoure">1 Heure</string>
-    <string name="sixhoure">6 Heures</string>
-    <string name="douzeoure">12 Heures</string>
-    <string name="oneday">1 Jour</string>
-    <string name="onswitch">On</string>
-    <string name="offswitch">Off</string>
-    <string name="timerWallpaper">Timer Wallpaper</string>
-    <string name="serviceis">Le service est</string>
-    <string name="addwalltitle">Ajouter photo</string>
-    <string name="addwalldesc">Vous devez ajouter 4 photo Minimum a la liste</string>
-    <string name="addwallok">Ajouter</string>
-    <string name="addwallcancel">Annuler</string>
-
-    <string name="activeservice">Activer</string>
-    <string name="closeservice">Désactiver</string>
-
-    <string name="timerWallpaperNotForget">n\'oublier pas de désactiver le service si vous utilisez un autre live wallpaper</string>
 
     <string name="titleBasmala">Basmala Lock</string>
     <string name="toastnosound">Sans la voix</string>
@@ -191,8 +166,7 @@
     <string name="douatitle1">Téléchargement des resources</string>
     <string name="douatitle2">veuillez attendre la fin du téléchargement</string>
 
-    <string name="nofiletimer">Vous devez ajouter 4 photo ou plus</string>
-    <string name="timeron">le changement automatique marche</string>
+
 
     <string name="nameofallah2dtitle">Nom de Allah 2D</string>
     <string name="nameofallah2ddesc">Les 99 nom de allah changent automatiquement sur l\'arriére plant de votre écran</string>

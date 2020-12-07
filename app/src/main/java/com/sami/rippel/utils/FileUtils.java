@@ -53,20 +53,6 @@ public class FileUtils {
         this.lwpListener = lwpListener;
     }
 
-    public String getFileName(String path) {
-        return path.substring(path.lastIndexOf('/') + 1, path.length());
-    }
-
-    private File getPermanentFile(String fileName) {
-        return new File(getPermanentDir(), fileName);
-    }
-
-    public File createImageFile() throws IOException {
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-        String imageFileName = "IMAGE_" + timeStamp + "_";
-        return File.createTempFile(imageFileName, ".jpg", getTemporaryDir());
-    }
 
     private void copyFile(File sourceLocation, File targetLocation)
             throws IOException {
@@ -98,10 +84,10 @@ public class FileUtils {
 
     public boolean savePermanentFile(final String url) {
         final boolean savedFinal;
-        File temp = getTemporaryFile(getFileName(url));
+        File temp = com.sfaxdroid.base.FileUtils.Companion.getTemporaryFile(com.sfaxdroid.base.FileUtils.Companion.getFileName(url), mContext, mContext.getString(com.sfaxdroid.timer.R.string.app_namenospace));
         if (temp != null) {
             try {
-                copyFile(temp, getPermanentFile(getFileName(url)));
+                copyFile(temp, com.sfaxdroid.base.FileUtils.Companion.getPermanentFile(com.sfaxdroid.base.FileUtils.Companion.getFileName(url), mContext, mContext.getString(com.sfaxdroid.timer.R.string.app_namenospace)));
                 mSavedPermanent = true;
             } catch (IOException ignored) {
             }
@@ -109,55 +95,18 @@ public class FileUtils {
             Glide.with(mContext).asBitmap().load(url).into(new SimpleTarget<Bitmap>() {
                 @Override
                 public void onResourceReady(Bitmap resource, Transition<? super Bitmap> glideAnimation) {
-                    mSavedPermanent = saveBitmapToStorage(resource, getFileName(url), SAVE_PERMANENT);
+                    mSavedPermanent = saveBitmapToStorage(resource, com.sfaxdroid.base.FileUtils.Companion.getFileName(url), SAVE_PERMANENT);
                 }
             });
         }
         return mSavedPermanent;
     }
 
-    public boolean deleteFile(final String url) {
-        File file = new File(url);
-        return file.delete();
-    }
-
-    private List<File> getListFiles(File parentDir) {
-        ArrayList<File> inFiles = new ArrayList<File>();
-        File[] files = parentDir.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    inFiles.addAll(getListFiles(file));
-                } else {
-                    inFiles.add(file);
-                }
-            }
-        }
-        return inFiles;
-    }
-
-    public List<File> getPermanentDirListFiles() {
-        return getListFiles(getPermanentDir());
-    }
-
-    public List<File> getBasmalaStickersFileList() {
-        return getListFiles(getBasmalaFileDirDir());
-    }
-
-    public File getBasmalServiceDirZipDestination() {
-        File temporaryDir = getTemporaryDir();
-        return new File(temporaryDir, Constants.KEY_BASMALA_FOLDER_CONTAINER);
-    }
-
-    public File getBasmalServiceDirZipFile() {
-        File temporaryDir = getTemporaryDir();
-        return new File(temporaryDir, Constants.PNG_BASMALA_STICKERS_FILE_NAME);
-    }
 
     public boolean saveBitmapToStorage(Bitmap bitmap, String fileName,
                                        int saveOption) {
-        File temporaryDir = getTemporaryDir();
-        File permanentDir = getPermanentDir();
+        File temporaryDir = com.sfaxdroid.base.FileUtils.Companion.getTemporaryDir(mContext, mContext.getString(com.sfaxdroid.timer.R.string.app_namenospace));
+        File permanentDir = com.sfaxdroid.base.FileUtils.Companion.getPermanentDir(mContext, mContext.getString(com.sfaxdroid.timer.R.string.app_namenospace));
         File file;
         switch (saveOption) {
             case SAVE_PERMANENT:
@@ -198,14 +147,13 @@ public class FileUtils {
     }
 
     public void saveToFileToTempsDirAndChooseAction(String url, final ActionTypeEnum action, int screenHeightPixels, int screenWidthPixels) {
-
         Glide.with(mContext).asBitmap().load(getUrlByScreen(url, screenHeightPixels, screenWidthPixels
         ))
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap resource,
                                                 Transition<? super Bitmap> glideAnimation) {
-                        boolean isSaved = saveBitmapToStorage(resource, getFileName(url), SAVE_TEMPORARY);
+                        boolean isSaved = saveBitmapToStorage(resource, com.sfaxdroid.base.FileUtils.Companion.getFileName(url), SAVE_TEMPORARY);
                         if (isSaved) {
                             if (action == ActionTypeEnum.CROP)
                                 wallpaperListener.onGoToCropActivity();
@@ -231,51 +179,6 @@ public class FileUtils {
                 });
     }
 
-    public boolean isSavedToStorage(String fileName) {
-        File temporaryFile = getTemporaryFile(fileName);
-        return temporaryFile.exists();
-    }
-
-    private File getTemporaryDir() {
-        File temporaryDir = new File(mContext.getFilesDir(),
-                mContext.getString(R.string.app_namenospace) + "/temp");
-        if (!temporaryDir.exists()) {
-            temporaryDir.mkdirs();
-        }
-        return temporaryDir;
-    }
-
-    private File getDouaFileDir() {
-        File temporaryDir = new File(mContext.getFilesDir(),
-                mContext.getString(R.string.app_namenospace) + "/temp");
-        if (!temporaryDir.exists()) {
-            temporaryDir.mkdirs();
-        }
-        return temporaryDir;
-    }
-
-    public File getTemporaryFile(String fileName) {
-        return new File(getTemporaryDir(), fileName);
-    }
-
-    private File getPermanentDir() {
-        File permanentDir = new File(
-                mContext.getFilesDir(),
-                mContext.getString(R.string.app_namenospace) + "/MyWallpaper");
-        if (!permanentDir.exists()) {
-            permanentDir.mkdirs();
-        }
-        return permanentDir;
-    }
-
-    private File getBasmalaFileDirDir() {
-
-        File zipDestination = new File(getTemporaryDir(), Constants.KEY_BASMALA_FOLDER_CONTAINER);
-        if (!zipDestination.exists()) {
-            zipDestination.mkdirs();
-        }
-        return zipDestination;
-    }
 
     private void scanFile(File file) {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
@@ -294,10 +197,5 @@ public class FileUtils {
         } else {
             return "";
         }
-    }
-
-    public Boolean isFileExistInDataFolder(String fileName) {
-        File ZipFile = new File(getTemporaryDir(), fileName);
-        return ZipFile.exists();
     }
 }

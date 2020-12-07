@@ -1,4 +1,4 @@
-package com.sami.rippel.livewallpapers.lwptimer;
+package com.sfaxdroid.timer;
 
 import android.annotation.TargetApi;
 import android.app.WallpaperManager;
@@ -12,8 +12,8 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.utils.FileUtils;
+
+import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.Utils;
 
 import java.io.File;
@@ -21,8 +21,6 @@ import java.io.IOException;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class RetrieveWallpaperService extends JobService {
-
-    private FileUtils mFileUtils = new FileUtils(this);
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -52,7 +50,7 @@ public class RetrieveWallpaperService extends JobService {
         @Override
         protected JobParameters doInBackground(JobParameters... params) {
             Log.d("WallpaperService", "Wallpaper changed");
-            int nbFile = mFileUtils.getPermanentDirListFiles().size();
+            int nbFile = FileUtils.Companion.getPermanentDirListFiles(getBaseContext(), getBaseContext().getString(R.string.app_namenospace)).size();
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             int currentWallpaper = sharedPref.getInt("currentWallpaper", 0);
             if (nbFile > 0) {
@@ -60,7 +58,7 @@ public class RetrieveWallpaperService extends JobService {
                     updateSchedulerSettings(0);
                     currentWallpaper = 0;
                 }
-                File MyFile = mFileUtils.getPermanentDirListFiles().get(currentWallpaper);
+                File MyFile = FileUtils.Companion.getPermanentDirListFiles(getBaseContext(), getBaseContext().getString(R.string.app_namenospace)).get(currentWallpaper);
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 if (MyFile.exists()) {

@@ -59,6 +59,7 @@ import com.sami.rippel.model.listner.StickersListener;
 import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
 import com.sfaxdroid.base.BitmapUtils;
+import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.Utils;
 
 
@@ -224,7 +225,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
-            photoFile = ViewModel.Current.fileUtils.createImageFile();
+            photoFile = FileUtils.Companion.createImageFile(this, getString(R.string.app_namenospace));
             imagePath = photoFile.getAbsolutePath();
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

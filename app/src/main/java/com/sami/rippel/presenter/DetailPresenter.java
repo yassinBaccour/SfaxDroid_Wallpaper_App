@@ -9,6 +9,7 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ActionTypeEnum;
 import com.sami.rippel.presenter.Contract.DetailContract;
+import com.sfaxdroid.base.FileUtils;
 import com.soundcloud.android.crop.Crop;
 
 import io.reactivex.Flowable;
@@ -33,10 +34,10 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
     }
 
     @Override
-    public void setAsWallpaper(String url) {
+    public void setAsWallpaper(String url, Context context, String appName) {
         mView.hideLoading();
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.device.decodeBitmapAndSetAsLiveWallpaper(ViewModel.Current.fileUtils.
-                getTemporaryFile(ViewModel.Current.fileUtils.getFileName(url))))
+        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.device.decodeBitmapAndSetAsLiveWallpaper(FileUtils.Companion.
+                getTemporaryFile(FileUtils.Companion.getFileName(url), context, appName)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(t -> {
@@ -85,9 +86,9 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
     }
 
     @Override
-    public void saveTempsDorAndDoAction(ActionTypeEnum actionToDo, String url) {
-        addSubscribe(Flowable.fromCallable(() -> ViewModel.Current.fileUtils.isSavedToStorage(ViewModel.Current.fileUtils
-                .getFileName(url)))
+    public void saveTempsDorAndDoAction(ActionTypeEnum actionToDo, String url, Context context, String appName) {
+        addSubscribe(Flowable.fromCallable(() -> FileUtils.Companion.isSavedToStorage(
+                FileUtils.Companion.getFileName(url), context, appName))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {

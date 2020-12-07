@@ -118,11 +118,11 @@
             android:screenOrientation="landscape" />
         <activity android:name="com.sfaxdoird.anim.img.DouaLwpActivity" />
         <activity
-            android:name="com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity"
+            android:name="com.sfaxdroid.timer.WallpaperSchedulerActivity"
             android:theme="@style/AppTheme" />
 
         <service
-            android:name="com.sami.rippel.livewallpapers.lwptimer.RetrieveWallpaperService"
+            android:name="com.sfaxdroid.timer.RetrieveWallpaperService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 

@@ -21,11 +21,8 @@ public class Constants {
     public static final String PNG_BASMALA_STICKERS_FILE_NAME = "basmala.zip";
     public static final String KEY_LWP_NAME = "LwpName";
     public static final String KEY_DOUA_LWP = "DouaLWP";
-    public static final String KEY_ADD_TIMER_LWP = "TimerLWPadd";
-    public static final String KEY_ADDED_LIST_TIMER_LWP = "TimerLWPList";
     public static final String KEY_RIPPLE_LWP = "RippleLwp";
     public static final String KEY_BASMALA_STIKERS = "BasmalaStikers";
-    public static final String KEY_BASMALA_FOLDER_CONTAINER = "BasmalaFolder";
     public static final String KEY_NAME_OF_ALLAH_2_D = "NameOfAllah2DLWP";
     public static final String KEY_TEXTURE = "keyTexture";
     //FIXME unmodifiableSet of NAME_OF_ALLAH_TAB

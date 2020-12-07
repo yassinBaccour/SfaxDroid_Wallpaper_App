@@ -20,15 +20,14 @@ import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.SimpleFragment;
-import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity;
 import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.ui.activity.AboutActivity;
 import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.activity.HomeActivity;
 import com.sfaxdroid.base.Utils;
 import com.sfaxdroid.sky.SkyLiveWallpaper;
+import com.sfaxdroid.timer.WallpaperSchedulerActivity;
 
 import java.io.IOException;
 
