@@ -277,14 +277,6 @@ public class FileUtils {
         return zipDestination;
     }
 
-    public File getTemporaryDouaDir() {
-        File zipDestination = new File(getTemporaryDir(), Constants.KEY_DOUA_FOLDER_CONTAINER);
-        if (!zipDestination.exists()) {
-            zipDestination.mkdirs();
-        }
-        return zipDestination;
-    }
-
     private void scanFile(File file) {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         intent.setData(Uri.fromFile(file));

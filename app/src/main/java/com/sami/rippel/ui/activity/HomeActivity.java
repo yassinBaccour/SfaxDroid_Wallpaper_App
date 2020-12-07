@@ -1,6 +1,7 @@
 package com.sami.rippel.ui.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -216,6 +217,7 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         }
     }
 
+    @SuppressLint("CheckResult")
     public void checkPermission() {
         rxPermissions
                 .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -415,10 +417,4 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         ShowTimedAds,
     }
 
-    public enum LwpTypeEnum {
-        RIPPLE_TYPE,
-        SKYBOX_TYPE,
-        DOUA_TYPE,
-        TIMER_TYPE,
-    }
 }

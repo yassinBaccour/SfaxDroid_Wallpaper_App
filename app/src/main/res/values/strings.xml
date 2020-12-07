@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Arabic Wallpaper HD</string>
-    <string name="app_namenospace">allahwallpapers</string>
     <string name="lwp_name">Allah Ripple LWP</string>
     <string-array name="ripple_size">
         <item>Small</item>
@@ -126,11 +125,8 @@
     <string name="FirstMethodRippleTitle">Fast Mode</string>
     <string name="FirstMethodRippleDesc">Choose one picture and click To the buttom below to open LWP</string>
 
-    <string name="TitleDouaLwp">Doua LWP</string>
     <string name="DescDouaLwp">Doua Changer over choosed background</string>
     <string name="DouaLwpTitle">Choose Background</string>
-    <string name="DouaLwpProgressDesc">Doua LWP Resources</string>
-    <string name="DouaLwpDownloadCompleted">Completed</string>
 
     <string name="main_menu_scheduler_status">Current Status: %1$s</string>
     <string name="scheduler_new_days_title">Change Wallpaper every :</string>
@@ -190,33 +186,21 @@
     <string name="activesbasmalah">Active</string>
     <string name="closesebasmalae">Close</string>
     <string name="imageChnaged">Image changer</string>
-    <string name="sizeFullscreen">Full</string>
-    <string name="sizeBig">Big</string>
-    <string name="sizeMeduim">Meduim</string>
-    <string name="sizeSmall">Small</string>
+
     <string name="playbasmalaunlocktitle">Play when you unlock phone</string>
     <string name="colortxt">Color</string>
     <string name="sizetxt">Size</string>
-    <string name="choosecolor">Choose color</string>
-    <string name="btnok">Ok</string>
-    <string name="btncancel">Cancel</string>
+
     <string name="speedInfoFast">The speed Is Fast in preview mode</string>
     <string name="txtspeed">Speed</string>
 
-    <string name="downloadterminated">Download Completed successful</string>
-    <string name="txtcompleted">Completed</string>
-    <string name="Writingtxt">Writing Color</string>
-    <string name="douatitle1">Download Live wallpaper resources</string>
-    <string name="douatitle2">Waiting Download Resource</string>
+
 
     <string name="nofiletimer">You need to add 4 or more picture</string>
     <string name="timeron">Auto changing background is Working</string>
 
     <string name="nameofallah2dtitle">Name Of Allah 2D</string>
     <string name="nameofallah2ddesc">Choose background and writing color and enjoy with new animated wallpapers</string>
-    <string name="textfont">Font Style</string>
-    <string name="sizeTexteNameofallah">Text size</string>
-    <string name="notchanger">New Wallpaper take effect after touchin screen 3 times, If you do not see the difference please try again </string>
 
 
     //Stickers Lab

@@ -175,10 +175,7 @@
     <string name="activesbasmalah">Activer</string>
     <string name="closesebasmalae">Arreter</string>
     <string name="imageChnaged">Image Changed Successful</string>
-    <string name="sizeFullscreen">Full</string>
-    <string name="sizeBig">Grand</string>
-    <string name="sizeMeduim">Moyen</string>
-    <string name="sizeSmall">Petit</string>
+
     <string name="playbasmalaunlocktitle">Basmala a l\'ouverture</string>
     <string name="colortxt">Couleur</string>
     <string name="sizetxt">Taille</string>
@@ -199,8 +196,5 @@
 
     <string name="nameofallah2dtitle">Nom de Allah 2D</string>
     <string name="nameofallah2ddesc">Les 99 nom de allah changent automatiquement sur l\'arriére plant de votre écran</string>
-    <string name="textfont">Style d\'écriture</string>
-    <string name="sizeTexteNameofallah">Taille du text</string>
-    <string name="notchanger">Si le changement de l\'arrière plant n\'a pas effet, toucher l\'écran 3 fois, et si vous ne voyez pas la nouvelle photo choisissez de nouveau une autre ou la même</string>
     <string name="scroll_up">étendre en haut</string>
 </resources>

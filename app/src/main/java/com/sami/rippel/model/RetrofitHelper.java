@@ -17,10 +17,6 @@ public class RetrofitHelper {
         this.wallpaperApiService = wallpaperApiService;
     }
 
-    public WallpaperApiService getWallpaperApiService() {
-        return wallpaperApiService;
-    }
-
     public Flowable<WallpapersRetrofitObject> getWallpapersList() {
         return wallpaperApiService.getWallpapersFromServices();
     }

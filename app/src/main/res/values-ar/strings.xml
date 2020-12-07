@@ -115,11 +115,8 @@
     <string name="otherMethodRippleDesc">إفتح صورة في الصفحة الرئسية ثم إضغط على الزر إجعلها خلفية تموج</string>
     <string name="FirstMethodRippleTitle">الطريقة الأولى</string>
     <string name="FirstMethodRippleDesc"> إختر صورتك المفضلة ثم إضغط على الزر الأسفل لجعلها خلفية متحركة</string>
-    <string name="TitleDouaLwp"> خلفية دعاء متبدلة  </string>
     <string name="DescDouaLwp">قم بإختيار خلفية و عند لمس الشاشة أدعية تتبدل تلقائيا</string>
     <string name="DouaLwpTitle">إختيار الخلفية</string>
-    <string name="DouaLwpProgressDesc">إختيار الخلفية</string>
-    <string name="DouaLwpDownloadCompleted">إنتهاء</string>
     <string name="main_menu_scheduler_status">خدمة التغيير: %1$s</string>
     <string name="scheduler_new_days_title">تغير الخلفية كل</string>
     <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
@@ -174,30 +171,19 @@
     <string name="activesbasmalah">تفعيل</string>
     <string name="closesebasmalae">غلق</string>
     <string name="imageChnaged">تم تبديل الصورة</string>
-    <string name="sizeFullscreen">الأكبر</string>
-    <string name="sizeBig">كبير</string>
-    <string name="sizeMeduim">معتدل</string>
-    <string name="sizeSmall">صغير</string>
+
     <string name="playbasmalaunlocktitle">قرائة البسملة عند فتح الهاتف</string>
     <string name="colortxt">لون الصورة</string>
     <string name="sizetxt">كبر الصورة</string>
-    <string name="choosecolor">إختر اللون</string>
-    <string name="btnok">نعم</string>
-    <string name="btncancel">لا</string>
+
     <string name="speedInfoFast">السرعة الآن سريعة جدا</string>
     <string name="txtspeed">السرعة</string>
-    <string name="downloadterminated">إنتهى التحميل</string>
-    <string name="txtcompleted">إنتهى</string>
-    <string name="Writingtxt">لون الكتابة</string>
-    <string name="douatitle1">تحميل الأدعية</string>
-    <string name="douatitle2">الرجاء إنتضار التحميل</string>
+
+
     <string name="nofiletimer">يجب زيادة 4 صور أو كثر</string>
     <string name="timeron">خدمت تبديل الصور تعمل</string>
     <string name="nameofallah2dtitle">٩٩ أسماء للله الحسنى</string>
     <string name="nameofallah2ddesc">خلفية حية لأسماء الله الحسنى اللتي تتبدل على الشاشة عند لمسها</string>
-    <string name="textfont">إختيار الخط</string>
-    <string name="sizeTexteNameofallah">كبر الخط</string>
-    <string name="notchanger">إذ إختيار الخلفية الجديدة لم يتفعل , إضغط على الشاشة ٣ مرات. أو أعد إختيار الصورة من جديد</string>
     <string name="disableDeleteMode">الرجاء غلق خاصية الفسخ</string>
     <string name="nothingAtScreen">لاشيئ على الشاشة</string>
     <string name="noText">لاتوجد كتابة على الشاشة</string>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.preference.PreferenceActivity
 
+//TODO use androidx pref
 @SuppressLint("ExportedPreferenceActivity")
 class SettingActivity : PreferenceActivity() {
 

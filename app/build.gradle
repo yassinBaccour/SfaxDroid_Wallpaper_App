@@ -104,6 +104,12 @@ dependencies {
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation project(':download-file-module')
     implementation project(':base-android')
+    implementation project(':ui-sky-rajawali-lwp')
+    implementation project(':ui-anim-img-lwp')
+    implementation project(':common-layouts')
+    implementation project(':ui-anim-word-lwp')
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'

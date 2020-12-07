@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.utils.FileUtils;
+import com.sfaxdroid.base.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class RetrieveWallpaperService extends JobService {
                     WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
                     try {
                         if (bitmap != null) {
-                            Bitmap background = Bitmap.createScaledBitmap(bitmap, ViewModel.Current.device.getScreenWidthPixels(), ViewModel.Current.device.getScreenHeightPixels(), true);
+                            Bitmap background = Bitmap.createScaledBitmap(bitmap, Utils.Companion.getScreenWidthPixels(getBaseContext()), Utils.Companion.getScreenHeightPixels(getBaseContext()), true);
                             if (background != null)
                                 wallpaperManager.setBitmap(background);
                             bitmap.recycle();

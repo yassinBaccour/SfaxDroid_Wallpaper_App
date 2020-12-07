@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
 import com.sami.rippel.base.BaseFragment
-import com.sami.rippel.livewallpapers.lwpskyview.SkyNameOfAllahLiveWallpaper
 import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity
 import com.sami.rippel.model.Constants
 import com.sami.rippel.model.ViewModel
@@ -30,7 +29,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
     private var adapter: ArticleListAdapter? = null
 
     override fun getFragmentActivity(): Activity {
-        return activity!!
+        return requireActivity()
     }
 
     override fun fillForm() {}
@@ -77,8 +76,8 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                             intent.putExtra(
                                 WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
                                 ComponentName(
-                                    activity!!,
-                                    SkyNameOfAllahLiveWallpaper::class.java
+                                    requireActivity(),
+                                    com.sfaxdroid.sky.SkyLiveWallpaper::class.java
                                 )
                             )
                             startActivity(intent)

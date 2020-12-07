@@ -8,8 +8,8 @@ import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.DeviceUtils;
 import com.sami.rippel.utils.FileUtils;
-import com.sami.rippel.utils.SharedPrefsUtils;
-import com.sfaxdroid.base.BitmapUtils;
+import com.sfaxdroid.base.SharedPrefsUtils;
+import com.sfaxdroid.base.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ import java.util.List;
  */
 
 public class ViewModel {
+
     public static ViewModel Current;
     private final List<OnStateChangeListener> mStateListeners = new ArrayList<>();
     public FileUtils fileUtils;
@@ -84,15 +85,6 @@ public class ViewModel {
 
     public boolean isWallpapersLoaded() {
         return retrofitWallpObject != null && retrofitWallpObject.getCategoryList().size() > 0;
-    }
-
-    public String getUrlFromWallpaperList(int pos, List<WallpaperObject> myList) {
-        String url = "";
-        if (ViewModel.Current.device.getScreenHeightPixels() < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
-            url = myList.get(pos).getPreviewUrl().replace(Constants.URL_BIG_WALLPAPER_FOLDER, Constants.URL_SMALL_WALLPAPER_FOLDER);
-        else
-            url = myList.get(pos).getPreviewUrl();
-        return url;
     }
 
     public String getUrlFromWallpaper(WallpaperObject wall) {

@@ -48,13 +48,7 @@ public class DeviceUtils {
 
     public WindowManager mWindowManager;
     private Context mContext;
-    private DeviceListner mDeviceListner;
-    private String[] mNotCompatibleRippleDeviceList = {"XIAOMI REDMI 3S",
-            "LGE LGLS755", "HUAWEI ALE-L21", "XIAOMI REDMI NOTE 3",
-            "ASUS ASUS_Z010D", "LGE LG-K430", "LGE LG-K430", "ONEPLUS ONEPLUS A3003",
-            "GENERAL MOBILE GM 5 PLUS", "HUAWEI HUAWEI NXT-L29", "HUAWEI HUAWEI RIO-L01", "HUAWEI HUAWEI CAM-L21",
-            "QMOBILE Z14", "HUAWEI ALE-L21", "LENOVO LENOVO PB1-750M", "WIKO LENNY3", "HUAWEI HUAWEI KII-L21",
-            "QMOBILE QMOBILE S2 PLUS", "SONY D6503", "LGE LG-H502"};
+    private DeviceListner deviceListner;
 
     public DeviceUtils(Context mContext) {
         this.mContext = mContext;
@@ -62,7 +56,7 @@ public class DeviceUtils {
     }
 
     public void setDeviceListner(DeviceListner listner) {
-        this.mDeviceListner = listner;
+        this.deviceListner = listner;
     }
 
     public void clearCurrentWallpaper() {
@@ -201,8 +195,8 @@ public class DeviceUtils {
                     permissionName)) {
                 showMessageOKCancel(mContext.getString(R.string.savepermissiondesc),
                         (dialog, which) -> {
-                            if (mDeviceListner != null)
-                                mDeviceListner.onRequestPermissions();
+                            if (deviceListner != null)
+                                deviceListner.onRequestPermissions();
                         }, activity);
             } else {
                 int REQUEST_CODE_ASK_PERMISSIONS = 123;
@@ -254,18 +248,7 @@ public class DeviceUtils {
         }
     }
 
-    public String getBytesDownloaded(int progress, long totalBytes) {
-        long bytesCompleted = (progress * totalBytes) / 100;
-        if (totalBytes >= 1000000) {
-            return ("" + (String.format("%.1f", (float) bytesCompleted / 1000000)) + "/" + (String.format("%.1f", (float) totalBytes / 1000000)) + "MB");
-        }
-        if (totalBytes >= 1000) {
-            return ("" + (String.format("%.1f", (float) bytesCompleted / 1000)) + "/" + (String.format("%.1f", (float) totalBytes / 1000)) + "Kb");
 
-        } else {
-            return ("" + bytesCompleted + "/" + totalBytes);
-        }
-    }
 
     public Boolean isConnected(Context con) {
 

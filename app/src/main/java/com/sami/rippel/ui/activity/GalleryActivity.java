@@ -17,7 +17,8 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.sami.rippel.allah.R;
-import com.sami.rippel.base.SimpleActivity;
+import com.sfaxdoird.anim.word.NameOfAllah2DActivity;
+import com.sfaxdroid.base.SimpleActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ActionTypeEnum;
@@ -29,6 +30,7 @@ import com.sami.rippel.model.listner.LwpListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
+import com.sfaxdoird.anim.img.DouaLwpActivity;
 
 
 import java.io.File;
@@ -150,7 +152,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                                             Intent intent = new Intent(
                                                     GalleryActivity.this,
                                                     DouaLwpActivity.class);
-                                            intent.putExtra(Constants.URL_TO_DOWNLOAD, mSelectedUrl);
+                                            intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
                                             startActivity(intent);
                                             break;
                                         }
@@ -183,7 +185,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                                             Intent intent = new Intent(
                                                     GalleryActivity.this,
                                                     NameOfAllah2DActivity.class);
-                                            intent.putExtra(Constants.URL_TO_DOWNLOAD, mSelectedUrl);
+                                            intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
                                             startActivity(intent);
                                             break;
                                         }

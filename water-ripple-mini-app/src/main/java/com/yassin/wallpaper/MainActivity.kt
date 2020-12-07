@@ -3,12 +3,12 @@ package com.yassin.wallpaper
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.sfaxdroid.base.BaseActivity
+import com.sfaxdroid.base.BaseMiniAppActivity
 import com.sfaxdroid.base.Utils
 import com.sfaxdroid.engine.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseMiniAppActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

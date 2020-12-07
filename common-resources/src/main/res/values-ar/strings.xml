@@ -43,4 +43,22 @@
     <string name="txt13">التقييم</string>
     <string name="txt14">رجاء التقييم التطبيقة</string>
     <string name="txt15">أمطار</string>
+
+    <string name="downloadterminated">إنتهى التحميل</string>
+    <string name="txtcompleted">إنتهى</string>
+    <string name="DouaLwpDownloadCompleted">إنتهاء</string>
+
+    <string name="btnok">نعم</string>
+    <string name="btncancel">لا</string>
+
+    <string name="choosecolor">إختر اللون</string>
+    <string name="TitleDouaLwp"> خلفية دعاء متبدلة  </string>
+    <string name="DouaLwpProgressDesc">إختيار الخلفية</string>
+    <string name="textfont">إختيار الخط</string>
+    <string name="sizeFullscreen">الأكبر</string>
+    <string name="sizeBig">كبير</string>
+    <string name="sizeMeduim">معتدل</string>
+    <string name="sizeSmall">صغير</string>
+    <string name="sizeTexteNameofallah">كبر الخط</string>
+
 </resources>

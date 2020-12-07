@@ -7,12 +7,16 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +39,7 @@ import com.sami.rippel.model.listner.WallpaperListener;
 import com.sami.rippel.presenter.Contract.DetailContract;
 import com.sami.rippel.presenter.DetailPresenter;
 import com.sami.rippel.ui.adapter.DetailPagerAdapter;
+import com.sfaxdroid.base.Utils;
 import com.soundcloud.android.crop.Crop;
 
 
@@ -260,7 +265,7 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
             }
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
-            ViewModel.Current.fileUtils.saveToFileToTempsDirAndChooseAction(getCurrentUrl(), actionToDo, ViewModel.Current.device.getScreenHeightPixels(), ViewModel.Current.device.getScreenWidthPixels());
+            ViewModel.Current.fileUtils.saveToFileToTempsDirAndChooseAction(getCurrentUrl(), actionToDo, Utils.Companion.getScreenHeightPixels(this), ViewModel.Current.device.getScreenWidthPixels());
         }
     }
 
@@ -316,7 +321,8 @@ public class DetailsActivity extends BaseActivity<DetailPresenter> implements Wa
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
-            Intent result) {
+                                    Intent result) {
+        super.onActivityResult(requestCode, resultCode, result);
         if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
             beginCrop();
         } else if (requestCode == Crop.REQUEST_CROP) {

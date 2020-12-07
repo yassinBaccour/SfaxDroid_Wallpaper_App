@@ -36,6 +36,7 @@ import com.myandroid.views.MultiTouchListener;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
+import com.sfaxdroid.base.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -108,7 +109,7 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
 
     public String GetUrlByScreen(String urlToChange) {
         String url = "";
-        if (ViewModel.Current.device.getScreenHeightPixels() < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
+        if (Utils.Companion.getScreenHeightPixels(this) < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
             url = urlToChange.replace("/islamicimages/", "/islamicimagesmini/");
         else
             url = urlToChange;

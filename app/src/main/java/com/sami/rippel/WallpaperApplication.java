@@ -6,7 +6,7 @@ import com.sami.rippel.model.MyService;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.utils.DeviceUtils;
 import com.sami.rippel.utils.FileUtils;
-import com.sami.rippel.utils.SharedPrefsUtils;
+import com.sfaxdroid.base.SharedPrefsUtils;
 
 /**
  * Created by yassin baccour on 15/05/2016.

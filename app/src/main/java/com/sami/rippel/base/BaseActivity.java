@@ -1,7 +1,10 @@
 package com.sami.rippel.base;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
+import com.sfaxdroid.base.SimpleActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -13,7 +16,9 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivity implements BaseView {
     protected CompositeDisposable mCompositeDisposable;
     protected T mPresenter;
+
     protected abstract void initInject();
+
     protected T instantiatePresenter() {
         return null;
     }

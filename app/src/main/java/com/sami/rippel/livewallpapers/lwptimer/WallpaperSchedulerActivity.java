@@ -32,6 +32,7 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.ui.activity.GalleryActivity;
+import com.sfaxdroid.base.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -197,8 +198,8 @@ public class WallpaperSchedulerActivity extends AppCompatActivity {
             try {
                 if (bitmap != null) {
                     Bitmap background = Bitmap.createScaledBitmap(bitmap,
-                            ViewModel.Current.device.getScreenWidthPixels(),
-                            ViewModel.Current.device.getScreenHeightPixels(),
+                            Utils.Companion.getScreenWidthPixels(this),
+                            Utils.Companion.getScreenHeightPixels(this),
                             true);
                     if (background != null)
                         wallpaperManager.setBitmap(background);

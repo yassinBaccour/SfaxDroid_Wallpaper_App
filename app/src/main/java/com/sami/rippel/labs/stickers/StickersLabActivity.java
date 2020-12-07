@@ -59,6 +59,7 @@ import com.sami.rippel.model.listner.StickersListener;
 import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
 import com.sfaxdroid.base.BitmapUtils;
+import com.sfaxdroid.base.Utils;
 
 
 import java.io.ByteArrayOutputStream;
@@ -319,7 +320,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     public void downloadAndPutTextureAtScreen(String mUrl, String resizeType) {
         changeProgressBarVisibility(true);
-        if (ViewModel.Current.device.getScreenHeightPixels() < 600)
+        if (Utils.Companion.getScreenHeightPixels(this) < 600)
             mUrl = mUrl.replace("islamicimages", "islamicimagesmini");
 
         Glide.with(mActivity).asBitmap().load(mUrl).into(new SimpleTarget<Bitmap>() {
@@ -912,7 +913,7 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
     }
 
     void reduceImageSizeAsync() {
-        addSubscribe(Flowable.fromCallable(() -> BitmapUtils.setReducedImageSize(imagePath, ViewModel.Current.device.getScreenHeightPixels(), ViewModel.Current.device.getScreenWidthPixels()))
+        addSubscribe(Flowable.fromCallable(() -> BitmapUtils.setReducedImageSize(imagePath, Utils.Companion.getScreenHeightPixels(this), Utils.Companion.getScreenWidthPixels(this)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap -> {

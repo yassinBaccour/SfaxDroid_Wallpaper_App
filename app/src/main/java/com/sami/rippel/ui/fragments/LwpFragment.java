@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,6 @@ import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.SimpleFragment;
-import com.sami.rippel.livewallpapers.lwpskyview.SkyNameOfAllahLiveWallpaper;
 import com.sami.rippel.livewallpapers.lwptimer.WallpaperSchedulerActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
@@ -26,6 +27,8 @@ import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.ui.activity.AboutActivity;
 import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.activity.HomeActivity;
+import com.sfaxdroid.base.Utils;
+import com.sfaxdroid.sky.SkyLiveWallpaper;
 
 import java.io.IOException;
 
@@ -83,7 +86,7 @@ public class LwpFragment extends SimpleFragment {
                 intent.putExtra(
                         WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
                         new ComponentName(getActivity(),
-                                SkyNameOfAllahLiveWallpaper.class));
+                                SkyLiveWallpaper.class));
                 startActivity(intent);
 
             } catch (Exception e) {
@@ -116,8 +119,8 @@ public class LwpFragment extends SimpleFragment {
             openWallpaperSchedulerActivity();
         });
 
-        if (ViewModel.Current.device.getScreenWidthPixels() < 710
-                && ViewModel.Current.device.getScreenHeightPixels() < 1200) {
+        if (Utils.Companion.getScreenWidthPixels(getContext()) < 710
+                && Utils.Companion.getScreenHeightPixels(getContext()) < 1200) {
             mCardViewSkyBox.setVisibility(View.GONE);
         }
 
@@ -214,8 +217,8 @@ public class LwpFragment extends SimpleFragment {
     }
 
     public void resizeTitleForSmallDevice() {
-        if (ViewModel.Current.device.getScreenWidthPixels() < 500
-                && ViewModel.Current.device.getScreenHeightPixels() < 820) {
+        if (Utils.Companion.getScreenWidthPixels(getContext()) < 500
+                && Utils.Companion.getScreenHeightPixels(getContext()) < 820) {
             //TITLE LWP
             mTxttitleripple.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
             mTxttilekybox.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);

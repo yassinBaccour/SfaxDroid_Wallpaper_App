@@ -23,8 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation libraries.kotlin
-    implementation libraries.ktx
+    api libraries.kotlin
+    api libraries.ktx
     api libraries.constraintlayout
     api libraries.appcompat
 }

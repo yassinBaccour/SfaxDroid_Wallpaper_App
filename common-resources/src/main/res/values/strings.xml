@@ -52,4 +52,23 @@
     <string name="pref_sync_frequency_summary">choose a wallpapers models</string>
     <string name="pref_update_setting">Models Settings</string>
 
+    <string name="downloadterminated">Download Completed successful</string>
+    <string name="txtcompleted">Completed</string>
+    <string name="DouaLwpDownloadCompleted">Completed</string>
+
+    <string name="btnok">Ok</string>
+    <string name="btncancel">Cancel</string>
+
+    <string name="choosecolor">Choose color</string>
+    <string name="TitleDouaLwp">Doua LWP</string>
+    <string name="DouaLwpProgressDesc">Doua LWP Resources</string>
+    <string name="app_namenospace">allahwallpapers</string>
+    <string name="textfont">Font Style</string>
+    <string name="sizeFullscreen">Full</string>
+    <string name="sizeBig">Big</string>
+    <string name="sizeMeduim">Meduim</string>
+    <string name="sizeSmall">Small</string>
+    <string name="sizeTexteNameofallah">Text size</string>
+
+
 </resources>
