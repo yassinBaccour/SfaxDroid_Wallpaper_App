@@ -10,6 +10,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.core.app.ActivityCompat;
@@ -55,17 +56,11 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
 
     private ProgressBar mProgressLoader;
 
-    private static final int PICK_FROM_FILE = 3;
-
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     public static Boolean isAdsShow = false;
 
     public static int nbOpenAds = 0;
-
-    public static boolean stat = false;
 
     private static long back_pressed;
 
@@ -129,7 +124,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
     protected void onResume() {
         super.onResume();
         checkForCrashes();
-        ViewModel.Current.device.setDeviceListner(this);
         showFirstTimeAndOneTimeAds();
         showTimedAdsWhenIOpenPicture();
         onOpenScreenTracker("ViewPager");
@@ -164,9 +158,15 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
                         mAdapter.ChangeAdapterFragmentViewState(true);
                     }
                 }, throwable -> {
-                    ViewModel.Current.device.showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
+                    showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
                 })
         );
+    }
+
+    public void showSnackMessage(CoordinatorLayout mRootLayout, String message) {
+        Snackbar snackbar = Snackbar
+                .make(mRootLayout, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     public void initRatingApp() {

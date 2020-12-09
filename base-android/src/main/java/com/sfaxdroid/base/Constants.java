@@ -17,6 +17,7 @@ public class Constants {
     public static final String DETAIL_IMAGE_POS = "pos";
     public static final String KEY_LWP_NAME = "LwpName";
     public static final String GT_FOLDER_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FrameImages/";
+    public static final String BASE_URL = "http://androidsporttv.com/islamicimages/RetorFitFormat/";
     public static int nbIncrementationAfterChange = 0;
     public static Boolean ifBackgroundChanged = false;
     public static final String DOUA_ZIP_FOLDER_NAME = "DouaFolder";

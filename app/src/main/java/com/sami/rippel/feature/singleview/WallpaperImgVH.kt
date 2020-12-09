@@ -1,5 +1,6 @@
 package com.sami.rippel.feature.singleview
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         pos: Int,
         openWallpaper: (WallpaperObject, Int) -> Unit
     ) {
-        Glide.with(itemView.context).load(getUrlByScreen(wallpaperObject))
+        Glide.with(itemView.context).load(getUrlByScreen(wallpaperObject, itemView.context))
             .transition(DrawableTransitionOptions.withCrossFade())
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(mImg)
@@ -27,7 +28,7 @@ class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         mImg.setOnClickListener { openWallpaper(wallpaperObject, pos) }
     }
 
-    private fun getUrlByScreen(wall: WallpaperObject): String? {
-        return ViewModel.Current.getUrlFromWallpaper(wall)
+    private fun getUrlByScreen(wall: WallpaperObject, context: Context): String? {
+        return ViewModel.Current.getUrlFromWallpaper(wall, context)
     }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 public class Constants {
     public static final String SFAXDROID_LINK = "market://search?q=pub:SFAXDROID";
     public static final String APP_PACKAGE = "market://details?id=com.sami.rippel.allah";
-    public static final String BASE_URL = "http://androidsporttv.com/islamicimages/RetorFitFormat/";
     public static final String RATING_MESSAGE = "ratingmessage";
     public static final String RATING_NON = "Non";
     public static final String RATING_YES = "Oui";

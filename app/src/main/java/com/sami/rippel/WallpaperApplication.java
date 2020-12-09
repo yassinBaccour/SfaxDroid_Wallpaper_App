@@ -2,11 +2,9 @@ package com.sami.rippel;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.sami.rippel.model.MyService;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.utils.DeviceUtils;
-import com.sami.rippel.utils.FileUtils;
 import com.sfaxdroid.base.SharedPrefsUtils;
+import com.sfaxdroid.data.MyService;
 
 /**
  * Created by yassin baccour on 15/05/2016.
@@ -25,8 +23,6 @@ public class WallpaperApplication extends MultiDexApplication {
         super.onCreate();
         instance = this;
         ViewModel.Current = new ViewModel(
-                new DeviceUtils(getApplicationContext()),
-                new FileUtils(getApplicationContext()),
                 new MyService(),
                 new SharedPrefsUtils(getApplicationContext())
         );

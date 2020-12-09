@@ -21,6 +21,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.snackbar.Snackbar;
 import com.kobakei.ratethisapp.RateThisApp;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseActivity;
@@ -44,10 +45,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     private ProgressBar mProgressLoader;
 
     private ImageView mPrivacy;
-
-    private static final int PICK_FROM_FILE = 3;
-
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
 
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
@@ -129,7 +126,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     protected void onResume() {
         super.onResume();
         checkForCrashes();
-        ViewModel.Current.device.setDeviceListner(this);
         showFirstTimeAndOneTimeAds();
         showTimedAdsWhenIOpenPicture();
         onOpenScreenTracker("ViewPager");
@@ -164,9 +160,15 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
                         onFillAdapterWithServiceData();
                     }
                 }, throwable -> {
-                    ViewModel.Current.device.showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
+                    showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
                 })
         );
+    }
+
+    public void showSnackMessage(CoordinatorLayout mRootLayout, String message) {
+        Snackbar snackbar = Snackbar
+                .make(mRootLayout, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     public void initRatingApp() {

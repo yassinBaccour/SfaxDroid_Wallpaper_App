@@ -115,7 +115,6 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
 
     @Override
     protected void initEventAndData() {
-        Current.fileUtils.SetLwpListener(this);
         ViewModel.Current.registerOnStateChangeListener(this);
         mToolbar = findViewById(R.id.toolbar);
         mProgressBar = findViewById(R.id.progressBar);
@@ -306,7 +305,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
             //sendToRippleLwp();
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
-            Utils.Companion.saveToFileToTempsDirAndChooseAction(url, actionToDo, ViewModel.Current.device.getScreenHeightPixels(), ViewModel.Current.device.getScreenWidthPixels(), this, "app_namenospace", null, this);
+            Utils.Companion.saveToFileToTempsDirAndChooseAction(url, actionToDo, Utils.Companion.getScreenHeightPixels(this), Utils.Companion.getScreenWidthPixels(this), this, "app_namenospace", null, this);
         }
     }
 

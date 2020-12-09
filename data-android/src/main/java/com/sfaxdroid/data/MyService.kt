@@ -1,6 +1,7 @@
-package com.sami.rippel.model
+package com.sfaxdroid.data
 
 import android.content.Context
+import com.sfaxdroid.base.Constants
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
@@ -14,7 +15,7 @@ class MyService {
     @JvmField
     var mRetrofitHelper: RetrofitHelper
     private val wallpaperApiService: WallpaperApiService
-        get() = createRetrofitXMlConverter().create(WallpaperApiService::class.java)
+        get() = createRetrofitXMlConverter().create(com.sfaxdroid.data.WallpaperApiService::class.java)
 
     init {
         mRetrofitHelper = RetrofitHelper(wallpaperApiService)

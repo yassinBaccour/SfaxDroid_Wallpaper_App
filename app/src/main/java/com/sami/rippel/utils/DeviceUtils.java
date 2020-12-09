@@ -32,27 +32,7 @@ import java.io.IOException;
 
 public class DeviceUtils {
 
-    public WindowManager mWindowManager;
-    private Context mContext;
-    private DeviceListner deviceListner;
-
-    public DeviceUtils(Context mContext) {
-        this.mContext = mContext;
-        mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-    }
-
-    public void setDeviceListner(DeviceListner listner) {
-        this.deviceListner = listner;
-    }
-
-
-    public void showSnackMessage(CoordinatorLayout mRootLayout, String message) {
-        Snackbar snackbar = Snackbar
-                .make(mRootLayout, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
-    public void openChooseActivityWithPhoto(Activity activity, Intent dataIntent) {
+    public static void openChooseActivityWithPhoto(Activity activity, Intent dataIntent) {
         if (activity != null && dataIntent.getData() != null) {
             Constants.currentBitmaps = BitmapUtils.getPreview(ViewModel.Current.fileUtils.getPath(activity, dataIntent.getData()));
             try {
@@ -62,11 +42,10 @@ public class DeviceUtils {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
-    public void openChooseActivityFromCamera(Activity activity) {
+    public static void openChooseActivityFromCamera(Activity activity) {
         File file = new File(Environment.getExternalStorageDirectory()
                 + File.separator + "ic_icon_image.jpg");
         Constants.currentBitmaps = BitmapUtils.decodeSampledBitmapFromFile(
@@ -79,41 +58,4 @@ public class DeviceUtils {
             e.printStackTrace();
         }
     }
-
-    private DisplayMetrics getDisplayMetrics() {
-        final DisplayMetrics displayMetrics = new DisplayMetrics();
-        if (mWindowManager != null) {
-            mWindowManager.getDefaultDisplay().getMetrics(displayMetrics);
-            return displayMetrics;
-        } else return null;
-    }
-
-    public int getScreenHeightPixels() {
-        return getDisplayMetrics().heightPixels;
-    }
-
-    public int getScreenWidthPixels() {
-        return getDisplayMetrics().widthPixels;
-    }
-
-    public int getCellWidth() {
-        if (ViewModel.Current.device.getScreenHeightPixels() < 820 && ViewModel.Current.device.getScreenWidthPixels() < 500) {
-            return 133;
-        } else {
-            return 200;
-        }
-    }
-
-    public int getCellHeight() {
-        if (ViewModel.Current.device.getScreenHeightPixels() < 820 && ViewModel.Current.device.getScreenWidthPixels() < 500) {
-            return 133;
-        } else {
-            return 200;
-        }
-    }
-
-
-
-
-
 }

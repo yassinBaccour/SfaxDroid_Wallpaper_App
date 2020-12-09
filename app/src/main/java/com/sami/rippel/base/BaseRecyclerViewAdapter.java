@@ -18,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
+import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT) {
                 Glide.with(context).load(GetUrlByScreen(wallpaperObject))
                         .thumbnail(0.5f)
-                        .override(ViewModel.Current.device.getCellWidth(), ViewModel.Current.device.getCellHeight())
+                        .override(DeviceUtils.Companion.getCellWidth(context), DeviceUtils.Companion.getCellHeight(context))
                         .transition(withCrossFade())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(((MyItemHolderCategory) holder).mImg);
@@ -71,7 +72,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
             } else
                 Glide.with(context).load(GetUrlByScreen(wallpaperObject))
                         .thumbnail(0.5f)
-                        .override(ViewModel.Current.device.getCellWidth(), ViewModel.Current.device.getCellHeight())
+                        .override(DeviceUtils.Companion.getCellWidth(context), DeviceUtils.Companion.getCellHeight(context))
                         .transition(withCrossFade())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(((MyItemHolderWallpaper) holder).mImg);
@@ -84,7 +85,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     }
 
     private String GetUrlByScreen(WallpaperObject wall) {
-        return ViewModel.Current.getUrlFromWallpaper(wall);
+        return ViewModel.Current.getUrlFromWallpaper(wall, context);
     }
 
     private static class MyItemHolderWallpaper extends RecyclerView.ViewHolder {

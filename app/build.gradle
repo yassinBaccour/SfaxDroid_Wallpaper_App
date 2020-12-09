@@ -109,7 +109,7 @@ dependencies {
     implementation project(':ui-anim-img-lwp')
     implementation project(':ui-anim-word-lwp')
     implementation project(':ui-timer-lwp')
-    implementation project(':data')
+    implementation project(':data-android')
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,7 +1,6 @@
-package com.sami.rippel.model;
+package com.sfaxdroid.data;
 
 import com.sfaxdroid.base.WallpapersRetrofitObject;
-import com.sfaxdroid.data.UpdateApp;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;

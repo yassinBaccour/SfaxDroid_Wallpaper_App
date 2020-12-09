@@ -7,6 +7,30 @@ import android.net.ConnectivityManager
 class DeviceUtils {
 
     companion object {
+
+
+        fun getCellWidth(context: Context): Int {
+            return if (Utils.getScreenHeightPixels(context) < 820 && Utils.getScreenWidthPixels(
+                    context
+                ) < 500
+            ) {
+                133
+            } else {
+                200
+            }
+        }
+
+        fun getCellHeight(context: Context): Int {
+            return if (Utils.getScreenHeightPixels(context) < 820 && Utils.getScreenWidthPixels(
+                    context
+                ) < 500
+            ) {
+                133
+            } else {
+                200
+            }
+        }
+
         @SuppressLint("MissingPermission")
         fun isConnected(con: Context): Boolean? {
             try {

@@ -16,22 +16,6 @@ import com.sfaxdroid.bases.WallpaperListener;
 
 public class FileUtils {
 
-    private Context mContext;
-    private WallpaperListener wallpaperListener;
-    private LwpListener lwpListener;
-
-    public FileUtils(Context context) {
-        this.mContext = context;
-    }
-
-    public void SetListener(WallpaperListener wallpaperListener) {
-        this.wallpaperListener = wallpaperListener;
-    }
-
-    public void SetLwpListener(LwpListener lwpListener) {
-        this.lwpListener = lwpListener;
-    }
-
     String getPath(Activity ac, Uri uri) {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = ac.managedQuery(uri, projection, null, null, null);
