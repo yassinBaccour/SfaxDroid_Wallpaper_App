@@ -17,7 +17,8 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.sami.rippel.allah.R;
-import com.sfaxdoird.anim.word.NameOfAllah2DActivity;
+import com.sfaxdoird.anim.img.WordImgActivity;
+import com.sfaxdoird.anim.word.AnimWord2dActivity;
 import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.SimpleActivity;
 import com.sami.rippel.model.Constants;
@@ -29,7 +30,6 @@ import com.sfaxdroid.bases.LwpListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
-import com.sfaxdoird.anim.img.DouaLwpActivity;
 import com.sfaxdroid.base.Utils;
 import com.sfaxdroid.base.WallpaperCategory;
 import com.sfaxdroid.base.WallpaperObject;
@@ -163,7 +163,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                                         case Constants.KEY_DOUA_LWP: {
                                             Intent intent = new Intent(
                                                     GalleryActivity.this,
-                                                    DouaLwpActivity.class);
+                                                    WordImgActivity.class);
                                             intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
                                             startActivity(intent);
                                             break;
@@ -206,7 +206,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                                         case Constants.KEY_NAME_OF_ALLAH_2_D: {
                                             Intent intent = new Intent(
                                                     GalleryActivity.this,
-                                                    NameOfAllah2DActivity.class);
+                                                    AnimWord2dActivity.class);
                                             intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
                                             startActivity(intent);
                                             break;

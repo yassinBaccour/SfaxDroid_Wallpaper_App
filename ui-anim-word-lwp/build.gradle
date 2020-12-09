@@ -4,8 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion androidCompileSdkVersion
 
+    compileSdkVersion androidCompileSdkVersion
 
     defaultConfig {
         minSdkVersion androidMinSdkVersion

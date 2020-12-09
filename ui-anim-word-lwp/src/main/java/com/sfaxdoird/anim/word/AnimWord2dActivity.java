@@ -36,7 +36,7 @@ import com.sfaxdroid.base.Utils;
 
 import java.io.File;
 
-public class NameOfAllah2DActivity extends SimpleActivity {
+public class AnimWord2dActivity extends SimpleActivity {
 
     private CoordinatorLayout mRootLayout;
     private ProgressBar mProgress1;
@@ -62,8 +62,8 @@ public class NameOfAllah2DActivity extends SimpleActivity {
     private File mBackgroundFile;
     SharedPrefsUtils pref;
 
-    NameOfAllah2DActivity.MyDownloadDownloadStatusListenerV1
-            mDownloadStatusListener = new NameOfAllah2DActivity.MyDownloadDownloadStatusListenerV1();
+    AnimWord2dActivity.MyDownloadDownloadStatusListenerV1
+            mDownloadStatusListener = new AnimWord2dActivity.MyDownloadDownloadStatusListenerV1();
 
     @Override
     protected int getLayout() {
@@ -285,7 +285,7 @@ public class NameOfAllah2DActivity extends SimpleActivity {
                     pref.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
                             BitmapUtils
-                                    .covertBitmapToDrawable(NameOfAllah2DActivity.this,
+                                    .covertBitmapToDrawable(AnimWord2dActivity.this,
                                             BitmapUtils.
                                                     changeImageColor(BitmapUtils.
                                                                     convertDrawableToBitmap(getResources()
@@ -317,7 +317,7 @@ public class NameOfAllah2DActivity extends SimpleActivity {
                         WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
                 intent.putExtra(
                         WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                        new ComponentName(NameOfAllah2DActivity.this,
+                        new ComponentName(AnimWord2dActivity.this,
                                 AnimWord2dWallpaper.class));
                 startActivity(intent);
                 //finish();

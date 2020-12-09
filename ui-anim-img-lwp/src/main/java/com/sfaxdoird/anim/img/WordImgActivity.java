@@ -36,7 +36,7 @@ import java.io.File;
 
 import static com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD;
 
-public class DouaLwpActivity extends SimpleActivity {
+public class WordImgActivity extends SimpleActivity {
 
     public CoordinatorLayout mRootLayout;
     public ProgressBar mProgress1;
@@ -151,7 +151,7 @@ public class DouaLwpActivity extends SimpleActivity {
                     SharedPrefsUtils pref = new SharedPrefsUtils(this);
                     pref.SetSetting("DouaLwpColor", selectedColor);
                     mButtonColor.setCompoundDrawablesWithIntrinsicBounds(null,
-                            BitmapUtils.covertBitmapToDrawable(DouaLwpActivity.this,
+                            BitmapUtils.covertBitmapToDrawable(WordImgActivity.this,
                                     BitmapUtils.
                                             changeImageColor(BitmapUtils.
                                                             convertDrawableToBitmap(getResources().getDrawable(R.mipmap.ic_palette))
@@ -186,7 +186,7 @@ public class DouaLwpActivity extends SimpleActivity {
                         WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
                 intent.putExtra(
                         WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                        new ComponentName(DouaLwpActivity.this,
+                        new ComponentName(WordImgActivity.this,
                                 WordImgLiveWallpaper.class));
                 intent.putExtra("valueStart", "eeee");
                 startActivity(intent);
