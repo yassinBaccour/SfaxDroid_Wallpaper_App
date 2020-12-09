@@ -1,7 +1,7 @@
 package com.sami.rippel.model;
 
-import com.sami.rippel.model.entity.UpdateApp;
-import com.sami.rippel.model.entity.WallpapersRetrofitObject;
+import com.sfaxdroid.base.WallpapersRetrofitObject;
+import com.sfaxdroid.data.UpdateApp;
 
 import io.reactivex.Flowable;
 

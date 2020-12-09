@@ -61,4 +61,13 @@
     <string name="sizeSmall">صغير</string>
     <string name="sizeTexteNameofallah">كبر الخط</string>
 
+    <string name="savepermissiondesc">يجب تفعيل خاصية تسجيل الصور ليعمل البرنامج</string>
+    <string name="permissionok">نعم</string>
+    <string name="permissionnon">لا</string>
+
+    <string name="appNotInstalled">التطبيق ليس موجود</string>
+    <string name="setSwallSucess">تم تطبيق الخلفية بنجاح</string>
+    <string name="setSwallNotSucess">خلل في تطبيق الخلفية </string>
+    <string name="setAs">إستعمال</string>
+
 </resources>

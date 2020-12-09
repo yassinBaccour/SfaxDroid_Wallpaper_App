@@ -1,15 +1,13 @@
 package com.sami.rippel.model;
 
-import com.sami.rippel.model.entity.IntentTypeEnum;
 import com.sami.rippel.model.entity.StateEnum;
-import com.sami.rippel.model.entity.WallpaperCategory;
-import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.model.entity.WallpapersRetrofitObject;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.DeviceUtils;
 import com.sami.rippel.utils.FileUtils;
 import com.sfaxdroid.base.SharedPrefsUtils;
-import com.sfaxdroid.base.Utils;
+import com.sfaxdroid.base.WallpaperObject;
+import com.sfaxdroid.base.WallpaperCategory;
+import com.sfaxdroid.base.WallpapersRetrofitObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,17 +33,6 @@ public class ViewModel {
         this.service = service;
         this.sharedPrefsUtils = sharedPrefsUtils;
         ViewModel.Current = this;
-    }
-
-    public String GetIntentNameFromType(IntentTypeEnum intentType) {
-        if (intentType == IntentTypeEnum.FACEBOOKINTENT) {
-            return Constants.FB_PACKAGE;
-        } else if (intentType == IntentTypeEnum.INTAGRAMINTENT) {
-            return Constants.INSTAGRAM_PACKAGE;
-        } else if (intentType == IntentTypeEnum.SHNAPCHATINTENT) {
-            return Constants.SNAP_PACKAGE;
-        } else
-            return null;
     }
 
 
@@ -89,19 +76,10 @@ public class ViewModel {
 
     public String getUrlFromWallpaper(WallpaperObject wall) {
         String url = "";
-        if (ViewModel.Current.device.getScreenHeightPixels() < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
-            url = wall.getPreviewUrl().replace(Constants.URL_BIG_WALLPAPER_FOLDER, Constants.URL_SMALL_WALLPAPER_FOLDER);
+        if (ViewModel.Current.device.getScreenHeightPixels() < com.sfaxdroid.base.Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < com.sfaxdroid.base.Constants.MIN_WIDHT)
+            url = wall.getPreviewUrl().replace(com.sfaxdroid.base.Constants.URL_BIG_WALLPAPER_FOLDER, com.sfaxdroid.base.Constants.URL_SMALL_WALLPAPER_FOLDER);
         else
             url = wall.getPreviewUrl();
-        return url;
-    }
-
-    public String getUrlByScreenSize(String urlToChange) {
-        String url = "";
-        if (ViewModel.Current.device.getScreenHeightPixels() < Constants.MIN_HEIGHT && ViewModel.Current.device.getScreenWidthPixels() < Constants.MIN_WIDHT)
-            url = urlToChange.replace(Constants.URL_BIG_WALLPAPER_FOLDER, Constants.URL_SMALL_WALLPAPER_FOLDER);
-        else
-            url = urlToChange;
         return url;
     }
 

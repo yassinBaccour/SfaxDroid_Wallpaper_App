@@ -47,7 +47,6 @@
     <string name="txt15">Enable Rain</string>
     <string name="txt16">Enable Touch</string>
 
-
     <string name="pref_sync_frequency">Choose models</string>
     <string name="pref_sync_frequency_summary">choose a wallpapers models</string>
     <string name="pref_update_setting">Models Settings</string>
@@ -70,5 +69,11 @@
     <string name="sizeSmall">Petit</string>
     <string name="sizeTexteNameofallah">Taille du text</string>
 
+    <string name="savepermissiondesc">Vous devez permettre à l\'application de sauvegarder les photos</string>
+
+    <string name="appNotInstalled">Cette application n\'est pas installer</string>
+    <string name="setSwallSucess">Fond d\'ecran appliqué avec succès</string>
+    <string name="setSwallNotSucess">Refaire</string>
+    <string name="setAs">Définir comme</string>
 
 </resources>

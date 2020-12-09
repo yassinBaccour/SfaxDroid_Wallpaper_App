@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:mContext="com.bentenstudio.islamoqhd.activity.DetailsActivity">
+
+    <item
+        android:id="@+id/buttonWallpaper"
+        android:icon="@mipmap/ic_crop"
+        android:title="@string/menu.detail.wall" />
+
+    <item
+        android:id="@+id/buttonChooser"
+        android:icon="@mipmap/ic_chooser"
+        android:title="@string/menu.detail.chooserwall" />
+
+    <item
+        android:id="@+id/buttonSave"
+        android:icon="@mipmap/ic_save"
+        android:title="@string/menu.detail.gallery" />
+
+    <item
+        android:id="@+id/buttonSareInsta"
+        android:icon="@mipmap/ic_insta"
+        android:title="@string/menu.detail.share.inst" />
+
+    <item
+        android:id="@+id/buttonSareFb"
+        android:icon="@mipmap/ic_fb"
+        android:title="@string/menu.detail.share.fb" />
+
+</menu>

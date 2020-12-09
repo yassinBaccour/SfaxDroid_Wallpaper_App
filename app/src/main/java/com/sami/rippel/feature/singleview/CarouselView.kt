@@ -1,6 +1,7 @@
 package com.sami.rippel.feature.singleview
 
-import com.sami.rippel.model.entity.WallpaperObject
+import com.sfaxdroid.base.WallpaperObject
+
 
 class CarouselView(
     var title: String,

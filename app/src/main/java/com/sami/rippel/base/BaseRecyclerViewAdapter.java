@@ -18,7 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.model.entity.WallpaperObject;
+import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.List;
 

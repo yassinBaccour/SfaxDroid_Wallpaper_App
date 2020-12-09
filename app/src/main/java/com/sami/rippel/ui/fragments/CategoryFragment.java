@@ -3,20 +3,20 @@ package com.sami.rippel.ui.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.Toast;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseFragment;
-import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.presenter.CategoryWallpaperPresenter;
@@ -24,6 +24,8 @@ import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.activity.HomeActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
+import com.sfaxdroid.base.Constants;
+import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +73,7 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
 
     @Override
     protected CategoryWallpaperPresenter instantiatePresenter() {
-        return new CategoryWallpaperPresenter(null); //FIXME VIEW MODEL NULL
+        return new CategoryWallpaperPresenter();
     }
 
     @Override
@@ -103,7 +105,7 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
                                                 getActivity(),
                                                 GalleryActivity.class);
                                         intent.putParcelableArrayListExtra(
-                                                Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData);
+                                                com.sfaxdroid.base.Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData);
 
                                         if (!categorName.isEmpty())
                                             intent.putExtra(Constants.DETAIL_IMAGE_POS, categorName);

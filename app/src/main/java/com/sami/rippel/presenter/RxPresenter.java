@@ -1,7 +1,7 @@
 package com.sami.rippel.presenter;
 
-import com.sami.rippel.base.BasePresenter;
-import com.sami.rippel.base.BaseView;
+import com.sfaxdroid.bases.BasePresenter;
+import com.sfaxdroid.bases.BaseView;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

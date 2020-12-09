@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
-import com.sami.rippel.labs.stickers.StickersLabActivity;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.ui.activity.HomeActivity;
 
@@ -33,10 +32,16 @@ public class LabFragment extends Fragment {
             if (mListener != null) {
                 mListener.onOpenScreenTracker("StikerActivity");
             }
-            Intent intent = new Intent(
-                    getActivity(),
-                    StickersLabActivity.class);
-            startActivity(intent);
+
+            try {
+                Intent intent = new Intent(
+                        getActivity(),
+                        Class.forName("com.sfaxdroid.detail.StickersLabActivity"));
+                startActivity(intent);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+
         });
     }
 

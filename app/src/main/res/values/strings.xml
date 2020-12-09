@@ -33,7 +33,6 @@
         <item>Allah 3</item>
     </string-array>
 
-    <string name="txt1">How to Set the wallpaper manually</string>
     <string name="txt2">Open LWP</string>
     <string name="txt3">How to Set the wallpaper</string>
     <string name="txt4"> Setting -> display  -> Wallpaper  -> Home screen -> live Wallpaper  ->  allah Water Ripple LWP</string>
@@ -57,10 +56,7 @@
     <string name="other">My Other Wallpaper in the store</string>
     <string name="txtGallery">Allah Wallpaper gallery</string>
     <string name="gallery"></string>
-    <string name="SetWall">Wallpaper Preview</string>
     <string name="NoConnection">No internet connection</string>
-    <string name="setSwallSucess">Successfully set as wallpaper</string>
-    <string name="setSwallNotSucess">Try again, Failed to set as wallpaper</string>
     <string name="otherwallll">1000 Wallpapers</string>
 
     <!-- Snack Details -->
@@ -90,8 +86,6 @@
     <string name="catalog_Category">Cat</string>
     <string name="catalog_LWP">LWP</string>
     <string name="catalog_Lab">Lab</string>
-    <string name="appNotInstalled">Application Not installed</string>
-    <string name="setAs">Set As</string>
     <string name="openGallery">Gallery</string>
     <string name="openCamera">Camera</string>
     <string name="cardframetitle">Wallpapers Frame</string>
@@ -101,9 +95,6 @@
     <string name="ShareUsing">Share image using</string>
     <string name="openGalleryLong">Open Image Gallery</string>
 
-    <string name="savepermissiondesc">You need to allow access to Storage to save Picture</string>
-    <string name="permissionok">Yes</string>
-    <string name="permissionnon">No</string>
 
     <string name="lwp_author">yassin Contributors</string>
     <string name="lwp_desc">Tunis Sfax Developer</string>
@@ -131,7 +122,7 @@
     <string name="main_menu_scheduler_status">Current Status: %1$s</string>
     <string name="scheduler_new_days_title">Change Wallpaper every :</string>
 
-   <string name="titleBasmala">Basmala Lock</string>
+    <string name="titleBasmala">Basmala Lock</string>
     <string name="toastnosound">Without Sound</string>
     <string name="toastwithsound">With Sound</string>
     <string name="toastsanspicture">Without Picture  </string>
@@ -168,8 +159,6 @@
 
     <string name="speedInfoFast">The speed Is Fast in preview mode</string>
     <string name="txtspeed">Speed</string>
-
-
 
 
     <string name="nameofallah2dtitle">Name Of Allah 2D</string>

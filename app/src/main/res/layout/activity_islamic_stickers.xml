@@ -14,7 +14,7 @@
             android:layout_height="match_parent">
 
 
-            <com.sami.rippel.views.ExtendedViewPager
+            <com.sfaxdroid.detail.ExtendedViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="@dimen/viewpagerwidth"
                 android:layout_height="match_parent"

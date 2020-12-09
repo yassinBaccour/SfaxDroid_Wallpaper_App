@@ -33,7 +33,6 @@
         <item>Allah 3</item>
     </string-array>
     <string name="title_activity_choose_ripple_lwp">ChooseRippleLwpActivity</string>
-    <string name="txt1">How to Set the wallpaper manually</string>
     <string name="txt2">Choisir</string>
     <string name="txt3">How to Set the wallpaper</string>
     <string name="txt4"> Setting -> display  -> Wallpaper  -> Home screen -> live Wallpaper  ->  allah Water Ripple LWP</string>
@@ -57,10 +56,7 @@
     <string name="other">Mes Autres Applications</string>
     <string name="txtGallery">Gallery</string>
     <string name="gallery"></string>
-    <string name="SetWall">Paramètre</string>
     <string name="NoConnection">Pas de connection internet</string>
-    <string name="setSwallSucess">Fond d\'ecran appliqué avec succès</string>
-    <string name="setSwallNotSucess">Refaire</string>
     <string name="otherwallll">1000 Wallpapers</string>
     <string name="detail.snack.save.success">Photo sauvegarder</string>
     <string name="detail.snack.save.failure">Réessayer l\'operation</string>
@@ -87,8 +83,6 @@
     <string name="catalog_Category">Cat</string>
     <string name="catalog_LWP">LWP</string>
     <string name="catalog_Lab">Lab</string>
-    <string name="appNotInstalled">Cette application n\'est pas installer</string>
-    <string name="setAs">Définir comme</string>
     <string name="openGallery">Gallery</string>
     <string name="openCamera">Camera</string>
     <string name="cardframetitle">Cadre photo</string>
@@ -97,9 +91,7 @@
     <string name="cardStickersdesc">Du texte avec des autocollants, cadres photos et des textures</string>
     <string name="ShareUsing">Partager à l\'aide de</string>
     <string name="openGalleryLong">Ouvrir l\'album photo</string>
-    <string name="savepermissiondesc">Vous devez permettre à l\'application de sauvegarder les photos</string>
-    <string name="permissionok">Oui</string>
-    <string name="permissionnon">Non</string>
+
     <string name="lwp_author">yassin Contributors</string>
     <string name="lwp_desc">Tunis Sfax Developer</string>
     <string name="nameofallah">Les Nom de allah Animation</string>

@@ -34,7 +34,6 @@
         <item>Allah 3</item>
     </string-array>
     <string name="title_activity_choose_ripple_lwp">ChooseRippleLwpActivity</string>
-    <string name="txt1">كيفية تطبيق الخلفية المتحرك ؟</string>
     <string name="txt2">إختيار الخلفية</string>
     <string name="txt3">كيفية التطبيق يدويا ؟</string>
     <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
@@ -58,10 +57,7 @@
     <string name="txtGallery">مجموعة الخلفيات الإسلامية</string>
     <string name="gallery"></string>
     <string name="catalog_Lab">مصنع</string>
-    <string name="SetWall">تطبيق الخلفية</string>
     <string name="NoConnection">لست متصل بالإنترنات</string>
-    <string name="setSwallSucess">تم تطبيق الخلفية بنجاح</string>
-    <string name="setSwallNotSucess">خلل في تطبيق الخلفية </string>
     <string name="otherwallll">آلاف الخلفيات</string>
     <string name="ratingapp">تقيم التطبيق مع الشكر</string>
     <!-- Snack Details -->
@@ -90,8 +86,6 @@
     <string name="catalog_Popular">الأحسن</string>
     <string name="catalog_Category">المجموعات</string>
     <string name="catalog_LWP">المتحركة</string>
-    <string name="appNotInstalled">التطبيق ليس موجود</string>
-    <string name="setAs">إستعمال</string>
     <string name="openGallery">فتح ملف الصور</string>
     <string name="openCamera">تصوير صورة</string>
     <string name="cardframetitle">إطارات للصور</string>
@@ -100,9 +94,7 @@
     <string name="cardStickersdesc">ركب ملصاقات على الصور وأنشرها</string>
     <string name="ShareUsing">Sالنشر بإستعمال</string>
     <string name="openGalleryLong">فتح ملف الصور</string>
-    <string name="savepermissiondesc">يجب تفعيل خاصية تسجيل الصور ليعمل البرنامج</string>
-    <string name="permissionok">نعم</string>
-    <string name="permissionnon">لا</string>
+
     <string name="lwp_author">yassin Contributors</string>
     <string name="lwp_desc">Tunis Sfax Developer</string>
     <string name="nameofallah">أسماء الله الحسنى </string>

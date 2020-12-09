@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sami.rippel.allah.R
-import com.sami.rippel.model.entity.WallpaperObject
+import com.sfaxdroid.base.WallpaperObject
 
 class ArticleListAdapter(
     private var articleList: List<ItemWrapperList<Any>>,

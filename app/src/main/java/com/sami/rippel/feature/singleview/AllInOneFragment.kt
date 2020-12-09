@@ -11,16 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
 import com.sami.rippel.base.BaseFragment
-import com.sfaxdroid.timer.WallpaperSchedulerActivity
-import com.sami.rippel.model.Constants
 import com.sami.rippel.model.ViewModel
 import com.sami.rippel.model.entity.StateEnum
-import com.sami.rippel.model.entity.WallpaperObject
 import com.sami.rippel.model.listner.OnStateChangeListener
 import com.sami.rippel.presenter.AllWallpaperPresenter
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract
-import com.sami.rippel.ui.activity.DetailsActivity
 import com.sami.rippel.ui.activity.GalleryActivity
+import com.sfaxdroid.base.LiveWallpaper
+import com.sfaxdroid.base.WallpaperObject
 import java.util.*
 
 class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
@@ -35,7 +33,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
     override fun fillForm() {}
 
     override fun instantiatePresenter(): AllWallpaperPresenter {
-        return AllWallpaperPresenter(null)
+        return AllWallpaperPresenter()
     }
 
     override fun onDestroyView() {
@@ -51,7 +49,10 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         showDetailViewActivity(wallpaperObject)
     }
 
-    private fun openCategory(wallpaperObject: WallpaperObject, carouselTypeEnum: CarouselTypeEnum) {
+    private fun openCategory(
+        wallpaperObject: WallpaperObject,
+        carouselTypeEnum: CarouselTypeEnum
+    ) {
         when (carouselTypeEnum) {
             is CarouselTypeEnum.LIVEWALLPAPER -> {
                 when (wallpaperObject.liveWallpaper) {
@@ -122,11 +123,11 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                     GalleryActivity::class.java
                 )
                 intent.putParcelableArrayListExtra(
-                    Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData
+                    com.sfaxdroid.base.Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData
                 )
 
                 if (categoryName.isNotEmpty()) intent.putExtra(
-                    Constants.DETAIL_IMAGE_POS,
+                    com.sfaxdroid.base.Constants.DETAIL_IMAGE_POS,
                     categoryName
                 )
                 startActivity(intent)
@@ -225,14 +226,14 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
             mListener?.onTrackAction("AllFragment", "OpenWallpapers")
             Intent(
                 activity,
-                DetailsActivity::class.java
+                Class.forName("com.sfaxdroid.detail.DetailsActivity")
             ).apply {
                 putParcelableArrayListExtra(
-                    Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER,
+                    com.sfaxdroid.base.Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER,
                     mData
                 )
                 putExtra(
-                    Constants.DETAIL_IMAGE_POS,
+                    com.sfaxdroid.base.Constants.DETAIL_IMAGE_POS,
                     pos
                 )
                 startActivity(this)

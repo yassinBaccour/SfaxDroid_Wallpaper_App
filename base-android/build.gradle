@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 android {
@@ -23,8 +24,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':base')
+    api project(':common-layouts')
+    api project(':common-resources')
     api libraries.kotlin
     api libraries.ktx
     api libraries.constraintlayout
     api libraries.appcompat
+    api 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    api 'com.google.android.material:material:1.2.1'
+    kapt libraries.glideCompîler
+    implementation libraries.glide
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
+
 }

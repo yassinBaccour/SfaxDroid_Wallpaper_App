@@ -1,8 +1,8 @@
 package com.sami.rippel.presenter.Contract;
 
-import com.sami.rippel.base.BasePresenter;
-import com.sami.rippel.base.BaseView;
-import com.sami.rippel.model.entity.WallpaperObject;
+import com.sfaxdroid.bases.BasePresenter;
+import com.sfaxdroid.bases.BaseView;
+import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.List;
 
@@ -11,14 +11,13 @@ import java.util.List;
  */
 
 public interface WallpaperFragmentContract {
+
     interface View extends BaseView {
         void showContent(List<WallpaperObject> mList);
     }
 
     interface Presenter extends BasePresenter<View> {
-
         void getWallpaper();
-
     }
 
 }

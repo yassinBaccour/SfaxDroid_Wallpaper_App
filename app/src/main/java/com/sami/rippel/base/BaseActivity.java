@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.sfaxdroid.bases.BasePresenter;
+import com.sfaxdroid.bases.BaseView;
 import com.sfaxdroid.base.SimpleActivity;
 
 import io.reactivex.disposables.CompositeDisposable;

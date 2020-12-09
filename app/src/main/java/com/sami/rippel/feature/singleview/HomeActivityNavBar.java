@@ -28,7 +28,7 @@ import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ServiceErrorFromEnum;
 import com.sami.rippel.model.listner.AdsListener;
-import com.sami.rippel.model.listner.DeviceListner;
+import com.sfaxdroid.bases.DeviceListner;
 import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 

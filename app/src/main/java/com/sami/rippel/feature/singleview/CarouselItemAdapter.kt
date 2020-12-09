@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.sami.rippel.allah.R
-import com.sami.rippel.model.entity.WallpaperObject
+import com.sfaxdroid.base.WallpaperObject
 
 class CarouselItemAdapter(
     var list: List<WallpaperObject>,

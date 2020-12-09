@@ -2,9 +2,11 @@ package com.sami.rippel.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,11 @@ import android.widget.ProgressBar;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.AdsListener;
+import com.sfaxdroid.base.SimpleFragment;
+import com.sfaxdroid.bases.BasePresenter;
+import com.sfaxdroid.bases.BaseView;
+import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.ArrayList;
 

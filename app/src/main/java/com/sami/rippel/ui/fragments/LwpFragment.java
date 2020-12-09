@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
-import com.sami.rippel.base.SimpleFragment;
+import com.sfaxdroid.base.SimpleFragment;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.ui.activity.AboutActivity;

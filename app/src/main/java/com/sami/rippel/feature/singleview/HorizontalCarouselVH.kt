@@ -3,7 +3,7 @@ package com.sami.rippel.feature.singleview
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import com.sami.rippel.model.entity.WallpaperObject
+import com.sfaxdroid.base.WallpaperObject
 import kotlinx.android.synthetic.main.item_horizontal_scroll.view.*
 
 class HorizontalCarouselVH(itemView: View) : RecyclerView.ViewHolder(itemView) {

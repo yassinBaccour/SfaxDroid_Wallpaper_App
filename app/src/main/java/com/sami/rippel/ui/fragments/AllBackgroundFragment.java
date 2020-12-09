@@ -14,19 +14,18 @@ import android.widget.Toast;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseFragment;
-import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.model.entity.WallpaperObject;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.RecyclerItemClickListener;
 import com.sami.rippel.presenter.AllWallpaperPresenter;
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
-import com.sami.rippel.ui.activity.DetailsActivity;
 import com.sami.rippel.ui.activity.HomeActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
+import com.sfaxdroid.base.Constants;
+import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
 
     @Override
     protected AllWallpaperPresenter instantiatePresenter() {
-        return new AllWallpaperPresenter(null); //FIXME VIEW MODEL NULL
+        return new AllWallpaperPresenter(); //FIXME VIEW MODEL NULL
     }
 
     @Override
@@ -91,11 +90,16 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
                                             HomeActivity.nbOpenAds++;
                                             mListener.onTrackAction("AllFragment", "OpenWallpapers");
                                         }
-                                        Intent intent = new Intent(
-                                                getActivity(),
-                                                DetailsActivity.class);
+                                        Intent intent = null;
+                                        try {
+                                            intent = new Intent(
+                                                    getActivity(),
+                                                    Class.forName("com.sfaxdroid.detail.DetailsActivity"));
+                                        } catch (ClassNotFoundException e) {
+                                            e.printStackTrace();
+                                        }
                                         intent.putParcelableArrayListExtra(
-                                                Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData);
+                                                com.sfaxdroid.base.Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData);
                                         intent.putExtra(Constants.DETAIL_IMAGE_POS, position);
                                         startActivity(intent);
                                     }
