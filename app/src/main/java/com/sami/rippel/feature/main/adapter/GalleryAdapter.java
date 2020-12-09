@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.adapter;
+package com.sami.rippel.feature.main.adapter;
 
 import android.content.Context;
 

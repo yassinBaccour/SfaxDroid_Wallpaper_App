@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.fragments;
+package com.sami.rippel.feature.main.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,11 +19,11 @@ import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.RecyclerItemClickListener;
-import com.sami.rippel.presenter.CategoryWallpaperPresenter;
-import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
-import com.sami.rippel.ui.activity.GalleryActivity;
-import com.sami.rippel.ui.activity.HomeActivity;
-import com.sami.rippel.ui.adapter.GalleryAdapter;
+import com.sami.rippel.feature.main.presenter.CategoryWallpaperPresenter;
+import com.sami.rippel.feature.main.presenter.Contract.WallpaperFragmentContract;
+import com.sami.rippel.feature.main.activity.GalleryActivity;
+import com.sami.rippel.feature.main.activity.HomeActivity;
+import com.sami.rippel.feature.main.adapter.GalleryAdapter;
 import com.sfaxdroid.base.Constants;
 import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.WallpaperObject;

@@ -1,8 +1,7 @@
-package com.sami.rippel.ui.activity;
+package com.sami.rippel.feature.main.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -18,7 +17,6 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -37,7 +35,7 @@ import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ServiceErrorFromEnum;
 import com.sami.rippel.model.listner.AdsListener;
 import com.sfaxdroid.bases.DeviceListner;
-import com.sami.rippel.ui.adapter.CatalogPagerAdapter;
+import com.sami.rippel.feature.main.adapter.CatalogPagerAdapter;
 import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 

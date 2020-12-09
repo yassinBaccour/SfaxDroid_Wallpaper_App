@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.activity
+package com.sami.rippel.feature.main.activity
 
 import android.content.Intent
 import android.content.pm.PackageInfo

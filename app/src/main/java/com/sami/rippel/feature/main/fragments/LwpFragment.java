@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.fragments;
+package com.sami.rippel.feature.main.fragments;
 
 import android.app.WallpaperManager;
 import android.content.ComponentName;
@@ -22,9 +22,9 @@ import com.sami.rippel.allah.R;
 import com.sfaxdroid.base.SimpleFragment;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.listner.AdsListener;
-import com.sami.rippel.ui.activity.AboutActivity;
-import com.sami.rippel.ui.activity.GalleryActivity;
-import com.sami.rippel.ui.activity.HomeActivity;
+import com.sami.rippel.feature.main.activity.AboutActivity;
+import com.sami.rippel.feature.main.activity.GalleryActivity;
+import com.sami.rippel.feature.main.activity.HomeActivity;
 import com.sfaxdroid.base.Utils;
 import com.sfaxdroid.sky.SkyLiveWallpaper;
 import com.sfaxdroid.timer.WallpaperSchedulerActivity;

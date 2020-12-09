@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.adapter;
+package com.sami.rippel.feature.main.adapter;
 
 import android.content.Context;
 import androidx.fragment.app.Fragment;
@@ -7,11 +7,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.listner.AdsListener;
-import com.sami.rippel.ui.fragments.AllBackgroundFragment;
-import com.sami.rippel.ui.fragments.CategoryFragment;
-import com.sami.rippel.ui.fragments.LabFragment;
-import com.sami.rippel.ui.fragments.LwpFragment;
-import com.sami.rippel.ui.fragments.RecentFragment;
+import com.sami.rippel.feature.main.fragments.AllBackgroundFragment;
+import com.sami.rippel.feature.main.fragments.CategoryFragment;
+import com.sami.rippel.feature.main.fragments.LabFragment;
+import com.sami.rippel.feature.main.fragments.LwpFragment;
 
 import java.util.ArrayList;
 

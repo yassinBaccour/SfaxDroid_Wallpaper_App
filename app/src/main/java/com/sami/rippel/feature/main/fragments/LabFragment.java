@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.fragments;
+package com.sami.rippel.feature.main.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.listner.AdsListener;
-import com.sami.rippel.ui.activity.HomeActivity;
+import com.sami.rippel.feature.main.activity.HomeActivity;
 
 public class LabFragment extends Fragment {
 

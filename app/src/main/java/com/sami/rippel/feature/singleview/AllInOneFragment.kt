@@ -14,9 +14,9 @@ import com.sami.rippel.base.BaseFragment
 import com.sami.rippel.model.ViewModel
 import com.sami.rippel.model.entity.StateEnum
 import com.sami.rippel.model.listner.OnStateChangeListener
-import com.sami.rippel.presenter.AllWallpaperPresenter
-import com.sami.rippel.presenter.Contract.WallpaperFragmentContract
-import com.sami.rippel.ui.activity.GalleryActivity
+import com.sami.rippel.feature.main.presenter.AllWallpaperPresenter
+import com.sami.rippel.feature.main.presenter.Contract.WallpaperFragmentContract
+import com.sami.rippel.feature.main.activity.GalleryActivity
 import com.sfaxdroid.base.DeviceUtils
 import com.sfaxdroid.base.LiveWallpaper
 import com.sfaxdroid.base.WallpaperObject

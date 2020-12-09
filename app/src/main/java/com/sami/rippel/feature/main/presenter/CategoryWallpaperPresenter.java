@@ -1,7 +1,7 @@
-package com.sami.rippel.presenter;
+package com.sami.rippel.feature.main.presenter;
 
+import com.sami.rippel.feature.main.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.presenter.Contract.WallpaperFragmentContract;
 import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.List;

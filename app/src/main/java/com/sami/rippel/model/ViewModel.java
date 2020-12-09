@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.sami.rippel.model.entity.StateEnum;
 import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.utils.DeviceUtils;
 import com.sami.rippel.utils.FileUtils;
 import com.sfaxdroid.base.SharedPrefsUtils;
 import com.sfaxdroid.base.Utils;

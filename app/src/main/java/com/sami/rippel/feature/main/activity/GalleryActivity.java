@@ -1,4 +1,4 @@
-package com.sami.rippel.ui.activity;
+package com.sami.rippel.feature.main.activity;
 
 import android.app.WallpaperManager;
 import android.content.Intent;
@@ -30,7 +30,7 @@ import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sfaxdroid.bases.LwpListener;
 import com.sami.rippel.model.listner.OnStateChangeListener;
 import com.sami.rippel.utils.RecyclerItemClickListener;
-import com.sami.rippel.ui.adapter.GalleryAdapter;
+import com.sami.rippel.feature.main.adapter.GalleryAdapter;
 import com.sfaxdroid.base.Utils;
 import com.sfaxdroid.base.WallpaperCategory;
 import com.sfaxdroid.base.WallpaperObject;

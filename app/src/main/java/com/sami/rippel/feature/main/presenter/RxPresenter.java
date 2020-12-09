@@ -1,4 +1,4 @@
-package com.sami.rippel.presenter;
+package com.sami.rippel.feature.main.presenter;
 
 import com.sfaxdroid.bases.BasePresenter;
 import com.sfaxdroid.bases.BaseView;

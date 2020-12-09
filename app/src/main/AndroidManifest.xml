@@ -90,7 +90,7 @@
         </service>
 
         <activity
-            android:name="com.sami.rippel.ui.activity.GalleryActivity"
+            android:name="com.sami.rippel.feature.main.activity.GalleryActivity"
             android:hardwareAccelerated="true"
             android:label="@string/gallery"
             android:screenOrientation="fullSensor" />
@@ -105,7 +105,7 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name="com.sami.rippel.ui.activity.AboutActivity" />
+        <activity android:name="com.sami.rippel.feature.main.activity.AboutActivity" />
 
         <activity
             android:name="com.sfaxdoird.anim.word.AnimWord2dActivity"
