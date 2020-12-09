@@ -17,6 +17,7 @@ import com.sami.rippel.model.listner.OnStateChangeListener
 import com.sami.rippel.presenter.AllWallpaperPresenter
 import com.sami.rippel.presenter.Contract.WallpaperFragmentContract
 import com.sami.rippel.ui.activity.GalleryActivity
+import com.sfaxdroid.base.DeviceUtils
 import com.sfaxdroid.base.LiveWallpaper
 import com.sfaxdroid.base.WallpaperObject
 import java.util.*
@@ -182,9 +183,9 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         if (ViewModel.Current.isWallpapersLoaded) {
             mData.clear()
             mData = ArrayList(mList)
-            if (activity != null && ViewModel.Current.device.isConnected(
-                    activity
-                ) && mData != null && mData.size > 0
+            if (activity != null && DeviceUtils.isConnected(
+                    requireContext()
+                ) == true && mData != null && mData.size > 0
             ) {
                 adapter = ArticleListAdapter(
                     getWallpaperList(mData),

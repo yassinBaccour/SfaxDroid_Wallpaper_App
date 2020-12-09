@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.listner.AdsListener;
+import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.SimpleFragment;
 import com.sfaxdroid.bases.BasePresenter;
 import com.sfaxdroid.bases.BaseView;
@@ -83,7 +84,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     }
 
     public void downloadPicture() {
-        if (getFragmentActivity() != null && ViewModel.Current.device.isConnected(getFragmentActivity()))
+        if (getFragmentActivity() != null && DeviceUtils.Companion.isConnected(getFragmentActivity()))
             fillForm();
     }
 }

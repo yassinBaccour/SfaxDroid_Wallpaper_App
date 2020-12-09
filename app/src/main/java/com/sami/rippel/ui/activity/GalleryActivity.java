@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import com.sami.rippel.allah.R;
 import com.sfaxdoird.anim.img.WordImgActivity;
 import com.sfaxdoird.anim.word.AnimWord2dActivity;
+import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.SimpleActivity;
 import com.sami.rippel.model.Constants;
@@ -137,7 +138,7 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
             listFileToSendToDetailViewPager.clear();
             listFileToSendToDetailViewPager = new ArrayList<>(getWallpaperCategory().getGetWallpapersList());
         }
-        if (Current.device.isConnected(getApplicationContext()) && listFileToSendToDetailViewPager != null && listFileToSendToDetailViewPager.size() > 0 && Current.isWallpapersLoaded()) {
+        if (DeviceUtils.Companion.isConnected(getApplicationContext()) && listFileToSendToDetailViewPager != null && listFileToSendToDetailViewPager.size() > 0 && Current.isWallpapersLoaded()) {
             mAdapter = new GalleryAdapter(GalleryActivity.this, listFileToSendToDetailViewPager, TypeCellItemEnum.GALLERY_CELL);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView

@@ -45,16 +45,6 @@ public class DeviceUtils {
         this.deviceListner = listner;
     }
 
-    public void clearCurrentWallpaper() {
-        WallpaperManager mWallpaperManager = WallpaperManager
-                .getInstance(mContext);
-        try {
-            mWallpaperManager.clear();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public void showSnackMessage(CoordinatorLayout mRootLayout, String message) {
         Snackbar snackbar = Snackbar
@@ -90,26 +80,6 @@ public class DeviceUtils {
         }
     }
 
-    public void openFileChooser(Activity ac, int requestCode) {
-        if (Environment.getExternalStorageState().equals("mounted")) {
-            Intent intent = new Intent();
-            intent.setType("ic_icon_image/*");
-            intent.setAction(Intent.ACTION_PICK);
-            ac.startActivityForResult(
-                    Intent.createChooser(intent, "Select Picture:"),
-                    requestCode);
-        }
-    }
-
-    public void openCameraChooser(Activity ac, int requestCode) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(Environment.getExternalStorageDirectory()
-                + File.separator + "ic_icon_image.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-        ac.startActivityForResult(intent, requestCode);
-    }
-
-
     private DisplayMetrics getDisplayMetrics() {
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         if (mWindowManager != null) {
@@ -143,23 +113,7 @@ public class DeviceUtils {
     }
 
 
-    public Boolean isConnected(Context con) {
 
-        try {
-            ConnectivityManager connectivityManager = (ConnectivityManager) con.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo wifiInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-            NetworkInfo mobileInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-            if (wifiInfo.isConnected() || mobileInfo.isConnected()) {
-                return true;
-            }
-
-        } catch (Exception e) {
-            System.out.println("CheckConnectivity Exception: " + e.getMessage());
-        }
-
-        return false;
-    }
 
 
 }

@@ -25,6 +25,7 @@ import com.sami.rippel.ui.activity.GalleryActivity;
 import com.sami.rippel.ui.activity.HomeActivity;
 import com.sami.rippel.ui.adapter.GalleryAdapter;
 import com.sfaxdroid.base.Constants;
+import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.WallpaperObject;
 
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
         if (ViewModel.Current.isWallpapersLoaded()) {
             mData.clear();
             mData = new ArrayList<>(mList);
-            if (getActivity() != null && ViewModel.Current.device.isConnected(getActivity()) && mData != null && mData.size() > 0) {
+            if (getActivity() != null && DeviceUtils.Companion.isConnected(getActivity()) && mData != null && mData.size() > 0) {
                 mAdapter = new GalleryAdapter(getActivity(), mData, TypeCellItemEnum.CATEGORY_NEW_FORMAT);
                 mRecyclerView.setAdapter(mAdapter);
                 mRecyclerView

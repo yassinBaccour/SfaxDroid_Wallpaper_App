@@ -310,28 +310,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-        switch (requestCode) {
-            case PICK_FROM_FILE:
-                stat = true;
-                ViewModel.Current.device.openChooseActivityWithPhoto(this, data);
-                break;
-
-            case CAMERA_CAPTURE_IMAGE_REQUEST_CODE:
-                stat = true;
-                ViewModel.Current.device.openChooseActivityFromCamera(this);
-                break;
-            case 123:
-                Log.d("permission", "ok");
-                break;
-        }
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
         RateThisApp.onStart(this);
