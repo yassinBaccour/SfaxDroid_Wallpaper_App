@@ -9,6 +9,7 @@ import com.sfaxdroid.bases.ActionTypeEnum;
 import com.sfaxdroid.bases.DeviceListner;
 import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.Utils;
+import com.sfaxdroid.detail.utils.RxPresenter;
 import com.soundcloud.android.crop.Crop;
 
 import io.reactivex.Flowable;
@@ -20,7 +21,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class DetailPresenter extends RxPresenter<DetailContract.View> implements DetailContract.Presenter {
-
 
     @Override
     public void attachView(DetailContract.View view) {
@@ -52,9 +52,9 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
                 .onErrorReturn(error -> false)
                 .subscribe(setSuccess -> {
                     if (setSuccess) {
-                        mView.showSnackMsg(context.getString(R.string.setSwallSucess));
+                        mView.showSnackMsg(context.getString(R.string.set_wallpaper_sucess_message));
                     } else {
-                        mView.showSnackMsg(context.getString(R.string.setSwallNotSucess));
+                        mView.showSnackMsg(context.getString(R.string.set_wallpaper_not_sucess_message));
                     }
                 })
         );
@@ -68,9 +68,9 @@ public class DetailPresenter extends RxPresenter<DetailContract.View> implements
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
                     if (aBoolean) {
-                        mView.showSnackMsg(context.getString(R.string.setSwallSucess));
+                        mView.showSnackMsg(context.getString(R.string.set_wallpaper_sucess_message));
                     } else {
-                        mView.showSnackMsg(context.getString(R.string.setSwallNotSucess));
+                        mView.showSnackMsg(context.getString(R.string.set_wallpaper_not_sucess_message));
                         Utils.Companion.checkPermission(context,
                                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE, deviceListner);
                     }

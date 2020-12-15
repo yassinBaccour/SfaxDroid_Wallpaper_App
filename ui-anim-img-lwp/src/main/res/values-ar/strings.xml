@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Writingtxt">لون الكتابة</string>
-    <string name="douatitle1">تحميل الأدعية</string>
-    <string name="douatitle2">الرجاء إنتضار التحميل</string>
+    <string name="writing_color">لون الكتابة</string>
+    <string name="download_resource_txt">تحميل الأدعية</string>
+    <string name="download_resource_txt_witing">الرجاء إنتضار التحميل</string>
+    <string name="failed_dwn">Failed</string>
 </resources>

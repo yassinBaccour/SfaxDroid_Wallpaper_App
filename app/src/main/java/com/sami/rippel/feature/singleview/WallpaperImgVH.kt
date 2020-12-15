@@ -13,7 +13,7 @@ import com.sfaxdroid.base.WallpaperObject
 
 class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val mImg: ImageView = itemView.findViewById(R.id.item_img_wallpaper)
+    private val img: ImageView = itemView.findViewById(R.id.item_img_wallpaper)
 
     fun bind(
         wallpaperObject: WallpaperObject,
@@ -23,9 +23,8 @@ class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView.context).load(getUrlByScreen(wallpaperObject, itemView.context))
             .transition(DrawableTransitionOptions.withCrossFade())
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(mImg)
-
-        mImg.setOnClickListener { openWallpaper(wallpaperObject, pos) }
+            .into(img)
+        img.setOnClickListener { openWallpaper(wallpaperObject, pos) }
     }
 
     private fun getUrlByScreen(wall: WallpaperObject, context: Context): String? {

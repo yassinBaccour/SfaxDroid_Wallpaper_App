@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:windowActionBar="false">
 
-    <com.sfaxdroid.detail.TouchImageView
+    <com.sfaxdroid.detail.utils.TouchImageView
         android:id="@+id/detailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -3,7 +3,6 @@ package com.sfaxdroid.framecollage;
 import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -273,16 +272,16 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
                 try {
                     wallpaperManager.setBitmap(bitmap);
                     wallpaperManager.suggestDesiredDimensions(width, height);
-                    ShowSnackMessage(getString(R.string.setSwallSucess));
+                    ShowSnackMessage(getString(R.string.set_wallpaper_sucess_message));
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             if (boolean1) {
-                ShowSnackMessage(getString(R.string.setSwallSucess));
+                ShowSnackMessage(getString(R.string.set_wallpaper_sucess_message));
             } else {
-                ShowSnackMessage(getString(R.string.setSwallNotSucess));
+                ShowSnackMessage(getString(R.string.set_wallpaper_not_sucess_message));
                 sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
                         Uri.parse("file://"
                                 + Environment.getExternalStorageDirectory())));
@@ -329,7 +328,7 @@ public class PreviewActivity extends ActivityLabBase implements OnTouchListener 
                 shareIntent.setPackage("com.facebook.katana");
                 startActivity(shareIntent);
             } else {
-                ShowSnackMessage(getString(R.string.appNotInstalled));
+                ShowSnackMessage(getString(R.string.app_not_installer_message));
             }
         }
     }

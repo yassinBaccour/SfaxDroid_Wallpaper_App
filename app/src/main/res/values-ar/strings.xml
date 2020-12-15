@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">خلفية تموج المياه الله</string>
-    <string name="lwp_name">خلفية تموج المياه الله</string>
-    <string name="app_namenospace">allahwallpapers</string>
-    <string-array name="ripple_size">
-        <item>صغيرة</item>
-        <item>متوسطة</item>
-        <item>كبيرة</item>
-    </string-array>
-    <string-array name="ripple_size_value">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-    </string-array>
-    <string-array name="ripple_duration">
-        <item>بطيئة</item>
-        <item>متوسط</item>
-        <item>سريع</item>
-    </string-array>
-    <string-array name="ripple_duration_value">
-        <item>slow</item>
-        <item>medium</item>
-        <item>fast</item>
-    </string-array>
-    <string-array name="ripple_image">
-        <item>Allah 1</item>
-        <item>Allah 2</item>
-        <item>Allah 3</item>
-    </string-array>
-    <string-array name="ripple_image_value">
-        <item>Allah 1</item>
-        <item>Allah 2</item>
-        <item>Allah 3</item>
-    </string-array>
-    <string name="title_activity_choose_ripple_lwp">ChooseRippleLwpActivity</string>
-    <string name="txt2">إختيار الخلفية</string>
+     <string name="txt2">إختيار الخلفية</string>
     <string name="txt3">كيفية التطبيق يدويا ؟</string>
     <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
     <string name="txtrate1">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
@@ -55,11 +22,14 @@
     <string name="txt14">رجاء التقييم التطبيقة</string>
     <string name="other">خلفياتي الأخرى</string>
     <string name="txtGallery">مجموعة الخلفيات الإسلامية</string>
+    <string name="global_how_to_use">قم بإختيات خلفياتك المفضلة اللتي ستتبدل علي الشاشة مع التوقيت الزمني المختار</string>
+    <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
+
     <string name="gallery"></string>
     <string name="catalog_Lab">مصنع</string>
     <string name="NoConnection">لست متصل بالإنترنات</string>
     <string name="otherwallll">آلاف الخلفيات</string>
-    <string name="ratingapp">تقيم التطبيق مع الشكر</string>
+    <string name="rating_app">تقيم التطبيق مع الشكر</string>
     <!-- Snack Details -->
     <string name="detail.snack.save.success">Successfully saved wallpaper</string>
     <string name="detail.snack.save.failure">Try again, Failed to save wallpaper</string>
@@ -109,9 +79,8 @@
     <string name="FirstMethodRippleDesc"> إختر صورتك المفضلة ثم إضغط على الزر الأسفل لجعلها خلفية متحركة</string>
     <string name="DescDouaLwp">قم بإختيار خلفية و عند لمس الشاشة أدعية تتبدل تلقائيا</string>
     <string name="DouaLwpTitle">إختيار الخلفية</string>
-    <string name="main_menu_scheduler_status">خدمة التغيير: %1$s</string>
-    <string name="scheduler_new_days_title">تغير الخلفية كل</string>
-   <string name="titleBasmala">الفتح مع البسملة</string>
+
+    <string name="titleBasmala">الفتح مع البسملة</string>
     <string name="toastnosound">بسمله بدون صوت</string>
     <string name="toastwithsound">بسمله بالصوت</string>
     <string name="toastsanspicture"> بسمله بدون صورة  </string>

@@ -109,12 +109,12 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
     }
 
     @Override
-    protected int getLayout() {
+    public int getLayout() {
         return R.layout.activity_gellery_wallpaper;
     }
 
     @Override
-    protected void initEventAndData() {
+    public void initEventAndData() {
         ViewModel.Current.registerOnStateChangeListener(this);
         mToolbar = findViewById(R.id.toolbar);
         mProgressBar = findViewById(R.id.progressBar);
@@ -161,11 +161,15 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                                     mSelectedUrl = mAdapter.GetFullPictureUrl(position);
                                     switch (mLwpName) {
                                         case Constants.KEY_DOUA_LWP: {
-                                            Intent intent = new Intent(
-                                                    GalleryActivity.this,
-                                                    WordImgActivity.class);
-                                            intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
-                                            startActivity(intent);
+                                            try {
+                                                Intent intent = new Intent(
+                                                        GalleryActivity.this,
+                                                        Class.forName("com.sfaxdoird.anim.img.WordImgActivity"));
+                                                intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
+                                                startActivity(intent);
+                                            } catch (ClassNotFoundException e) {
+                                                e.printStackTrace();
+                                            }
                                             break;
                                         }
                                         case "SkyBoxLwp":
@@ -204,11 +208,15 @@ public class GalleryActivity extends SimpleActivity implements LwpListener, OnSt
                                             break;
                                         }
                                         case Constants.KEY_NAME_OF_ALLAH_2_D: {
-                                            Intent intent = new Intent(
-                                                    GalleryActivity.this,
-                                                    AnimWord2dActivity.class);
-                                            intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
-                                            startActivity(intent);
+                                            try {
+                                                Intent intent = new Intent(
+                                                        GalleryActivity.this,
+                                                        Class.forName("com.sfaxdoird.anim.word.AnimWord2dActivity"));
+                                                intent.putExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD, mSelectedUrl);
+                                                startActivity(intent);
+                                            } catch (ClassNotFoundException e) {
+                                                e.printStackTrace();
+                                            }
                                             break;
                                         }
                                         case Constants.KEY_TEXTURE: {

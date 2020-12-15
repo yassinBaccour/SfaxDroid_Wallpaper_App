@@ -1,6 +1,7 @@
 package com.sami.rippel.feature.main.adapter;
 
 import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -65,7 +66,7 @@ public class CatalogPagerAdapter extends FragmentPagerAdapter {
                 lab.setListener(ads);
                 return lab;
         }
-     }
+    }
 
     @Override
     public int getCount() {

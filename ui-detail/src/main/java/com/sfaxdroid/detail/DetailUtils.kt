@@ -8,11 +8,11 @@ import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.Utils
 import java.io.File
 import java.io.IOException
+import kotlin.math.max
 
 class DetailUtils {
 
     companion object {
-
 
         fun setWallpaper(wallpaper: Bitmap, context: Context): Boolean {
             return try {
@@ -24,16 +24,6 @@ class DetailUtils {
                         context
                     ) < Constants.MIN_WIDHT
                 ) {
-                    val xPadding =
-                        Math.max(0, width - wallpaper.width) / 2
-                    val yPadding =
-                        Math.max(0, height - wallpaper.height) / 2
-                    val paddedWallpaper =
-                        Bitmap.createBitmap(
-                            width,
-                            height,
-                            Bitmap.Config.ARGB_8888
-                        )
                     val pixels =
                         IntArray(wallpaper.width * wallpaper.height)
                     wallpaper.getPixels(
@@ -45,16 +35,21 @@ class DetailUtils {
                         wallpaper.width,
                         wallpaper.height
                     )
-                    paddedWallpaper.setPixels(
-                        pixels,
-                        0,
-                        wallpaper.width,
-                        xPadding,
-                        yPadding,
-                        wallpaper.width,
-                        wallpaper.height
-                    )
-                    wallpaperManager.setBitmap(paddedWallpaper)
+                    wallpaperManager.setBitmap(Bitmap.createBitmap(
+                        width,
+                        height,
+                        Bitmap.Config.ARGB_8888
+                    ).apply {
+                        setPixels(
+                            pixels,
+                            0,
+                            wallpaper.width,
+                            max(0, width - wallpaper.width) / 2,
+                            max(0, height - wallpaper.height) / 2,
+                            wallpaper.width,
+                            wallpaper.height
+                        )
+                    })
                     true
                 } else {
                     wallpaperManager.setBitmap(wallpaper)
@@ -67,34 +62,33 @@ class DetailUtils {
 
 
         fun decodeBitmapAndSetAsLiveWallpaper(file: File, context: Context): Boolean {
-            val mOptions =
-                BitmapFactory.Options()
-            mOptions.inPreferredConfig = Bitmap.Config.ARGB_8888
-            return if (file.exists()) {
-                val mBitmap = BitmapFactory.decodeFile(
-                    file.path,
-                    mOptions
-                )
+            if (file.exists()) {
                 val wallpaperManager =
                     WallpaperManager.getInstance(context)
                 try {
-                    if (mBitmap != null) {
+                    BitmapFactory.decodeFile(
+                        file.path,
+                        BitmapFactory.Options().apply {
+                            inPreferredConfig = Bitmap.Config.ARGB_8888
+                        }
+                    )?.also {
                         val mBackground =
                             Bitmap.createScaledBitmap(
-                                mBitmap,
+                                it,
                                 Utils.getScreenWidthPixels(context),
                                 Utils.getScreenHeightPixels(context),
                                 true
                             )
                         if (mBackground != null) wallpaperManager.setBitmap(mBackground)
-                        mBitmap.recycle()
-                        true
-                    } else false
+                        it.recycle()
+                        return true
+                    }
+                    return false
                 } catch (ignored: IOException) {
-                    false
+                    return false
                 }
             } else {
-                false
+                return false
             }
         }
     }

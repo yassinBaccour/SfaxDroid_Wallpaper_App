@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Arabic Wallpaper HD</string>
-    <string name="lwp_name">Allah Fond écran</string>
-    <string-array name="ripple_size">
-    <item>Petit</item>
-        <item>Moyen</item>
-        <item>Grand</item>
-    </string-array>
-    <string-array name="ripple_size_value">
-        <item>small</item>
-        <item>medium</item>
-        <item>large</item>
-    </string-array>
-    <string-array name="ripple_duration">
-        <item>Long</item>
-        <item>Moyen</item>
-        <item>Rapide</item>
-    </string-array>
-    <string-array name="ripple_duration_value">
-        <item>slow</item>
-        <item>medium</item>
-        <item>fast</item>
-    </string-array>
-    <string-array name="ripple_image">
-        <item>Allah 1</item>
-        <item>Allah 2</item>
-        <item>Allah 3</item>
-    </string-array>
-    <string-array name="ripple_image_value">
-        <item>Allah 1</item>
-        <item>Allah 2</item>
-        <item>Allah 3</item>
-    </string-array>
-    <string name="title_activity_choose_ripple_lwp">ChooseRippleLwpActivity</string>
     <string name="txt2">Choisir</string>
     <string name="txt3">How to Set the wallpaper</string>
     <string name="txt4"> Setting -> display  -> Wallpaper  -> Home screen -> live Wallpaper  ->  allah Water Ripple LWP</string>
@@ -52,9 +20,12 @@
     <string name="txt12">Paramétre</string>
     <string name="txt13">Recommendations</string>
     <string name="txt14">Donné un avi</string>
-    <string name="ratingapp">Votre avis nous interesse</string>
+    <string name="rating_app">Votre avis nous interesse</string>
     <string name="other">Mes Autres Applications</string>
     <string name="txtGallery">Gallery</string>
+    <string name="global_how_to_use">Changement de l\'arrière-plan automatiquement avec la période de temps choisie </string>
+    <string name="TitleActionBarTimerLwpAdded">Wallpapers télécharger</string>
+
     <string name="gallery"></string>
     <string name="NoConnection">Pas de connection internet</string>
     <string name="otherwallll">1000 Wallpapers</string>
@@ -109,8 +80,7 @@
     <string name="DouaLwpTitle">Choisir une photo</string>
     <string name="DouaLwpProgressDesc">Doua LWP Resources</string>
     <string name="DouaLwpDownloadCompleted">Completed</string>
-    <string name="main_menu_scheduler_status">Current Status: %1$s</string>
-    <string name="scheduler_new_days_title">Changer chaque :</string>
+
 
     <string name="titleBasmala">Basmala Lock</string>
     <string name="toastnosound">Sans la voix</string>
@@ -157,7 +127,6 @@
     <string name="Writingtxt">Couleur écriture</string>
     <string name="douatitle1">Téléchargement des resources</string>
     <string name="douatitle2">veuillez attendre la fin du téléchargement</string>
-
 
 
     <string name="nameofallah2dtitle">Nom de Allah 2D</string>

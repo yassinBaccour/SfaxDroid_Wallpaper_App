@@ -14,17 +14,28 @@ import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.snackbar.Snackbar
 import com.sfaxdroid.bases.*
 import java.io.File
 
 class Utils {
     companion object {
+
+        fun showSnackMessage(
+            mRootLayout: CoordinatorLayout,
+            message: String
+        ) {
+            val snackBar = Snackbar
+                .make(mRootLayout, message, Snackbar.LENGTH_LONG)
+            snackBar.show()
+        }
 
         fun shareAllFile(activity: Activity, file: File?) {
             val intent =
@@ -40,7 +51,7 @@ class Utils {
             activity.startActivityForResult(
                 Intent.createChooser(
                     intent,
-                    activity.getString(R.string.setAs)
+                    activity.getString(R.string.set_as_dialog_message)
                 ), 200
             )
         }
@@ -140,7 +151,7 @@ class Utils {
                     )
                 ) {
                     showMessageOKCancel(
-                        activity.getString(R.string.savepermissiondesc),
+                        activity.getString(R.string.permission_storage_message),
                         DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int -> if (deviceListner != null) deviceListner.onRequestPermissions() },
                         activity
                     )
@@ -168,8 +179,11 @@ class Utils {
         ) {
             AlertDialog.Builder(ac)
                 .setMessage(message)
-                .setPositiveButton(ac.getString(R.string.permissionok), okListener)
-                .setNegativeButton(ac.getString(R.string.permissionnon), null)
+                .setPositiveButton(
+                    ac.getString(R.string.permission_accept_click_button),
+                    okListener
+                )
+                .setNegativeButton(ac.getString(R.string.permission_deny_click_button), null)
                 .create()
                 .show()
         }
@@ -182,7 +196,7 @@ class Utils {
             context: Context,
             appName: String,
             wallpaperListener: WallpaperListener,
-            lwpListener: LwpListener
+            lwpListener: LwpListener?
         ) {
             Glide.with(context).asBitmap().load(
                 getUrlByScreen(
@@ -268,6 +282,11 @@ class Utils {
             } else false
         }
 
+        fun isSmallScreen(context: Context): Boolean {
+            return getScreenHeightPixels(context) < 820
+                    && getScreenWidthPixels(context) < 500
+        }
+
 
         inline fun <reified T : Any> openLiveWallpaper(context: Context) {
             try {
@@ -287,7 +306,7 @@ class Utils {
                     action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
                 })
                 Toast.makeText(
-                    context, R.string.txt1,
+                    context, R.string.set_wallpaper_manually_message,
                     Toast.LENGTH_SHORT
                 ).show()
             }

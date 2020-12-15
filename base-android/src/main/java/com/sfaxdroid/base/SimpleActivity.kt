@@ -19,7 +19,8 @@ abstract class SimpleActivity : AppCompatActivity() {
         initEventAndData()
     }
 
-    protected open fun onViewCreated() {}
-    protected abstract val layout: Int
-    protected abstract fun initEventAndData()
+    open fun onViewCreated() {}
+    abstract fun initEventAndData()
+    abstract val layout: Int
+
 }

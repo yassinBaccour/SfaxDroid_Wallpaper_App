@@ -114,12 +114,12 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     }
 
     @Override
-    protected int getLayout() {
+    public int getLayout() {
         return R.layout.activity_home_nav;
     }
 
     @Override
-    protected void initEventAndData() {
+    public void initEventAndData() {
     }
 
     @Override

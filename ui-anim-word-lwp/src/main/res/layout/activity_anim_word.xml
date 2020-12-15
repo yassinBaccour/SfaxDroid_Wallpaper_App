@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:mContext="com.sfaxdoird.anim.img.WordImgActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#2c3e50">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true">
+
+                <LinearLayout
+                    android:id="@+id/container_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/toolbar"
+                        layout="@layout/toolbar" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:id="@+id/titletxtlayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:background="#1c2b39"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:gravity="center"
+                                android:text="@string/douatitle1"
+                                android:textAlignment="center"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:id="@+id/txtstatusDownload"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:gravity="center"
+                                android:text="@string/douatitle2"
+                                android:textAlignment="center"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textStyle="italic" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/processlayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/titletxtlayout"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:orientation="vertical"
+
+                            >
+
+                            <TextView
+                                android:text="@string/word_img_resource"
+                                android:id="@+id/progressTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="5dp" />
+
+                            <ProgressBar
+                                android:progress="0"
+                                android:max="100"
+                                android:id="@+id/progress1"
+                                style="@style/ProgressBarStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/progressTxt"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dip"
+                                android:layout_marginRight="10dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/processlayout"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/Writingtxt" />
+
+                            <Button
+                                android:id="@+id/buttonColor"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="center"
+                                android:background="@android:color/transparent"
+                                android:drawableTop="@mipmap/ic_palette"
+                                app:srcCompat="@mipmap/ic_palette" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:background="#80ecf0f1" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:text="@string/size_texte_name_of_allah" />
+
+
+                            <TableLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TableRow android:gravity="fill">
+
+                                    <Button
+                                        android:id="@+id/buttonSizeSmall"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100dp"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        android:background="@android:color/transparent"
+                                        android:drawableTop="@mipmap/ic_size_small"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="@string/size_small"
+                                        android:textColor="#ecf0f1" />
+
+                                    <View
+                                        android:layout_width="0.5dp"
+                                        android:layout_height="60dp"
+                                        android:layout_gravity="center"
+                                        android:background="#80ecf0f1" />
+
+                                    <Button
+                                        android:id="@+id/buttonSizeMeduim"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100dp"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        android:background="@android:color/transparent"
+                                        android:drawableTop="@mipmap/ic_size_meduim"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="@string/size_meduim"
+                                        android:textColor="#ecf0f1" />
+
+                                    <View
+                                        android:layout_width="0.5dp"
+                                        android:layout_height="60dp"
+                                        android:layout_gravity="center"
+                                        android:background="#80ecf0f1" />
+
+                                    <Button
+                                        android:id="@+id/buttonSizeBig"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100dp"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        android:background="@android:color/transparent"
+                                        android:drawableTop="@mipmap/ic_size_big"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="@string/size_big"
+                                        android:textColor="#ecf0f1" />
+
+                                    <View
+                                        android:layout_width="0.5dp"
+                                        android:layout_height="60dp"
+                                        android:layout_gravity="center"
+                                        android:background="#80ecf0f1" />
+
+                                    <Button
+                                        android:id="@+id/buttonSizeFullScreen"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="100dp"
+                                        android:layout_gravity="center"
+                                        android:layout_weight="1"
+                                        android:background="@android:color/transparent"
+                                        android:drawableTop="@mipmap/ic_size_full"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="@string/size_full_screen"
+                                        android:textColor="#ecf0f1" />
+                                </TableRow>
+                            </TableLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:background="#80ecf0f1" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:text="@string/text_font" />
+
+
+                            <TextView
+                                android:id="@+id/txtfont1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/txtfont2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/txtfont3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/txtfont4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/txtfont5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/txtfont6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/txtfont7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/txtfont8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="٩٩ أسماء الله الحسني"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:background="#80ecf0f1" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="10dp"
+                                android:gravity="center"
+                                android:text="@string/notchanger"
+                                android:textColor="@android:color/white"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </ScrollView>
+        </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:enabled="false"
+            android:src="@android:drawable/ic_media_play"
+            app:backgroundTint="#2ecc71" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -15,20 +15,20 @@ class CarouselItemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             TYPE_LIVE_WALLPAPER ->
-                return WallpaperCarrouselItemVH(
+                return WallpaperCarouselItemVH(
                     LayoutInflater.from(parent.context).inflate(
                         R.layout.lit_item_carrousel,
                         parent, false
                     )
                 )
             TYPE_CATEGORY ->
-                return WallpaperCarrouselItemVH(
+                return WallpaperCarouselItemVH(
                     LayoutInflater.from(parent.context).inflate(
                         R.layout.lit_item_carrousel_cat,
                         parent, false
                     )
                 )
-            else -> return WallpaperCarrouselItemVH(
+            else -> return WallpaperCarouselItemVH(
                 LayoutInflater.from(parent.context).inflate(
                     R.layout.lit_item_carrousel,
                     parent, false
@@ -37,18 +37,16 @@ class CarouselItemAdapter(
         }
     }
 
-
     override fun getItemViewType(position: Int) = when (type) {
         CarouselTypeEnum.LIVEWALLPAPER -> TYPE_LIVE_WALLPAPER
         CarouselTypeEnum.CATEGORY -> TYPE_CATEGORY
     }
 
-
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is WallpaperCarrouselItemVH -> holder.bind(
+            is WallpaperCarouselItemVH -> holder.bind(
                 list[position], type, clickListener
             )
         }

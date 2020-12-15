@@ -341,7 +341,7 @@
                             android:id="@+id/buttonSizeSmall"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:text="@string/sizeSmall"
+                            android:text="@string/size_small"
                             android:layout_gravity="center"
                             android:textColor="#ecf0f1" />
 
@@ -360,7 +360,7 @@
                             android:id="@+id/buttonSizeMeduim"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:text="@string/sizeMeduim"
+                            android:text="@string/size_meduim"
                             android:layout_gravity="center"
                             android:textColor="#ecf0f1" />
 
@@ -379,7 +379,7 @@
                             android:id="@+id/buttonSizeBig"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:text="@string/sizeBig"
+                            android:text="@string/size_big"
                             android:layout_gravity="center"
                             android:textColor="#ecf0f1" />
 
@@ -398,7 +398,7 @@
                             android:id="@+id/buttonSizeFullScreen"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:text="@string/sizeFullscreen"
+                            android:text="@string/size_full_screen"
                             android:layout_gravity="center"
                             android:textColor="#ecf0f1" />
                     </TableRow>

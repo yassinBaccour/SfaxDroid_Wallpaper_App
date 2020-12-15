@@ -8,7 +8,7 @@ import kotlin.math.abs
 
 class WallpaperRenderer(context: Context) : Renderer(context) {
 
-    private var axe = ""
+    private var axe: Position = Position.None
     private var downX = 0f
     private var downY = 0f
 
@@ -38,19 +38,19 @@ class WallpaperRenderer(context: Context) : Renderer(context) {
                     if (abs(deltaX) > abs(deltaY)) {
                         if (abs(deltaX) > minDistance) {
                             if (deltaX < 0) {
-                                axe = "LefttoRigh"
+                                axe = Position.LeftToRights
                             }
                             if (deltaX > 0) {
-                                axe = "RighToLeft"
+                                axe = Position.RightToLeft
                             }
                         }
                     } else {
                         if (abs(deltaY) > minDistance) {
                             if (deltaY < 0) {
-                                axe = "TopToBottom"
+                                axe = Position.TopToBottom
                             }
                             if (deltaY > 0) {
-                                axe = "BottomToTop"
+                                axe = Position.BottomToTop
                             }
                         }
                     }
@@ -65,19 +65,19 @@ class WallpaperRenderer(context: Context) : Renderer(context) {
                 if (abs(deltaX) > abs(deltaY)) {
                     if (abs(deltaX) > minDistance) {
                         if (deltaX < 0) {
-                            axe = "LefttoRigh"
+                            axe = Position.LeftToRights
                         }
                         if (deltaX > 0) {
-                            axe = "RighToLeft"
+                            axe = Position.RightToLeft
                         }
                     }
                 } else {
                     if (abs(deltaY) > minDistance) {
                         if (deltaY < 0) {
-                            axe = "TopToBottom"
+                            axe = Position.TopToBottom
                         }
                         if (deltaY > 0) {
-                            axe = "BottomToTop"
+                            axe = Position.BottomToTop
                         }
                     }
                 }
@@ -90,14 +90,15 @@ class WallpaperRenderer(context: Context) : Renderer(context) {
         deltaTime: Double
     ) {
         super.onRender(ellapsedRealtime, deltaTime)
-        try {
-            when (axe) {
-                "LefttoRigh" -> currentCamera.rotate(Vector3.Axis.Y, -0.1)
-                "RighToLeft" -> currentCamera.rotate(Vector3.Axis.Y, +0.1)
-                "TopToBottom" -> currentCamera.rotate(Vector3.Axis.X, -0.1)
-                "BottomToTop" -> currentCamera.rotate(Vector3.Axis.X, +0.1)
-            }
-        } catch (ignored: Exception) {
+        rotateCamera()
+    }
+
+    private fun rotateCamera() {
+        when (axe) {
+            is Position.LeftToRights -> currentCamera.rotate(Vector3.Axis.Y, -0.1)
+            is Position.RightToLeft -> currentCamera.rotate(Vector3.Axis.Y, +0.1)
+            is Position.TopToBottom -> currentCamera.rotate(Vector3.Axis.X, -0.1)
+            is Position.BottomToTop -> currentCamera.rotate(Vector3.Axis.X, +0.1)
         }
     }
 
@@ -107,4 +108,13 @@ class WallpaperRenderer(context: Context) : Renderer(context) {
         } catch (ignored: Exception) {
         }
     }
+
+    sealed class Position {
+        object LeftToRights : Position()
+        object RightToLeft : Position()
+        object TopToBottom : Position()
+        object BottomToTop : Position()
+        object None : Position()
+    }
+
 }

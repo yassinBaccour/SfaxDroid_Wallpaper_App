@@ -95,7 +95,6 @@
             android:label="@string/gallery"
             android:screenOrientation="fullSensor" />
 
-        <activity android:name="com.sfaxdoird.anim.img.WordImgActivity" />
         <activity
             android:name="com.sfaxdroid.timer.WallpaperSchedulerActivity"
             android:theme="@style/AppTheme" />
@@ -107,11 +106,6 @@
 
         <activity android:name="com.sami.rippel.feature.main.activity.AboutActivity" />
 
-        <activity
-            android:name="com.sfaxdoird.anim.word.AnimWord2dActivity"
-            android:label="Nameofallah"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>
 
 </manifest>

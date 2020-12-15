@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="TitleActionBarTimerLwpAdded">Wallpapers télécharger</string>
-    <string name="TitleTimerLwp">Périodique</string>
-    <string name="DescTimerLwp">Changement de l\'arrière-plan automatiquement avec la période de temps choisie </string>
-    <string name="AddWallpaper">Ajouter des Wallpapers</string>
-    <string name="ListWallpaper">Liste des images sauvegarder</string>
-    <string name="TimerActivityDesc">Ajouter 4 photo minimum dans la liste des photo et choisissez le temps que vous voulez que lapplication change la photo puis activez le service</string>
-    <string name="TimerActivityHowToUse">Comment sa marche ?</string>
-    <string name="onehoure">1 Heure</string>
-    <string name="sixhoure">6 Heures</string>
-    <string name="douzeoure">12 Heures</string>
-    <string name="oneday">1 Jour</string>
-    <string name="onswitch">On</string>
-    <string name="offswitch">Off</string>
+    <string name="timer_wallpaper_name">Périodique</string>
+    <string name="add_new_message">Ajouter des Wallpapers</string>
+    <string name="wallpaper_list_fav">Liste des images sauvegarder</string>
+    <string name="how_to_use_description">Ajouter 4 photo minimum dans la liste des photo et choisissez le temps que vous voulez que lapplication change la photo puis activez le service</string>
+    <string name="how_to_use_message">Comment sa marche ?</string>
+    <string name="one_houre">1 Heure</string>
+    <string name="six_houre">6 Heures</string>
+    <string name="twelve_hour">12 Heures</string>
+    <string name="one_day">1 Jour</string>
+    <string name="on_switch">On</string>
+    <string name="off_switch">Off</string>
     <string name="timerWallpaper">Timer Wallpaper</string>
-    <string name="serviceis">Le service est</string>
-    <string name="addwalltitle">Ajouter photo</string>
-    <string name="addwalldesc">Vous devez ajouter 4 photo Minimum a la liste</string>
-    <string name="addwallok">Ajouter</string>
-    <string name="addwallcancel">Annuler</string>
+    <string name="service_is_message">Le service est</string>
+    <string name="add_wallpaper_title">Ajouter photo</string>
+    <string name="add_wallpaper_min_message">Vous devez ajouter 4 photo Minimum a la liste</string>
+    <string name="add_image_ok">Ajouter</string>
+    <string name="cancel_adding_images">Annuler</string>
 
-    <string name="activeservice">Activer</string>
-    <string name="closeservice">Désactiver</string>
+    <string name="active_this_service">Activer</string>
+    <string name="close_this_service">Désactiver</string>
 
-    <string name="timerWallpaperNotForget">n\'oublier pas de désactiver le service si vous utilisez un autre live wallpaper</string>
-    <string name="nofiletimer">Vous devez ajouter 4 photo ou plus</string>
-    <string name="timeron">le changement automatique marche</string>
+    <string name="warning_message">n\'oublier pas de désactiver le service si vous utilisez un autre live wallpaper</string>
+    <string name="add_wallpaper_messages">Vous devez ajouter 4 photo ou plus</string>
+    <string name="auto_change_on">le changement automatique marche</string>
+    <string name="main_menu_scheduler_status">Current Status: %1$s</string>
+    <string name="scheduler_new_days_title">Changer chaque :</string>
 </resources>

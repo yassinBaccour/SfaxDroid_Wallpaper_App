@@ -14,6 +14,7 @@ import com.sfaxdroid.bases.DeviceListner;
  */
 
 public interface DetailContract {
+
     interface View extends BaseView {
         void onSaveTempsDorAndDoAction(Boolean aBoolean, ActionTypeEnum actionToDo);
     }

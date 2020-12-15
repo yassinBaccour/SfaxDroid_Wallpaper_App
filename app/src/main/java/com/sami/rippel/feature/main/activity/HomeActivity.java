@@ -109,13 +109,12 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
     }
 
     @Override
-    protected int getLayout() {
+    public int getLayout() {
         return R.layout.activity_home;
     }
 
     @Override
-    protected void initEventAndData() {
-//Nothing
+    public void initEventAndData() {
     }
 
     @Override

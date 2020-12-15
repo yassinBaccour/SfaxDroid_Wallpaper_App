@@ -141,7 +141,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         mList.forEach { listItem.add(ItemWrapperList(it, ArticleListAdapter.TYPE_WALLPAPER)) }
         val lwpList: List<WallpaperObject> = listOf(
             WallpaperObject(
-                getString(R.string.TitleDouaLwp),
+                getString(R.string.title_word_anim_lwp),
                 getString(R.string.DescDouaLwp),
                 resources.getColor(R.color.primary),
                 R.mipmap.ic_doua_lwp,
@@ -153,8 +153,8 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                 R.mipmap.ic_skybox,
                 LiveWallpaper.NameOfAllah
             ), WallpaperObject(
-                getString(R.string.TitleTimerLwp),
-                getString(R.string.DescTimerLwp),
+                getString(R.string.timer_wallpaper_name),
+                getString(R.string.global_how_to_use),
                 resources.getColor(R.color.primary),
                 R.mipmap.ic_timer_lwp,
                 LiveWallpaper.TimerLwp

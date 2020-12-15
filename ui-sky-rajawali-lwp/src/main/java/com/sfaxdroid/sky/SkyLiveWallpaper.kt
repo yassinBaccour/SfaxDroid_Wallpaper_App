@@ -6,18 +6,17 @@ import org.rajawali3d.renderer.ISurfaceRenderer
 import org.rajawali3d.view.ISurface
 import org.rajawali3d.wallpaper.Wallpaper
 import java.lang.Exception
-import java.lang.reflect.InvocationTargetException
 
 class SkyLiveWallpaper : Wallpaper() {
 
     override fun onCreateEngine(): Engine {
-        val mRenderer = try {
+        val renderer = try {
             val mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
             val rendererClass = Class.forName(
                 mSharedPreferences.getString(
                     "renderer_class",
                     WallpaperRenderer::class.java.canonicalName
-                )!!
+                ).orEmpty()
             )
             rendererClass.getConstructor(Context::class.java)
                 .newInstance(this) as ISurfaceRenderer
@@ -27,7 +26,7 @@ class SkyLiveWallpaper : Wallpaper() {
 
         return WallpaperEngine(
             baseContext,
-            mRenderer,
+            renderer,
             ISurface.ANTI_ALIASING_CONFIG.NONE
         )
     }

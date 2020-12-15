@@ -1,2 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sfaxdoird.anim.word" />
+    package="com.sfaxdoird.anim.word">
+
+    <application>
+        <activity
+            android:name="com.sfaxdoird.anim.word.AnimWord2dActivity"
+            android:label="AnimWord2dActivity"
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+    </application>
+</manifest>

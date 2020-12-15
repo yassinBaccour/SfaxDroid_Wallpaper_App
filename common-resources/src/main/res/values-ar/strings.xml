@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="choose">إختر الصورة</string>
+    <string name="choose_picture">إختر الصورة</string>
 
     <string-array name="ripple_size">
         <item>صغيرة</item>
@@ -22,8 +22,8 @@
         <item>متوسط</item>
         <item>سريع</item>
     </string-array>
-    <string name="txt1">كيفية تطبيق الخلفية المتحرك ؟</string>
-    <string name="txt2">تطبيق الخلفية المتحرك</string>
+    <string name="set_wallpaper_manually_message">كيفية تطبيق الخلفية المتحرك ؟</string>
+    <string name="set_wallpaper_click_text">تطبيق الخلفية المتحرك</string>
     <string name="txt3">كيفية التطبيق يدويا ؟</string>
     <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
     <string name="txtrate1">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
@@ -32,42 +32,42 @@
     <string name="txtrate4">لا تسألني مرة أخرى</string>
     <string name="txtrate5">تقييم التطبيقة </string>
     <string name="txtrate6">اضغط مرتين على الزر للخروج</string>
-    <string name="txt5"> الصوت</string>
-    <string name="txt6">حدد هذا الخيار لسماع صوت قطرة الماء عند لمس الشاشة</string>
-    <string name="txt7">حجم التموج</string>
-    <string name="txt8">تغير حجم التموج</string>
-    <string name="txt9">سرعة التموج</string>
-    <string name="txt10">تغير سرعة التموج</string>
-    <string name="txt11">صوت</string>
-    <string name="txt12">اعدادت التموج</string>
-    <string name="txt13">التقييم</string>
-    <string name="txt14">رجاء التقييم التطبيقة</string>
-    <string name="txt15">أمطار</string>
+    <string name="enable_sound_wallpaper"> الصوت</string>
+    <string name="enable_water_ripple_sound">حدد هذا الخيار لسماع صوت قطرة الماء عند لمس الشاشة</string>
+    <string name="setting_ripple_size">حجم التموج</string>
+    <string name="setting_change_size">تغير حجم التموج</string>
+    <string name="setting_ripple_speed">سرعة التموج</string>
+    <string name="setting_change_ripple_speed">تغير سرعة التموج</string>
+    <string name="setting_sound">صوت</string>
+    <string name="setting_ripple">اعدادت التموج</string>
+    <string name="setting_recommendations">التقييم</string>
+    <string name="setting_rate_us">رجاء التقييم التطبيقة</string>
+    <string name="setting_enable_rain">أمطار</string>
+    <string name="setting_enable_touch">Enable Touch</string>
+    <string name="pref_sync_frequency">Choose models</string>
+    <string name="pref_sync_frequency_summary">choose a wallpapers models</string>
+    <string name="pref_update_setting">Models Settings</string>
+    <string name="download_terminated_sucessful">إنتهى التحميل</string>
+    <string name="download_completed">إنتهى</string>
+    <string name="btn_ok">نعم</string>
+    <string name="btn_cancel">لا</string>
+    <string name="permission_accept_click_button">نعم</string>
+    <string name="permission_deny_click_button">لا</string>
+    <string name="choose_color">إختر اللون</string>
+    <string name="title_word_anim_lwp"> خلفية دعاء متبدلة  </string>
+    <string name="word_img_resource">إختيار الخلفية</string>
+    <string name="text_font">إختيار الخط</string>
+    <string name="size_full_screen">الأكبر</string>
+    <string name="size_big">كبير</string>
+    <string name="size_meduim">معتدل</string>
+    <string name="size_small">صغير</string>
+    <string name="size_texte_name_of_allah">كبر الخط</string>
 
-    <string name="downloadterminated">إنتهى التحميل</string>
-    <string name="txtcompleted">إنتهى</string>
-    <string name="DouaLwpDownloadCompleted">إنتهاء</string>
+    <string name="permission_storage_message">يجب تفعيل خاصية تسجيل الصور ليعمل البرنامج</string>
 
-    <string name="btnok">نعم</string>
-    <string name="btncancel">لا</string>
-
-    <string name="choosecolor">إختر اللون</string>
-    <string name="TitleDouaLwp"> خلفية دعاء متبدلة  </string>
-    <string name="DouaLwpProgressDesc">إختيار الخلفية</string>
-    <string name="textfont">إختيار الخط</string>
-    <string name="sizeFullscreen">الأكبر</string>
-    <string name="sizeBig">كبير</string>
-    <string name="sizeMeduim">معتدل</string>
-    <string name="sizeSmall">صغير</string>
-    <string name="sizeTexteNameofallah">كبر الخط</string>
-
-    <string name="savepermissiondesc">يجب تفعيل خاصية تسجيل الصور ليعمل البرنامج</string>
-    <string name="permissionok">نعم</string>
-    <string name="permissionnon">لا</string>
-
-    <string name="appNotInstalled">التطبيق ليس موجود</string>
-    <string name="setSwallSucess">تم تطبيق الخلفية بنجاح</string>
-    <string name="setSwallNotSucess">خلل في تطبيق الخلفية </string>
-    <string name="setAs">إستعمال</string>
+    <string name="app_not_installer_message">التطبيق ليس موجود</string>
+    <string name="set_wallpaper_sucess_message">تم تطبيق الخلفية بنجاح</string>
+    <string name="set_wallpaper_not_sucess_message">خلل في تطبيق الخلفية </string>
+    <string name="set_as_dialog_message">إستعمال</string>
 
 </resources>

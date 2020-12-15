@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="choose">Choose picture</string>
+    <string name="choose_picture">Choose picture</string>
 
     <string-array name="ripple_image">
         <item>Allah 1</item>
@@ -33,47 +33,57 @@
         <item>medium</item>
         <item>fast</item>
     </string-array>
-    <string name="txt2">Set the wallpaper</string>
-    <string name="txt5">Enable Sound</string>
-    <string name="txt6">Select This Option For Sweet Sound Of Water Drop On Screen Touch</string>
-    <string name="txt7">Ripple Size</string>
-    <string name="txt8">Change Size Of Ripples</string>
-    <string name="txt9">Ripple Speed</string>
-    <string name="txt10">Change Speed Of Ripples</string>
-    <string name="txt11">Sound</string>
-    <string name="txt12">Ripple Settings</string>
-    <string name="txt13">Recommendations</string>
-    <string name="txt14">please Rate us</string>
-    <string name="txt15">Enable Rain</string>
-    <string name="txt16">Enable Touch</string>
+    <string name="txtrate1">\n If you like this application Please rating , rating help me to develop more Islamic Application \n </string>
+    <string name="txtrate2">Rate this app</string>
+    <string name="txtrate3">Later</string>
+    <string name="txtrate4">No, Thanks</string>
+    <string name="txtrate5">Rate now</string>
+    <string name="txtrate6">Simultaneously press two times the back button to exit</string>
+    <string name="set_wallpaper_click_text">Set the wallpaper</string>
+    <string name="enable_sound_wallpaper">Enable Sound</string>
+    <string name="enable_water_ripple_sound">Select This Option For Sweet Sound Of Water Drop On Screen Touch</string>
+    <string name="setting_ripple_size">Ripple Size</string>
+    <string name="setting_change_size">Change Size Of Ripples</string>
+    <string name="setting_ripple_speed">Ripple Speed</string>
+    <string name="setting_change_ripple_speed">Change Speed Of Ripples</string>
+    <string name="setting_sound">Sound</string>
+    <string name="setting_ripple">Ripple Settings</string>
+    <string name="setting_recommendations">Recommendations</string>
+    <string name="setting_rate_us">please Rate us</string>
+    <string name="setting_enable_rain">Enable Rain</string>
+    <string name="setting_enable_touch">Enable Touch</string>
 
     <string name="pref_sync_frequency">Choose models</string>
     <string name="pref_sync_frequency_summary">choose a wallpapers models</string>
     <string name="pref_update_setting">Models Settings</string>
 
-    <string name="downloadterminated">Download Completed successful</string>
+    <string name="download_terminated_sucessful">Download Completed successful</string>
     <string name="txtcompleted">Completed</string>
-    <string name="DouaLwpDownloadCompleted">Completed</string>
+    <string name="download_completed">Completed</string>
 
-    <string name="btnok">Ok</string>
-    <string name="btncancel">Cancel</string>
+    <string name="btn_ok">Ok</string>
+    <string name="btn_cancel">Cancel</string>
 
-    <string name="choosecolor">Choose color</string>
-    <string name="TitleDouaLwp">Doua LWP</string>
-    <string name="DouaLwpProgressDesc">Doua LWP Resources</string>
+    <string name="permission_accept_click_button">Oui</string>
+    <string name="permission_deny_click_button">No</string>
+
+    <string name="choose_color">Choose color</string>
+    <string name="title_word_anim_lwp">Doua LWP</string>
+    <string name="word_img_resource">Doua LWP Resources</string>
     <string name="app_namenospace">allahwallpapers</string>
-    <string name="textfont">Style d\'écriture</string>
-    <string name="sizeFullscreen">Full</string>
-    <string name="sizeBig">Grand</string>
-    <string name="sizeMeduim">Moyen</string>
-    <string name="sizeSmall">Petit</string>
-    <string name="sizeTexteNameofallah">Taille du text</string>
+    <string name="text_font">Style d\'écriture</string>
+    <string name="size_full_screen">Full</string>
+    <string name="size_big">Grand</string>
+    <string name="size_meduim">Moyen</string>
+    <string name="size_small">Petit</string>
+    <string name="size_texte_name_of_allah">Taille du text</string>
 
-    <string name="savepermissiondesc">Vous devez permettre à l\'application de sauvegarder les photos</string>
+    <string name="permission_storage_message">Vous devez permettre à l\'application de sauvegarder les photos</string>
 
-    <string name="appNotInstalled">Cette application n\'est pas installer</string>
-    <string name="setSwallSucess">Fond d\'ecran appliqué avec succès</string>
-    <string name="setSwallNotSucess">Refaire</string>
-    <string name="setAs">Définir comme</string>
+    <string name="app_not_installer_message">Cette application n\'est pas installer</string>
+    <string name="set_wallpaper_sucess_message">Fond d\'ecran appliqué avec succès</string>
+    <string name="set_wallpaper_not_sucess_message">Refaire</string>
+    <string name="set_as_dialog_message">Définir comme</string>
+    <string name="set_wallpaper_manually_message">How to Set the wallpaper manually</string>
 
 </resources>

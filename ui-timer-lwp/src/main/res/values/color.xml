@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green">#8BC34A</color>
-    <color name="redflatui">#27ae60</color>
-    <color name="red">#F44336</color>
+    <color name="timer_green">#8BC34A</color>
+    <color name="timer_flu_green">#27ae60</color>
+    <color name="timer_red">#F44336</color>
 </resources>

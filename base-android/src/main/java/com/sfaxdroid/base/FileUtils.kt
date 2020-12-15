@@ -118,7 +118,7 @@ class FileUtils {
             return File.createTempFile(imageFileName, ".jpg", getTemporaryDir(context, appName))
         }
 
-        fun getPermanentDir(context: Context, appName: String): File? {
+        private fun getPermanentDir(context: Context, appName: String): File? {
             val permanentDir = File(
                 context.filesDir,
                 "$appName/MyWallpaper"
@@ -137,7 +137,7 @@ class FileUtils {
             return getListFiles(getBasmalaFileDirDir(context, appName))
         }
 
-        fun getTemporaryDir(context: Context, appName: String): File? {
+        private fun getTemporaryDir(context: Context, appName: String): File? {
             val temporaryDir = File(
                 context.filesDir,
                 "$appName/temp"

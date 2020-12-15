@@ -122,6 +122,8 @@ public class LwpFragment extends SimpleFragment {
                 && Utils.Companion.getScreenHeightPixels(getContext()) < 1200) {
             mCardViewSkyBox.setVisibility(View.GONE);
         }
+        //Set visible
+        mCardViewSkyBox.setVisibility(View.VISIBLE);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mCardViewTimer.setVisibility(View.VISIBLE);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="timer_wallpaper_name">Timer LWP</string>
+    <string name="add_new_message">Add New</string>
+    <string name="wallpaper_list_fav">Favourites</string>
+    <string name="how_to_use_description">Add 4 Wallpapers and configure the timer finally activate the service, the application will change the background when it\'s necessary</string>
+    <string name="how_to_use_message">How It Work ?</string>
+    <string name="timerWallpaper">Timer Wallpaper</string>
+    <string name="one_houre">1 houre</string>
+    <string name="six_houre">6 houres</string>
+    <string name="twelve_hour">12 houres</string>
+    <string name="one_day">1 day</string>
+    <string name="on_switch">On</string>
+    <string name="off_switch">Off</string>
+    <string name="service_is_message">Service is</string>
+    <string name="add_wallpaper_title">Add Wallpapers</string>
+    <string name="add_wallpaper_min_message">You need to add 4 Wallpapers Minimum</string>
+    <string name="add_image_ok">Add</string>
+    <string name="cancel_adding_images">Cancel</string>
+    <string name="active_this_service">Active</string>
+    <string name="close_this_service">Close</string>
+    <string name="warning_message">do not forget to disable the service if you use any other live wallpapers</string>
+    <string name="auto_change_on">Auto changing background is Working</string>
+    <string name="add_wallpaper_messages">You need to add 4 or more picture</string>
+    <string name="main_menu_scheduler_status">Current Status: %1$s</string>
+    <string name="scheduler_new_days_title">Change Wallpaper every :</string>
+</resources>

@@ -29,15 +29,15 @@ class WallpaperSettings : PreferenceActivity(),
         data: Intent
     ) {
         if (requestCode == 300) {
-            val perfs =
+            val sharedPreferences =
                 preferenceManager.sharedPreferences
-            val oldValue = perfs.getInt("Select_Image", 10000)
+            val oldValue = sharedPreferences.getInt("Select_Image", 10000)
             val rnd = Random()
             var newValue = rnd.nextInt()
             while (newValue == oldValue) {
                 newValue = rnd.nextInt()
             }
-            perfs.edit().putInt("Select_Image", newValue).apply()
+            sharedPreferences.edit().putInt("Select_Image", newValue).apply()
         }
     }
 }

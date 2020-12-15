@@ -14,6 +14,7 @@ import com.sfaxdroid.bases.BasePagerAdapter
 import com.sfaxdroid.bases.BaseView
 import com.sfaxdroid.base.Utils.Companion.getUrlByScreenSize
 import com.sfaxdroid.base.WallpaperObject
+import com.sfaxdroid.detail.utils.TouchImageView
 import java.util.*
 
 class DetailPagerAdapter(

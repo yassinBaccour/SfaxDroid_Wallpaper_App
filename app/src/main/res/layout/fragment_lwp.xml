@@ -74,9 +74,9 @@
                             android:id="@+id/button1"
                             style="@style/Material_Action"
                             android:layout_gravity="bottom"
-                            android:text="@string/txt2"
+                            android:text="@string/set_wallpaper_click_text"
                             android:textColor="@color/primary"
-                            tools:text="@string/txt2" />
+                            tools:text="@string/set_wallpaper_click_text" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -117,8 +117,8 @@
                         <TextView
                             android:id="@+id/txttitledoua"
                             style="@style/Material_Card_Title"
-                            android:text="@string/TitleDouaLwp"
-                            tools:text="@string/TitleDouaLwp" />
+                            android:text="@string/title_word_anim_lwp"
+                            tools:text="@string/title_word_anim_lwp" />
 
                         <TextView
                             android:id="@+id/txtdescdoua"
@@ -153,7 +153,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardViewSkyBox"
             style="@style/Material_Card_View"
             card_view:cardCornerRadius="2dp"
@@ -258,14 +258,14 @@
                         <TextView
                             android:id="@+id/txttitleTimer"
                             style="@style/Material_Card_Title"
-                            android:text="@string/TitleTimerLwp"
-                            tools:text="@string/TitleTimerLwp" />
+                            android:text="@string/timer_wallpaper_name"
+                            tools:text="@string/timer_wallpaper_name" />
 
                         <TextView
                             android:id="@+id/txtdesctimer"
                             style="@style/Material_Card_Subtitle_16dp"
-                            android:text="@string/DescTimerLwp"
-                            tools:text="@string/DescTimerLwp" />
+                            android:text="@string/global_how_to_use"
+                            tools:text="@string/global_how_to_use" />
                     </LinearLayout>
 
                     <View xmlns:android="http://schemas.android.com/apk/res/android"
@@ -373,7 +373,7 @@
             android:gravity="center"
             android:text="About Us"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/green" />
+            android:textColor="@color/timer_green" />
 
         <Button
             android:id="@+id/btotherapp"
@@ -387,7 +387,7 @@
             android:id="@+id/btnRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ratingapp"
+            android:text="@string/rating_app"
             android:visibility="gone" />
     </LinearLayout>
 

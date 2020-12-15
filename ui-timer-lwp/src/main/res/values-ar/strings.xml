@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
-    <string name="TitleTimerLwp">خلفيات متبدلة</string>
-    <string name="DescTimerLwp">قم بإختيات خلفياتك المفضلة اللتي ستتبدل علي الشاشة مع التوقيت الزمني المختار</string>
-    <string name="AddWallpaper">إضافة الخلفيات</string>
-    <string name="ListWallpaper">قائمة الصور المحفوظة</string>
-    <string name="TimerActivityDesc">حمل العديد من الخلفيات وذالك عبر إختيارها وقم بإختيار المدة الزمنية لتبديل الخلفية </string>
-    <string name="TimerActivityHowToUse">كيفية الإستعمال</string>
-    <string name="onehoure">ساعة واحدة</string>
-    <string name="sixhoure">ستة ساعات</string>
-    <string name="douzeoure">نصف يوم</string>
-    <string name="oneday">كل يوم</string>
-    <string name="onswitch">تعمل</string>
-    <string name="offswitch">لا تعمل</string>
+    <string name="timer_wallpaper_name">خلفيات متبدلة</string>
+    <string name="add_new_message">إضافة الخلفيات</string>
+    <string name="wallpaper_list_fav">قائمة الصور المحفوظة</string>
+    <string name="how_to_use_description">حمل العديد من الخلفيات وذالك عبر إختيارها وقم بإختيار المدة الزمنية لتبديل الخلفية </string>
+    <string name="how_to_use_message">كيفية الإستعمال</string>
+    <string name="one_houre">ساعة واحدة</string>
+    <string name="six_houre">ستة ساعات</string>
+    <string name="twelve_hour">نصف يوم</string>
+    <string name="one_day">كل يوم</string>
+    <string name="on_switch">تعمل</string>
+    <string name="off_switch">لا تعمل</string>
     <string name="timerWallpaper">خدمة</string>
-    <string name="serviceis">تغير الخلفية</string>
-    <string name="addwalltitle">إضافة الصور</string>
-    <string name="addwalldesc">يجب عليك زيادة ٤ صور على الأقل لتفعيل الخدمة</string>
-    <string name="addwallok">إضافة</string>
-    <string name="addwallcancel">إلغاء</string>
-    <string name="activeservice">تفعيل الخدمة</string>
-    <string name="closeservice">غلق الخدمة</string>
-    <string name="timerWallpaperNotForget">لانسى غلق الخدمة إذا إستعملة خلفية متحركة أخرى</string>
-    <string name="timeron">خدمت تبديل الصور تعمل</string>
-    <string name="nofiletimer">يجب زيادة 4 صور أو كثر</string>
-
+    <string name="service_is_message">تغير الخلفية</string>
+    <string name="add_wallpaper_title">إضافة الصور</string>
+    <string name="add_wallpaper_min_message">يجب عليك زيادة ٤ صور على الأقل لتفعيل الخدمة</string>
+    <string name="add_image_ok">إضافة</string>
+    <string name="cancel_adding_images">إلغاء</string>
+    <string name="active_this_service">تفعيل الخدمة</string>
+    <string name="close_this_service">غلق الخدمة</string>
+    <string name="warning_message">لانسى غلق الخدمة إذا إستعملة خلفية متحركة أخرى</string>
+    <string name="auto_change_on">خدمت تبديل الصور تعمل</string>
+    <string name="add_wallpaper_messages">يجب زيادة 4 صور أو كثر</string>
+    <string name="main_menu_scheduler_status">خدمة التغيير: %1$s</string>
+    <string name="scheduler_new_days_title">تغير الخلفية كل</string>
 </resources>

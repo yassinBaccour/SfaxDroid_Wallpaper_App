@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sami.rippel.allah.R;
+import com.sami.rippel.home.MyItemHolderCategory;
+import com.sami.rippel.home.MyItemHolderWallpaper;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.TypeCellItemEnum;
 import com.sfaxdroid.base.DeviceUtils;
@@ -49,7 +51,7 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType), parent, false);  //cherche le type de cellule depuis la classe fille
         if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT)
-            return new MyItemHolderCategory(view, context);
+            return new MyItemHolderCategory(view);
         else
             return new MyItemHolderWallpaper(view);
     }
@@ -59,23 +61,9 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         if (data.get(position) instanceof WallpaperObject) {
             WallpaperObject wallpaperObject = (WallpaperObject) data.get(position);
             if (getRecycleViewBindType() == TypeCellItemEnum.CATEGORY_NEW_FORMAT) {
-                Glide.with(context).load(GetUrlByScreen(wallpaperObject))
-                        .thumbnail(0.5f)
-                        .override(DeviceUtils.Companion.getCellWidth(context), DeviceUtils.Companion.getCellHeight(context))
-                        .transition(withCrossFade())
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(((MyItemHolderCategory) holder).mImg);
-
-                ((MyItemHolderCategory) holder).ln.setBackgroundColor(Color.parseColor(wallpaperObject.getColor()));
-                ((MyItemHolderCategory) holder).title.setText(wallpaperObject.getName());
-                ((MyItemHolderCategory) holder).desc.setText(wallpaperObject.getDesc());
+                ((MyItemHolderCategory) holder).bindView(context, wallpaperObject);
             } else
-                Glide.with(context).load(GetUrlByScreen(wallpaperObject))
-                        .thumbnail(0.5f)
-                        .override(DeviceUtils.Companion.getCellWidth(context), DeviceUtils.Companion.getCellHeight(context))
-                        .transition(withCrossFade())
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(((MyItemHolderWallpaper) holder).mImg);
+                ((MyItemHolderWallpaper) holder).bindView(context, wallpaperObject);
         }
     }
 
@@ -84,31 +72,4 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
         return 0;
     }
 
-    private String GetUrlByScreen(WallpaperObject wall) {
-        return ViewModel.Current.getUrlFromWallpaper(wall, context);
-    }
-
-    private static class MyItemHolderWallpaper extends RecyclerView.ViewHolder {
-        ImageView mImg;
-
-        MyItemHolderWallpaper(View itemView) {
-            super(itemView);
-            mImg = itemView.findViewById(R.id.item_img);
-        }
-    }
-
-
-    private static class MyItemHolderCategory extends RecyclerView.ViewHolder {
-        private ImageView mImg;
-        private LinearLayout ln;
-        private TextView title, desc;
-
-        MyItemHolderCategory(View itemView, Context context) {
-            super(itemView);
-            mImg = itemView.findViewById(R.id.item_img);
-            ln = itemView.findViewById(R.id.contentImg);
-            title = itemView.findViewById(R.id.title);
-            desc = itemView.findViewById(R.id.subtitle);
-        }
-    }
 }

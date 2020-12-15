@@ -31,7 +31,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     }
 
     @Override
-    protected void onViewCreated() {
+    public void onViewCreated() {
         super.onViewCreated();
         initInject();
         mPresenter = instantiatePresenter();

@@ -49,10 +49,6 @@ public class GalleryAdapter extends BaseRecyclerViewAdapter<WallpaperObject> {
         return mTypeCell;
     }
 
-    public String GetPreviewUrl(int pos) {
-        return data.get(pos).getPreviewUrl();
-    }
-
     public String GetFullPictureUrl(int pos) {
         return data.get(pos).getUrl();
     }

@@ -1,36 +1,36 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="PicRipples"
     android:title="Settings">
-    <PreferenceCategory android:title="@string/txt11">
+    <PreferenceCategory android:title="@string/setting_sound">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="sound_on"
-            android:summary="@string/txt6"
-            android:title="@string/txt5" />
+            android:summary="@string/enable_water_ripple_sound"
+            android:title="@string/enable_sound_wallpaper" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/txt12">
+    <PreferenceCategory android:title="@string/setting_ripple">
         <ListPreference
             android:defaultValue="small"
             android:entries="@array/ripple_size"
             android:entryValues="@array/ripple_size_value"
             android:key="ripple_size"
-            android:summary="@string/txt8"
-            android:title="@string/txt7" />
+            android:summary="@string/setting_change_size"
+            android:title="@string/setting_ripple_size" />
 
         <ListPreference
             android:defaultValue="slow"
             android:entries="@array/ripple_duration"
             android:entryValues="@array/ripple_duration_value"
             android:key="ripple_speed"
-            android:summary="@string/txt10"
-            android:title="@string/txt9" />
+            android:summary="@string/setting_change_ripple_speed"
+            android:title="@string/setting_ripple_speed" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/txt13">
+    <PreferenceCategory android:title="@string/setting_recommendations">
         <Preference
             android:key="recommend_1"
-            android:title="@string/txt14" />
+            android:title="@string/setting_rate_us" />
 
     </PreferenceCategory>
 
