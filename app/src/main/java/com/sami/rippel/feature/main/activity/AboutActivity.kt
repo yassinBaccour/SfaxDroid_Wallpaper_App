@@ -14,7 +14,6 @@ class AboutActivity : AppCompatActivity() {
         setContentView(
             AboutPage(this)
                 .isRTL(false)
-                .setImage(R.mipmap.header)
                 .setDescription("Islamic Live Wallpaper")
                 .addItem(
                     Element().setTitle(

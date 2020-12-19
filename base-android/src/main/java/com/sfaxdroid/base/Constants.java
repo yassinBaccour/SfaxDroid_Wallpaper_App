@@ -18,6 +18,11 @@ public class Constants {
     public static final String KEY_LWP_NAME = "LwpName";
     public static final String GT_FOLDER_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FrameImages/";
     public static final String BASE_URL = "http://androidsporttv.com/islamicimages/RetorFitFormat/";
+    public static final String KEY_BASMALA_STIKERS = "BasmalaStikers";
+    public static final String KEY_WORD_IMG_LWP = "DouaLWP";
+    public static final String KEY_ANIM_2D_LWP = "NameOfAllah2DLWP";
+    public static final String KEY_TEXTURE = "keyTexture";
+    public static final String SQUARE_TYPE = "square";
     public static int nbIncrementationAfterChange = 0;
     public static Boolean ifBackgroundChanged = false;
     public static final String DOUA_ZIP_FOLDER_NAME = "DouaFolder";

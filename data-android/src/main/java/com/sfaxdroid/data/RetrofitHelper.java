@@ -1,7 +1,6 @@
 package com.sfaxdroid.data;
 
 import com.sfaxdroid.base.WallpapersRetrofitObject;
-import com.sfaxdroid.data.UpdateApp;
 
 import io.reactivex.Flowable;
 
@@ -21,7 +20,4 @@ public class RetrofitHelper {
         return wallpaperApiService.getWallpapersFromServices();
     }
 
-    public Flowable<UpdateApp> getUpdateObject() {
-        return wallpaperApiService.isUpdateNeeded();
-    }
 }

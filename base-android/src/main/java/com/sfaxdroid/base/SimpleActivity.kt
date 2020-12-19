@@ -9,12 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
  */
 abstract class SimpleActivity : AppCompatActivity() {
 
-    protected var mContext: Activity? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout)
-        mContext = this
         onViewCreated()
         initEventAndData()
     }

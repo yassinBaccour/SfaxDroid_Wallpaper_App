@@ -90,7 +90,7 @@
         </service>
 
         <activity
-            android:name="com.sami.rippel.feature.main.activity.GalleryActivity"
+            android:name="com.sfaxdroid.gallery.GalleryActivity"
             android:hardwareAccelerated="true"
             android:label="@string/gallery"
             android:screenOrientation="fullSensor" />

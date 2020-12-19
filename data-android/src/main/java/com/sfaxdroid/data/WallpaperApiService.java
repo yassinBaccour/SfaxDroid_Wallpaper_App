@@ -12,7 +12,4 @@ import retrofit2.http.GET;
 public interface WallpaperApiService {
     @GET("wallpapersRetrofitFormat.xml")
     Flowable<WallpapersRetrofitObject> getWallpapersFromServices();
-
-    @GET("needUpdate.xml")
-    Flowable<UpdateApp> isUpdateNeeded();
 }

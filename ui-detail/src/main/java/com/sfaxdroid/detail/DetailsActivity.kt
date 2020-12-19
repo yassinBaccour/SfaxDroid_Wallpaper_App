@@ -434,8 +434,6 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
         progressBar?.visibility = View.GONE
     }
 
-    override fun initInject() {}
-
     companion object {
         const val REQUEST_CODE_ASK_PERMISSION = 123
     }

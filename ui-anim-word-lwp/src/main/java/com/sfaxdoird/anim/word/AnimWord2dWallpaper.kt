@@ -10,7 +10,7 @@ import com.sfaxdroid.base.SharedPrefsUtils
 class AnimWord2dWallpaper : WallpaperService() {
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)
-        val color = pref.GetSetting("2dwallpaperColor", -4522170)
+        val color = pref.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
         val textSize = pref.GetSetting("2dwallpapertextsize", 1) * 20
         val fontStyle = pref.GetSetting("2dwallpaperfontstyle", 1)
         return IslamicEngine(color, textSize, fontStyle)

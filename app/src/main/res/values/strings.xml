@@ -35,8 +35,6 @@
     <string name="catalog_Lab">Lab</string>
     <string name="openGallery">Gallery</string>
     <string name="openCamera">Camera</string>
-    <string name="cardframetitle">Wallpapers Frame</string>
-    <string name="cardframedesc">Choose one picture and one frame and Create your wallpapers</string>
     <string name="cardStickerstitle">Stikers and Text</string>
     <string name="cardStickersdesc">Write on your photos and add stickers, frames, filters and other stuff</string>
     <string name="ShareUsing">Share image using</string>
@@ -56,7 +54,6 @@
     <string name="DescRippleLwp">You can choose one picture and set the water ripple animation</string>
     <string name="TitleRippleLwp">Water Ripple</string>
     <string name="global_how_to_use">The Lwp allows you to change your screen wallpaper on a timed basis</string>
-    <string name="TitleActionBarTimerLwpAdded">Saved Wallpapers</string>
 
     <string name="otherMethodRippleTitle">Other Method</string>
     <string name="otherMethodRippleDesc">Open wallpaper from gallery and click to Use as ripple lwp button</string>
@@ -65,9 +62,6 @@
     <string name="FirstMethodRippleDesc">Choose one picture and click To the buttom below to open LWP</string>
 
     <string name="DescDouaLwp">Doua Changer over choosed background</string>
-    <string name="DouaLwpTitle">Choose Background</string>
-
-
 
     <string name="titleBasmala">Basmala Lock</string>
     <string name="toastnosound">Without Sound</string>
@@ -153,6 +147,5 @@
     <string name="addtochangebackground">You need add Text before</string>
     <string name="addtochangefont">You need add Text before</string>
     <string name="removepicture">Delete Picture</string>
-    <string name="texturetitle">Choose Texture</string>
     <string name="scroll_up">Scroll Up</string>
 </resources>

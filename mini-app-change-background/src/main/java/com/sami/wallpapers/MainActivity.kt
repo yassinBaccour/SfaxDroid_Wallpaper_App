@@ -12,7 +12,7 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
-import com.sfaxdroid.base.BaseMiniAppActivity
+import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMiniAppActivity() {

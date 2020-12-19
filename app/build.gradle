@@ -1,9 +1,10 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
+//apply plugin: 'com.google.firebase.crashlytics'
+
 
 android {
 
@@ -89,15 +90,13 @@ dependencies {
     implementation libraries.constraintlayout
     implementation libraries.retrofit
     implementation libraries.servicesAds
-    implementation libraries.crashlytics
-    implementation libraries.firebaseAnalytics
+    //implementation libraries.crashlytics
     implementation "com.flipboard:bottomsheet-core:1.5.3"
     implementation "com.flipboard:bottomsheet-commons:1.5.3"
     implementation "io.github.kobakei:ratethisapp:1.2.0"
     implementation "com.mani:ThinDownloadManager:1.2.5"
     implementation "com.github.medyo:android-about-page:1.2.2"
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
@@ -110,6 +109,7 @@ dependencies {
     implementation project(':ui-anim-word-lwp')
     implementation project(':ui-timer-lwp')
     implementation project(':data-android')
+    implementation project(':ui-gallery')
 }
 
 apply plugin: 'com.google.gms.google-services'

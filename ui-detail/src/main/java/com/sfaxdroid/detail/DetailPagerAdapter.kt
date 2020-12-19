@@ -10,7 +10,6 @@ import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import com.sfaxdroid.bases.BasePagerAdapter
 import com.sfaxdroid.bases.BaseView
 import com.sfaxdroid.base.Utils.Companion.getUrlByScreenSize
 import com.sfaxdroid.base.WallpaperObject
@@ -18,9 +17,11 @@ import com.sfaxdroid.detail.utils.TouchImageView
 import java.util.*
 
 class DetailPagerAdapter(
-    private val mContext: Context, private val mResourceId: Int,
-    data: ArrayList<WallpaperObject?>?, private val baseView: BaseView
-) : BasePagerAdapter<WallpaperObject?>(data) {
+    private val context: Context,
+    private val resourceId: Int,
+    wallpaperList: ArrayList<WallpaperObject?>?,
+    private val baseView: BaseView
+) : BasePagerAdapter<WallpaperObject?>(wallpaperList) {
 
     override fun isViewFromObject(
         view: View,
@@ -33,27 +34,29 @@ class DetailPagerAdapter(
         container: ViewGroup,
         position: Int
     ): Any {
-        val inflater = mContext
+        val inflater = context
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val viewLayout = inflater.inflate(mResourceId, container, false)
-        val mDetailImage: TouchImageView = viewLayout
+        val viewLayout = inflater.inflate(resourceId, container, false)
+
+        val detailImage: TouchImageView = viewLayout
             .findViewById(R.id.detailImage)
         baseView.showLoading()
-        Glide.with(mContext).load(getUrlByScreen(getItem(position)?.url ?: "", mContext))
+        Glide.with(context).load(getUrlByScreen(getItem(position)?.url ?: "", context))
             .into(object : SimpleTarget<Drawable?>() {
                 override fun onResourceReady(
                     resource: Drawable,
                     transition: Transition<in Drawable?>?
                 ) {
-                    mDetailImage.setImageDrawable(resource)
+                    detailImage.setImageDrawable(resource)
                     baseView.hideLoading()
                 }
             })
         container.addView(viewLayout)
         container.addView(
-            TouchImageView(container.context), LinearLayout.LayoutParams.MATCH_PARENT,
+            TouchImageView(context), LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT
         )
+
         return viewLayout
     }
 

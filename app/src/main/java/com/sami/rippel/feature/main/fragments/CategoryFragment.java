@@ -15,18 +15,18 @@ import android.widget.Toast;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseFragment;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.entity.StateEnum;
-import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.utils.RecyclerItemClickListener;
+import com.sfaxdroid.bases.StateEnum;
+import com.sfaxdroid.bases.TypeCellItemEnum;
+import com.sfaxdroid.bases.OnStateChangeListener;
+import com.sfaxdroid.base.RecyclerItemClickListener;
 import com.sami.rippel.feature.main.presenter.CategoryWallpaperPresenter;
 import com.sami.rippel.feature.main.presenter.Contract.WallpaperFragmentContract;
-import com.sami.rippel.feature.main.activity.GalleryActivity;
 import com.sami.rippel.feature.main.activity.HomeActivity;
-import com.sami.rippel.feature.main.adapter.GalleryAdapter;
 import com.sfaxdroid.base.Constants;
 import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.WallpaperObject;
+import com.sfaxdroid.gallery.GalleryActivity;
+import com.sfaxdroid.gallery.GalleryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,11 +97,7 @@ public class CategoryFragment extends BaseFragment<CategoryWallpaperPresenter> i
                                 (view, position) -> {
                                     if (position >= 0) {
                                         String categorName = mAdapter.GetName(position);
-                                        if (mListener != null) {
-                                            HomeActivity.nbOpenAds++;
-                                            mListener.onOpenScreenTracker("CategoryGallery");
-                                            mListener.onTrackAction("CategoryOpen", categorName);
-                                        }
+                                        HomeActivity.nbOpenAds++;
                                         Intent intent = new Intent(
                                                 getActivity(),
                                                 GalleryActivity.class);

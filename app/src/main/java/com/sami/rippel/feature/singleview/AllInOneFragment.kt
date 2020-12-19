@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
 import com.sami.rippel.base.BaseFragment
 import com.sami.rippel.model.ViewModel
-import com.sami.rippel.model.entity.StateEnum
-import com.sami.rippel.model.listner.OnStateChangeListener
+import com.sfaxdroid.bases.StateEnum
+import com.sfaxdroid.bases.OnStateChangeListener
 import com.sami.rippel.feature.main.presenter.AllWallpaperPresenter
 import com.sami.rippel.feature.main.presenter.Contract.WallpaperFragmentContract
-import com.sami.rippel.feature.main.activity.GalleryActivity
+import com.sfaxdroid.gallery.GalleryActivity
 import com.sfaxdroid.base.DeviceUtils
 import com.sfaxdroid.base.LiveWallpaper
 import com.sfaxdroid.base.WallpaperObject
@@ -61,17 +61,14 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                         HomeActivityNavBar.isAdsShow = true
                         val intent = Intent(
                             activity,
-                            GalleryActivity::class.java
+                            com.sfaxdroid.gallery.GalleryActivity::class.java
                         )
-                        intent.putExtra("LwpName", "DouaLWP")
+                        intent.putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, "DouaLWP")
                         startActivity(intent)
                     }
                     is LiveWallpaper.NameOfAllah -> {
                         HomeActivityNavBar.isAdsShow = true
                         try {
-                            if (mListener != null) {
-                                mListener.onTrackAction("LwpFragment", "OpenSkyBox")
-                            }
                             val intent = Intent(
                                 WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
                             )
@@ -107,18 +104,17 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                             activity,
                             GalleryActivity::class.java
                         )
-                        intent.putExtra("LwpName", "NameOfAllah2DLWP")
+                        intent.putExtra(
+                            com.sfaxdroid.base.Constants.KEY_LWP_NAME,
+                            "NameOfAllah2DLWP"
+                        )
                         startActivity(intent)
                     }
                 }
             }
             is CarouselTypeEnum.CATEGORY -> {
                 val categoryName: String = wallpaperObject.name
-                if (mListener != null) {
-                    HomeActivityNavBar.nbOpenAds++
-                    mListener.onOpenScreenTracker("CategoryGallery")
-                    mListener.onTrackAction("CategoryOpen", categoryName)
-                }
+                HomeActivityNavBar.nbOpenAds++
                 val intent = Intent(
                     activity,
                     GalleryActivity::class.java
@@ -224,7 +220,6 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
 
             val pos = mData.indexOfFirst { it.url == wallpaperObject.url }
             HomeActivityNavBar.nbOpenAds++
-            mListener?.onTrackAction("AllFragment", "OpenWallpapers")
             Intent(
                 activity,
                 Class.forName("com.sfaxdroid.detail.DetailsActivity")

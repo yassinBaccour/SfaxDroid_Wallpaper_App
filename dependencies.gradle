@@ -1,7 +1,7 @@
 ext {
     androidBuildToolsVersion = '29.0.3'
     androidCompileSdkVersion = 29
-    androidMinSdkVersion = 19
+    androidMinSdkVersion = 21
     androidTargetSdkVersion = 29
 
     libraries = [

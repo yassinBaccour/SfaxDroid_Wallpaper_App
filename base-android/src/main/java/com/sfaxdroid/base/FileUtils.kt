@@ -173,7 +173,6 @@ class FileUtils {
             return zipDestination
         }
 
-        @Throws(IOException::class)
         private fun copyFile(
             sourceLocation: File,
             targetLocation: File?

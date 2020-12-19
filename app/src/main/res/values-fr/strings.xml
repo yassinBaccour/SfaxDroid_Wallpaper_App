@@ -24,7 +24,6 @@
     <string name="other">Mes Autres Applications</string>
     <string name="txtGallery">Gallery</string>
     <string name="global_how_to_use">Changement de l\'arrière-plan automatiquement avec la période de temps choisie </string>
-    <string name="TitleActionBarTimerLwpAdded">Wallpapers télécharger</string>
 
     <string name="gallery"></string>
     <string name="NoConnection">Pas de connection internet</string>
@@ -56,8 +55,6 @@
     <string name="catalog_Lab">Lab</string>
     <string name="openGallery">Gallery</string>
     <string name="openCamera">Camera</string>
-    <string name="cardframetitle">Cadre photo</string>
-    <string name="cardframedesc">Crée des photos à l\'aide de cadres</string>
     <string name="cardStickerstitle">Écritures et Autocollants</string>
     <string name="cardStickersdesc">Du texte avec des autocollants, cadres photos et des textures</string>
     <string name="ShareUsing">Partager à l\'aide de</string>
@@ -77,7 +74,6 @@
     <string name="FirstMethodRippleDesc">Choisir une photo pour l\'animation est clicker sur le bouton en dessous pour l\'ouvrir</string>
     <string name="TitleDouaLwp">Doua LWP</string>
     <string name="DescDouaLwp">Des écritures de Doua qui défilent sur l\'écran de votre téléphone avec un fond d\'écran choisi</string>
-    <string name="DouaLwpTitle">Choisir une photo</string>
     <string name="DouaLwpProgressDesc">Doua LWP Resources</string>
     <string name="DouaLwpDownloadCompleted">Completed</string>
 

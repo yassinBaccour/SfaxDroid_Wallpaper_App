@@ -16,12 +16,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import com.sami.rippel.allah.R;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.model.entity.WallpaperObject;
-import com.sami.rippel.utils.RecyclerItemClickListener;
-import com.sami.rippel.ui.adapter.GalleryAdapter;
 import com.sfaxdroid.base.WallpaperObject;
 
 import java.io.File;

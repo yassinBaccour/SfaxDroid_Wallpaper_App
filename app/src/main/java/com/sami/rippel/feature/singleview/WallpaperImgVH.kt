@@ -10,6 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.sami.rippel.allah.R
 import com.sami.rippel.model.ViewModel
 import com.sfaxdroid.base.WallpaperObject
+import com.sfaxdroid.base.WallpaperUtils
 
 class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -28,6 +29,6 @@ class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     private fun getUrlByScreen(wall: WallpaperObject, context: Context): String? {
-        return ViewModel.Current.getUrlFromWallpaper(wall, context)
+        return WallpaperUtils.getUrlFromWallpaper(wall, context)
     }
 }

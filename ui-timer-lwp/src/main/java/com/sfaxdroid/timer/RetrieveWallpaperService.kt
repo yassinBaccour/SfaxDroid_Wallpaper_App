@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.preference.PreferenceManager
 import com.sfaxdroid.base.FileUtils.Companion.getPermanentDirListFiles
+import com.sfaxdroid.bases.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class RetrieveWallpaperService : JobService() {
                 baseContext,
                 baseContext.getString(R.string.app_namenospace)
             )?.size ?: 0
-            var currentWallpaper = sharedPref.getInt("currentWallpaper", 0)
+            var currentWallpaper = sharedPref.getInt(Constants.CURRENT_WALLPAPER_KEY, 0)
             if (nbFile > 0) {
                 if (currentWallpaper >= nbFile) {
                     updateSchedulerSettings(0)
@@ -50,7 +51,7 @@ class RetrieveWallpaperService : JobService() {
         val sharedPref =
             PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val editor = sharedPref.edit()
-        editor.putInt("currentWallpaper", currentWallpaper)
+        editor.putInt(Constants.CURRENT_WALLPAPER_KEY, currentWallpaper)
         editor.apply()
     }
 }

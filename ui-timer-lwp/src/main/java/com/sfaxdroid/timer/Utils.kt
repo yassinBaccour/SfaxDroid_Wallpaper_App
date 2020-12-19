@@ -14,14 +14,11 @@ import java.io.IOException
 class Utils {
 
     companion object {
-
         fun setWallpaperFromFile(context: Context, appName: String, wallpaperNum: Int? = null) {
-            val file =
-                getPermanentDirListFiles(
-                    context,
-                    appName
-                )?.getOrNull(wallpaperNum ?: 0)
-            if (file?.exists() == true) {
+            getPermanentDirListFiles(
+                context,
+                appName
+            )?.getOrNull(wallpaperNum ?: 0)?.takeIf { it.exists() }?.also { file ->
                 try {
                     BitmapFactory.decodeFile(
                         file.path,
@@ -62,7 +59,7 @@ class Utils {
                     activity,
                     Class.forName("com.sami.rippel.feature.main.activity.GalleryActivity")
                 ).apply {
-                    putExtra("LwpName", key)
+                    putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, key)
                 })
             } catch (ignored: ClassNotFoundException) {
             }

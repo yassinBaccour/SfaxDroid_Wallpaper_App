@@ -15,25 +15,23 @@ import android.widget.Toast;
 import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseFragment;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.entity.StateEnum;
-import com.sami.rippel.model.entity.TypeCellItemEnum;
-import com.sami.rippel.model.listner.AdsListener;
-import com.sami.rippel.model.listner.OnStateChangeListener;
-import com.sami.rippel.utils.RecyclerItemClickListener;
+import com.sfaxdroid.bases.StateEnum;
+import com.sfaxdroid.bases.TypeCellItemEnum;
+import com.sfaxdroid.bases.OnStateChangeListener;
+import com.sfaxdroid.base.RecyclerItemClickListener;
 import com.sami.rippel.feature.main.presenter.AllWallpaperPresenter;
 import com.sami.rippel.feature.main.presenter.Contract.WallpaperFragmentContract;
 import com.sami.rippel.feature.main.activity.HomeActivity;
-import com.sami.rippel.feature.main.adapter.GalleryAdapter;
 import com.sfaxdroid.base.Constants;
 import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.WallpaperObject;
+import com.sfaxdroid.gallery.GalleryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> implements WallpaperFragmentContract.View, OnStateChangeListener {
 
-    private AdsListener mListener = null;
     private AllBackgroundFragment mFragment;
 
     public static AllBackgroundFragment newInstance() {
@@ -87,10 +85,7 @@ public class AllBackgroundFragment extends BaseFragment<AllWallpaperPresenter> i
                                 getActivity(),
                                 (view, position) -> {
                                     if (mFragment.getView() != null && position >= 0) {
-                                        if (mListener != null) {
-                                            HomeActivity.nbOpenAds++;
-                                            mListener.onTrackAction("AllFragment", "OpenWallpapers");
-                                        }
+                                        HomeActivity.nbOpenAds++;
                                         Intent intent = null;
                                         try {
                                             intent = new Intent(

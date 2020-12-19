@@ -9,7 +9,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.widget.Toast
@@ -75,18 +74,6 @@ class Utils {
             return getDisplayMetrics(context)!!.widthPixels
         }
 
-        fun openPub(context: Context) {
-            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("market://details?id=com.sami.rippel.allah")
-            })
-        }
-
-        fun ratingApplication(context: Context) {
-            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("market://details?id=" + context.packageName)
-            })
-        }
-
         fun getBytesDownloaded(progress: Int, totalBytes: Long): String? {
             val bytesCompleted = progress * totalBytes / 100
             if (totalBytes >= 1000000) {
@@ -137,7 +124,7 @@ class Utils {
         fun checkPermission(
             activity: Activity?,
             permissionName: String?,
-            deviceListner: DeviceListner
+            deviceListener: DeviceListner
         ) {
             if (ContextCompat.checkSelfPermission(
                     activity!!,
@@ -152,7 +139,7 @@ class Utils {
                 ) {
                     showMessageOKCancel(
                         activity.getString(R.string.permission_storage_message),
-                        DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int -> if (deviceListner != null) deviceListner.onRequestPermissions() },
+                        DialogInterface.OnClickListener { dialog: DialogInterface?, which: Int -> deviceListener.onRequestPermissions() },
                         activity
                     )
                 } else {
@@ -164,11 +151,11 @@ class Utils {
 
         private fun requestPermissions(
             ac: Activity,
-            REQUEST_CODE_ASK_PERMISSIONS: Int
+            requestCode: Int
         ) {
             ActivityCompat.requestPermissions(
                 ac, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                REQUEST_CODE_ASK_PERMISSIONS
+                requestCode
             )
         }
 
@@ -195,7 +182,7 @@ class Utils {
             screenWidthPixels: Int,
             context: Context,
             appName: String,
-            wallpaperListener: WallpaperListener,
+            wallpaperListener: WallpaperListener?,
             lwpListener: LwpListener?
         ) {
             Glide.with(context).asBitmap().load(
@@ -216,16 +203,25 @@ class Utils {
                                 context, appName
                             )
                         if (isSaved) {
-                            if (action == ActionTypeEnum.CROP) wallpaperListener.onGoToCropActivity() else if (action == ActionTypeEnum.OPEN_NATIV_CHOOSER) wallpaperListener.onOpenNativeSetWallChoose() else if (action == ActionTypeEnum.MOVE_PERMANENT_DIR) wallpaperListener.onMoveFileToPermanentGallery() else if (action == ActionTypeEnum.SHARE_FB) wallpaperListener.onOpenWithFaceBook() else if (action == ActionTypeEnum.SHARE_INSTA) wallpaperListener.onOpenWithInstagram() else if (action == ActionTypeEnum.SEND_LWP) wallpaperListener.onSendToRippleLwp() else if (action == ActionTypeEnum.SHARE_SNAP_CHAT) wallpaperListener.onShareWhitApplication() else if (action == ActionTypeEnum.SKYBOX_LWP) lwpListener.onSendToLwp()
+                            when (action) {
+                                ActionTypeEnum.CROP -> wallpaperListener?.onGoToCropActivity()
+                                ActionTypeEnum.OPEN_NATIV_CHOOSER -> wallpaperListener?.onOpenNativeSetWallChoose()
+                                ActionTypeEnum.MOVE_PERMANENT_DIR -> wallpaperListener?.onMoveFileToPermanentGallery()
+                                ActionTypeEnum.SHARE_FB -> wallpaperListener?.onOpenWithFaceBook()
+                                ActionTypeEnum.SHARE_INSTA -> wallpaperListener?.onOpenWithInstagram()
+                                ActionTypeEnum.SEND_LWP -> wallpaperListener?.onSendToRippleLwp()
+                                ActionTypeEnum.SHARE_SNAP_CHAT -> wallpaperListener?.onShareWhitApplication()
+                                ActionTypeEnum.SKYBOX_LWP -> lwpListener?.onSendToLwp()
+                            }
                         } else {
-                            wallpaperListener.onFinishActivity()
+                            wallpaperListener?.onFinishActivity()
                             resource.recycle()
                         }
                     }
                 })
         }
 
-        private fun GetIntentNameFromType(intentType: IntentTypeEnum): String {
+        private fun getIntentNameFromType(intentType: IntentTypeEnum): String {
             return when (intentType) {
                 IntentTypeEnum.FACEBOOKINTENT -> {
                     Constants.FB_PACKAGE
@@ -260,7 +256,7 @@ class Utils {
             file: File?,
             intentType: IntentTypeEnum
         ): Boolean? {
-            return if (appInstalledOrNot(GetIntentNameFromType(intentType), activity)
+            return if (appInstalledOrNot(getIntentNameFromType(intentType), activity)
             ) {
                 val shareIntent =
                     Intent(Intent.ACTION_SEND)
@@ -273,7 +269,7 @@ class Utils {
                 )
                 shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI)
                 shareIntent.setPackage(
-                    GetIntentNameFromType(
+                    getIntentNameFromType(
                         intentType
                     )
                 )

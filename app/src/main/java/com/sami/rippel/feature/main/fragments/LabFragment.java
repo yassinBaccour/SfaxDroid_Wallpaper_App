@@ -13,12 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sami.rippel.allah.R;
-import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.feature.main.activity.HomeActivity;
 
 public class LabFragment extends Fragment {
-
-    private AdsListener mListener = null;
 
     public static LabFragment newInstance() {
         return new LabFragment();
@@ -29,10 +26,6 @@ public class LabFragment extends Fragment {
         TextView stickers = view.findViewById(R.id.buttonTakeImageActivityStikers);
         stickers.setOnClickListener(views -> {
             HomeActivity.isAdsShow = true;
-            if (mListener != null) {
-                mListener.onOpenScreenTracker("StikerActivity");
-            }
-
             try {
                 Intent intent = new Intent(
                         getActivity(),
@@ -48,10 +41,6 @@ public class LabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_lab, container, false);
-    }
-
-    public void setListener(AdsListener listener) {
-        mListener = listener;
     }
 
 }

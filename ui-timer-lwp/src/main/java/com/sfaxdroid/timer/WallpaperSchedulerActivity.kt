@@ -52,7 +52,6 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
         buttonActive.setOnClickListener {
             activeService()
         }
-
         buttonClose.setOnClickListener {
             cancelService()
         }

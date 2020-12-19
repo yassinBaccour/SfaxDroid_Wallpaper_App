@@ -34,15 +34,14 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
     private var isClickable = false
 
-    override fun onViewCreated() {
-        fab?.setOnClickListener { openLwp() }
-        buttonColor?.setOnClickListener { chooseColor() }
-    }
 
     override val layout: Int
         get() = R.layout.activity_word_img_lwp
 
     override fun initEventAndData() {
+
+        fab?.setOnClickListener { openLwp() }
+        buttonColor?.setOnClickListener { chooseColor() }
 
         initToolbar()
 
@@ -114,7 +113,7 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
 
                 val pref = SharedPrefsUtils(this)
-                pref.SetSetting("2dwallpaperColor", selectedColor)
+                pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
 
                 BitmapUtils.changeDrawableButtonColor(
                     buttonColor,

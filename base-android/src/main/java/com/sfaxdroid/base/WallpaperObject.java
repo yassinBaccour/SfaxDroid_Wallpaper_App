@@ -30,7 +30,7 @@ public class WallpaperObject implements Parcelable, Serializable {
         liveWallpaper = lv;
     }
 
-    public LiveWallpaper getLiveWallpaper(){
+    public LiveWallpaper getLiveWallpaper() {
         return liveWallpaper;
     }
 

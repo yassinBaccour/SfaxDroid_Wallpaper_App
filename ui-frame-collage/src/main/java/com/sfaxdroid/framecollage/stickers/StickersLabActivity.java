@@ -933,7 +933,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
 
     @Override
     protected void onResume() {
-        checkForCrashes();
         super.onResume();
     }
 
@@ -943,8 +942,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
             changeProgressBarVisibility(false);
     }
 
-    private void checkForCrashes() {
-    }
 
     public void hideTextFragment() {
         this.onBackPressed();

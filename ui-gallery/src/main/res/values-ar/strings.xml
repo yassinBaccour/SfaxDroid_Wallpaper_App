@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cardframetitle">إطارات للصور</string>
+    <string name="cardframedesc">ركب صورتك الخاصة عبر إستعمال الإطارات</string>
+    <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
+    <string name="texturetitle">إختيار الخلفية</string>
+    <string name="choose_background">إختيار الخلفية</string>
+
+</resources>

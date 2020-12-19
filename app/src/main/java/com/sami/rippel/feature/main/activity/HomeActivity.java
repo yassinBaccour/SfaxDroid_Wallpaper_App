@@ -32,15 +32,15 @@ import com.sami.rippel.allah.R;
 import com.sami.rippel.base.BaseActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.entity.ServiceErrorFromEnum;
-import com.sami.rippel.model.listner.AdsListener;
 import com.sfaxdroid.bases.DeviceListner;
 import com.sami.rippel.feature.main.adapter.CatalogPagerAdapter;
 import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.util.ArrayList;
 
-public class HomeActivity extends BaseActivity implements AdsListener, DeviceListner {
+
+public class HomeActivity extends BaseActivity implements DeviceListner {
 
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
 
@@ -71,7 +71,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkForCrashes();
         rxPermissions = new RxPermissions(this);
         setupAds();
         ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
@@ -80,7 +79,7 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         setupViewPager();
         initRatingApp();
         manageNbRunApp();
-        mAdapter.ChangeAdapterFragmentViewState(false);
+        mAdapter.changeButtonSate(false);
         loadAndSetWallpaperToViewModel();
         checkPermission();
     }
@@ -120,29 +119,8 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
     @Override
     protected void onResume() {
         super.onResume();
-        checkForCrashes();
         showFirstTimeAndOneTimeAds();
         showTimedAdsWhenIOpenPicture();
-        onOpenScreenTracker("ViewPager");
-    }
-
-    public void onOpenScreenTracker(String screenName) {
-    }
-
-    public void startUpdateAppIfNeeded() {
-        assert mProgressLoader != null;
-        mProgressLoader.setVisibility(View.VISIBLE);
-        addSubscribe(ViewModel.Current.service.mRetrofitHelper.getUpdateObject()
-                .compose(RxUtil.rxSchedulerHelper())
-                .subscribe(updateApp -> {
-                    if (updateApp.isUpdateAppNeeded()) {
-                        onStartCheckUpdateNewWallpapersDataBase();
-                    } else {
-                        onUpdateNotNeeded();
-                    }
-                }, throwable -> {
-                })
-        );
     }
 
     public void loadAndSetWallpaperToViewModel() {
@@ -152,7 +130,7 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
                     if (wallpapersRetrofitObject.getCategoryList().size() > 0) {
                         ViewModel.Current.setRetrofitWallpObject(wallpapersRetrofitObject);
                         onFillAdapterWithServiceData();
-                        mAdapter.ChangeAdapterFragmentViewState(true);
+                        mAdapter.changeButtonSate(true);
                     }
                 }, throwable -> {
                     showSnackMessage(mRootLayout, "Parsing Wallpaper Data Error" + throwable.getMessage());
@@ -241,7 +219,14 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
     }
 
     private void setupViewPager() {
-        mAdapter = new CatalogPagerAdapter(getSupportFragmentManager(), this, this);
+
+        ArrayList titleList = new ArrayList<String>();
+        titleList.add(getString(R.string.catalog_LWP));
+        titleList.add(getString(R.string.catalog_All));
+        titleList.add(getString(R.string.catalog_Category));
+        titleList.add(getString(R.string.catalog_Lab));
+
+        mAdapter = new CatalogPagerAdapter(getSupportFragmentManager(), titleList);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -252,7 +237,7 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
             @Override
             public void onPageSelected(int position) {
                 if (mAdapter != null) {
-                    mAdapter.ChooseFragmentToExcecuteAction(position);
+                    mAdapter.downloadPicture(position);
                 }
             }
 
@@ -295,7 +280,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
 
         if (nbOpenAds == 7) {
             rateApplication();
-            onOpenScreenTracker("RatingDialog");
         }
     }
 
@@ -303,8 +287,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         loadAndSetWallpaperToViewModel();
     }
 
-    private void checkForCrashes() {
-    }
 
     @Override
     protected void onStart() {
@@ -337,7 +319,6 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
                         Manifest.permission.WRITE_SETTINGS,
                         Manifest.permission.SET_WALLPAPER,
                         Manifest.permission.RECEIVE_BOOT_COMPLETED},
-
                 REQUEST_CODE_ASK_PERMISSIONS);
     }
 
@@ -363,20 +344,10 @@ public class HomeActivity extends BaseActivity implements AdsListener, DeviceLis
         mProgressLoader.setVisibility(View.GONE);
     }
 
-    public void onRestartCheckIfCallError(ServiceErrorFromEnum errorFromEnum) {
-        if (errorFromEnum == ServiceErrorFromEnum.UPDATE_APPLICATION_CALL) {
-            startUpdateAppIfNeeded();
-        } else if (errorFromEnum == ServiceErrorFromEnum.GET_WALLPAPER_LIST_CALL) {
-            checkUpdateNewWallpapers();
-        }
-    }
 
     @Override
-    protected void initInject() {
-    }
+    public void showSnackMsg(String s) {
 
-    @Override
-    public void showSnackMsg(String msg) {
     }
 
     @Override

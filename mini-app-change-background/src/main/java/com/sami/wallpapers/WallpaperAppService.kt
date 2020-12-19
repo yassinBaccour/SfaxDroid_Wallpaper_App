@@ -23,7 +23,7 @@ class WallpaperAppService : WallpaperService() {
     }
 
     inner class WallpaperEngine(
-        var context: Context,
+        private var context: Context,
         var qualityPref: String?,
         var speedPref: String?
     ) :
@@ -117,7 +117,7 @@ class WallpaperAppService : WallpaperService() {
             if (currentPosition >= frameMaxDigit) {
                 currentPosition = 0
             }
-            val bitmap = BitmapFactory.decodeResource(
+            BitmapFactory.decodeResource(
                 context.resources,
                 context.resources.getIdentifier(
                     "img_"
@@ -129,13 +129,15 @@ class WallpaperAppService : WallpaperService() {
                     context.packageName
                 ),
                 bitmapOptions
-            )
-            val scaledBitmap = Bitmap.createScaledBitmap(
-                bitmap, mScreenWidth,
-                mScreenHeight, true
-            )
-            canvas.drawBitmap(scaledBitmap, transformationMatrix, null)
-            bitmap.recycle()
+            )?.let {
+                canvas.drawBitmap(
+                    Bitmap.createScaledBitmap(
+                        it, mScreenWidth,
+                        mScreenHeight, true
+                    ), transformationMatrix, null
+                )
+                it.recycle()
+            }
             mTickCount++
         }
 

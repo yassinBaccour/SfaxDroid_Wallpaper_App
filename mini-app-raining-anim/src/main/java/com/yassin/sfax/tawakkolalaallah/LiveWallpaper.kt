@@ -7,7 +7,7 @@ import android.preference.PreferenceManager
 import android.service.wallpaper.WallpaperService
 import android.view.MotionEvent
 import android.view.SurfaceHolder
-import com.sfaxdroid.base.AnimatedItem
+import com.sfaxdroid.mini.base.AnimatedItem
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getBackground
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getRainingItem
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getTouchingItem

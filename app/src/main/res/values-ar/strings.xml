@@ -23,7 +23,6 @@
     <string name="other">خلفياتي الأخرى</string>
     <string name="txtGallery">مجموعة الخلفيات الإسلامية</string>
     <string name="global_how_to_use">قم بإختيات خلفياتك المفضلة اللتي ستتبدل علي الشاشة مع التوقيت الزمني المختار</string>
-    <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
 
     <string name="gallery"></string>
     <string name="catalog_Lab">مصنع</string>
@@ -58,8 +57,6 @@
     <string name="catalog_LWP">المتحركة</string>
     <string name="openGallery">فتح ملف الصور</string>
     <string name="openCamera">تصوير صورة</string>
-    <string name="cardframetitle">إطارات للصور</string>
-    <string name="cardframedesc">ركب صورتك الخاصة عبر إستعمال الإطارات</string>
     <string name="cardStickerstitle">خطوط و ملصقات</string>
     <string name="cardStickersdesc">ركب ملصاقات على الصور وأنشرها</string>
     <string name="ShareUsing">Sالنشر بإستعمال</string>
@@ -78,7 +75,6 @@
     <string name="FirstMethodRippleTitle">الطريقة الأولى</string>
     <string name="FirstMethodRippleDesc"> إختر صورتك المفضلة ثم إضغط على الزر الأسفل لجعلها خلفية متحركة</string>
     <string name="DescDouaLwp">قم بإختيار خلفية و عند لمس الشاشة أدعية تتبدل تلقائيا</string>
-    <string name="DouaLwpTitle">إختيار الخلفية</string>
 
     <string name="titleBasmala">الفتح مع البسملة</string>
     <string name="toastnosound">بسمله بدون صوت</string>
@@ -136,7 +132,6 @@
     <string name="addtochangebackground">أضف النص على الصورة لتبديل لون خلفية الكتابة</string>
     <string name="addtochangefont">أضف النص على الصورة لتغير الخط</string>
     <string name="removepicture"> فسخ الصورة</string>
-    <string name="texturetitle">إختيار الخلفية</string>
     <string name="scroll_up">إلى الأعلى</string>
 
 </resources>

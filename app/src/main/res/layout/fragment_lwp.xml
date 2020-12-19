@@ -14,7 +14,7 @@
         android:layout_marginRight="3dp"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardViewRippleLWP"
             style="@style/Material_Card_View"
             android:visibility="gone"
@@ -57,7 +57,7 @@
                             tools:text="@string/DescRippleLwp" />
                     </LinearLayout>
 
-                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                    <View
 
                         android:layout_width="fill_parent"
                         android:layout_height="1px"
@@ -83,7 +83,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardViewDoua"
             style="@style/Material_Card_View"
             card_view:cardCornerRadius="2dp"
@@ -109,7 +109,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -127,7 +127,7 @@
                             tools:text="@string/DescDouaLwp" />
                     </LinearLayout>
 
-                    <View xmlns:android="http://schemas.android.com/apk/res/android"
+                    <View
                         android:id="@+id/dividerDoua"
                         android:layout_width="fill_parent"
                         android:layout_height="1px"

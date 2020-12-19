@@ -3,7 +3,6 @@ package com.sami.rippel.feature.singleview;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,15 +27,14 @@ import com.sami.rippel.base.BaseActivity;
 import com.sami.rippel.model.Constants;
 import com.sami.rippel.model.ViewModel;
 import com.sami.rippel.model.entity.ServiceErrorFromEnum;
-import com.sami.rippel.model.listner.AdsListener;
 import com.sfaxdroid.bases.DeviceListner;
 import com.sami.rippel.utils.RxUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import org.jetbrains.annotations.NotNull;
 
-public class HomeActivityNavBar extends BaseActivity implements AdsListener, DeviceListner {
 
-    private CollapsingToolbarLayout mCollapsingToolbarLayout;
+public class HomeActivityNavBar extends BaseActivity implements DeviceListner {
 
     private CoordinatorLayout mRootLayout;
 
@@ -63,7 +61,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkForCrashes();
         rxPermissions = new RxPermissions(this);
         setupAds();
         ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
@@ -77,7 +74,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
 
     private void loadFragment() {
         AllInOneFragment mAllBackgroundFragment = AllInOneFragment.Companion.newInstance();
-        mAllBackgroundFragment.setListener(this);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.content_main, mAllBackgroundFragment, "Home.class");
@@ -85,12 +81,10 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     }
 
     private void initView() {
-        mCollapsingToolbarLayout = findViewById(R.id.collapsingToolbarLayout);
         mRootLayout = findViewById(R.id.rootLayout);
         mToolbar = findViewById(R.id.toolbar);
         mProgressLoader = findViewById(R.id.progressBar);
         mPrivacy = findViewById(R.id.imgPrivacy);
-
         mPrivacy.setOnClickListener(x -> {
             Intent intent = new Intent(this,
                     PrivacyActivity.class);
@@ -110,7 +104,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
-
     }
 
     @Override
@@ -125,29 +118,8 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     @Override
     protected void onResume() {
         super.onResume();
-        checkForCrashes();
         showFirstTimeAndOneTimeAds();
         showTimedAdsWhenIOpenPicture();
-        onOpenScreenTracker("ViewPager");
-    }
-
-    public void onOpenScreenTracker(String screenName) {
-    }
-
-    public void startUpdateAppIfNeeded() {
-        assert mProgressLoader != null;
-        mProgressLoader.setVisibility(View.VISIBLE);
-        addSubscribe(ViewModel.Current.service.mRetrofitHelper.getUpdateObject()
-                .compose(RxUtil.rxSchedulerHelper())
-                .subscribe(updateApp -> {
-                    if (updateApp.isUpdateAppNeeded()) {
-                        onStartCheckUpdateNewWallpapersDataBase();
-                    } else {
-                        onUpdateNotNeeded();
-                    }
-                }, throwable -> {
-                })
-        );
     }
 
     public void loadAndSetWallpaperToViewModel() {
@@ -211,7 +183,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
         } else if (nbRun == 3) {
             ViewModel.Current.sharedPrefsUtils.SetSetting("NbRun",
                     0);
-            showRunAppADS();
         } else {
             nbRun = nbRun + 1;
             ViewModel.Current.sharedPrefsUtils.SetSetting("NbRun",
@@ -229,9 +200,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
                 });
     }
 
-    public void showRunAppADS() {
-        onTrackAction("ADS", "RunApplication");
-    }
 
     private void setupToolBar() {
         setSupportActionBar(mToolbar);
@@ -243,13 +211,9 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
         }
     }
 
-    public void onTrackAction(String category, String name) {
-    }
-
     public void showFirstTimeAndOneTimeAds() {
         if (isAdsShow) {
             isAdsShow = false;
-            onTrackAction("ADS", AdsType.ShowAds.toString());
             showInterstitial();
         }
     }
@@ -265,22 +229,16 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
         if (nbOpenAds == 4) {
             nbOpenAds = 0;
             showInterstitial();
-            onTrackAction("ADS", AdsType.ShowTimedAds.toString());
         }
 
         if (nbOpenAds == 7) {
             rateApplication();
-            onOpenScreenTracker("RatingDialog");
         }
     }
 
     public void checkUpdateNewWallpapers() {
         loadAndSetWallpaperToViewModel();
     }
-
-    private void checkForCrashes() {
-    }
-
 
     @Override
     protected void onStart() {
@@ -337,22 +295,6 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
         mProgressLoader.setVisibility(View.GONE);
     }
 
-    public void onRestartCheckIfCallError(ServiceErrorFromEnum errorFromEnum) {
-        if (errorFromEnum == ServiceErrorFromEnum.UPDATE_APPLICATION_CALL) {
-            startUpdateAppIfNeeded();
-        } else if (errorFromEnum == ServiceErrorFromEnum.GET_WALLPAPER_LIST_CALL) {
-            checkUpdateNewWallpapers();
-        }
-    }
-
-    @Override
-    protected void initInject() {
-    }
-
-    @Override
-    public void showSnackMsg(String msg) {
-    }
-
     @Override
     public void showLoading() {
     }
@@ -360,6 +302,12 @@ public class HomeActivityNavBar extends BaseActivity implements AdsListener, Dev
     @Override
     public void hideLoading() {
     }
+
+    @Override
+    public void showSnackMsg(@NotNull String msg) {
+
+    }
+
 
     public enum AdsType {
         ShowAds,

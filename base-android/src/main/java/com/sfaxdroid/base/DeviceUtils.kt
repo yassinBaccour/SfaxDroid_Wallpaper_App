@@ -8,7 +8,6 @@ class DeviceUtils {
 
     companion object {
 
-
         fun getCellWidth(context: Context): Int {
             return if (Utils.getScreenHeightPixels(context) < 820 && Utils.getScreenWidthPixels(
                     context
@@ -44,7 +43,6 @@ class DeviceUtils {
                     return true
                 }
             } catch (e: Exception) {
-                println("CheckConnectivity Exception: " + e.message)
             }
             return false
         }

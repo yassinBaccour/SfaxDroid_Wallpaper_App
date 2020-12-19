@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import com.sfaxdroid.base.Utils
+import com.sfaxdroid.mini.base.Utils
 
 class MainActivity : Activity() {
 

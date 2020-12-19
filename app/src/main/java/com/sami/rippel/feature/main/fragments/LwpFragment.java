@@ -21,9 +21,7 @@ import android.widget.TextView;
 import com.sami.rippel.allah.R;
 import com.sfaxdroid.base.SimpleFragment;
 import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.listner.AdsListener;
 import com.sami.rippel.feature.main.activity.AboutActivity;
-import com.sami.rippel.feature.main.activity.GalleryActivity;
 import com.sami.rippel.feature.main.activity.HomeActivity;
 import com.sfaxdroid.base.Utils;
 import com.sfaxdroid.sky.SkyLiveWallpaper;
@@ -53,7 +51,6 @@ public class LwpFragment extends SimpleFragment {
     private Button mBtotherapp;
     private CardView mCardViewSkyBox;
     private CardView mCardViewTimer;
-    private AdsListener mListener = null;
 
     public static LwpFragment newInstance() {
         return new LwpFragment();
@@ -63,23 +60,20 @@ public class LwpFragment extends SimpleFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         mButtonRippleLWP.setOnClickListener(v -> {
-            if (mListener != null) {
-                mListener.onTrackAction("LwpFragment", "OpenLiveWallpapers");
+            try {
+                Intent intent = new Intent(
+                        getActivity(),
+                        Class.forName("com.sfaxdroid.detail.GalleryActivity"));
+                intent.putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, "RippleLwp");
+                startActivity(intent);
+            } catch (Exception e) {
+
             }
-            Intent intent = new Intent(
-                    getActivity(),
-                    GalleryActivity.class);
-            intent.putExtra("LwpName", "RippleLwp");
-            startActivity(intent);
         });
 
         mButtonSkybox.setOnClickListener(v -> {
             clearCurrentWallpaper();
             try {
-                if (mListener != null) {
-                    mListener.onTrackAction("LwpFragment", "OpenSkyBox");
-                }
-
                 Intent intent = new Intent(
                         WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
                 intent.putExtra(
@@ -99,21 +93,19 @@ public class LwpFragment extends SimpleFragment {
         });
 
         mButtonDoua.setOnClickListener(view12 -> {
-            if (mListener != null) {
-                mListener.onTrackAction("LwpFragment", "DouaLWP");
-            }
             HomeActivity.isAdsShow = true;
-            Intent intent = new Intent(
-                    getActivity(),
-                    GalleryActivity.class);
-            intent.putExtra("LwpName", "DouaLWP");
-            startActivity(intent);
+            try {
+                Intent intent = new Intent(
+                        getActivity(), Class.forName("com.sfaxdroid.detail.GalleryActivity")
+                );
+                intent.putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, "DouaLWP");
+                startActivity(intent);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         });
 
         mButtonTimer.setOnClickListener(view13 -> {
-            if (mListener != null) {
-                mListener.onTrackAction("LwpFragment", "TimerLWP");
-            }
             HomeActivity.isAdsShow = true;
             openWallpaperSchedulerActivity();
         });
@@ -122,7 +114,6 @@ public class LwpFragment extends SimpleFragment {
                 && Utils.Companion.getScreenHeightPixels(getContext()) < 1200) {
             mCardViewSkyBox.setVisibility(View.GONE);
         }
-        //Set visible
         mCardViewSkyBox.setVisibility(View.VISIBLE);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -152,18 +143,23 @@ public class LwpFragment extends SimpleFragment {
         });
 
         mButtonNameofallah2D.setOnClickListener(view1 -> {
-            if (mListener != null) {
-                mListener.onTrackAction("LwpFragment", "NameOfAllah2D");
-            }
             HomeActivity.isAdsShow = true;
-            Intent intent = new Intent(
-                    getActivity(),
-                    GalleryActivity.class);
-            intent.putExtra("LwpName", "NameOfAllah2DLWP");
-            startActivity(intent);
+            open();
         });
 
         resizeTitleForSmallDevice();
+    }
+
+    private void open() {
+        try {
+            Intent intent = new Intent(
+                    getActivity(),
+                    Class.forName("com.sfaxdroid.detail.GalleryActivity"));
+            intent.putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, "NameOfAllah2DLWP");
+            startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void openWallpaperSchedulerActivity() {
@@ -235,16 +231,12 @@ public class LwpFragment extends SimpleFragment {
         }
     }
 
-    public void clearCurrentWallpaper() {
+    private void clearCurrentWallpaper() {
         WallpaperManager myWallpaperManager = WallpaperManager
                 .getInstance(getActivity());
         try {
             myWallpaperManager.clear();
         } catch (IOException ignored) {
         }
-    }
-
-    public void setListener(AdsListener adsListener) {
-        mListener = adsListener;
     }
 }

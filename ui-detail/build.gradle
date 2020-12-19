@@ -8,7 +8,6 @@ apply from: '../dependencies.gradle'
 android {
     compileSdkVersion androidCompileSdkVersion
 
-
     defaultConfig {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
@@ -17,7 +16,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 

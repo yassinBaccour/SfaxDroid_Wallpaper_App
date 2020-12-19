@@ -187,7 +187,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
             .setPositiveButton(
                 getString(R.string.btn_ok)
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
-                pref!!.SetSetting("2dwallpaperColor", selectedColor)
+                pref!!.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
                 BitmapUtils.changeDrawableButtonColor(buttonColor, this, R.mipmap.ic_palette)
             }
             .setNegativeButton(

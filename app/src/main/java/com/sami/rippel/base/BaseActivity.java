@@ -19,8 +19,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     protected CompositeDisposable mCompositeDisposable;
     protected T mPresenter;
 
-    protected abstract void initInject();
-
     protected T instantiatePresenter() {
         return null;
     }
@@ -33,7 +31,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
     @Override
     public void onViewCreated() {
         super.onViewCreated();
-        initInject();
         mPresenter = instantiatePresenter();
         if (mPresenter != null)
             mPresenter.attachView(this);

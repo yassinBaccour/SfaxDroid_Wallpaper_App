@@ -3,9 +3,9 @@ package com.yassin.wallpaper
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.sfaxdroid.base.BaseMiniAppActivity
-import com.sfaxdroid.base.Utils
+import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.engine.Constants
+import com.sfaxdroid.mini.base.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMiniAppActivity() {

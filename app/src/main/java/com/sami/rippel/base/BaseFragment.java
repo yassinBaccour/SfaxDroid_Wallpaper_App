@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.sami.rippel.allah.R;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.listner.AdsListener;
 import com.sfaxdroid.base.DeviceUtils;
 import com.sfaxdroid.base.SimpleFragment;
 import com.sfaxdroid.bases.BasePresenter;
@@ -28,7 +26,6 @@ import java.util.ArrayList;
  */
 
 public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView {
-    protected AdsListener mListener = null;
     protected ArrayList<WallpaperObject> mData = new ArrayList<>();
     protected RecyclerView mRecyclerView;
     protected ProgressBar mProgressLoader;
@@ -77,10 +74,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
             mPresenter.detachView();
         }
         super.onDestroyView();
-    }
-
-    public void setListener(AdsListener adsListener) {
-        mListener = adsListener;
     }
 
     public void downloadPicture() {
