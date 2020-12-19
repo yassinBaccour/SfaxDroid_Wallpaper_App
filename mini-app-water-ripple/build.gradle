@@ -55,5 +55,4 @@ dependencies {
     implementation project(':common-resources')
     implementation project(':base-rajawali-engine')
     implementation project(':mini-app-base')
-
 }

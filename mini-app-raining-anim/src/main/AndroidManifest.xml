@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yassin.sfax.tawakkolalaallah">
 
@@ -14,7 +15,7 @@
         android:theme="@style/Theme">
 
         <service
-            android:name="com.yassin.sfax.tawakkolalaallah.LiveWallpaper"
+            android:name=".LiveWallpaper"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_WALLPAPER">
@@ -28,11 +29,11 @@
         </service>
 
         <activity
-            android:name="com.yassin.sfax.tawakkolalaallah.SettingActivity"
+            android:name=".SettingActivity"
             android:exported="true"
             android:label="@string/app_name" />
         <activity
-            android:name="com.yassin.sfax.tawakkolalaallah.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="fullSensor">
             <intent-filter>
