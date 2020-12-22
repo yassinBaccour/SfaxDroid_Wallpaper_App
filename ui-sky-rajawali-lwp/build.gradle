@@ -27,5 +27,5 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    compileOnly files('libs/rajawali-1.1.970.aar')
 }
