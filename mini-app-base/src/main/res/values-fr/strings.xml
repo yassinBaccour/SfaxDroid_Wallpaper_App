@@ -9,5 +9,5 @@
     <string name="set_wallpaper_click_text">Set the wallpaper</string>
     <string name="open_gallery">Open Wallpaper Gallery</string>
     <string name="setting_rate_us">please Rate us</string>
-    <string name="set_wallpaper_failure">Try again, Failed to set as wallpaper</string>
+    <string name="set_wallpaper_failure">Refaire</string>
 </resources>

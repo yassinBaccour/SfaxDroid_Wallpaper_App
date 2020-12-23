@@ -16,7 +16,8 @@ import java.util.*
 class WallpaperPagerAdapter(private var context: Context, private var resourceId: Int) :
     PagerAdapter() {
 
-    override fun getCount(): Int = 99
+    override fun getCount() = if (BuildConfig.FLAVOR == "big")
+        98 else 70
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean = view === `object`
 

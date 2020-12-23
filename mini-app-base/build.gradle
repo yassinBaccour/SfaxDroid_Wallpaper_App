@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
-
 android {
 
     compileSdkVersion androidCompileSdkVersion
@@ -23,8 +22,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api libraries.kotlinStdlib
     api libraries.constraintlayout
-    api project(':common-layouts')
-    api project(':common-resources')
 }

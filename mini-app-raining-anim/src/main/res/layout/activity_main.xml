@@ -24,7 +24,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
-        android:text="@string/setting_ripple"
+        android:text="@string/setting_rate_us"
         app:layout_constraintBottom_toTopOf="@+id/imageViewPub"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

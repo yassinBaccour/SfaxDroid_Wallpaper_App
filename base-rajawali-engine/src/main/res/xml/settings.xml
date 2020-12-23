@@ -5,8 +5,8 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="sound_on"
-            android:summary="@string/enable_water_ripple_sound"
-            android:title="@string/enable_sound_wallpaper" />
+            android:summary="@string/setting_enable_sound_desc"
+            android:title="@string/setting_enable_sound" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/setting_ripple">
         <ListPreference
@@ -29,7 +29,7 @@
 
     <PreferenceCategory android:title="@string/setting_recommendations">
         <Preference
-            android:key="recommend_1"
+            android:key="rate_us"
             android:title="@string/setting_rate_us" />
 
     </PreferenceCategory>

@@ -41,7 +41,7 @@ class Utils {
                     action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
                 })
                 Toast.makeText(
-                    context, R.string.set_wallpaper_manually_message,
+                    context, R.string.set_wallpaper_failure,
                     Toast.LENGTH_SHORT
                 ).show()
             }

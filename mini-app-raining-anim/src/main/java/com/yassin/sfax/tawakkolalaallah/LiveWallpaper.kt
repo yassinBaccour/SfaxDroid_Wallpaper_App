@@ -27,18 +27,22 @@ class LiveWallpaper : WallpaperService() {
         private val mDrawPattern = Runnable { drawFrame() }
         private val animatedItems: ArrayList<AnimatedItem> = ArrayList()
         private var newCloudIteration = 0
+
         private var background = BitmapFactory.decodeResource(
             resources,
             R.drawable.wallpaper1
         )
+
         private var rainingItem = BitmapFactory.decodeResource(
             resources,
             R.drawable.style4_raining
         )
+
         private var touchingItem = BitmapFactory.decodeResource(
             resources,
             R.drawable.style4_raining
         )
+
         private var mVisible = false
 
         init {
@@ -61,7 +65,6 @@ class LiveWallpaper : WallpaperService() {
 
             val rainingPref = sharedPrefs.getBoolean("rainingPref", true)
             val touchingPref = sharedPrefs.getBoolean("touchingPref", true)
-
             val themePref = sharedPrefs.getString("themePref", "Style 1")
 
             background = getBackground(

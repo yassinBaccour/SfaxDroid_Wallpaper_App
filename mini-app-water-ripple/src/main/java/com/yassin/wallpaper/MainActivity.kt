@@ -15,7 +15,7 @@ class MainActivity : BaseMiniAppActivity() {
         setContentView(R.layout.activity_main)
 
         btnSetWallpaper.setOnClickListener {
-            ClearCurrentWallpaper()
+            clearCurrentWallpaper()
             Utils.openLiveWallpaper<WallpaperEngine>(this)
         }
 

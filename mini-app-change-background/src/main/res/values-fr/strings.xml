@@ -1,6 +1,4 @@
 <resources>
-    <string name="wallpaper_author" translatable="false">SfaxDroid</string>
-    <string name="wallpaper_description" translatable="false">أسماء الله الحسنى متغيرة</string>
     <string name="setting_change_speed">تعديل سرعة تبديل الصور</string>
     <string name="setting_speed_very_slow">التغير البطيء جداً للصور</string>
     <string name="setting_speed_slow">التغير البطيء للصور</string>

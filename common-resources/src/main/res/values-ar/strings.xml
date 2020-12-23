@@ -26,12 +26,12 @@
     <string name="set_wallpaper_click_text">تطبيق الخلفية المتحرك</string>
     <string name="txt3">كيفية التطبيق يدويا ؟</string>
     <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
-    <string name="txtrate1">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
-    <string name="txtrate2"> تقييم التطبيقة </string>
-    <string name="txtrate3">ذكرني لاحق</string>
-    <string name="txtrate4">لا تسألني مرة أخرى</string>
-    <string name="txtrate5">تقييم التطبيقة </string>
-    <string name="txtrate6">اضغط مرتين على الزر للخروج</string>
+    <string name="rating_box_description">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
+    <string name="rating_box_title"> تقييم التطبيقة </string>
+    <string name="rating_box_later">ذكرني لاحق</string>
+    <string name="rating_box_never">لا تسألني مرة أخرى</string>
+    <string name="rating_box_rate">تقييم التطبيقة </string>
+    <string name="back_press_message_info">اضغط مرتين على الزر للخروج</string>
     <string name="enable_sound_wallpaper"> الصوت</string>
     <string name="enable_water_ripple_sound">حدد هذا الخيار لسماع صوت قطرة الماء عند لمس الشاشة</string>
     <string name="setting_ripple_size">حجم التموج</string>
@@ -69,5 +69,6 @@
     <string name="set_wallpaper_sucess_message">تم تطبيق الخلفية بنجاح</string>
     <string name="set_wallpaper_not_sucess_message">خلل في تطبيق الخلفية </string>
     <string name="set_as_dialog_message">إستعمال</string>
+    <string name="open_gallery">Open Wallpaper Gallery</string>
 
 </resources>

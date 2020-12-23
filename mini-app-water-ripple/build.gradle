@@ -16,7 +16,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 
@@ -51,8 +50,5 @@ android {
 }
 
 dependencies {
-    implementation project(':common-layouts')
-    implementation project(':common-resources')
     implementation project(':base-rajawali-engine')
-    implementation project(':mini-app-base')
 }

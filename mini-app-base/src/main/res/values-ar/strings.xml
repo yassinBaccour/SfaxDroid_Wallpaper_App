@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rating_box_description">\n if you like this application Please rating , rating help me to develop more Islamic Application \n </string>
     <string name="rating_box_title">Rate the application</string>
     <string name="rating_box_later">Remind me later</string>
     <string name="rating_box_never">Do not ask again</string>
     <string name="rating_box_rate">Rate my application</string>
-    <string name="back_press_message_info">Simultaneously press two times the back button to exit</string>
-    <string name="set_wallpaper_click_text">Set the wallpaper</string>
+    <string name="back_press_message_info">اضغط مرتين على الزر للخروج</string>
+    <string name="set_wallpaper_click_text">تطبيق الخلفية المتحرك</string>
     <string name="open_gallery">Open Wallpaper Gallery</string>
-    <string name="setting_rate_us">please Rate us</string>
-    <string name="set_wallpaper_failure">Try again, Failed to set as wallpaper</string>
+    <string name="setting_rate_us">رجاء التقييم التطبيقة</string>
+    <string name="set_wallpaper_failure">خلل في تطبيق الخلفية </string>
 </resources>
+

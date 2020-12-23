@@ -8,18 +8,18 @@ import java.io.IOException
 
 abstract class BaseMiniAppActivity : Activity() {
     override fun onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed() else {
+        if (backPressed + 2000 > System.currentTimeMillis()) super.onBackPressed() else {
             RateUs(this, packageName).appLaunched()
             Toast.makeText(
-                baseContext, R.string.txtrate6,
+                baseContext, R.string.back_press_message_info,
                 Toast.LENGTH_SHORT
             ).show()
         }
-        back_pressed = System.currentTimeMillis()
+        backPressed = System.currentTimeMillis()
     }
 
     @SuppressLint("MissingPermission")
-    fun ClearCurrentWallpaper() {
+    fun clearCurrentWallpaper() {
         val myWallpaperManager = WallpaperManager
             .getInstance(this)
         try {
@@ -30,6 +30,6 @@ abstract class BaseMiniAppActivity : Activity() {
     }
 
     companion object {
-        private var back_pressed: Long = 0
+        private var backPressed: Long = 0
     }
 }

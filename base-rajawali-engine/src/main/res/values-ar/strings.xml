@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="setting_sound">صوت</string>
+    <string name="setting_enable_sound_desc">حدد هذا الخيار لسماع صوت قطرة الماء عند لمس الشاشة</string>
+    <string name="setting_enable_sound"> الصوت</string>
+    <string name="setting_ripple_size">حجم التموج</string>
+    <string name="setting_change_size">تغير حجم التموج</string>
+    <string name="setting_ripple_speed">سرعة التموج</string>
+    <string name="setting_change_ripple_speed">تغير سرعة التموج</string>
+    <string name="setting_ripple">اعدادت التموج</string>
+    <string name="setting_recommendations">التقييم</string>
+    <string name="setting_rate_us">رجاء التقييم التطبيقة</string>
+    <string-array name="ripple_size">
+        <item>صغيرة</item>
+        <item>متوسطة</item>
+        <item>كبيرة</item>
+    </string-array>
+    <string-array name="ripple_size_value">
+        <item>صغيرة</item>
+        <item>متوسطة</item>
+        <item>كبيرة</item>
+    </string-array>
+    <string-array name="ripple_duration">
+        <item>بطيئة</item>
+        <item>متوسط</item>
+        <item>سريع</item>
+    </string-array>
+    <string-array name="ripple_duration_value">
+        <item>بطيئة</item>
+        <item>متوسط</item>
+        <item>سريع</item>
+    </string-array>
+</resources>

@@ -1,10 +1,6 @@
 package com.sami.wallpapers
 
-import android.app.WallpaperManager
-import android.content.ActivityNotFoundException
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -13,64 +9,51 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
+import com.sfaxdroid.mini.base.Constans
+import com.sfaxdroid.mini.base.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMiniAppActivity() {
 
     private var mInterstitialAd: InterstitialAd? = null
 
+    private var sharedPrefs: SharedPreferences? = null
+
+    private var canShowAds = (BuildConfig.FLAVOR == "big")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        initAdMob()
-        val sharedPrefs = getSharedPreferences(
-            "NAME_OF_ALLAH",
-            Context.MODE_PRIVATE
-        )
+        sharedPrefs = getSharedPreferences(Constans.PREF_NAME, Context.MODE_PRIVATE)
 
-        val prefsEditor = sharedPrefs.edit()
+        setContentView(R.layout.activity_main)
+
+        if (canShowAds) {
+            initAdMob()
+        }
 
         button_set_wallpaper.setOnClickListener {
-            try {
-                val intent = Intent(
-                    WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
-                )
-                intent.putExtra(
-                    WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                    ComponentName(
-                        applicationContext,
-                        WallpaperAppService::class.java
-                    )
-                )
-                startActivity(intent)
-            } catch (e: Exception) {
-                val intent = Intent()
-                intent.action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
-                startActivity(intent)
-                Toast.makeText(
-                    applicationContext, R.string.set_wallpaper_manually_message,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+            Utils.openLiveWallpaper<WallpaperAppService>(this)
         }
-  
 
         button_open_gallery.setOnClickListener {
-            val intent = Intent(
-                applicationContext,
-                ViewWallpaperActivity::class.java
+            startActivity(
+                Intent(
+                    applicationContext,
+                    ViewWallpaperActivity::class.java
+                )
             )
-            startActivity(intent)
         }
+
         button_privacy.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://www.iubenda.com/privacy-policy/27298346")
+                Uri.parse(Constants.PRIVACY)
             )
             if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             }
         }
+
         btn_rating.setOnClickListener {
             val myAppLinkToMarket = Intent(
                 Intent.ACTION_VIEW,
@@ -81,78 +64,84 @@ class MainActivity : BaseMiniAppActivity() {
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(
                     this@MainActivity,
-                    " unable to find market app",
+                    "Unable to find market app",
                     Toast.LENGTH_LONG
                 ).show()
             }
         }
 
-        when (sharedPrefs.getString("prefSyncFrequency", "none")) {
-            "speed1" -> {
+        when (sharedPrefs?.getString(Constants.PREF_KEY_SPEED, "none")) {
+            Constants.PREF_VALUE_SPEED_1 -> {
                 radio_animation.check(R.id.speed1)
             }
-            "speed2" -> {
+            Constants.PREF_VALUE_SPEED_2 -> {
                 radio_animation.check(R.id.speed2)
             }
-            "speed3" -> {
+            Constants.PREF_VALUE_SPEED_3 -> {
                 radio_animation.check(R.id.speed3)
             }
-            "speed4" -> {
+            Constants.PREF_VALUE_SPEED_4 -> {
                 radio_animation.check(R.id.speed4)
             }
             else -> {
                 radio_animation.check(R.id.speed3)
-                prefsEditor.putString("prefSyncFrequency", "speed3")
-                prefsEditor.apply()
+                saveSpeed(Constants.PREF_VALUE_SPEED_3)
             }
         }
 
         radio_animation.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.speed1 -> {
-                    prefsEditor.putString("prefSyncFrequency", "speed1")
-                    prefsEditor.commit()
+                    saveSpeed(Constants.PREF_VALUE_SPEED_1)
                 }
                 R.id.speed2 -> {
-                    prefsEditor.putString("prefSyncFrequency", "speed2")
-                    prefsEditor.commit()
+                    saveSpeed(Constants.PREF_VALUE_SPEED_2)
                 }
                 R.id.speed3 -> {
-                    prefsEditor.putString("prefSyncFrequency", "speed3")
-                    prefsEditor.commit()
+                    saveSpeed(Constants.PREF_VALUE_SPEED_3)
                 }
                 R.id.speed4 -> {
-                    prefsEditor.putString("prefSyncFrequency", "speed4")
-                    prefsEditor.commit()
+                    saveSpeed(Constants.PREF_VALUE_SPEED_4)
                 }
             }
         }
 
-        when (sharedPrefs.getString("prefQuality", "none")) {
-            "quality1" -> {
+        when (sharedPrefs?.getString(Constants.PREF_KEY_QUALITY, "none")) {
+            Constants.PREF_VALUE_QUALITY_1 -> {
                 radio_quality.check(R.id.quality1)
             }
-            "quality2" -> {
+            Constants.PREF_VALUE_QUALITY_2 -> {
                 radio_quality.check(R.id.quality2)
             }
             else -> {
                 radio_quality.check(R.id.quality1)
-                prefsEditor.putString("prefquality", "quality1")
-                prefsEditor.commit()
+                saveQuality(Constants.PREF_VALUE_QUALITY_1)
             }
         }
 
         radio_quality.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.quality1 -> {
-                    prefsEditor.putString("prefquality", "quality1")
-                    prefsEditor.commit()
+                    saveQuality(Constants.PREF_VALUE_QUALITY_1)
                 }
                 R.id.quality2 -> {
-                    prefsEditor.putString("prefquality", "quality2")
-                    prefsEditor.commit()
+                    saveQuality(Constants.PREF_VALUE_QUALITY_2)
                 }
             }
+        }
+    }
+
+    private fun saveQuality(quality: String) {
+        sharedPrefs?.edit()?.apply {
+            putString(Constants.PREF_KEY_QUALITY, quality)
+            apply()
+        }
+    }
+
+    private fun saveSpeed(speed: String) {
+        sharedPrefs?.edit()?.apply {
+            putString(Constants.PREF_KEY_SPEED, speed)
+            apply()
         }
     }
 
@@ -160,19 +149,20 @@ class MainActivity : BaseMiniAppActivity() {
         MobileAds.initialize(
             this
         ) { }
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd?.adUnitId = "ca-app-pub-6263632629106733/9710395681"
-        mInterstitialAd?.loadAd(AdRequest.Builder().build())
-        mInterstitialAd?.adListener = object : AdListener() {
-            override fun onAdClosed() {
-                mInterstitialAd?.loadAd(AdRequest.Builder().build())
+        mInterstitialAd = InterstitialAd(this).apply {
+            adUnitId = Constants.AD_MOB
+            loadAd(AdRequest.Builder().build())
+            adListener = object : AdListener() {
+                override fun onAdClosed() {
+                    mInterstitialAd?.loadAd(AdRequest.Builder().build())
+                }
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (mInterstitialAd?.isLoaded == true) {
+        if (canShowAds && mInterstitialAd?.isLoaded == true) {
             mInterstitialAd?.show()
         }
     }

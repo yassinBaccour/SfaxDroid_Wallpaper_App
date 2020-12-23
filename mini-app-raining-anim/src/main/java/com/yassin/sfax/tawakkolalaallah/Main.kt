@@ -44,21 +44,22 @@ fun buttonShow() {
         Column {
             Text("Alfred Sisley", fontWeight = FontWeight.Bold)
             Button(onClick = { }) {
-                Text("Button")
+                Text("Set the wallpaper")
             }
             Button(onClick = { }) {
-                Text("Button")
+                Text("please Rate us")
             }
         }
     }
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     SfaxDroidTheme {
-        buttonShow()
+        Surface(color = MaterialTheme.colors.background) {
+            buttonShow()
+        }
     }
 }

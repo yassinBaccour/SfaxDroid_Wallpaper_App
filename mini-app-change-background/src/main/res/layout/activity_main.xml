@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#7f8c8d">
+    android:background="@color/primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,14 +19,13 @@
             android:contentDescription="@string/app_name"
             android:scaleType="centerInside" />
 
-
         <Button
             android:id="@+id/button_set_wallpaper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
             android:text="@string/set_wallpaper_click_text" />
 
         <Button
@@ -35,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="@string/setting_change_ripple_speed" />
+            android:text="@string/open_gallery" />
 
         <Button
             android:id="@+id/btn_rating"
@@ -43,16 +42,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="@string/setting_ripple" />
-
-        <Button
-            android:visibility="gone"
-            android:id="@+id/btn_other_app"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="@string/setting_recommendations" />
+            android:text="@string/setting_rate_us" />
 
         <TextView
             android:id="@+id/textView1"
@@ -60,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
-            android:text="تعديل سرعة تبديل الصور"
+            android:text="@string/setting_change_speed"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <RadioGroup
@@ -74,34 +64,34 @@
                 android:id="@+id/speed1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:text="التغير البطيء جداً للصور"
-                android:layout_marginStart="5dp" />
+                android:text="@string/setting_speed_very_slow" />
 
             <RadioButton
                 android:id="@+id/speed2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:checked="true"
-                android:text="التغير البطيء  للصور"
-                android:layout_marginStart="5dp" />
+                android:text="@string/setting_speed_slow" />
 
             <RadioButton
                 android:id="@+id/speed3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:text="التغير العادي للصور"
-                android:layout_marginStart="5dp" />
+                android:text="@string/setting_speed_standard" />
 
             <RadioButton
                 android:id="@+id/speed4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:text="التغير السريع للصور"
-                android:layout_marginStart="5dp" />
+                android:text="@string/setting_speed_very_fast" />
 
         </RadioGroup>
 
@@ -111,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
-            android:text="تعديل جودة الصورة"
+            android:text="@string/setting_image_quality"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <RadioGroup
@@ -125,9 +115,9 @@
                 android:id="@+id/quality1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
-                android:text="جودة الصورة متوسطة و الأحسن"
-                android:layout_marginStart="5dp" />
+                android:text="@string/setting_quality_low" />
 
             <RadioButton
                 android:id="@+id/quality2"
@@ -135,15 +125,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:checked="true"
-                android:text="جودة الصورة عالية لكنها تستهلك الذاكرة" />
+                android:text="@string/setting_quality_hight" />
         </RadioGroup>
+
         <Button
-            android:layout_marginTop="10dp"
             android:id="@+id/button_privacy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
-            android:text="Privacy Policy" />
+            android:text="@string/setting_privacy" />
     </LinearLayout>
 </ScrollView>

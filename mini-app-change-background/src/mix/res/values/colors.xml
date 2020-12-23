@@ -6,7 +6,7 @@
     <color name="default_back_color">#ffffffff</color>
     <color name="button_backgound">#3498db</color>
     <color name="background_color">#B6B6B6</color>
-    <color name="primary">#7f8c8d</color>
-    <color name="primary_dark">#7f8c8d</color>
+    <color name="primary">#006978</color>
+    <color name="primary_dark">#006978</color>
     <color name="accent">#2c3e50</color>
 </resources>

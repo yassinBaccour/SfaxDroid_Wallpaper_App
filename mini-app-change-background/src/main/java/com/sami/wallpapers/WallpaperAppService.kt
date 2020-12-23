@@ -6,19 +6,18 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.os.Handler
-import android.preference.PreferenceManager
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
 import android.view.animation.DecelerateInterpolator
+import com.sfaxdroid.mini.base.Constans
 import java.util.*
 
 class WallpaperAppService : WallpaperService() {
     override fun onCreateEngine(): Engine {
-
-        val sharedPrefs = PreferenceManager
-            .getDefaultSharedPreferences(this)
-        val qualityPref = sharedPrefs.getString("prefquality", "none")
-        val speedPref = sharedPrefs.getString("prefSyncFrequency", "")
+        val sharedPrefs =
+            getSharedPreferences(Constans.PREF_NAME, Context.MODE_PRIVATE)
+        val qualityPref = sharedPrefs.getString(Constants.PREF_KEY_QUALITY, "none")
+        val speedPref = sharedPrefs.getString(Constants.PREF_KEY_SPEED, "")
         return WallpaperEngine(this, qualityPref, speedPref)
     }
 
@@ -29,7 +28,8 @@ class WallpaperAppService : WallpaperService() {
     ) :
         Engine() {
 
-        private val frameMaxDigit = 99
+        private val frameMaxDigit = if (BuildConfig.FLAVOR == "big")
+            99 else 70
         private var currentPosition = 0
         private var speed = 10000
         private val handler = Handler()
@@ -64,10 +64,10 @@ class WallpaperAppService : WallpaperService() {
         private fun setSpeedFromPref() {
 
             when (speedPref) {
-                "speed1" -> speed = 300000
-                "speed2" -> speed = 20000
-                "speed3" -> speed = 10000
-                "speed4" -> speed = 8000
+                Constants.PREF_VALUE_SPEED_1 -> speed = 300000
+                Constants.PREF_VALUE_SPEED_2 -> speed = 20000
+                Constants.PREF_VALUE_SPEED_3 -> speed = 10000
+                Constants.PREF_VALUE_SPEED_4 -> speed = 8000
             }
         }
 

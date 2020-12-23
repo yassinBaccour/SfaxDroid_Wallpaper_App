@@ -1,6 +1,7 @@
 package com.sfaxdroid.mini.base
 
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,6 +10,7 @@ import android.net.Uri
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 
 class RateUs(var context: Context, var packageName: String) {
 
@@ -26,20 +28,20 @@ class RateUs(var context: Context, var packageName: String) {
     private fun showRateDialog() {
         Dialog(context).let { dialog ->
             dialog.setCanceledOnTouchOutside(true)
-            dialog.setTitle(R.string.txtrate2)
+            dialog.setTitle(R.string.rating_box_title)
             dialog.setContentView(LinearLayout(context).apply {
                 orientation = LinearLayout.VERTICAL
 
                 addView(TextView(context).apply {
                     setTextColor(Color.WHITE)
                     textSize = 16f
-                    setText(R.string.txtrate1)
+                    setText(R.string.rating_box_description)
                     width = 240
                     setPadding(20, 0, 4, 10)
                 })
 
                 addView(Button(context).apply {
-                    setText(R.string.txtrate5)
+                    setText(R.string.rating_box_rate)
                     setOnClickListener {
                         startRateUs(context, packageName)
                         dialog.dismiss()
@@ -47,12 +49,12 @@ class RateUs(var context: Context, var packageName: String) {
                 })
 
                 addView(Button(context).apply {
-                    setText(R.string.txtrate3)
+                    setText(R.string.rating_box_later)
                     setOnClickListener { dialog.dismiss() }
                 })
 
                 addView(Button(context).apply {
-                    setText(R.string.txtrate4)
+                    setText(R.string.rating_box_never)
                     setOnClickListener {
                         setSetting()
                         dialog.dismiss()
@@ -64,12 +66,20 @@ class RateUs(var context: Context, var packageName: String) {
     }
 
     private fun startRateUs(context: Context, packageName: String) {
-        context.startActivity(
-            Intent(
-                Intent.ACTION_VIEW, Uri
-                    .parse("market://details?id=$packageName")
+        try {
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW, Uri
+                        .parse("market://details?id=$packageName")
+                )
             )
-        )
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(
+                context,
+                " unable to find market app",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     private fun setSetting() {
