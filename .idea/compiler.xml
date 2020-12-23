@@ -14,6 +14,8 @@
       <module name="SfaxDroid_Arabic_Wallpaper.mini-app-change-background" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.mini-app-raining-anim" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.mini-app-water-ripple" target="11" />
+      <module name="SfaxDroid_Arabic_Wallpaper.myapplication" target="11" />
+      <module name="SfaxDroid_Arabic_Wallpaper.mylibrary" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.ui-anim-img-lwp" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.ui-anim-word-lwp" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.ui-detail" target="11" />
