@@ -14,10 +14,10 @@ import android.widget.Toast
 
 class RateUs(var context: Context, var packageName: String) {
 
-    private val preferences: SharedPreferences = context.getSharedPreferences(Constans.PREF_NAME, 0)
+    private val preferences: SharedPreferences = context.getSharedPreferences(Constants.PREF_NAME, 0)
 
     fun appLaunched() {
-        val isRateDialogShowed = preferences.getBoolean(Constans.PREF_RATE_APP_KEY, false)
+        val isRateDialogShowed = preferences.getBoolean(Constants.PREF_RATE_APP_KEY, false)
         if (isRateDialogShowed) {
             return
         } else {
@@ -84,7 +84,7 @@ class RateUs(var context: Context, var packageName: String) {
 
     private fun setSetting() {
         preferences.edit().apply {
-            putBoolean(Constans.PREF_RATE_APP_KEY, true)
+            putBoolean(Constants.PREF_RATE_APP_KEY, true)
             apply()
         }
     }
