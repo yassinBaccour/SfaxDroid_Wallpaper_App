@@ -1,31 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <skip />
-    <string name="app_name">fond ecran animé islamique</string>
-
-    <string name="livewallpaper_settings">Parametre</string>
-    <string name="livewallpaper_settings_title">Select test pattern</string>
-    <string name="livewallpaper_settings_summary">Choose which test pattern to display</string>
-    <string name="livewallpaper_movement_title">Motion</string>
-    <string name="livewallpaper_movement_summary">Apply movement to test pattern</string>
-
-    <string name="menu_settings">Parametre</string>
-    <string name="title_activity_main">MainActivity</string>
-
-    <string name="txt1">Applique manuellement</string>
-    <string name="txt2">Appliqué le fond d ecrant</string>
-    <string name="txt3">Comment appliquer le fond d ecran</string>
-    <string name="txt4"> Parametre -> Affichage  -> Fond d ecrant  -> Ecrant d accueil -> fond d ecrant animés  -> islamic live wallpaper</string>
-
-    <string name="txt5">Annuler l animation 1</string>
-    <string name="txt6">Annuler l animation 2</string>
-
-
-
-    <string name="pref_sync_frequency">choisir un modele</string>
-    <string name="pref_sync_frequency_summary">choisir un modele d animaton</string>
-    <string name="pref_update_setting">Parametres des modeles</string>
-
-    <string name="txt12">Donner un Avi Merci</string>
-    <string name="txt13">Autres Fond Sur le store</string>
+<resources>
+    <string name="app_name">Fleur SBH LWP</string>
 </resources>

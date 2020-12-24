@@ -1,5 +1,7 @@
 package com.yassin.sfax.tawakkolalaallah
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.os.Handler
@@ -8,6 +10,7 @@ import android.service.wallpaper.WallpaperService
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.sfaxdroid.mini.base.AnimatedItem
+import com.sfaxdroid.mini.base.Constans
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getBackground
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getRainingItem
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getTouchingItem
@@ -35,12 +38,12 @@ class LiveWallpaper : WallpaperService() {
 
         private var rainingItem = BitmapFactory.decodeResource(
             resources,
-            R.drawable.style4_raining
+            R.drawable.style1_raining
         )
 
         private var touchingItem = BitmapFactory.decodeResource(
             resources,
-            R.drawable.style4_raining
+            R.drawable.style1_raining
         )
 
         private var mVisible = false
@@ -60,9 +63,7 @@ class LiveWallpaper : WallpaperService() {
         }
 
         override fun onVisibilityChanged(visible: Boolean) {
-            val sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this@LiveWallpaper)
-
+            val sharedPrefs = getSharedPreferences(Constans.PREF_NAME, Context.MODE_PRIVATE)
             val rainingPref = sharedPrefs.getBoolean("rainingPref", true)
             val touchingPref = sharedPrefs.getBoolean("touchingPref", true)
             val themePref = sharedPrefs.getString("themePref", "Style 1")
