@@ -11,9 +11,13 @@ class Utils {
     companion object {
 
         fun openPub(context: Context) {
-            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("market://details?id=com.sami.rippel.allah")
-            })
+            try {
+                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("market://details?id=com.sami.rippel.allah")
+                })
+            } catch (exception: Exception) {
+
+            }
         }
 
         fun ratingApplication(context: Context) {
