@@ -9,13 +9,13 @@ import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
 import android.view.animation.DecelerateInterpolator
-import com.sfaxdroid.mini.base.Constants
 import java.util.*
 
 class WallpaperAppService : WallpaperService() {
+
     override fun onCreateEngine(): Engine {
         val sharedPrefs =
-            getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            getSharedPreferences(com.sfaxdroid.mini.base.Constants.PREF_NAME, Context.MODE_PRIVATE)
         val qualityPref = sharedPrefs.getString(Constants.PREF_KEY_QUALITY, "none")
         val speedPref = sharedPrefs.getString(Constants.PREF_KEY_SPEED, "")
         return WallpaperEngine(this, qualityPref, speedPref)
@@ -120,7 +120,7 @@ class WallpaperAppService : WallpaperService() {
             BitmapFactory.decodeResource(
                 context.resources,
                 context.resources.getIdentifier(
-                    "img_"
+                    Constants.RESOURCE_PREFIX
                             + String.format(
                         "%05d",
                         currentPosition % frameMaxDigit,

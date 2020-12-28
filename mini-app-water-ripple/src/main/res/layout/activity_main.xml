@@ -41,14 +41,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
             android:drawableTop="@drawable/ic_mokup1" />
 
         <RadioButton
             android:id="@+id/wallp3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
             android:drawableTop="@drawable/ic_mokup3" />
     </RadioGroup>
 

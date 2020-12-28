@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
-import com.squareup.picasso.Picasso
 import java.util.*
 
 
@@ -32,10 +31,11 @@ class WallpaperPagerAdapter(private var context: Context, private var resourceId
                 false
             )
         val drawableRes = context.resources.getIdentifier(
-            "img_" + String.format("%05d", position, Locale.US), "drawable",
+            Constants.RESOURCE_PREFIX + String.format("%05d", position, Locale.US), "drawable",
             context.packageName
         )
-        Picasso.get().load(drawableRes).into(viewLayout.findViewById<ImageView>(R.id.detailImage))
+        val detailImage = viewLayout.findViewById<ImageView>(R.id.detailImage)
+        detailImage.setImageResource(drawableRes)
         viewLayout.findViewById<Button>(R.id.btn_set_wallpaper)
             .setOnClickListener { setAsWallpaper(drawableRes) }
         container.addView(viewLayout)

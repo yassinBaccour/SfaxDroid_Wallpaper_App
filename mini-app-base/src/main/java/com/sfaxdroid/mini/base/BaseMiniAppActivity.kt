@@ -7,6 +7,7 @@ import android.widget.Toast
 import java.io.IOException
 
 abstract class BaseMiniAppActivity : Activity() {
+
     override fun onBackPressed() {
         if (backPressed + 2000 > System.currentTimeMillis()) super.onBackPressed() else {
             RateUs(this, packageName).appLaunched()

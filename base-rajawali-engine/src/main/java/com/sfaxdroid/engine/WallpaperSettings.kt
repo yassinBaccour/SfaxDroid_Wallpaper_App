@@ -1,44 +1,41 @@
 package com.sfaxdroid.engine
 
-import android.content.Intent
 import android.os.Bundle
-import android.preference.Preference
-import android.preference.PreferenceActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceFragmentCompat
 import com.sfaxdroid.mini.base.Utils
-import java.util.*
 
-class WallpaperSettings : PreferenceActivity(),
-    Preference.OnPreferenceClickListener {
+class WallpaperSettings : AppCompatActivity() {
 
     override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
+        setContentView(R.layout.activity_settings)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.settings_container, MyPreferenceFragment())
+            .commit()
+    }
+}
+
+class MyPreferenceFragment : PreferenceFragmentCompat(),
+    androidx.preference.Preference.OnPreferenceChangeListener {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         preferenceManager.sharedPreferencesName = Constants.PREFERENCE_NAME
         addPreferencesFromResource(R.xml.settings)
-        findPreference("rate_us").onPreferenceClickListener = this
     }
 
-    override fun onPreferenceClick(preference: Preference): Boolean {
-        if (preference.key == "rate_us") {
-            Utils.ratingApplication(this)
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    }
+
+    override fun onPreferenceChange(
+        preference: androidx.preference.Preference?,
+        newValue: Any?
+    ): Boolean {
+        if (preference?.key == "rate_us") {
+            Utils.ratingApplication(requireContext())
         }
         return false
-    }
-
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent
-    ) {
-        if (requestCode == 300) {
-            val sharedPreferences =
-                preferenceManager.sharedPreferences
-            val oldValue = sharedPreferences.getInt(Constants.CHANGE_IMAGE_KEY, 10000)
-            val rnd = Random()
-            var newValue = rnd.nextInt()
-            while (newValue == oldValue) {
-                newValue = rnd.nextInt()
-            }
-            sharedPreferences.edit().putInt(Constants.CHANGE_IMAGE_KEY, newValue).apply()
-        }
     }
 }

@@ -43,7 +43,6 @@ android {
 
 dependencies {
     implementation project(':mini-app-base')
-    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation libraries.ads
 }
 

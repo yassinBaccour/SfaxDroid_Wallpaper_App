@@ -14,7 +14,8 @@ import android.widget.Toast
 
 class RateUs(var context: Context, var packageName: String) {
 
-    private val preferences: SharedPreferences = context.getSharedPreferences(Constants.PREF_NAME, 0)
+    private val preferences: SharedPreferences =
+        context.getSharedPreferences(Constants.PREF_NAME, 0)
 
     fun appLaunched() {
         val isRateDialogShowed = preferences.getBoolean(Constants.PREF_RATE_APP_KEY, false)
@@ -33,7 +34,6 @@ class RateUs(var context: Context, var packageName: String) {
                 orientation = LinearLayout.VERTICAL
 
                 addView(TextView(context).apply {
-                    setTextColor(Color.WHITE)
                     textSize = 16f
                     setText(R.string.rating_box_description)
                     width = 240

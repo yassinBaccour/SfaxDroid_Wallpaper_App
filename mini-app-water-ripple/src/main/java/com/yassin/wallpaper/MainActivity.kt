@@ -30,7 +30,7 @@ class MainActivity : BaseMiniAppActivity() {
         if (BuildConfig.FLAVOR == "green") {
             imageViewLogo.visibility = View.GONE
         }
-        if (BuildConfig.FLAVOR != "pink") {
+        if (BuildConfig.FLAVOR != "pink" ) {
             initRadioButton()
         } else {
             radioChooseWallpaper.visibility = View.INVISIBLE

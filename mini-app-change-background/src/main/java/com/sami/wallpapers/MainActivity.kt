@@ -9,7 +9,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
-import com.sfaxdroid.mini.base.Constants
 import com.sfaxdroid.mini.base.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,7 +22,8 @@ class MainActivity : BaseMiniAppActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPrefs = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+        sharedPrefs =
+            getSharedPreferences(com.sfaxdroid.mini.base.Constants.PREF_NAME, Context.MODE_PRIVATE)
 
         setContentView(R.layout.activity_main)
 
