@@ -16,7 +16,6 @@ class Utils {
                     data = Uri.parse(Constants.ADS_URL)
                 })
             } catch (exception: Exception) {
-
             }
         }
 
