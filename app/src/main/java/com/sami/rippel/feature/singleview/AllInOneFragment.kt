@@ -61,7 +61,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                         HomeActivityNavBar.isAdsShow = true
                         val intent = Intent(
                             activity,
-                            com.sfaxdroid.gallery.GalleryActivity::class.java
+                            GalleryActivity::class.java
                         )
                         intent.putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, "DouaLWP")
                         startActivity(intent)

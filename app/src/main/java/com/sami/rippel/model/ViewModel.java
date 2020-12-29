@@ -72,7 +72,6 @@ public class ViewModel {
     }
 
 
-
     public WallpaperCategory getWallpaperCategoryFromName(String catName) {
         List<WallpaperCategory> wall = ViewModel.Current.retrofitWallpObject.getCategoryList();
         for (WallpaperCategory wallCat : wall) {

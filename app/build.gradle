@@ -79,6 +79,12 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     kapt libraries.glideCompîler
+    kapt libraries.daggerCompiler
+    kapt libraries.daggerAndroidCompiler
+    kapt libraries.lifecycleCompiler
+    compileOnly libraries.annotationDagger2
+    kapt libraries.processorDagger2
+    api libraries.daggerAndroid
     implementation libraries.kotlin
     implementation libraries.ktx
     implementation libraries.appcompat
@@ -103,6 +109,7 @@ dependencies {
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation project(':download-file-module')
     implementation project(':base-android')
+    implementation project(':domain')
     implementation project(':ui-detail')
     implementation project(':ui-sky-rajawali-lwp')
     implementation project(':ui-anim-img-lwp')
