@@ -4,6 +4,7 @@ import android.content.Context
 import com.sami.rippel.WallpaperApplication
 import com.sami.rippel.utils.AppName
 import com.sami.rippel.utils.NetworkHandler
+import com.sfaxdroid.base.Constants
 import com.sfaxdroid.data.DeviceNetworkHandler
 import com.sfaxdroid.data.repositories.Network
 import com.sfaxdroid.data.repositories.WsRepository
@@ -29,7 +30,7 @@ class ApplicationModule {
 
     @Provides
     @Named("domain-url")
-    fun provideBaseUrl(): String = " BuildConfig.DOMAIN"
+    fun provideBaseUrl(): String = "http://androidsporttv.com/yassin123441/"
 
     @Provides
     @Named("app-name")

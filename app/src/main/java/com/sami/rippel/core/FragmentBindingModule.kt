@@ -4,6 +4,7 @@ import com.sami.rippel.feature.main.fragments.AllBackgroundFragment
 import com.sami.rippel.feature.main.fragments.CategoryFragment
 import com.sami.rippel.feature.main.fragments.LabFragment
 import com.sami.rippel.feature.main.fragments.LwpFragment
+import com.sami.rippel.feature.singleview.AllInOneFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -21,5 +22,9 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     internal abstract fun lwpFragment(): LwpFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun allInOneFragment(): AllInOneFragment
+
 
 }

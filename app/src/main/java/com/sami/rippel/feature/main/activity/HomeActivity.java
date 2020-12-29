@@ -73,7 +73,6 @@ public class HomeActivity extends BaseActivity implements DeviceListner {
         super.onCreate(savedInstanceState);
         rxPermissions = new RxPermissions(this);
         setupAds();
-        ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
         initView();
         setupToolBar();
         setupViewPager();

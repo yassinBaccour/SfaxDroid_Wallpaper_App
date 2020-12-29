@@ -58,12 +58,12 @@ public class HomeActivityNavBar extends BaseActivity implements DeviceListner {
 
     private InterstitialAd mInterstitialAd;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rxPermissions = new RxPermissions(this);
         setupAds();
-        ViewModel.Current.sharedPrefsUtils.SetSetting("IsTheFirstRun", false);
         initView();
         setupToolBar();
         initRatingApp();
@@ -306,18 +306,5 @@ public class HomeActivityNavBar extends BaseActivity implements DeviceListner {
     @Override
     public void showSnackMsg(@NotNull String msg) {
 
-    }
-
-
-    public enum AdsType {
-        ShowAds,
-        ShowTimedAds,
-    }
-
-    public enum LwpTypeEnum {
-        RIPPLE_TYPE,
-        SKYBOX_TYPE,
-        DOUA_TYPE,
-        TIMER_TYPE,
     }
 }

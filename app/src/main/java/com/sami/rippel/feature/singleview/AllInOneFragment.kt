@@ -3,6 +3,7 @@ package com.sami.rippel.feature.singleview
 import android.app.Activity
 import android.app.WallpaperManager
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.view.MotionEvent
 import android.widget.Toast
@@ -20,12 +21,33 @@ import com.sfaxdroid.gallery.GalleryActivity
 import com.sfaxdroid.base.DeviceUtils
 import com.sfaxdroid.base.LiveWallpaper
 import com.sfaxdroid.base.WallpaperObject
+import com.sfaxdroid.domain.GetAllWallpapersUseCase
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.android.support.AndroidSupportInjection
 import java.util.*
+import javax.inject.Inject
 
 class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
-    WallpaperFragmentContract.View, OnStateChangeListener {
+    WallpaperFragmentContract.View, OnStateChangeListener, HasAndroidInjector {
+
+    @Inject
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
+    @Inject
+    lateinit var repo: GetAllWallpapersUseCase
 
     private var adapter: ArticleListAdapter? = null
+
+    override fun androidInjector(): AndroidInjector<Any> {
+        return androidInjector
+    }
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun getFragmentActivity(): Activity {
         return requireActivity()
