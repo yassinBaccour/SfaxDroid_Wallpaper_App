@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="lwp_anim_2d_name">Doua lwp</string>
     <string name="Writingtxt">Writing Color</string>
     <string name="douatitle1">Download Live wallpaper resources</string>
     <string name="douatitle2">Waiting Download Resource</string>

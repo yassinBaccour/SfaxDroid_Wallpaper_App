@@ -3,5 +3,18 @@
 
     <application>
         <activity android:name="com.sfaxdoird.anim.img.WordImgActivity" />
+        <service
+            android:name="com.sfaxdoird.anim.img.WordImgLiveWallpaper"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/lwp_word_img_name"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/lwp_word_img" />
+        </service>
     </application>
 </manifest>

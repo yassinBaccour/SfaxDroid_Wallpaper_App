@@ -6,9 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.sfaxdroid.base.FileUtils.Companion.getPermanentDirListFiles
-import com.sfaxdroid.base.Utils.Companion.getScreenHeightPixels
-import com.sfaxdroid.base.Utils.Companion.getScreenWidthPixels
+import com.sfaxdroid.base.utils.FileUtils.Companion.getPermanentDirListFiles
+import com.sfaxdroid.base.utils.Utils.Companion.getScreenHeightPixels
+import com.sfaxdroid.base.utils.Utils.Companion.getScreenWidthPixels
 import java.io.IOException
 
 class Utils {

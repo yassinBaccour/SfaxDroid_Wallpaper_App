@@ -5,7 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.Utils
+import com.sfaxdroid.base.utils.Utils
 import java.io.File
 import java.io.IOException
 import kotlin.math.max

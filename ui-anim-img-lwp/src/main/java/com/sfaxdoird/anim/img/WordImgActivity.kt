@@ -10,11 +10,11 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdoird.anim.img.Utils.getTemporaryDir
 import com.sfaxdroid.app.ZipUtils.Companion.unzipFile
 import com.sfaxdroid.app.downloadsystem.*
-import com.sfaxdroid.base.BitmapUtils
+import com.sfaxdroid.base.utils.BitmapUtils
 import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.SimpleActivity
-import com.sfaxdroid.base.Utils
-import com.sfaxdroid.base.Utils.Companion.getBytesDownloaded
+import com.sfaxdroid.base.utils.Utils
+import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
 import kotlinx.android.synthetic.main.activity_word_img_lwp.*
 import java.io.File
 

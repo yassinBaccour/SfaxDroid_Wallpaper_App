@@ -1,6 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sfaxdroid.timer" >
+    package="com.sfaxdroid.timer">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
+    <application>
+        <activity android:name="com.sfaxdroid.timer.WallpaperSchedulerActivity" />
+        <service
+            android:name="com.sfaxdroid.timer.RetrieveWallpaperService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+    </application>
 </manifest>

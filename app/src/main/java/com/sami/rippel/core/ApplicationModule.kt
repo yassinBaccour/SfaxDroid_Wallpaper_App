@@ -5,6 +5,7 @@ import com.sami.rippel.WallpaperApplication
 import com.sami.rippel.utils.AppName
 import com.sami.rippel.utils.NetworkHandler
 import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.data.DeviceNetworkHandler
 import com.sfaxdroid.data.repositories.Network
 import com.sfaxdroid.data.repositories.WsRepository
@@ -36,6 +37,24 @@ class ApplicationModule {
     @Named("app-name")
     fun provideAppName(): AppName {
         return AppName.SFAXDROID
+    }
+
+    @Provides
+    @Singleton
+    fun providePreferencesManager(
+        context: Context,
+        @Named("app-name") appName: AppName
+    ): PreferencesManager {
+
+        val name = when (appName) {
+            AppName.LILIAGAME -> "f24"
+            AppName.SFAXDROID -> "rfi"
+        }
+
+        return PreferencesManager(
+            context,
+            name.plus(Constants.PREFERENCESNAME)
+        )
     }
 
     @Provides

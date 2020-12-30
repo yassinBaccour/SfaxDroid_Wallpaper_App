@@ -7,8 +7,8 @@ import android.provider.MediaStore;
 
 import com.sfaxdroid.bases.ActionTypeEnum;
 import com.sfaxdroid.bases.DeviceListner;
-import com.sfaxdroid.base.FileUtils;
-import com.sfaxdroid.base.Utils;
+import com.sfaxdroid.base.utils.FileUtils;
+import com.sfaxdroid.base.utils.Utils;
 import com.sfaxdroid.detail.utils.RxPresenter;
 import com.soundcloud.android.crop.Crop;
 

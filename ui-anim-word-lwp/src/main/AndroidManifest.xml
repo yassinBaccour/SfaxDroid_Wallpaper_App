@@ -7,5 +7,20 @@
             android:label="AnimWord2dActivity"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+
+        <service
+            android:name="com.sfaxdoird.anim.word.AnimWord2dWallpaper"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/lwp_anim_2d_name"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/lwp_anim_2d" />
+        </service>
+
     </application>
 </manifest>

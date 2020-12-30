@@ -17,20 +17,20 @@ class CarouselItemAdapter(
             TYPE_LIVE_WALLPAPER ->
                 return WallpaperCarouselItemVH(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.lit_item_carrousel,
+                        R.layout.list_item_carrousel,
                         parent, false
                     )
                 )
             TYPE_CATEGORY ->
                 return WallpaperCarouselItemVH(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.lit_item_carrousel_cat,
+                        R.layout.list_item_carrousel_cat,
                         parent, false
                     )
                 )
             else -> return WallpaperCarouselItemVH(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.lit_item_carrousel,
+                    R.layout.list_item_carrousel,
                     parent, false
                 )
             )

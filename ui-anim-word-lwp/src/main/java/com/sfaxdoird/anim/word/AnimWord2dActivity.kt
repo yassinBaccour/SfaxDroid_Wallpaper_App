@@ -13,7 +13,9 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdroid.app.downloadsystem.*
 import com.sfaxdroid.base.*
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.Utils.Companion.getBytesDownloaded
+import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
+import com.sfaxdroid.base.utils.BitmapUtils
+import com.sfaxdroid.base.utils.Utils
 import kotlinx.android.synthetic.main.activity_anim_word.*
 import java.io.File
 

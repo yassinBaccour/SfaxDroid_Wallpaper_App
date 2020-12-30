@@ -6,7 +6,7 @@ import android.app.job.JobService
 import android.content.SharedPreferences
 import android.os.Build
 import android.preference.PreferenceManager
-import com.sfaxdroid.base.FileUtils.Companion.getPermanentDirListFiles
+import com.sfaxdroid.base.utils.FileUtils.Companion.getPermanentDirListFiles
 import com.sfaxdroid.bases.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

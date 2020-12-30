@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="SetWall">Appliquer</string>
+    <string name="menu.detail.share.fb">Partager sur facebook</string>
+    <string name="menu.detail.share.inst">Partager sur instagram</string>
+    <string name="menu.detail.oneclickwallpaper">Juste appliquer le fond</string>
+    <string name="menu.detail.wall">Recadrer et appliquer le fond</string>
+    <string name="menu.detail.chooserwall">Appliquer avec l\'éditeur photo</string>
+    <string name="menu.detail.gallery">Sauvegarder avec mes photos</string>
+    <string name="menu.detail.share.all">Partager</string>
+    <string name="menu.detail.share.ripple">Utiliser dans l\'animation</string>
 </resources>

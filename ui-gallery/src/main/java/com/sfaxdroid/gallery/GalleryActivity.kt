@@ -8,8 +8,8 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sfaxdroid.base.*
-import com.sfaxdroid.base.FileUtils.Companion.getBasmalaStickersFileList
-import com.sfaxdroid.base.FileUtils.Companion.getPermanentDirListFiles
+import com.sfaxdroid.base.utils.FileUtils.Companion.getBasmalaStickersFileList
+import com.sfaxdroid.base.utils.FileUtils.Companion.getPermanentDirListFiles
 import com.sfaxdroid.bases.LwpListener
 import com.sfaxdroid.bases.OnStateChangeListener
 import com.sfaxdroid.bases.StateEnum

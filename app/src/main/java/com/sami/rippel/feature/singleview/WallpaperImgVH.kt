@@ -8,9 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.sami.rippel.allah.R
-import com.sami.rippel.model.ViewModel
 import com.sfaxdroid.base.WallpaperObject
-import com.sfaxdroid.base.WallpaperUtils
+import com.sfaxdroid.base.utils.WallpaperUtils
 
 class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

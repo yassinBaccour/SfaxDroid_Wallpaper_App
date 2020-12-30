@@ -1,2 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sfaxdroid.gallery" />
+    package="com.sfaxdroid.gallery">
+
+    <application>
+        <activity
+            android:name="com.sfaxdroid.gallery.GalleryActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="fullSensor" />
+    </application>
+
+</manifest>

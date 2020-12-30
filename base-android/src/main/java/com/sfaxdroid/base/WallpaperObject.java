@@ -15,6 +15,10 @@ import java.util.List;
 @Root(name = "wallpaper", strict = false)
 public class WallpaperObject implements Parcelable, Serializable {
 
+    public WallpaperObject(String url) {
+        this.url = url;
+    }
+
     public WallpaperObject(String name, String desc, int resourceColor, int resourceUri) {
         this.name = name;
         this.desc = desc;

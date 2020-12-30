@@ -46,67 +46,11 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <service
-            android:name="com.sfaxdroid.sky.SkyLiveWallpaper"
-            android:enabled="true"
-            android:label="Sky Name Of Allah"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/rajawali_example_wallpaper" />
-        </service>
-
         <meta-data
             android:name="com.sami.rippel.views.GlideConfiguration"
             android:value="GlideModule" />
 
-        <service
-            android:name="com.sfaxdoird.anim.img.WordImgLiveWallpaper"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/lwp_doua" />
-        </service>
-        <service
-            android:name="com.sfaxdoird.anim.word.AnimWord2dWallpaper"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_WALLPAPER">
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.service.wallpaper"
-                android:resource="@xml/lwp_doua" />
-        </service>
-
-        <activity
-            android:name="com.sfaxdroid.gallery.GalleryActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/gallery"
-            android:screenOrientation="fullSensor" />
-
-        <activity
-            android:name="com.sfaxdroid.timer.WallpaperSchedulerActivity"
-            android:theme="@style/AppTheme" />
-
-        <service
-            android:name="com.sfaxdroid.timer.RetrieveWallpaperService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <activity android:name="com.sami.rippel.feature.main.activity.AboutActivity" />
+        <activity android:name="com.sami.rippel.feature.main.AboutActivity" />
 
     </application>
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //Stickers Lab
+    <string name="stickersHelpTitleResize"></string>
+    <string name="stickersHelpDesc1Resize"></string>
+    <string name="stickersHelpDesc2Resize"></string>
+    <string name="stickersHelpDesc3Resize"></string>
+    <string name="stickersHelpDesc4Resize"></string>
+
+    <string name="stickersHelpTitleAddText"></string>
+    <string name="stickersHelpDesc1AddText"></string>
+    <string name="stickersHelpDesc2AddText"></string>
+    <string name="stickersHelpDesc3AddText"></string>
+    <string name="stickersHelpDesc4AddText"></string>
+
+    <string name="stickersHelpTitleAddSickers"></string>
+    <string name="stickersHelpDesc1AddSickers"></string>
+    <string name="stickersHelpDesc2AddSickers"></string>
+    <string name="stickersHelpDesc3AddSickers"></string>
+    <string name="stickersHelpDesc4AddSickers"></string>
+
+    <string name="stickersHelpTitleDeleteSickers"></string>
+    <string name="stickersHelpDesc1DeleteSickers"></string>
+    <string name="stickersHelpDesc2DeleteSickers"></string>
+    <string name="stickersHelpDesc3DeleteSickers"></string>
+    <string name="stickersHelpDesc4DeleteSickers"></string>
+
+    <string name="disableDeleteMode">Please disable delete mode</string>
+    <string name="nothingAtScreen">Nothing at screen</string>
+    <string name="noText">No Text at screen</string>
+    <string name="addNewTextTitle">Add New Text</string>
+    <string name="addtextfragment">Add Text</string>
+
+    <string name="resizestickers">يمكنك تكبير و تعديل الملصقات</string>
+    <string name="swipeleftright">Swipe left and right</string>
+    <string name="opencamera"> From Camera </string>
+    <string name="opengellery"> From Gallery </string>
+    <string name="openweb"> App Gallery </string>
+    <string name="issaved"> Picture Saved </string>
+    <string name="addtochangesize">You need add Text before</string>
+    <string name="addtochangebackground">You need add Text before</string>
+    <string name="addtochangefont">You need add Text before</string>
+    <string name="removepicture">Delete Picture</string>
+    <string name="scroll_up">Scroll Up</string>
+</resources>

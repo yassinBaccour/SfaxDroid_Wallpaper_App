@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.sfaxdroid.base.DeviceUtils.Companion.getCellHeight
-import com.sfaxdroid.base.DeviceUtils.Companion.getCellWidth
+import com.sfaxdroid.base.utils.DeviceUtils.Companion.getCellHeight
+import com.sfaxdroid.base.utils.DeviceUtils.Companion.getCellWidth
 import com.sfaxdroid.base.WallpaperObject
-import com.sfaxdroid.base.WallpaperUtils
+import com.sfaxdroid.base.utils.WallpaperUtils
 
 class MyItemHolderWallpaper internal constructor(itemView: View) :
     RecyclerView.ViewHolder(itemView) {

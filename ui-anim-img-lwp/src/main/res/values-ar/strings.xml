@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="lwp_word_img_name">Doua lwp</string>
     <string name="writing_color">لون الكتابة</string>
     <string name="download_resource_txt">تحميل الأدعية</string>
     <string name="download_resource_txt_witing">الرجاء إنتضار التحميل</string>

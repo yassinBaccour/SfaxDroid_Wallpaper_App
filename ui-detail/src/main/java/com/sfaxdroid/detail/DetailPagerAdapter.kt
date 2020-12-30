@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.sfaxdroid.bases.BaseView
-import com.sfaxdroid.base.Utils.Companion.getUrlByScreenSize
+import com.sfaxdroid.base.utils.Utils.Companion.getUrlByScreenSize
 import com.sfaxdroid.base.WallpaperObject
 import com.sfaxdroid.detail.utils.TouchImageView
 import java.util.*

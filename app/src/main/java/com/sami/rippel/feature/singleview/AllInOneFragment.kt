@@ -1,72 +1,50 @@
 package com.sami.rippel.feature.singleview
 
-import android.app.Activity
 import android.app.WallpaperManager
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.widget.Toast
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
 import com.sami.rippel.base.BaseFragment
-import com.sami.rippel.model.ViewModel
-import com.sfaxdroid.bases.StateEnum
-import com.sfaxdroid.bases.OnStateChangeListener
-import com.sami.rippel.feature.main.presenter.AllWallpaperPresenter
-import com.sami.rippel.feature.main.presenter.Contract.WallpaperFragmentContract
-import com.sfaxdroid.gallery.GalleryActivity
-import com.sfaxdroid.base.DeviceUtils
+import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.LiveWallpaper
 import com.sfaxdroid.base.WallpaperObject
+import com.sfaxdroid.data.entity.WallpaperResponse
+import com.sfaxdroid.data.mappers.SimpleWallpaperView
+import com.sfaxdroid.data.mappers.WallpaperToViewMapper
+import com.sfaxdroid.data.repositories.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_all_background.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
-    WallpaperFragmentContract.View, OnStateChangeListener, HasAndroidInjector {
+class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+    lateinit var getAllWallpapersUseCase: GetAllWallpapersUseCase
 
-    @Inject
-    lateinit var repo: GetAllWallpapersUseCase
+    private var wallpapersListAdapter: WallpapersListAdapter? = null
 
-    private var adapter: ArticleListAdapter? = null
+    private val fileName by lazy {
+        arguments?.getString(Constants.KEY_JSON_FILE_NAME, "") ?: ""
+    }
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
     }
 
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
-
-    override fun getFragmentActivity(): Activity {
-        return requireActivity()
-    }
-
-    override fun fillForm() {}
-
-    override fun instantiatePresenter(): AllWallpaperPresenter {
-        return AllWallpaperPresenter()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        ViewModel.Current.unregisterOnStateChangeListener(this)
-    }
-
-    override fun initEventAndData() {
-        mPresenter?.getWallpaper()
-    }
+    var mData = ArrayList<WallpaperObject>()
 
     private fun openWallpaper(wallpaperObject: WallpaperObject, pos: Int) {
         showDetailViewActivity(wallpaperObject)
@@ -81,12 +59,15 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                 when (wallpaperObject.liveWallpaper) {
                     is LiveWallpaper.DouaLwp -> {
                         HomeActivityNavBar.isAdsShow = true
-                        val intent = Intent(
-                            activity,
-                            GalleryActivity::class.java
-                        )
-                        intent.putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, "DouaLWP")
-                        startActivity(intent)
+                        try {
+                            val intent = Intent(
+                                activity, Class.forName("com.sfaxdroid.detail.GalleryActivity")
+                            )
+                            intent.putExtra(Constants.KEY_LWP_NAME, "DouaLWP")
+                            startActivity(intent)
+                        } catch (e: ClassNotFoundException) {
+                            e.printStackTrace()
+                        }
                     }
                     is LiveWallpaper.NameOfAllah -> {
                         HomeActivityNavBar.isAdsShow = true
@@ -98,7 +79,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                                 WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
                                 ComponentName(
                                     requireActivity(),
-                                    com.sfaxdroid.sky.SkyLiveWallpaper::class.java
+                                    Class.forName("com.sfaxdroid.sky.SkyLiveWallpaper")
                                 )
                             )
                             startActivity(intent)
@@ -115,7 +96,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                         HomeActivityNavBar.isAdsShow = true
                         val intent = Intent(
                             activity,
-                            com.sfaxdroid.timer.WallpaperSchedulerActivity::class.java
+                            Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")::class.java
                         )
                         startActivity(intent)
                     }
@@ -124,7 +105,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                         HomeActivityNavBar.isAdsShow = true
                         val intent = Intent(
                             activity,
-                            GalleryActivity::class.java
+                            Class.forName("com.sfaxdroid.detail.GalleryActivity")
                         )
                         intent.putExtra(
                             com.sfaxdroid.base.Constants.KEY_LWP_NAME,
@@ -139,7 +120,7 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
                 HomeActivityNavBar.nbOpenAds++
                 val intent = Intent(
                     activity,
-                    GalleryActivity::class.java
+                    Class.forName("com.sfaxdroid.detail.GalleryActivity")
                 )
                 intent.putParcelableArrayListExtra(
                     com.sfaxdroid.base.Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, mData
@@ -154,39 +135,69 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         }
     }
 
-    private fun getWallpaperList(mList: List<WallpaperObject>): List<ItemWrapperList<Any>> {
-        val listItem: MutableList<ItemWrapperList<Any>> = arrayListOf()
-        mList.forEach { listItem.add(ItemWrapperList(it, ArticleListAdapter.TYPE_WALLPAPER)) }
-        val lwpList: List<WallpaperObject> = listOf(
-            WallpaperObject(
-                getString(R.string.title_word_anim_lwp),
-                getString(R.string.DescDouaLwp),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_doua_lwp,
-                LiveWallpaper.DouaLwp
-            ), WallpaperObject(
-                getString(R.string.TitleSkyboxLwp),
-                getString(R.string.DescSkyboxLwp),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_skybox,
-                LiveWallpaper.NameOfAllah
-            ), WallpaperObject(
-                getString(R.string.timer_wallpaper_name),
-                getString(R.string.global_how_to_use),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_timer_lwp,
-                LiveWallpaper.TimerLwp
-            ), WallpaperObject(
-                getString(R.string.nameofallah2dtitle),
-                getString(R.string.nameofallah2ddesc),
-                resources.getColor(R.color.primary),
-                R.mipmap.ic_nameofallah_lwp,
-                LiveWallpaper.NameOfAllah2D
-            )
+    private fun openLab() {
+        val intent = Intent(
+            activity,
+            Class.forName("com.sfaxdroid.detail.StickersLabActivity")
         )
-        val lwp = CarouselView("Live Wallpaper 4K", lwpList, CarouselTypeEnum.LIVEWALLPAPER)
-        listItem.add(6, ItemWrapperList(lwp, ArticleListAdapter.TYPE_CAROUSEL))
+        startActivity(intent)
+    }
 
+    private fun getItemType(screenType: ScreenType): Int {
+        return when (screenType) {
+            is ScreenType.Lwp -> WallpapersListAdapter.TYPE_LWP
+            is ScreenType.Wall -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
+            is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
+        }
+    }
+
+    private fun getWallpaperList(
+        mList: List<WallpaperObject>,
+        screenType: ScreenType,
+        isMixed: Boolean = false
+    ): List<ItemWrapperList<Any>> {
+        val listItem: MutableList<ItemWrapperList<Any>> = arrayListOf()
+        mList.forEach {
+            listItem.add(
+                ItemWrapperList(
+                    it,
+                    getItemType(screenType)
+                )
+            )
+        }
+        if (isMixed) {
+            val lwpList: List<WallpaperObject> = listOf(
+                WallpaperObject(
+                    getString(R.string.title_word_anim_lwp),
+                    getString(R.string.DescDouaLwp),
+                    resources.getColor(R.color.primary),
+                    9,
+                    LiveWallpaper.DouaLwp
+                ), WallpaperObject(
+                    getString(R.string.TitleSkyboxLwp),
+                    getString(R.string.DescSkyboxLwp),
+                    resources.getColor(R.color.primary),
+                    9,
+                    LiveWallpaper.NameOfAllah
+                ), WallpaperObject(
+                    getString(R.string.timer_wallpaper_name),
+                    getString(R.string.global_how_to_use),
+                    resources.getColor(R.color.primary),
+                    9,
+                    LiveWallpaper.TimerLwp
+                ), WallpaperObject(
+                    getString(R.string.nameofallah2dtitle),
+                    getString(R.string.nameofallah2ddesc),
+                    resources.getColor(R.color.primary),
+                    9,
+                    LiveWallpaper.NameOfAllah2D
+                )
+            )
+            val lwp = CarouselView("Live Wallpaper 4K", lwpList, CarouselTypeEnum.LIVEWALLPAPER)
+            listItem.add(6, ItemWrapperList(lwp, WallpapersListAdapter.TYPE_CAROUSEL))
+
+            //todo fix
+            /*
         val wallpaperObjects =
             ViewModel.Current.getWallpaperCategoryFromName("ImageCategoryNew")
                 .getGetWallpapersList()
@@ -194,46 +205,47 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         val cat = CarouselView("All Category", wallpaperObjects, CarouselTypeEnum.CATEGORY)
         listItem.add(13, ItemWrapperList(cat, ArticleListAdapter.TYPE_CAROUSEL))
 
+         */
+        }
         return listItem
     }
 
-    override fun showContent(mList: List<WallpaperObject>) {
-        if (ViewModel.Current.isWallpapersLoaded) {
-            mData.clear()
-            mData = ArrayList(mList)
-            if (activity != null && DeviceUtils.isConnected(
-                    requireContext()
-                ) == true && mData != null && mData.size > 0
-            ) {
-                adapter = ArticleListAdapter(
-                    getWallpaperList(mData),
-                    { catItem, pos -> openWallpaper(catItem, pos) },
-                    { catItem, type -> openCategory(catItem, type) }
-                )
-                mRecyclerView.adapter = adapter
-                mRecyclerView.addOnItemTouchListener(
-                    object : RecyclerView.OnItemTouchListener {
-                        override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
-                        override fun onInterceptTouchEvent(
-                            rv: RecyclerView, e:
-                            MotionEvent
-                        ): Boolean {
-                            if (e.action == MotionEvent.ACTION_DOWN &&
-                                rv.scrollState == RecyclerView.SCROLL_STATE_SETTLING
-                            ) {
-                                rv.stopScroll()
-                            }
-                            return false
-                        }
+    private fun showContent(mList: List<SimpleWallpaperView>, screenType: ScreenType) {
+        val list = mList.map {
+            WallpaperObject(it.url)
+        }
+        mData.clear()
+        mData = ArrayList(list)
+        wallpapersListAdapter = WallpapersListAdapter(
+            getWallpaperList(mData, screenType),
+            { catItem, pos -> openWallpaper(catItem, pos) },
+            { catItem, type -> openCategory(catItem, type) }
+        )
 
-                        override fun onRequestDisallowInterceptTouchEvent(
-                            disallowIntercept: Boolean
+        recycler_view_wallpapers?.apply {
+            layoutManager = getLwpLayoutManager()
+            setHasFixedSize(true)
+            adapter = wallpapersListAdapter
+            addOnItemTouchListener(
+                object : RecyclerView.OnItemTouchListener {
+                    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+                    override fun onInterceptTouchEvent(
+                        rv: RecyclerView, e:
+                        MotionEvent
+                    ): Boolean {
+                        if (e.action == MotionEvent.ACTION_DOWN &&
+                            rv.scrollState == RecyclerView.SCROLL_STATE_SETTLING
                         ) {
+                            rv.stopScroll()
                         }
-                    })
-            } else {
-                shoNowInternet()
-            }
+                        return false
+                    }
+
+                    override fun onRequestDisallowInterceptTouchEvent(
+                        disallowIntercept: Boolean
+                    ) {
+                    }
+                })
         }
     }
 
@@ -259,27 +271,20 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         }
     }
 
-    private fun shoNowInternet() {
-        view?.let {
-            Toast.makeText(
-                activity, getString(R.string.NoConnection),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
-
-
-    override fun getLayoutManager(): LayoutManager {
+    private fun getLwpLayoutManager(): LayoutManager {
         return GridLayoutManager(
             context,
             3
         ).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
-                    return when (adapter?.getItemViewType(position)) {
-                        ArticleListAdapter.TYPE_WALLPAPER -> 1
-                        ArticleListAdapter.TYPE_ADS -> 1
-                        ArticleListAdapter.TYPE_CAROUSEL -> spanCount
+                    return when (wallpapersListAdapter?.getItemViewType(position)) {
+                        WallpapersListAdapter.TYPE_SQUARE_WALLPAPER -> 1
+                        WallpapersListAdapter.TYPE_WALLPAPER -> 1
+                        WallpapersListAdapter.TYPE_ADS -> spanCount
+                        WallpapersListAdapter.TYPE_LWP -> spanCount
+                        WallpapersListAdapter.TYPE_CAT -> spanCount
+                        WallpapersListAdapter.TYPE_CAROUSEL -> spanCount
                         else -> -1
                     }
                 }
@@ -287,18 +292,57 @@ class AllInOneFragment : BaseFragment<AllWallpaperPresenter?>(),
         }
     }
 
-    override fun onStateChange(state: StateEnum) {
-        mPresenter?.getWallpaper()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        GlobalScope.launch {
+            getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))
+            {
+                when (it) {
+                    is Response.SUCESS -> {
+                        val rep = (it.response as Response.SUCESS).response as WallpaperResponse
+                        var screenType = getType(rep.wallpaperList.title)
+                        val list = rep.wallpaperList.wallpapers.map {
+                            WallpaperToViewMapper().map(it)
+                        }
+                        showContent(list, screenType)
+                    }
+                    is Response.FAILURE -> {
+
+                    }
+                }
+            }
+        }
     }
 
-    override fun showSnackMsg(msg: String) {}
-    override fun showLoading() {}
-    override fun hideLoading() {}
-    override val fragmentId = R.layout.fragment_all_background
+    private fun getType(type: String): ScreenType {
+        return when (type) {
+            "LWP" -> ScreenType.Lwp()
+            else -> ScreenType.Wall()
+        }
+    }
+
+    sealed class ScreenType {
+        class Lwp : ScreenType()
+        class Wall : ScreenType()
+        class Cat : ScreenType()
+    }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_all_background, container, false)
+    }
 
     companion object {
-        fun newInstance(): AllInOneFragment {
-            return AllInOneFragment()
+        fun newInstance(fileName: String): AllInOneFragment {
+            return AllInOneFragment().apply {
+                val args = Bundle()
+                args.putString(Constants.KEY_JSON_FILE_NAME, fileName)
+                arguments = args
+            }
         }
     }
 

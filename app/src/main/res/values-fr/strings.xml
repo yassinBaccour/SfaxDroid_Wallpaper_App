@@ -25,22 +25,13 @@
     <string name="txtGallery">Gallery</string>
     <string name="global_how_to_use">Changement de l\'arrière-plan automatiquement avec la période de temps choisie </string>
 
-    <string name="gallery"></string>
-    <string name="NoConnection">Pas de connection internet</string>
     <string name="otherwallll">1000 Wallpapers</string>
     <string name="detail.snack.save.success">Photo sauvegarder</string>
     <string name="detail.snack.save.failure">Réessayer l\'operation</string>
     <string name="detail.snack.set.success">Appliqué avec succès</string>
     <string name="detail.snack.set.failure">Réessayer l\'operation</string>
     <string name="detail.snack.button.not_ready">Réessayer l\'operation</string>
-    <string name="menu.detail.oneclickwallpaper">Juste appliquer le fond</string>
-    <string name="menu.detail.wall">Recadrer et appliquer le fond</string>
-    <string name="menu.detail.chooserwall">Appliquer avec l\'éditeur photo</string>
-    <string name="menu.detail.gallery">Sauvegarder avec mes photos</string>
-    <string name="menu.detail.share.inst">Partager sur instagram</string>
-    <string name="menu.detail.share.fb">Partager sur facebook</string>
-    <string name="menu.detail.share.all">Partager</string>
-    <string name="menu.detail.share.ripple">Utiliser dans l\'animation</string>
+
     <string name="title_activity_tabbed_gallery">TabbedGalleryActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -109,14 +100,12 @@
     <string name="closesebasmalae">Arreter</string>
     <string name="imageChnaged">Image Changed Successful</string>
 
-    <string name="playbasmalaunlocktitle">Basmala a l\'ouverture</string>
     <string name="colortxt">Couleur</string>
     <string name="sizetxt">Taille</string>
     <string name="choosecolor">Couleur</string>
     <string name="btnok">Ok</string>
     <string name="btncancel">Annuler</string>
-    <string name="speedInfoFast">La vietesse est rapide dans le mode de test</string>
-    <string name="txtspeed">Vitesse</string>
+
 
     <string name="downloadterminated">Téléchargement terminé</string>
     <string name="txtcompleted">Terminer</string>

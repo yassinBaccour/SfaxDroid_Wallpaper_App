@@ -84,7 +84,7 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
             initBtnActive(true)
             initBtnClose(true)
         } else {
-            com.sfaxdroid.base.Utils.showSnackMessage(
+            com.sfaxdroid.base.utils.Utils.showSnackMessage(
                 rootLayout,
                 getString(R.string.add_wallpaper_messages)
             )
@@ -222,7 +222,7 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
                     )
                     GlobalScope.launch(Dispatchers.Main) {
                         initTxtStatus(true)
-                        com.sfaxdroid.base.Utils.showSnackMessage(
+                        com.sfaxdroid.base.utils.Utils.showSnackMessage(
                             rootLayout,
                             getString(R.string.auto_change_on)
                         )

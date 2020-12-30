@@ -9,7 +9,7 @@ import android.service.wallpaper.WallpaperService
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.sfaxdoird.anim.img.Utils.getTemporaryDir
-import com.sfaxdroid.base.BitmapUtils
+import com.sfaxdroid.base.utils.BitmapUtils
 import com.sfaxdroid.base.SharedPrefsUtils
 import java.io.File
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">خلفية تموج المياه الله</string>
-     <string name="txt2">إختيار الخلفية</string>
+    <string name="txt2">إختيار الخلفية</string>
     <string name="txt3">كيفية التطبيق يدويا ؟</string>
     <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
     <string name="txtrate1">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
@@ -23,10 +23,7 @@
     <string name="other">خلفياتي الأخرى</string>
     <string name="txtGallery">مجموعة الخلفيات الإسلامية</string>
     <string name="global_how_to_use">قم بإختيات خلفياتك المفضلة اللتي ستتبدل علي الشاشة مع التوقيت الزمني المختار</string>
-
-    <string name="gallery"></string>
     <string name="catalog_Lab">مصنع</string>
-    <string name="NoConnection">لست متصل بالإنترنات</string>
     <string name="otherwallll">آلاف الخلفيات</string>
     <string name="rating_app">تقيم التطبيق مع الشكر</string>
     <!-- Snack Details -->
@@ -36,14 +33,7 @@
     <string name="detail.snack.set.failure">Try again, Failed to set as wallpaper</string>
     <string name="detail.snack.button.not_ready">Try again, The resource is not ready to process</string>
     <!-- Menu Details -->
-    <string name="menu.detail.oneclickwallpaper">تطبيق الخلفية</string>
-    <string name="menu.detail.wall">جعل الصورة خلفية</string>
-    <string name="menu.detail.chooserwall">فتح عبر برنامج الخلفيات</string>
-    <string name="menu.detail.gallery">حفظ الصورة</string>
-    <string name="menu.detail.share.inst">النشر في الإنستقرام </string>
-    <string name="menu.detail.share.fb">النشر في الفيسبوك </string>
-    <string name="menu.detail.share.all">النشر</string>
-    <string name="menu.detail.share.ripple">إستعمال كخلفية تموج</string>
+
     <string name="title_activity_tabbed_gallery">TabbedGalleryActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
@@ -107,16 +97,13 @@
     <string name="closesebasmalae">غلق</string>
     <string name="imageChnaged">تم تبديل الصورة</string>
 
-    <string name="playbasmalaunlocktitle">قرائة البسملة عند فتح الهاتف</string>
     <string name="colortxt">لون الصورة</string>
     <string name="sizetxt">كبر الصورة</string>
-
-    <string name="speedInfoFast">السرعة الآن سريعة جدا</string>
-    <string name="txtspeed">السرعة</string>
 
 
     <string name="nameofallah2dtitle">٩٩ أسماء للله الحسنى</string>
     <string name="nameofallah2ddesc">خلفية حية لأسماء الله الحسنى اللتي تتبدل على الشاشة عند لمسها</string>
+
     <string name="disableDeleteMode">الرجاء غلق خاصية الفسخ</string>
     <string name="nothingAtScreen">لاشيئ على الشاشة</string>
     <string name="noText">لاتوجد كتابة على الشاشة</string>

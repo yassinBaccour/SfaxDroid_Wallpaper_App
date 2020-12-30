@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="lwp_anim_2d_name">Doua lwp</string>
     <string name="Writingtxt">Writing Color</string>
     <string name="douatitle1">Download Live wallpaper resources</string>
     <string name="douatitle2">Waiting Download Resource</string>
     <string name="notchanger">New Wallpaper take effect after touchin screen 3 times, If you do not see the difference please try again </string>
     <string name="failed_dwn">Failed</string>
     <string name="waiting_downlaod">"Wait for download"</string>
-
 </resources>

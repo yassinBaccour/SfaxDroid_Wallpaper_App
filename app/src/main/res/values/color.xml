@@ -8,7 +8,5 @@
     <color name="black_alpha_30">#4D000000</color>
     <color name="navigationBarColor">@android:color/black</color>
     <color name="red">#F44336</color>
-
     <color name="gray_one">#414141</color>
-
 </resources>
