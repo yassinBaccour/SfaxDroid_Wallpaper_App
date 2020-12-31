@@ -1,7 +1,7 @@
 package com.sami.rippel;
 
 
-import com.sami.rippel.core.DaggerApplicationComponent;
+import com.sami.rippel.core.di.DaggerApplicationComponent;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;

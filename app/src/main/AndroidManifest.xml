@@ -30,7 +30,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
 
-        <activity android:name="com.sami.rippel.feature.singleview.PrivacyActivity"></activity>
+        <activity android:name="com.sami.rippel.feature.other.PrivacyActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -47,10 +47,10 @@
         </provider>
 
         <meta-data
-            android:name="com.sami.rippel.views.GlideConfiguration"
+            android:name="com.sami.rippel.utils.GlideConfiguration"
             android:value="GlideModule" />
 
-        <activity android:name="com.sami.rippel.feature.main.AboutActivity" />
+        <activity android:name="com.sami.rippel.feature.other.AboutActivity" />
 
     </application>
 

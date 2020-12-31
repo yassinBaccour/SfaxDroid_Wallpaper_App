@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="cardframetitle">Cadre photo</string>
-    <string name="cardframedesc">Crée des photos à l\'aide de cadres</string>
-    <string name="TitleActionBarTimerLwpAdded">Wallpapers télécharger</string>
-    <string name="texturetitle">Choisir Texture</string>
-    <string name="choose_background">Choisir une photo</string>
-
-</resources>

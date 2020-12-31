@@ -10,6 +10,7 @@ dependencies {
     api libraries.annotation
     api libraries.dagger
     api libraries.coroutinesCore
+    api libraries.ktx
     kapt libraries.daggerCompiler
 }
 

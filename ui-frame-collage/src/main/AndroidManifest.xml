@@ -16,5 +16,9 @@
             android:name="com.sfaxdroid.framecollage.stickers.StickersLabActivity"
             android:hardwareAccelerated="true"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".gallery.GalleryActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="fullSensor" />
     </application>
 </manifest>

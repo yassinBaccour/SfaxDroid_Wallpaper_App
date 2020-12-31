@@ -1,78 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:id="@+id/cardViewStickers"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:ignore="MissingDefaultResource">
+    android:layout_margin="6dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="4dp">
 
-    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cardViewStickers"
-        style="@style/Material_Card_View"
-        card_view:cardCornerRadius="2dp"
-        card_view:cardElevation="4dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ecf0f1"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#ecf0f1"
-            android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/item_detail_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintDimensionRatio="w,9:16"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageStikers"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:contentDescription="@null"
-                android:minWidth="100dp"
-                android:scaleType="fitXY" />
+        <TextView
+            android:id="@+id/item_detail_title"
+            style="@style/item_detail_title_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/item_detail_image"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/item_detail_random_title" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+        <TextView
+            android:id="@+id/item_detail_desc"
+            style="@style/item_detail_desc_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/item_detail_image"
+            card_view:layout_constraintTop_toBottomOf="@+id/item_detail_title"
+            tools:text="@string/item_detail_random_desc" />
 
-                    <TextView
-                        android:id="@+id/titleStckers"
-                        style="@style/Material_Card_Title"
-                        android:text="@string/cardStickerstitle"
-                        tools:text="@string/cardStickerstitle" />
+        <TextView
+            android:id="@+id/item_detail_btn"
+            style="@style/item_detail_open_button_style"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:text="@string/item_detail_random_btn_text"
+            android:textColor="@color/primary"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/item_detail_desc"
+            tools:text="@string/item_detail_random_btn_text" />
 
-                    <TextView
-                        android:id="@+id/subtitleStickers"
-                        style="@style/Material_Card_Subtitle_16dp"
-                        android:text="@string/cardStickersdesc"
-                        tools:text="@string/cardStickersdesc" />
-                </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
 
-                <View xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/dividerStickers"
-                    android:layout_width="fill_parent"
-                    android:layout_height="1px"
-                    android:background="@color/divider_grey"
-                    android:visibility="invisible" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="horizontal"
-                    android:paddingLeft="8dp">
-
-                    <TextView
-                        android:id="@+id/button_open"
-                        style="@style/Material_Action"
-                        android:layout_gravity="bottom"
-                        android:text="@string/openGallery"
-                        android:textColor="@color/primary"
-                        tools:text="@string/openGallery" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</LinearLayout>

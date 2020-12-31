@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="cardframetitle">Wallpapers Frame</string>
-    <string name="cardframedesc">Choose one picture and one frame and Create your wallpapers</string>
-    <string name="TitleActionBarTimerLwpAdded">Saved Wallpapers</string>
-    <string name="texturetitle">Choose Texture</string>
-    <string name="choose_background">Choose Background</string>
-
-</resources>

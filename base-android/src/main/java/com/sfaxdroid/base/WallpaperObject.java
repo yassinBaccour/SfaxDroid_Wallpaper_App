@@ -26,17 +26,8 @@ public class WallpaperObject implements Parcelable, Serializable {
         this.resourceUri = resourceUri;
     }
 
-    public WallpaperObject(String name, String desc, int resourceColor, int resourceUri, LiveWallpaper lv) {
-        this.name = name;
-        this.desc = desc;
-        this.resourcecolor = resourceColor;
-        this.resourceUri = resourceUri;
-        liveWallpaper = lv;
-    }
 
-    public LiveWallpaper getLiveWallpaper() {
-        return liveWallpaper;
-    }
+
 
     public int getResourceUri() {
         return resourceUri;
@@ -61,7 +52,6 @@ public class WallpaperObject implements Parcelable, Serializable {
     @Path("subcategory")
     private List<WallpaperObject> subWallpapersCategoryList;
 
-    LiveWallpaper liveWallpaper;
 
     protected WallpaperObject(Parcel in) {
         name = in.readString();

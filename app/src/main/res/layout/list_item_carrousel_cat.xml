@@ -34,13 +34,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/TitleSkyboxLwp"
+            android:text="@string/item_detail_random_title"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             android:textColor="@android:color/white"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/imgCarrouselImage"
-            tools:text="@string/TitleSkyboxLwp" />
+            tools:text="@string/item_detail_random_title" />
 
         <TextView
             android:id="@+id/txt_carrousel_desc"
@@ -49,13 +49,13 @@
             android:lines="4"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="@string/DescSkyboxLwp"
+            android:text="@string/item_detail_random_desc"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textColor="@android:color/white"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/txt_carrousel_title"
-            tools:text="@string/DescSkyboxLwp" />
+            tools:text="@string/item_detail_random_desc" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

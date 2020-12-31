@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sami.rippel.feature.singleview.PrivacyActivity">
+    tools:context="com.sami.rippel.feature.other.PrivacyActivity">
 
     <WebView
         android:id="@+id/privacyWebView"

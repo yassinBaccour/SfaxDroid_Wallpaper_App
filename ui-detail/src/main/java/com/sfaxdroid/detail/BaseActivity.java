@@ -49,7 +49,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivi
         mCompositeDisposable.add(subscription);
     }
 
-
     @Override
     protected void onDestroy() {
         if (mPresenter != null)

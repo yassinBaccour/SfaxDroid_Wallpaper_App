@@ -4,6 +4,7 @@ import android.os.Environment;
 
 public class Constants {
     public static final String KEY_JSON_FILE_NAME = "KEY_JSON_FILE_NAME";
+    public static final String KEY_SCREEN_TYPE = "KEY_SCREEN_TYPE";
 
     public static final String DOUA_PNG_BACKFROUND_FILE_NAME = "doua.jpg";
     public static final String URL_TO_DOWNLOAD = "URLTODOWNLOAD";

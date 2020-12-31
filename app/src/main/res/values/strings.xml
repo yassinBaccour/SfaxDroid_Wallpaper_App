@@ -3,94 +3,23 @@
     <string name="app_name">Arabic Wallpaper HD</string>
     <string name="rating_app">Rating This Application</string>
     <string name="open_lwp">Open Lwp</string>
+    <string name="open_cat">Open</string>
 
-    <!-- Snack Details -->
+    <string name="item_detail_random_desc">Write on your photos and add stickers, frames, filters and other stuff</string>
+    <string name="item_detail_random_title">Stikers and Text</string>
+    <string name="item_detail_random_btn_text">Gallery</string>
+    s
+    <string name="rating_app_description">\n if you like this application Please rating , rating help me to develop more Islamic Application \n </string>
+    <string name="rating_app_title">Rate the application</string>
+    <string name="rating_app_later">Remind me later</string>
+    <string name="rating_app_never">Do not ask again</string>
+    <string name="rating_app_yes_btn">Rate my application</string>
+
+    <string name="exit_app_message">Simultaneously press two times the back button to exit</string>
+
     <string name="detail.snack.save.success">Successfully saved wallpaper</string>
     <string name="detail.snack.save.failure">Try again, Failed to save wallpaper</string>
     <string name="detail.snack.set.success">Successfully set as wallpaper</string>
     <string name="detail.snack.set.failure">Try again, Failed to set as wallpaper</string>
     <string name="detail.snack.button.not_ready">Try again, The resource is not ready to process</string>
-    <!-- Menu Details -->
-
-    <string name="title_activity_tabbed_gallery">TabbedGalleryActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="catalog_title">Islamic Wallpapers</string>
-    <string name="catalog_download">Download Wallpapers</string>
-    <string name="catalog_loading">Loading.....</string>
-    <string name="catalog_New">New</string>
-    <string name="catalog_All">All</string>
-    <string name="catalog_Popular">Popular</string>
-    <string name="catalog_Category">Cat</string>
-    <string name="catalog_LWP">LWP</string>
-    <string name="catalog_Lab">Lab</string>
-    <string name="openGallery">Gallery</string>
-    <string name="openCamera">Camera</string>
-    <string name="cardStickerstitle">Stikers and Text</string>
-    <string name="cardStickersdesc">Write on your photos and add stickers, frames, filters and other stuff</string>
-    <string name="ShareUsing">Share image using</string>
-    <string name="openGalleryLong">Open Image Gallery</string>
-
-
-    <string name="lwp_author">yassin Contributors</string>
-    <string name="lwp_desc">Tunis Sfax Developer</string>
-
-    <string name="nameofallah">Name Of Allah in the sky LWP</string>
-
-    <string name="setSkyboxLwp">Open Lwp</string>
-    <string name="DescSkyboxLwp">99 Name Of Allah With 360 view</string>
-    <string name="TitleSkyboxLwp">Name Of Allah</string>
-
-
-    <string name="DescRippleLwp">You can choose one picture and set the water ripple animation</string>
-    <string name="TitleRippleLwp">Water Ripple</string>
-    <string name="global_how_to_use">The Lwp allows you to change your screen wallpaper on a timed basis</string>
-
-    <string name="otherMethodRippleTitle">Other Method</string>
-    <string name="otherMethodRippleDesc">Open wallpaper from gallery and click to Use as ripple lwp button</string>
-
-    <string name="FirstMethodRippleTitle">Fast Mode</string>
-    <string name="FirstMethodRippleDesc">Choose one picture and click To the buttom below to open LWP</string>
-
-    <string name="DescDouaLwp">Doua Changer over choosed background</string>
-
-    <string name="titleBasmala">Basmala Lock</string>
-    <string name="toastnosound">Without Sound</string>
-    <string name="toastwithsound">With Sound</string>
-    <string name="toastsanspicture">Without Picture  </string>
-    <string name="toastwithpicture">With Picture</string>
-    <string name="notifbasmallahactive">Basmallah Active</string>
-    <string name="prefPicture">Show basmallah Picture </string>
-    <string name="prefSound">Play basmallah Sound</string>
-    <string name="defaultText">Choose Picture</string>
-    <string name="select_Category">Choose Picture</string>
-    <string name="prefAleatoire">Random picture</string>
-    <string name="settingtxt">Setting</string>
-    <string name="currentPicutre">Current Picture</string>
-    <string name="prefnbopentoshow">Show after X unlock</string>
-    <string name="nbunlockinfo">Nb x how you lock and unlock phone to show</string>
-    <string name="openBasmalaTitle">Basmala Unlocking</string>
-    <string name="openBasmalaDesc">Play Basmala when you unlock your phone</string>
-    <string name="openBasmala">Open</string>
-    <string name="openBasmalaNeedAddPicture">You need to choose picture</string>
-    <string name="needallowpermission">You need to allow permission</string>
-    <string name="timeShort">Short</string>
-    <string name="timeMeduim">Meduim</string>
-    <string name="timeFast">Fast</string>
-    <string name="timeTurbo">Turbo</string>
-    <string name="serviceOn">Service ON</string>
-    <string name="serviceOff">Service Off</string>
-    <string name="basmalapicturegallery">Picture</string>
-    <string name="activesbasmalah">Active</string>
-    <string name="closesebasmalae">Close</string>
-    <string name="imageChnaged">Image changer</string>
-
-    <string name="colortxt">Color</string>
-    <string name="sizetxt">Size</string>
-    <string name="timer_wallpaper_name">Timer LWP</string>
-
-
-    <string name="nameofallah2dtitle">Name Of Allah 2D</string>
-    <string name="nameofallah2ddesc">Choose background and writing color and enjoy with new animated wallpapers</string>
-
 </resources>

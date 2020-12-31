@@ -111,13 +111,12 @@ dependencies {
     implementation project(':download-file-module')
     implementation project(':base-android')
     implementation project(':domain')
-    //implementation project(':ui-detail')
+    implementation project(':ui-detail')
     //implementation project(':ui-sky-rajawali-lwp')
     //implementation project(':ui-anim-img-lwp')
     //implementation project(':ui-anim-word-lwp')
     //implementation project(':ui-timer-lwp')
     //implementation project(':data-android')
-    //implementation project(':ui-gallery')
 }
 
 apply plugin: 'com.google.gms.google-services'

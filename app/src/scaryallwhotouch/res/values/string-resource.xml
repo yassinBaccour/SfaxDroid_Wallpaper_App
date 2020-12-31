@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="appname">scare</string>
     <string name="admobkey">ca-app-pub-6263632629106733~4067989099</string>
     <string name="intertitial">ca-app-pub-6263632629106733/5688786978</string>
-    <string name="privacy"><a class="iubenda-white no-brand iubenda-embed iub-body-embed" href="https://www.iubenda.com/privacy-policy/57190094" title="Privacy Policy">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script></string>
 </resources>

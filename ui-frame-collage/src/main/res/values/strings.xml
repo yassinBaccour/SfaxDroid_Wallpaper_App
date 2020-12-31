@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="cardframetitle">Wallpapers Frame</string>
+    <string name="cardframedesc">Choose one picture and one frame and Create your wallpapers</string>
+    <string name="TitleActionBarTimerLwpAdded">Saved Wallpapers</string>
+    <string name="texturetitle">Choose Texture</string>
+    <string name="choose_background">Choose Background</string>
+
     //Stickers Lab
     <string name="stickersHelpTitleResize"></string>
     <string name="stickersHelpDesc1Resize"></string>
@@ -42,4 +49,24 @@
     <string name="addtochangefont">You need add Text before</string>
     <string name="removepicture">Delete Picture</string>
     <string name="scroll_up">Scroll Up</string>
+
+    <string name="title_activity_tabbed_gallery">TabbedGalleryActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="catalog_title">Islamic Wallpapers</string>
+    <string name="catalog_download">Download Wallpapers</string>
+    <string name="catalog_loading">Loading.....</string>
+    <string name="catalog_New">New</string>
+    <string name="catalog_All">All</string>
+    <string name="catalog_Popular">Popular</string>
+    <string name="catalog_Category">Cat</string>
+    <string name="catalog_LWP">LWP</string>
+    <string name="catalog_Lab">Lab</string>
+    <string name="openGallery">Gallery</string>
+    <string name="openCamera">Camera</string>
+    <string name="cardStickerstitle">Stikers and Text</string>
+    <string name="cardStickersdesc">Write on your photos and add stickers, frames, filters and other stuff</string>
+    <string name="ShareUsing">Share image using</string>
+    <string name="openGalleryLong">Open Image Gallery</string>
+
 </resources>

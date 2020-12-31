@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="disableDeleteMode">الرجاء غلق خاصية الفسخ</string>
+    <string name="nothingAtScreen">لاشيئ على الشاشة</string>
+    <string name="noText">لاتوجد كتابة على الشاشة</string>
+    <string name="addNewTextTitle">أضف كتابة</string>
+    <string name="addtextfragment">أضافة الكتابات</string>
+    <string name="resizestickers">يمكنك تكبير و تعديل الملصقات</string>
+    <string name="swipeleftright">للمزيد اسحب إلي اليمين أو اليسار</string>
+    <string name="opencamera"> إلتقاط الصورة عبر الكميرا </string>
+    <string name="opengellery"> فتح ملف صور الهاتف </string>
+    <string name="openweb"> صور البرنامج </string>
+    <string name="issaved">تم حفظ الصورة في الذاكرة</string>
+    <string name="addtochangesize">أضف النص على الصورة لتكبير الكتابة</string>
+    <string name="addtochangebackground">أضف النص على الصورة لتبديل لون خلفية الكتابة</string>
+    <string name="addtochangefont">أضف النص على الصورة لتغير الخط</string>
+    <string name="removepicture"> فسخ الصورة</string>
+    <string name="scroll_up">إلى الأعلى</string>
+    <string name="cardframetitle">إطارات للصور</string>
+    <string name="cardframedesc">ركب صورتك الخاصة عبر إستعمال الإطارات</string>
+    <string name="TitleActionBarTimerLwpAdded">الخلفيات المحملة</string>
+    <string name="texturetitle">إختيار الخلفية</string>
+    <string name="choose_background">إختيار الخلفية</string>
+</resources>

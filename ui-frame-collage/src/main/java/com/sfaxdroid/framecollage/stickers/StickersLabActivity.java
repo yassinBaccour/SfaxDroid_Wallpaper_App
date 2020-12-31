@@ -61,6 +61,7 @@ import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
 import com.sfaxdroid.base.BitmapUtils;
 import com.sfaxdroid.base.FileUtils;
 import com.sfaxdroid.base.Utils;
+import com.sfaxdroid.framecollage.Constants;
 
 
 import java.io.ByteArrayOutputStream;
