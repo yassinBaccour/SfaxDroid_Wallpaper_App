@@ -18,17 +18,17 @@ class WordImgLiveWallpaper : WallpaperService() {
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)
         val color = pref.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
-        val zipFolder = com.sfaxdroid.base.Constants.DOUA_ZIP_FOLDER_NAME
+        val zipFolder = com.sfaxdroid.base.Constants.ZIP_FOLDER_NAME
         return ImgWordEngine(
             color, getTemporaryDir(
                 this,
                 Constants.KEY_LWP_FOLDER_CONTAINER,
                 getString(R.string.app_namenospace)
-            ), com.sfaxdroid.base.Constants.DOUA_PNG_BACKFROUND_FILE_NAME, zipFolder
+            ), com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME, zipFolder
         )
     }
 
-    private inner class ImgWordEngine internal constructor(
+    private inner class ImgWordEngine constructor(
         private val color: Int,
         private val tempDir: File,
         private val backgroundFileName: String,

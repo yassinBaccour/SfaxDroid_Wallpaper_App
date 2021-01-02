@@ -107,7 +107,7 @@ class FileUtils {
             return File(getPermanentDir(context, appName), fileName)
         }
 
-        fun getFileName(path: String): String? {
+        fun getFileName(path: String): String {
             return path.substring(path.lastIndexOf('/') + 1, path.length)
         }
 
@@ -134,10 +134,6 @@ class FileUtils {
             return getListFiles(getPermanentDir(context, appName))
         }
 
-        fun getBasmalaStickersFileList(context: Context, appName: String): List<File?>? {
-            return getListFiles(getBasmalaFileDirDir(context, appName))
-        }
-
         private fun getTemporaryDir(context: Context, appName: String): File? {
             val temporaryDir = File(
                 context.filesDir,
@@ -149,29 +145,18 @@ class FileUtils {
             return temporaryDir
         }
 
-        fun getTemporaryFile(fileName: String?, context: Context, appName: String): File? {
+        fun getTemporaryFile(fileName: String, context: Context, appName: String): File {
             return File(getTemporaryDir(context, appName), fileName)
         }
 
-        fun isSavedToStorage(fileName: String?, context: Context, appName: String): Boolean {
+        fun isSavedToStorage(fileName: String, context: Context, appName: String): Boolean {
             val temporaryFile = getTemporaryFile(fileName, context, appName)
-            return temporaryFile!!.exists()
+            return temporaryFile.exists()
         }
 
-        fun deleteFile(url: String?): Boolean {
+        fun deleteFile(url: String): Boolean {
             val file = File(url)
             return file.delete()
-        }
-
-        private fun getBasmalaFileDirDir(context: Context, appName: String): File? {
-            val zipDestination = File(
-                getTemporaryDir(context, appName),
-                Constants.KEY_BASMALA_FOLDER_CONTAINER
-            )
-            if (!zipDestination.exists()) {
-                zipDestination.mkdirs()
-            }
-            return zipDestination
         }
 
         private fun copyFile(

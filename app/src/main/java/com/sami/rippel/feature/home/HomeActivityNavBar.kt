@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
@@ -21,10 +20,9 @@ import com.sami.rippel.feature.home.AllInOneFragment.Companion.newInstance
 import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
-import com.sfaxdroid.bases.DeviceListner
 import com.tbruyelle.rxpermissions2.RxPermissions
 
-class HomeActivityNavBar : SimpleActivity(), DeviceListner {
+class HomeActivityNavBar : SimpleActivity() {
 
     private var mToolbar: Toolbar? = null
     private var mPrivacy: ImageView? = null
@@ -191,22 +189,6 @@ class HomeActivityNavBar : SimpleActivity(), DeviceListner {
             ).show()
         }
         back_pressed = System.currentTimeMillis()
-    }
-
-    override fun onRequestPermissions() {
-        ActivityCompat.requestPermissions(
-            this@HomeActivityNavBar, arrayOf(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.SET_WALLPAPER_HINTS,
-                Manifest.permission.WRITE_SETTINGS,
-                Manifest.permission.SET_WALLPAPER,
-                Manifest.permission.RECEIVE_BOOT_COMPLETED
-            ),
-            REQUEST_CODE_ASK_PERMISSIONS
-        )
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {

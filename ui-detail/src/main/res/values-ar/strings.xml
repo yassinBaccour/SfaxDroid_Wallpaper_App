@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="SetWall">تطبيق الخلفية</string>
-    <string name="menu.detail.share.fb">النشر في الفيسبوك </string>
-    <string name="menu.detail.share.inst">النشر في الإنستقرام </string>
+    <string name="ui_detail_title">تطبيق الخلفية</string>
+    <string name="ui_detail_share_fb">النشر في الفيسبوك </string>
+    <string name="ui_detail_insta">النشر في الإنستقرام </string>
     <string name="menu.detail.oneclickwallpaper">تطبيق الخلفية</string>
-    <string name="menu.detail.wall">جعل الصورة خلفية</string>
-    <string name="menu.detail.chooserwall">فتح عبر برنامج الخلفيات</string>
-    <string name="menu.detail.gallery">حفظ الصورة</string>
-    <string name="menu.detail.share.all">النشر</string>
-    <string name="menu.detail.share.ripple">إستعمال كخلفية تموج</string>
+    <string name="ui_detail_crop">جعل الصورة خلفية</string>
+    <string name="ui_detail_choose_wall">فتح عبر برنامج الخلفيات</string>
+    <string name="ui_detail_save">حفظ الصورة</string>
+    <string name="ui_detail_share">النشر</string>
+    <string name="ui_detail_send_ripple">إستعمال كخلفية تموج</string>
 </resources>

@@ -7,7 +7,7 @@
         <activity
             android:name="com.sfaxdroid.detail.DetailsActivity"
             android:hardwareAccelerated="true"
-            android:label="@string/SetWall"
+            android:label="@string/ui_detail_title"
             android:screenOrientation="portrait" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 

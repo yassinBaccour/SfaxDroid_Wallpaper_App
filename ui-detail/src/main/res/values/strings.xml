@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="SetWall">Wallpaper Preview</string>
-    <string name="menu.detail.share.fb">Share with FB</string>
-    <string name="menu.detail.oneclickwallpaper">Set As Wallpaper</string>
-    <string name="menu.detail.wall">Fast Crop And Set</string>
-    <string name="menu.detail.chooserwall">Open With Wallpaper Application</string>
-    <string name="menu.detail.gallery">Save to gallery</string>
-    <string name="menu.detail.share.inst">Share with insta</string>
-    <string name="menu.detail.share.all">Share</string>
-    <string name="menu.detail.share.ripple">Use as ripple LWP</string>
+    <string name="ui_detail_title">Wallpaper Preview</string>
+    <string name="ui_detail_share_fb">Share with FB</string>
+    <string name="ui_detail_crop">Fast Crop And Set</string>
+    <string name="ui_detail_choose_wall">Open With Wallpaper Application</string>
+    <string name="ui_detail_save">Save to gallery</string>
+    <string name="ui_detail_insta">Share with insta</string>
+    <string name="ui_detail_share">Share</string>
+    <string name="ui_detail_send_ripple">Use as ripple LWP</string>
+    <string name="ui_detail_failure_delete">Error Deleting file</string>
 </resources>

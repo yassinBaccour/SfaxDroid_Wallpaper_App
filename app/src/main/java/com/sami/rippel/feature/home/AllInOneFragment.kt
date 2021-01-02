@@ -45,11 +45,11 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
     private var wallpapersListAdapter: WallpapersListAdapter? = null
 
     private val fileName by lazy {
-        arguments?.getString(Constants.KEY_JSON_FILE_NAME, "") ?: ""
+        arguments?.getString(Constants.EXTRA_JSON_FILE_NAME, "") ?: ""
     }
 
     private val screen by lazy {
-        arguments?.getString(Constants.KEY_SCREEN_TYPE, "") ?: ""
+        arguments?.getString(Constants.EXTRA_SCREEN_TYPE, "") ?: ""
     }
 
     private val selectedLwpName by lazy {
@@ -70,7 +70,7 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 Class.forName(name)
             ).apply {
                 putExtra(
-                    Constants.URL_TO_DOWNLOAD,
+                    Constants.EXTRA_URL_TO_DOWNLOAD,
                     url
                 )
             })
@@ -101,7 +101,6 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         }
     }
 
-
     private fun openWallpaper(wallpaperObject: BaseWallpaperView) {
         when (wallpaperObject) {
             is SimpleWallpaperView -> {
@@ -111,23 +110,12 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 openLwp(wallpaperObject)
             }
             is CategoryItem -> {
-                val categoryName: String = wallpaperObject.name
                 HomeActivityNavBar.nbOpenAds++
-                val intent = Intent(
-                    activity,
-                    Class.forName("com.sfaxdroid.framecollage.gallery.GalleryActivity")
-                )
-                intent.putParcelableArrayListExtra(
-                    Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER, arrayListOf()
-                )
-                if (categoryName.isNotEmpty()) intent.putExtra(
-                    Constants.DETAIL_IMAGE_POS,
-                    categoryName
-                )
-                startActivity(intent)
+                AllInOneFragment.newInstance(wallpaperObject.list, "CAT_WALLPAPER")
             }
         }
     }
+
 
     private fun openLwp(
         wallpaperObject: LwpItem,
@@ -289,13 +277,9 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 activity,
                 Class.forName("com.sfaxdroid.detail.DetailsActivity")
             ).apply {
-                putParcelableArrayListExtra(
-                    Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER,
-                    arrayListOf()
-                )
                 putExtra(
-                    Constants.DETAIL_IMAGE_POS,
-                    pos
+                    Constants.EXTRA_IMG_URL,
+                    wallpaperObject.url
                 )
                 if (lwpName.isNotEmpty())
                     putExtra(
@@ -456,8 +440,8 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         fun newInstance(fileName: String, screenType: String): AllInOneFragment {
             return AllInOneFragment().apply {
                 val args = Bundle()
-                args.putString(Constants.KEY_JSON_FILE_NAME, fileName)
-                args.putString(Constants.KEY_SCREEN_TYPE, screenType)
+                args.putString(Constants.EXTRA_JSON_FILE_NAME, fileName)
+                args.putString(Constants.EXTRA_SCREEN_TYPE, screenType)
                 arguments = args
             }
         }

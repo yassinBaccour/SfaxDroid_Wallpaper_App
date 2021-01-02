@@ -53,7 +53,7 @@ class ApplicationModule {
 
         return PreferencesManager(
             context,
-            name.plus(Constants.PREFERENCESNAME)
+            name.plus(Constants.PREFERENCES_NAME)
         )
     }
 

@@ -15,4 +15,5 @@ abstract class BaseFragment : Fragment() {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }
+
 }

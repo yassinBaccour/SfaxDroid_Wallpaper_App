@@ -53,8 +53,8 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
         zipFile = File(lwpFolder, Constants.PNG_ZIP_FILE_NAME)
 
-        backgroundFile = File(lwpFolder, com.sfaxdroid.base.Constants.DOUA_PNG_BACKFROUND_FILE_NAME)
-        zipDestination = File(lwpFolder, com.sfaxdroid.base.Constants.DOUA_ZIP_FOLDER_NAME)
+        backgroundFile = File(lwpFolder, com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME)
+        zipDestination = File(lwpFolder, com.sfaxdroid.base.Constants.ZIP_FOLDER_NAME)
 
         val requestZipFile =
             DownloadRequest(Uri.parse(if (Utils.isSmallScreen(this)) Constants.URL_ZIP_FILE_MINI_PNG else Constants.URL_ZIP_FILE_PNG))
@@ -66,15 +66,13 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
         requestWallpaper = DownloadRequest(
             Uri.parse(
-                intent.getStringExtra(com.sfaxdroid.base.Constants.URL_TO_DOWNLOAD).orEmpty()
-                    .apply {
-                        if (Utils.isSmallScreen(this@WordImgActivity)
-                        ) {
-                            replace("islamicimages", "islamicimagesmini")
-                        }
-                    })
+                Utils.getUrlByScreenSize(
+                    intent.getStringExtra(com.sfaxdroid.base.Constants.EXTRA_URL_TO_DOWNLOAD)
+                        .orEmpty(), this@WordImgActivity
+                )
+            )
         )
-            .setDestinationURI(Uri.parse(lwpFolder.toString() + "/" + com.sfaxdroid.base.Constants.DOUA_PNG_BACKFROUND_FILE_NAME))
+            .setDestinationURI(Uri.parse(lwpFolder.toString() + "/" + com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME))
             .setPriority(DownloadRequest.Priority.LOW)
             .setRetryPolicy(DefaultRetryPolicy())
             .setDownloadContext("Doua LWP Background")
@@ -145,7 +143,7 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
             com.sfaxdroid.base.Constants.nbIncrementationAfterChange = 0
             Utils.openLiveWallpaper<WordImgLiveWallpaper>(this)
         } else {
-            Utils.showSnackMessage(rootLayout, "Wait for download")
+            Utils.showSnackMessage(rootLayout, getString(R.string.download_resource_txt_witing))
         }
     }
 

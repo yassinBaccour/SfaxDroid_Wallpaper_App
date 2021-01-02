@@ -82,7 +82,7 @@ class AnimWord2dWallpaper : WallpaperService() {
             }
 
             BitmapFactory.decodeFile(
-                filesDir.toString() + "/" + com.sfaxdroid.base.Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
+                filesDir.toString() + "/" + com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
                 options
             )?.also {
                 background = Bitmap.createScaledBitmap(it, width, height, true)
@@ -116,7 +116,7 @@ class AnimWord2dWallpaper : WallpaperService() {
                     background = Bitmap.createScaledBitmap(
                         BitmapFactory.decodeFile(
                             filesDir.toString() + "/"
-                                    + com.sfaxdroid.base.Constants.DOUA_PNG_BACKFROUND_FILE_NAME,
+                                    + com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
                             options
                         ),
                         screenWidth, screenHeight, true

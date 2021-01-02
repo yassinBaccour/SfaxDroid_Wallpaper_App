@@ -138,7 +138,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
-                                android:text="@string/size_texte_name_of_allah" />
+                                android:text="@string/size_texte" />
 
 
                             <TableLayout

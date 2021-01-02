@@ -4,14 +4,13 @@ apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'com.squareup.retrofit2:converter-gson:2.7.1'
+    kapt libraries.daggerCompiler
+    api libraries.retrofit2Converter
+    api libraries.kotlinStdlib
     api libraries.annotation
     api libraries.dagger
     api libraries.coroutinesCore
     api libraries.ktx
-    kapt libraries.daggerCompiler
 }
 
 java {

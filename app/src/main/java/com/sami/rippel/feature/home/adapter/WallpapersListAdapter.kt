@@ -70,7 +70,7 @@ class WallpapersListAdapter(
             TYPE_ADS ->
                 return WallpaperImgVH(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item,
+                        R.layout.list_item_wallpaper,
                         parent, false
                     )
                 )
@@ -109,7 +109,7 @@ class WallpapersListAdapter(
 
             else -> return WallpaperImgVH(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.list_item,
+                    R.layout.list_item_wallpaper,
                     parent, false
                 )
             )

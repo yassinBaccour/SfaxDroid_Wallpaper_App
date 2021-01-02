@@ -13,7 +13,7 @@ public class SharedPrefsUtils {
     private SharedPreferences.Editor prefsEditor;
 
     public SharedPrefsUtils(Context mContext) {
-        mPref = mContext.getSharedPreferences(Constants.PREFERENCESNAME,
+        mPref = mContext.getSharedPreferences(Constants.PREFERENCES_NAME,
                 Context.MODE_PRIVATE);
         prefsEditor = mPref.edit();
     }

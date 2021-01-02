@@ -5,126 +5,179 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.flipboard.bottomsheet.commons.MenuSheetView
 import com.flipboard.bottomsheet.commons.MenuSheetView.MenuType
 import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.utils.FileUtils
 import com.sfaxdroid.base.utils.FileUtils.Companion.getFileName
 import com.sfaxdroid.base.utils.FileUtils.Companion.getTemporaryFile
 import com.sfaxdroid.base.utils.FileUtils.Companion.isSavedToStorage
+import com.sfaxdroid.base.utils.FileUtils.Companion.savePermanentFile
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.base.utils.Utils.Companion.checkPermission
 import com.sfaxdroid.base.utils.Utils.Companion.getScreenHeightPixels
 import com.sfaxdroid.base.utils.Utils.Companion.getScreenWidthPixels
-import com.sfaxdroid.base.utils.Utils.Companion.saveToFileToTempsDirAndChooseAction
-import com.sfaxdroid.base.utils.Utils.Companion.shareAllFile
-import com.sfaxdroid.base.utils.Utils.Companion.shareFileWithIntentType
-import com.sfaxdroid.base.WallpaperObject
-import com.sfaxdroid.bases.ActionTypeEnum
-import com.sfaxdroid.bases.DeviceListner
-import com.sfaxdroid.bases.IntentTypeEnum
-import com.sfaxdroid.bases.WallpaperListener
+import com.sfaxdroid.detail.utils.DetailUtils
+import com.sfaxdroid.detail.utils.DetailUtils.Companion.decodeBitmapAndSetAsLiveWallpaper
+import com.sfaxdroid.detail.utils.DetailUtils.Companion.setWallpaper
+import com.sfaxdroid.detail.utils.LoadingListener
+import com.sfaxdroid.detail.utils.TouchImageView
 import com.soundcloud.android.crop.Crop
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_details.*
 import java.io.File
 import java.util.*
 
-class DetailsActivity : BaseActivity<DetailPresenter?>(),
-    WallpaperListener, DeviceListner, DetailContract.View {
-    private var selectedPosInPager = 0
-    private var from: String? = ""
+class DetailsActivity : SimpleActivity(), LoadingListener {
+
+    private var mCompositeDisposable: CompositeDisposable? = null
+    private var from: String = ""
+    private var currentUrl: String = ""
     private var fromRipple = false
-    private var adapter: DetailPagerAdapter? = null
-    private var listOfWallpaper =
-        ArrayList<WallpaperObject?>()
+
+    private fun unSubscribe() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable!!.dispose()
+        }
+    }
+
+    private fun addSubscribe(subscription: Disposable?) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = CompositeDisposable()
+        }
+        mCompositeDisposable!!.add(subscription!!)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unSubscribe()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setFlags()
-        listOfWallpaper =
-            intent.getParcelableArrayListExtra(Constants.LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER)
-                ?: arrayListOf()
-        selectedPosInPager = intent.getIntExtra(Constants.DETAIL_IMAGE_POS, 0)
-        from = intent.getStringExtra(Constants.KEY_LWP_NAME)
+        currentUrl = getFullUrl(
+            Utils.getUrlByScreenSize(
+                intent.getStringExtra(Constants.EXTRA_IMG_URL).orEmpty(), this
+            )
+        )
+        from = intent.getStringExtra(Constants.KEY_LWP_NAME).orEmpty()
         initToolbar()
-        setFabImageResource()
-        setupViewPager()
+        initFabButton()
         checkPermission()
+        showLoading()
+        loadWallpaper()
     }
 
-    private fun setFlags() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-                WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED
-            )
-        }
+    private fun getFullUrl(url: String): String {
+        return url.replace("_preview", "")
+    }
+
+    private fun loadWallpaper() {
+        val detailImage: TouchImageView = findViewById(R.id.detailImage)
+        Glide.with(this).load(currentUrl)
+            .into(object : SimpleTarget<Drawable?>() {
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable?>?
+                ) {
+                    detailImage.setImageDrawable(resource)
+                    hideLoading()
+                }
+            })
     }
 
     private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
-            checkPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                this
-            )
+            onRequestPermissions()
         }
     }
 
     private fun initToolbar() {
         setSupportActionBar(toolbar as Toolbar)
-        supportActionBar?.title = getString(R.string.SetWall)
+        supportActionBar?.title = getString(R.string.ui_detail_title)
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun instantiatePresenter() = DetailPresenter()
-
-    override val layout: Int
-        get() = R.layout.activity_details
+    override val layout = R.layout.activity_details
 
     override fun initEventAndData() {}
 
-    private fun fabClick() {
-        if (!from.isNullOrEmpty()) {
-            when (from) {
-                Constants.KEY_ADD_TIMER_LWP -> mPresenter?.saveTempsDorAndDoAction(
-                    ActionTypeEnum.MOVE_PERMANENT_DIR,
-                    currentUrl,
-                    this,
-                    getString(R.string.app_namenospace)
-                )
-                Constants.KEY_ADDED_LIST_TIMER_LWP -> mPresenter?.saveTempsDorAndDoAction(
-                    ActionTypeEnum.DELETE_CURRENT_PICTURE,
-                    currentUrl,
-                    this,
-                    getString(R.string.app_namenospace)
-                )
-                Constants.KEY_RIPPLE_LWP -> mPresenter?.saveTempsDorAndDoAction(
-                    ActionTypeEnum.SEND_LWP,
-                    currentUrl,
-                    this,
-                    getString(R.string.app_namenospace)
+    private fun saveTempsDorAndDoAction(
+        actionToDo: ActionTypeEnum,
+        url: String,
+        context: Context,
+        appName: String
+    ) {
+        addSubscribe(Flowable.fromCallable {
+            isSavedToStorage(
+                getFileName(url),
+                context,
+                appName
+            )
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { aBoolean: Boolean ->
+                onSaveTempsDorAndDoAction(
+                    aBoolean,
+                    actionToDo
                 )
             }
+        )
+    }
+
+    private fun fabClick() {
+        if (from.isNotEmpty()) {
+            saveAndGoToLiveWallpaper()
         } else {
             showMenuSheet()
         }
     }
 
-    private fun setFabImageResource() {
-        if (from?.isEmpty() == false) {
+    private fun saveAndGoToLiveWallpaper() {
+        when (from) {
+            Constants.KEY_ADD_TIMER_LWP -> saveTempsDorAndDoAction(
+                ActionTypeEnum.MovePerDir,
+                currentUrl,
+                this,
+                getString(R.string.app_namenospace)
+            )
+            Constants.KEY_ADDED_LIST_TIMER_LWP -> saveTempsDorAndDoAction(
+                ActionTypeEnum.Delete,
+                currentUrl,
+                this,
+                getString(R.string.app_namenospace)
+            )
+            Constants.KEY_RIPPLE_LWP -> saveTempsDorAndDoAction(
+                ActionTypeEnum.SendLwp,
+                currentUrl,
+                this,
+                getString(R.string.app_namenospace)
+            )
+        }
+    }
+
+    private fun initFabButton() {
+        if (from.isNotEmpty()) {
             when (from) {
                 Constants.KEY_ADD_TIMER_LWP -> fab?.setImageResource(R.mipmap.ic_download)
                 Constants.KEY_ADDED_LIST_TIMER_LWP -> fab?.setImageResource(R.mipmap.ic_delete)
@@ -138,10 +191,9 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
         if (FileUtils.deleteFile(currentUrl)) {
             finishWithResult()
         } else {
-            Utils.showSnackMessage(rootLayout, "Error Deleting file")
+            Utils.showSnackMessage(rootLayout, getString(R.string.ui_detail_failure_delete))
         }
     }
-
 
     private fun finishWithResult() {
         val intent = Intent()
@@ -161,53 +213,44 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
         }
     }
 
-    private fun setupViewPager() {
-        adapter = DetailPagerAdapter(
-            this, R.layout.layout_detail_pager,
-            listOfWallpaper, this
-        )
-        viewpager?.adapter = adapter
-        viewpager?.currentItem = selectedPosInPager
-    }
-
     private val menuSheetListener: MenuSheetView.OnMenuItemClickListener
         get() = MenuSheetView.OnMenuItemClickListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.buttonWallpaper -> {
-                    mPresenter?.saveTempsDorAndDoAction(
-                        ActionTypeEnum.CROP,
+                    saveTempsDorAndDoAction(
+                        ActionTypeEnum.Crop,
                         currentUrl,
                         this,
                         getString(R.string.app_namenospace)
                     )
                 }
                 R.id.buttonChooser -> {
-                    mPresenter?.saveTempsDorAndDoAction(
-                        ActionTypeEnum.OPEN_NATIV_CHOOSER,
+                    saveTempsDorAndDoAction(
+                        ActionTypeEnum.OpenNativeChooser,
                         currentUrl,
                         this,
                         getString(R.string.app_namenospace)
                     )
                 }
                 R.id.buttonSave -> {
-                    mPresenter?.saveTempsDorAndDoAction(
-                        ActionTypeEnum.MOVE_PERMANENT_DIR,
+                    saveTempsDorAndDoAction(
+                        ActionTypeEnum.MovePerDir,
                         currentUrl,
                         this,
                         getString(R.string.app_namenospace)
                     )
                 }
                 R.id.buttonSareInsta -> {
-                    mPresenter?.saveTempsDorAndDoAction(
-                        ActionTypeEnum.SHARE_INSTA,
+                    saveTempsDorAndDoAction(
+                        ActionTypeEnum.ShareInstagram,
                         currentUrl,
                         this,
                         getString(R.string.app_namenospace)
                     )
                 }
                 R.id.buttonSareFb -> {
-                    mPresenter?.saveTempsDorAndDoAction(
-                        ActionTypeEnum.SHARE_FB,
+                    saveTempsDorAndDoAction(
+                        ActionTypeEnum.ShareFacebook,
                         currentUrl,
                         this,
                         getString(R.string.app_namenospace)
@@ -218,61 +261,94 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
             true
         }
 
-    override fun onSaveTempsDorAndDoAction(
+    private fun onSaveTempsDorAndDoAction(
         aBoolean: Boolean,
         actionToDo: ActionTypeEnum
     ) {
         if (aBoolean) {
-            if (actionToDo == ActionTypeEnum.OPEN_NATIV_CHOOSER) {
+            if (actionToDo == ActionTypeEnum.OpenNativeChooser) {
                 shareAll()
             }
-            if (actionToDo == ActionTypeEnum.SHARE_FB) {
-                createIntent(IntentTypeEnum.FACEBOOKINTENT)
+            if (actionToDo == ActionTypeEnum.ShareFacebook) {
+                createIntent(IntentType.facebook)
             }
-            if (actionToDo == ActionTypeEnum.SHARE_INSTA) {
-                createIntent(IntentTypeEnum.INTAGRAMINTENT)
+            if (actionToDo == ActionTypeEnum.ShareInstagram) {
+                createIntent(IntentType.instagram)
             }
-            if (actionToDo == ActionTypeEnum.SEND_LWP) {
+            if (actionToDo == ActionTypeEnum.SendLwp) {
                 //sendToRippleLwp();
             }
-            if (actionToDo == ActionTypeEnum.CROP) {
+            if (actionToDo == ActionTypeEnum.Crop) {
                 beginCrop()
             }
-            if (actionToDo == ActionTypeEnum.MOVE_PERMANENT_DIR) {
-                mPresenter?.saveFileToPermanentGallery(
+            if (actionToDo == ActionTypeEnum.MovePerDir) {
+                saveFileToPermanentGallery(
                     currentUrl,
                     this,
                     getString(R.string.app_namenospace),
-                    this
+                    ::onRequestPermissions
                 )
             }
-            if (actionToDo == ActionTypeEnum.DELETE_CURRENT_PICTURE) {
+            if (actionToDo == ActionTypeEnum.Delete) {
                 deleteCurrentPicture()
             }
-            if (actionToDo == ActionTypeEnum.JUST_WALLPAPER) {
-                mPresenter?.setAsWallpaper(
+            if (actionToDo == ActionTypeEnum.JustWallpaper) {
+                setAsWallpaper(
                     currentUrl,
                     this,
                     getString(R.string.app_namenospace)
                 )
             }
         } else {
-            progressBar?.visibility = View.VISIBLE
-            saveToFileToTempsDirAndChooseAction(
+            hideLoading()
+            DetailUtils.saveToFileToTempsDirAndChooseAction(
                 currentUrl,
                 actionToDo,
                 getScreenHeightPixels(this),
                 getScreenWidthPixels(this),
                 this,
                 getString(R.string.app_namenospace),
-                this,
-                null
+                ::doActionAfterSave
             )
         }
     }
 
-    private val currentUrl: String
-        get() = adapter?.getItem(viewpager.currentItem)?.url.orEmpty()
+    private fun doActionAfterSave(isSaved: Boolean, action: ActionTypeEnum) {
+        if (isSaved) {
+            when (action) {
+                is ActionTypeEnum.Crop -> onGoToCropActivity()
+                is ActionTypeEnum.OpenNativeChooser -> shareAll()
+                is ActionTypeEnum.MovePerDir -> onMoveFileToPermanentGallery()
+                is ActionTypeEnum.ShareFacebook -> createIntent(IntentType.instagram)
+                is ActionTypeEnum.ShareInstagram -> createIntent(IntentType.instagram)
+                is ActionTypeEnum.SendLwp -> onSendToRippleLwp()
+                is ActionTypeEnum.ShareSnap -> createIntent(IntentType.snap)
+            }
+        } else {
+            onSaveError()
+        }
+    }
+
+    private fun setAsWallpaper(url: String, context: Context, appName: String) {
+        hideLoading()
+        addSubscribe(Flowable.fromCallable {
+            decodeBitmapAndSetAsLiveWallpaper(
+                getTemporaryFile(
+                    getFileName(
+                        url
+                    ), context, appName
+                )!!, context
+            )
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { t: Boolean ->
+                if (t) showSnackMsg("Success") else showSnackMsg(
+                    "Error"
+                )
+            }
+        )
+    }
 
     private fun beginCrop() {
         hideLoading()
@@ -295,9 +371,9 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
         return super.onOptionsItemSelected(menuItem)
     }
 
-    private fun createIntent(intentType: IntentTypeEnum) {
+    private fun createIntent(intentType: IntentType) {
         hideLoading()
-        if (shareFileWithIntentType(
+        if (!DetailUtils.shareFileWithIntentType(
                 this,
                 getTemporaryFile(
                     getFileName(
@@ -305,7 +381,7 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
                     ), this, getString(R.string.app_namenospace)
                 ),
                 intentType
-            ) == false
+            )
         ) {
             Utils.showSnackMessage(rootLayout, getString(R.string.app_not_installer_message))
         }
@@ -313,13 +389,34 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
 
     private fun handleCrop(resultCode: Int, result: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            mPresenter?.handleCrop(result, this)
+            handleCrop(result, this)
         } else if (resultCode == Crop.RESULT_ERROR) {
             Utils.showSnackMessage(rootLayout, Crop.getError(result).message.orEmpty())
         }
     }
 
-    override fun onRequestPermissions() {
+    private fun handleCrop(result: Intent?, context: Context) {
+        addSubscribe(Flowable.fromCallable {
+            setWallpaper(
+                MediaStore.Images.Media.getBitmap(
+                    context.contentResolver, Crop.getOutput(result)
+                ), context
+            )
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .onErrorReturn { error: Throwable? -> false }
+            .subscribe { setSuccess: Boolean ->
+                if (setSuccess) {
+                    showSnackMsg(context.getString(R.string.set_wallpaper_sucess_message))
+                } else {
+                    showSnackMsg(context.getString(R.string.set_wallpaper_not_sucess_message))
+                }
+            }
+        )
+    }
+
+    private fun onRequestPermissions() {
         ActivityCompat.requestPermissions(
             this@DetailsActivity,
             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -351,7 +448,7 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
 
     private fun shareAll() {
         hideLoading()
-        shareAllFile(
+        DetailUtils.shareAllFile(
             this,
             getTemporaryFile(
                 getFileName(
@@ -361,7 +458,7 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
         )
     }
 
-    override fun onGoToCropActivity() {
+    private fun onGoToCropActivity() {
         addSubscribe(Flowable.fromCallable {
             isSavedToStorage(
                 getFileName(currentUrl),
@@ -381,37 +478,50 @@ class DetailsActivity : BaseActivity<DetailPresenter?>(),
         )
     }
 
-    override fun onMoveFileToPermanentGallery() {
-        mPresenter?.saveFileToPermanentGallery(
+    private fun onMoveFileToPermanentGallery() {
+        saveFileToPermanentGallery(
             currentUrl,
             this,
             getString(R.string.app_namenospace),
-            this
+            ::onRequestPermissions
         )
     }
 
-    override fun onOpenNativeSetWallChoose() {
-        shareAll()
+    private fun saveFileToPermanentGallery(
+        url: String?,
+        context: Activity,
+        appName: String?,
+        onRequestPermissions: () -> Unit
+    ) {
+        addSubscribe(Flowable.fromCallable {
+            savePermanentFile(
+                url, context,
+                appName!!
+            )
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { aBoolean: Boolean ->
+                if (aBoolean) {
+                    showSnackMsg(context.getString(R.string.set_wallpaper_sucess_message))
+                } else {
+                    showSnackMsg(context.getString(R.string.set_wallpaper_not_sucess_message))
+                    checkPermission(
+                        context,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE, onRequestPermissions
+                    )
+                }
+                hideLoading()
+            }
+        )
     }
 
-    override fun onOpenWithFaceBook() {
-        createIntent(IntentTypeEnum.FACEBOOKINTENT)
-    }
-
-    override fun onOpenWithInstagram() {
-        createIntent(IntentTypeEnum.INTAGRAMINTENT)
-    }
-
-    override fun onSendToRippleLwp() {
+    private fun onSendToRippleLwp() {
         //sendToRippleLwp();
     }
 
-    override fun onShareWhitApplication() {
-        createIntent(IntentTypeEnum.SHNAPCHATINTENT)
-    }
-
-    override fun onFinishActivity() {
-        Utils.showSnackMessage(rootLayout, "Error Reading Storage")
+    private fun onSaveError() {
+        Utils.showSnackMessage(rootLayout, getString(R.string.ui_detail_failure_delete))
         hideLoading()
     }
 

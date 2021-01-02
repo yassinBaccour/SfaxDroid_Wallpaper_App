@@ -68,7 +68,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
         val filesDir = getExternalFilesDir("")
         startDownload(filesDir!!)
         backgroundFile =
-            File(filesDir, Constants.DOUA_PNG_BACKFROUND_FILE_NAME)
+            File(filesDir, Constants.PNG_BACKFROUND_FILE_NAME)
         backgroundFile?.delete()?.takeIf { !it }.also {
             Utils.showSnackMessage(rootLayout, "Error deleteing temps file")
         }
@@ -77,7 +77,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
     private fun startDownload(file: File) {
         val requestWallpaper =
             DownloadRequest(
-                Uri.parse(intent.getStringExtra(Constants.URL_TO_DOWNLOAD)
+                Uri.parse(intent.getStringExtra(Constants.EXTRA_URL_TO_DOWNLOAD)
                     .orEmpty()
                     .apply {
                         if (Utils.isSmallScreen(this@AnimWord2dActivity)
@@ -89,7 +89,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
                 .setDestinationURI(
                     Uri.parse(
                         file
-                            .toString() + "/" + Constants.DOUA_PNG_BACKFROUND_FILE_NAME
+                            .toString() + "/" + Constants.PNG_BACKFROUND_FILE_NAME
                     )
                 ).setPriority(DownloadRequest.Priority.LOW)
                 .setRetryPolicy(DefaultRetryPolicy())

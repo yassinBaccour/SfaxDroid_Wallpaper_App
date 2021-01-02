@@ -36,7 +36,6 @@
             card_view:layout_constraintTop_toTopOf="parent"
             tools:text="@string/item_detail_random_title" />
 
-
         <TextView
             android:id="@+id/item_detail_desc"
             style="@style/item_detail_desc_style"

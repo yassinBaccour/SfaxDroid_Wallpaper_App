@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
@@ -15,33 +14,26 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.kobakei.ratethisapp.RateThisApp
 import com.sami.rippel.allah.BuildConfig
 import com.sami.rippel.allah.R
+import com.sami.rippel.core.base.BaseActivity
 import com.sami.rippel.feature.home.adapter.CatalogPagerAdapter
 import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
-import com.sfaxdroid.bases.DeviceListner
 import com.tbruyelle.rxpermissions2.RxPermissions
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
-import javax.inject.Inject
 
-class HomeActivity : DaggerAppCompatActivity(), DeviceListner {
+class HomeActivity : BaseActivity() {
 
     private var collapsingToolbarLayout: CollapsingToolbarLayout? = null
     private var rxPermissions: RxPermissions? = null
     private var mInterstitialAd: InterstitialAd? = null
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     private lateinit var preferencesManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCESNAME)
+        preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCES_NAME)
         rxPermissions = RxPermissions(this)
         setupAds()
         setupToolBar()
@@ -49,10 +41,6 @@ class HomeActivity : DaggerAppCompatActivity(), DeviceListner {
         initRatingApp()
         manageNbRunApp()
         checkPermission()
-    }
-
-    override fun androidInjector(): AndroidInjector<Any?> {
-        return androidInjector
     }
 
     private fun setupAds() {
@@ -201,21 +189,6 @@ class HomeActivity : DaggerAppCompatActivity(), DeviceListner {
         }
     }
 
-    override fun onRequestPermissions() {
-        ActivityCompat.requestPermissions(
-            this@HomeActivity, arrayOf(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.SET_WALLPAPER_HINTS,
-                Manifest.permission.WRITE_SETTINGS,
-                Manifest.permission.SET_WALLPAPER,
-                Manifest.permission.RECEIVE_BOOT_COMPLETED
-            ),
-            REQUEST_CODE_ASK_PERMISSIONS
-        )
-    }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
@@ -225,7 +198,6 @@ class HomeActivity : DaggerAppCompatActivity(), DeviceListner {
     }
 
     companion object {
-        private const val REQUEST_CODE_ASK_PERMISSIONS = 123
 
         @JvmField
         var isAdsShow = false

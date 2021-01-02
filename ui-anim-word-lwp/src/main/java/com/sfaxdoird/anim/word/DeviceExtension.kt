@@ -1,4 +1,4 @@
-package com.sfaxdroid.base
+package com.sfaxdoird.anim.word
 
 import android.content.Context
 import android.graphics.drawable.Drawable

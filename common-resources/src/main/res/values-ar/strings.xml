@@ -1,52 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="choose_picture">إختر الصورة</string>
-
-    <string-array name="ripple_size">
-        <item>صغيرة</item>
-        <item>متوسطة</item>
-        <item>كبيرة</item>
-    </string-array>
-    <string-array name="ripple_size_value">
-        <item>صغيرة</item>
-        <item>متوسطة</item>
-        <item>كبيرة</item>
-    </string-array>
-    <string-array name="ripple_duration">
-        <item>بطيئة</item>
-        <item>متوسط</item>
-        <item>سريع</item>
-    </string-array>
-    <string-array name="ripple_duration_value">
-        <item>بطيئة</item>
-        <item>متوسط</item>
-        <item>سريع</item>
-    </string-array>
-    <string name="set_wallpaper_manually_message">كيفية تطبيق الخلفية المتحرك ؟</string>
-    <string name="set_wallpaper_click_text">تطبيق الخلفية المتحرك</string>
-    <string name="txt3">كيفية التطبيق يدويا ؟</string>
-    <string name="txt4"> الإعدادات -> الشاشة  -> لخلفية -> خلفيات متحرك ->خلفيات</string>
-    <string name="rating_box_description">\n رجى تقيم تطبيق  لتشجيعي علي صنع المزيد من التطبيقات  الاسلامية, شكرا لك \n </string>
-    <string name="rating_box_title"> تقييم التطبيقة </string>
-    <string name="rating_box_later">ذكرني لاحق</string>
-    <string name="rating_box_never">لا تسألني مرة أخرى</string>
-    <string name="rating_box_rate">تقييم التطبيقة </string>
-    <string name="back_press_message_info">اضغط مرتين على الزر للخروج</string>
-    <string name="enable_sound_wallpaper"> الصوت</string>
-    <string name="enable_water_ripple_sound">حدد هذا الخيار لسماع صوت قطرة الماء عند لمس الشاشة</string>
-    <string name="setting_ripple_size">حجم التموج</string>
-    <string name="setting_change_size">تغير حجم التموج</string>
-    <string name="setting_ripple_speed">سرعة التموج</string>
-    <string name="setting_change_ripple_speed">تغير سرعة التموج</string>
-    <string name="setting_sound">صوت</string>
-    <string name="setting_ripple">اعدادت التموج</string>
-    <string name="setting_recommendations">التقييم</string>
-    <string name="setting_rate_us">رجاء التقييم التطبيقة</string>
-    <string name="setting_enable_rain">أمطار</string>
-    <string name="setting_enable_touch">Enable Touch</string>
-    <string name="pref_sync_frequency">Choose models</string>
-    <string name="pref_sync_frequency_summary">choose a wallpapers models</string>
-    <string name="pref_update_setting">Models Settings</string>
     <string name="download_terminated_sucessful">إنتهى التحميل</string>
     <string name="download_completed">إنتهى</string>
     <string name="btn_ok">نعم</string>
@@ -61,14 +14,10 @@
     <string name="size_big">كبير</string>
     <string name="size_meduim">معتدل</string>
     <string name="size_small">صغير</string>
-    <string name="size_texte_name_of_allah">كبر الخط</string>
-
+    <string name="size_texte">كبر الخط</string>
     <string name="permission_storage_message">يجب تفعيل خاصية تسجيل الصور ليعمل البرنامج</string>
-
     <string name="app_not_installer_message">التطبيق ليس موجود</string>
     <string name="set_wallpaper_sucess_message">تم تطبيق الخلفية بنجاح</string>
     <string name="set_wallpaper_not_sucess_message">خلل في تطبيق الخلفية </string>
     <string name="set_as_dialog_message">إستعمال</string>
-    <string name="open_gallery">Open Wallpaper Gallery</string>
-
 </resources>
