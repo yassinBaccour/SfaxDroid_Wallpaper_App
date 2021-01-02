@@ -1,7 +1,5 @@
 package com.sami.rippel.feature.home
 
-import android.app.WallpaperManager
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -119,19 +117,17 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         }
     }
 
-
     private fun openLwp(
         wallpaperObject: LwpItem,
     ) {
         when (wallpaperObject.type) {
             is LiveWallpaper.DouaLwp -> {
                 try {
-                    val intent = Intent(
-                        activity,
-                        Class.forName("com.sfaxdroid.framecollage.gallery.GalleryActivity")
+                    AllInOneFragment.newInstance(
+                        "texture.json",
+                        "TEXTURE",
+                        Constants.KEY_WORD_IMG_LWP
                     )
-                    intent.putExtra(Constants.KEY_LWP_NAME, "DouaLWP")
-                    startActivity(intent)
                 } catch (e: ClassNotFoundException) {
                     e.printStackTrace()
                 }
@@ -142,20 +138,12 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
             is LiveWallpaper.TimerLwp -> {
                 val intent = Intent(
                     activity,
-                    Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")::class.java
+                    Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")
                 )
                 startActivity(intent)
             }
             is LiveWallpaper.NameOfAllah2D -> {
-                val intent = Intent(
-                    activity,
-                    Class.forName("com.sfaxdroid.framecollage.gallery.GalleryActivity")
-                )
-                intent.putExtra(
-                    Constants.KEY_LWP_NAME,
-                    Constants.KEY_ANIM_2D_LWP
-                )
-                startActivity(intent)
+                AllInOneFragment.newInstance("texture.json", "TEXTURE", Constants.KEY_ANIM_2D_LWP)
             }
             LiveWallpaper.none -> {
 
@@ -414,12 +402,17 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
     }
 
     companion object {
-        fun newInstance(fileName: String, screenType: String): AllInOneFragment {
+        fun newInstance(
+            fileName: String,
+            screenType: String,
+            lwpName: String? = null
+        ): AllInOneFragment {
             return AllInOneFragment().apply {
-                val args = Bundle()
-                args.putString(Constants.EXTRA_JSON_FILE_NAME, fileName)
-                args.putString(Constants.EXTRA_SCREEN_TYPE, screenType)
-                arguments = args
+                arguments = Bundle().apply {
+                    putString(Constants.EXTRA_JSON_FILE_NAME, fileName)
+                    putString(Constants.EXTRA_SCREEN_TYPE, screenType)
+                    putString(Constants.KEY_LWP_NAME, lwpName)
+                }
             }
         }
     }

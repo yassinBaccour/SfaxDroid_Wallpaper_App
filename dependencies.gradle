@@ -53,6 +53,7 @@ ext {
             kotlin               : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
             kotlinStdlib         : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
             gson                 : "com.google.code.gson:gson:2.8.6",
-            ads                  : "com.google.android.gms:play-services-ads:19.6.0"
+            ads                  : "com.google.android.gms:play-services-ads:19.6.0",
+            rajawali             : "org.rajawali3d:rajawali:1.1.970@aar"
     ]
 }

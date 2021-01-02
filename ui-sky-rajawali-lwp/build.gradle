@@ -27,5 +27,5 @@ android {
 }
 
 dependencies {
-    implementation 'org.rajawali3d:rajawali:1.1.970@aar'
+    implementation libraries.rajawali
 }

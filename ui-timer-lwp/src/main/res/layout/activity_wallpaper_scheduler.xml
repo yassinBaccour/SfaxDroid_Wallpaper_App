@@ -249,18 +249,6 @@
                         android:text="@string/how_to_use_description"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="50dp"
-                        android:text="Developped With JobService by Yassin Ba"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="#ecf0f1" />
-
 
                 </LinearLayout>
             </ScrollView>

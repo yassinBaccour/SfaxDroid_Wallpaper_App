@@ -27,23 +27,23 @@ class WallpapersListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is WallpaperImgVH -> holder.bind(
-                articleList[position].getObject() as SimpleWallpaperView,
+                articleList[position].`object` as SimpleWallpaperView,
                 openCategory
             )
             is HorizontalCarouselVH -> holder.bindView(
-                articleList[position].getObject() as CarouselView,
+                articleList[position].`object` as CarouselView,
                 openCategory
             )
             is LwpItemVH -> holder.bind(
-                articleList[position].getObject() as LwpItem,
+                articleList[position].`object` as LwpItem,
                 openCategory
             )
             is CategoryItemVH -> holder.bind(
-                articleList[position].getObject() as CategoryItem,
+                articleList[position].`object` as CategoryItem,
                 openCategory
             )
             is LabItemVH -> holder.bind(
-                articleList[position].getObject() as CategoryItem,
+                articleList[position].`object` as CategoryItem,
                 openCategory
             )
         }
