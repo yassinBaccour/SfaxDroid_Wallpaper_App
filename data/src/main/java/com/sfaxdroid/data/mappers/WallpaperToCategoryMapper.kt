@@ -9,14 +9,8 @@ class WallpaperToCategoryMapper : SfaxDroidMapper<Wallpaper, CategoryItem> {
             from?.name ?: "",
             from?.desc ?: "",
             from?.color ?: "",
-            getSimpleWallpaper(from?.subcategory?.wallpapers),
+            from?.file ?: "",
             from?.url ?: ""
         )
-    }
-
-    private fun getSimpleWallpaper(wallpapers: List<Wallpaper>?): List<SimpleWallpaperView> {
-        return wallpapers?.map {
-            SimpleWallpaperView(it.url)
-        } ?: emptyList()
     }
 }

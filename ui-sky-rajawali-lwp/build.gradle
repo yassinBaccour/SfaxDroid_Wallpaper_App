@@ -27,5 +27,5 @@ android {
 }
 
 dependencies {
-    compileOnly files('libs/rajawali-1.1.970.aar')
+    implementation files('libs/rajawali-1.1.970.aar')
 }

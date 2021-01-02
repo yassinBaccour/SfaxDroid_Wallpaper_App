@@ -16,6 +16,7 @@ import com.sami.rippel.core.base.BaseFragment
 import com.sami.rippel.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.FileUtils
+import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.mappers.*
@@ -23,6 +24,7 @@ import com.sfaxdroid.data.repositories.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
+import com.sfaxdroid.sky.SkyLiveWallpaper
 import dagger.android.AndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.fragment_all_background.*
@@ -102,6 +104,7 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
     }
 
     private fun openWallpaper(wallpaperObject: BaseWallpaperView) {
+        HomeActivityNavBar.isAdsShow = true
         when (wallpaperObject) {
             is SimpleWallpaperView -> {
                 openByType(wallpaperObject)
@@ -122,7 +125,6 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
     ) {
         when (wallpaperObject.type) {
             is LiveWallpaper.DouaLwp -> {
-                HomeActivityNavBar.isAdsShow = true
                 try {
                     val intent = Intent(
                         activity,
@@ -135,30 +137,9 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 }
             }
             is LiveWallpaper.SkyView -> {
-                HomeActivityNavBar.isAdsShow = true
-                try {
-                    val intent = Intent(
-                        WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
-                    )
-                    intent.putExtra(
-                        WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                        ComponentName(
-                            requireActivity(),
-                            Class.forName("com.sfaxdroid.sky.SkyLiveWallpaper")
-                        )
-                    )
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    try {
-                        val intent = Intent()
-                        intent.action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
-                        startActivity(intent)
-                    } catch (ignored: Exception) {
-                    }
-                }
+                Utils.openLiveWallpaper<SkyLiveWallpaper>(requireContext())
             }
             is LiveWallpaper.TimerLwp -> {
-                HomeActivityNavBar.isAdsShow = true
                 val intent = Intent(
                     activity,
                     Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")::class.java
@@ -166,15 +147,13 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 startActivity(intent)
             }
             is LiveWallpaper.NameOfAllah2D -> {
-                HomeActivityNavBar.isAdsShow = true
-                HomeActivityNavBar.isAdsShow = true
                 val intent = Intent(
                     activity,
                     Class.forName("com.sfaxdroid.framecollage.gallery.GalleryActivity")
                 )
                 intent.putExtra(
                     Constants.KEY_LWP_NAME,
-                    "NameOfAllah2DLWP"
+                    Constants.KEY_ANIM_2D_LWP
                 )
                 startActivity(intent)
             }
@@ -271,7 +250,6 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
         if (view != null) {
-            val pos = mData.indexOfFirst { it.url == wallpaperObject.url }
             HomeActivityNavBar.nbOpenAds++
             Intent(
                 activity,
@@ -320,8 +298,8 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                     is Response.SUCESS -> {
                         val rep =
                             (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map {
-                            WallpaperToLwpMapper().map(it)
+                        val list = rep.wallpaperList.wallpapers.map { wall ->
+                            WallpaperToLwpMapper().map(wall)
                         }
                         showContent(list, screenType)
                     }
@@ -341,8 +319,8 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                     is Response.SUCESS -> {
                         val rep =
                             (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map {
-                            WallpaperToViewMapper().map(it)
+                        val list = rep.wallpaperList.wallpapers.map { wall ->
+                            WallpaperToViewMapper().map(wall)
                         }
                         showContent(list, screenType)
                     }
@@ -366,8 +344,7 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val screenType = getType(screen)
-        when (screenType) {
+        when (val screenType = getType(screen)) {
             is ScreenType.Lwp -> {
                 getLiveWallpapers(screenType)
             }
@@ -382,8 +359,8 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                             is Response.SUCESS -> {
                                 val rep =
                                     (it.response as Response.SUCESS).response as WallpaperResponse
-                                val list = rep.wallpaperList.wallpapers.map {
-                                    WallpaperToCategoryMapper().map(it)
+                                val list = rep.wallpaperList.wallpapers.map { wall ->
+                                    WallpaperToCategoryMapper().map(wall)
                                 }
                                 showContent(list, screenType)
                             }
@@ -413,7 +390,7 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
             "LWP" -> ScreenType.Lwp
             "CAT" -> ScreenType.Cat
             "LAB" -> ScreenType.Lab
-            "TEXTURE" -> ScreenType.Lab
+            "TEXTURE" -> ScreenType.TEXTURE
             "TIMER" -> ScreenType.TIMER
             else -> ScreenType.Wall
         }
