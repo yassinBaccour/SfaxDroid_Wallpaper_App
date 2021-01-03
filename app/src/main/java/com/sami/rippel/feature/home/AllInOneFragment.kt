@@ -45,17 +45,16 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
     private var wallpapersListAdapter: WallpapersListAdapter? = null
 
     private val fileName by lazy {
-        arguments?.getString(Constants.EXTRA_JSON_FILE_NAME, "") ?: ""
+        arguments?.getString("keyJsonFileName").orEmpty()
     }
 
     private val screen by lazy {
-        arguments?.getString(Constants.EXTRA_SCREEN_TYPE, "") ?: ""
+        arguments?.getString("keyScreenType").orEmpty()
     }
 
     private val selectedLwpName by lazy {
         arguments?.getString(Constants.KEY_LWP_NAME, "") ?: ""
     }
-
 
     override fun androidInjector(): AndroidInjector<Any> {
         return androidInjector
@@ -332,6 +331,12 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //var dxx = AllInOneFragmentArgs by navArgs()
+        //val flowStepNumber = safeArgs.flowStepNumber
+
+        var dxx = arguments?.getString("keyJsonFileName")
+
         when (val screenType = getType(screen)) {
             is ScreenType.Lwp -> {
                 getLiveWallpapers(screenType)

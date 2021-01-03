@@ -13,7 +13,7 @@ class CatalogPagerAdapter(
     fragmentManager,
     BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) {
-    
+
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
