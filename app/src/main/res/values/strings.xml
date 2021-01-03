@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Arabic Wallpaper HD</string>
+
+    <string name="screen_lwp">Live Wallpaper</string>
+    <string name="screen_wallpaper">Wallpaper</string>
+    <string name="screen_category">Category</string>
+    <string name="screen_category_show">Category Show</string>
+
+
     <string name="rating_app">Rating This Application</string>
     <string name="open_lwp">Open Lwp</string>
     <string name="open_cat">Open</string>

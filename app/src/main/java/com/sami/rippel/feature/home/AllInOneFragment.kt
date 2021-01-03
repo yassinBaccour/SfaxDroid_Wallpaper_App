@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -31,7 +33,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class AllInOneFragment : BaseFragment(), HasAndroidInjector {
+open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     @Inject
     lateinit var getAllWallpapersUseCase: GetAllWallpapersUseCase
@@ -111,7 +113,7 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
             }
             is CategoryItem -> {
                 HomeActivityNavBar.nbOpenAds++
-                AllInOneFragment.newInstance(wallpaperObject.list, "CAT_WALLPAPER")
+                findNavController().navigate(R.id.category_show_navigation_fg)
             }
         }
     }
@@ -142,7 +144,8 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 startActivity(intent)
             }
             is LiveWallpaper.NameOfAllah2D -> {
-                AllInOneFragment.newInstance("texture.json", "TEXTURE", Constants.KEY_ANIM_2D_LWP)
+                //AllInOneFragment.newInstance("texture.json", "TEXTURE", Constants.KEY_ANIM_2D_LWP)
+                findNavController().navigate(R.id.chooser_navigation_fg)
             }
             LiveWallpaper.none -> {
 
@@ -210,7 +213,7 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
         recycler_view_wallpapers?.apply {
             layoutManager = getLwpLayoutManager()
-            setHasFixedSize(true)
+            //setHasFixedSize(true)
             adapter = wallpapersListAdapter
             addOnItemTouchListener(
                 object : RecyclerView.OnItemTouchListener {
@@ -331,12 +334,6 @@ class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //var dxx = AllInOneFragmentArgs by navArgs()
-        //val flowStepNumber = safeArgs.flowStepNumber
-
-        var dxx = arguments?.getString("keyJsonFileName")
-
         when (val screenType = getType(screen)) {
             is ScreenType.Lwp -> {
                 getLiveWallpapers(screenType)

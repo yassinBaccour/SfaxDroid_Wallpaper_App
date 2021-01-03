@@ -6,16 +6,18 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.navigation.NavController
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
-import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kobakei.ratethisapp.RateThisApp
 import com.sami.rippel.allah.BuildConfig
 import com.sami.rippel.allah.R
 import com.sami.rippel.core.base.BaseActivity
-import com.sami.rippel.feature.home.adapter.CatalogPagerAdapter
+import com.sami.rippel.core.setupWithNavController
 import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -24,23 +26,52 @@ import java.util.*
 
 class HomeActivity : BaseActivity() {
 
-    private var collapsingToolbarLayout: CollapsingToolbarLayout? = null
     private var rxPermissions: RxPermissions? = null
     private var mInterstitialAd: InterstitialAd? = null
+    private var currentNavController: LiveData<NavController>? = null
 
     private lateinit var preferencesManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        if (savedInstanceState == null) {
+            initView()
+        }
+
         preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCES_NAME)
         rxPermissions = RxPermissions(this)
         setupAds()
         setupToolBar()
-        setupViewPager()
         initRatingApp()
         manageNbRunApp()
         checkPermission()
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        initView()
+    }
+
+    private fun initView() {
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        val navGraphIds = listOf(
+            R.navigation.lwp_nav_graph,
+            R.navigation.wallpaper_nav_graph,
+            R.navigation.category_nav_graph
+        )
+        val controller = bottomNav.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.nav_host_fragment,
+            intent = intent
+        )
+        currentNavController = controller
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
     }
 
     private fun setupAds() {
@@ -125,18 +156,6 @@ class HomeActivity : BaseActivity() {
         }
     }
 
-    private fun setupViewPager() {
-        viewpager?.adapter = CatalogPagerAdapter(
-            supportFragmentManager, arrayListOf(
-                "LWP",
-                "ALL",
-                "CAT",
-                "LAB"
-            )
-        )
-        tabLayout?.setupWithViewPager(viewpager)
-    }
-
     private fun rateApplication() {
         if (preferencesManager[Constants.RATING_MESSAGE,
                     Constants.RATING_YES]
@@ -173,22 +192,6 @@ class HomeActivity : BaseActivity() {
         super.onStart()
         RateThisApp.onStart(this)
     }
-
-    override fun onBackPressed() {
-        if (!BuildConfig.DEBUG) {
-            if (back_pressed + 2000 > System.currentTimeMillis()) {
-                super.onBackPressed()
-            } else {
-                rateApplication()
-                Toast.makeText(
-                    baseContext, R.string.exit_app_message,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            back_pressed = System.currentTimeMillis()
-        }
-    }
-
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {

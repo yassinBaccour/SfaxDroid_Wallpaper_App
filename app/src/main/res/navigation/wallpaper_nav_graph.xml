@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wallpaper_list_navigation"
+    app:startDestination="@+id/wallpaper_list_navigation_fg">
+
+    <fragment
+        android:id="@+id/wallpaper_list_navigation_fg"
+        android:name="com.sami.rippel.feature.home.AllInOneFragment"
+        android:label="@string/screen_wallpaper"
+        tools:layout="@layout/fragment_all_background">
+        <argument
+            android:name="keyJsonFileName"
+            android:defaultValue="new.json"
+            app:argType="string" />
+        <argument
+            android:name="keyScreenType"
+            android:defaultValue="NEW"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

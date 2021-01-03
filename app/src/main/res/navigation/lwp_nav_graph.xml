@@ -2,12 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@+id/lwp_dest">
+    android:id="@+id/lwp_navigation"
+    app:startDestination="@+id/lwp_navigation_fg">
 
     <fragment
-        android:id="@+id/lwp_dest"
+        android:id="@+id/lwp_navigation_fg"
         android:name="com.sami.rippel.feature.home.AllInOneFragment"
-        android:label="@string/app_name"
+        android:label="@string/screen_lwp"
         tools:layout="@layout/fragment_all_background">
         <argument
             android:name="keyJsonFileName"
@@ -17,36 +18,20 @@
             android:name="keyScreenType"
             android:defaultValue="LWP"
             app:argType="string" />
-        <action
-            android:id="@+id/action_lwp_dest_to_wallpaper_list_dest"
-            app:destination="@id/wallpaper_list_dest" />
     </fragment>
 
     <fragment
-        android:id="@+id/wallpaper_list_dest"
+        android:id="@+id/chooser_navigation_fg"
         android:name="com.sami.rippel.feature.home.AllInOneFragment"
+        android:label="@string/screen_lwp"
         tools:layout="@layout/fragment_all_background">
         <argument
             android:name="keyJsonFileName"
-            android:defaultValue="new.json"
+            android:defaultValue="texture.json"
             app:argType="string" />
         <argument
             android:name="keyScreenType"
             android:defaultValue="NEW"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/category_list_dest"
-        android:name="com.sami.rippel.feature.home.AllInOneFragment"
-        tools:layout="@layout/fragment_all_background">
-        <argument
-            android:name="keyJsonFileName"
-            android:defaultValue="category.json"
-            app:argType="string" />
-        <argument
-            android:name="keyScreenType"
-            android:defaultValue="CAT"
             app:argType="string" />
     </fragment>
 

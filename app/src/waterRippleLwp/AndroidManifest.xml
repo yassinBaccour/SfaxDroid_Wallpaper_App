@@ -14,7 +14,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name="com.sami.rippel.feature.home.Home"
+            android:name="com.sami.rippel.feature.home.HomeActivity"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
