@@ -3,8 +3,10 @@ package com.sfaxdroid.base
 class Constants {
     companion object {
         const val EXTRA_URL_TO_DOWNLOAD = "URLTODOWNLOAD"
-        const val EXTRA_JSON_FILE_NAME = "KEY_JSON_FILE_NAME"
-        const val EXTRA_SCREEN_TYPE = "KEY_SCREEN_TYPE"
+        const val EXTRA_JSON_FILE_NAME = "keyJsonFileName"
+        const val VALUE_TEXTURE_JSON_FILE_NAME = "texture.json"
+        const val VALUE_TEXTURE_SCREEN_NAME = "TEXTURE"
+        const val EXTRA_SCREEN_TYPE = "keyScreenType"
         const val EXTRA_IMG_URL = "EXTRA_IMG_URL"
         const val PNG_BACKFROUND_FILE_NAME = "doua.jpg"
         const val KEY_ADDED_LIST_TIMER_LWP = "TimerLWPList"

@@ -37,4 +37,15 @@ class Network @Inject constructor(
             false -> Response.FAILURE(Failure.NetworkConnection())
         }
     }
+
+    override suspend fun getCategoryWallpaper(file: String): Response {
+        return when (networkHandler.isConnected()) {
+            true -> request(
+                service.getCategoryWallpaper(file),
+                { Response.SUCESS(it.copy()) },
+                null
+            )
+            false -> Response.FAILURE(Failure.NetworkConnection())
+        }
+    }
 }

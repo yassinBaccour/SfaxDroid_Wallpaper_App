@@ -26,4 +26,9 @@ internal interface ApiClient {
     fun getCategory(
         @Path("file") guid: String
     ): Call<WallpaperResponse>
+
+    @GET("themes/{file}")
+    fun getCategoryWallpaper(
+        @Path("file") guid: String
+    ): Call<WallpaperResponse>
 }

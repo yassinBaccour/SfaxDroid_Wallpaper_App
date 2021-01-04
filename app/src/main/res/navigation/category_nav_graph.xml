@@ -35,6 +35,5 @@
             app:argType="string" />
     </fragment>
 
-    findNavController().navigate(R.id.navigation_trending)
 
 </navigation>

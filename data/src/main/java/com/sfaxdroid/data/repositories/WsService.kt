@@ -27,4 +27,8 @@ class WsService
     override fun getCategory(guid: String): Call<WallpaperResponse> {
         return articleApi.getCategory(guid)
     }
+
+    override fun getCategoryWallpaper(guid: String): Call<WallpaperResponse> {
+        return articleApi.getCategoryWallpaper(guid)
+    }
 }

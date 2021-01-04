@@ -2,7 +2,6 @@ package com.sami.rippel.feature.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.lifecycle.LiveData
@@ -33,14 +32,14 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        setupToolBar()
         if (savedInstanceState == null) {
             initView()
         }
-
         preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCES_NAME)
         rxPermissions = RxPermissions(this)
         setupAds()
-        setupToolBar()
+
         initRatingApp()
         manageNbRunApp()
         checkPermission()
@@ -66,11 +65,6 @@ class HomeActivity : BaseActivity() {
             intent = intent
         )
         currentNavController = controller
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setDisplayUseLogoEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -150,13 +144,6 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun setupToolBar() {
-        setSupportActionBar(toolbar)
-        collapsingToolbarLayout?.title = " "
-        collapsingToolbarLayout?.setCollapsedTitleTextColor(Color.TRANSPARENT)
-        supportActionBar?.apply {
-            setHomeButtonEnabled(true)
-            setDisplayHomeAsUpEnabled(false)
-        }
     }
 
     private fun rateApplication() {

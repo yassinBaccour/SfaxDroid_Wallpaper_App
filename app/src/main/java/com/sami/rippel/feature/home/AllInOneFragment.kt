@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +21,7 @@ import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.mappers.*
 import com.sfaxdroid.data.repositories.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
+import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.sky.SkyLiveWallpaper
@@ -43,6 +43,9 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     @Inject
     lateinit var getCategoryUseCase: GetCategoryUseCase
+
+    @Inject
+    lateinit var getCatWallpapersUseCase: GetCatWallpapersUseCase
 
     private var wallpapersListAdapter: WallpapersListAdapter? = null
 
@@ -122,10 +125,34 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 openLwp(wallpaperObject)
             }
             is CategoryItem -> {
+                val cat = wallpaperObject as CategoryItem
                 HomeActivityNavBar.nbOpenAds++
-                findNavController().navigate(R.id.category_show_navigation_fg)
+                findNavController().navigate(R.id.category_show_navigation_fg,
+                    Bundle().apply {
+                        putString(Constants.EXTRA_JSON_FILE_NAME, cat.file)
+                        putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
+                    })
             }
         }
+    }
+
+    private fun navToTexture(lwpName: String) {
+        findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
+            putString(
+                Constants.EXTRA_JSON_FILE_NAME,
+                Constants.VALUE_TEXTURE_SCREEN_NAME
+            )
+            putString(Constants.EXTRA_SCREEN_TYPE, "TEXTURE")
+            putString(Constants.KEY_LWP_NAME, lwpName)
+        })
+    }
+
+    private fun navToTimer() {
+        val intent = Intent(
+            activity,
+            Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")
+        )
+        startActivity(intent)
     }
 
     private fun openLwp(
@@ -133,55 +160,27 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
     ) {
         when (wallpaperObject.type) {
             is LiveWallpaper.DouaLwp -> {
-                try {
-                    findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
-                        putString(Constants.EXTRA_JSON_FILE_NAME, "texture.json")
-                        putString(Constants.EXTRA_SCREEN_TYPE, "TEXTURE")
-                        putString(Constants.KEY_LWP_NAME, Constants.KEY_WORD_IMG_LWP)
-                    })
-                } catch (e: ClassNotFoundException) {
-                    e.printStackTrace()
-                }
+                navToTexture(Constants.KEY_WORD_IMG_LWP)
             }
             is LiveWallpaper.SkyView -> {
                 Utils.openLiveWallpaper<SkyLiveWallpaper>(requireContext())
             }
             is LiveWallpaper.TimerLwp -> {
-                val intent = Intent(
-                    activity,
-                    Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")
-                )
-                startActivity(intent)
+                navToTimer()
             }
             is LiveWallpaper.NameOfAllah2D -> {
-                findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
-                    putString(Constants.EXTRA_JSON_FILE_NAME, "texture.json")
-                    putString(Constants.EXTRA_SCREEN_TYPE, "TEXTURE")
-                    putString(Constants.KEY_LWP_NAME, Constants.KEY_ANIM_2D_LWP)
-                })
-            }
-            LiveWallpaper.none -> {
-
+                navToTexture(Constants.KEY_ANIM_2D_LWP)
             }
         }
     }
 
-    private fun openLab() {
-        val intent = Intent(
-            activity,
-            Class.forName("com.sfaxdroid.detail.StickersLabActivity")
-        )
-        startActivity(intent)
-    }
-
     private fun getItemType(screenType: ScreenType): Int {
         return when (screenType) {
-            is ScreenType.Lwp -> WallpapersListAdapter.TYPE_LWP
             is ScreenType.Wall -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
+            is ScreenType.CatWallpaper -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
             is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
             is ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
-            is ScreenType.TEXTURE -> WallpapersListAdapter.TYPE_LWP
-            is ScreenType.TIMER -> WallpapersListAdapter.TYPE_LWP
+            else -> WallpapersListAdapter.TYPE_LWP
         }
     }
 
@@ -203,7 +202,6 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
             val lwpList: List<LwpItem> = arrayListOf()
             val lwp = CarouselView("Live Wallpaper 4K", lwpList, CarouselTypeEnum.LWP)
             listItem.add(6, ItemWrapperList(lwp, WallpapersListAdapter.TYPE_CAROUSEL))
-
             //todo fix
             /*
             val wallpaperObjects =
@@ -384,6 +382,26 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
             ScreenType.TIMER -> {
                 getSavedWallpaperList(screenType)
             }
+            ScreenType.CatWallpaper -> {
+                GlobalScope.launch {
+                    getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName))
+                    {
+                        when (it) {
+                            is Response.SUCESS -> {
+                                val rep =
+                                    (it.response as Response.SUCESS).response as WallpaperResponse
+                                val list = rep.wallpaperList.wallpapers.map { wall ->
+                                    WallpaperToViewMapper().map(wall)
+                                }
+                                showContent(list, screenType)
+                            }
+                            is Response.FAILURE -> {
+
+                            }
+                        }
+                    }
+                }
+            }
         }
 
     }
@@ -395,6 +413,7 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
             "LAB" -> ScreenType.Lab
             "TEXTURE" -> ScreenType.TEXTURE
             "TIMER" -> ScreenType.TIMER
+            "CAT_WALL" -> ScreenType.CatWallpaper
             else -> ScreenType.Wall
         }
     }
@@ -405,6 +424,7 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         object Cat : ScreenType()
         object Lab : ScreenType()
         object TEXTURE : ScreenType()
+        object CatWallpaper : ScreenType()
         object TIMER : ScreenType()
     }
 

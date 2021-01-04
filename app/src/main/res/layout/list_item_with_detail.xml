@@ -21,10 +21,10 @@
             android:layout_height="0dp"
             android:contentDescription="@null"
             android:scaleType="fitXY"
-            card_view:layout_constraintWidth_percent="0.30"
             card_view:layout_constraintBottom_toBottomOf="parent"
-             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintWidth_percent="0.30" />
 
         <TextView
             android:id="@+id/item_detail_title"
@@ -52,8 +52,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
+            android:gravity="end"
             android:text="@string/item_detail_random_btn_text"
-            android:textColor="@color/primary"
+            android:textColor="@color/colorAccent"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/item_detail_desc"

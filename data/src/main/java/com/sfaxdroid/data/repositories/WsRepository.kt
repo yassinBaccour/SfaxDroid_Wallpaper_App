@@ -18,4 +18,8 @@ interface WsRepository {
         file: String
     ): Response
 
+    suspend fun getCategoryWallpaper(
+        file: String
+    ): Response
+
 }
