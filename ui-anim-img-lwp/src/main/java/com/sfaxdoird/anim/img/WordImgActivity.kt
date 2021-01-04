@@ -41,7 +41,7 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
     override fun initEventAndData() {
 
         fab?.setOnClickListener { openLwp() }
-        buttonColor?.setOnClickListener { chooseColor() }
+        button_choose_color?.setOnClickListener { chooseColor() }
 
         initToolbar()
 
@@ -114,7 +114,7 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
                 pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
 
                 BitmapUtils.changeDrawableButtonColor(
-                    buttonColor,
+                    button_choose_color,
                     this@WordImgActivity,
                     selectedColor
                 )
@@ -168,14 +168,14 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
         if (id == mDownloadId2) {
             fab?.isEnabled = true
             setProgressInformation(getString(R.string.download_terminated_sucessful))
-            txtstatusDownload?.text = getString(R.string.download_completed)
+            download_status_information_text?.text = getString(R.string.download_completed)
             isClickable = true
         }
 
     }
 
     private fun setProgressInformation(info: String) {
-        progressTxt?.text = info
+        progress_information?.text = info
     }
 
     override fun onDownloadFailed(
@@ -197,15 +197,15 @@ class WordImgActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
     private fun setProgressView(progress: Int, byte: Long) {
         if (progress != 0) {
-            progress1?.progress = progress
-            progressTxt?.text = ("$progress%  "
+            progress_bar_information?.progress = progress
+            progress_information?.text = ("$progress%  "
                     + getBytesDownloaded(
                 progress,
                 byte
             ))
         } else {
-            progress1?.progress = 0
-            progressTxt?.text = getString(R.string.failed_dwn)
+            progress_bar_information?.progress = 0
+            progress_information?.text = getString(R.string.failed_dwn)
         }
 
     }

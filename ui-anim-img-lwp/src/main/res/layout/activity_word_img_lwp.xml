@@ -14,123 +14,97 @@
         android:layout_alignParentTop="true"
         android:background="#2c3e50">
 
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ScrollView
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/download_status_information_title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true">
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="@string/download_resource_txt"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-                <LinearLayout
-                    android:id="@+id/container_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/download_status_information_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/download_resource_txt_witing"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/download_status_information_title" />
 
-                    android:orientation="vertical">
+            <TextView
+                android:id="@+id/progress_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/word_img_resource"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/download_status_information_text" />
 
-                    <include
-                        android:id="@+id/toolbar"
-                        layout="@layout/toolbar" />
+            <ProgressBar
+                android:id="@+id/progress_bar_information"
+                style="@style/ProgressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/progress_information"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dip"
+                android:layout_marginRight="10dp"
+                android:max="100"
+                android:progress="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_information" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView_writing_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/writing_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress_bar_information" />
 
+            <Button
+                android:id="@+id/button_choose_color"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:drawableTop="@mipmap/ic_palette"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_writing_color"
+                app:layout_constraintVertical_bias="0.04000002"
+                app:srcCompat="@mipmap/ic_palette" />
 
-                        <LinearLayout
-                            android:id="@+id/titletxtlayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:background="#1c2b39"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:gravity="center"
-                                android:text="@string/download_resource_txt"
-                                android:textAlignment="center"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:textStyle="italic" />
-
-                            <TextView
-                                android:id="@+id/txtstatusDownload"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp"
-                                android:gravity="center"
-                                android:text="@string/download_resource_txt_witing"
-                                android:textAlignment="center"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:textStyle="italic" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/processlayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/titletxtlayout"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:orientation="vertical"
-
-                            >
-
-                            <TextView
-                                android:id="@+id/progressTxt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="5dp"
-                                android:text="@string/word_img_resource" />
-
-                            <ProgressBar
-                                android:id="@+id/progress1"
-                                style="@style/ProgressBarStyle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/progressTxt"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="5dip"
-                                android:layout_marginRight="10dp"
-                                android:max="100"
-                                android:progress="0" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/processlayout"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="@string/writing_color" />
-
-                            <Button
-                                android:id="@+id/buttonColor"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginLeft="30dp"
-                                android:layout_marginTop="5dp"
-                                android:background="@android:color/transparent"
-                                android:drawableTop="@mipmap/ic_palette"
-                                app:srcCompat="@mipmap/ic_palette" />
-
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
-                </LinearLayout>
-            </ScrollView>
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
