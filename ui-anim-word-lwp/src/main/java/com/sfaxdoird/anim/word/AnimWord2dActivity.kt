@@ -18,6 +18,7 @@ import com.sfaxdroid.base.utils.BitmapUtils
 import com.sfaxdroid.base.utils.Utils
 import kotlinx.android.synthetic.main.activity_anim_word.*
 import java.io.File
+import java.lang.Exception
 
 class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
@@ -28,23 +29,9 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
     private val downloadManager =
         ThinDownloadManager(Constants.DOWNLOAD_THREAD_POOL_SIZE)
 
-    private var fontButtonList = listOf<TextView>(
-        txtfont1,
-        txtfont2,
-        txtfont3,
-        txtfont4,
-        txtfont5,
-        txtfont6,
-        txtfont7,
-        txtfont8
-    )
+    private var fontButtonList = arrayListOf<TextView>()
 
-    private var buttonSizeList = listOf<Button>(
-        buttonSizeSmall,
-        buttonSizeMeduim,
-        buttonSizeBig,
-        buttonSizeFullScreen
-    )
+    private var buttonSizeList = arrayListOf<Button>()
 
     var pref: SharedPrefsUtils? = null
 
@@ -55,6 +42,24 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
         pref = SharedPrefsUtils(this)
         toolbar = findViewById(R.id.toolbar)
+
+        fontButtonList = arrayListOf(
+            txtfont1,
+            txtfont2,
+            txtfont3,
+            txtfont4,
+            txtfont5,
+            txtfont6,
+            txtfont7,
+            txtfont8
+        )
+
+        buttonSizeList = arrayListOf(
+            buttonSizeSmall,
+            buttonSizeMeduim,
+            buttonSizeBig,
+            buttonSizeFullScreen
+        )
 
         setTextViewTypeFace()
         initSizeListener()
@@ -127,7 +132,12 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
     private fun setTextViewTypeFace() {
         fontButtonList.forEachIndexed { index, button ->
-            button.typeface = Typeface.createFromAsset(assets, "arabicfont$index.otf")
+            val ind = index + 1
+            try {
+                button.typeface = Typeface.createFromAsset(assets, "arabicfont$ind.otf")
+            } catch (e: Exception) {
+                button.typeface = Typeface.createFromAsset(assets, "arabicfont$ind.ttf")
+            }
         }
     }
 
@@ -150,7 +160,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
     }
 
     private fun saveTextSize(size: Int, button: Button?) {
-        pref!!.SetSetting("2dwallpapertextsize", size)
+        pref?.SetSetting("2dwallpapertextsize", size)
         resetBtnSizeBackground()
         setButtonDrawable(button)
     }

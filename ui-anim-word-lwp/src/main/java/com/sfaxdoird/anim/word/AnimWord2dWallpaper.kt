@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.sfaxdroid.base.SharedPrefsUtils
 
+
 class AnimWord2dWallpaper : WallpaperService() {
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)
@@ -47,7 +48,14 @@ class AnimWord2dWallpaper : WallpaperService() {
                     "arabicfont$mTypefaceNum.ttf"
                 )
             } catch (e: Exception) {
-                Typeface.DEFAULT
+                return try {
+                    Typeface.createFromAsset(
+                        assets,
+                        "arabicfont$mTypefaceNum.otf"
+                    )
+                } catch (e: Exception) {
+                    Typeface.DEFAULT
+                }
             }
         }
 
@@ -158,20 +166,16 @@ class AnimWord2dWallpaper : WallpaperService() {
         }
 
         private fun draw2dImg(canvas: Canvas) {
-            val rect = Rect()
-            canvas.getClipBounds(rect)
 
             val header =
                 Constants.NAME_OF_ALLAH_TAB[currentPhoto]
 
-            val height = rect.height()
-            val width = rect.width()
-            val x = width / 2f - rect.width() / 2f - rect.left
-            val y = height / 2f + rect.height() / 2f - rect.bottom
+            val bounds = Rect()
+            paintOption.getTextBounds(header, 0, header.length, bounds)
+            val x = canvas.width / 2 - bounds.width() / 2
+            val y = canvas.height / 2 - bounds.height() / 2
 
-            paintOption.textAlign = Paint.Align.LEFT
-            paintOption.getTextBounds(header, 0, header.length, rect)
-            canvas.drawText(header, x, y, paintOption)
+            canvas.drawText(header, x.toFloat(), y.toFloat(), paintOption)
         }
 
         private fun drawPattern(canvas: Canvas) {
