@@ -61,12 +61,24 @@ object BitmapUtils {
         )
     }
 
-    fun changeImageColor(sourceBitmap: Bitmap, color: Int): Bitmap? {
+    fun changeImageColor(
+        sourceBitmap: Bitmap,
+        color: Int,
+        width: Int = 0,
+        height: Int = 0
+    ): Bitmap? {
         return try {
-            val resultBitmap = Bitmap.createBitmap(
-                sourceBitmap, 0, 0,
-                sourceBitmap.width - 1, sourceBitmap.height - 1
-            )
+            val resultBitmap: Bitmap = if (width != 0) {
+                Bitmap.createScaledBitmap(
+                    sourceBitmap, width, height,
+                    false
+                )
+            } else {
+                Bitmap.createBitmap(
+                    sourceBitmap, 0, 0,
+                    sourceBitmap.width - 1, sourceBitmap.height - 1
+                )
+            }
             val canvas = Canvas(resultBitmap)
             canvas.drawBitmap(resultBitmap, 0f, 0f, Paint().apply {
                 colorFilter = LightingColorFilter(color, 1)

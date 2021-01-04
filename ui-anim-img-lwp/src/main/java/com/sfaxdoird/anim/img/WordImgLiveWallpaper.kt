@@ -6,12 +6,14 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
+import android.view.Display
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.sfaxdoird.anim.img.Utils.getTemporaryDir
-import com.sfaxdroid.base.utils.BitmapUtils
 import com.sfaxdroid.base.SharedPrefsUtils
+import com.sfaxdroid.base.utils.BitmapUtils
 import java.io.File
+
 
 class WordImgLiveWallpaper : WallpaperService() {
 
@@ -147,7 +149,7 @@ class WordImgLiveWallpaper : WallpaperService() {
                     BitmapFactory.decodeFile(
                         "$tempDir/$zipFolder/$prefix$currentPhoto.png",
                         options
-                    ), color
+                    ), color, screenWidth / 2, screenHeight / 2
                 )
                 if (currentPhoto == nbMaxPhoto) {
                     currentPhoto = 0

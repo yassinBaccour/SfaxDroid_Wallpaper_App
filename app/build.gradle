@@ -81,8 +81,8 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     kapt libraries.glideCompîler
     kapt libraries.daggerCompiler
     kapt libraries.daggerAndroidCompiler
@@ -94,7 +94,6 @@ dependencies {
     implementation libraries.appcompat
     implementation libraries.multidex
     implementation libraries.material
-    implementation libraries.cardview
     implementation libraries.recyclerview
     implementation libraries.glide
     implementation libraries.constraintlayout
@@ -108,7 +107,7 @@ dependencies {
     implementation "com.mani:ThinDownloadManager:1.2.5"
     implementation "com.github.medyo:android-about-page:1.2.2"
     implementation 'com.squareup.retrofit2:converter-simplexml:2.6.2'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'

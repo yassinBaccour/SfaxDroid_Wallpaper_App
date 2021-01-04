@@ -79,13 +79,23 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         }
     }
 
+    private fun getFullUrl(url: String): String {
+        return url.replace("_preview", "")
+    }
+
     private fun openByType(wallpaperObject: SimpleWallpaperView) {
         when (selectedLwpName) {
             Constants.KEY_WORD_IMG_LWP -> {
-                openByClassName("com.sfaxdoird.anim.img.WordImgActivity", wallpaperObject.url)
+                openByClassName(
+                    "com.sfaxdoird.anim.img.WordImgActivity",
+                    getFullUrl(wallpaperObject.url)
+                )
             }
             Constants.KEY_ANIM_2D_LWP -> {
-                openByClassName("com.sfaxdoird.anim.word.AnimWord2dActivity", wallpaperObject.url)
+                openByClassName(
+                    "com.sfaxdoird.anim.word.AnimWord2dActivity",
+                    getFullUrl(wallpaperObject.url)
+                )
             }
             Constants.KEY_RIPPLE_LWP -> {
                 showDetailViewActivity(wallpaperObject, Constants.KEY_RIPPLE_LWP)
@@ -124,11 +134,11 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         when (wallpaperObject.type) {
             is LiveWallpaper.DouaLwp -> {
                 try {
-                    AllInOneFragment.newInstance(
-                        "texture.json",
-                        "TEXTURE",
-                        Constants.KEY_WORD_IMG_LWP
-                    )
+                    findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
+                        putString(Constants.EXTRA_JSON_FILE_NAME, "texture.json")
+                        putString(Constants.EXTRA_SCREEN_TYPE, "TEXTURE")
+                        putString(Constants.KEY_LWP_NAME, Constants.KEY_WORD_IMG_LWP)
+                    })
                 } catch (e: ClassNotFoundException) {
                     e.printStackTrace()
                 }
@@ -144,8 +154,11 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
                 startActivity(intent)
             }
             is LiveWallpaper.NameOfAllah2D -> {
-                //AllInOneFragment.newInstance("texture.json", "TEXTURE", Constants.KEY_ANIM_2D_LWP)
-                findNavController().navigate(R.id.chooser_navigation_fg)
+                findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
+                    putString(Constants.EXTRA_JSON_FILE_NAME, "texture.json")
+                    putString(Constants.EXTRA_SCREEN_TYPE, "TEXTURE")
+                    putString(Constants.KEY_LWP_NAME, Constants.KEY_ANIM_2D_LWP)
+                })
             }
             LiveWallpaper.none -> {
 
@@ -247,7 +260,7 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
             ).apply {
                 putExtra(
                     Constants.EXTRA_IMG_URL,
-                    wallpaperObject.url
+                    getFullUrl(wallpaperObject.url)
                 )
                 if (lwpName.isNotEmpty())
                     putExtra(

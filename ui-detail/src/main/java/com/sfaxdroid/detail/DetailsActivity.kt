@@ -54,16 +54,14 @@ class DetailsActivity : SimpleActivity(), LoadingListener {
     private var fromRipple = false
 
     private fun unSubscribe() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable!!.dispose()
-        }
+        mCompositeDisposable?.dispose()
     }
 
     private fun addSubscribe(subscription: Disposable?) {
         if (mCompositeDisposable == null) {
             mCompositeDisposable = CompositeDisposable()
         }
-        mCompositeDisposable!!.add(subscription!!)
+        mCompositeDisposable?.add(subscription!!)
     }
 
     override fun onDestroy() {
@@ -73,10 +71,8 @@ class DetailsActivity : SimpleActivity(), LoadingListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentUrl = getFullUrl(
-            Utils.getUrlByScreenSize(
-                intent.getStringExtra(Constants.EXTRA_IMG_URL).orEmpty(), this
-            )
+        currentUrl = Utils.getUrlByScreenSize(
+            intent.getStringExtra(Constants.EXTRA_IMG_URL).orEmpty(), this
         )
         from = intent.getStringExtra(Constants.KEY_LWP_NAME).orEmpty()
         initToolbar()

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.gms.ads.AdListener
@@ -14,7 +13,6 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kobakei.ratethisapp.RateThisApp
-import com.sami.rippel.allah.BuildConfig
 import com.sami.rippel.allah.R
 import com.sami.rippel.core.base.BaseActivity
 import com.sami.rippel.core.setupWithNavController
@@ -68,6 +66,11 @@ class HomeActivity : BaseActivity() {
             intent = intent
         )
         currentNavController = controller
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     override fun onSupportNavigateUp(): Boolean {

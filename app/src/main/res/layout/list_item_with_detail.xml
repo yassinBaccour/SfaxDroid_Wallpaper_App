@@ -21,9 +21,9 @@
             android:layout_height="0dp"
             android:contentDescription="@null"
             android:scaleType="fitXY"
+            card_view:layout_constraintWidth_percent="0.30"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintDimensionRatio="w,9:16"
-            card_view:layout_constraintStart_toStartOf="parent"
+             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
