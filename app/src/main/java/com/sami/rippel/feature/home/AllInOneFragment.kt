@@ -50,15 +50,15 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
     private var wallpapersListAdapter: WallpapersListAdapter? = null
 
     private val fileName by lazy {
-        arguments?.getString("keyJsonFileName").orEmpty()
+        arguments?.getString(Constants.EXTRA_JSON_FILE_NAME).orEmpty()
     }
 
     private val screen by lazy {
-        arguments?.getString("keyScreenType").orEmpty()
+        arguments?.getString(Constants.EXTRA_SCREEN_TYPE).orEmpty()
     }
 
     private val selectedLwpName by lazy {
-        arguments?.getString(Constants.KEY_LWP_NAME, "") ?: ""
+        arguments?.getString(Constants.KEY_LWP_NAME).orEmpty()
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
@@ -136,23 +136,23 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         }
     }
 
-    private fun navToTexture(lwpName: String) {
-        findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
-            putString(
-                Constants.EXTRA_JSON_FILE_NAME,
-                Constants.VALUE_TEXTURE_SCREEN_NAME
-            )
-            putString(Constants.EXTRA_SCREEN_TYPE, "TEXTURE")
-            putString(Constants.KEY_LWP_NAME, lwpName)
-        })
-    }
-
     private fun navToTimer() {
         val intent = Intent(
             activity,
             Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")
         )
         startActivity(intent)
+    }
+
+    private fun navToTexture(lwpName: String) {
+        findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
+            putString(
+                Constants.EXTRA_JSON_FILE_NAME,
+                Constants.VALUE_TEXTURE_JSON_FILE_NAME
+            )
+            putString(Constants.EXTRA_SCREEN_TYPE, Constants.VALUE_TEXTURE_SCREEN_NAME)
+            putString(Constants.KEY_LWP_NAME, lwpName)
+        })
     }
 
     private fun openLwp(
@@ -178,6 +178,7 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
         return when (screenType) {
             is ScreenType.Wall -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
             is ScreenType.CatWallpaper -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
+            is ScreenType.TEXTURE -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
             is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
             is ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
             else -> WallpapersListAdapter.TYPE_LWP
