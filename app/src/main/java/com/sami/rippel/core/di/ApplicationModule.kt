@@ -54,34 +54,6 @@ class ApplicationModule {
         )
     }
 
-    @Provides
-    @Singleton
-    fun provideAppRepository(dataSource: Network): WsRepository {
-        return dataSource
-    }
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(@Named("domain-url") url: String): Retrofit {
-        return Retrofit.Builder()
-            .client(createClient())
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(url)
-            .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideDeviceNetworkHandler(deviceNetworkHandler: NetworkHandler): DeviceNetworkHandler {
-        return deviceNetworkHandler
-    }
-
-    private fun createClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .build()
-    }
 
 }

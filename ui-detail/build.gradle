@@ -31,8 +31,11 @@ dependencies {
     implementation project(':base-android')
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation "com.flipboard:bottomsheet-core:1.5.3"
     implementation "com.flipboard:bottomsheet-commons:1.5.3"
+
+    implementation libraries.hildLib
+    kapt libraries.hildComplier
 }

@@ -108,7 +108,7 @@ class DetailsActivity : SimpleActivity(), LoadingListener {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar as Toolbar)
-        supportActionBar?.title = getString(R.string.ui_detail_title)
+        supportActionBar?.title = ""
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
