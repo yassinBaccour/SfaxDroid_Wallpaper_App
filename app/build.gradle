@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../dependencies.gradle'
 //apply plugin: 'com.google.firebase.crashlytics'
-
 
 android {
 
@@ -83,13 +83,11 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
-    kapt libraries.glideCompîler
-    kapt libraries.daggerCompiler
-    kapt libraries.daggerAndroidCompiler
+
+    implementation libraries.hildLib
+    kapt libraries.hildComplier
+
     kapt libraries.lifecycleCompiler
-    compileOnly libraries.annotationDagger2
-    kapt libraries.processorDagger2
-    api libraries.daggerAndroid
     implementation libraries.kotlin
     implementation libraries.appcompat
     implementation libraries.multidex

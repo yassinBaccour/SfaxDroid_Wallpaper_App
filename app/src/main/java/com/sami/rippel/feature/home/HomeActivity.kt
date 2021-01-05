@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.gms.ads.AdListener
@@ -13,15 +14,16 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kobakei.ratethisapp.RateThisApp
 import com.sami.rippel.allah.R
-import com.sami.rippel.core.base.BaseActivity
 import com.sami.rippel.core.setupWithNavController
 import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.tbruyelle.rxpermissions2.RxPermissions
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
-class HomeActivity : BaseActivity() {
+@AndroidEntryPoint
+class HomeActivity : AppCompatActivity() {
 
     private var rxPermissions: RxPermissions? = null
     private var mInterstitialAd: InterstitialAd? = null

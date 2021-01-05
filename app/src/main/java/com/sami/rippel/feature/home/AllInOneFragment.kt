@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
-import com.sami.rippel.core.base.BaseFragment
 import com.sami.rippel.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.FileUtils
@@ -25,15 +25,15 @@ import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.sky.SkyLiveWallpaper
-import dagger.android.AndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_background.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
+@AndroidEntryPoint
+open class AllInOneFragment : Fragment() {
 
     @Inject
     lateinit var getAllWallpapersUseCase: GetAllWallpapersUseCase
@@ -59,10 +59,6 @@ open class AllInOneFragment : BaseFragment(), HasAndroidInjector {
 
     private val selectedLwpName by lazy {
         arguments?.getString(Constants.KEY_LWP_NAME).orEmpty()
-    }
-
-    override fun androidInjector(): AndroidInjector<Any> {
-        return androidInjector
     }
 
     var mData = ArrayList<BaseWallpaperView>()

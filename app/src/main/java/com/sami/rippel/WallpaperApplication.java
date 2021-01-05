@@ -1,20 +1,15 @@
 package com.sami.rippel;
 
 
-import com.sami.rippel.core.di.DaggerApplicationComponent;
+import android.app.Application;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
+import dagger.hilt.android.HiltAndroidApp;
 
 /**
  * Created by yassin baccour on 15/05/2016.
  */
+@HiltAndroidApp
+public class WallpaperApplication extends Application {
 
-public class WallpaperApplication extends DaggerApplication {
-
-    @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerApplicationComponent.factory().create(this);
-    }
 
 }

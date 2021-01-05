@@ -46,9 +46,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <meta-data
-            android:name="com.sami.rippel.utils.GlideConfiguration"
-            android:value="GlideModule" />
 
         <activity android:name="com.sami.rippel.feature.other.AboutActivity" />
 

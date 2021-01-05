@@ -11,6 +11,10 @@ import com.sfaxdroid.data.repositories.Network
 import com.sfaxdroid.data.repositories.WsRepository
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,16 +22,9 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
+@InstallIn(SingletonComponent::class)
 @Module
 class ApplicationModule {
-
-
-    @Provides
-    fun provideContext(
-        application: WallpaperApplication
-    ): Context {
-        return application
-    }
 
     @Provides
     @Named("domain-url")
@@ -42,7 +39,7 @@ class ApplicationModule {
     @Provides
     @Singleton
     fun providePreferencesManager(
-        context: Context,
+        @ApplicationContext context: Context,
         @Named("app-name") appName: AppName
     ): PreferencesManager {
 

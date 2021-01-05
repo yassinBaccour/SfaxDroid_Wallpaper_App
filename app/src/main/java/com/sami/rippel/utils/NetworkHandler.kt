@@ -5,12 +5,13 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.sfaxdroid.data.DeviceNetworkHandler
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class NetworkHandler
-@Inject constructor(private val context: Context) : DeviceNetworkHandler {
+@Inject constructor(@ApplicationContext private val context: Context) : DeviceNetworkHandler {
 
     private fun isReachable(context: Context): Boolean {
         val manager = context.getSystemService(
