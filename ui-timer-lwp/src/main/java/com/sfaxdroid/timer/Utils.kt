@@ -1,6 +1,5 @@
 package com.sfaxdroid.timer
 
-import android.app.Activity
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
@@ -53,10 +52,10 @@ class Utils {
             )?.size ?: 0 > 3
         }
 
-        fun openAddWallpaperWithKeyActivity(activity: Activity, key: String) {
+        fun openAddWallpaperWithKeyActivity(context: Context, key: String) {
             try {
-                activity.startActivity(Intent(
-                    activity,
+                context.startActivity(Intent(
+                    context,
                     Class.forName("com.sami.rippel.feature.main.activity.GalleryActivity")
                 ).apply {
                     putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, key)

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#203141"
-    tools:mContext="com.sfaxdroid.timer.WallpaperSchedulerActivity">
+    tools:mContext="com.sfaxdroid.timer.WallpaperSchedulerFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -17,10 +17,6 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:orientation="vertical">
-
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar" />
 
             <ScrollView
                 android:layout_width="wrap_content"

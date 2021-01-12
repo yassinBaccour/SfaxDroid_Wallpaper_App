@@ -2,7 +2,6 @@
     package="com.sfaxdoird.anim.img">
 
     <application>
-        <activity android:name="com.sfaxdoird.anim.img.WordImgActivity" />
         <service
             android:name="com.sfaxdoird.anim.img.WordImgLiveWallpaper"
             android:icon="@mipmap/ic_launcher"

@@ -2,12 +2,6 @@
     package="com.sfaxdoird.anim.word">
 
     <application>
-        <activity
-            android:name="com.sfaxdoird.anim.word.AnimWord2dActivity"
-            android:label="AnimWord2dActivity"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-
         <service
             android:name="com.sfaxdoird.anim.word.AnimWord2dWallpaper"
             android:icon="@mipmap/ic_launcher"

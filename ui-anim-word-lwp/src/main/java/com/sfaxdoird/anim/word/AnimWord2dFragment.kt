@@ -4,23 +4,29 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdroid.app.downloadsystem.*
-import com.sfaxdroid.base.*
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
+import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.utils.BitmapUtils
 import com.sfaxdroid.base.utils.Utils
-import kotlinx.android.synthetic.main.activity_anim_word.*
+import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
+import kotlinx.android.synthetic.main.fragment_anim_word.*
 import java.io.File
-import java.lang.Exception
 
-class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
+
+class AnimWord2dFragment : Fragment(), DownloadStatusListenerV1 {
 
     private var toolbar: Toolbar? = null
     private var clickable = false
@@ -35,13 +41,23 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
     var pref: SharedPrefsUtils? = null
 
-    override val layout: Int
-        get() = R.layout.activity_anim_word
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_anim_word, container, false)
+    }
 
-    override fun initEventAndData() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initEventAndData()
+    }
 
-        pref = SharedPrefsUtils(this)
-        toolbar = findViewById(R.id.toolbar)
+    private fun initEventAndData() {
+
+        pref = SharedPrefsUtils(requireContext())
+        toolbar = view?.findViewById(R.id.toolbar)
 
         fontButtonList = arrayListOf(
             txtfont1,
@@ -70,7 +86,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
         buttonColor?.setOnClickListener { chooseColor() }
         fab.setOnClickListener { openLiveWallpapers() }
 
-        val filesDir = getExternalFilesDir("")
+        val filesDir = requireContext().getExternalFilesDir("")
         startDownload(filesDir!!)
         backgroundFile =
             File(filesDir, Constants.PNG_BACKFROUND_FILE_NAME)
@@ -82,10 +98,9 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
     private fun startDownload(file: File) {
         val requestWallpaper =
             DownloadRequest(
-                Uri.parse(intent.getStringExtra(Constants.EXTRA_URL_TO_DOWNLOAD)
-                    .orEmpty()
+                Uri.parse(arguments?.getString(Constants.EXTRA_URL_TO_DOWNLOAD, "") ?: ""
                     .apply {
-                        if (Utils.isSmallScreen(this@AnimWord2dActivity)
+                        if (Utils.isSmallScreen(requireContext())
                         ) {
                             replace("islamicimages", "islamicimagesmini")
                         }
@@ -134,9 +149,11 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
         fontButtonList.forEachIndexed { index, button ->
             val ind = index + 1
             try {
-                button.typeface = Typeface.createFromAsset(assets, "arabicfont$ind.otf")
+                button.typeface =
+                    Typeface.createFromAsset(requireContext().assets, "arabicfont$ind.otf")
             } catch (e: Exception) {
-                button.typeface = Typeface.createFromAsset(assets, "arabicfont$ind.ttf")
+                button.typeface =
+                    Typeface.createFromAsset(requireContext().assets, "arabicfont$ind.ttf")
             }
         }
     }
@@ -172,25 +189,24 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
     }
 
     private fun resetBtnSizeBackground() {
-        buttonSizeSmall.setCompoundTopDrawables(getDrawableByVersion(R.mipmap.ic_size_small))
-        buttonSizeMeduim.setCompoundTopDrawables(getDrawableByVersion(R.mipmap.ic_size_meduim))
-        buttonSizeBig.setCompoundTopDrawables(getDrawableByVersion(R.mipmap.ic_size_big))
-        buttonSizeFullScreen.setCompoundTopDrawables(getDrawableByVersion(R.mipmap.ic_size_full))
+        buttonSizeSmall.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_small))
+        buttonSizeMeduim.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_meduim))
+        buttonSizeBig.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_big))
+        buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_full))
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            supportActionBar?.title = getString(R.string.title_word_anim_lwp)
-            supportActionBar?.setHomeButtonEnabled(true)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.supportActionBar?.apply {
+            title = getString(R.string.title_word_anim_lwp)
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
         }
     }
 
     private fun chooseColor() {
         ColorPickerDialogBuilder
-            .with(this)
+            .with(requireContext())
             .setTitle(getString(R.string.choose_color))
             .initialColor(Color.BLUE)
             .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
@@ -200,7 +216,11 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
                 getString(R.string.btn_ok)
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
                 pref!!.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
-                BitmapUtils.changeDrawableButtonColor(buttonColor, this, R.mipmap.ic_palette)
+                BitmapUtils.changeDrawableButtonColor(
+                    buttonColor,
+                    requireContext(),
+                    R.mipmap.ic_palette
+                )
             }
             .setNegativeButton(
                 getString(R.string.btn_cancel)
@@ -211,7 +231,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
-            finish()
+            requireActivity().onBackPressed()
         }
         return super.onOptionsItemSelected(menuItem)
     }
@@ -221,7 +241,7 @@ class AnimWord2dActivity : SimpleActivity(), DownloadStatusListenerV1 {
             backgroundFile = null
             Constants.ifBackgroundChanged = true
             Constants.nbIncrementationAfterChange = 0
-            Utils.openLiveWallpaper<AnimWord2dWallpaper>(this)
+            Utils.openLiveWallpaper<AnimWord2dWallpaper>(requireContext())
         } else {
             Utils.showSnackMessage(rootLayout, getString(R.string.waiting_downlaod))
         }

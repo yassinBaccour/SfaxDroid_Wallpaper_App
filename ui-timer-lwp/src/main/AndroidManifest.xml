@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application>
-        <activity android:name="com.sfaxdroid.timer.WallpaperSchedulerActivity" />
         <service
             android:name="com.sfaxdroid.timer.RetrieveWallpaperService"
             android:exported="true"

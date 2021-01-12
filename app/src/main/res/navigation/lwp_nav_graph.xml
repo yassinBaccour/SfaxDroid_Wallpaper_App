@@ -18,6 +18,13 @@
             android:name="keyScreenType"
             android:defaultValue="LWP"
             app:argType="string" />
+        <action
+            android:id="@+id/navigate_to_timer"
+            app:destination="@id/wallpaper_scheduler_fragment" />
+
+        <action
+            android:id="@+id/action_lwp_navigation_fg_to_chooser_navigation_fg"
+            app:destination="@id/chooser_navigation_fg" />
     </fragment>
 
     <fragment
@@ -33,6 +40,27 @@
             android:name="keyScreenType"
             android:defaultValue="NEW"
             app:argType="string" />
+        <action
+            android:id="@+id/navigate_to_anim_2d"
+            app:destination="@id/anim_word_2d_fg" />
+        <action
+            android:id="@+id/navigate_to_word_img"
+            app:destination="@id/word_img_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/wallpaper_scheduler_fragment"
+        android:name="com.sfaxdroid.timer.WallpaperSchedulerFragment"
+        android:label="WallpaperSchedulerFragment"
+        tools:layout="@layout/fragment_wallpaper_scheduler" />
+    <fragment
+        android:id="@+id/anim_word_2d_fg"
+        android:name="com.sfaxdoird.anim.word.AnimWord2dFragment"
+        android:label="AnimWord2dFragment"
+        tools:layout="@layout/fragment_anim_word" />
+    <fragment
+        android:id="@+id/word_img_fragment"
+        android:name="com.sfaxdoird.anim.img.WordImgFragment"
+        android:label="WordImgFragment"
+        tools:layout="@layout/fragment_word_img_lwp" />
 
 </navigation>

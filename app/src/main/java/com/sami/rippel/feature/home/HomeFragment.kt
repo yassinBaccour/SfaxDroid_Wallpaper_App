@@ -55,16 +55,22 @@ class HomeFragment : Fragment() {
     private fun openByType(wallpaperObject: SimpleWallpaperView) {
         when (selectedLwpName) {
             Constants.KEY_WORD_IMG_LWP -> {
-                openByClassName(
-                    "com.sfaxdoird.anim.img.WordImgActivity",
-                    getFullUrl(wallpaperObject.url)
-                )
+                findNavController().navigate(R.id.navigate_to_word_img,
+                    Bundle().apply {
+                        putString(
+                            Constants.EXTRA_URL_TO_DOWNLOAD,
+                            getFullUrl(wallpaperObject.url)
+                        )
+                    })
             }
             Constants.KEY_ANIM_2D_LWP -> {
-                openByClassName(
-                    "com.sfaxdoird.anim.word.AnimWord2dActivity",
-                    getFullUrl(wallpaperObject.url)
-                )
+                findNavController().navigate(R.id.navigate_to_anim_2d,
+                    Bundle().apply {
+                        putString(
+                            Constants.EXTRA_URL_TO_DOWNLOAD,
+                            getFullUrl(wallpaperObject.url)
+                        )
+                    })
             }
             Constants.KEY_RIPPLE_LWP -> {
                 showDetailViewActivity(wallpaperObject, Constants.KEY_RIPPLE_LWP)
@@ -102,12 +108,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navToTimer() {
-        startActivity(
-            Intent(
-                activity,
-                Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")
-            )
-        )
+        findNavController().navigate(R.id.navigate_to_timer)
     }
 
     private fun navToTexture(lwpName: String) {

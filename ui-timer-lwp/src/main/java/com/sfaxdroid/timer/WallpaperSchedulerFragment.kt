@@ -9,29 +9,38 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.timer.Utils.Companion.openAddWallpaperWithKeyActivity
 import com.sfaxdroid.timer.Utils.Companion.setWallpaperFromFile
-import kotlinx.android.synthetic.main.activity_wallpaper_scheduler.*
+import kotlinx.android.synthetic.main.fragment_wallpaper_scheduler.*
 import kotlinx.coroutines.*
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class WallpaperSchedulerActivity : AppCompatActivity() {
+class WallpaperSchedulerFragment : Fragment() {
 
     private var scheduler: JobScheduler? = null
 
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_wallpaper_scheduler)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_wallpaper_scheduler, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initToolbar()
         scheduler =
-            applicationContext.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+            requireContext().getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
 
         initViewWithJobStatus()
 
@@ -41,12 +50,12 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
         }
         buttonAddLwp.setOnClickListener {
             openAddWallpaperWithKeyActivity(
-                this, Constants.KEY_ADD_TIMER_LWP
+                requireContext(), Constants.KEY_ADD_TIMER_LWP
             )
         }
         buttonLWPList.setOnClickListener {
             openAddWallpaperWithKeyActivity(
-                this, Constants.KEY_ADDED_LIST_TIMER_LWP
+                requireContext(), Constants.KEY_ADDED_LIST_TIMER_LWP
             )
         }
         buttonActive.setOnClickListener {
@@ -79,7 +88,7 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
     }
 
     private fun activeService() {
-        if (Utils.haveMinWallpaperInDir(this, getString(R.string.app_namenospace))) {
+        if (Utils.haveMinWallpaperInDir(requireContext(), getString(R.string.app_namenospace))) {
             activeJob()
             initBtnActive(true)
             initBtnClose(true)
@@ -132,7 +141,7 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
     private fun getSelectedTime(): Long {
 
         val radioSelectedButton =
-            findViewById<View>(radioGroup?.checkedRadioButtonId!!) as RadioButton
+            view?.findViewById<View>(radioGroup?.checkedRadioButtonId!!) as RadioButton
 
         return when (radioSelectedButton.text.toString()) {
             getString(R.string.one_houre) -> 3600000
@@ -148,13 +157,13 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
     }
 
     private fun showDialogNoMinFiles() {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.add_wallpaper_title))
             .setMessage(getString(R.string.add_wallpaper_min_message))
             .setPositiveButton(
                 getString(R.string.add_image_ok)
             ) { _: DialogInterface?, _: Int ->
-                openAddWallpaperWithKeyActivity(this, Constants.KEY_ADD_TIMER_LWP)
+                openAddWallpaperWithKeyActivity(requireContext(), Constants.KEY_ADD_TIMER_LWP)
             }
             .setNegativeButton(
                 getString(R.string.cancel_adding_images)
@@ -168,17 +177,12 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.apply {
-            title = getString(R.string.timer_wallpaper_name)
-            setHomeButtonEnabled(true)
-            setDisplayHomeAsUpEnabled(true)
-        }
+
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
-            finish()
+            //finish()
         }
         return super.onOptionsItemSelected(menuItem)
     }
@@ -194,12 +198,12 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
         )
     }
 
-    private fun scheduleJob(): Int? =
+    private fun scheduleJob(): Int =
         scheduler?.schedule(
             JobInfo.Builder(
                 1,
                 ComponentName(
-                    this@WallpaperSchedulerActivity,
+                    requireContext(),
                     RetrieveWallpaperService::class.java
                 )
             )
@@ -211,13 +215,13 @@ class WallpaperSchedulerActivity : AppCompatActivity() {
 
     private fun activeJob() {
         progressBar?.visibility = View.VISIBLE
-        if (Utils.haveMinWallpaperInDir(this, getString(R.string.app_namenospace))
+        if (Utils.haveMinWallpaperInDir(requireContext(), getString(R.string.app_namenospace))
         ) {
             GlobalScope.launch(Dispatchers.Default) {
                 val status = scheduleJob()
                 if (status == JobScheduler.RESULT_SUCCESS) {
                     setWallpaperFromFile(
-                        this@WallpaperSchedulerActivity,
+                        requireContext(),
                         getString(R.string.app_namenospace)
                     )
                     GlobalScope.launch(Dispatchers.Main) {
