@@ -34,7 +34,6 @@ import com.sfaxdroid.base.utils.Utils.Companion.getScreenWidthPixels
 import com.sfaxdroid.detail.utils.DetailUtils
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.decodeBitmapAndSetAsLiveWallpaper
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.setWallpaper
-import com.sfaxdroid.detail.utils.LoadingListener
 import com.sfaxdroid.detail.utils.TouchImageView
 import com.soundcloud.android.crop.Crop
 import io.reactivex.Flowable
@@ -46,7 +45,7 @@ import kotlinx.android.synthetic.main.activity_details.*
 import java.io.File
 import java.util.*
 
-class DetailsActivity : SimpleActivity(), LoadingListener {
+class DetailsActivity : SimpleActivity() {
 
     private var mCompositeDisposable: CompositeDisposable? = null
     private var from: String = ""
@@ -108,9 +107,11 @@ class DetailsActivity : SimpleActivity(), LoadingListener {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar as Toolbar)
-        supportActionBar?.title = ""
-        supportActionBar?.setHomeButtonEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            title = ""
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override val layout = R.layout.activity_details
@@ -192,15 +193,20 @@ class DetailsActivity : SimpleActivity(), LoadingListener {
     }
 
     private fun finishWithResult() {
-        val intent = Intent()
-        setResult(Activity.RESULT_OK, intent)
+        setResult(Activity.RESULT_OK, Intent())
         finish()
     }
 
     private fun showMenuSheet() {
-        val menuSheetView = MenuSheetView(this, MenuType.LIST, "", menuSheetListener)
-        menuSheetView.inflateMenu(R.menu.menu_details)
-        bottomsheetLayout?.showWithSheetView(menuSheetView)
+        bottomsheetLayout?.showWithSheetView(
+            MenuSheetView(
+                this,
+                MenuType.LIST,
+                "",
+                menuSheetListener
+            ).apply {
+                inflateMenu(R.menu.menu_details)
+            })
     }
 
     private fun dismissMenuSheet() {
@@ -333,7 +339,7 @@ class DetailsActivity : SimpleActivity(), LoadingListener {
                     getFileName(
                         url
                     ), context, appName
-                )!!, context
+                ), context
             )
         }
             .subscribeOn(Schedulers.io())
@@ -528,15 +534,15 @@ class DetailsActivity : SimpleActivity(), LoadingListener {
         }
     }
 
-    override fun showSnackMsg(msg: String) {
+    fun showSnackMsg(msg: String) {
         Utils.showSnackMessage(rootLayout, msg)
     }
 
-    override fun showLoading() {
+    fun showLoading() {
         progressBar?.visibility = View.VISIBLE
     }
 
-    override fun hideLoading() {
+    fun hideLoading() {
         progressBar?.visibility = View.GONE
     }
 

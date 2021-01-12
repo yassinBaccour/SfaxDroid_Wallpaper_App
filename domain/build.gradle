@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 android {
@@ -30,5 +31,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':data-android')
     api project(':data')
+    implementation libraries.hildLib
+    kapt libraries.hildComplier
 
 }

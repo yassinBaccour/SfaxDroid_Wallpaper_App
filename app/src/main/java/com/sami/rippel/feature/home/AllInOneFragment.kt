@@ -7,61 +7,33 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
+import com.sami.rippel.core.viewModelProviderFactoryOf
 import com.sami.rippel.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.utils.FileUtils
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.data.entity.LiveWallpaper
-import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.mappers.*
-import com.sfaxdroid.data.repositories.Response
-import com.sfaxdroid.domain.GetAllWallpapersUseCase
-import com.sfaxdroid.domain.GetCatWallpapersUseCase
-import com.sfaxdroid.domain.GetCategoryUseCase
-import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.sky.SkyLiveWallpaper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_background.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-open class AllInOneFragment : Fragment() {
-
-    @Inject
-    lateinit var getAllWallpapersUseCase: GetAllWallpapersUseCase
-
-    @Inject
-    lateinit var getLiveWallpapersUseCase: GetLiveWallpapersUseCase
-
-    @Inject
-    lateinit var getCategoryUseCase: GetCategoryUseCase
-
-    @Inject
-    lateinit var getCatWallpapersUseCase: GetCatWallpapersUseCase
+class AllInOneFragment : Fragment() {
 
     private var wallpapersListAdapter: WallpapersListAdapter? = null
-
-    private val fileName by lazy {
-        arguments?.getString(Constants.EXTRA_JSON_FILE_NAME).orEmpty()
-    }
-
-    private val screen by lazy {
-        arguments?.getString(Constants.EXTRA_SCREEN_TYPE).orEmpty()
-    }
 
     private val selectedLwpName by lazy {
         arguments?.getString(Constants.KEY_LWP_NAME).orEmpty()
     }
 
-    var mData = ArrayList<BaseWallpaperView>()
+    private val viewModel: HomeViewModel by viewModels()
 
     private fun openByClassName(name: String, url: String) {
         try {
@@ -170,53 +142,9 @@ open class AllInOneFragment : Fragment() {
         }
     }
 
-    private fun getItemType(screenType: ScreenType): Int {
-        return when (screenType) {
-            is ScreenType.Wall -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
-            is ScreenType.CatWallpaper -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
-            is ScreenType.TEXTURE -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
-            is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
-            is ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
-            else -> WallpapersListAdapter.TYPE_LWP
-        }
-    }
-
-    private fun getWallpaperList(
-        mList: List<BaseWallpaperView>,
-        screenType: ScreenType,
-        isMixed: Boolean = false
-    ): List<ItemWrapperList<Any>> {
-        val listItem: MutableList<ItemWrapperList<Any>> = arrayListOf()
-        mList.forEach {
-            listItem.add(
-                ItemWrapperList(
-                    it,
-                    getItemType(screenType)
-                )
-            )
-        }
-        if (isMixed) {
-            val lwpList: List<LwpItem> = arrayListOf()
-            val lwp = CarouselView("Live Wallpaper 4K", lwpList, CarouselTypeEnum.LWP)
-            listItem.add(6, ItemWrapperList(lwp, WallpapersListAdapter.TYPE_CAROUSEL))
-            //todo fix
-            /*
-            val wallpaperObjects =
-                ViewModel.Current.getWallpaperCategoryFromName("ImageCategoryNew")
-                    .getGetWallpapersList()
-
-            val cat = CarouselView("All Category", wallpaperObjects, CarouselTypeEnum.CATEGORY)
-            listItem.add(13, ItemWrapperList(cat, ArticleListAdapter.TYPE_CAROUSEL))
-            */
-        }
-        return listItem
-    }
-
-    private fun showContent(mList: List<BaseWallpaperView>, screenType: ScreenType) {
-        mData.clear()
-        mData = ArrayList(mList)
+    private fun showContent(mList: List<ItemWrapperList<Any>>) {
         wallpapersListAdapter = WallpapersListAdapter(
-            getWallpaperList(mList, screenType)
+            mList
         ) { catItem -> openWallpaper(catItem) }
 
         recycler_view_wallpapers?.apply {
@@ -288,133 +216,6 @@ open class AllInOneFragment : Fragment() {
         }
     }
 
-    private fun getLiveWallpapers(screenType: ScreenType) {
-        GlobalScope.launch {
-            getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(fileName))
-            {
-                when (it) {
-                    is Response.SUCESS -> {
-                        val rep =
-                            (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToLwpMapper().map(wall)
-                        }
-                        showContent(list, screenType)
-                    }
-                    is Response.FAILURE -> {
-
-                    }
-                }
-            }
-        }
-    }
-
-    private fun getWallpapers(screenType: ScreenType) {
-        GlobalScope.launch {
-            getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))
-            {
-                when (it) {
-                    is Response.SUCESS -> {
-                        val rep =
-                            (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(wall)
-                        }
-                        showContent(list, screenType)
-                    }
-                    is Response.FAILURE -> {
-
-                    }
-                }
-            }
-        }
-    }
-
-    private fun getSavedWallpaperList(screenType: ScreenType) {
-        val list = FileUtils.getPermanentDirListFiles(
-            requireContext(),
-            requireContext().getString(R.string.app_namenospace)
-        )?.map {
-            SimpleWallpaperView(it?.path.orEmpty())
-        }.orEmpty()
-        showContent(list, screenType)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        when (val screenType = getType(screen)) {
-            is ScreenType.Lwp -> {
-                getLiveWallpapers(screenType)
-            }
-            is ScreenType.Wall -> {
-                getWallpapers(screenType)
-            }
-            is ScreenType.Cat -> {
-                GlobalScope.launch {
-                    getCategoryUseCase(GetCategoryUseCase.Param(fileName))
-                    {
-                        when (it) {
-                            is Response.SUCESS -> {
-                                val rep =
-                                    (it.response as Response.SUCESS).response as WallpaperResponse
-                                val list = rep.wallpaperList.wallpapers.map { wall ->
-                                    WallpaperToCategoryMapper().map(wall)
-                                }
-                                showContent(list, screenType)
-                            }
-                            is Response.FAILURE -> {
-
-                            }
-                        }
-                    }
-                }
-            }
-            ScreenType.Lab -> {
-            }
-            ScreenType.TEXTURE -> {
-                GlobalScope.launch {
-                    getWallpapers(screenType)
-                }
-            }
-            ScreenType.TIMER -> {
-                getSavedWallpaperList(screenType)
-            }
-            ScreenType.CatWallpaper -> {
-                GlobalScope.launch {
-                    getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName))
-                    {
-                        when (it) {
-                            is Response.SUCESS -> {
-                                val rep =
-                                    (it.response as Response.SUCESS).response as WallpaperResponse
-                                val list = rep.wallpaperList.wallpapers.map { wall ->
-                                    WallpaperToViewMapper().map(wall)
-                                }
-                                showContent(list, screenType)
-                            }
-                            is Response.FAILURE -> {
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
-    private fun getType(type: String): ScreenType {
-        return when (type) {
-            "LWP" -> ScreenType.Lwp
-            "CAT" -> ScreenType.Cat
-            "LAB" -> ScreenType.Lab
-            "TEXTURE" -> ScreenType.TEXTURE
-            "TIMER" -> ScreenType.TIMER
-            "CAT_WALL" -> ScreenType.CatWallpaper
-            else -> ScreenType.Wall
-        }
-    }
-
     sealed class ScreenType {
         object Lwp : ScreenType()
         object Wall : ScreenType()
@@ -431,6 +232,14 @@ open class AllInOneFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_all_background, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.wallpaperListLiveData.observe(viewLifecycleOwner) { list ->
+            showContent(list)
+        }
     }
 
     companion object {

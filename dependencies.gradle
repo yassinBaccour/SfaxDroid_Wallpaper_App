@@ -53,6 +53,6 @@ ext {
             ads                  : "com.google.android.gms:play-services-ads:19.6.0",
             rajawali             : "org.rajawali3d:rajawali:1.1.970@aar",
             hildLib              : "com.google.dagger:hilt-android:2.30.1-alpha",
-            hildComplier         : "com.google.dagger:hilt-android-compiler:2.29.1-alpha"
+            hildComplier         : "com.google.dagger:hilt-android-compiler:2.30.1-alpha"
     ]
 }
