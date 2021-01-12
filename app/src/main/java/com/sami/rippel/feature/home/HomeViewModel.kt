@@ -5,6 +5,7 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.sami.rippel.allah.R
+import com.sami.rippel.feature.ScreenType
 import com.sami.rippel.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.FileUtils
@@ -37,45 +38,45 @@ class HomeViewModel @ViewModelInject constructor(
         loadWallpaperByScreenType()
     }
 
-    private fun getType(type: String): AllInOneFragment.ScreenType {
+    private fun getType(type: String): ScreenType {
         return when (type) {
-            "LWP" -> AllInOneFragment.ScreenType.Lwp
-            "CAT" -> AllInOneFragment.ScreenType.Cat
-            "LAB" -> AllInOneFragment.ScreenType.Lab
-            "TEXTURE" -> AllInOneFragment.ScreenType.TEXTURE
-            "TIMER" -> AllInOneFragment.ScreenType.TIMER
-            "CAT_WALL" -> AllInOneFragment.ScreenType.CatWallpaper
-            else -> AllInOneFragment.ScreenType.Wall
+            "LWP" -> ScreenType.Lwp
+            "CAT" -> ScreenType.Cat
+            "LAB" -> ScreenType.Lab
+            "TEXTURE" -> ScreenType.TEXTURE
+            "TIMER" -> ScreenType.TIMER
+            "CAT_WALL" -> ScreenType.CatWallpaper
+            else -> ScreenType.Wall
         }
     }
 
     private fun loadWallpaperByScreenType() {
         when (val screenType = getType(screen)) {
-            is AllInOneFragment.ScreenType.Lwp -> {
+            is ScreenType.Lwp -> {
                 getLiveWallpapers(screenType)
             }
-            is AllInOneFragment.ScreenType.Wall -> {
+            is ScreenType.Wall -> {
                 getWallpapers(screenType)
             }
-            is AllInOneFragment.ScreenType.Cat -> {
+            is ScreenType.Cat -> {
                 getCategory(screenType)
             }
-            AllInOneFragment.ScreenType.TEXTURE -> {
+            ScreenType.TEXTURE -> {
                 GlobalScope.launch {
                     getWallpapers(screenType)
                 }
             }
-            AllInOneFragment.ScreenType.TIMER -> {
+            ScreenType.TIMER -> {
                 getSavedWallpaperList(screenType, null!!)
             }
-            AllInOneFragment.ScreenType.CatWallpaper -> {
+            ScreenType.CatWallpaper -> {
                 getCatWallpapers(screenType)
             }
         }
     }
 
 
-    private fun getLiveWallpapers(screenType: AllInOneFragment.ScreenType) {
+    private fun getLiveWallpapers(screenType: ScreenType) {
         GlobalScope.launch {
             getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(fileName))
             {
@@ -96,7 +97,7 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun getCategory(screenType: AllInOneFragment.ScreenType) {
+    private fun getCategory(screenType: ScreenType) {
         GlobalScope.launch {
             getCategoryUseCase(GetCategoryUseCase.Param(fileName))
             {
@@ -117,7 +118,7 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun getCatWallpapers(screenType: AllInOneFragment.ScreenType) {
+    private fun getCatWallpapers(screenType: ScreenType) {
         GlobalScope.launch {
             getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName))
             {
@@ -139,7 +140,7 @@ class HomeViewModel @ViewModelInject constructor(
     }
 
 
-    private fun getWallpapers(screenType: AllInOneFragment.ScreenType) {
+    private fun getWallpapers(screenType: ScreenType) {
         GlobalScope.launch {
             getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))
             {
@@ -160,7 +161,7 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun getSavedWallpaperList(screenType: AllInOneFragment.ScreenType, context: Context) {
+    private fun getSavedWallpaperList(screenType: ScreenType, context: Context) {
         val list = FileUtils.getPermanentDirListFiles(
             context,
             context.getString(R.string.app_namenospace)
@@ -170,20 +171,20 @@ class HomeViewModel @ViewModelInject constructor(
         wrapWallpapers(list, screenType)
     }
 
-    private fun getItemType(screenType: AllInOneFragment.ScreenType): Int {
+    private fun getItemType(screenType: ScreenType): Int {
         return when (screenType) {
-            is AllInOneFragment.ScreenType.Wall -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
-            is AllInOneFragment.ScreenType.CatWallpaper -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
-            is AllInOneFragment.ScreenType.TEXTURE -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
-            is AllInOneFragment.ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
-            is AllInOneFragment.ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
+            is ScreenType.Wall -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
+            is ScreenType.CatWallpaper -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
+            is ScreenType.TEXTURE -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
+            is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
+            is ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
             else -> WallpapersListAdapter.TYPE_LWP
         }
     }
 
     private fun wrapWallpapers(
         mList: List<BaseWallpaperView>,
-        screenType: AllInOneFragment.ScreenType
+        screenType: ScreenType
     ) {
         val listItem: MutableList<ItemWrapperList<Any>> = arrayListOf()
         mList.forEach {

@@ -8,12 +8,13 @@ import mehdi.sakout.aboutpage.AboutPage
 import mehdi.sakout.aboutpage.Element
 
 class AboutActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(
             AboutPage(this)
                 .isRTL(false)
-                .setDescription("Islamic Live Wallpaper")
+                .setDescription("Arabic Live Wallpaper")
                 .addItem(
                     Element().setTitle(
                         "Version " + packageManager.getPackageInfo(

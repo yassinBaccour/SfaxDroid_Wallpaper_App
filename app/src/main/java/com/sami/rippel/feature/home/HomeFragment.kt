@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sami.rippel.allah.R
-import com.sami.rippel.core.viewModelProviderFactoryOf
 import com.sami.rippel.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.Utils
@@ -22,10 +21,9 @@ import com.sfaxdroid.data.mappers.*
 import com.sfaxdroid.sky.SkyLiveWallpaper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_background.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class AllInOneFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private var wallpapersListAdapter: WallpapersListAdapter? = null
 
@@ -93,11 +91,10 @@ class AllInOneFragment : Fragment() {
                 openLwp(wallpaperObject)
             }
             is CategoryItem -> {
-                val cat = wallpaperObject as CategoryItem
                 HomeActivityNavBar.nbOpenAds++
                 findNavController().navigate(R.id.category_show_navigation_fg,
                     Bundle().apply {
-                        putString(Constants.EXTRA_JSON_FILE_NAME, cat.file)
+                        putString(Constants.EXTRA_JSON_FILE_NAME, wallpaperObject.file)
                         putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
                     })
             }
@@ -105,11 +102,12 @@ class AllInOneFragment : Fragment() {
     }
 
     private fun navToTimer() {
-        val intent = Intent(
-            activity,
-            Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")
+        startActivity(
+            Intent(
+                activity,
+                Class.forName("com.sfaxdroid.timer.WallpaperSchedulerActivity")
+            )
         )
-        startActivity(intent)
     }
 
     private fun navToTexture(lwpName: String) {
@@ -216,15 +214,6 @@ class AllInOneFragment : Fragment() {
         }
     }
 
-    sealed class ScreenType {
-        object Lwp : ScreenType()
-        object Wall : ScreenType()
-        object Cat : ScreenType()
-        object Lab : ScreenType()
-        object TEXTURE : ScreenType()
-        object CatWallpaper : ScreenType()
-        object TIMER : ScreenType()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -247,8 +236,8 @@ class AllInOneFragment : Fragment() {
             fileName: String,
             screenType: String,
             lwpName: String? = null
-        ): AllInOneFragment {
-            return AllInOneFragment().apply {
+        ): HomeFragment {
+            return HomeFragment().apply {
                 arguments = Bundle().apply {
                     putString(Constants.EXTRA_JSON_FILE_NAME, fileName)
                     putString(Constants.EXTRA_SCREEN_TYPE, screenType)

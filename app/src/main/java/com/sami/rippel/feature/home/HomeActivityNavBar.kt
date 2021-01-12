@@ -16,7 +16,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus
 import com.kobakei.ratethisapp.RateThisApp
 import com.sami.rippel.allah.R
 import com.sami.rippel.feature.other.PrivacyActivity
-import com.sami.rippel.feature.home.AllInOneFragment.Companion.newInstance
+import com.sami.rippel.feature.home.HomeFragment.Companion.newInstance
 import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
