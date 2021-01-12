@@ -13,27 +13,24 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.initialization.InitializationStatus
-import com.kobakei.ratethisapp.RateThisApp
 import com.sami.rippel.allah.R
 import com.sami.rippel.feature.other.PrivacyActivity
 import com.sami.rippel.feature.home.HomeFragment.Companion.newInstance
 import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
-import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tbruyelle.rxpermissions3.RxPermissions
 
 class HomeActivityNavBar : SimpleActivity() {
 
     private var mToolbar: Toolbar? = null
     private var mPrivacy: ImageView? = null
-    private var rxPermissions: RxPermissions? = null
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var preferencesManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preferencesManager = PreferencesManager(this, "ccc")
-        rxPermissions = RxPermissions(this)
         setupAds()
         initView()
         setupToolBar()
@@ -85,27 +82,7 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     fun initRatingApp() {
-        val config = RateThisApp.Config(3, 5)
-        config.setTitle(R.string.rating_app_title)
-        config.setMessage(R.string.rating_app_description)
-        config.setYesButtonText(R.string.rating_app_yes_btn)
-        config.setNoButtonText(R.string.rating_app_never)
-        config.setCancelButtonText(R.string.rating_app_later)
-        RateThisApp.setCallback(object : RateThisApp.Callback {
-            override fun onYesClicked() {
-                RateThisApp.stopRateDialog(this@HomeActivityNavBar)
-                preferencesManager[Constants.RATING_MESSAGE] =
-                    Constants.RATING_NON
-            }
 
-            override fun onNoClicked() {
-                preferencesManager[Constants.RATING_MESSAGE] =
-                    Constants.RATING_NON
-            }
-
-            override fun onCancelClicked() {}
-        })
-        RateThisApp.init(config)
     }
 
     private fun manageNbRunApp() {
@@ -129,7 +106,7 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun checkPermission() {
-        rxPermissions?.request(
+        RxPermissions(this).request(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_SETTINGS
@@ -145,11 +122,10 @@ class HomeActivityNavBar : SimpleActivity() {
                     Constants.RATING_YES]
             == Constants.RATING_YES
         ) {
-            RateThisApp.showRateDialog(this)
         }
     }
 
-    fun showFirstTimeAndOneTimeAds() {
+    private fun showFirstTimeAndOneTimeAds() {
         if (isAdsShow) {
             isAdsShow = false
             showInterstitial()
@@ -175,7 +151,6 @@ class HomeActivityNavBar : SimpleActivity() {
     fun checkUpdateNewWallpapers() {}
     override fun onStart() {
         super.onStart()
-        RateThisApp.onStart(this)
     }
 
     override fun onBackPressed() {
@@ -201,7 +176,6 @@ class HomeActivityNavBar : SimpleActivity() {
     override fun initEventAndData() {}
 
     companion object {
-        private const val REQUEST_CODE_ASK_PERMISSIONS = 123
         var isAdsShow = false
         var nbOpenAds = 0
         private var back_pressed: Long = 0

@@ -12,12 +12,10 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.kobakei.ratethisapp.RateThisApp
 import com.sami.rippel.allah.R
 import com.sami.rippel.core.setupWithNavController
-import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
-import com.tbruyelle.rxpermissions2.RxPermissions
+import com.tbruyelle.rxpermissions3.RxPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
@@ -25,7 +23,6 @@ import java.util.*
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    private var rxPermissions: RxPermissions? = null
     private var mInterstitialAd: InterstitialAd? = null
     private var currentNavController: LiveData<NavController>? = null
 
@@ -39,7 +36,6 @@ class HomeActivity : AppCompatActivity() {
             initView()
         }
         preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCES_NAME)
-        rxPermissions = RxPermissions(this)
         setupAds()
 
         initRatingApp()
@@ -93,27 +89,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initRatingApp() {
-        RateThisApp.setCallback(object : RateThisApp.Callback {
-            override fun onYesClicked() {
-                RateThisApp.stopRateDialog(this@HomeActivity)
-                preferencesManager[Constants.RATING_MESSAGE] =
-                    Constants.RATING_NON
-            }
-
-            override fun onNoClicked() {
-                preferencesManager[Constants.RATING_MESSAGE] =
-                    Constants.RATING_NON
-            }
-
-            override fun onCancelClicked() {}
-        })
-        RateThisApp.init(RateThisApp.Config(3, 5).apply {
-            setTitle(R.string.rating_app_title)
-            setMessage(R.string.rating_app_description)
-            setYesButtonText(R.string.rating_app_yes_btn)
-            setNoButtonText(R.string.rating_app_never)
-            setCancelButtonText(R.string.rating_app_later)
-        })
     }
 
     private fun manageNbRunApp() {
@@ -138,7 +113,7 @@ class HomeActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     fun checkPermission() {
-        rxPermissions?.request(
+        RxPermissions(this).request(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_SETTINGS
@@ -148,14 +123,6 @@ class HomeActivity : AppCompatActivity() {
     private fun setupToolBar() {
     }
 
-    private fun rateApplication() {
-        if (preferencesManager[Constants.RATING_MESSAGE,
-                    Constants.RATING_YES]
-            == Constants.RATING_YES
-        ) {
-            RateThisApp.showRateDialog(this)
-        }
-    }
 
     private fun showFirstTimeAndOneTimeAds() {
         if (isAdsShow) {
@@ -175,14 +142,6 @@ class HomeActivity : AppCompatActivity() {
             nbOpenAds = 0
             showInterstitial()
         }
-        if (nbOpenAds == 7) {
-            rateApplication()
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        RateThisApp.onStart(this)
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
