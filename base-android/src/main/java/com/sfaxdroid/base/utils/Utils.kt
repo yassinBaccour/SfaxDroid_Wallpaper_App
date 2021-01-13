@@ -88,16 +88,13 @@ class Utils {
             }
         }
 
-        fun getUrlByScreenSize(urlToChange: String, context: Context): String {
-            var url: String? = ""
-            url = if (getScreenHeightPixels(context) < Constants.MIN_HEIGHT && getScreenWidthPixels(
-                    context
-                ) < Constants.MIN_WIDHT
-            ) urlToChange.replace(
-                Constants.URL_BIG_WALLPAPER_FOLDER,
-                Constants.URL_SMALL_WALLPAPER_FOLDER
-            ) else urlToChange
-            return url
+        fun getUrlByScreenSize(urlToChange: String, isSmallScreen: Boolean): String {
+            return if (isSmallScreen)
+                urlToChange.replace(
+                    Constants.URL_BIG_WALLPAPER_FOLDER,
+                    Constants.URL_SMALL_WALLPAPER_FOLDER
+                )
+            else urlToChange
         }
 
         fun checkPermission(

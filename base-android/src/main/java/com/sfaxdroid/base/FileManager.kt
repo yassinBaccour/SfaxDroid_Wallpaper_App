@@ -6,4 +6,6 @@ interface FileManager {
     fun getTemporaryDirWithFolder(
         folder: String
     ): File
+
+    fun getExternalFilesDir()
 }

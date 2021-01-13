@@ -1,6 +1,5 @@
 package com.sfaxdoird.anim.img
 
-import android.content.Context
 import android.net.Uri
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
@@ -10,11 +9,15 @@ import androidx.lifecycle.ViewModel
 import com.sfaxdroid.app.ZipUtils
 import com.sfaxdroid.app.downloadsystem.*
 import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.DeviceManager
+import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.utils.Utils
 import java.io.File
 
 class WordImgViewModel @ViewModelInject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle
+    @Assisted private val savedStateHandle: SavedStateHandle,
+    fileManager: FileManager,
+    deviceManager: DeviceManager
 ) :
     ViewModel(), DownloadStatusListenerV1 {
 
@@ -31,17 +34,14 @@ class WordImgViewModel @ViewModelInject constructor(
     private var mDownloadId1 = 0
     private var mDownloadId2 = 0
 
-    fun downloadResource(context: Context) {
-        val lwpFolder = com.sfaxdoird.anim.img.Utils.getTemporaryDirWithFolder(
-            context,
-            folder = com.sfaxdoird.anim.img.Constants.KEY_LWP_FOLDER_CONTAINER,
-            context.getString(R.string.app_namenospace)
-        )
+    init {
+        val lwpFolder =
+            fileManager.getTemporaryDirWithFolder(com.sfaxdoird.anim.img.Constants.KEY_LWP_FOLDER_CONTAINER)
 
         zipDestination = File(lwpFolder, Constants.ZIP_FOLDER_NAME)
 
         val requestZipFile =
-            DownloadRequest(Uri.parse(if (Utils.isSmallScreen(context)) com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_MINI_PNG else com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_PNG))
+            DownloadRequest(Uri.parse(if (deviceManager.isSmallScreen()) com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_MINI_PNG else com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_PNG))
                 .setDestinationURI(Uri.parse(lwpFolder.toString() + "/" + com.sfaxdoird.anim.img.Constants.PNG_ZIP_FILE_NAME))
                 .setPriority(DownloadRequest.Priority.LOW)
                 .setRetryPolicy(DefaultRetryPolicy())
@@ -52,7 +52,7 @@ class WordImgViewModel @ViewModelInject constructor(
             Uri.parse(
                 Utils.getUrlByScreenSize(
                     savedStateHandle.get<String>(Constants.EXTRA_URL_TO_DOWNLOAD)
-                        .orEmpty(), context
+                        .orEmpty(), deviceManager.isSmallScreen()
                 )
             )
         )

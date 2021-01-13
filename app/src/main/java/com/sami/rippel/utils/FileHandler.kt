@@ -20,6 +20,10 @@ class FileHandler @Inject constructor(@ApplicationContext private val context: C
         )
     }
 
+    override fun getExternalFilesDir() {
+        context.getExternalFilesDir("")
+    }
+
     private fun provideTemporaryDirWithFolder(
         context: Context,
         folder: String,

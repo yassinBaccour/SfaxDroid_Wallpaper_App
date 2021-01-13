@@ -44,7 +44,6 @@ class WordImgFragment : Fragment() {
         button_choose_color?.setOnClickListener { chooseColor() }
         initToolbar()
 
-        viewModel.downloadResource(requireContext())
         viewModel.progressInfo.observe(viewLifecycleOwner, {
             setProgressInformation(it)
         })
@@ -63,10 +62,10 @@ class WordImgFragment : Fragment() {
     }
 
     private fun initToolbar() {
-        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = getString(R.string.title_word_anim_lwp)
-            setHomeButtonEnabled(true)
+            setHomeButtonEnabled(false)
             setDisplayHomeAsUpEnabled(true)
         }
     }
@@ -90,7 +89,6 @@ class WordImgFragment : Fragment() {
                     requireContext(),
                     selectedColor
                 )
-
             }
             .setNegativeButton(
                 getString(R.string.btn_cancel)
@@ -101,7 +99,7 @@ class WordImgFragment : Fragment() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
-            //finish()
+            activity?.onBackPressed()
         }
         return super.onOptionsItemSelected(menuItem)
     }

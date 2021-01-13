@@ -71,7 +71,7 @@ class DetailsActivity : SimpleActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         currentUrl = Utils.getUrlByScreenSize(
-            intent.getStringExtra(Constants.EXTRA_IMG_URL).orEmpty(), this
+            intent.getStringExtra(Constants.EXTRA_IMG_URL).orEmpty(), Utils.isSmallScreen(this)
         )
         from = intent.getStringExtra(Constants.KEY_LWP_NAME).orEmpty()
         initToolbar()

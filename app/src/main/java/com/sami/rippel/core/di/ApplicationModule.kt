@@ -3,9 +3,11 @@ package com.sami.rippel.core.di
 import android.content.Context
 import com.sami.rippel.WallpaperApplication
 import com.sami.rippel.utils.AppName
+import com.sami.rippel.utils.DeviceHandler
 import com.sami.rippel.utils.FileHandler
 import com.sami.rippel.utils.NetworkHandler
 import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.data.DeviceNetworkHandler
@@ -60,6 +62,12 @@ class ApplicationModule {
     @Singleton
     fun provideFileManager(fileHandler: FileHandler): FileManager {
         return fileHandler
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeviceManager(deviceHandler: DeviceHandler): DeviceManager {
+        return deviceHandler
     }
 
 }

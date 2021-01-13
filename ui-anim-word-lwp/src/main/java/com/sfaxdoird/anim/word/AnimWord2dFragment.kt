@@ -3,7 +3,6 @@ package com.sfaxdoird.anim.word
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Typeface
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -14,32 +13,27 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import com.sfaxdroid.app.downloadsystem.*
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.utils.BitmapUtils
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_anim_word.*
-import java.io.File
 
-
-class AnimWord2dFragment : Fragment(), DownloadStatusListenerV1 {
+@AndroidEntryPoint
+class AnimWord2dFragment : Fragment() {
 
     private var toolbar: Toolbar? = null
     private var clickable = false
-    private var downloadId2 = 0
-    private var backgroundFile: File? = null
-    private val downloadManager =
-        ThinDownloadManager(Constants.DOWNLOAD_THREAD_POOL_SIZE)
-
     private var fontButtonList = arrayListOf<TextView>()
-
     private var buttonSizeList = arrayListOf<Button>()
-
     var pref: SharedPrefsUtils? = null
+
+    private val viewModel: AnimWord2dViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,40 +80,19 @@ class AnimWord2dFragment : Fragment(), DownloadStatusListenerV1 {
         buttonColor?.setOnClickListener { chooseColor() }
         fab.setOnClickListener { openLiveWallpapers() }
 
-        val filesDir = requireContext().getExternalFilesDir("")
-        startDownload(filesDir!!)
-        backgroundFile =
-            File(filesDir, Constants.PNG_BACKFROUND_FILE_NAME)
-        backgroundFile?.delete()?.takeIf { !it }.also {
-            Utils.showSnackMessage(rootLayout, "Error deleteing temps file")
-        }
-    }
+        viewModel.progressValue.observe(viewLifecycleOwner, {
+            setProgressView(it.first, it.second)
+        })
 
-    private fun startDownload(file: File) {
-        val requestWallpaper =
-            DownloadRequest(
-                Uri.parse(arguments?.getString(Constants.EXTRA_URL_TO_DOWNLOAD, "") ?: ""
-                    .apply {
-                        if (Utils.isSmallScreen(requireContext())
-                        ) {
-                            replace("islamicimages", "islamicimagesmini")
-                        }
-                    })
-            )
-                .setDestinationURI(
-                    Uri.parse(
-                        file
-                            .toString() + "/" + Constants.PNG_BACKFROUND_FILE_NAME
-                    )
-                ).setPriority(DownloadRequest.Priority.LOW)
-                .setRetryPolicy(DefaultRetryPolicy())
-                .setDownloadContext("LWP Background")
-                .setStatusListener(this)
+        viewModel.isCompleted.observe(viewLifecycleOwner, {
+            if (it) {
+                fab?.isEnabled = true
+                progressTxt?.text = getString(R.string.download_terminated_sucessful)
+                txtstatusDownload?.text = getString(R.string.download_completed)
+                clickable = true
+            }
+        })
 
-        if (downloadManager.query(downloadId2) == DownloadManager.STATUS_NOT_FOUND) {
-            downloadId2 =
-                downloadManager.add(requestWallpaper)
-        }
     }
 
     private fun getDrawableBySize(): Int {
@@ -219,7 +192,7 @@ class AnimWord2dFragment : Fragment(), DownloadStatusListenerV1 {
                 BitmapUtils.changeDrawableButtonColor(
                     buttonColor,
                     requireContext(),
-                    R.mipmap.ic_palette
+                    selectedColor
                 )
             }
             .setNegativeButton(
@@ -238,7 +211,6 @@ class AnimWord2dFragment : Fragment(), DownloadStatusListenerV1 {
 
     private fun openLiveWallpapers() {
         if (clickable) {
-            backgroundFile = null
             Constants.ifBackgroundChanged = true
             Constants.nbIncrementationAfterChange = 0
             Utils.openLiveWallpaper<AnimWord2dWallpaper>(requireContext())
@@ -259,31 +231,7 @@ class AnimWord2dFragment : Fragment(), DownloadStatusListenerV1 {
             progress1?.progress = 0
             progressTxt?.text = getString(R.string.failed_dwn)
         }
-
     }
 
-    override fun onDownloadComplete(request: DownloadRequest) {
-        fab?.isEnabled = true
-        progressTxt?.text = getString(R.string.download_terminated_sucessful)
-        txtstatusDownload?.text = getString(R.string.download_completed)
-        clickable = true
-    }
-
-    override fun onDownloadFailed(
-        request: DownloadRequest,
-        errorCode: Int,
-        errorMessage: String
-    ) {
-        setProgressView(0, 0)
-    }
-
-    override fun onProgress(
-        request: DownloadRequest,
-        totalBytes: Long,
-        downloadedBytes: Long,
-        progress: Int
-    ) {
-        setProgressView(progress, totalBytes)
-    }
 
 }
