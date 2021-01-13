@@ -6,10 +6,9 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
-import android.view.Display
 import android.view.MotionEvent
 import android.view.SurfaceHolder
-import com.sfaxdoird.anim.img.Utils.getTemporaryDir
+import com.sfaxdoird.anim.img.Utils.getTemporaryDirWithFolder
 import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.utils.BitmapUtils
 import java.io.File
@@ -22,10 +21,10 @@ class WordImgLiveWallpaper : WallpaperService() {
         val color = pref.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
         val zipFolder = com.sfaxdroid.base.Constants.ZIP_FOLDER_NAME
         return ImgWordEngine(
-            color, getTemporaryDir(
+            color, getTemporaryDirWithFolder(
                 this,
-                Constants.KEY_LWP_FOLDER_CONTAINER,
-                getString(R.string.app_namenospace)
+                folder = Constants.KEY_LWP_FOLDER_CONTAINER,
+                appName = getString(R.string.app_namenospace)
             ), com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME, zipFolder
         )
     }

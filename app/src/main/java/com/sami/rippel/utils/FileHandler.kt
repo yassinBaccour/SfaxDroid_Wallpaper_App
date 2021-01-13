@@ -1,11 +1,26 @@
-package com.sfaxdoird.anim.img
+package com.sami.rippel.utils
 
 import android.content.Context
+import com.sfaxdoird.anim.img.R
+import com.sfaxdroid.base.FileManager
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object Utils {
-    @JvmStatic
-    fun getTemporaryDirWithFolder(
+@Singleton
+class FileHandler @Inject constructor(@ApplicationContext private val context: Context) :
+    FileManager {
+
+    override fun getTemporaryDirWithFolder(folder: String): File {
+        return provideTemporaryDirWithFolder(
+            context,
+            folder,
+            context.getString(R.string.app_namenospace)
+        )
+    }
+
+    private fun provideTemporaryDirWithFolder(
         context: Context,
         folder: String,
         appName: String
