@@ -17,6 +17,14 @@ class DeviceHandler @Inject constructor(@ApplicationContext private val context:
                 && getScreenWidthPixels(context) < 500
     }
 
+    override fun getScreenHeightPixels(): Int {
+        return getScreenHeightPixels(context)
+    }
+
+    override fun getScreenWidthPixels(): Int {
+        return getScreenWidthPixels(context)
+    }
+
     private fun getScreenHeightPixels(context: Context): Int {
         return getDisplayMetrics(context).heightPixels
     }

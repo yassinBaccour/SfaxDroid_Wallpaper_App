@@ -49,12 +49,7 @@ class WordImgViewModel @ViewModelInject constructor(
                 .setStatusListener(this)
 
         requestWallpaper = DownloadRequest(
-            Uri.parse(
-                Utils.getUrlByScreenSize(
-                    savedStateHandle.get<String>(Constants.EXTRA_URL_TO_DOWNLOAD)
-                        .orEmpty(), deviceManager.isSmallScreen()
-                )
-            )
+            Uri.parse(savedStateHandle.get<String>(Constants.EXTRA_URL_TO_DOWNLOAD).orEmpty())
         )
             .setDestinationURI(Uri.parse(lwpFolder.toString() + "/" + Constants.PNG_BACKFROUND_FILE_NAME))
             .setPriority(DownloadRequest.Priority.LOW)

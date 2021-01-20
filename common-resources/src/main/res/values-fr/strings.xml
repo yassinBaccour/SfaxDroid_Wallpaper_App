@@ -18,7 +18,7 @@
     <string name="size_texte">Taille du text</string>
     <string name="permission_storage_message">Vous devez permettre à l\'application de sauvegarder les photos</string>
     <string name="app_not_installer_message">Cette application n\'est pas installer</string>
-    <string name="set_wallpaper_sucess_message">Fond d\'ecran appliqué avec succès</string>
-    <string name="set_wallpaper_not_sucess_message">Refaire</string>
+    <string name="set_wallpaper_success_message">Fond d\'ecran appliqué avec succès</string>
+    <string name="set_wallpaper_not_success_message">Refaire</string>
     <string name="set_as_dialog_message">Définir comme</string>
 </resources>

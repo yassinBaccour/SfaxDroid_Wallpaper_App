@@ -18,7 +18,7 @@ import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.SharedPrefsUtils
-import com.sfaxdroid.base.utils.BitmapUtils
+import com.sfaxdroid.base.extension.changeDrawableButtonColor
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
 import dagger.hilt.android.AndroidEntryPoint
@@ -189,10 +189,8 @@ class AnimWord2dFragment : Fragment() {
                 getString(R.string.btn_ok)
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
                 pref!!.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
-                BitmapUtils.changeDrawableButtonColor(
-                    buttonColor,
-                    requireContext(),
-                    selectedColor
+                buttonColor.changeDrawableButtonColor(
+                    selectedColor, resources.getDrawable(com.sfaxdroid.base.R.mipmap.ic_palette)
                 )
             }
             .setNegativeButton(

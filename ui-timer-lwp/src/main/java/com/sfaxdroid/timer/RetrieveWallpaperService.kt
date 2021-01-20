@@ -6,14 +6,24 @@ import android.app.job.JobService
 import android.content.SharedPreferences
 import android.os.Build
 import android.preference.PreferenceManager
-import com.sfaxdroid.base.utils.FileUtils.Companion.getPermanentDirListFiles
+import com.sfaxdroid.base.DeviceManager
+import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.bases.Constants
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+@AndroidEntryPoint
 class RetrieveWallpaperService : JobService() {
+
+    @Inject
+    lateinit var fileManager: FileManager
+
+    @Inject
+    lateinit var deviceManager: DeviceManager
 
     private val sharedPref: SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(
@@ -22,10 +32,7 @@ class RetrieveWallpaperService : JobService() {
 
     override fun onStartJob(params: JobParameters): Boolean {
         GlobalScope.launch(Dispatchers.Default) {
-            val nbFile = getPermanentDirListFiles(
-                baseContext,
-                baseContext.getString(R.string.app_namenospace)
-            )?.size ?: 0
+            val nbFile = fileManager.getPermanentDirListFiles().size
             var currentWallpaper = sharedPref.getInt(Constants.CURRENT_WALLPAPER_KEY, 0)
             if (nbFile > 0) {
                 if (currentWallpaper >= nbFile) {
@@ -34,7 +41,9 @@ class RetrieveWallpaperService : JobService() {
                 }
                 Utils.setWallpaperFromFile(
                     baseContext,
-                    getString(R.string.app_namenospace),
+                    fileManager.getPermanentDirListFiles(),
+                    deviceManager.getScreenWidthPixels(),
+                    deviceManager.getScreenHeightPixels(),
                     currentWallpaper
                 )
                 currentWallpaper += 1

@@ -16,17 +16,29 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.DeviceManager
+import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.timer.Utils.Companion.openAddWallpaperWithKeyActivity
 import com.sfaxdroid.timer.Utils.Companion.setWallpaperFromFile
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallpaper_scheduler.*
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+@AndroidEntryPoint
 class WallpaperSchedulerFragment : Fragment() {
 
     private var scheduler: JobScheduler? = null
+
+    @Inject
+    lateinit var fileManager: FileManager
+
+    @Inject
+    lateinit var deviceManager: DeviceManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,7 +100,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun activeService() {
-        if (Utils.haveMinWallpaperInDir(requireContext(), getString(R.string.app_namenospace))) {
+        if (fileManager.getPermanentDirListFiles().size > 3) {
             activeJob()
             initBtnActive(true)
             initBtnClose(true)
@@ -104,11 +116,17 @@ class WallpaperSchedulerFragment : Fragment() {
         buttonClose?.apply {
             setCompoundDrawablesWithIntrinsicBounds(
                 null,
-                resources.getDrawable(if (isJobActive) R.mipmap.ic_close_img else R.mipmap.ic_close_img_on),
+                ResourcesCompat.getDrawable(
+                    resources,
+                    if (isJobActive) R.mipmap.ic_close_img else R.mipmap.ic_close_img_on,
+                    context.theme
+                ),
                 null,
                 null
             )
-            setTextColor(resources.getColor(if (isJobActive) Color.WHITE else R.color.timer_flu_green))
+            setTextColor(
+                resources.getColor(if (isJobActive) Color.WHITE else R.color.timer_flu_green),
+            )
         }
     }
 
@@ -116,7 +134,11 @@ class WallpaperSchedulerFragment : Fragment() {
         buttonActive?.apply {
             setCompoundDrawablesWithIntrinsicBounds(
                 null,
-                resources.getDrawable(if (isJobActive) R.mipmap.ic_active_img_on else R.mipmap.ic_active_img),
+                ResourcesCompat.getDrawable(
+                    resources,
+                    if (isJobActive) R.mipmap.ic_active_img_on else R.mipmap.ic_active_img,
+                    context.theme
+                ),
                 null,
                 null
             )
@@ -177,7 +199,6 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initToolbar() {
-
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
@@ -212,17 +233,17 @@ class WallpaperSchedulerFragment : Fragment() {
                 .build()
         ) ?: JobScheduler.RESULT_FAILURE
 
-
     private fun activeJob() {
         progressBar?.visibility = View.VISIBLE
-        if (Utils.haveMinWallpaperInDir(requireContext(), getString(R.string.app_namenospace))
-        ) {
+        if (fileManager.getPermanentDirListFiles().size > 3) {
             GlobalScope.launch(Dispatchers.Default) {
                 val status = scheduleJob()
                 if (status == JobScheduler.RESULT_SUCCESS) {
                     setWallpaperFromFile(
                         requireContext(),
-                        getString(R.string.app_namenospace)
+                        fileManager.getPermanentDirListFiles(),
+                        deviceManager.getScreenWidthPixels(),
+                        deviceManager.getScreenHeightPixels()
                     )
                     GlobalScope.launch(Dispatchers.Main) {
                         initTxtStatus(true)

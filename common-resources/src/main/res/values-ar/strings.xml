@@ -17,7 +17,7 @@
     <string name="size_texte">كبر الخط</string>
     <string name="permission_storage_message">يجب تفعيل خاصية تسجيل الصور ليعمل البرنامج</string>
     <string name="app_not_installer_message">التطبيق ليس موجود</string>
-    <string name="set_wallpaper_sucess_message">تم تطبيق الخلفية بنجاح</string>
-    <string name="set_wallpaper_not_sucess_message">خلل في تطبيق الخلفية </string>
+    <string name="set_wallpaper_success_message">تم تطبيق الخلفية بنجاح</string>
+    <string name="set_wallpaper_not_success_message">خلل في تطبيق الخلفية </string>
     <string name="set_as_dialog_message">إستعمال</string>
 </resources>

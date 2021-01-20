@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Arabic Wallpaper HD</string>
-
     <string name="screen_lwp">Live Wallpaper</string>
     <string name="screen_wallpaper">Wallpaper</string>
     <string name="screen_category">Category</string>

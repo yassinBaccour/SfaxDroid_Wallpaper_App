@@ -5,12 +5,12 @@ import com.sfaxdroid.data.entity.Wallpaper
 
 class WallpaperToLwpMapper : SfaxDroidMapper<Wallpaper, LwpItem> {
 
-    override fun map(from: Wallpaper?): LwpItem {
+    override fun map(from: Wallpaper?, isSmallScreen: Boolean): LwpItem {
         return LwpItem(
             from?.name ?: "",
             from?.desc ?: "",
             getType(from?.type ?: ""),
-            from?.url ?: ""
+            getUrlByScreenSize(from?.url ?: "", isSmallScreen)
         )
     }
 

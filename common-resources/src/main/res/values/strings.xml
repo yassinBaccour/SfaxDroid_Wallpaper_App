@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_namenospace" translatable="false">allahwallpapers</string>
+    <string name="app_namenospace" translatable="false">SfaxDroidApp</string>
     <string name="download_terminated_sucessful">Download Completed successful</string>
     <string name="download_completed">Completed</string>
     <string name="btn_ok">OK</string>
@@ -18,7 +18,7 @@
     <string name="permission_accept_click_button">Yes</string>
     <string name="permission_deny_click_button">No</string>
     <string name="app_not_installer_message">Application Not installed</string>
-    <string name="set_wallpaper_sucess_message">Successfully set as wallpaper</string>
-    <string name="set_wallpaper_not_sucess_message">Try again, Failed to set as wallpaper</string>
+    <string name="set_wallpaper_success_message">Successfully set as wallpaper</string>
+    <string name="set_wallpaper_not_success_message">Try again, Failed to set as wallpaper</string>
     <string name="set_as_dialog_message">Set As</string>
 </resources>

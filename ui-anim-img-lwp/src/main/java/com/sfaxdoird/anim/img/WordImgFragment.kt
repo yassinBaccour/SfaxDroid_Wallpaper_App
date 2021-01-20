@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
-import com.sfaxdroid.base.utils.BitmapUtils
 import com.sfaxdroid.base.SharedPrefsUtils
+import com.sfaxdroid.base.extension.changeDrawableButtonColor
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
 import dagger.hilt.android.AndroidEntryPoint
@@ -84,10 +84,8 @@ class WordImgFragment : Fragment() {
                 val pref = SharedPrefsUtils(requireContext())
                 pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
 
-                BitmapUtils.changeDrawableButtonColor(
-                    button_choose_color,
-                    requireContext(),
-                    selectedColor
+                button_choose_color.changeDrawableButtonColor(
+                    selectedColor, resources.getDrawable(com.sfaxdroid.base.R.mipmap.ic_palette)
                 )
             }
             .setNegativeButton(

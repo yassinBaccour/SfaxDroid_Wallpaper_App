@@ -1,6 +1,5 @@
 package com.sami.rippel.feature.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -33,21 +32,6 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private fun openByClassName(name: String, url: String) {
-        try {
-            startActivity(Intent(
-                context,
-                Class.forName(name)
-            ).apply {
-                putExtra(
-                    Constants.EXTRA_URL_TO_DOWNLOAD,
-                    url
-                )
-            })
-        } catch (e: Exception) {
-        }
-    }
-
     private fun getFullUrl(url: String): String {
         return url.replace("_preview", "")
     }
@@ -59,7 +43,7 @@ class HomeFragment : Fragment() {
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
-                            getFullUrl(wallpaperObject.url)
+                            getFullUrl(wallpaperObject.detailUrl)
                         )
                     })
             }
@@ -68,7 +52,7 @@ class HomeFragment : Fragment() {
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
-                            getFullUrl(wallpaperObject.url)
+                            getFullUrl(wallpaperObject.detailUrl)
                         )
                     })
             }
@@ -178,7 +162,7 @@ class HomeFragment : Fragment() {
         findNavController().navigate(R.id.navigate_to_details, Bundle().apply {
             putString(
                 Constants.EXTRA_IMG_URL,
-                getFullUrl(wallpaperObject.url)
+                getFullUrl(wallpaperObject.detailUrl)
             )
             if (lwpName.isNotEmpty()) {
                 putString(Constants.KEY_LWP_NAME, lwpName)

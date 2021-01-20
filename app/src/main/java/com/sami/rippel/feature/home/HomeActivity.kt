@@ -7,14 +7,12 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sami.rippel.allah.R
-import com.sami.rippel.core.hideSoftInput
 import com.sami.rippel.core.setupWithNavController
 import com.sfaxdroid.base.PreferencesManager
 import com.tbruyelle.rxpermissions3.RxPermissions
@@ -69,7 +67,6 @@ class HomeActivity : AppCompatActivity() {
         currentNavController?.observe(this) { navController ->
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 if (destination.id != R.id.navigate_to_details) {
-                    hideSoftInput()
                 }
             }
         }
@@ -170,6 +167,5 @@ class HomeActivity : AppCompatActivity() {
 
         @JvmField
         var nbOpenAds = 0
-        private var back_pressed: Long = 0
     }
 }

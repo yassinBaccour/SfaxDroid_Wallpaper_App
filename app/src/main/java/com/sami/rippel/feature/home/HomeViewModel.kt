@@ -1,14 +1,13 @@
 package com.sami.rippel.feature.home
 
-import android.content.Context
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.sami.rippel.allah.R
 import com.sami.rippel.feature.ScreenType
 import com.sami.rippel.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.utils.FileUtils
+import com.sfaxdroid.base.DeviceManager
+import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.mappers.*
 import com.sfaxdroid.data.repositories.Response
@@ -24,7 +23,9 @@ class HomeViewModel @ViewModelInject constructor(
     var getAllWallpapersUseCase: GetAllWallpapersUseCase,
     var getLiveWallpapersUseCase: GetLiveWallpapersUseCase,
     var getCategoryUseCase: GetCategoryUseCase,
-    var getCatWallpapersUseCase: GetCatWallpapersUseCase
+    var getCatWallpapersUseCase: GetCatWallpapersUseCase,
+    var fileManager: FileManager,
+    var deviceManager: DeviceManager
 ) :
     ViewModel() {
 
@@ -67,7 +68,7 @@ class HomeViewModel @ViewModelInject constructor(
                 }
             }
             ScreenType.TIMER -> {
-                getSavedWallpaperList(screenType, null!!)
+                getSavedWallpaperList(screenType)
             }
             ScreenType.CatWallpaper -> {
                 getCatWallpapers(screenType)
@@ -85,7 +86,7 @@ class HomeViewModel @ViewModelInject constructor(
                         val rep =
                             (it.response as Response.SUCESS).response as WallpaperResponse
                         val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToLwpMapper().map(wall)
+                            WallpaperToLwpMapper().map(wall, deviceManager.isSmallScreen())
                         }
                         wrapWallpapers(list, screenType)
                     }
@@ -106,7 +107,7 @@ class HomeViewModel @ViewModelInject constructor(
                         val rep =
                             (it.response as Response.SUCESS).response as WallpaperResponse
                         val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToCategoryMapper().map(wall)
+                            WallpaperToCategoryMapper().map(wall, deviceManager.isSmallScreen())
                         }
                         wrapWallpapers(list, screenType)
                     }
@@ -127,7 +128,10 @@ class HomeViewModel @ViewModelInject constructor(
                         val rep =
                             (it.response as Response.SUCESS).response as WallpaperResponse
                         val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(wall)
+                            WallpaperToViewMapper().map(
+                                wall,
+                                deviceManager.isSmallScreen()
+                            )
                         }
                         wrapWallpapers(list, screenType)
                     }
@@ -149,7 +153,10 @@ class HomeViewModel @ViewModelInject constructor(
                         val rep =
                             (it.response as Response.SUCESS).response as WallpaperResponse
                         val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(wall)
+                            WallpaperToViewMapper().map(
+                                wall,
+                                deviceManager.isSmallScreen()
+                            )
                         }
                         wrapWallpapers(list, screenType)
                     }
@@ -161,13 +168,10 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun getSavedWallpaperList(screenType: ScreenType, context: Context) {
-        val list = FileUtils.getPermanentDirListFiles(
-            context,
-            context.getString(R.string.app_namenospace)
-        )?.map {
-            SimpleWallpaperView(it?.path.orEmpty())
-        }.orEmpty()
+    private fun getSavedWallpaperList(screenType: ScreenType) {
+        val list = fileManager.getPermanentDirListFiles().map {
+            SimpleWallpaperView(it.path.orEmpty())
+        }
         wrapWallpapers(list, screenType)
     }
 

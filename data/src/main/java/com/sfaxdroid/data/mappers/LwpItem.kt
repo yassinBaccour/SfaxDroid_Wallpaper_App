@@ -6,7 +6,7 @@ class LwpItem(
     var name: String,
     var desc: String,
     var type: LiveWallpaper,
-    url: String
+    thumbnailUrl: String
 ) :
-    BaseWallpaperView(url) {
+    BaseWallpaperView(thumbnailUrl) {
 }

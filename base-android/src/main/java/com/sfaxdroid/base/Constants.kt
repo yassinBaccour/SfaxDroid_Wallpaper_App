@@ -26,6 +26,8 @@ class Constants {
         const val DOWNLOAD_THREAD_POOL_SIZE = 4
         const val MIN_WIDHT = 600
         const val MIN_HEIGHT = 1000
+        const val SAVE_TEMPORARY = 0
+        const val SAVE_PERMANENT = 1
         var ifBackgroundChanged = false
         var nbIncrementationAfterChange = 0
     }

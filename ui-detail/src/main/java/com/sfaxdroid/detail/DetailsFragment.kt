@@ -20,20 +20,16 @@ import com.bumptech.glide.request.transition.Transition
 import com.flipboard.bottomsheet.commons.MenuSheetView
 import com.flipboard.bottomsheet.commons.MenuSheetView.MenuType
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.utils.FileUtils
-import com.sfaxdroid.base.utils.FileUtils.Companion.getFileName
-import com.sfaxdroid.base.utils.FileUtils.Companion.getTemporaryFile
-import com.sfaxdroid.base.utils.FileUtils.Companion.isSavedToStorage
-import com.sfaxdroid.base.utils.FileUtils.Companion.savePermanentFile
+import com.sfaxdroid.base.DeviceManager
+import com.sfaxdroid.base.FileManager
+import com.sfaxdroid.base.extension.getFileName
 import com.sfaxdroid.base.utils.Utils
-import com.sfaxdroid.base.utils.Utils.Companion.checkPermission
-import com.sfaxdroid.base.utils.Utils.Companion.getScreenHeightPixels
-import com.sfaxdroid.base.utils.Utils.Companion.getScreenWidthPixels
 import com.sfaxdroid.detail.utils.DetailUtils
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.decodeBitmapAndSetAsLiveWallpaper
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.setWallpaper
 import com.sfaxdroid.detail.utils.TouchImageView
 import com.soundcloud.android.crop.Crop
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -41,13 +37,21 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_details.*
 import java.io.File
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     private var mCompositeDisposable: CompositeDisposable? = null
     private var from: String = ""
     private var currentUrl: String = ""
     private var fromRipple = false
+
+    @Inject
+    lateinit var fileManager: FileManager
+
+    @Inject
+    lateinit var deviceManager: DeviceManager
 
     private fun unSubscribe() {
         mCompositeDisposable?.dispose()
@@ -85,15 +89,8 @@ class DetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        currentUrl = Utils.getUrlByScreenSize(
-            arguments?.getString(Constants.EXTRA_IMG_URL).orEmpty(),
-            Utils.isSmallScreen(requireContext())
-        )
+        currentUrl = arguments?.getString(Constants.EXTRA_IMG_URL).orEmpty()
         from = arguments?.getString(Constants.KEY_LWP_NAME).orEmpty()
-    }
-
-    private fun getFullUrl(url: String): String {
-        return url.replace("_preview", "")
     }
 
     private fun loadWallpaper() {
@@ -132,11 +129,7 @@ class DetailsFragment : Fragment() {
         appName: String
     ) {
         addSubscribe(Flowable.fromCallable {
-            isSavedToStorage(
-                getFileName(url),
-                context,
-                appName
-            )
+            fileManager.getTemporaryDirWithFile(url.getFileName()).exists()
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -191,8 +184,13 @@ class DetailsFragment : Fragment() {
         fab.setOnClickListener { fabClick() }
     }
 
+    fun deleteFile(url: String): Boolean {
+        val file = File(url)
+        return file.delete()
+    }
+
     private fun deleteCurrentPicture() {
-        if (FileUtils.deleteFile(currentUrl)) {
+        if (deleteFile(currentUrl)) {
             finishWithResult()
         } else {
             Utils.showSnackMessage(rootLayout, getString(R.string.ui_detail_failure_delete))
@@ -294,7 +292,6 @@ class DetailsFragment : Fragment() {
                 saveFileToPermanentGallery(
                     currentUrl,
                     requireActivity(),
-                    getString(R.string.app_namenospace),
                     ::onRequestPermissions
                 )
             }
@@ -304,8 +301,7 @@ class DetailsFragment : Fragment() {
             if (actionToDo == ActionTypeEnum.JustWallpaper) {
                 setAsWallpaper(
                     currentUrl,
-                    requireContext(),
-                    getString(R.string.app_namenospace)
+                    requireContext()
                 )
             }
         } else {
@@ -313,10 +309,8 @@ class DetailsFragment : Fragment() {
             DetailUtils.saveToFileToTempsDirAndChooseAction(
                 currentUrl,
                 actionToDo,
-                getScreenHeightPixels(requireContext()),
-                getScreenWidthPixels(requireContext()),
                 requireContext(),
-                getString(R.string.app_namenospace),
+                fileManager,
                 ::doActionAfterSave
             )
         }
@@ -338,15 +332,16 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private fun setAsWallpaper(url: String, context: Context, appName: String) {
+    private fun setAsWallpaper(url: String, context: Context) {
         hideLoading()
         addSubscribe(Flowable.fromCallable {
             decodeBitmapAndSetAsLiveWallpaper(
-                getTemporaryFile(
-                    getFileName(
-                        url
-                    ), context, appName
-                ), context
+                fileManager.getTemporaryDirWithFile(
+                    url.getFileName()
+                ),
+                context,
+                deviceManager.getScreenWidthPixels(),
+                deviceManager.getScreenHeightPixels()
             )
         }
             .subscribeOn(Schedulers.io())
@@ -362,13 +357,8 @@ class DetailsFragment : Fragment() {
     private fun beginCrop() {
         hideLoading()
         Crop.of(
-            Uri.fromFile(
-                getTemporaryFile(
-                    getFileName(currentUrl),
-                    requireContext(),
-                    getString(R.string.app_namenospace)
-                )
-            ), Uri.fromFile(File(requireContext().cacheDir, "cropped"))
+            Uri.fromFile(fileManager.getTemporaryDirWithFile(currentUrl.getFileName())),
+            Uri.fromFile(File(requireContext().cacheDir, "cropped"))
         ).withAspect(screenPoint.x, screenPoint.y)
             .start(context, this)
     }
@@ -384,11 +374,7 @@ class DetailsFragment : Fragment() {
         hideLoading()
         if (!DetailUtils.shareFileWithIntentType(
                 requireActivity(),
-                getTemporaryFile(
-                    getFileName(
-                        currentUrl
-                    ), requireContext(), getString(R.string.app_namenospace)
-                ),
+                fileManager.getTemporaryDirWithFile(currentUrl.getFileName()),
                 intentType
             )
         ) {
@@ -409,7 +395,8 @@ class DetailsFragment : Fragment() {
             setWallpaper(
                 MediaStore.Images.Media.getBitmap(
                     context.contentResolver, Crop.getOutput(result)
-                ), context
+                ),
+                context, deviceManager.getScreenWidthPixels(),
             )
         }
             .subscribeOn(Schedulers.io())
@@ -417,9 +404,9 @@ class DetailsFragment : Fragment() {
             .onErrorReturn { _: Throwable? -> false }
             .subscribe { setSuccess: Boolean ->
                 if (setSuccess) {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_sucess_message))
+                    showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
                 } else {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_not_sucess_message))
+                    showSnackMsg(context.getString(R.string.set_wallpaper_not_success_message))
                 }
             }
         )
@@ -458,21 +445,13 @@ class DetailsFragment : Fragment() {
         hideLoading()
         DetailUtils.shareAllFile(
             requireActivity(),
-            getTemporaryFile(
-                getFileName(
-                    currentUrl
-                ), requireActivity(), getString(R.string.app_namenospace)
-            )
+            fileManager.getTemporaryDirWithFile(currentUrl.getFileName())
         )
     }
 
     private fun onGoToCropActivity() {
         addSubscribe(Flowable.fromCallable {
-            isSavedToStorage(
-                getFileName(currentUrl),
-                requireContext(),
-                getString(R.string.app_namenospace)
-            )
+            fileManager.getTemporaryDirWithFile(currentUrl.getFileName()).exists()
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -490,31 +469,26 @@ class DetailsFragment : Fragment() {
         saveFileToPermanentGallery(
             currentUrl,
             requireActivity(),
-            getString(R.string.app_namenospace),
             ::onRequestPermissions
         )
     }
 
     private fun saveFileToPermanentGallery(
-        url: String?,
+        url: String,
         context: Activity,
-        appName: String,
         onRequestPermissions: () -> Unit
     ) {
         addSubscribe(Flowable.fromCallable {
-            savePermanentFile(
-                url, context,
-                appName
-            )
+            fileManager.savePermanentFile(url)
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { aBoolean: Boolean ->
                 if (aBoolean) {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_sucess_message))
+                    showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
                 } else {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_not_sucess_message))
-                    checkPermission(
+                    showSnackMsg(context.getString(R.string.set_wallpaper_not_success_message))
+                    DetailUtils.checkPermission(
                         context,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE, onRequestPermissions
                     )
