@@ -174,24 +174,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
-        if (view != null) {
-            HomeActivityNavBar.nbOpenAds++
-            Intent(
-                activity,
-                Class.forName("com.sfaxdroid.detail.DetailsActivity")
-            ).apply {
-                putExtra(
-                    Constants.EXTRA_IMG_URL,
-                    getFullUrl(wallpaperObject.url)
-                )
-                if (lwpName.isNotEmpty())
-                    putExtra(
-                        Constants.KEY_LWP_NAME,
-                        lwpName
-                    )
-                startActivity(this)
+        HomeActivityNavBar.nbOpenAds++
+        findNavController().navigate(R.id.navigate_to_details, Bundle().apply {
+            putString(
+                Constants.EXTRA_IMG_URL,
+                getFullUrl(wallpaperObject.url)
+            )
+            if (lwpName.isNotEmpty()) {
+                putString(Constants.KEY_LWP_NAME, lwpName)
             }
-        }
+        })
     }
 
     private fun getLwpLayoutManager(): LayoutManager {

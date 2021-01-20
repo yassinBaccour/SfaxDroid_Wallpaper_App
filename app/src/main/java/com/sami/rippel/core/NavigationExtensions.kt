@@ -1,15 +1,30 @@
 package com.sami.rippel.core
 
+import android.app.Activity
 import android.content.Intent
 import android.util.SparseArray
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.getSystemService
 import androidx.core.util.forEach
 import androidx.core.util.set
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
+fun Activity.hideSoftInput() {
+    val imm: InputMethodManager? = getSystemService()
+    val currentFocus = currentFocus
+    if (currentFocus != null && imm != null) {
+        imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+    }
+}
+
+fun Fragment.hideSoftInput() = requireActivity().hideSoftInput()
+
 
 fun BottomNavigationView.setupWithNavController(
     navGraphIds: List<Int>,

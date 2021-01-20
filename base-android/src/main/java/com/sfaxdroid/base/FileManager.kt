@@ -7,5 +7,5 @@ interface FileManager {
         folder: String
     ): File
 
-    fun getExternalFilesDir()
+    fun getExternalFilesDir(): File
 }

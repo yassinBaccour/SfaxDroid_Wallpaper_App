@@ -24,7 +24,6 @@ class AnimWord2dViewModel @ViewModelInject constructor(
     var progressValue = MutableLiveData<Pair<Int, Long>>()
     var isCompleted = MutableLiveData<Boolean>()
 
-
     init {
 
         val filesDir = fileManager.getExternalFilesDir()

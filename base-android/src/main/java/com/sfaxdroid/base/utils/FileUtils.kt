@@ -21,41 +21,24 @@ class FileUtils {
         const val SAVE_PERMANENT = 1
 
         fun savePermanentFile(url: String?, context: Context, appName: String): Boolean {
-            val savedFinal: Boolean
             val temp = getTemporaryFile(
                 getFileName(url!!),
                 context,
                 appName
             )
-            if (temp != null) {
-                try {
-                    copyFile(
-                        temp,
-                        getPermanentFile(
-                            getFileName(url)!!,
-                            context,
-                            appName
-                        )
+            return try {
+                copyFile(
+                    temp,
+                    getPermanentFile(
+                        getFileName(url),
+                        context,
+                        appName
                     )
-                    mSavedPermanent = true
-                } catch (ignored: IOException) {
-                }
-            } else {
-                Glide.with(context).asBitmap().load(url)
-                    .into(object : SimpleTarget<Bitmap?>() {
-                        override fun onResourceReady(
-                            resource: Bitmap,
-                            transition: Transition<in Bitmap?>?
-                        ) {
-                            mSavedPermanent = saveBitmapToStorage(
-                                resource,
-                                getFileName(url),
-                                SAVE_PERMANENT, context, appName
-                            )
-                        }
-                    })
+                )
+                true
+            } catch (ignored: IOException) {
+                false
             }
-            return mSavedPermanent
         }
 
         fun saveBitmapToStorage(

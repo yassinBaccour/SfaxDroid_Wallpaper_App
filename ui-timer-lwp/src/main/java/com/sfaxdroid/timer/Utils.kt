@@ -53,6 +53,7 @@ class Utils {
         }
 
         fun openAddWallpaperWithKeyActivity(context: Context, key: String) {
+            //todo https://developer.android.com/guide/navigation/navigation-deep-link
             try {
                 context.startActivity(Intent(
                     context,

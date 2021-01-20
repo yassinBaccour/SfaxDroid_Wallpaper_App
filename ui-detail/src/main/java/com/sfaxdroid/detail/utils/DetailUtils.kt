@@ -126,6 +126,8 @@ class DetailUtils {
                         context
                     ) < Constants.MIN_WIDHT
                 ) {
+                    val xPadding = Math.max(0, width - wallpaper.width) / 2
+                    val yPadding = Math.max(0, height - wallpaper.height) / 2
                     val pixels =
                         IntArray(wallpaper.width * wallpaper.height)
                     wallpaper.getPixels(
@@ -146,8 +148,8 @@ class DetailUtils {
                             pixels,
                             0,
                             wallpaper.width,
-                            max(0, width - wallpaper.width) / 2,
-                            max(0, height - wallpaper.height) / 2,
+                            xPadding,
+                            yPadding,
                             wallpaper.width,
                             wallpaper.height
                         )

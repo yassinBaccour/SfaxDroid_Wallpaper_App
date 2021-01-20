@@ -3,13 +3,6 @@
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <application>
-
-        <activity
-            android:name="com.sfaxdroid.detail.DetailsActivity"
-            android:hardwareAccelerated="true"
-            android:label="@string/ui_detail_title"
-            android:screenOrientation="portrait" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
     </application>
 </manifest>

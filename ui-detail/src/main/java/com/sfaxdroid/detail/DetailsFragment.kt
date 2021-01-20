@@ -10,18 +10,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.MenuItem
-import android.view.View
-import android.view.WindowManager
-import androidx.appcompat.widget.Toolbar
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.flipboard.bottomsheet.commons.MenuSheetView
 import com.flipboard.bottomsheet.commons.MenuSheetView.MenuType
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.utils.FileUtils
 import com.sfaxdroid.base.utils.FileUtils.Companion.getFileName
 import com.sfaxdroid.base.utils.FileUtils.Companion.getTemporaryFile
@@ -43,9 +41,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_details.*
 import java.io.File
-import java.util.*
 
-class DetailsActivity : SimpleActivity() {
+class DetailsFragment : Fragment() {
 
     private var mCompositeDisposable: CompositeDisposable? = null
     private var from: String = ""
@@ -68,12 +65,16 @@ class DetailsActivity : SimpleActivity() {
         unSubscribe()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        currentUrl = Utils.getUrlByScreenSize(
-            intent.getStringExtra(Constants.EXTRA_IMG_URL).orEmpty(), Utils.isSmallScreen(this)
-        )
-        from = intent.getStringExtra(Constants.KEY_LWP_NAME).orEmpty()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.activity_details, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initFabButton()
         checkPermission()
@@ -81,12 +82,22 @@ class DetailsActivity : SimpleActivity() {
         loadWallpaper()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        currentUrl = Utils.getUrlByScreenSize(
+            arguments?.getString(Constants.EXTRA_IMG_URL).orEmpty(),
+            Utils.isSmallScreen(requireContext())
+        )
+        from = arguments?.getString(Constants.KEY_LWP_NAME).orEmpty()
+    }
+
     private fun getFullUrl(url: String): String {
         return url.replace("_preview", "")
     }
 
     private fun loadWallpaper() {
-        val detailImage: TouchImageView = findViewById(R.id.detailImage)
+        val detailImage: TouchImageView = requireView().findViewById(R.id.detailImage)
         Glide.with(this).load(currentUrl)
             .into(object : SimpleTarget<Drawable?>() {
                 override fun onResourceReady(
@@ -106,17 +117,13 @@ class DetailsActivity : SimpleActivity() {
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar as Toolbar)
-        supportActionBar?.apply {
+        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = ""
-            setHomeButtonEnabled(true)
+            setHomeButtonEnabled(false)
             setDisplayHomeAsUpEnabled(true)
         }
     }
-
-    override val layout = R.layout.activity_details
-
-    override fun initEventAndData() {}
 
     private fun saveTempsDorAndDoAction(
         actionToDo: ActionTypeEnum,
@@ -155,19 +162,19 @@ class DetailsActivity : SimpleActivity() {
             Constants.KEY_ADD_TIMER_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.MovePerDir,
                 currentUrl,
-                this,
+                requireContext(),
                 getString(R.string.app_namenospace)
             )
             Constants.KEY_ADDED_LIST_TIMER_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.Delete,
                 currentUrl,
-                this,
+                requireContext(),
                 getString(R.string.app_namenospace)
             )
             Constants.KEY_RIPPLE_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.SendLwp,
                 currentUrl,
-                this,
+                requireContext(),
                 getString(R.string.app_namenospace)
             )
         }
@@ -193,14 +200,14 @@ class DetailsActivity : SimpleActivity() {
     }
 
     private fun finishWithResult() {
-        setResult(Activity.RESULT_OK, Intent())
-        finish()
+        requireActivity().setResult(Activity.RESULT_OK, Intent())
+        requireActivity().onBackPressed()
     }
 
     private fun showMenuSheet() {
         bottomsheetLayout?.showWithSheetView(
             MenuSheetView(
-                this,
+                requireContext(),
                 MenuType.LIST,
                 "",
                 menuSheetListener
@@ -222,7 +229,7 @@ class DetailsActivity : SimpleActivity() {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.Crop,
                         currentUrl,
-                        this,
+                        requireContext(),
                         getString(R.string.app_namenospace)
                     )
                 }
@@ -230,7 +237,7 @@ class DetailsActivity : SimpleActivity() {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.OpenNativeChooser,
                         currentUrl,
-                        this,
+                        requireContext(),
                         getString(R.string.app_namenospace)
                     )
                 }
@@ -238,7 +245,7 @@ class DetailsActivity : SimpleActivity() {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.MovePerDir,
                         currentUrl,
-                        this,
+                        requireContext(),
                         getString(R.string.app_namenospace)
                     )
                 }
@@ -246,7 +253,7 @@ class DetailsActivity : SimpleActivity() {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.ShareInstagram,
                         currentUrl,
-                        this,
+                        requireContext(),
                         getString(R.string.app_namenospace)
                     )
                 }
@@ -254,7 +261,7 @@ class DetailsActivity : SimpleActivity() {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.ShareFacebook,
                         currentUrl,
-                        this,
+                        requireContext(),
                         getString(R.string.app_namenospace)
                     )
                 }
@@ -286,7 +293,7 @@ class DetailsActivity : SimpleActivity() {
             if (actionToDo == ActionTypeEnum.MovePerDir) {
                 saveFileToPermanentGallery(
                     currentUrl,
-                    this,
+                    requireActivity(),
                     getString(R.string.app_namenospace),
                     ::onRequestPermissions
                 )
@@ -297,7 +304,7 @@ class DetailsActivity : SimpleActivity() {
             if (actionToDo == ActionTypeEnum.JustWallpaper) {
                 setAsWallpaper(
                     currentUrl,
-                    this,
+                    requireContext(),
                     getString(R.string.app_namenospace)
                 )
             }
@@ -306,9 +313,9 @@ class DetailsActivity : SimpleActivity() {
             DetailUtils.saveToFileToTempsDirAndChooseAction(
                 currentUrl,
                 actionToDo,
-                getScreenHeightPixels(this),
-                getScreenWidthPixels(this),
-                this,
+                getScreenHeightPixels(requireContext()),
+                getScreenWidthPixels(requireContext()),
+                requireContext(),
                 getString(R.string.app_namenospace),
                 ::doActionAfterSave
             )
@@ -358,17 +365,17 @@ class DetailsActivity : SimpleActivity() {
             Uri.fromFile(
                 getTemporaryFile(
                     getFileName(currentUrl),
-                    this,
+                    requireContext(),
                     getString(R.string.app_namenospace)
                 )
-            ), Uri.fromFile(File(cacheDir, "cropped"))
+            ), Uri.fromFile(File(requireContext().cacheDir, "cropped"))
         ).withAspect(screenPoint.x, screenPoint.y)
-            .start(this)
+            .start(context, this)
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
-            finish()
+            requireActivity().onBackPressed()
         }
         return super.onOptionsItemSelected(menuItem)
     }
@@ -376,11 +383,11 @@ class DetailsActivity : SimpleActivity() {
     private fun createIntent(intentType: IntentType) {
         hideLoading()
         if (!DetailUtils.shareFileWithIntentType(
-                this,
+                requireActivity(),
                 getTemporaryFile(
                     getFileName(
                         currentUrl
-                    ), this, getString(R.string.app_namenospace)
+                    ), requireContext(), getString(R.string.app_namenospace)
                 ),
                 intentType
             )
@@ -389,15 +396,15 @@ class DetailsActivity : SimpleActivity() {
         }
     }
 
-    private fun handleCrop(resultCode: Int, result: Intent?) {
+    private fun handleCropResult(resultCode: Int, result: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
-            handleCrop(result, this)
+            handleCropSuccess(result, requireContext())
         } else if (resultCode == Crop.RESULT_ERROR) {
             Utils.showSnackMessage(rootLayout, Crop.getError(result).message.orEmpty())
         }
     }
 
-    private fun handleCrop(result: Intent?, context: Context) {
+    private fun handleCropSuccess(result: Intent?, context: Context) {
         addSubscribe(Flowable.fromCallable {
             setWallpaper(
                 MediaStore.Images.Media.getBitmap(
@@ -407,7 +414,7 @@ class DetailsActivity : SimpleActivity() {
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .onErrorReturn { error: Throwable? -> false }
+            .onErrorReturn { _: Throwable? -> false }
             .subscribe { setSuccess: Boolean ->
                 if (setSuccess) {
                     showSnackMsg(context.getString(R.string.set_wallpaper_sucess_message))
@@ -420,7 +427,7 @@ class DetailsActivity : SimpleActivity() {
 
     private fun onRequestPermissions() {
         ActivityCompat.requestPermissions(
-            this@DetailsActivity,
+            requireActivity(),
             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
             REQUEST_CODE_ASK_PERMISSION
         )
@@ -434,14 +441,13 @@ class DetailsActivity : SimpleActivity() {
         if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
             beginCrop()
         } else if (requestCode == Crop.REQUEST_CROP) {
-            handleCrop(resultCode, result)
+            handleCropResult(resultCode, result)
         }
     }
 
     private val screenPoint: Point
         get() {
-            val wm = this
-                .getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val wm = context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val display = wm.defaultDisplay
             val size = Point()
             display.getSize(size)
@@ -451,11 +457,11 @@ class DetailsActivity : SimpleActivity() {
     private fun shareAll() {
         hideLoading()
         DetailUtils.shareAllFile(
-            this,
+            requireActivity(),
             getTemporaryFile(
                 getFileName(
                     currentUrl
-                ), this, getString(R.string.app_namenospace)
+                ), requireActivity(), getString(R.string.app_namenospace)
             )
         )
     }
@@ -464,7 +470,7 @@ class DetailsActivity : SimpleActivity() {
         addSubscribe(Flowable.fromCallable {
             isSavedToStorage(
                 getFileName(currentUrl),
-                this,
+                requireContext(),
                 getString(R.string.app_namenospace)
             )
         }
@@ -474,7 +480,7 @@ class DetailsActivity : SimpleActivity() {
                 if (aBoolean) {
                     beginCrop()
                 } else {
-                    finish()
+                    requireActivity().onBackPressed()
                 }
             }
         )
@@ -483,7 +489,7 @@ class DetailsActivity : SimpleActivity() {
     private fun onMoveFileToPermanentGallery() {
         saveFileToPermanentGallery(
             currentUrl,
-            this,
+            requireActivity(),
             getString(R.string.app_namenospace),
             ::onRequestPermissions
         )
@@ -492,13 +498,13 @@ class DetailsActivity : SimpleActivity() {
     private fun saveFileToPermanentGallery(
         url: String?,
         context: Activity,
-        appName: String?,
+        appName: String,
         onRequestPermissions: () -> Unit
     ) {
         addSubscribe(Flowable.fromCallable {
             savePermanentFile(
                 url, context,
-                appName!!
+                appName
             )
         }
             .subscribeOn(Schedulers.io())

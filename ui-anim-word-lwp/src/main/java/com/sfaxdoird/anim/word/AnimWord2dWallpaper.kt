@@ -1,12 +1,14 @@
 package com.sfaxdoird.anim.word
 
+import android.content.Context
 import android.graphics.*
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.sfaxdroid.base.SharedPrefsUtils
-
+import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 class AnimWord2dWallpaper : WallpaperService() {
     override fun onCreateEngine(): Engine {
@@ -23,7 +25,8 @@ class AnimWord2dWallpaper : WallpaperService() {
         private var paintOption: Paint
         private val handler = Handler()
         private val mHolder = surfaceHolder
-        private val filesDir = getExternalFilesDir("")
+        private val filesDir =
+            getTemporaryDir(this@AnimWord2dWallpaper, getString(R.string.app_namenospace))
         private var screenHeight = 0
         private var screenWidth = 0
         private var background: Bitmap? = null
@@ -185,6 +188,21 @@ class AnimWord2dWallpaper : WallpaperService() {
             draw2dImg(canvas)
             canvas.restore()
         }
+    }
+
+
+    private fun getTemporaryDir(
+        context: Context,
+        appName: String
+    ): File {
+        val temporaryDir = File(
+            context.filesDir,
+            "$appName/temp"
+        )
+        if (!temporaryDir.exists()) {
+            temporaryDir.mkdirs()
+        }
+        return temporaryDir
     }
 
     companion object {

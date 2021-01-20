@@ -18,6 +18,13 @@
             android:name="keyScreenType"
             android:defaultValue="NEW"
             app:argType="string" />
+        <action
+            android:id="@+id/navigate_to_details"
+            app:destination="@id/detailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.sfaxdroid.detail.DetailsFragment"
+        android:label="DetailsFragment" />
 
 </navigation>
