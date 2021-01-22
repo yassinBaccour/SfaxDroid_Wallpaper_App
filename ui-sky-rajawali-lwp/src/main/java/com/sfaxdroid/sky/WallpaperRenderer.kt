@@ -6,7 +6,7 @@ import org.rajawali3d.math.vector.Vector3
 import org.rajawali3d.renderer.Renderer
 import kotlin.math.abs
 
-class WallpaperRenderer(context: Context) : Renderer(context) {
+class WallpaperRenderer(context: Context, private val img: Int) : Renderer(context) {
 
     private var axe: Position = Position.None
     private var downX = 0f
@@ -104,7 +104,7 @@ class WallpaperRenderer(context: Context) : Renderer(context) {
 
     override fun initScene() {
         try {
-            currentScene.setSkybox(R.drawable.night)
+            currentScene.setSkybox(img)
         } catch (ignored: Exception) {
         }
     }

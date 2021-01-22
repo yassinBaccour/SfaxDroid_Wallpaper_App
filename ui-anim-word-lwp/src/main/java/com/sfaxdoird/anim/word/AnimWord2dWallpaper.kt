@@ -10,16 +10,18 @@ import com.sfaxdroid.base.SharedPrefsUtils
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class AnimWord2dWallpaper : WallpaperService() {
+
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)
         val color = pref.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
         val textSize = pref.GetSetting("2dwallpapertextsize", 1) * 20
         val fontStyle = pref.GetSetting("2dwallpaperfontstyle", 1)
-        return IslamicEngine(color, textSize, fontStyle)
+        return AnimWord2dEngine(color, textSize, fontStyle)
     }
 
-    internal inner class IslamicEngine(private val mColor: Int, textSize: Int, fontStyle: Int) :
+    internal inner class AnimWord2dEngine(private val mColor: Int, textSize: Int, fontStyle: Int) :
         Engine() {
 
         private var paintOption: Paint

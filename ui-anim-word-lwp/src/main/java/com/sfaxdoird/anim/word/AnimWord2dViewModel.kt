@@ -30,13 +30,7 @@ class AnimWord2dViewModel @ViewModelInject constructor(
 
         val requestWallpaper =
             DownloadRequest(
-                Uri.parse(savedStateHandle.get<String>(Constants.EXTRA_URL_TO_DOWNLOAD).orEmpty()
-                    .apply {
-                        if (deviceManager.isSmallScreen()
-                        ) {
-                            replace("islamicimages", "islamicimagesmini")
-                        }
-                    })
+                Uri.parse(savedStateHandle.get<String>(Constants.EXTRA_URL_TO_DOWNLOAD).orEmpty())
             )
                 .setDestinationURI(
                     Uri.parse(

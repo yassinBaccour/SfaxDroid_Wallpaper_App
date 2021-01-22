@@ -124,9 +124,7 @@ class DetailsFragment : Fragment() {
 
     private fun saveTempsDorAndDoAction(
         actionToDo: ActionTypeEnum,
-        url: String,
-        context: Context,
-        appName: String
+        url: String
     ) {
         addSubscribe(Flowable.fromCallable {
             fileManager.getTemporaryDirWithFile(url.getFileName()).exists()
@@ -154,21 +152,15 @@ class DetailsFragment : Fragment() {
         when (from) {
             Constants.KEY_ADD_TIMER_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.MovePerDir,
-                currentUrl,
-                requireContext(),
-                getString(R.string.app_namenospace)
+                currentUrl
             )
             Constants.KEY_ADDED_LIST_TIMER_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.Delete,
-                currentUrl,
-                requireContext(),
-                getString(R.string.app_namenospace)
+                currentUrl
             )
             Constants.KEY_RIPPLE_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.SendLwp,
-                currentUrl,
-                requireContext(),
-                getString(R.string.app_namenospace)
+                currentUrl
             )
         }
     }
@@ -184,7 +176,7 @@ class DetailsFragment : Fragment() {
         fab.setOnClickListener { fabClick() }
     }
 
-    fun deleteFile(url: String): Boolean {
+    private fun deleteFile(url: String): Boolean {
         val file = File(url)
         return file.delete()
     }
@@ -226,41 +218,31 @@ class DetailsFragment : Fragment() {
                 R.id.buttonWallpaper -> {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.Crop,
-                        currentUrl,
-                        requireContext(),
-                        getString(R.string.app_namenospace)
+                        currentUrl
                     )
                 }
                 R.id.buttonChooser -> {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.OpenNativeChooser,
-                        currentUrl,
-                        requireContext(),
-                        getString(R.string.app_namenospace)
+                        currentUrl
                     )
                 }
                 R.id.buttonSave -> {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.MovePerDir,
-                        currentUrl,
-                        requireContext(),
-                        getString(R.string.app_namenospace)
+                        currentUrl
                     )
                 }
                 R.id.buttonSareInsta -> {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.ShareInstagram,
-                        currentUrl,
-                        requireContext(),
-                        getString(R.string.app_namenospace)
+                        currentUrl
                     )
                 }
                 R.id.buttonSareFb -> {
                     saveTempsDorAndDoAction(
                         ActionTypeEnum.ShareFacebook,
-                        currentUrl,
-                        requireContext(),
-                        getString(R.string.app_namenospace)
+                        currentUrl
                     )
                 }
             }

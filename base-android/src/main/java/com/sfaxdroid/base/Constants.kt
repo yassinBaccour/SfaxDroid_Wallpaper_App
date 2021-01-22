@@ -11,8 +11,6 @@ class Constants {
         const val PNG_BACKFROUND_FILE_NAME = "doua.jpg"
         const val KEY_ADDED_LIST_TIMER_LWP = "TimerLWPList"
         const val KEY_ADD_TIMER_LWP = "TimerLWPadd"
-        const val URL_BIG_WALLPAPER_FOLDER = "/islamicimages/"
-        const val URL_SMALL_WALLPAPER_FOLDER = "/islamicimagesmini/"
         const val KEY_RIPPLE_LWP = "RippleLwp"
         const val LIST_FILE_TO_SEND_TO_DETAIL_VIEW_PAGER = "listFileToSendToDetailViewPager"
         const val KEY_LWP_NAME = "LwpName"
