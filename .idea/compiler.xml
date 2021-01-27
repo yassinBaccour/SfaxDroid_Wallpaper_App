@@ -5,6 +5,7 @@
       <module name="SfaxDroid_Arabic_Wallpaper.app" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.base-android" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.base-rajawali-engine" target="11" />
+      <module name="SfaxDroid_Arabic_Wallpaper.buildSrc" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.common-layouts" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.common-resources" target="11" />
       <module name="SfaxDroid_Arabic_Wallpaper.data-android" target="11" />

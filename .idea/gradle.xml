@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base-android" />
+            <option value="$PROJECT_DIR$/base-rajawali-engine" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/common-layouts" />
+            <option value="$PROJECT_DIR$/common-resources" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data-android" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/download-file-module" />
+            <option value="$PROJECT_DIR$/mini-app-base" />
+            <option value="$PROJECT_DIR$/mini-app-change-background" />
+            <option value="$PROJECT_DIR$/mini-app-raining-anim" />
+            <option value="$PROJECT_DIR$/mini-app-water-ripple" />
+            <option value="$PROJECT_DIR$/ui-anim-img-lwp" />
+            <option value="$PROJECT_DIR$/ui-anim-word-lwp" />
+            <option value="$PROJECT_DIR$/ui-detail" />
+            <option value="$PROJECT_DIR$/ui-frame-collage" />
+            <option value="$PROJECT_DIR$/ui-sky-rajawali-lwp" />
+            <option value="$PROJECT_DIR$/ui-timer-lwp" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
