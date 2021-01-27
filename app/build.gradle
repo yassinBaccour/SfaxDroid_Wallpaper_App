@@ -15,6 +15,7 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         multiDexEnabled true
+        buildConfigField("String", "APP_KEY", API_KEY)
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
@@ -59,10 +60,6 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/MANIFEST.MF'
-    }
-
-    dexOptions {
-        javaMaxHeapSize "4g"
     }
 
     sourceSets {

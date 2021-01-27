@@ -99,6 +99,8 @@ class WallpaperRenderer(context: Context, private val img: Int) : Renderer(conte
             is Position.RightToLeft -> currentCamera.rotate(Vector3.Axis.Y, +0.1)
             is Position.TopToBottom -> currentCamera.rotate(Vector3.Axis.X, -0.1)
             is Position.BottomToTop -> currentCamera.rotate(Vector3.Axis.X, +0.1)
+            else -> {
+            }
         }
     }
 
