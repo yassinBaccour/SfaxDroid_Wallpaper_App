@@ -39,8 +39,8 @@ class ApplicationModule {
     ): PreferencesManager {
 
         val name = when (appName) {
-            AppName.LILIAGAME -> "f24"
-            AppName.SFAXDROID -> "rfi"
+            AppName.LILIAGAME -> "liliagame"
+            AppName.SFAXDROID -> "sfaxdroid"
         }
 
         return PreferencesManager(
