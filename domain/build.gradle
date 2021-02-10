@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
+apply from: '../spotless.gradle'
 
 android {
     compileSdkVersion androidCompileSdkVersion
