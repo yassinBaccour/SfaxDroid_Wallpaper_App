@@ -1,8 +1,8 @@
 package com.sami.rippel.feature.home.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.sami.rippel.allah.R
 import com.sami.rippel.feature.home.CarouselTypeEnum
 import com.sami.rippel.feature.home.viewholder.WallpaperCarouselItemVH
@@ -58,5 +58,4 @@ class CarouselItemAdapter(
         const val TYPE_LWP = 1
         const val TYPE_CAT = 2
     }
-
 }

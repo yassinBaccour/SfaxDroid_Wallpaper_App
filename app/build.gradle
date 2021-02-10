@@ -4,7 +4,9 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../dependencies.gradle'
+apply from: '../spotless.gradle'
 //apply plugin: 'com.google.firebase.crashlytics'
+
 
 android {
 

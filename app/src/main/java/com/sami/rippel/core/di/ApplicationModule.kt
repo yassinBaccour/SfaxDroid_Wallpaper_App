@@ -60,5 +60,4 @@ class ApplicationModule {
     fun provideDeviceManager(deviceHandler: DeviceHandler): DeviceManager {
         return deviceHandler
     }
-
 }
