@@ -31,7 +31,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':data-android')
     api project(':data')
-    implementation libraries.hildLib
-    kapt libraries.hildComplier
+    implementation libraries.hiltLib
+    kapt libraries.hiltAndroidComplier
 
 }

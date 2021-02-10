@@ -15,9 +15,12 @@ import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     var getAllWallpapersUseCase: GetAllWallpapersUseCase,
     var getLiveWallpapersUseCase: GetLiveWallpapersUseCase,
