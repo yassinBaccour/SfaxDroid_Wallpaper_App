@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sami.rippel.allah.R
 import com.sami.rippel.feature.home.CarouselView
 import com.sami.rippel.feature.home.ItemWrapperList
-import com.sami.rippel.feature.home.viewholder.*
+import com.sami.rippel.feature.home.viewholder.CategoryItemVH
+import com.sami.rippel.feature.home.viewholder.HorizontalCarouselVH
+import com.sami.rippel.feature.home.viewholder.LabItemVH
+import com.sami.rippel.feature.home.viewholder.LwpItemVH
+import com.sami.rippel.feature.home.viewholder.WallpaperImgVH
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.LwpItem
