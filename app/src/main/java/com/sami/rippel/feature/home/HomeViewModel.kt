@@ -15,7 +15,6 @@ import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
@@ -63,9 +62,7 @@ class HomeViewModel @ViewModelInject constructor(
                 getCategory(screenType)
             }
             ScreenType.TEXTURE -> {
-                GlobalScope.launch {
-                    getWallpapers(screenType)
-                }
+                getWallpapers(screenType)
             }
             ScreenType.TIMER -> {
                 getSavedWallpaperList(screenType)
@@ -76,68 +73,54 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-
     private fun getLiveWallpapers(screenType: ScreenType) {
-        GlobalScope.launch {
-            getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(fileName))
-            {
-                when (it) {
-                    is Response.SUCESS -> {
-                        val rep =
-                            (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToLwpMapper().map(wall, deviceManager.isSmallScreen())
-                        }
-                        wrapWallpapers(list, screenType)
+        viewModelScope.launch {
+            when (val data = getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(fileName))) {
+                is Response.SUCESS -> {
+                    val rep = data.response as WallpaperResponse
+                    val list = rep.wallpaperList.wallpapers.map { wall ->
+                        WallpaperToLwpMapper().map(wall, deviceManager.isSmallScreen())
                     }
-                    is Response.FAILURE -> {
+                    wrapWallpapers(list, screenType)
+                }
+                is Response.FAILURE -> {
 
-                    }
                 }
             }
+
         }
     }
 
     private fun getCategory(screenType: ScreenType) {
-        GlobalScope.launch {
-            getCategoryUseCase(GetCategoryUseCase.Param(fileName))
-            {
-                when (it) {
-                    is Response.SUCESS -> {
-                        val rep =
-                            (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToCategoryMapper().map(wall, deviceManager.isSmallScreen())
-                        }
-                        wrapWallpapers(list, screenType)
+        viewModelScope.launch {
+            when (val data = getCategoryUseCase(GetCategoryUseCase.Param(fileName))) {
+                is Response.SUCESS -> {
+                    val rep = data.response as WallpaperResponse
+                    val list = rep.wallpaperList.wallpapers.map { wall ->
+                        WallpaperToCategoryMapper().map(wall, deviceManager.isSmallScreen())
                     }
-                    is Response.FAILURE -> {
-
-                    }
+                    wrapWallpapers(list, screenType)
+                }
+                is Response.FAILURE -> {
                 }
             }
         }
     }
 
     private fun getCatWallpapers(screenType: ScreenType) {
-        GlobalScope.launch {
-            getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName))
-            {
-                when (it) {
-                    is Response.SUCESS -> {
-                        val rep =
-                            (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(
-                                wall,
-                                deviceManager.isSmallScreen()
-                            )
-                        }
-                        wrapWallpapers(list, screenType)
+        viewModelScope.launch {
+            when (val data = getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName))) {
+                is Response.SUCESS -> {
+                    val rep = data.response as WallpaperResponse
+                    val list = rep.wallpaperList.wallpapers.map { wall ->
+                        WallpaperToViewMapper().map(
+                            wall,
+                            deviceManager.isSmallScreen()
+                        )
                     }
-                    is Response.FAILURE -> {
-
-                    }
+                    wrapWallpapers(list, screenType)
+                }
+                is Response.FAILURE -> {
                 }
             }
         }
@@ -145,24 +128,20 @@ class HomeViewModel @ViewModelInject constructor(
 
 
     private fun getWallpapers(screenType: ScreenType) {
-        GlobalScope.launch {
-            getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))
-            {
-                when (it) {
-                    is Response.SUCESS -> {
-                        val rep =
-                            (it.response as Response.SUCESS).response as WallpaperResponse
-                        val list = rep.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(
-                                wall,
-                                deviceManager.isSmallScreen()
-                            )
-                        }
-                        wrapWallpapers(list, screenType)
+        viewModelScope.launch {
+            when (val data = getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))) {
+                is Response.SUCESS -> {
+                    val rep = data.response as WallpaperResponse
+                    val list = rep.wallpaperList.wallpapers.map { wall ->
+                        WallpaperToViewMapper().map(
+                            wall,
+                            deviceManager.isSmallScreen()
+                        )
                     }
-                    is Response.FAILURE -> {
+                    wrapWallpapers(list, screenType)
+                }
+                is Response.FAILURE -> {
 
-                    }
                 }
             }
         }

@@ -15,11 +15,11 @@ open class BaseNetwork {
             try {
                 val response = call.execute()
                 when (response.isSuccessful) {
-                    true -> Response.SUCESS(transform((response.body() ?: default!!)))
-                    false -> Response.FAILURE(Failure.FeatureFailure())
+                    true -> transform((response.body() ?: default!!))
+                    false -> Response.FAILURE(Failure.FeatureFailure)
                 }
             } catch (exception: Throwable) {
-                Response.FAILURE(Failure.ServerError())
+                Response.FAILURE(Failure.ServerError)
             }
         }
     }
