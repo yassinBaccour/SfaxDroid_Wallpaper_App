@@ -19,7 +19,6 @@ import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.R
 import com.sfaxdroid.base.extension.getFileName
-import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.detail.ActionTypeEnum
 import com.sfaxdroid.detail.IntentType
 import java.io.File
@@ -58,13 +57,13 @@ class DetailUtils {
 
         private fun getIntentNameFromType(intentType: IntentType): String {
             return when (intentType) {
-                is IntentType.facebook -> {
+                is IntentType.FACEBOOK -> {
                     Constants.FB_PACKAGE
                 }
-                is IntentType.instagram -> {
+                is IntentType.INSTAGRAM -> {
                     Constants.INSTAGRAM_PACKAGE
                 }
-                is IntentType.snap -> {
+                is IntentType.SNAP -> {
                     Constants.SNAP_PACKAGE
                 }
             }

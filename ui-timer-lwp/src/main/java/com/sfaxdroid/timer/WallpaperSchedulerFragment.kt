@@ -21,8 +21,8 @@ import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
-import com.sfaxdroid.timer.Utils.Companion.openAddWallpaperWithKeyActivity
-import com.sfaxdroid.timer.Utils.Companion.setWallpaperFromFile
+import com.sfaxdroid.timer.TimerUtils.Companion.openAddWallpaperWithKeyActivity
+import com.sfaxdroid.timer.TimerUtils.Companion.setWallpaperFromFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallpaper_scheduler.*
 import kotlinx.coroutines.*

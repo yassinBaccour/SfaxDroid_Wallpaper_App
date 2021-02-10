@@ -39,7 +39,7 @@ class RetrieveWallpaperService : JobService() {
                     updateSchedulerSettings(0)
                     currentWallpaper = 0
                 }
-                Utils.setWallpaperFromFile(
+                TimerUtils.setWallpaperFromFile(
                     baseContext,
                     fileManager.getPermanentDirListFiles(),
                     deviceManager.getScreenWidthPixels(),

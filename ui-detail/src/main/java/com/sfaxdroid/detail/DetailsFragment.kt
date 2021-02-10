@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,15 +13,13 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 import com.flipboard.bottomsheet.commons.MenuSheetView
 import com.flipboard.bottomsheet.commons.MenuSheetView.MenuType
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.extension.getFileName
+import com.sfaxdroid.base.extension.loadUrlWithAction
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.detail.utils.DetailUtils
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.decodeBitmapAndSetAsLiveWallpaper
@@ -95,16 +92,7 @@ class DetailsFragment : Fragment() {
 
     private fun loadWallpaper() {
         val detailImage: TouchImageView = requireView().findViewById(R.id.detailImage)
-        Glide.with(this).load(currentUrl)
-            .into(object : SimpleTarget<Drawable?>() {
-                override fun onResourceReady(
-                    resource: Drawable,
-                    transition: Transition<in Drawable?>?
-                ) {
-                    detailImage.setImageDrawable(resource)
-                    hideLoading()
-                }
-            })
+        detailImage.loadUrlWithAction(currentUrl, ::hideLoading)
     }
 
     private fun checkPermission() {
@@ -259,10 +247,10 @@ class DetailsFragment : Fragment() {
                 shareAll()
             }
             if (actionToDo == ActionTypeEnum.ShareFacebook) {
-                createIntent(IntentType.facebook)
+                createIntent(IntentType.FACEBOOK)
             }
             if (actionToDo == ActionTypeEnum.ShareInstagram) {
-                createIntent(IntentType.instagram)
+                createIntent(IntentType.INSTAGRAM)
             }
             if (actionToDo == ActionTypeEnum.SendLwp) {
                 //sendToRippleLwp();
@@ -304,10 +292,10 @@ class DetailsFragment : Fragment() {
                 is ActionTypeEnum.Crop -> onGoToCropActivity()
                 is ActionTypeEnum.OpenNativeChooser -> shareAll()
                 is ActionTypeEnum.MovePerDir -> onMoveFileToPermanentGallery()
-                is ActionTypeEnum.ShareFacebook -> createIntent(IntentType.instagram)
-                is ActionTypeEnum.ShareInstagram -> createIntent(IntentType.instagram)
+                is ActionTypeEnum.ShareFacebook -> createIntent(IntentType.INSTAGRAM)
+                is ActionTypeEnum.ShareInstagram -> createIntent(IntentType.INSTAGRAM)
                 is ActionTypeEnum.SendLwp -> onSendToRippleLwp()
-                is ActionTypeEnum.ShareSnap -> createIntent(IntentType.snap)
+                is ActionTypeEnum.ShareSnap -> createIntent(IntentType.SNAP)
             }
         } else {
             onSaveError()
@@ -383,7 +371,7 @@ class DetailsFragment : Fragment() {
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .onErrorReturn { _: Throwable? -> false }
+            .onErrorReturn { false }
             .subscribe { setSuccess: Boolean ->
                 if (setSuccess) {
                     showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
@@ -500,11 +488,11 @@ class DetailsFragment : Fragment() {
         Utils.showSnackMessage(rootLayout, msg)
     }
 
-    fun showLoading() {
+    private fun showLoading() {
         progressBar?.visibility = View.VISIBLE
     }
 
-    fun hideLoading() {
+    private fun hideLoading() {
         progressBar?.visibility = View.GONE
     }
 
