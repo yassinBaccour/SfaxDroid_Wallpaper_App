@@ -1,5 +1,7 @@
 package com.sfaxdroid.data
 
+import android.content.Context
+import androidx.room.Room
 import com.sfaxdroid.data.repositories.Network
 import com.sfaxdroid.data.repositories.WsRepository
 import dagger.Module
@@ -16,6 +18,28 @@ class WallpaperDataSource {
     @Singleton
     fun provideAppRepository(dataSource: Network): WsRepository {
         return dataSource
+    }
+
+    @Singleton
+    @Provides
+    fun providesRoomDatabase(context: Context): SfaxDroidRoomDatabase {
+        return Room.databaseBuilder(
+            context,
+            SfaxDroidRoomDatabase::class.java,
+            "SfaxDroid"
+        ).build()
+    }
+
+    @Singleton
+    @Provides
+    fun providesWallpaperDao(database: SfaxDroidRoomDatabase): WallpaperDao {
+        return database.wallpaperDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providesDbDataSource(productDao: WallpaperDao): DbDataSource {
+        return DbDataSource(productDao)
     }
 
 }
