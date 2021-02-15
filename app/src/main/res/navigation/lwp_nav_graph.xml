@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/lwp_navigation_fg"
-        android:name="com.sami.rippel.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
         android:label="@string/screen_lwp"
         tools:layout="@layout/fragment_all_background">
         <argument
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/chooser_navigation_fg"
-        android:name="com.sami.rippel.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
         android:label="@string/screen_lwp"
         tools:layout="@layout/fragment_all_background">
         <argument

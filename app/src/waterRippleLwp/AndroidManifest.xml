@@ -4,7 +4,7 @@
     package="com.sami.rippel.allah">
 
     <application
-        android:name="com.sami.rippel.WallpaperApplication"
+        android:name="com.yassin.wallpaper.WallpaperApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name="com.sami.rippel.feature.home.HomeActivity"
+            android:name="com.yassin.wallpaper.feature.home.HomeActivity"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait">

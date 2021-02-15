@@ -48,7 +48,7 @@ class TimerUtils {
             try {
                 context.startActivity(Intent(
                     context,
-                    Class.forName("com.sami.rippel.feature.main.activity.GalleryActivity")
+                    Class.forName("com.yassin.wallpaper.feature.main.activity.GalleryActivity")
                 ).apply {
                     putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, key)
                 })
