@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.sami.rippel.allah.R
+import com.yassin.wallpaper.R
 import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem

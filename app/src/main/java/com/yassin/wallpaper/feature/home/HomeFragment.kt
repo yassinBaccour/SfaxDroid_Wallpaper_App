@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.sami.rippel.allah.R
+import com.yassin.wallpaper.R
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.Utils

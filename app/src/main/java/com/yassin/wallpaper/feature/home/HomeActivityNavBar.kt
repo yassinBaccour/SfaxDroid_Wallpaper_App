@@ -10,7 +10,7 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
-import com.sami.rippel.allah.R
+import com.yassin.wallpaper.R
 import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.yassin.wallpaper.feature.home.HomeFragment.Companion.newInstance
 import com.yassin.wallpaper.utils.Constants

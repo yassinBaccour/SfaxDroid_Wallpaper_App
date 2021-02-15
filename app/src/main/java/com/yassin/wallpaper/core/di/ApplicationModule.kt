@@ -1,7 +1,7 @@
 package com.yassin.wallpaper.core.di
 
 import android.content.Context
-import com.sami.rippel.allah.BuildConfig
+import com.yassin.wallpaper.BuildConfig
 import com.yassin.wallpaper.utils.AppName
 import com.yassin.wallpaper.utils.DeviceHandler
 import com.yassin.wallpaper.utils.FileHandler

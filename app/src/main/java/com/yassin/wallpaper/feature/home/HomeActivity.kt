@@ -10,7 +10,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.sami.rippel.allah.R
+import com.yassin.wallpaper.R
 import com.yassin.wallpaper.core.setupWithNavController
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission

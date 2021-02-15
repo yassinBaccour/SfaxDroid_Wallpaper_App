@@ -3,7 +3,7 @@ package com.yassin.wallpaper.feature.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sami.rippel.allah.R
+import com.yassin.wallpaper.R
 import com.yassin.wallpaper.feature.home.CarouselTypeEnum
 import com.yassin.wallpaper.feature.home.viewholder.WallpaperCarouselItemVH
 import com.sfaxdroid.data.mappers.BaseWallpaperView

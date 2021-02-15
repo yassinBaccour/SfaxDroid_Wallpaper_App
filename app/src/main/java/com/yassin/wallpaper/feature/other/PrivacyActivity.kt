@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
-import com.sami.rippel.allah.R
+import com.yassin.wallpaper.R
 import kotlinx.android.synthetic.main.activity_privacy.*
 
 class PrivacyActivity : AppCompatActivity() {
