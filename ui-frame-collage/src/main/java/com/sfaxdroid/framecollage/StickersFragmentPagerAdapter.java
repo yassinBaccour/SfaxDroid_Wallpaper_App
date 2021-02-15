@@ -7,13 +7,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.sfaxdroid.framecollage.stickers.FlowerStickersImageFragment;
 import com.sfaxdroid.framecollage.stickers.FrameImageFragment;
 import com.sfaxdroid.framecollage.stickers.NonVectorStickersImageFragment;
+import com.sfaxdroid.framecollage.stickers.StickersListener;
 import com.sfaxdroid.framecollage.stickers.TextStickersImageFragment;
 import com.sfaxdroid.framecollage.stickers.VectorStickersImageFragment;
-import com.sami.rippel.model.listner.StickersListener;
 
 public class StickersFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private StickersListener stickersListener;
+    private final StickersListener stickersListener;
 
     public StickersFragmentPagerAdapter(FragmentManager fragmentManager,
                                         StickersListener stickersListener) {

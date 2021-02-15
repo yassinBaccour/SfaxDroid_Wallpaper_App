@@ -27,9 +27,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':data')
     implementation project(':common-layouts')
     implementation project(':common-resources')
     implementation project(path: ':base-android')
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation "com.flipboard:bottomsheet-core:1.5.3"
+    implementation "com.flipboard:bottomsheet-commons:1.5.3"
 }

@@ -34,10 +34,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.flipboard.bottomsheet.BottomSheetLayout;
 import com.flipboard.bottomsheet.commons.MenuSheetView;
 import com.myandroid.views.MultiTouchListener;
-import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.ViewModel;
 import com.sfaxdroid.base.Constants;
-import com.sfaxdroid.base.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;

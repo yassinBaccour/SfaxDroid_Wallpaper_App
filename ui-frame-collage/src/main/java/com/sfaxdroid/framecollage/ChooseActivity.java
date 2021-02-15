@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import com.sfaxdroid.base.WallpaperObject;
 
 import java.io.File;
 import java.util.ArrayList;
