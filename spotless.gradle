@@ -22,7 +22,6 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
-
     format 'xml', {
         target '**/*.xml'
         indentWithSpaces()
