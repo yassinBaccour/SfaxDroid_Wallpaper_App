@@ -2,9 +2,12 @@ package com.sami.rippel.feature.home
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.google.android.gms.ads.AdListener
@@ -15,10 +18,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sami.rippel.allah.R
 import com.sami.rippel.core.setupWithNavController
 import com.sfaxdroid.base.PreferencesManager
-import com.tbruyelle.rxpermissions3.RxPermissions
+import com.sfaxdroid.base.extension.checkAppPermission
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_home.*
-import java.util.*
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -40,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
 
         initRatingApp()
         manageNbRunApp()
-        checkPermission()
+        this.checkAppPermission()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -120,18 +121,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("CheckResult")
-    fun checkPermission() {
-        RxPermissions(this).request(
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_SETTINGS
-        )?.subscribe { }
-    }
 
     private fun setupToolBar() {
     }
-
 
     private fun showFirstTimeAndOneTimeAds() {
         if (isAdsShow) {

@@ -13,6 +13,7 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.flipboard.bottomsheet.commons.MenuSheetView
 import com.flipboard.bottomsheet.commons.MenuSheetView.MenuType
 import com.sfaxdroid.base.Constants
@@ -27,19 +28,16 @@ import com.sfaxdroid.detail.utils.DetailUtils.Companion.setWallpaper
 import com.sfaxdroid.detail.utils.TouchImageView
 import com.soundcloud.android.crop.Crop
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_details.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
-    private var mCompositeDisposable: CompositeDisposable? = null
     private var from: String = ""
     private var currentUrl: String = ""
     private var fromRipple = false
@@ -49,22 +47,6 @@ class DetailsFragment : Fragment() {
 
     @Inject
     lateinit var deviceManager: DeviceManager
-
-    private fun unSubscribe() {
-        mCompositeDisposable?.dispose()
-    }
-
-    private fun addSubscribe(subscription: Disposable?) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = CompositeDisposable()
-        }
-        mCompositeDisposable?.add(subscription!!)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unSubscribe()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -114,18 +96,18 @@ class DetailsFragment : Fragment() {
         actionToDo: ActionTypeEnum,
         url: String
     ) {
-        addSubscribe(Flowable.fromCallable {
-            fileManager.getTemporaryDirWithFile(url.getFileName()).exists()
+        viewLifecycleOwner.lifecycleScope.launch {
+            var result = saveFile(url)
+            onSaveTempsDorAndDoAction(
+                result,
+                actionToDo
+            )
         }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { aBoolean: Boolean ->
-                onSaveTempsDorAndDoAction(
-                    aBoolean,
-                    actionToDo
-                )
-            }
-        )
+
+    }
+
+    suspend fun saveFile(url: String) = withContext(Dispatchers.IO) {
+        fileManager.getTemporaryDirWithFile(url.getFileName()).exists()
     }
 
     private fun fabClick() {
@@ -304,23 +286,22 @@ class DetailsFragment : Fragment() {
 
     private fun setAsWallpaper(url: String, context: Context) {
         hideLoading()
-        addSubscribe(Flowable.fromCallable {
-            decodeBitmapAndSetAsLiveWallpaper(
-                fileManager.getTemporaryDirWithFile(
-                    url.getFileName()
-                ),
-                context,
-                deviceManager.getScreenWidthPixels(),
-                deviceManager.getScreenHeightPixels()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = decodeAndSet(context, url)
+            if (result) showSnackMsg("Success") else showSnackMsg(
+                "Error"
             )
         }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { t: Boolean ->
-                if (t) showSnackMsg("Success") else showSnackMsg(
-                    "Error"
-                )
-            }
+    }
+
+    private suspend fun decodeAndSet(context: Context, url: String) = withContext(Dispatchers.IO) {
+        decodeBitmapAndSetAsLiveWallpaper(
+            fileManager.getTemporaryDirWithFile(
+                url.getFileName()
+            ),
+            context,
+            deviceManager.getScreenWidthPixels(),
+            deviceManager.getScreenHeightPixels()
         )
     }
 
@@ -361,7 +342,18 @@ class DetailsFragment : Fragment() {
     }
 
     private fun handleCropSuccess(result: Intent?, context: Context) {
-        addSubscribe(Flowable.fromCallable {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = setWallpaper(result, context)
+            if (result) {
+                showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
+            } else {
+                showSnackMsg(context.getString(R.string.set_wallpaper_not_success_message))
+            }
+        }
+    }
+
+    private suspend fun setWallpaper(result: Intent?, context: Context) =
+        withContext(Dispatchers.IO) {
             setWallpaper(
                 MediaStore.Images.Media.getBitmap(
                     context.contentResolver, Crop.getOutput(result)
@@ -369,18 +361,6 @@ class DetailsFragment : Fragment() {
                 context, deviceManager.getScreenWidthPixels(),
             )
         }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .onErrorReturn { false }
-            .subscribe { setSuccess: Boolean ->
-                if (setSuccess) {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
-                } else {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_not_success_message))
-                }
-            }
-        )
-    }
 
     private fun onRequestPermissions() {
         ActivityCompat.requestPermissions(
@@ -420,19 +400,18 @@ class DetailsFragment : Fragment() {
     }
 
     private fun onGoToCropActivity() {
-        addSubscribe(Flowable.fromCallable {
-            fileManager.getTemporaryDirWithFile(currentUrl.getFileName()).exists()
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { aBoolean: Boolean ->
-                if (aBoolean) {
-                    beginCrop()
-                } else {
-                    requireActivity().onBackPressed()
-                }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = getTempFile()
+            if (result) {
+                beginCrop()
+            } else {
+                requireActivity().onBackPressed()
             }
-        )
+        }
+    }
+
+    private suspend fun getTempFile() = withContext(Dispatchers.IO) {
+        fileManager.getTemporaryDirWithFile(currentUrl.getFileName()).exists()
     }
 
     private fun onMoveFileToPermanentGallery() {
@@ -448,24 +427,23 @@ class DetailsFragment : Fragment() {
         context: Activity,
         onRequestPermissions: () -> Unit
     ) {
-        addSubscribe(Flowable.fromCallable {
-            fileManager.savePermanentFile(url)
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { aBoolean: Boolean ->
-                if (aBoolean) {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
-                } else {
-                    showSnackMsg(context.getString(R.string.set_wallpaper_not_success_message))
-                    DetailUtils.checkPermission(
-                        context,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE, onRequestPermissions
-                    )
-                }
-                hideLoading()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = savePermanentFile(url)
+            if (result) {
+                showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
+            } else {
+                showSnackMsg(context.getString(R.string.set_wallpaper_not_success_message))
+                DetailUtils.checkPermission(
+                    context,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE, onRequestPermissions
+                )
             }
-        )
+            hideLoading()
+        }
+    }
+
+    private suspend fun savePermanentFile(url: String) = withContext(Dispatchers.IO) {
+        fileManager.savePermanentFile(url)
     }
 
     private fun onSendToRippleLwp() {

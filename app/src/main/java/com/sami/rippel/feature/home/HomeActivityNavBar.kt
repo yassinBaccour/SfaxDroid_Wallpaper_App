@@ -12,14 +12,13 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.initialization.InitializationStatus
 import com.sami.rippel.allah.R
 import com.sami.rippel.feature.other.PrivacyActivity
 import com.sami.rippel.feature.home.HomeFragment.Companion.newInstance
 import com.sami.rippel.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
-import com.tbruyelle.rxpermissions3.RxPermissions
+import com.sfaxdroid.base.extension.checkAppPermission
 
 class HomeActivityNavBar : SimpleActivity() {
 
@@ -36,7 +35,7 @@ class HomeActivityNavBar : SimpleActivity() {
         setupToolBar()
         initRatingApp()
         manageNbRunApp()
-        checkPermission()
+        this.checkAppPermission()
         loadFragment()
     }
 
@@ -51,7 +50,7 @@ class HomeActivityNavBar : SimpleActivity() {
     private fun initView() {
         mToolbar = findViewById(R.id.toolbar)
         mPrivacy = findViewById(R.id.imgPrivacy)
-        mPrivacy?.setOnClickListener { x: View? ->
+        mPrivacy?.setOnClickListener {
             val intent = Intent(
                 this,
                 PrivacyActivity::class.java
@@ -61,7 +60,7 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun setupAds() {
-        MobileAds.initialize(this) { initializationStatus: InitializationStatus? -> }
+        MobileAds.initialize(this)
         mInterstitialAd = InterstitialAd(this)
         mInterstitialAd!!.adUnitId = getString(R.string.intertitial)
         mInterstitialAd!!.loadAd(AdRequest.Builder().build())
@@ -105,14 +104,6 @@ class HomeActivityNavBar : SimpleActivity() {
         }
     }
 
-    private fun checkPermission() {
-        RxPermissions(this).request(
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_SETTINGS
-        )?.subscribe { granted: Boolean? -> }
-    }
-
     private fun setupToolBar() {
         setSupportActionBar(mToolbar)
     }
@@ -138,7 +129,7 @@ class HomeActivityNavBar : SimpleActivity() {
         }
     }
 
-    fun showTimedAdsWhenIOpenPicture() {
+    private fun showTimedAdsWhenIOpenPicture() {
         if (nbOpenAds == 4) {
             nbOpenAds = 0
             showInterstitial()
