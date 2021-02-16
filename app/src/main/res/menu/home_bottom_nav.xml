@@ -4,19 +4,16 @@
 
     <item
         android:id="@id/lwp_navigation"
-        android:icon="@drawable/ic_fav"
         android:orderInCategory="1"
         android:title="@string/screen_lwp" />
 
     <item
         android:id="@id/wallpaper_list_navigation"
-        android:icon="@drawable/ic_fav"
         android:orderInCategory="2"
         android:title="@string/screen_wallpaper" />
 
     <item
         android:id="@id/category_navigation"
-        android:icon="@drawable/ic_fav"
         android:orderInCategory="3"
         android:title="@string/screen_category" />
 </menu>

@@ -33,7 +33,6 @@ class HomeActivity : AppCompatActivity() {
         }
         preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCES_NAME)
         setupAds()
-
         initRatingApp()
         manageNbRunApp()
         this.checkAppPermission()

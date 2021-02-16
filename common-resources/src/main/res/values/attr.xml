@@ -7,6 +7,8 @@
         <attr name="customBackgroundColor" format="color" />
         <attr name="customBackgroundListColor" format="color" />
         <attr name="customCardBackgroundColor" format="color" />
+        <attr name="customCardTitleColor" format="color" />
+        <attr name="customCardSurtitleColor" format="color" />
         <attr name="customTextAccentColor" format="color" />
         <attr name="customTextInvColor" format="color" />
         <attr name="customBlackColor" format="color" />

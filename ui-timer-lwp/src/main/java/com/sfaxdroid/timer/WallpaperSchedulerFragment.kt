@@ -105,10 +105,10 @@ class WallpaperSchedulerFragment : Fragment() {
             initBtnActive(true)
             initBtnClose(true)
         } else {
-            com.sfaxdroid.base.utils.Utils.showSnackMessage(
+            /*com.sfaxdroid.base.utils.Utils.showSnackMessage(
                 rootLayout,
                 getString(R.string.add_wallpaper_messages)
-            )
+            )*/
         }
     }
 
@@ -247,10 +247,10 @@ class WallpaperSchedulerFragment : Fragment() {
                     )
                     GlobalScope.launch(Dispatchers.Main) {
                         initTxtStatus(true)
-                        com.sfaxdroid.base.utils.Utils.showSnackMessage(
+                        /*com.sfaxdroid.base.utils.Utils.showSnackMessage(
                             rootLayout,
                             getString(R.string.auto_change_on)
-                        )
+                        )*/
                     }
                 }
             }

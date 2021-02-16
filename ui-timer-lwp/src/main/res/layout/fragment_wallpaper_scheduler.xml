@@ -1,262 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/customPrimaryColor"
-    tools:mContext="com.sfaxdroid.timer.WallpaperSchedulerFragment">
+    android:background="?attr/customBackgroundColor">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/container_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical">
-
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtNotForget"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="@string/warning_message"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="?attr/customTextAccentColor"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:text="@string/service_is_message"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/txtstatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Off"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="@android:color/holo_red_light"
-                        android:textSize="40sp"
-                        android:textStyle="italic" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#80ecf0f1" />
-
-                    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
-                        <TableRow android:gravity="fill">
-
-                            <Button
-                                android:id="@+id/buttonActive"
-                                android:layout_width="wrap_content"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:background="@android:color/transparent"
-                                android:drawableTop="@mipmap/ic_active_img"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/active_this_service" />
-
-                            <View
-                                android:layout_width="0.5dp"
-                                android:layout_height="60dp"
-                                android:layout_gravity="center"
-                                android:background="#80ecf0f1" />
-
-                            <Button
-                                android:id="@+id/buttonClose"
-                                android:layout_width="wrap_content"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:background="@android:color/transparent"
-                                android:drawableTop="@mipmap/ic_close_img"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/close_this_service" />
-                        </TableRow>
-                    </TableLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="#80ecf0f1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/scheduler_new_days_title"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp" />
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:weightSum="1">
-
-                        <RadioButton
-                            android:id="@+id/radioOneHoure"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:checked="true"
-                            android:text="@string/one_houre"
-                            android:textSize="20dp" />
-
-                        <RadioButton
-                            android:id="@+id/radioSixHoure"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_weight="0.13"
-                            android:checked="false"
-                            android:text="@string/six_houre"
-                            android:textSize="20dp" />
-
-                        <RadioButton
-                            android:id="@+id/radioDouzeHoure"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_weight="0.13"
-                            android:checked="false"
-                            android:text="@string/twelve_hour"
-                            android:textSize="20dp" />
-
-                        <RadioButton
-                            android:id="@+id/radioOneDayHoure"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_weight="0.13"
-                            android:checked="false"
-                            android:text="@string/one_day"
-                            android:textSize="20dp" />
-                    </RadioGroup>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#80ecf0f1" />
-
-                    <View
-                        android:id="@+id/divinerBottom"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:background="#80ecf0f1" />
-
-                    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
-
-                        <TableRow android:gravity="fill">
-
-                            <Button
-                                android:id="@+id/buttonAddLwp"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:background="@android:color/transparent"
-                                android:drawableTop="@drawable/ic_gallery"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/add_new_message" />
-
-                            <View
-                                android:layout_width="0.5dp"
-                                android:layout_height="60dp"
-                                android:layout_gravity="center"
-                                android:background="#80ecf0f1" />
-
-                            <Button
-                                android:id="@+id/buttonLWPList"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:background="@android:color/transparent"
-                                android:drawableTop="@drawable/ic_fav"
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:text="@string/wallpaper_list_fav" />
-
-                        </TableRow>
-                    </TableLayout>
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/how_to_use_message"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/how_to_use_description"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
-    </FrameLayout>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="gone" />
+        android:orientation="vertical">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtNotForget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/warning_message"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?attr/customTextAccentColor"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/service_is_message"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?attr/customTextColor" />
+
+        <TextView
+            android:id="@+id/txtstatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Off"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="40sp"
+            android:textStyle="italic" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#80ecf0f1" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TableRow android:gravity="fill">
+
+                <Button
+                    android:id="@+id/buttonActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@mipmap/ic_active_img"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/active_this_service" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="#80ecf0f1" />
+
+                <Button
+                    android:id="@+id/buttonClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@mipmap/ic_close_img"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/close_this_service" />
+            </TableRow>
+        </TableLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#80ecf0f1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/scheduler_new_days_title"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:weightSum="1">
+
+            <RadioButton
+                android:id="@+id/radioOneHoure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:checked="true"
+                android:text="@string/one_houre"
+                android:textColor="?attr/customTextColor"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioSixHoure"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_weight="0.13"
+                android:checked="false"
+                android:text="@string/six_houre"
+                android:textColor="?attr/customTextColor"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioDouzeHoure"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_weight="0.13"
+                android:checked="false"
+                android:text="@string/twelve_hour"
+                android:textColor="?attr/customTextColor"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radioOneDayHoure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_weight="0.13"
+                android:checked="false"
+                android:text="@string/one_day"
+                android:textColor="?attr/customTextColor"
+                android:textSize="20sp" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:background="#80ecf0f1" />
+
+        <View
+            android:id="@+id/divinerBottom"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#80ecf0f1" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TableRow android:gravity="fill">
+
+                <Button
+                    android:id="@+id/buttonAddLwp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/ic_gallery"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/add_new_message" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:background="#80ecf0f1" />
+
+                <Button
+                    android:id="@+id/buttonLWPList"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@drawable/ic_fav"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/wallpaper_list_fav" />
+
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="@string/how_to_use_message"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?attr/customTextColor" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/how_to_use_description"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?attr/customTextColor" />
+    </LinearLayout>
+
+
+</ScrollView>
+
+
