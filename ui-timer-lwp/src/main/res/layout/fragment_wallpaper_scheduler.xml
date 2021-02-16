@@ -36,7 +36,7 @@
                         android:gravity="center"
                         android:text="@string/warning_message"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="?attr/customTextColor"
+                        android:textColor="?attr/customTextAccentColor"
                         android:visibility="gone" />
 
                     <TextView

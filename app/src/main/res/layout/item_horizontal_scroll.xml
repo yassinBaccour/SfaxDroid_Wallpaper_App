@@ -12,12 +12,12 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textColor="?attr/customTextColor"
+        android:textColor="?attr/customTextAccentColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="New Live Wallpaper"
-        tools:textColor="?attr/customTextColor" />
+        tools:textColor="?attr/customTextAccentColor" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_list"

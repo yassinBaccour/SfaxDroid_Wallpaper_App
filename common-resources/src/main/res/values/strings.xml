@@ -21,4 +21,5 @@
     <string name="set_wallpaper_success_message">Successfully set as wallpaper</string>
     <string name="set_wallpaper_not_success_message">Try again, Failed to set as wallpaper</string>
     <string name="set_as_dialog_message">Set As</string>
+    <string name="create_animated_wallpapers">Create Animated wallpapers</string>
 </resources>

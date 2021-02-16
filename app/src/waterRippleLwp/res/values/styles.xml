@@ -10,8 +10,10 @@
         <item name="customBackgroundColor">@color/primary</item>
         <item name="customBackgroundListColor">@color/primary</item>
         <item name="customCardBackgroundColor">@color/primary</item>
-        <item name="customTextColor">@color/colorAccent</item>
+        <item name="customTextAccentColor">@color/colorAccent</item>
         <item name="customTextInvColor">@android:color/white</item>
         <item name="customBlackColor">@android:color/black</item>
+        <item name="customTextColor">@android:color/white</item>
+        <item name="customTextSubColor">@android:color/white</item>
     </style>
 </resources>

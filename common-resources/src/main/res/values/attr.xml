@@ -7,8 +7,10 @@
         <attr name="customBackgroundColor" format="color" />
         <attr name="customBackgroundListColor" format="color" />
         <attr name="customCardBackgroundColor" format="color" />
-        <attr name="customTextColor" format="color" />
+        <attr name="customTextAccentColor" format="color" />
         <attr name="customTextInvColor" format="color" />
         <attr name="customBlackColor" format="color" />
+        <attr name="customTextColor" format="color" />
+        <attr name="customTextSubColor" format="color" />
     </declare-styleable>
 </resources>

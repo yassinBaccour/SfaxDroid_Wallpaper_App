@@ -80,15 +80,9 @@ class AnimWord2dFragment : Fragment() {
         buttonColor?.setOnClickListener { chooseColor() }
         fab.setOnClickListener { openLiveWallpapers() }
 
-        viewModel.progressValue.observe(viewLifecycleOwner, {
-            setProgressView(it.first, it.second)
-        })
-
         viewModel.isCompleted.observe(viewLifecycleOwner, {
             if (it) {
                 fab?.isEnabled = true
-                progressTxt?.text = getString(R.string.download_terminated_sucessful)
-                txtstatusDownload?.text = getString(R.string.download_completed)
                 clickable = true
             }
         })
@@ -212,22 +206,6 @@ class AnimWord2dFragment : Fragment() {
             Constants.ifBackgroundChanged = true
             Constants.nbIncrementationAfterChange = 0
             Utils.openLiveWallpaper<AnimWord2dWallpaper>(requireContext())
-        } else {
-            Utils.showSnackMessage(rootLayout, getString(R.string.waiting_downlaod))
-        }
-    }
-
-    private fun setProgressView(progress: Int, byte: Long) {
-        if (progress != 0) {
-            progress1?.progress = progress
-            progressTxt?.text = ("$progress%  "
-                    + getBytesDownloaded(
-                progress,
-                byte
-            ))
-        } else {
-            progress1?.progress = 0
-            progressTxt?.text = getString(R.string.failed_dwn)
         }
     }
 
