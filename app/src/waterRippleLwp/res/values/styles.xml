@@ -5,5 +5,13 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="android:statusBarColor">@color/primary</item>
+        <item name="customPrimaryColor">@color/primary</item>
+        <item name="customPrimaryDarkColor">@color/primary_dark</item>
+        <item name="customBackgroundColor">@color/primary</item>
+        <item name="customBackgroundListColor">@color/primary</item>
+        <item name="customCardBackgroundColor">@color/primary</item>
+        <item name="customTextColor">@color/colorAccent</item>
+        <item name="customTextInvColor">@android:color/white</item>
+        <item name="customBlackColor">@android:color/black</item>
     </style>
 </resources>

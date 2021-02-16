@@ -9,7 +9,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_dark"
+        android:background="?attr/customPrimaryDarkColor"
         android:indeterminate="true"
         android:visibility="gone" />
 
@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
 
 
             <androidx.appcompat.widget.Toolbar

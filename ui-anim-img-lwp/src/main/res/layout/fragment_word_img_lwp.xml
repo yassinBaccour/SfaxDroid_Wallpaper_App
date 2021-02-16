@@ -23,7 +23,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
+                android:background="?attr/customPrimaryColor"
                 android:minHeight="?attr/actionBarSize"
                 android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -121,7 +121,7 @@
             android:layout_margin="@dimen/fab_margin"
             android:enabled="false"
             android:src="@android:drawable/ic_media_play"
-            app:backgroundTint="#2ecc71" />
+            app:backgroundTint="?attr/customTextColor" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

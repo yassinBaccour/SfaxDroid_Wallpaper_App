@@ -7,6 +7,14 @@
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:navigationBarColor">@color/navigationBarColor</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="customPrimaryColor">@color/primary</item>
+        <item name="customPrimaryDarkColor">@color/primary_dark</item>
+        <item name="customBackgroundColor">@color/primary</item>
+        <item name="customBackgroundListColor">@color/primary</item>
+        <item name="customCardBackgroundColor">@color/primary</item>
+        <item name="customTextColor">@color/colorAccent</item>
+        <item name="customTextInvColor">@android:color/white</item>
+        <item name="customBlackColor">@android:color/black</item>
     </style>
 
     <style name="item_detail_open_button_style" parent="@style/Base.TextAppearance.AppCompat.Button">

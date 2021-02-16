@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="isTablet">false</bool>
+    <declare-styleable name="declaredStyle">
+        <attr name="customPrimaryColor" format="color" />
+        <attr name="customPrimaryDarkColor" format="color" />
+        <attr name="customBackgroundColor" format="color" />
+        <attr name="customBackgroundListColor" format="color" />
+        <attr name="customCardBackgroundColor" format="color" />
+        <attr name="customTextColor" format="color" />
+        <attr name="customTextInvColor" format="color" />
+        <attr name="customBlackColor" format="color" />
+    </declare-styleable>
+</resources>

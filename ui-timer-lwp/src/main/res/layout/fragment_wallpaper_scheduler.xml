@@ -4,7 +4,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#203141"
+    android:background="?attr/customPrimaryColor"
     tools:mContext="com.sfaxdroid.timer.WallpaperSchedulerFragment">
 
     <FrameLayout
@@ -36,7 +36,7 @@
                         android:gravity="center"
                         android:text="@string/warning_message"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="#2ecc71"
+                        android:textColor="?attr/customTextColor"
                         android:visibility="gone" />
 
                     <TextView

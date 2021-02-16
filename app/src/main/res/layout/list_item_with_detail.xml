@@ -54,7 +54,7 @@
             android:layout_gravity="bottom"
             android:gravity="end"
             android:text="@string/item_detail_random_btn_text"
-            android:textColor="@color/colorAccent"
+            android:textColor="?attr/customTextColor"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/item_detail_desc"
