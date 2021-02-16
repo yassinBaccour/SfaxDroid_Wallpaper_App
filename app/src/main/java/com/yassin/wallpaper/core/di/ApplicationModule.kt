@@ -28,7 +28,7 @@ class ApplicationModule {
     @Provides
     @Named("app-name")
     fun provideAppName(): AppName {
-        return AppName.SFAXDROID
+        return AppName.SfaxDroid
     }
 
     @Provides
@@ -39,8 +39,8 @@ class ApplicationModule {
     ): PreferencesManager {
 
         val name = when (appName) {
-            AppName.LILIAGAME -> "liliagame"
-            AppName.SFAXDROID -> "sfaxdroid"
+            AppName.LiliaGame -> "liliagame"
+            AppName.SfaxDroid -> "sfaxdroid"
         }
 
         return PreferencesManager(
