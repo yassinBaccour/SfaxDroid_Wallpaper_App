@@ -20,7 +20,7 @@ class WallpaperToLwpMapper : SfaxDroidMapper<Wallpaper, LwpItem> {
             "SkyView" -> LiveWallpaper.SkyView
             "Timer" -> LiveWallpaper.TimerLwp
             "Text2D" -> LiveWallpaper.NameOfAllah2D
-            else -> LiveWallpaper.none
+            else -> LiveWallpaper.None
         }
     }
 

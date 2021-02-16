@@ -5,5 +5,5 @@ sealed class LiveWallpaper {
     object SkyView : LiveWallpaper()
     object TimerLwp : LiveWallpaper()
     object NameOfAllah2D : LiveWallpaper()
-    object none : LiveWallpaper()
+    object None : LiveWallpaper()
 }
