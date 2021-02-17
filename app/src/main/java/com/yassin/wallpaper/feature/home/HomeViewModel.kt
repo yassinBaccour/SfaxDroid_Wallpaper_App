@@ -36,6 +36,9 @@ class HomeViewModel @Inject constructor(
     var wallpaperListLiveData: MutableLiveData<List<ItemWrapperList<Any>>> =
         MutableLiveData()
 
+    var tagVisibility: MutableLiveData<Boolean> =
+        MutableLiveData()
+
     init {
         loadWallpaperByScreenType()
     }
@@ -55,21 +58,27 @@ class HomeViewModel @Inject constructor(
     private fun loadWallpaperByScreenType() {
         when (val screenType = getType(screen)) {
             is ScreenType.Lwp -> {
+                tagVisibility.value = false
                 getLiveWallpapers(screenType)
             }
             is ScreenType.Wall -> {
+                tagVisibility.value = true
                 getWallpapers(screenType)
             }
             is ScreenType.Cat -> {
+                tagVisibility.value = false
                 getCategory(screenType)
             }
             ScreenType.TEXTURE -> {
+                tagVisibility.value = true
                 getWallpapers(screenType)
             }
             ScreenType.TIMER -> {
+                tagVisibility.value = false
                 getSavedWallpaperList(screenType)
             }
             ScreenType.CatWallpaper -> {
+                tagVisibility.value = false
                 getCatWallpapers(screenType)
             }
         }
