@@ -1,11 +1,11 @@
 package com.yassin.wallpaper.feature.home.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.data.mappers.TagView
 import com.yassin.wallpaper.R
 
@@ -15,8 +15,7 @@ class TagAdapter(
 ) :
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
 
-    var selectedItemPos = -1
-    var lastItemSelectedPos = -1
+    private var selected_position = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         TagViewHolder(
@@ -29,7 +28,21 @@ class TagAdapter(
         )
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
-        holder.bindView(mTagList[position], mTagList.size - 1, clickListener)
+        holder.bindView(mTagList[position], clickListener)
+        if (selected_position == position) {
+            holder.selectedBg()
+        } else {
+            holder.defaultBg()
+        }
+        holder.mLayout.setOnClickListener {
+            if (selected_position == position) {
+                selected_position = -1
+                notifyDataSetChanged()
+            } else {
+                selected_position = position
+                notifyDataSetChanged()
+            }
+        }
     }
 
     override fun getItemCount() = mTagList.size
@@ -37,21 +50,21 @@ class TagAdapter(
     class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val mTxtLabel: TextView = itemView.findViewById(R.id.item_content)
-        private val mDivider: View = itemView.findViewById(R.id.item_divider)
-        private val mLayout: LinearLayout = itemView.findViewById(R.id.item_tag_main)
+        val mLayout: LinearLayout = itemView.findViewById(R.id.item_tag_main)
 
-        fun bindView(tagView: TagView, tagSize: Int, clickListener: (TagView) -> Unit) {
-            mDivider.visibility = if (position == tagSize) View.INVISIBLE else View.VISIBLE
+        fun bindView(tagView: TagView, clickListener: (TagView) -> Unit) {
             mTxtLabel.text = tagView.name
-            mLayout.setOnClickListener { clickListener(tagView) }
+            mLayout.setOnClickListener {
+                clickListener(tagView)
+            }
         }
 
-        private fun defaultBg() {
+        fun defaultBg() {
             itemView.background =
                 itemView.context.getDrawable(R.drawable.round_corner_tag_unselected)
         }
 
-        private fun selectedBg() {
+        fun selectedBg() {
             itemView.background = itemView.context.getDrawable(R.drawable.round_corner_tag_selected)
         }
 

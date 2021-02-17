@@ -185,7 +185,14 @@ class HomeFragment : Fragment() {
                 false
             )
             adapter = TagAdapter(
-                listOf(TagView("wewewe"), TagView("wewewe"), TagView("wewewe"), TagView("wewewe")),
+                listOf(
+                    TagView("New"),
+                    TagView("Arabic"),
+                    TagView("Top Arabic"),
+                    TagView("Doua"),
+                    TagView("Abusaeed"),
+                    TagView("m5015")
+                ),
                 ::onTagClickListener
             )
         }
