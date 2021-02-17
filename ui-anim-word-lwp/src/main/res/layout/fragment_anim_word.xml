@@ -256,11 +256,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            android:background="@android:color/white"
             android:enabled="false"
             android:text="@string/create_animated_wallpapers"
-            android:textColor="?attr/customTextAccentColor" />
-
+            android:textColor="?attr/customTextAccentColor"
+            app:backgroundTint="@android:color/white" />
     </LinearLayout>
 </ScrollView>
 
