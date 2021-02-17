@@ -15,7 +15,7 @@ class TagAdapter(
 ) :
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
 
-    private var selected_position = -1
+    private var selectedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         TagViewHolder(
@@ -29,17 +29,17 @@ class TagAdapter(
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
         holder.bindView(mTagList[position], clickListener)
-        if (selected_position == position) {
+        if (selectedPosition == position) {
             holder.selectedBg()
         } else {
             holder.defaultBg()
         }
         holder.mLayout.setOnClickListener {
-            if (selected_position == position) {
-                selected_position = -1
+            if (selectedPosition == position) {
+                selectedPosition = -1
                 notifyDataSetChanged()
             } else {
-                selected_position = position
+                selectedPosition = position
                 notifyDataSetChanged()
             }
         }
