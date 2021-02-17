@@ -1,4 +1,4 @@
-package com.sfaxdroid.framecollage;
+package com.sfaxdroid.framecollage.stickers;
 
 /**
  * Created by yassin baccour on 16/05/2016.

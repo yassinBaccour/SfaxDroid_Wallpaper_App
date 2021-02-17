@@ -22,6 +22,7 @@ import android.provider.MediaStore.Images.Media;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,21 +47,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.flask.colorpicker.ColorPickerView;
-import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
-import com.kobakei.ratethisapp.RateThisApp;
 import com.myandroid.views.MultiTouchListener;
 import com.myandroid.views.myView;
-import com.sami.rippel.allah.R;
-import com.sami.rippel.base.BaseActivity;
-import com.sami.rippel.model.Constants;
-import com.sami.rippel.model.ViewModel;
-import com.sami.rippel.model.listner.StickersListener;
-import com.sami.rippel.ui.activity.GalleryActivity;
-import com.sami.rippel.ui.adapter.StickersFragmentPagerAdapter;
-import com.sfaxdroid.base.BitmapUtils;
-import com.sfaxdroid.base.FileUtils;
-import com.sfaxdroid.base.Utils;
 import com.sfaxdroid.framecollage.Constants;
 
 
@@ -70,12 +58,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 @SuppressLint("NewApi")
-public class StickersLabActivity extends BaseActivity implements StickersListener, View.OnClickListener {
+public class StickersLabActivity extends AppCompatActivity implements StickersListener, View.OnClickListener {
 
     private static final int PICTURE_TAKEN_FROM_GALLERY = 1;
     private static final int SHARE_REQUEST_CODE = 23123;
@@ -799,34 +783,6 @@ public class StickersLabActivity extends BaseActivity implements StickersListene
         }
     }
 
-    public void initRatingApp() {
-        RateThisApp.Config config = new RateThisApp.Config(3, 5);
-        config.setTitle(R.string.txtrate2);
-        config.setMessage(R.string.txtrate1);
-        config.setYesButtonText(R.string.txtrate5);
-        config.setNoButtonText(R.string.txtrate4);
-        config.setCancelButtonText(R.string.txtrate3);
-        RateThisApp.setCallback(new RateThisApp.Callback() {
-            @Override
-            public void onYesClicked() {
-                RateThisApp.stopRateDialog(StickersLabActivity.this);
-                ViewModel.Current.sharedPrefsUtils.SetSetting("rating",
-                        "yes");
-            }
-
-            @Override
-            public void onNoClicked() {
-                ViewModel.Current.sharedPrefsUtils.SetSetting("rating",
-                        "non");
-            }
-
-            @Override
-            public void onCancelClicked() {
-            }
-        });
-
-        RateThisApp.init(config);
-    }
 
     public void loadBitmapAsync(Intent data) {
         changeProgressBarVisibility(true);
