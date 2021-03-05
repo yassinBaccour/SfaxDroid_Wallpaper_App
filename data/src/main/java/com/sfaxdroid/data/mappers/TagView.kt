@@ -1,4 +1,4 @@
 package com.sfaxdroid.data.mappers
 
 
-class TagView(var name: String)
+class TagView(var name: String, fileName: String)

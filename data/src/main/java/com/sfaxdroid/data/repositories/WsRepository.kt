@@ -22,4 +22,8 @@ interface WsRepository {
         file: String
     ): Response
 
+    suspend fun getTags(
+        file: String
+    ): Response
+
 }

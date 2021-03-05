@@ -51,6 +51,11 @@ class HomeFragment : Fragment() {
         viewModel.tagVisibility.observe(viewLifecycleOwner) { visibility ->
             tagVisibility(visibility)
         }
+
+        viewModel.tagListLiveData.observe(viewLifecycleOwner) { list ->
+            showFilter(list)
+        }
+
     }
 
     private fun getFullUrl(url: String): String {
@@ -176,7 +181,9 @@ class HomeFragment : Fragment() {
                     }
                 })
         }
+    }
 
+    private fun showFilter(tagList: List<TagView>) {
         recycler_view_tag.apply {
             isNestedScrollingEnabled = false
             layoutManager = LinearLayoutManager(
@@ -185,21 +192,14 @@ class HomeFragment : Fragment() {
                 false
             )
             adapter = TagAdapter(
-                listOf(
-                    TagView("New"),
-                    TagView("Arabic"),
-                    TagView("Top Arabic"),
-                    TagView("Doua"),
-                    TagView("Abusaeed"),
-                    TagView("m5015")
-                ),
+                tagList,
                 ::onTagClickListener
             )
         }
     }
 
     private fun onTagClickListener(tagView: TagView) {
-
+        viewModel.loadByTag(tagView.name)
     }
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
@@ -235,6 +235,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
     private fun tagVisibility(visibility: Boolean) {
         recycler_view_tag.visibility = if (visibility) View.VISIBLE else View.GONE

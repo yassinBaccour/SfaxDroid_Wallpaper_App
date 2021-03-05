@@ -60,11 +60,13 @@ class HomeActivityNavBar : SimpleActivity() {
     private fun setupAds() {
         MobileAds.initialize(this)
         mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd!!.adUnitId = getString(R.string.intertitial)
-        mInterstitialAd!!.loadAd(AdRequest.Builder().build())
-        mInterstitialAd!!.adListener = object : AdListener() {
-            override fun onAdClosed() {
-                mInterstitialAd!!.loadAd(AdRequest.Builder().build())
+        mInterstitialAd?.apply {
+            adUnitId = getString(R.string.intertitial)
+            loadAd(AdRequest.Builder().build())
+            adListener = object : AdListener() {
+                override fun onAdClosed() {
+                    loadAd(AdRequest.Builder().build())
+                }
             }
         }
     }

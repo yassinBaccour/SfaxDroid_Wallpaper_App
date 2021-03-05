@@ -48,4 +48,15 @@ class Network @Inject constructor(
             false -> Response.FAILURE(Failure.NetworkConnection)
         }
     }
+
+    override suspend fun getTags(file: String): Response {
+        return when (networkHandler.isConnected()) {
+            true -> request(
+                service.getTags(file),
+                { Response.SUCESS(it) },
+                null
+            )
+            false -> Response.FAILURE(Failure.NetworkConnection)
+        }
+    }
 }
