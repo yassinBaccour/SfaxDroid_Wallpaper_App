@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="timer_wallpaper_name">خلفيات متبدلة</string>
-    <string name="add_new_message">إضافة الخلفيات</string>
+    <string name="add_new_message">إضافة</string>
     <string name="wallpaper_list_fav">قائمة الصور المحفوظة</string>
     <string name="how_to_use_description">حمل العديد من الخلفيات وذالك عبر إختيارها وقم بإختيار المدة الزمنية لتبديل الخلفية </string>
     <string name="how_to_use_message">كيفية الإستعمال</string>

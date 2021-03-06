@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="timer_wallpaper_name">Périodique</string>
-    <string name="add_new_message">Ajouter des Wallpapers</string>
+    <string name="add_new_message">Ajouter Photo</string>
     <string name="wallpaper_list_fav">Liste des images sauvegarder</string>
     <string name="how_to_use_description">Ajouter 4 photo minimum dans la liste des photo et choisissez le temps que vous voulez que lapplication change la photo puis activez le service</string>
     <string name="how_to_use_message">Comment sa marche ?</string>
@@ -11,7 +11,7 @@
     <string name="one_day">1 Jour</string>
     <string name="on_switch">On</string>
     <string name="off_switch">Off</string>
-    <string name="timerWallpaper">Timer Wallpaper</string>
+    <string name="timerWallpaper">Photo periodique</string>
     <string name="service_is_message">Le service est</string>
     <string name="add_wallpaper_title">Ajouter photo</string>
     <string name="add_wallpaper_min_message">Vous devez ajouter 4 photo Minimum a la liste</string>

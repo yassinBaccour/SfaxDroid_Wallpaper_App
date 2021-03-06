@@ -66,8 +66,8 @@
 
                 <Button
                     android:id="@+id/buttonActive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
@@ -84,8 +84,8 @@
 
                 <Button
                     android:id="@+id/buttonClose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
@@ -184,17 +184,17 @@
             android:background="#80ecf0f1" />
 
         <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TableRow android:gravity="fill">
 
                 <Button
                     android:id="@+id/buttonAddLwp"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_weight="50"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/ic_gallery"
                     android:paddingTop="10dp"
@@ -209,10 +209,10 @@
 
                 <Button
                     android:id="@+id/buttonLWPList"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
+                    android:layout_weight="50"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/ic_fav"
                     android:paddingTop="10dp"
