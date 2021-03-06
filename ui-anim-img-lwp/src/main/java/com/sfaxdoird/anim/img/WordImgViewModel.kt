@@ -13,11 +13,13 @@ import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.utils.Utils
 import java.io.File
+import javax.inject.Named
 
 class WordImgViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     fileManager: FileManager,
-    deviceManager: DeviceManager
+    deviceManager: DeviceManager,
+    @Named("domain-url") var domainUrl: String
 ) :
     ViewModel(), DownloadStatusListenerV1 {
 
@@ -41,7 +43,7 @@ class WordImgViewModel @ViewModelInject constructor(
         zipDestination = File(lwpFolder, Constants.ZIP_FOLDER_NAME)
 
         val requestZipFile =
-            DownloadRequest(Uri.parse(if (deviceManager.isSmallScreen()) com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_MINI_PNG else com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_PNG))
+            DownloadRequest(Uri.parse(if (deviceManager.isSmallScreen()) domainUrl + com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_MINI_PNG else domainUrl + com.sfaxdoird.anim.img.Constants.URL_ZIP_FILE_PNG))
                 .setDestinationURI(Uri.parse(lwpFolder.toString() + "/" + com.sfaxdoird.anim.img.Constants.PNG_ZIP_FILE_NAME))
                 .setPriority(DownloadRequest.Priority.LOW)
                 .setRetryPolicy(DefaultRetryPolicy())
