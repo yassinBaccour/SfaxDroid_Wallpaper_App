@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.yassin.wallpaper.R
@@ -18,8 +19,9 @@ import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.*
 import com.sfaxdroid.sky.SkyLiveWallpaper
+import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_all_background.*
+import kotlinx.android.synthetic.main.fragment_wallpapers.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -31,6 +33,62 @@ class HomeFragment : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_wallpapers, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        viewModel.wallpaperListLiveData.observe(viewLifecycleOwner) { list ->
+            showContent(list)
+        }
+        viewModel.tagVisibility.observe(viewLifecycleOwner) { visibility ->
+            tagVisibility(visibility)
+        }
+
+        viewModel.tagListLiveData.observe(viewLifecycleOwner) { list ->
+            showFilter(list)
+        }
+
+    }
+
+    fun initView() {
+        wallpapersListAdapter = WallpapersListAdapter(
+            arrayListOf()
+        ) { catItem -> openWallpaper(catItem) }
+
+        recycler_view_wallpapers?.apply {
+            layoutManager = getLwpLayoutManager()
+            //setHasFixedSize(true)
+            adapter = wallpapersListAdapter
+            addOnItemTouchListener(
+                object : RecyclerView.OnItemTouchListener {
+                    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+                    override fun onInterceptTouchEvent(
+                        rv: RecyclerView, e:
+                        MotionEvent
+                    ): Boolean {
+                        if (e.action == MotionEvent.ACTION_DOWN &&
+                            rv.scrollState == RecyclerView.SCROLL_STATE_SETTLING
+                        ) {
+                            rv.stopScroll()
+                        }
+                        return false
+                    }
+
+                    override fun onRequestDisallowInterceptTouchEvent(
+                        disallowIntercept: Boolean
+                    ) {
+                    }
+                })
+        }
+    }
 
     private fun getFullUrl(url: String): String {
         return url.replace("_preview", "")
@@ -125,36 +183,27 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showContent(mList: List<ItemWrapperList<Any>>) {
-        wallpapersListAdapter = WallpapersListAdapter(
-            mList
-        ) { catItem -> openWallpaper(catItem) }
+    private fun showContent(list: List<ItemWrapperList<Any>>) {
+        wallpapersListAdapter?.update(list)
+    }
 
-        recycler_view_wallpapers?.apply {
-            layoutManager = getLwpLayoutManager()
-            //setHasFixedSize(true)
-            adapter = wallpapersListAdapter
-            addOnItemTouchListener(
-                object : RecyclerView.OnItemTouchListener {
-                    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
-                    override fun onInterceptTouchEvent(
-                        rv: RecyclerView, e:
-                        MotionEvent
-                    ): Boolean {
-                        if (e.action == MotionEvent.ACTION_DOWN &&
-                            rv.scrollState == RecyclerView.SCROLL_STATE_SETTLING
-                        ) {
-                            rv.stopScroll()
-                        }
-                        return false
-                    }
-
-                    override fun onRequestDisallowInterceptTouchEvent(
-                        disallowIntercept: Boolean
-                    ) {
-                    }
-                })
+    private fun showFilter(tagList: List<TagView>) {
+        recycler_view_tag.apply {
+            isNestedScrollingEnabled = false
+            layoutManager = LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            adapter = TagAdapter(
+                tagList,
+                ::onTagClickListener
+            )
         }
+    }
+
+    private fun onTagClickListener(tagView: TagView) {
+        viewModel.loadByTag(tagView)
     }
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
@@ -192,21 +241,10 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_all_background, container, false)
+    private fun tagVisibility(visibility: Boolean) {
+        recycler_view_tag.visibility = if (visibility) View.VISIBLE else View.GONE
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.wallpaperListLiveData.observe(viewLifecycleOwner) { list ->
-            showContent(list)
-        }
-    }
 
     companion object {
         fun newInstance(

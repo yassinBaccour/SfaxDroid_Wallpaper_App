@@ -1,5 +1,6 @@
 package com.yassin.wallpaper.feature.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 
 class WallpapersListAdapter(
-    private var articleList: List<ItemWrapperList<Any>>,
+    private var articleList: MutableList<ItemWrapperList<Any>>,
     private val openCategory: (BaseWallpaperView) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -27,6 +28,13 @@ class WallpapersListAdapter(
     override fun getItemCount() = articleList.size
 
     override fun getItemViewType(position: Int) = getElementType(position)
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun update(list: List<ItemWrapperList<Any>>) {
+        articleList.clear()
+        articleList = list.toMutableList()
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {

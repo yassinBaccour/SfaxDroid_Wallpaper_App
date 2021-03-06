@@ -22,8 +22,14 @@ import javax.inject.Singleton
 class ApplicationModule {
 
     @Provides
-    @Named("domain-url")
     fun provideBaseUrl(): String = BuildConfig.APP_KEY
+
+    @Provides
+    fun provideJsonVersion(): String = BuildConfig.JSON_VERSION
+
+    @Provides
+    @Named("domain-url")
+    fun provideFullUrl(): String = provideBaseUrl() + provideJsonVersion() + "/"
 
     @Provides
     @Named("app-name")

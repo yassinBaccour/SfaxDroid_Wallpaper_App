@@ -9,7 +9,7 @@
         android:id="@+id/lwp_navigation_fg"
         android:name="com.yassin.wallpaper.feature.home.HomeFragment"
         android:label="@string/screen_lwp"
-        tools:layout="@layout/fragment_all_background">
+        tools:layout="@layout/fragment_wallpapers">
         <argument
             android:name="keyJsonFileName"
             android:defaultValue="lwp.json"
@@ -31,7 +31,7 @@
         android:id="@+id/chooser_navigation_fg"
         android:name="com.yassin.wallpaper.feature.home.HomeFragment"
         android:label="@string/screen_lwp"
-        tools:layout="@layout/fragment_all_background">
+        tools:layout="@layout/fragment_wallpapers">
         <argument
             android:name="keyJsonFileName"
             android:defaultValue="texture.json"

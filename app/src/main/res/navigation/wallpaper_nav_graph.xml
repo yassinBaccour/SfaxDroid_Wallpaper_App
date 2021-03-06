@@ -9,7 +9,7 @@
         android:id="@+id/wallpaper_list_navigation_fg"
         android:name="com.yassin.wallpaper.feature.home.HomeFragment"
         android:label="@string/screen_wallpaper"
-        tools:layout="@layout/fragment_all_background">
+        tools:layout="@layout/fragment_wallpapers">
         <argument
             android:name="keyJsonFileName"
             android:defaultValue="new.json"
