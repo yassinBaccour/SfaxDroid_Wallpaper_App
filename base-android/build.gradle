@@ -43,7 +43,7 @@ dependencies {
     api libraries.coordinatorlayout
     api libraries.material
     api libraries.livedataKtx
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
     api libraries.lifecycle
     api libraries.fragmentktx
 }

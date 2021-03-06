@@ -12,7 +12,7 @@ dependencies {
     api libraries.dagger
     api libraries.coroutinesCore
     api libraries.ktx
-    api 'androidx.room:room-common:2.3.0-beta01'
+    api 'androidx.room:room-common:2.3.0-beta02'
 }
 
 java {
