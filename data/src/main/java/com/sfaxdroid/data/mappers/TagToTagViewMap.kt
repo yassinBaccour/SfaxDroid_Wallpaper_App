@@ -4,6 +4,14 @@ import com.sfaxdroid.data.entity.Tag
 
 class TagToTagViewMap : SfaxDroidMapper<Tag, TagView> {
     override fun map(from: Tag?, isSmallScreen: Boolean): TagView {
-        return TagView(from?.title.orEmpty(), from?.fileName.orEmpty())
+        return TagView(from?.title ?: "", from?.fileName ?: "", getType(from?.type ?: ""))
+    }
+
+    private fun getType(type: String): TagType {
+        return when (type) {
+            "category" -> TagType.Category
+            "texture" -> TagType.Texture
+            else -> TagType.Wallpaper
+        }
     }
 }

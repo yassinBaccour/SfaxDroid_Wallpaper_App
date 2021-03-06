@@ -1,3 +1,3 @@
 package com.sfaxdroid.data.entity
 
-class Tag(var id: Int, var title: String, var fileName: String)
+class Tag(var id: Int, var title: String, var fileName: String, var type: String)

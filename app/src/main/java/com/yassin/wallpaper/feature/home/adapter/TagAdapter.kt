@@ -1,5 +1,6 @@
 package com.yassin.wallpaper.feature.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,21 +28,20 @@ class TagAdapter(
                 )
         )
 
-    override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
-        holder.bindView(mTagList[position], clickListener)
+    override fun onBindViewHolder(
+        holder: TagViewHolder, position: Int
+    ) {
+        val item = mTagList[position]
+        holder.bindView(item)
         if (selectedPosition == position) {
             holder.selectedBg()
         } else {
             holder.defaultBg()
         }
         holder.mLayout.setOnClickListener {
-            if (selectedPosition == position) {
-                selectedPosition = -1
-                notifyDataSetChanged()
-            } else {
-                selectedPosition = position
-                notifyDataSetChanged()
-            }
+            clickListener(item)
+            selectedPosition = position
+            notifyDataSetChanged()
         }
     }
 
@@ -52,11 +52,8 @@ class TagAdapter(
         private val mTxtLabel: TextView = itemView.findViewById(R.id.item_content)
         val mLayout: LinearLayout = itemView.findViewById(R.id.item_tag_main)
 
-        fun bindView(tagView: TagView, clickListener: (TagView) -> Unit) {
+        fun bindView(tagView: TagView) {
             mTxtLabel.text = tagView.name
-            mLayout.setOnClickListener {
-                clickListener(tagView)
-            }
         }
 
         fun defaultBg() {

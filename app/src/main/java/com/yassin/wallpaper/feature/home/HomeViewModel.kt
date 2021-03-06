@@ -111,7 +111,7 @@ class HomeViewModel @Inject constructor(
             }
             ScreenType.CatWallpaper -> {
                 tagVisibility.value = false
-                getCatWallpapers(screenType)
+                getCatWallpapers(screenType, fileName)
             }
         }
     }
@@ -151,7 +151,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getCatWallpapers(screenType: ScreenType) {
+    private fun getCatWallpapers(screenType: ScreenType, fileName: String) {
         viewModelScope.launch {
             when (val data = getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName))) {
                 is Response.SUCESS -> {
@@ -170,8 +170,12 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun loadByTag(tagName: String) {
-        getWallpapers(ScreenType.Lwp, tagName)
+    fun loadByTag(tagView: TagView) {
+        when (tagView.type) {
+            TagType.Category -> getCatWallpapers(ScreenType.Wall, tagView.fileName)
+            TagType.Texture -> getWallpapers(ScreenType.Wall, tagView.fileName)
+            else -> getWallpapers(ScreenType.Wall, tagView.fileName)
+        }
     }
 
     private fun getWallpapers(screenType: ScreenType, fileName: String) {

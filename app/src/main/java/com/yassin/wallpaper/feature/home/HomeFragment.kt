@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initView()
         viewModel.wallpaperListLiveData.observe(viewLifecycleOwner) { list ->
             showContent(list)
         }
@@ -56,6 +56,38 @@ class HomeFragment : Fragment() {
             showFilter(list)
         }
 
+    }
+
+    fun initView() {
+        wallpapersListAdapter = WallpapersListAdapter(
+            arrayListOf()
+        ) { catItem -> openWallpaper(catItem) }
+
+        recycler_view_wallpapers?.apply {
+            layoutManager = getLwpLayoutManager()
+            //setHasFixedSize(true)
+            adapter = wallpapersListAdapter
+            addOnItemTouchListener(
+                object : RecyclerView.OnItemTouchListener {
+                    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+                    override fun onInterceptTouchEvent(
+                        rv: RecyclerView, e:
+                        MotionEvent
+                    ): Boolean {
+                        if (e.action == MotionEvent.ACTION_DOWN &&
+                            rv.scrollState == RecyclerView.SCROLL_STATE_SETTLING
+                        ) {
+                            rv.stopScroll()
+                        }
+                        return false
+                    }
+
+                    override fun onRequestDisallowInterceptTouchEvent(
+                        disallowIntercept: Boolean
+                    ) {
+                    }
+                })
+        }
     }
 
     private fun getFullUrl(url: String): String {
@@ -151,36 +183,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showContent(mList: List<ItemWrapperList<Any>>) {
-        wallpapersListAdapter = WallpapersListAdapter(
-            mList
-        ) { catItem -> openWallpaper(catItem) }
-
-        recycler_view_wallpapers?.apply {
-            layoutManager = getLwpLayoutManager()
-            //setHasFixedSize(true)
-            adapter = wallpapersListAdapter
-            addOnItemTouchListener(
-                object : RecyclerView.OnItemTouchListener {
-                    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
-                    override fun onInterceptTouchEvent(
-                        rv: RecyclerView, e:
-                        MotionEvent
-                    ): Boolean {
-                        if (e.action == MotionEvent.ACTION_DOWN &&
-                            rv.scrollState == RecyclerView.SCROLL_STATE_SETTLING
-                        ) {
-                            rv.stopScroll()
-                        }
-                        return false
-                    }
-
-                    override fun onRequestDisallowInterceptTouchEvent(
-                        disallowIntercept: Boolean
-                    ) {
-                    }
-                })
-        }
+    private fun showContent(list: List<ItemWrapperList<Any>>) {
+        wallpapersListAdapter?.update(list)
     }
 
     private fun showFilter(tagList: List<TagView>) {
@@ -199,7 +203,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onTagClickListener(tagView: TagView) {
-        viewModel.loadByTag(tagView.name)
+        viewModel.loadByTag(tagView)
     }
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
