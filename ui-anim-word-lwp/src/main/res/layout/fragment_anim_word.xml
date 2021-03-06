@@ -73,7 +73,7 @@
                         <Button
                             android:id="@+id/buttonSizeSmall"
                             android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_height="110dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
@@ -92,7 +92,7 @@
                         <Button
                             android:id="@+id/buttonSizeMeduim"
                             android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_height="110dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
@@ -111,7 +111,7 @@
                         <Button
                             android:id="@+id/buttonSizeBig"
                             android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_height="110dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
@@ -130,7 +130,7 @@
                         <Button
                             android:id="@+id/buttonSizeFullScreen"
                             android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_height="110dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
