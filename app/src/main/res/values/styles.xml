@@ -29,7 +29,7 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
-    <style name="item_detail_title_style">
+    <style name="item_detail_title_style" parent="android:TextAppearance.Material.Title">
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">?attr/customCardTitleColor</item>
         <item name="android:paddingLeft">16dp</item>
@@ -38,9 +38,8 @@
         <item name="android:paddingBottom">12dp</item>
     </style>
 
-    <style name="item_detail_desc_style">
+    <style name="item_detail_desc_style" parent="android:TextAppearance.Material.Body2">
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">16sp</item>
         <item name="android:textColor">?attr/customCardSurtitleColor</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="android:paddingLeft">16dp</item>

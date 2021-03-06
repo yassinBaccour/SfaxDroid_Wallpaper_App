@@ -18,6 +18,7 @@ import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -118,7 +119,8 @@ class HomeViewModel @Inject constructor(
 
     private fun getLiveWallpapers(screenType: ScreenType) {
         viewModelScope.launch {
-            when (val data = getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(fileName))) {
+            when (val data =
+                getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(byLanguage(fileName)))) {
                 is Response.SUCESS -> {
                     wrapWallpapers(
                         wallpaperList = (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
@@ -131,6 +133,14 @@ class HomeViewModel @Inject constructor(
                 }
             }
 
+        }
+    }
+
+    private fun byLanguage(fileName: String): String {
+        return when (Locale.getDefault().language) {
+            "ar" -> fileName.replace("lwp", "lwp_ar")
+            "fr" -> fileName.replace("lwp", "lwp_fr")
+            else -> fileName
         }
     }
 
@@ -182,14 +192,12 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             when (val data = getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))) {
                 is Response.SUCESS -> {
-                    val wallpaperList =
-                        (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(
-                                wall,
-                                deviceManager.isSmallScreen()
-                            )
-                        }
-                    wrapWallpapers(wallpaperList, screenType)
+                    wrapWallpapers((data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                        WallpaperToViewMapper().map(
+                            wall,
+                            deviceManager.isSmallScreen()
+                        )
+                    }, screenType)
                 }
                 is Response.FAILURE -> {
                 }

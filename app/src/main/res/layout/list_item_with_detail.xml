@@ -18,9 +18,9 @@
         <ImageView
             android:id="@+id/item_detail_image"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="170dp"
             android:contentDescription="@null"
-            android:scaleType="fitXY"
+            android:scaleType="center"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
@@ -57,7 +57,6 @@
             android:textColor="?attr/customTextAccentColor"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/item_detail_desc"
             tools:text="@string/item_detail_random_btn_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,6 @@ class Network @Inject constructor(
     BaseNetwork(), WsRepository {
 
     override suspend fun getLiveWallpapers(file: String): Response {
-
         return when (networkHandler.isConnected()) {
             true -> request(service.getLiveWallpapers(file), { Response.SUCESS(it.copy()) }, null)
             false -> Response.FAILURE(Failure.NetworkConnection)
