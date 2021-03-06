@@ -97,16 +97,14 @@ class DetailsFragment : Fragment() {
         url: String
     ) {
         viewLifecycleOwner.lifecycleScope.launch {
-            var result = saveFile(url)
             onSaveTempsDorAndDoAction(
-                result,
+                saveFile(url),
                 actionToDo
             )
         }
-
     }
 
-    suspend fun saveFile(url: String) = withContext(Dispatchers.IO) {
+    private suspend fun saveFile(url: String) = withContext(Dispatchers.IO) {
         fileManager.getTemporaryDirWithFile(url.getFileName()).exists()
     }
 
@@ -165,7 +163,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun showMenuSheet() {
-        bottomsheetLayout?.showWithSheetView(
+        bottom_sheet_layout?.showWithSheetView(
             MenuSheetView(
                 requireContext(),
                 MenuType.LIST,
@@ -177,8 +175,8 @@ class DetailsFragment : Fragment() {
     }
 
     private fun dismissMenuSheet() {
-        if (bottomsheetLayout?.isSheetShowing == true) {
-            bottomsheetLayout?.dismissSheet()
+        if (bottom_sheet_layout?.isSheetShowing == true) {
+            bottom_sheet_layout?.dismissSheet()
         }
     }
 
