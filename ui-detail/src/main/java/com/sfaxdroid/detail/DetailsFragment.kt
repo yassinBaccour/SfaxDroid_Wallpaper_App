@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.flipboard.bottomsheet.commons.MenuSheetView
-import com.flipboard.bottomsheet.commons.MenuSheetView.MenuType
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
@@ -34,6 +32,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import javax.inject.Inject
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.bottom_sheet.*
+
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -41,6 +42,7 @@ class DetailsFragment : Fragment() {
     private var from: String = ""
     private var currentUrl: String = ""
     private var fromRipple = false
+    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
 
     @Inject
     lateinit var fileManager: FileManager
@@ -59,7 +61,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
-        initFabButton()
+        initFabButtonAndBottomSheet()
         checkPermission()
         showLoading()
         loadWallpaper()
@@ -133,7 +135,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private fun initFabButton() {
+    private fun initFabButtonAndBottomSheet() {
         if (from.isNotEmpty()) {
             when (from) {
                 Constants.KEY_ADD_TIMER_LWP -> fab?.setImageResource(R.mipmap.ic_download)
@@ -142,6 +144,32 @@ class DetailsFragment : Fragment() {
             }
         }
         fab.setOnClickListener { fabClick() }
+
+        bottomSheetBehavior =
+            BottomSheetBehavior.from<View>(bottom_sheet)
+        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior?.peekHeight = 0
+        bottomSheetBehavior?.isHideable = true
+        bottomSheetBehavior?.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED)
+                    fab?.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
+                else
+                    fab?.setImageResource(R.mipmap.ic_add_white)
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+
+        })
+
+        buttonWallpaper.setOnClickListener { view -> menuSheetClick(view.id) }
+        buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
+        buttonSave.setOnClickListener { view -> menuSheetClick(view.id) }
+        buttonSareInsta.setOnClickListener { view -> menuSheetClick(view.id) }
+        buttonSareFb.setOnClickListener { view -> menuSheetClick(view.id) }
     }
 
     private fun deleteFile(url: String): Boolean {
@@ -163,60 +191,52 @@ class DetailsFragment : Fragment() {
     }
 
     private fun showMenuSheet() {
-        bottom_sheet_layout?.showWithSheetView(
-            MenuSheetView(
-                requireContext(),
-                MenuType.LIST,
-                "",
-                menuSheetListener
-            ).apply {
-                inflateMenu(R.menu.menu_details)
-            })
+        if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+        } else {
+            bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
     private fun dismissMenuSheet() {
-        if (bottom_sheet_layout?.isSheetShowing == true) {
-            bottom_sheet_layout?.dismissSheet()
-        }
+        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
-    private val menuSheetListener: MenuSheetView.OnMenuItemClickListener
-        get() = MenuSheetView.OnMenuItemClickListener { item: MenuItem ->
-            when (item.itemId) {
-                R.id.buttonWallpaper -> {
-                    saveTempsDorAndDoAction(
-                        ActionTypeEnum.Crop,
-                        currentUrl
-                    )
-                }
-                R.id.buttonChooser -> {
-                    saveTempsDorAndDoAction(
-                        ActionTypeEnum.OpenNativeChooser,
-                        currentUrl
-                    )
-                }
-                R.id.buttonSave -> {
-                    saveTempsDorAndDoAction(
-                        ActionTypeEnum.MovePerDir,
-                        currentUrl
-                    )
-                }
-                R.id.buttonSareInsta -> {
-                    saveTempsDorAndDoAction(
-                        ActionTypeEnum.ShareInstagram,
-                        currentUrl
-                    )
-                }
-                R.id.buttonSareFb -> {
-                    saveTempsDorAndDoAction(
-                        ActionTypeEnum.ShareFacebook,
-                        currentUrl
-                    )
-                }
+    private fun menuSheetClick(id: Int) {
+        when (id) {
+            R.id.buttonWallpaper -> {
+                saveTempsDorAndDoAction(
+                    ActionTypeEnum.Crop,
+                    currentUrl
+                )
             }
-            dismissMenuSheet()
-            true
+            R.id.buttonChooser -> {
+                saveTempsDorAndDoAction(
+                    ActionTypeEnum.OpenNativeChooser,
+                    currentUrl
+                )
+            }
+            R.id.buttonSave -> {
+                saveTempsDorAndDoAction(
+                    ActionTypeEnum.MovePerDir,
+                    currentUrl
+                )
+            }
+            R.id.buttonSareInsta -> {
+                saveTempsDorAndDoAction(
+                    ActionTypeEnum.ShareInstagram,
+                    currentUrl
+                )
+            }
+            R.id.buttonSareFb -> {
+                saveTempsDorAndDoAction(
+                    ActionTypeEnum.ShareFacebook,
+                    currentUrl
+                )
+            }
         }
+        dismissMenuSheet()
+    }
 
     private fun onSaveTempsDorAndDoAction(
         aBoolean: Boolean,

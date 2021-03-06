@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:background="@android:color/white">
+
+    <Button
+        android:id="@+id/buttonWallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_crop"
+        android:text="@string/ui_detail_crop"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorPrimary" />
+
+    <Button
+        android:id="@+id/buttonChooser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_chooser"
+        android:text="@string/ui_detail_choose_wall"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorPrimary" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_save"
+        android:text="@string/ui_detail_save"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorPrimary" />
+
+    <Button
+        android:id="@+id/buttonSareInsta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_insta"
+        android:text="@string/ui_detail_insta"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorPrimary" />
+
+    <Button
+        android:id="@+id/buttonSareFb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@mipmap/ic_fb"
+        android:text="@string/ui_detail_share_fb"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorPrimary" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

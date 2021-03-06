@@ -2,6 +2,7 @@ package com.yassin.wallpaper.feature.home
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -57,16 +58,13 @@ class HomeActivity : AppCompatActivity() {
             containerId = R.id.nav_host_fragment,
             intent = intent
         )
-
         currentNavController = controller
         currentNavController?.observe(this) { navController ->
             navController.addOnDestinationChangedListener { _, destination, _ ->
-                if (destination.id != R.id.navigate_to_details) {
-                }
             }
         }
-
         currentNavController = controller
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
