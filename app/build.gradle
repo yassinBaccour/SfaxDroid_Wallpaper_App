@@ -161,7 +161,6 @@ dependencies {
     kapt libraries.hiltComplier
     implementation libraries.hiltViewModel
 
-    implementation libraries.kotlin
     implementation libraries.appcompat
     implementation libraries.multidex
     implementation libraries.material

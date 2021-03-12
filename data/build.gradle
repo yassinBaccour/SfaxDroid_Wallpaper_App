@@ -6,13 +6,13 @@ apply from: '../spotless.gradle'
 
 dependencies {
     kapt libraries.daggerCompiler
+    implementation libraries.kotlinStdlib
     api libraries.retrofit2Converter
-    api libraries.kotlinStdlib
     api libraries.annotation
     api libraries.dagger
     api libraries.coroutinesCore
     api libraries.ktx
-    api 'androidx.room:room-common:2.3.0-beta02'
+    api 'androidx.room:room-common:2.3.0-beta03'
 }
 
 java {

@@ -35,7 +35,6 @@ dependencies {
     api project(':common-layouts')
     api project(':common-resources')
     kapt libraries.glideCompîler
-    api libraries.kotlin
     api libraries.ktx
     api libraries.constraintlayout
     api libraries.appcompat
