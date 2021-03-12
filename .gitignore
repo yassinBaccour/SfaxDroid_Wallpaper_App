@@ -1,5 +1,18 @@
+*.apk
+*.aar
+*.ap_
+*.aab
 *.iml
+*.dex
+bin/
+gen/
+out/
+.idea/
 .gradle
+.idea/libraries
+.idea/caches
+.idea/modules.xml
+.idea/navEditor.xml
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -11,6 +24,9 @@
 /build
 /captures
 .externalNativeBuild
-.cxx
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
 gradle.properties
 

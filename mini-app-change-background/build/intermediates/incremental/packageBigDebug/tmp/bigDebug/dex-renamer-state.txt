@@ -1,0 +1,13 @@
+#Fri Mar 12 16:55:27 CET 2021
+path.3=1/classes.dex
+path.2=0/classes.dex
+path.1=10/classes.dex
+path.0=classes.dex
+base.3=D\:\\Android Code Source\\SfaxDroid_Arabic_Wallpaper\\mini-app-change-background\\build\\intermediates\\dex\\bigDebug\\mergeProjectDexBigDebug\\1\\classes.dex
+base.2=D\:\\Android Code Source\\SfaxDroid_Arabic_Wallpaper\\mini-app-change-background\\build\\intermediates\\dex\\bigDebug\\mergeProjectDexBigDebug\\0\\classes.dex
+base.1=D\:\\Android Code Source\\SfaxDroid_Arabic_Wallpaper\\mini-app-change-background\\build\\intermediates\\dex\\bigDebug\\mergeLibDexBigDebug\\10\\classes.dex
+base.0=D\:\\Android Code Source\\SfaxDroid_Arabic_Wallpaper\\mini-app-change-background\\build\\intermediates\\dex\\bigDebug\\mergeExtDexBigDebug\\classes.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex

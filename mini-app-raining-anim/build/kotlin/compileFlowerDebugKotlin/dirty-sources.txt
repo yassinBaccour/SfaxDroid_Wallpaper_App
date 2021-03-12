@@ -1,0 +1,9 @@
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\ResourceUtils.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\ui\Color.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\LiveWallpaper.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\Main.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\SettingActivity.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\ui\Shape.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\MainActivity.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\ui\Theme.kt
+D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\java\com\yassin\sfax\tawakkolalaallah\ui\Type.kt

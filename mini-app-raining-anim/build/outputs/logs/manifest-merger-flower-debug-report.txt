@@ -1,0 +1,290 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+MERGED from [:mini-app-base] D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-base\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.preference:preference-ktx:1.1.1] C:\Users\Yassin\.gradle\caches\transforms-3\737183ce31e04ccffe7b7e1ac521e53c\transformed\jetified-preference-ktx-1.1.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment-ktx:1.2.4] C:\Users\Yassin\.gradle\caches\transforms-3\ec6289b550430c3325b3d336651f605b\transformed\jetified-fragment-ktx-1.2.4\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.compose.material:material:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\8f8c7cf507ffb7f688acdc47ac2d235c\transformed\jetified-material-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\fccb505e8c3b220d4d2f2c16b84747b4\transformed\jetified-foundation-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-icons-core:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\a6370e65fba65e397f93fdfa5d5492c9\transformed\jetified-material-icons-core-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\81786bf7eba32691b60553bb5337b19b\transformed\jetified-animation-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\21b7646f6af20aed20f9694ededbdcae\transformed\jetified-foundation-layout-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\b7a86d22e5aad1dd2cfbef3db4f659d5\transformed\jetified-ui-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.animation:animation-core:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\cb02db713c697553b73fabc35fe68036\transformed\jetified-animation-core-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-text:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\46212762bd52d764ed40b9b5ecd75fae\transformed\jetified-ui-text-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime-saved-instance-state:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\3ab294dec7c09069023c3647e386970f\transformed\jetified-runtime-saved-instance-state-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-graphics:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\1904433a6c80e94238aedcf69ba74095\transformed\jetified-ui-graphics-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-unit:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\bed049a083e842e0c673488ce1c92ef1\transformed\jetified-ui-unit-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-geometry:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\62faaa6545bc8da6de016143de882612\transformed\jetified-ui-geometry-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.ui:ui-util:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\d9ca039753c115ea9d05d0597c53263a\transformed\jetified-ui-util-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\7fb9473c7f933b6bc3c7cc2145862d62\transformed\jetified-runtime-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity-ktx:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\b764bbe8c3487d25c3ca82bcccf34f34\transformed\jetified-activity-ktx-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.runtime:runtime-dispatch:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\efa90848b53af3673fb185b4a5fccd6a\transformed\jetified-runtime-dispatch-1.0.0-alpha08\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\Yassin\.gradle\caches\transforms-3\2d3134fc500b79634c0d7c9dfad7e21d\transformed\jetified-core-ktx-1.3.2\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\2bc0946aa2200248367c1414fd690a6f\transformed\jetified-lifecycle-viewmodel-ktx-2.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\778d9368f20d89bbaef148e8df7fba99\transformed\jetified-lifecycle-runtime-ktx-2.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\dbfbb30719d3da26794539c083d8198f\transformed\jetified-lifecycle-livedata-core-ktx-2.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.material:material:1.2.1] C:\Users\Yassin\.gradle\caches\transforms-3\1724aa4a53a8566983f5c10d2f7c1b24\transformed\material-1.2.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\Yassin\.gradle\caches\transforms-3\1cd660df95f618f0a12450310cb9c52a\transformed\constraintlayout-2.0.4\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.preference:preference:1.1.1] C:\Users\Yassin\.gradle\caches\transforms-3\22d0dd81de370564df81ba3c7418cc98\transformed\preference-1.1.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.3.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\b4431c04cce195fa3285e1e60fe69727\transformed\appcompat-1.3.0-alpha01\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\38057c7044dc523e806da83007132c9c\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\69ab33a6b0c6f8144d0b6a07665ea502\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\d34251a0c7acef78bc5245494f0288ca\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\848e112a9397ead0fd74f9f84c2b4e16\transformed\jetified-appcompat-resources-1.3.0-alpha01\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\90472d15ad0e78ce514f421883efb559\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\bd517f85be54a726c31c8ea3280dc9e3\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\226b42e094d02412bbbcf6d3f8e9514e\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.3.0-alpha07] C:\Users\Yassin\.gradle\caches\transforms-3\971b0c11d691089528d405176e252f4a\transformed\fragment-1.3.0-alpha07\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\143ee3640cca39b3e6daf87db4e70594\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\47732e659ad34043e2d28385ab923e71\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\25267242aa7ab9bbfc5023d160a82e92\transformed\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\ac1ead2174164b037fe105f806a6a88e\transformed\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.2.0-alpha07] C:\Users\Yassin\.gradle\caches\transforms-3\4dc60f0f0dead899b0117b5599a04b34\transformed\jetified-activity-1.2.0-alpha07\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\63212a69d274e2078cc84c20aedca1b3\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\46bb1c35f5f8684faf974b776139cd27\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.5.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\dfa39e1c5935d6d3a43b85f209764b40\transformed\core-1.5.0-alpha01\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\94f6fe5b7f65953abfd0a134b6b2ce02\transformed\versionedparcelable-1.1.0\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\229dff2138e7424089c6bd6ea8a8a5a8\transformed\jetified-lifecycle-viewmodel-savedstate-2.3.0-alpha06\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\b459ada04dfb025fed608bda4d2d0a94\transformed\lifecycle-viewmodel-2.3.0-alpha06\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\2eebfcc0c0bd108296a04a78f7403665\transformed\jetified-savedstate-1.1.0-alpha01\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\2adeb3c3bc5702da671b1469339ad4f8\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\a5c91c67ed66bf5df39a2c66eff60d3c\transformed\lifecycle-runtime-2.3.0-alpha06\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\0dc851249a2e145bc71c09f1b5fed765\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\9c233bfc01d7e730a86e0dfbb2614e73\transformed\lifecycle-livedata-core-2.3.0-alpha06\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\0f6b2d10da1d0ef180cd60f9fe761f67\transformed\core-runtime-2.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\ee5e49f01304970e133d83eccd21d48f\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\30cc909e0e7f0d0bd0ea9420fd271265\transformed\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+	package
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:3:5-47
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:1-49:12
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.SET_WALLPAPER
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:5:5-72
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:5:22-69
+uses-feature#android.software.live_wallpaper
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:7:5-9:35
+	android:required
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:9:9-32
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:8:9-55
+application
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:11:5-47:19
+MERGED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:24:5-28:19
+MERGED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:24:5-28:19
+MERGED from [com.google.android.material:material:1.2.1] C:\Users\Yassin\.gradle\caches\transforms-3\1724aa4a53a8566983f5c10d2f7c1b24\transformed\material-1.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.2.1] C:\Users\Yassin\.gradle\caches\transforms-3\1724aa4a53a8566983f5c10d2f7c1b24\transformed\material-1.2.1\AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\Yassin\.gradle\caches\transforms-3\1cd660df95f618f0a12450310cb9c52a\transformed\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\Yassin\.gradle\caches\transforms-3\1cd660df95f618f0a12450310cb9c52a\transformed\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.5.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\dfa39e1c5935d6d3a43b85f209764b40\transformed\core-1.5.0-alpha01\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.5.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\dfa39e1c5935d6d3a43b85f209764b40\transformed\core-1.5.0-alpha01\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\94f6fe5b7f65953abfd0a134b6b2ce02\transformed\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\94f6fe5b7f65953abfd0a134b6b2ce02\transformed\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.5.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\dfa39e1c5935d6d3a43b85f209764b40\transformed\core-1.5.0-alpha01\AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:14:9-41
+	android:icon
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:13:9-43
+	android:allowBackup
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:12:9-35
+	android:theme
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:15:9-37
+service#com.yassin.sfax.tawakkolalaallah.LiveWallpaper
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:17:9-29:19
+	android:label
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:20:13-45
+	android:permission
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:21:13-67
+	android:icon
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:19:13-47
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:18:13-42
+intent-filter#action:name:android.service.wallpaper.WallpaperService
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:22:13-24:29
+action#android.service.wallpaper.WallpaperService
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:23:17-85
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:23:25-82
+meta-data#android.service.wallpaper
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:26:13-28:53
+	android:resource
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:28:17-50
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:27:17-57
+activity#com.yassin.sfax.tawakkolalaallah.SettingActivity
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:31:9-35:48
+	android:label
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:35:13-45
+	android:exported
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:33:13-36
+	android:theme
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:34:13-41
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:32:13-44
+activity#com.yassin.sfax.tawakkolalaallah.MainActivity
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:36:9-45:20
+	android:screenOrientation
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:39:13-51
+	android:label
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:38:13-45
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:37:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:40:13-44:29
+action#android.intent.action.MAIN
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:41:17-69
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:41:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:43:17-77
+	android:name
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml:43:27-74
+uses-sdk
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+MERGED from [:mini-app-base] D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-base\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:mini-app-base] D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-base\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.preference:preference-ktx:1.1.1] C:\Users\Yassin\.gradle\caches\transforms-3\737183ce31e04ccffe7b7e1ac521e53c\transformed\jetified-preference-ktx-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference-ktx:1.1.1] C:\Users\Yassin\.gradle\caches\transforms-3\737183ce31e04ccffe7b7e1ac521e53c\transformed\jetified-preference-ktx-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment-ktx:1.2.4] C:\Users\Yassin\.gradle\caches\transforms-3\ec6289b550430c3325b3d336651f605b\transformed\jetified-fragment-ktx-1.2.4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment-ktx:1.2.4] C:\Users\Yassin\.gradle\caches\transforms-3\ec6289b550430c3325b3d336651f605b\transformed\jetified-fragment-ktx-1.2.4\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\8f8c7cf507ffb7f688acdc47ac2d235c\transformed\jetified-material-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\8f8c7cf507ffb7f688acdc47ac2d235c\transformed\jetified-material-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\fccb505e8c3b220d4d2f2c16b84747b4\transformed\jetified-foundation-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\fccb505e8c3b220d4d2f2c16b84747b4\transformed\jetified-foundation-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\a6370e65fba65e397f93fdfa5d5492c9\transformed\jetified-material-icons-core-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-icons-core:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\a6370e65fba65e397f93fdfa5d5492c9\transformed\jetified-material-icons-core-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\81786bf7eba32691b60553bb5337b19b\transformed\jetified-animation-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\81786bf7eba32691b60553bb5337b19b\transformed\jetified-animation-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\21b7646f6af20aed20f9694ededbdcae\transformed\jetified-foundation-layout-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.foundation:foundation-layout:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\21b7646f6af20aed20f9694ededbdcae\transformed\jetified-foundation-layout-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\b7a86d22e5aad1dd2cfbef3db4f659d5\transformed\jetified-ui-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\b7a86d22e5aad1dd2cfbef3db4f659d5\transformed\jetified-ui-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\cb02db713c697553b73fabc35fe68036\transformed\jetified-animation-core-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.animation:animation-core:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\cb02db713c697553b73fabc35fe68036\transformed\jetified-animation-core-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\46212762bd52d764ed40b9b5ecd75fae\transformed\jetified-ui-text-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-text:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\46212762bd52d764ed40b9b5ecd75fae\transformed\jetified-ui-text-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saved-instance-state:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\3ab294dec7c09069023c3647e386970f\transformed\jetified-runtime-saved-instance-state-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-saved-instance-state:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\3ab294dec7c09069023c3647e386970f\transformed\jetified-runtime-saved-instance-state-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\1904433a6c80e94238aedcf69ba74095\transformed\jetified-ui-graphics-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-graphics:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\1904433a6c80e94238aedcf69ba74095\transformed\jetified-ui-graphics-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\bed049a083e842e0c673488ce1c92ef1\transformed\jetified-ui-unit-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-unit:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\bed049a083e842e0c673488ce1c92ef1\transformed\jetified-ui-unit-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\62faaa6545bc8da6de016143de882612\transformed\jetified-ui-geometry-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-geometry:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\62faaa6545bc8da6de016143de882612\transformed\jetified-ui-geometry-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\d9ca039753c115ea9d05d0597c53263a\transformed\jetified-ui-util-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.ui:ui-util:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\d9ca039753c115ea9d05d0597c53263a\transformed\jetified-ui-util-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\7fb9473c7f933b6bc3c7cc2145862d62\transformed\jetified-runtime-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\7fb9473c7f933b6bc3c7cc2145862d62\transformed\jetified-runtime-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\b764bbe8c3487d25c3ca82bcccf34f34\transformed\jetified-activity-ktx-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity-ktx:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\b764bbe8c3487d25c3ca82bcccf34f34\transformed\jetified-activity-ktx-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-dispatch:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\efa90848b53af3673fb185b4a5fccd6a\transformed\jetified-runtime-dispatch-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.runtime:runtime-dispatch:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\efa90848b53af3673fb185b4a5fccd6a\transformed\jetified-runtime-dispatch-1.0.0-alpha08\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\Yassin\.gradle\caches\transforms-3\2d3134fc500b79634c0d7c9dfad7e21d\transformed\jetified-core-ktx-1.3.2\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\Yassin\.gradle\caches\transforms-3\2d3134fc500b79634c0d7c9dfad7e21d\transformed\jetified-core-ktx-1.3.2\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\2bc0946aa2200248367c1414fd690a6f\transformed\jetified-lifecycle-viewmodel-ktx-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\2bc0946aa2200248367c1414fd690a6f\transformed\jetified-lifecycle-viewmodel-ktx-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\778d9368f20d89bbaef148e8df7fba99\transformed\jetified-lifecycle-runtime-ktx-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\778d9368f20d89bbaef148e8df7fba99\transformed\jetified-lifecycle-runtime-ktx-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\dbfbb30719d3da26794539c083d8198f\transformed\jetified-lifecycle-livedata-core-ktx-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\dbfbb30719d3da26794539c083d8198f\transformed\jetified-lifecycle-livedata-core-ktx-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.material:material:1.2.1] C:\Users\Yassin\.gradle\caches\transforms-3\1724aa4a53a8566983f5c10d2f7c1b24\transformed\material-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.2.1] C:\Users\Yassin\.gradle\caches\transforms-3\1724aa4a53a8566983f5c10d2f7c1b24\transformed\material-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\Yassin\.gradle\caches\transforms-3\1cd660df95f618f0a12450310cb9c52a\transformed\constraintlayout-2.0.4\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\Yassin\.gradle\caches\transforms-3\1cd660df95f618f0a12450310cb9c52a\transformed\constraintlayout-2.0.4\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.preference:preference:1.1.1] C:\Users\Yassin\.gradle\caches\transforms-3\22d0dd81de370564df81ba3c7418cc98\transformed\preference-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.1.1] C:\Users\Yassin\.gradle\caches\transforms-3\22d0dd81de370564df81ba3c7418cc98\transformed\preference-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\b4431c04cce195fa3285e1e60fe69727\transformed\appcompat-1.3.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\b4431c04cce195fa3285e1e60fe69727\transformed\appcompat-1.3.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\38057c7044dc523e806da83007132c9c\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\38057c7044dc523e806da83007132c9c\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\69ab33a6b0c6f8144d0b6a07665ea502\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\69ab33a6b0c6f8144d0b6a07665ea502\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\d34251a0c7acef78bc5245494f0288ca\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\Yassin\.gradle\caches\transforms-3\d34251a0c7acef78bc5245494f0288ca\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\848e112a9397ead0fd74f9f84c2b4e16\transformed\jetified-appcompat-resources-1.3.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\848e112a9397ead0fd74f9f84c2b4e16\transformed\jetified-appcompat-resources-1.3.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\90472d15ad0e78ce514f421883efb559\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\90472d15ad0e78ce514f421883efb559\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\bd517f85be54a726c31c8ea3280dc9e3\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\bd517f85be54a726c31c8ea3280dc9e3\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\226b42e094d02412bbbcf6d3f8e9514e\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\226b42e094d02412bbbcf6d3f8e9514e\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.0-alpha07] C:\Users\Yassin\.gradle\caches\transforms-3\971b0c11d691089528d405176e252f4a\transformed\fragment-1.3.0-alpha07\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.0-alpha07] C:\Users\Yassin\.gradle\caches\transforms-3\971b0c11d691089528d405176e252f4a\transformed\fragment-1.3.0-alpha07\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\143ee3640cca39b3e6daf87db4e70594\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\143ee3640cca39b3e6daf87db4e70594\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\47732e659ad34043e2d28385ab923e71\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\47732e659ad34043e2d28385ab923e71\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\25267242aa7ab9bbfc5023d160a82e92\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\25267242aa7ab9bbfc5023d160a82e92\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\ac1ead2174164b037fe105f806a6a88e\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\ac1ead2174164b037fe105f806a6a88e\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.2.0-alpha07] C:\Users\Yassin\.gradle\caches\transforms-3\4dc60f0f0dead899b0117b5599a04b34\transformed\jetified-activity-1.2.0-alpha07\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.0-alpha07] C:\Users\Yassin\.gradle\caches\transforms-3\4dc60f0f0dead899b0117b5599a04b34\transformed\jetified-activity-1.2.0-alpha07\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\63212a69d274e2078cc84c20aedca1b3\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\63212a69d274e2078cc84c20aedca1b3\transformed\jetified-autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\46bb1c35f5f8684faf974b776139cd27\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\46bb1c35f5f8684faf974b776139cd27\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.5.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\dfa39e1c5935d6d3a43b85f209764b40\transformed\core-1.5.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\dfa39e1c5935d6d3a43b85f209764b40\transformed\core-1.5.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\94f6fe5b7f65953abfd0a134b6b2ce02\transformed\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\94f6fe5b7f65953abfd0a134b6b2ce02\transformed\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\229dff2138e7424089c6bd6ea8a8a5a8\transformed\jetified-lifecycle-viewmodel-savedstate-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\229dff2138e7424089c6bd6ea8a8a5a8\transformed\jetified-lifecycle-viewmodel-savedstate-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\b459ada04dfb025fed608bda4d2d0a94\transformed\lifecycle-viewmodel-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\b459ada04dfb025fed608bda4d2d0a94\transformed\lifecycle-viewmodel-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\2eebfcc0c0bd108296a04a78f7403665\transformed\jetified-savedstate-1.1.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0-alpha01] C:\Users\Yassin\.gradle\caches\transforms-3\2eebfcc0c0bd108296a04a78f7403665\transformed\jetified-savedstate-1.1.0-alpha01\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\2adeb3c3bc5702da671b1469339ad4f8\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\2adeb3c3bc5702da671b1469339ad4f8\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\a5c91c67ed66bf5df39a2c66eff60d3c\transformed\lifecycle-runtime-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\a5c91c67ed66bf5df39a2c66eff60d3c\transformed\lifecycle-runtime-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\0dc851249a2e145bc71c09f1b5fed765\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\0dc851249a2e145bc71c09f1b5fed765\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\9c233bfc01d7e730a86e0dfbb2614e73\transformed\lifecycle-livedata-core-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.0-alpha06] C:\Users\Yassin\.gradle\caches\transforms-3\9c233bfc01d7e730a86e0dfbb2614e73\transformed\lifecycle-livedata-core-2.3.0-alpha06\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\0f6b2d10da1d0ef180cd60f9fe761f67\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Yassin\.gradle\caches\transforms-3\0f6b2d10da1d0ef180cd60f9fe761f67\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\ee5e49f01304970e133d83eccd21d48f\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\ee5e49f01304970e133d83eccd21d48f\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\30cc909e0e7f0d0bd0ea9420fd271265\transformed\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\Yassin\.gradle\caches\transforms-3\30cc909e0e7f0d0bd0ea9420fd271265\transformed\jetified-annotation-experimental-1.0.0\AndroidManifest.xml:20:5-22:41
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+		ADDED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+		INJECTED from D:\Android Code Source\SfaxDroid_Arabic_Wallpaper\mini-app-raining-anim\src\main\AndroidManifest.xml
+activity#androidx.compose.ui.tooling.preview.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:25:9-27:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:27:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling:1.0.0-alpha08] C:\Users\Yassin\.gradle\caches\transforms-3\99ad3fd426c2d6358bf8538fde56ab66\transformed\jetified-ui-tooling-1.0.0-alpha08\AndroidManifest.xml:26:13-79
