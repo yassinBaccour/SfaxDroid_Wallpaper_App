@@ -1,2 +1,0 @@
-com/yassin/wallpaper/BuildConfig.java
- com.yassin.wallpaper.BuildConfig
