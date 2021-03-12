@@ -2,19 +2,16 @@ apply from: './dependencies.gradle'
 
 buildscript {
 
-    ext {
-        compose_version = '1.0.0-alpha08'
-    }
     ext.kotlin_version = '1.4.30'
 
     repositories {
-        jcenter()
+        mavenCentral() j
         google()
     }
 
     dependencies {
         //classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha08'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha09'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.5'
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.30.1-alpha'
@@ -25,7 +22,7 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
         google()
