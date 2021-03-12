@@ -47,11 +47,25 @@
             android:id="@+id/navigate_to_word_img"
             app:destination="@id/word_img_fragment" />
     </fragment>
+
     <fragment
         android:id="@+id/wallpaper_scheduler_fragment"
         android:name="com.sfaxdroid.timer.WallpaperSchedulerFragment"
         android:label="WallpaperSchedulerFragment"
-        tools:layout="@layout/fragment_wallpaper_scheduler" />
+        tools:layout="@layout/fragment_wallpaper_scheduler">
+        <argument
+            android:name="keyJsonFileName"
+            android:defaultValue="texture.json"
+            app:argType="string" />
+        <argument
+            android:name="keyScreenType"
+            android:defaultValue="NEW"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_scheduler_to_list"
+            app:destination="@id/wall_list_navigation_fg" />
+    </fragment>
+
     <fragment
         android:id="@+id/anim_word_2d_fg"
         android:name="com.sfaxdoird.anim.word.AnimWord2dFragment"
@@ -62,5 +76,23 @@
         android:name="com.sfaxdoird.anim.img.WordImgFragment"
         android:label="WordImgFragment"
         tools:layout="@layout/fragment_word_img_lwp" />
+
+    <fragment
+        android:id="@+id/wall_list_navigation_fg"
+        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_wallpapers">
+        <action
+            android:id="@+id/action_list_to_detailsFragment"
+            app:destination="@id/detailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment2"
+        android:name="com.sfaxdroid.detail.DetailsFragment"
+        android:label="DetailsFragment">
+        <action
+            android:id="@+id/action_details_to_scheduler"
+            app:destination="@id/wallpaper_scheduler_fragment" />
+    </fragment>
 
 </navigation>

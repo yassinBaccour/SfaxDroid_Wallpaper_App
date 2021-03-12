@@ -14,10 +14,11 @@ import com.yassin.wallpaper.R
 import com.yassin.wallpaper.core.setupWithNavController
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
+import com.sfaxdroid.timer.NavigationCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), NavigationCallback {
 
     private var mInterstitialAd: InterstitialAd? = null
     private var currentNavController: LiveData<NavController>? = null
@@ -150,5 +151,9 @@ class HomeActivity : AppCompatActivity() {
 
         @JvmField
         var nbOpenAds = 0
+    }
+
+    override fun onNavigateToList() {
+        TODO("Not yet implemented")
     }
 }
