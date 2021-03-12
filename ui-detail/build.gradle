@@ -27,14 +27,14 @@ android {
 }
 
 dependencies {
-    kapt glide.glideCompîler
+    kapt Libs.glide.glideCompîler
     implementation project(':data')
     implementation project(':base-android')
-    implementation libraries.crop
-    implementation libraries.recyclerview
+    implementation Libs.other.crop
+    implementation Libs.androidx.recyclerview
 
-    api hilt.hiltLib
-    kapt hilt.hiltAndroidComplier
+    api Libs.hilt.hiltLib
+    kapt Libs.hilt.hiltAndroidComplier
 
-    kapt hilt.hiltComplier
+    kapt Libs.hilt.hiltComplier
 }

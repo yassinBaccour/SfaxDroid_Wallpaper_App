@@ -33,12 +33,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base-android')
-    implementation kotlin.coroutinesAndroid
+    implementation Libs.kotlin.coroutinesAndroid
 
-    api hilt.hiltLib
-    kapt hilt.hiltAndroidComplier
+    api Libs.hilt.hiltLib
+    kapt Libs.hilt.hiltAndroidComplier
 
-    kapt hilt.hiltComplier
+    kapt Libs.hilt.hiltComplier
 }

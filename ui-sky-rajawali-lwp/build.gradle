@@ -35,5 +35,5 @@ android {
 }
 
 dependencies {
-    implementation libraries.rajawali
+    implementation Libs.other.rajawali
 }

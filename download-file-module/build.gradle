@@ -28,6 +28,6 @@ android {
 }
 
 dependencies {
-    api "com.mani:ThinDownloadManager:1.4.0"
+    api Libs.other.download
 }
 

@@ -30,18 +30,17 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':base')
     api project(':common-layouts')
     api project(':common-resources')
-    kapt glide.glideCompîler
-    api libraries.constraintlayout
-    api libraries.appcompat
-    api glide.glide
-    api libraries.coordinatorlayout
-    api google.material
-    api lifecycle.livedataKtx
-    api lifecycle.livedataViewmodel
-    api lifecycle.lifecycle
-    api libraries.fragmentktx
+    kapt Libs.glide.glideCompîler
+    api Libs.androidx.constraintlayout
+    api Libs.androidx.appcompat
+    api Libs.glide.glide
+    api Libs.androidx.coordinatorlayout
+    api Libs.google.material
+    api Libs.lifecycle.livedataKtx
+    api Libs.lifecycle.livedataViewmodel
+    api Libs.lifecycle.lifecycle
+    api Libs.androidx.fragmentktx
 }

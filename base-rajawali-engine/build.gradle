@@ -23,6 +23,6 @@ android {
 dependencies {
     api files('libs/rajawalilib.jar')
     api project(':mini-app-base')
-    api libraries.appcompat
-    implementation libraries.preference
+    api Libs.androidx.appcompat
+    implementation Libs.androidx.preference
 }

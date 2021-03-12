@@ -32,17 +32,17 @@ android {
 }
 
 dependencies {
-    implementation libraries.colorpicker
+    implementation Libs.other.colorpicker
     implementation project(':base-android')
     implementation project(':download-file-module')
 
-    implementation navigation.fragmentNavktx
-    implementation navigation.navigationKtx
+    implementation Libs.navigation.fragmentNavktx
+    implementation Libs.navigation.navigationKtx
 
-    api hilt.hiltLib
-    kapt hilt.hiltAndroidComplier
+    api Libs.hilt.hiltLib
+    kapt Libs.hilt.hiltAndroidComplier
 
-    api hilt.hiltViewModel
-    kapt hilt.hiltComplier
+    api Libs.hilt.hiltViewModel
+    kapt Libs.hilt.hiltComplier
 
 }

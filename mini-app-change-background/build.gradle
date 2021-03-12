@@ -43,7 +43,7 @@ android {
 
 dependencies {
     implementation project(':mini-app-base')
-    implementation google.servicesAds
+    implementation Libs.google.servicesAds
 }
 
 

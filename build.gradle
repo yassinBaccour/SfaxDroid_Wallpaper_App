@@ -9,12 +9,12 @@ buildscript {
 
     dependencies {
         //classpath google.crashlyticsGradle
-        classpath projectClasspath.gradleBuildTool
-        classpath kotlin.kotlinGradlePlugin
-        classpath google.service
-        classpath hilt.gradlePlugin
-        classpath projectClasspath.spotless
-        classpath projectClasspath.libCheckUpdate
+        classpath Libs.projectClasspath.gradleBuildTool
+        classpath Libs.kotlin.kotlinGradlePlugin
+        classpath Libs.google.service
+        classpath Libs.hilt.gradlePlugin
+        classpath Libs.projectClasspath.spotless
+        classpath Libs.projectClasspath.libCheckUpdate
     }
 }
 

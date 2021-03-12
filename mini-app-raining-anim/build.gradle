@@ -59,11 +59,11 @@ android {
 
     dependencies {
         implementation project(':mini-app-base')
-        implementation libraries.appcompat
-        implementation google.material
-        implementation libraries.preference
-        implementation compose.composeUi
-        implementation compose.composeMaterial
-        implementation compose.composeUiTooling
+        implementation Libs.androidx.appcompat
+        implementation Libs.google.material
+        implementation Libs.androidx.preference
+        implementation Libs.compose.composeUi
+        implementation Libs.compose.composeMaterial
+        implementation Libs.compose.composeUiTooling
     }
 }
