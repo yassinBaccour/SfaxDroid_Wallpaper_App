@@ -7,11 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.sfaxdroid.app.ZipUtils
-import com.sfaxdroid.app.downloadsystem.*
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
-import com.sfaxdroid.base.utils.Utils
+import com.thin.downloadmanager.DefaultRetryPolicy
+import com.thin.downloadmanager.DownloadManager
+import com.thin.downloadmanager.DownloadRequest
+import com.thin.downloadmanager.DownloadStatusListenerV1
+import com.thin.downloadmanager.ThinDownloadManager
 import java.io.File
 import javax.inject.Named
 

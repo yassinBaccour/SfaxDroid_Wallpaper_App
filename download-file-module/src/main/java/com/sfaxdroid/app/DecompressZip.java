@@ -1,4 +1,4 @@
-package com.sfaxdroid.app.downloadsystem;
+package com.sfaxdroid.app;
 
 import android.util.Log;
 

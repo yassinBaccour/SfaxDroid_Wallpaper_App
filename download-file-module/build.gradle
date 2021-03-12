@@ -28,6 +28,6 @@ android {
 }
 
 dependencies {
-    implementation "com.mani:ThinDownloadManager:1.4.0"
+    api "com.mani:ThinDownloadManager:1.4.0"
 }
 
