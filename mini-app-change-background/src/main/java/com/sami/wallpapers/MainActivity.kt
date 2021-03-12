@@ -23,7 +23,7 @@ class MainActivity : BaseMiniAppActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPrefs =
-            getSharedPreferences(com.sfaxdroid.mini.base.Constants.PREF_NAME, Context.MODE_PRIVATE)
+            getSharedPreferences(com.sfaxdroid.mini.base.BaseConstants.PREF_NAME, Context.MODE_PRIVATE)
 
         setContentView(R.layout.activity_main)
 

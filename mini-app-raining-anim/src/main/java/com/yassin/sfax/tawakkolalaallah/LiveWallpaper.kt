@@ -8,7 +8,7 @@ import android.service.wallpaper.WallpaperService
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.sfaxdroid.mini.base.AnimatedItem
-import com.sfaxdroid.mini.base.Constants
+import com.sfaxdroid.mini.base.BaseConstants
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getBackground
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getRainingItem
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getTouchingItem
@@ -61,7 +61,7 @@ class LiveWallpaper : WallpaperService() {
         }
 
         override fun onVisibilityChanged(visible: Boolean) {
-            val sharedPrefs = getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE)
+            val sharedPrefs = getSharedPreferences(BaseConstants.PREF_NAME, Context.MODE_PRIVATE)
             val rainingPref = sharedPrefs.getBoolean("rainingPref", true)
             val touchingPref = sharedPrefs.getBoolean("touchingPref", true)
             val themePref = sharedPrefs.getString("themePref", "Style 1")

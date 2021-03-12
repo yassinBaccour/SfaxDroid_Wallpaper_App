@@ -15,7 +15,7 @@ class WallpaperAppService : WallpaperService() {
 
     override fun onCreateEngine(): Engine {
         val sharedPrefs =
-            getSharedPreferences(com.sfaxdroid.mini.base.Constants.PREF_NAME, Context.MODE_PRIVATE)
+            getSharedPreferences(com.sfaxdroid.mini.base.BaseConstants.PREF_NAME, Context.MODE_PRIVATE)
         val qualityPref = sharedPrefs.getString(Constants.PREF_KEY_QUALITY, "none")
         val speedPref = sharedPrefs.getString(Constants.PREF_KEY_SPEED, "")
         return WallpaperEngine(this, qualityPref, speedPref)

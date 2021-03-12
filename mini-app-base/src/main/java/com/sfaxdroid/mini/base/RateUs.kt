@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.net.Uri
 import android.widget.Button
 import android.widget.LinearLayout
@@ -15,10 +14,10 @@ import android.widget.Toast
 class RateUs(var context: Context, var packageName: String) {
 
     private val preferences: SharedPreferences =
-        context.getSharedPreferences(Constants.PREF_NAME, 0)
+        context.getSharedPreferences(BaseConstants.PREF_NAME, 0)
 
     fun appLaunched() {
-        val isRateDialogShowed = preferences.getBoolean(Constants.PREF_RATE_APP_KEY, false)
+        val isRateDialogShowed = preferences.getBoolean(BaseConstants.PREF_RATE_APP_KEY, false)
         if (isRateDialogShowed) {
             return
         } else {
@@ -84,7 +83,7 @@ class RateUs(var context: Context, var packageName: String) {
 
     private fun setSetting() {
         preferences.edit().apply {
-            putBoolean(Constants.PREF_RATE_APP_KEY, true)
+            putBoolean(BaseConstants.PREF_RATE_APP_KEY, true)
             apply()
         }
     }

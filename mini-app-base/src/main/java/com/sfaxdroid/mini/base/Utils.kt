@@ -13,7 +13,7 @@ class Utils {
         fun openPub(context: Context) {
             try {
                 context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse(Constants.ADS_URL)
+                    data = Uri.parse(BaseConstants.ADS_URL)
                 })
             } catch (exception: Exception) {
             }
