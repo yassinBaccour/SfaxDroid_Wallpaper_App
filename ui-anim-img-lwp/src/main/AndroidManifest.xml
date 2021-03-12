@@ -4,7 +4,7 @@
     <application>
         <service
             android:name="com.sfaxdoird.anim.img.WordImgLiveWallpaper"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="?attr/customLauncherIcon"
             android:label="@string/lwp_word_img_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>

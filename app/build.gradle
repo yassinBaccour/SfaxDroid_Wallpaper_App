@@ -172,9 +172,6 @@ dependencies {
     implementation libraries.servicesAds
     implementation libraries.coroutinesAndroid
     //implementation libraries.crashlytics
-    implementation "com.flipboard:bottomsheet-core:1.5.3"
-    implementation "com.flipboard:bottomsheet-commons:1.5.3"
-    implementation "com.mani:ThinDownloadManager:1.4.0"
     implementation project(':download-file-module')
     implementation project(':base-android')
     implementation project(':domain')
