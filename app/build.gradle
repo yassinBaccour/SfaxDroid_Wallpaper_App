@@ -152,24 +152,24 @@ tasks.named("dependencyUpdates").configure {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    implementation navigation.fragmentNavktx
+    implementation navigation.navigationKtx
 
-    implementation libraries.hiltLib
-    kapt libraries.hiltAndroidComplier
+    implementation hilt.hiltLib
+    kapt hilt.hiltAndroidComplier
 
-    kapt libraries.hiltComplier
-    implementation libraries.hiltViewModel
+    kapt hilt.hiltComplier
+    implementation hilt.hiltViewModel
 
     implementation libraries.appcompat
     implementation libraries.multidex
-    implementation libraries.material
+    implementation google.material
     implementation libraries.recyclerview
-    implementation libraries.glide
+    implementation glide.glide
     implementation libraries.constraintlayout
-    implementation libraries.retrofit
-    implementation libraries.servicesAds
-    implementation libraries.coroutinesAndroid
+    implementation retrofit.retrofit
+    implementation google.servicesAds
+    implementation kotlin.coroutinesAndroid
     //implementation libraries.crashlytics
     implementation project(':download-file-module')
     implementation project(':base-android')

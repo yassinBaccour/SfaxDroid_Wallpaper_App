@@ -32,7 +32,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':data-android')
     api project(':data')
-    implementation libraries.hiltLib
-    kapt libraries.hiltAndroidComplier
+    implementation hilt.hiltLib
+    kapt hilt.hiltAndroidComplier
 
 }

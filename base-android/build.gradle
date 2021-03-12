@@ -34,15 +34,14 @@ dependencies {
     api project(':base')
     api project(':common-layouts')
     api project(':common-resources')
-    kapt libraries.glideCompîler
-    api libraries.ktx
+    kapt glide.glideCompîler
     api libraries.constraintlayout
     api libraries.appcompat
-    api libraries.glide
+    api glide.glide
     api libraries.coordinatorlayout
-    api libraries.material
-    api libraries.livedataKtx
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
-    api libraries.lifecycle
+    api google.material
+    api lifecycle.livedataKtx
+    api lifecycle.livedataViewmodel
+    api lifecycle.lifecycle
     api libraries.fragmentktx
 }

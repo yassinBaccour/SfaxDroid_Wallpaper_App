@@ -59,13 +59,11 @@ android {
 
     dependencies {
         implementation project(':mini-app-base')
-        implementation 'androidx.core:core-ktx:1.3.2'
-        implementation 'androidx.appcompat:appcompat:1.2.0'
-        implementation 'com.google.android.material:material:1.2.1'
-        implementation('androidx.preference:preference-ktx:1.1.1')
-        implementation "androidx.compose.ui:ui:$compose_version"
-        implementation "androidx.compose.material:material:$compose_version"
-        implementation "androidx.compose.ui:ui-tooling:$compose_version"
-
+        implementation libraries.appcompat
+        implementation google.material
+        implementation libraries.preference
+        implementation compose.composeUi
+        implementation compose.composeMaterial
+        implementation compose.composeUiTooling
     }
 }

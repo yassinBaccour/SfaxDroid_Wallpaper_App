@@ -27,14 +27,14 @@ android {
 }
 
 dependencies {
-    kapt libraries.glideCompîler
+    kapt glide.glideCompîler
     implementation project(':data')
     implementation project(':base-android')
-    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation libraries.crop
+    implementation libraries.recyclerview
 
-    api libraries.hiltLib
-    kapt libraries.hiltAndroidComplier
+    api hilt.hiltLib
+    kapt hilt.hiltAndroidComplier
 
-    kapt libraries.hiltComplier
+    kapt hilt.hiltComplier
 }

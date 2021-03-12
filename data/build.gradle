@@ -5,14 +5,13 @@ apply from: '../dependencies.gradle'
 apply from: '../spotless.gradle'
 
 dependencies {
-    kapt libraries.daggerCompiler
-    implementation libraries.kotlinStdlib
-    api libraries.retrofit2Converter
+    kapt dagger.daggerCompiler
+    implementation kotlin.kotlinStdlib
+    api retrofit.retrofit2Converter
     api libraries.annotation
-    api libraries.dagger
-    api libraries.coroutinesCore
-    api libraries.ktx
-    api 'androidx.room:room-common:2.3.0-beta03'
+    api dagger.dagger
+    api kotlin.coroutinesCore
+    api room.roomCommon
 }
 
 java {

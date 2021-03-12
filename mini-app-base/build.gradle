@@ -22,6 +22,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api libraries.kotlinStdlib
+    api kotlin.kotlinStdlib
     api libraries.constraintlayout
 }

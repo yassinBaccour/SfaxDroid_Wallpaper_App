@@ -3,13 +3,14 @@ apply plugin: 'kotlin'
 apply from: '../spotless.gradle'
 apply from: '../dependencies.gradle'
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api libraries.kotlinStdlib
-    api libraries.dagger
-}
-
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api kotlin.kotlinStdlib
+    api kotlin.coroutinesCore
+    api dagger.dagger
 }

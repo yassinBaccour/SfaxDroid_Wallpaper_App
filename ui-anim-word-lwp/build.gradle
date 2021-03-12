@@ -32,17 +32,16 @@ android {
 }
 
 dependencies {
-    implementation "com.github.QuadFlask:colorpicker:0.0.15"
+    implementation libraries.colorpicker
     implementation project(':base-android')
     implementation project(':download-file-module')
 
-    implementation libraries.fragmentNavktx
-    implementation libraries.navigationKtx
+    implementation navigation.fragmentNavktx
+    implementation navigation.navigationKtx
 
-    api libraries.hiltLib
-    kapt libraries.hiltAndroidComplier
+    api hilt.hiltLib
+    api hilt.hiltViewModel
 
-    api libraries.hiltViewModel
-    kapt libraries.hiltComplier
-
+    kapt hilt.hiltComplier
+    kapt hilt.hiltAndroidComplier
 }

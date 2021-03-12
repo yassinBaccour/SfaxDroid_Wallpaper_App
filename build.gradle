@@ -1,11 +1,6 @@
-apply from: './dependencies.gradle'
-
 buildscript {
 
-    ext {
-        compose_version = '1.0.0-alpha08'
-    }
-    ext.kotlin_version = '1.4.30'
+    apply from: rootProject.file('dependencies.gradle')
 
     repositories {
         jcenter()
@@ -13,13 +8,13 @@ buildscript {
     }
 
     dependencies {
-        //classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
-        classpath 'com.android.tools.build:gradle:7.0.0-alpha09'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.3.5'
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.31.2-alpha'
-        classpath 'com.diffplug.spotless:spotless-plugin-gradle:5.10.0'
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.36.0"
+        //classpath google.crashlyticsGradle
+        classpath projectClasspath.gradleBuildTool
+        classpath kotlin.kotlinGradlePlugin
+        classpath google.service
+        classpath hilt.gradlePlugin
+        classpath projectClasspath.spotless
+        classpath projectClasspath.libCheckUpdate
     }
 }
 
