@@ -3,8 +3,9 @@ package com.yassin.wallpaper
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.engine.Constants
+import com.sfaxdroid.mini.base.BaseConstants
+import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.mini.base.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -41,7 +42,7 @@ class MainActivity : BaseMiniAppActivity() {
     private fun initRadioButton() {
 
         val sharedPref = getSharedPreferences(
-            Constants.PREFERENCE_NAME,
+            BaseConstants.PREF_NAME,
             Context.MODE_PRIVATE
         )
 

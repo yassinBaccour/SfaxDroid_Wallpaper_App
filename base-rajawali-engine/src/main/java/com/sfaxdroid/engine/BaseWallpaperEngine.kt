@@ -3,6 +3,7 @@ package com.sfaxdroid.engine
 import android.content.Context
 import android.content.SharedPreferences
 import android.service.wallpaper.WallpaperService
+import com.sfaxdroid.mini.base.BaseConstants
 import rajawali.wallpaper.Wallpaper
 
 abstract class BaseWallpaperEngine : Wallpaper(),
@@ -22,7 +23,7 @@ abstract class BaseWallpaperEngine : Wallpaper(),
             getWallpaperOne()
         )
         sharedPreferences = getSharedPreferences(
-            Constants.PREFERENCE_NAME,
+            BaseConstants.PREF_NAME,
             Context.MODE_PRIVATE
         )
 
@@ -36,7 +37,7 @@ abstract class BaseWallpaperEngine : Wallpaper(),
 
         return WallpaperEngine(
             getSharedPreferences(
-                Constants.PREFERENCE_NAME,
+                BaseConstants.PREF_NAME,
                 Context.MODE_PRIVATE
             ),
             baseContext,
