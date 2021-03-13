@@ -173,7 +173,7 @@ class AnimWord2dWallpaper : WallpaperService() {
         private fun draw2dImg(canvas: Canvas) {
 
             val header =
-                Constants.NAME_OF_ALLAH_TAB[currentPhoto]
+                com.sfaxdoird.anim.word.Constants.NAME_OF_ALLAH_TAB[currentPhoto]
 
             val bounds = Rect()
             paintOption.getTextBounds(header, 0, header.length, bounds)
