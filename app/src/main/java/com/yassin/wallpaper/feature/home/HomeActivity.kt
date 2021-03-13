@@ -1,6 +1,7 @@
 package com.yassin.wallpaper.feature.home
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
@@ -138,7 +139,7 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
-            onBackPressed()
+            this.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK))
         }
         return super.onOptionsItemSelected(menuItem)
     }
