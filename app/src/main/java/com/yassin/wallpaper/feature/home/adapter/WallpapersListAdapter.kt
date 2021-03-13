@@ -106,7 +106,7 @@ class WallpapersListAdapter(
             TYPE_CAT ->
                 return CategoryItemVH(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_with_detail,
+                        R.layout.list_item_category,
                         parent, false
                     )
                 )

@@ -139,24 +139,6 @@ class HomeActivityNavBar : SimpleActivity() {
         }
     }
 
-    fun checkUpdateNewWallpapers() {}
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed()
-        } else {
-            rateApplication()
-            Toast.makeText(
-                baseContext, R.string.exit_app_message,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        back_pressed = System.currentTimeMillis()
-    }
-
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
             finish()
@@ -169,6 +151,5 @@ class HomeActivityNavBar : SimpleActivity() {
     companion object {
         var isAdsShow = false
         var nbOpenAds = 0
-        private var back_pressed: Long = 0
     }
 }

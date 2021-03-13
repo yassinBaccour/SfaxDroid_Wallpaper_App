@@ -11,11 +11,14 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.core.setupWithNavController
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.appcompat.app.AlertDialog
+
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -34,7 +37,6 @@ class HomeActivity : AppCompatActivity() {
         }
         preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCES_NAME)
         setupAds()
-        initRatingApp()
         manageNbRunApp()
         this.checkAppPermission()
     }
@@ -45,7 +47,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         val navGraphIds = listOf(
             R.navigation.lwp_nav_graph,
@@ -61,10 +62,10 @@ class HomeActivity : AppCompatActivity() {
         currentNavController = controller
         currentNavController?.observe(this) { navController ->
             navController.addOnDestinationChangedListener { _, destination, _ ->
+                showInterstitial()
             }
         }
         currentNavController = controller
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -84,27 +85,42 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        showFirstTimeAndOneTimeAds()
-        showTimedAdsWhenIOpenPicture()
-    }
-
-    private fun initRatingApp() {
+    private fun ratingApp() {
+        AlertDialog.Builder(this).apply {
+            setTitle(getString(R.string.rating_app_title))
+            setMessage(getString(R.string.rating_app_description))
+            setPositiveButton(
+                getString(R.string.rating_app_yes_btn)
+            ) { _, _ ->
+                val reviewManager = ReviewManagerFactory.create(this@HomeActivity)
+                reviewManager.requestReviewFlow()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            reviewManager.launchReviewFlow(this@HomeActivity, task.result)
+                                .addOnCompleteListener {
+                                }
+                        } else {
+                        }
+                    }
+            }
+            setNegativeButton(
+                getString(R.string.rating_app_later)
+            ) { _, _ ->
+                preferencesManager["NbRun"] = 0
+            }
+            setNeutralButton(
+                getString(R.string.rating_app_never)
+            ) { _, _ ->
+                preferencesManager["NbRun"] = 100
+            }
+        }.create().show()
     }
 
     private fun manageNbRunApp() {
-
         var nbRun = preferencesManager["NbRun", 0]
-        when {
-            preferencesManager["IsSecondRun", "null"] == "null" -> {
-
-                preferencesManager["IsSecondRun"] = "Second"
-                nbRun += 1
-                preferencesManager["NbRun"] = nbRun
-            }
-            nbRun == 3 -> {
-                preferencesManager["NbRun"] = 0
+        when (nbRun) {
+            3 -> {
+                ratingApp()
             }
             else -> {
                 nbRun += 1
@@ -117,23 +133,13 @@ class HomeActivity : AppCompatActivity() {
     private fun setupToolBar() {
     }
 
-    private fun showFirstTimeAndOneTimeAds() {
-        if (isAdsShow) {
-            isAdsShow = false
-            showInterstitial()
-        }
-    }
-
     private fun showInterstitial() {
-        if (mInterstitialAd?.isLoaded == true) {
-            mInterstitialAd?.show()
-        }
-    }
-
-    private fun showTimedAdsWhenIOpenPicture() {
+        nbOpenAds++
         if (nbOpenAds == 4) {
             nbOpenAds = 0
-            showInterstitial()
+            if (mInterstitialAd?.isLoaded == true) {
+                mInterstitialAd?.show()
+            }
         }
     }
 
@@ -145,11 +151,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     companion object {
-
-        @JvmField
-        var isAdsShow = false
-
-        @JvmField
         var nbOpenAds = 0
     }
 }

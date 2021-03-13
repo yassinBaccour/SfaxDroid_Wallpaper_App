@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,7 +30,13 @@ class HomeFragment : Fragment() {
     private var wallpapersListAdapter: WallpapersListAdapter? = null
 
     private val selectedLwpName by lazy {
-        arguments?.getString(Constants.KEY_LWP_NAME).orEmpty()
+        requireArguments().getString(Constants.KEY_LWP_NAME)
+    }
+    private val screenName by lazy {
+        requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
+    }
+    private val screenType by lazy {
+        requireArguments().getString(Constants.EXTRA_SCREEN_TYPE)
     }
 
     private val viewModel: HomeViewModel by viewModels()
@@ -40,6 +47,23 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_wallpapers, container, false)
+    }
+
+    private fun initToolbar() {
+        if (!selectedLwpName.isNullOrEmpty() || screenType == "CAT_WALL") {
+            (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+            (activity as AppCompatActivity?)?.supportActionBar?.apply {
+                title = when (selectedLwpName) {
+                    Constants.KEY_WORD_IMG_LWP -> screenName
+                    Constants.KEY_ANIM_2D_LWP -> screenName
+                    else -> if (screenType == "CAT_WALL") screenName else ""
+                }
+                setHomeButtonEnabled(true)
+                setDisplayHomeAsUpEnabled(true)
+            }
+        } else {
+            toolbar.visibility = View.GONE
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +82,8 @@ class HomeFragment : Fragment() {
 
     }
 
-    fun initView() {
+    private fun initView() {
+        initToolbar()
         wallpapersListAdapter = WallpapersListAdapter(
             arrayListOf()
         ) { catItem -> openWallpaper(catItem) }
@@ -103,6 +128,10 @@ class HomeFragment : Fragment() {
                             Constants.EXTRA_URL_TO_DOWNLOAD,
                             getFullUrl(wallpaperObject.detailUrl)
                         )
+                        putString(
+                            Constants.EXTRA_SCREEN_NAME,
+                            screenName
+                        )
                     })
             }
             Constants.KEY_ANIM_2D_LWP -> {
@@ -111,6 +140,10 @@ class HomeFragment : Fragment() {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
                             getFullUrl(wallpaperObject.detailUrl)
+                        )
+                        putString(
+                            Constants.EXTRA_SCREEN_NAME,
+                            screenName
                         )
                     })
             }
@@ -143,17 +176,20 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.category_show_navigation_fg,
                     Bundle().apply {
                         putString(Constants.EXTRA_JSON_FILE_NAME, wallpaperObject.file)
+                        putString(Constants.EXTRA_SCREEN_NAME, wallpaperObject.name)
                         putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
                     })
             }
         }
     }
 
-    private fun navToTimer() {
-        findNavController().navigate(R.id.navigate_to_timer)
+    private fun navToTimer(screeName: String) {
+        findNavController().navigate(
+            R.id.navigate_to_timer,
+            Bundle().apply { putString(Constants.EXTRA_SCREEN_NAME, screeName) })
     }
 
-    private fun navToTexture(lwpName: String) {
+    private fun navToTexture(lwpName: String, screeName: String) {
         findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
             putString(
                 Constants.EXTRA_JSON_FILE_NAME,
@@ -161,6 +197,7 @@ class HomeFragment : Fragment() {
             )
             putString(Constants.EXTRA_SCREEN_TYPE, Constants.VALUE_TEXTURE_SCREEN_NAME)
             putString(Constants.KEY_LWP_NAME, lwpName)
+            putString(Constants.EXTRA_SCREEN_NAME, screeName)
         })
     }
 
@@ -168,17 +205,17 @@ class HomeFragment : Fragment() {
         wallpaperObject: LwpItem,
     ) {
         when (wallpaperObject.type) {
-            is LiveWallpaper.DouaLwp -> {
-                navToTexture(Constants.KEY_WORD_IMG_LWP)
+            is LiveWallpaper.WordImg -> {
+                navToTexture(Constants.KEY_WORD_IMG_LWP, wallpaperObject.name)
             }
             is LiveWallpaper.SkyView -> {
                 Utils.openLiveWallpaper<SkyLiveWallpaper>(requireContext())
             }
             is LiveWallpaper.TimerLwp -> {
-                navToTimer()
+                navToTimer(wallpaperObject.name)
             }
-            is LiveWallpaper.NameOfAllah2D -> {
-                navToTexture(Constants.KEY_ANIM_2D_LWP)
+            is LiveWallpaper.Word2d -> {
+                navToTexture(Constants.KEY_ANIM_2D_LWP, wallpaperObject.name)
             }
         }
     }

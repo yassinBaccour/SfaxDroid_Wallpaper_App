@@ -151,24 +151,23 @@ tasks.named("dependencyUpdates").configure {
 
 
 dependencies {
+    kapt Libs.hilt.hiltAndroidComplier
+    kapt Libs.hilt.hiltComplier
+    implementation Libs.kotlin.coroutinesAndroid
     implementation Libs.navigation.fragmentNavktx
     implementation Libs.navigation.navigationKtx
-
     implementation Libs.hilt.hiltLib
-    kapt Libs.hilt.hiltAndroidComplier
-
-    kapt Libs.hilt.hiltComplier
     implementation Libs.hilt.hiltViewModel
-
     implementation Libs.androidx.appcompat
     implementation Libs.androidx.multidex
-    implementation Libs.google.material
     implementation Libs.androidx.recyclerview
-    implementation Libs.glide.glide
     implementation Libs.androidx.constraintlayout
     implementation Libs.retrofit.retrofit
+    implementation Libs.google.material
     implementation Libs.google.servicesAds
-    implementation Libs.kotlin.coroutinesAndroid
+    implementation Libs.google.core
+    implementation Libs.google.coreKtx
+    implementation Libs.glide.glide
     implementation project(':download-file-module')
     implementation project(':base-android')
     implementation project(':domain')

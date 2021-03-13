@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
@@ -50,7 +51,8 @@ class WallpaperSchedulerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar()
+        val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
+        initToolbar(screenName)
         scheduler =
             requireContext().getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
 
@@ -75,6 +77,15 @@ class WallpaperSchedulerFragment : Fragment() {
         }
         buttonClose.setOnClickListener {
             cancelService()
+        }
+    }
+
+    private fun initToolbar(screeName: String?) {
+        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.supportActionBar?.apply {
+            title = screeName
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
         }
     }
 
@@ -196,9 +207,6 @@ class WallpaperSchedulerFragment : Fragment() {
     private fun removeJob() {
         scheduler?.cancelAll()
         initTxtStatus(false)
-    }
-
-    private fun initToolbar() {
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {

@@ -16,10 +16,10 @@ class WallpaperToLwpMapper : SfaxDroidMapper<Wallpaper, LwpItem> {
 
     private fun getType(type: String): LiveWallpaper {
         return when (type) {
-            "Img2D" -> LiveWallpaper.DouaLwp
+            "Img2D" -> LiveWallpaper.WordImg
             "SkyView" -> LiveWallpaper.SkyView
             "Timer" -> LiveWallpaper.TimerLwp
-            "Text2D" -> LiveWallpaper.NameOfAllah2D
+            "Text2D" -> LiveWallpaper.Word2d
             else -> LiveWallpaper.None
         }
     }

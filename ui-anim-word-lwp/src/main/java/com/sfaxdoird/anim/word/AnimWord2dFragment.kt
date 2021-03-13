@@ -71,10 +71,12 @@ class AnimWord2dFragment : Fragment() {
             buttonSizeFullScreen
         )
 
+        var screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
+
         setTextViewTypeFace()
         initSizeListener()
         initTextViewListener()
-        initToolbar()
+        initToolbar(screenName)
         initTextSize()
 
         buttonColor?.setOnClickListener { chooseColor() }
@@ -163,10 +165,10 @@ class AnimWord2dFragment : Fragment() {
         buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_full))
     }
 
-    private fun initToolbar() {
+    private fun initToolbar(screenName: String?) {
         (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
-            title = getString(R.string.title_word_anim_lwp)
+            title = screenName
             setHomeButtonEnabled(true)
             setDisplayHomeAsUpEnabled(true)
         }
@@ -193,13 +195,6 @@ class AnimWord2dFragment : Fragment() {
             ) { _: DialogInterface?, _: Int -> }
             .build()
             .show()
-    }
-
-    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == android.R.id.home) {
-            requireActivity().onBackPressed()
-        }
-        return super.onOptionsItemSelected(menuItem)
     }
 
     private fun openLiveWallpapers() {
