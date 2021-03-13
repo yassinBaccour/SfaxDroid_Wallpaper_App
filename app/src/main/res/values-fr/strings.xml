@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="screen_lwp">Live Wallpaper</string>
+    <string name="screen_wallpaper">Wallpaper</string>
+    <string name="screen_category">Category</string>
+    <string name="screen_category_show">Category Show</string>
+    <string name="open_lwp">Ouvrir</string>
+    <string name="open_cat">Ouvrir</string>
+    <string name="preview_desc">Write on your photos and add stickers, frames, filters and other stuff</string>
+    <string name="preview_title">My Title</string>
+    <string name="preview_btn_open">Open</string>
+    <string name="rating_app_description">Si vous aimer cette application note la SVP dans le store, ca m encourage, a, crée des applications gratuites </string>
+    <string name="rating_app_title">Donner un Avis</string>
+    <string name="rating_app_later">Apres</string>
+    <string name="rating_app_never">Jamais</string>
+    <string name="rating_app_yes_btn">Noter</string>
+</resources>
