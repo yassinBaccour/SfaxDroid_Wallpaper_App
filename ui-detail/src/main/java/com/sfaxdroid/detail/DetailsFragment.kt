@@ -147,24 +147,25 @@ class DetailsFragment : Fragment() {
 
         bottomSheetBehavior =
             BottomSheetBehavior.from<View>(bottom_sheet)
-        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
-        bottomSheetBehavior?.peekHeight = 0
-        bottomSheetBehavior?.isHideable = true
-        bottomSheetBehavior?.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED)
-                    fab?.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
-                else
-                    fab?.setImageResource(R.mipmap.ic_add_white)
-            }
+        bottomSheetBehavior?.apply {
+            state = BottomSheetBehavior.STATE_HIDDEN
+            peekHeight = 0
+            isHideable = true
+            addBottomSheetCallback(object :
+                BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED)
+                        fab?.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
+                    else
+                        fab?.setImageResource(R.mipmap.ic_add_white)
+                }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
-            }
+                }
 
-        })
-
+            })
+        }
         buttonWallpaper.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonSave.setOnClickListener { view -> menuSheetClick(view.id) }
@@ -173,8 +174,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun deleteFile(url: String): Boolean {
-        val file = File(url)
-        return file.delete()
+        return File(url).delete()
     }
 
     private fun deleteCurrentPicture() {

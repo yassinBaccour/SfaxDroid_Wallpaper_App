@@ -30,8 +30,9 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var preferencesManager: PreferencesManager
 
+    @Inject
     @Named("intertitial-key")
-    private lateinit var intertitialKey: String
+    lateinit var intertitialKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

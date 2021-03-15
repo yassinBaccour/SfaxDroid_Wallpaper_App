@@ -2,7 +2,7 @@ package com.sfaxdoird.anim.word
 
 
 object Constants {
-    val NAME_OF_ALLAH_TAB = listOf(
+    val quote_tab = listOf(
         "الرحمن",
         "الرحيم",
         "الملك",

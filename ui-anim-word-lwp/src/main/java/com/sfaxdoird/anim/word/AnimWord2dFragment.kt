@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -19,8 +18,9 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.extension.changeDrawableButtonColor
+import com.sfaxdroid.base.extension.getDrawableWithTheme
+import com.sfaxdroid.base.extension.setCompoundDrawableFromId
 import com.sfaxdroid.base.utils.Utils
-import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_anim_word.*
 
@@ -71,7 +71,7 @@ class AnimWord2dFragment : Fragment() {
             buttonSizeFullScreen
         )
 
-        var screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
+        val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
 
         setTextViewTypeFace()
         initSizeListener()
@@ -102,10 +102,7 @@ class AnimWord2dFragment : Fragment() {
     }
 
     private fun setButtonDrawable(button: Button?) {
-        button?.setCompoundDrawablesWithIntrinsicBounds(
-            null,
-            resources.getDrawable(getDrawableBySize()), null, null
-        )
+        button?.setCompoundDrawableFromId(getDrawableBySize())
     }
 
     private fun initTextSize() {
@@ -159,10 +156,10 @@ class AnimWord2dFragment : Fragment() {
     }
 
     private fun resetBtnSizeBackground() {
-        buttonSizeSmall.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_small))
-        buttonSizeMeduim.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_meduim))
-        buttonSizeBig.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_big))
-        buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_full))
+        buttonSizeSmall.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_small))
+        buttonSizeMeduim.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_meduim))
+        buttonSizeBig.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_big))
+        buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_full))
     }
 
     private fun initToolbar(screenName: String?) {
@@ -187,7 +184,8 @@ class AnimWord2dFragment : Fragment() {
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
                 pref!!.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
                 buttonColor.changeDrawableButtonColor(
-                    selectedColor, resources.getDrawable(com.sfaxdroid.base.R.mipmap.ic_palette)
+                    selectedColor,
+                    requireContext().getDrawableWithTheme(com.sfaxdroid.base.R.mipmap.ic_palette)
                 )
             }
             .setNegativeButton(

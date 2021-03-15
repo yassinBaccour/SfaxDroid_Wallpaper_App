@@ -107,8 +107,8 @@ class WordImgFragment : Fragment() {
 
     private fun openLwp() {
         if (isClickable) {
-            com.sfaxdroid.base.Constants.ifBackgroundChanged = true
-            com.sfaxdroid.base.Constants.nbIncrementationAfterChange = 0
+            Constants.ifBackgroundChanged = true
+            Constants.nbIncrementationAfterChange = 0
             Utils.openLiveWallpaper<WordImgLiveWallpaper>(requireContext())
         }
     }
