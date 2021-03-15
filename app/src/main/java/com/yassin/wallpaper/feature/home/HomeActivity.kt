@@ -18,6 +18,8 @@ import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.appcompat.app.AlertDialog
+import javax.inject.Inject
+import javax.inject.Named
 
 
 @AndroidEntryPoint
@@ -27,6 +29,9 @@ class HomeActivity : AppCompatActivity() {
     private var currentNavController: LiveData<NavController>? = null
 
     private lateinit var preferencesManager: PreferencesManager
+
+    @Named("intertitial-key")
+    private lateinit var intertitialKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupAds() {
         MobileAds.initialize(this)
         InterstitialAd(this).apply {
-            adUnitId = getString(R.string.intertitial)
+            adUnitId = intertitialKey
             loadAd(AdRequest.Builder().build())
             adListener = object : AdListener() {
                 override fun onAdClosed() {
