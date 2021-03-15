@@ -1,14 +1,11 @@
-# Android Wallpapers Apps (In-progress) [ 5 Million Install ]
-
+# Android Wallpapers Apps (In-progress) [ 5 Millions Install ]
  
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 ## Download
-#### This application is on four google play store. Each version are graphically different, but the features are the same
+##### This application is on 4 google play store. Each version are graphically different, but the features are the same
 ##### The first Google Play Account is target Nord Africa and middle east user, i use a wallpaper with arabic themes
-[![N|Solid](https://icon-library.net/images/download-our-app-icon/download-our-app-icon-29.jpg)](https://nodesource.com/products/nsolid)
+[![N|Solid](http://androidsporttv.com/getit.png)](https://nodesource.com/products/nsolid)
 ##### My Second Google Play Account is target All Word User, i use a wallpaper with arabic themes + Nature theme
-[![N|Solid](https://icon-library.net/images/download-our-app-icon/download-our-app-icon-29.jpg)](https://nodesource.com/products/nsolid)
+[![N|Solid](http://androidsporttv.com/getit.png)](https://nodesource.com/products/nsolid)
 
 ## Features
 - One Big wallpaper app 
@@ -23,9 +20,9 @@
 - Uses Kotlin Coroutines.
 
 ## Development setup
-Require the latest Android Studio 4.2 Canary to be able to build the app
+Require the latest Android Studio 4.2 Canary to be able to build the app.
 ### Code style
-This project uses ktlint, provided via the spotless gradle plugin  ./gradlew spotlessApply
+This project uses ktlint, provided via the spotless gradle plugin ````./gradlew spotlessApply ````
 ### API keys
 Create gradle.properties file if not exist and the two line 
 
@@ -38,7 +35,7 @@ API_KEY_PIXA_BAY="Pixa Bay Api Key"
 
 License
 =======
-    Copyright 2013 Mir Ikram Uddin
+    Copyright 2013 SfaxDroid
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
