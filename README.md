@@ -3,15 +3,19 @@
 ## Download
 ##### This application is on 4 google play store. Each version are graphically different, but the features are the same
 ##### The first Google Play Account is target Nord Africa and middle east user, i use a wallpaper with arabic themes
-[![N|Solid](http://androidsporttv.com/getit.png)](https://nodesource.com/products/nsolid)
+
+<a href="https://play.google.com/store/apps/details?id=com.sami.rippel.allah" target="_blank">
+<img src="http://androidsporttv.com/getit.png" width=240 />
+</a>
+
 ##### My Second Google Play Account is target All Word User, i use a wallpaper with arabic themes + Nature theme
-[![N|Solid](http://androidsporttv.com/getit.png)](https://nodesource.com/products/nsolid)
+[![N|Solid](http://androidsporttv.com/getit.png)](https://play.google.com/store/apps/details?id=com.liliagame.scarewhotouchme)
 
 ## Features
 - One Big wallpaper app 
-- Some of mini wallpaper app
+- Mini wallpapers apps (Module name start with mini-app-)
 - 3D Wallpapers (With Rajawali libs)
-- 2D Wallpapers
+- 2D Wallpapers 
 
 ## Development
 - Written in Kotlin (Converting old java class in progress)
