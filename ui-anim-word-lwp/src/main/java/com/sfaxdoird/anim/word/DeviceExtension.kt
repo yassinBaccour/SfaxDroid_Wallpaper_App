@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable
 import android.widget.Button
 
 
-fun Button.setCompoundTopDrawables(drawable: Drawable) {
+fun Button.setCompoundTopDrawables(drawable: Drawable?) {
     this.setCompoundDrawablesWithIntrinsicBounds(
         null,
         drawable, null, null

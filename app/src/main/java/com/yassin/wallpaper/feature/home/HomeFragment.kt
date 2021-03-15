@@ -45,9 +45,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_wallpapers, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_wallpapers, container, false)
 
     private fun initToolbar() {
         if (!selectedLwpName.isNullOrEmpty() || screenType == "CAT_WALL") {

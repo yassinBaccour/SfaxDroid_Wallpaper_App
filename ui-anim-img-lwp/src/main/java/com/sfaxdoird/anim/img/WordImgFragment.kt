@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.flask.colorpicker.ColorPickerView
@@ -88,7 +89,12 @@ class WordImgFragment : Fragment() {
                 pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
 
                 button_choose_color.changeDrawableButtonColor(
-                    selectedColor, resources.getDrawable(com.sfaxdroid.base.R.mipmap.ic_palette)
+                    selectedColor,
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        com.sfaxdroid.base.R.mipmap.ic_palette,
+                        requireContext().theme
+                    )
                 )
             }
             .setNegativeButton(

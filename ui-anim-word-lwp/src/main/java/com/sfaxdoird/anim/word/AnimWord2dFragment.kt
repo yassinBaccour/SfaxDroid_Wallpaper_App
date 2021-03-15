@@ -182,7 +182,7 @@ class AnimWord2dFragment : Fragment() {
             .setPositiveButton(
                 getString(R.string.btn_ok)
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
-                pref!!.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
+                pref?.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
                 buttonColor.changeDrawableButtonColor(
                     selectedColor,
                     requireContext().getDrawableWithTheme(com.sfaxdroid.base.R.mipmap.ic_palette)
