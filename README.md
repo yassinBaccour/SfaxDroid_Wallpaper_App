@@ -2,14 +2,22 @@
  
 ## Download
 ##### This application is on 4 google play store. Each version are graphically different, but the features are the same
+
+## First App
 ##### The first Google Play Account is target Nord Africa and middle east user, i use a wallpaper with arabic themes
 
 <a href="https://play.google.com/store/apps/details?id=com.sami.rippel.allah" target="_blank">
 <img src="http://androidsporttv.com/getit.png" width=240 />
 </a>
 
+## Second App
 ##### My Second Google Play Account is target All Word User, i use a wallpaper with arabic themes + Nature theme
-[![N|Solid](http://androidsporttv.com/getit.png)](https://play.google.com/store/apps/details?id=com.liliagame.scarewhotouchme)
+<a href="https://play.google.com/store/apps/details?id=com.liliagame.scarewhotouchme" target="_blank">
+<img src="http://androidsporttv.com/getit.png" width=240 />
+</a>
+
+## Other App
+I have other application in other account with different theme (cars, wallpaper, ect)
 
 ## Features
 - One Big wallpaper app 
