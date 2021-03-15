@@ -332,13 +332,6 @@ class DetailsFragment : Fragment() {
             .start(context, this)
     }
 
-    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == android.R.id.home) {
-            requireActivity().onBackPressed()
-        }
-        return super.onOptionsItemSelected(menuItem)
-    }
-
     private fun createIntent(intentType: IntentType) {
         hideLoading()
         if (!DetailUtils.shareFileWithIntentType(

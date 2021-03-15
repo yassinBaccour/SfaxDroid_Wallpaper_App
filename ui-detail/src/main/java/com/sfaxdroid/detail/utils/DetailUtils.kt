@@ -8,6 +8,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
+import android.webkit.MimeTypeMap
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,6 +25,7 @@ import com.sfaxdroid.detail.ActionTypeEnum
 import com.sfaxdroid.detail.IntentType
 import java.io.File
 import java.io.IOException
+
 
 class DetailUtils {
 
@@ -69,10 +72,9 @@ class DetailUtils {
             }
         }
 
-        fun appInstalledOrNot(uri: String, context: Context): Boolean {
+        private fun appInstalledOrNot(uri: String, context: Context): Boolean {
             val mPackageManager: PackageManager = context.packageManager
-            val appInstalled: Boolean
-            appInstalled = try {
+            return try {
                 mPackageManager.getPackageInfo(
                     uri,
                     PackageManager.GET_ACTIVITIES
@@ -81,7 +83,6 @@ class DetailUtils {
             } catch (e: PackageManager.NameNotFoundException) {
                 false
             }
-            return appInstalled
         }
 
         fun shareFileWithIntentType(
@@ -91,23 +92,21 @@ class DetailUtils {
         ): Boolean {
             return if (appInstalledOrNot(getIntentNameFromType(intentType), activity)
             ) {
-                activity.startActivity(Intent(Intent.ACTION_SEND).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                    type = "ic_icon_image/*"
-                    putExtra(
-                        Intent.EXTRA_STREAM, FileProvider.getUriForFile(
-                            activity,
-                            activity.applicationContext.packageName + ".provider",
-                            file
-                        )
-                    )
-                    setPackage(
-                        getIntentNameFromType(
-                            intentType
-                        )
-                    )
-                })
-                true
+                val mIntentShare = Intent(Intent.ACTION_SEND)
+                val mStrExtension =
+                    MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(file).toString())
+                val mStrMimeType =
+                    MimeTypeMap.getSingleton().getMimeTypeFromExtension(mStrExtension)
+                if (mStrExtension.equals("", ignoreCase = true) || mStrMimeType == null) {
+                    mIntentShare.type = "text*//*"
+                } else {
+                    mIntentShare.type = mStrMimeType
+                }
+                mIntentShare.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
+                mIntentShare.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                mIntentShare.setPackage(getIntentNameFromType(intentType))
+                activity.startActivity(mIntentShare)
+                return true
             } else false
         }
 
