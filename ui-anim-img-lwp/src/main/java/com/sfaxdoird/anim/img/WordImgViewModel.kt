@@ -98,6 +98,7 @@ class WordImgViewModel @ViewModelInject constructor(
         errorMessage: String?
     ) {
         progressValue.value = Pair(0, 0)
+        isCompleted.value = false
     }
 
     override fun onProgress(

@@ -86,9 +86,30 @@ class AnimWord2dFragment : Fragment() {
             if (it) {
                 fab?.isEnabled = true
                 clickable = true
+            } else {
+                Utils.showAlert(requireContext(), ::retryDownload)
             }
         })
 
+        viewModel.progressValue.observe(viewLifecycleOwner, {
+            setProgressBytes(it.first, it.second)
+        })
+
+    }
+
+    private fun setProgressBytes(progress: Int, byte: Long) {
+        if (progress == 100) {
+            progress_bar_information?.visibility = View.INVISIBLE
+        }
+        if (progress != 0) {
+            progress_bar_information?.progress = progress
+        } else {
+            progress_bar_information?.progress = 0
+        }
+    }
+
+    private fun retryDownload() {
+        viewModel.load()
     }
 
     private fun getDrawableBySize(): Int {

@@ -31,6 +31,18 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
+                <ProgressBar
+                    android:id="@+id/progress_bar_information"
+                    style="@style/ProgressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:max="100"
+                    android:progress="0" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

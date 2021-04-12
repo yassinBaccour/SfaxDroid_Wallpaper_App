@@ -29,7 +29,10 @@ class AnimWord2dViewModel @ViewModelInject constructor(
     var isCompleted = MutableLiveData<Boolean>()
 
     init {
+        load()
+    }
 
+    fun load() {
         val filesDir = fileManager.getExternalFilesDir()
 
         val requestWallpaper =
@@ -62,6 +65,7 @@ class AnimWord2dViewModel @ViewModelInject constructor(
         errorMessage: String
     ) {
         progressValue.value = Pair(0, 0)
+        isCompleted.value = false
     }
 
     override fun onProgress(

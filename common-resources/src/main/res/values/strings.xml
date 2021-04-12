@@ -22,4 +22,10 @@
     <string name="set_wallpaper_not_success_message">Try again, Failed to set as wallpaper</string>
     <string name="set_as_dialog_message">Set As</string>
     <string name="create_animated_wallpapers">Create Animated wallpapers</string>
+
+    <string name="alert_error_download_title">Connection Time Out</string>
+    <string name="alert_error_download_desc">A problem occurred while downloading wallpaper</string>
+    <string name="alert_error_download_yes">Retry</string>
+    <string name="alert_error_download_no">Cancel</string>
+
 </resources>

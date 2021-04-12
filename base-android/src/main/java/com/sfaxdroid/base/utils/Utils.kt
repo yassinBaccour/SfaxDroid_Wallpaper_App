@@ -1,14 +1,29 @@
 package com.sfaxdroid.base.utils
 
+import android.app.AlertDialog
 import android.app.WallpaperManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.snackbar.Snackbar
+import com.sfaxdroid.base.R
 
 class Utils {
     companion object {
+
+        fun showAlert(context: Context, retry: () -> Unit) {
+            AlertDialog.Builder(context).apply {
+                setTitle(context.getString(R.string.alert_error_download_title))
+                setMessage(context.getString(R.string.alert_error_download_desc))
+                setPositiveButton(context.getString(R.string.alert_error_download_yes)) { _, _ ->
+                    retry()
+                }
+                setNegativeButton(context.getString(R.string.alert_error_download_no)) { _, _ ->
+                }
+                show()
+            }
+        }
 
         fun showSnackMessage(
             mRootLayout: CoordinatorLayout,
