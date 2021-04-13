@@ -128,8 +128,9 @@ class AnimWord2dFragment : Fragment() {
 
     private fun initTextSize() {
         resetBtnSizeBackground()
+        val textSize = pref?.GetSetting("2dwallpapertextsize", 1) ?: 2
+        setButtonDrawable(buttonSizeList[textSize - 1])
     }
-
 
     private fun setTextViewTypeFace() {
         fontButtonList.forEachIndexed { index, button ->
@@ -154,6 +155,9 @@ class AnimWord2dFragment : Fragment() {
                 saveFontStyle(index, button)
             }
         }
+
+        val fontStyle = pref?.GetSetting("2dwallpaperfontstyle", 1) ?: 2
+        fontButtonList[fontStyle - 1].setTextColor(Color.GREEN)
     }
 
     private fun saveFontStyle(style: Int, textView: TextView) {

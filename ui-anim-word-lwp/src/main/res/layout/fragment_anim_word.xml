@@ -1,279 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/customBackgroundColor">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="?attr/customTextColor" />
 
     <LinearLayout
-        android:id="@+id/container_toolbar"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/customBackgroundColor"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <ProgressBar
+            android:id="@+id/progress_bar_information"
+            style="@style/ProgressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:titleTextColor="?attr/customTextColor" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:max="100"
+            android:progress="0" />
 
-        <RelativeLayout
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/Writingtxt"
+            android:textColor="?attr/customTextColor" />
+
+        <Button
+            android:id="@+id/buttonColor"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:drawableTop="@mipmap/ic_palette"
+            app:srcCompat="@mipmap/ic_palette" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="#80ecf0f1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/size_texte"
+            android:textColor="?attr/customTextColor" />
+
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ProgressBar
-                    android:id="@+id/progress_bar_information"
-                    style="@style/ProgressBarStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dip"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:max="100"
-                    android:progress="0" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/Writingtxt"
-                    android:textColor="?attr/customTextColor" />
+            <TableRow android:gravity="fill">
 
                 <Button
-                    android:id="@+id/buttonColor"
-                    android:layout_width="60dp"
+                    android:id="@+id/buttonSizeSmall"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@mipmap/ic_size_small"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/size_small"
+                    android:textColor="#ecf0f1" />
+
+                <View
+                    android:layout_width="0.5dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
+                    android:background="#80ecf0f1" />
+
+                <Button
+                    android:id="@+id/buttonSizeMeduim"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:drawableTop="@mipmap/ic_palette"
-                    app:srcCompat="@mipmap/ic_palette" />
+                    android:drawableTop="@mipmap/ic_size_meduim"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/size_meduim"
+                    android:textColor="#ecf0f1" />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_width="0.5dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
                     android:background="#80ecf0f1" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="@string/size_texte"
-                    android:textColor="?attr/customTextColor" />
-
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow android:gravity="fill">
-
-                        <Button
-                            android:id="@+id/buttonSizeSmall"
-                            android:layout_width="100dp"
-                            android:layout_height="110dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            android:drawableTop="@mipmap/ic_size_small"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="@string/size_small"
-                            android:textColor="#ecf0f1" />
-
-                        <View
-                            android:layout_width="0.5dp"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center"
-                            android:background="#80ecf0f1" />
-
-                        <Button
-                            android:id="@+id/buttonSizeMeduim"
-                            android:layout_width="100dp"
-                            android:layout_height="110dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            android:drawableTop="@mipmap/ic_size_meduim"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="@string/size_meduim"
-                            android:textColor="#ecf0f1" />
-
-                        <View
-                            android:layout_width="0.5dp"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center"
-                            android:background="#80ecf0f1" />
-
-                        <Button
-                            android:id="@+id/buttonSizeBig"
-                            android:layout_width="100dp"
-                            android:layout_height="110dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            android:drawableTop="@mipmap/ic_size_big"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="@string/size_big"
-                            android:textColor="#ecf0f1" />
-
-                        <View
-                            android:layout_width="0.5dp"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center"
-                            android:background="#80ecf0f1" />
-
-                        <Button
-                            android:id="@+id/buttonSizeFullScreen"
-                            android:layout_width="100dp"
-                            android:layout_height="110dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            android:drawableTop="@mipmap/ic_size_full"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:text="@string/size_full_screen"
-                            android:textColor="#ecf0f1" />
-                    </TableRow>
-                </TableLayout>
+                <Button
+                    android:id="@+id/buttonSizeBig"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@mipmap/ic_size_big"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/size_big"
+                    android:textColor="#ecf0f1" />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_width="0.5dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
                     android:background="#80ecf0f1" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="@string/text_font"
-                    android:textColor="?attr/customTextSubColor" />
+                <Button
+                    android:id="@+id/buttonSizeFullScreen"
+                    android:layout_width="100dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:drawableTop="@mipmap/ic_size_full"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/size_full_screen"
+                    android:textColor="#ecf0f1" />
+            </TableRow>
+        </TableLayout>
 
-
-                <TextView
-                    android:id="@+id/txtfont1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txtfont2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txtfont3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txtfont4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txtfont5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txtfont6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txtfont7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/txtfont8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:text="٩٩ أسماء الله الحسني"
-                    android:textColor="?attr/customTextSubColor"
-                    android:textSize="20sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:background="#80ecf0f1" />
-
-            </LinearLayout>
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/fab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:enabled="false"
-            android:text="@string/create_animated_wallpapers"
-            android:textColor="?attr/customTextAccentColor"
-            app:backgroundTint="@android:color/white" />
     </LinearLayout>
-</ScrollView>
+
+    <View
+        android:id="@+id/view_one"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#80ecf0f1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/txt_text_font"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/text_font"
+        android:textColor="?attr/customTextSubColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_one" />
+
+    <ScrollView
+        android:id="@+id/scrollviewfont"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/fab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_text_font">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtfont1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtfont2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtfont3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtfont4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtfont5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtfont6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtfont7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtfont8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="٩٩ أسماء الله الحسني"
+                android:textColor="?attr/customTextSubColor"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/fab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginBottom="10dp"
+        android:enabled="false"
+        android:text="@string/create_animated_wallpapers"
+        android:textColor="?attr/customTextAccentColor"
+        app:backgroundTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
