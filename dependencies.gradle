@@ -5,7 +5,7 @@ ext {
     androidTargetSdkVersion = 29
     compose_version = '1.0.0-beta02'
 
-    kotlinVersion = "1.4.31"
+    kotlinVersion = "1.4.32"
 
     def sfaxLibs = [:]
     Libs = sfaxLibs

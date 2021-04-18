@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply from: '../spotless.gradle'
 apply from: '../dependencies.gradle'
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
 
 android {
 
