@@ -79,6 +79,11 @@ class AnimWord2dFragment : Fragment() {
         initToolbar(screenName)
         initTextSize()
 
+        val btnColorColor = pref?.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -1) ?: 0
+        buttonColor.changeDrawableButtonColor(
+            btnColorColor,
+            requireContext().getDrawableWithTheme(com.sfaxdroid.base.R.mipmap.ic_palette)
+        )
         buttonColor?.setOnClickListener { chooseColor() }
         fab.setOnClickListener { openLiveWallpapers() }
 
