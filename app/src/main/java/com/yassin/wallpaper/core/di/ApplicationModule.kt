@@ -42,6 +42,12 @@ class ApplicationModule {
     }
 
     @Provides
+    @Named("app-id")
+    fun provideAppId(): String {
+        return BuildConfig.APPLICATION_ID
+    }
+
+    @Provides
     @Singleton
     fun providePreferencesManager(
         @ApplicationContext context: Context,

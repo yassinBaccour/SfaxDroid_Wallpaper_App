@@ -110,17 +110,18 @@ class DetailUtils {
             } else false
         }
 
-        fun shareAllFile(activity: Activity, file: File?) {
+        fun shareAllFile(activity: Activity, file: File?, appId: String) {
             activity.startActivityForResult(
                 Intent.createChooser(
                     Intent(Intent.ACTION_ATTACH_DATA).apply {
                         setDataAndType(
                             FileProvider.getUriForFile(
-                                activity, activity.applicationContext.packageName
-                                        + ".provider", file!!
-                            ), "ic_icon_image/jpg"
+                                activity,
+                                appId + "." + activity.localClassName + ".provider",
+                                file!!
+                            ), "image/jpeg"
                         )
-                        putExtra("mimeType", "ic_icon_image/jpg")
+                        putExtra("mimeType", "image/jpeg")
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     },
                     activity.getString(R.string.set_as_dialog_message)
