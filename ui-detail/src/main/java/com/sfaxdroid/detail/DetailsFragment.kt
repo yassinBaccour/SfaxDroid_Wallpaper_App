@@ -12,7 +12,6 @@ import android.provider.MediaStore
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.sfaxdroid.base.Constants
@@ -410,21 +409,9 @@ class DetailsFragment : Fragment() {
 
     private fun shareAll() {
         hideLoading()
-        activity?.startActivityForResult(
-            Intent.createChooser(
-                Intent(Intent.ACTION_ATTACH_DATA).apply {
-                    setDataAndType(
-                        FileProvider.getUriForFile(
-                            requireActivity().applicationContext,
-                            appId + "." + requireActivity().localClassName + ".provider",
-                            fileManager.getTemporaryDirWithFile(currentUrl.getFileName())!!
-                        ), "image/jpeg"
-                    )
-                    putExtra("mimeType", "image/jpeg")
-                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                },
-                requireActivity().getString(com.sfaxdroid.base.R.string.set_as_dialog_message)
-            ), 200
+        DetailUtils.shareAllFile(
+            requireActivity(),
+            fileManager.getTemporaryDirWithFile(currentUrl.getFileName()), appId
         )
     }
 
