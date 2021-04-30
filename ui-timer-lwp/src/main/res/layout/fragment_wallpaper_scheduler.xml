@@ -95,7 +95,8 @@
                         android:drawableTop="@mipmap/ic_active_img"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:text="@string/active_this_service" />
+                        android:text="@string/active_this_service"
+                        android:textColor="@android:color/white" />
 
                     <View
                         android:layout_width="0.5dp"
@@ -113,7 +114,8 @@
                         android:drawableTop="@mipmap/ic_close_img"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:text="@string/close_this_service" />
+                        android:text="@string/close_this_service"
+                        android:textColor="@android:color/white" />
                 </TableRow>
             </TableLayout>
 
@@ -220,7 +222,8 @@
                         android:drawableTop="@drawable/ic_gallery"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:text="@string/add_new_message" />
+                        android:text="@string/add_new_message"
+                        android:textColor="@android:color/white" />
 
                     <View
                         android:layout_width="0.5dp"
@@ -238,7 +241,9 @@
                         android:drawableTop="@drawable/ic_fav"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:text="@string/wallpaper_list_fav" />
+                        android:text="@string/wallpaper_list_fav"
+
+                        android:textColor="@android:color/white" />
 
                 </TableRow>
             </TableLayout>
