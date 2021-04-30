@@ -8,6 +8,7 @@ import android.graphics.Point
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.provider.MediaStore
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,8 @@ import java.io.File
 import javax.inject.Inject
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.bottom_sheet.*
+import java.lang.Exception
+import java.lang.reflect.Method
 import javax.inject.Named
 
 
@@ -70,6 +73,14 @@ class DetailsFragment : Fragment() {
         checkPermission()
         showLoading()
         loadWallpaper()
+        if (Build.VERSION.SDK_INT >= 24) {
+            try {
+                val m: Method = StrictMode::class.java.getMethod("disableDeathOnFileUriExposure")
+                m.invoke(null)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -171,11 +182,9 @@ class DetailsFragment : Fragment() {
 
             })
         }
-        buttonWallpaper.setOnClickListener { view -> menuSheetClick(view.id) }
+        buttonCrop.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
-        buttonSave.setOnClickListener { view -> menuSheetClick(view.id) }
-        buttonSareInsta.setOnClickListener { view -> menuSheetClick(view.id) }
-        buttonSareFb.setOnClickListener { view -> menuSheetClick(view.id) }
+        buttonSare.setOnClickListener { view -> menuSheetClick(view.id) }
     }
 
     private fun deleteFile(url: String): Boolean {
@@ -209,7 +218,7 @@ class DetailsFragment : Fragment() {
 
     private fun menuSheetClick(id: Int) {
         when (id) {
-            R.id.buttonWallpaper -> {
+            R.id.buttonCrop -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.Crop,
                     currentUrl
@@ -221,21 +230,9 @@ class DetailsFragment : Fragment() {
                     currentUrl
                 )
             }
-            R.id.buttonSave -> {
+            R.id.buttonSare -> {
                 saveTempsDorAndDoAction(
-                    ActionTypeEnum.MovePerDir,
-                    currentUrl
-                )
-            }
-            R.id.buttonSareInsta -> {
-                saveTempsDorAndDoAction(
-                    ActionTypeEnum.ShareInstagram,
-                    currentUrl
-                )
-            }
-            R.id.buttonSareFb -> {
-                saveTempsDorAndDoAction(
-                    ActionTypeEnum.ShareFacebook,
+                    ActionTypeEnum.Share,
                     currentUrl
                 )
             }
@@ -248,36 +245,27 @@ class DetailsFragment : Fragment() {
         actionToDo: ActionTypeEnum
     ) {
         if (aBoolean) {
-            if (actionToDo == ActionTypeEnum.OpenNativeChooser) {
-                shareAll()
-            }
-            if (actionToDo == ActionTypeEnum.ShareFacebook) {
-                createIntent(IntentType.FACEBOOK)
-            }
-            if (actionToDo == ActionTypeEnum.ShareInstagram) {
-                createIntent(IntentType.INSTAGRAM)
-            }
-            if (actionToDo == ActionTypeEnum.SendLwp) {
-                //sendToRippleLwp();
-            }
-            if (actionToDo == ActionTypeEnum.Crop) {
-                beginCrop()
-            }
-            if (actionToDo == ActionTypeEnum.MovePerDir) {
-                saveFileToPermanentGallery(
-                    currentUrl,
-                    requireActivity(),
-                    ::onRequestPermissions
-                )
-            }
-            if (actionToDo == ActionTypeEnum.Delete) {
-                deleteCurrentPicture()
-            }
-            if (actionToDo == ActionTypeEnum.JustWallpaper) {
-                setAsWallpaper(
-                    currentUrl,
-                    requireContext()
-                )
+            when (actionToDo) {
+                ActionTypeEnum.OpenNativeChooser -> {
+                    openNativeChooser()
+                }
+                ActionTypeEnum.Share -> {
+                    createIntent()
+                }
+                ActionTypeEnum.MovePerDir -> {
+                    saveFileToPermanentGallery(
+                        currentUrl,
+                        requireActivity(),
+                        ::onRequestPermissions
+                    )
+                }
+                ActionTypeEnum.Delete -> {
+                    deleteCurrentPicture()
+                }
+                ActionTypeEnum.SendLwp -> {
+                    //sendToRippleLwp();
+                }
+                else -> beginCrop()
             }
         } else {
             hideLoading()
@@ -294,13 +282,11 @@ class DetailsFragment : Fragment() {
     private fun doActionAfterSave(isSaved: Boolean, action: ActionTypeEnum) {
         if (isSaved) {
             when (action) {
-                is ActionTypeEnum.Crop -> onGoToCropActivity()
-                is ActionTypeEnum.OpenNativeChooser -> shareAll()
+                is ActionTypeEnum.OpenNativeChooser -> openNativeChooser()
                 is ActionTypeEnum.MovePerDir -> onMoveFileToPermanentGallery()
-                is ActionTypeEnum.ShareFacebook -> createIntent(IntentType.INSTAGRAM)
-                is ActionTypeEnum.ShareInstagram -> createIntent(IntentType.INSTAGRAM)
+                is ActionTypeEnum.Share -> createIntent()
                 is ActionTypeEnum.SendLwp -> onSendToRippleLwp()
-                is ActionTypeEnum.ShareSnap -> createIntent(IntentType.SNAP)
+                else -> onGoToCropActivity()
             }
         } else {
             onSaveError()
@@ -337,12 +323,11 @@ class DetailsFragment : Fragment() {
             .start(context, this)
     }
 
-    private fun createIntent(intentType: IntentType) {
+    private fun createIntent() {
         hideLoading()
         if (!DetailUtils.shareFileWithIntentType(
                 requireActivity(),
-                fileManager.getTemporaryDirWithFile(currentUrl.getFileName()),
-                intentType
+                fileManager.getTemporaryDirWithFile(currentUrl.getFileName()), appId
             )
         ) {
             Utils.showSnackMessage(rootLayout, getString(R.string.app_not_installer_message))
@@ -407,9 +392,9 @@ class DetailsFragment : Fragment() {
             return size
         }
 
-    private fun shareAll() {
+    private fun openNativeChooser() {
         hideLoading()
-        DetailUtils.shareAllFile(
+        DetailUtils.openNativeChooser(
             requireActivity(),
             fileManager.getTemporaryDirWithFile(currentUrl.getFileName()), appId
         )

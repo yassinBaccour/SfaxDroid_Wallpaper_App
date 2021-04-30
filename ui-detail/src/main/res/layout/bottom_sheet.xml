@@ -11,7 +11,7 @@
     tools:background="@android:color/white">
 
     <Button
-        android:id="@+id/buttonWallpaper"
+        android:id="@+id/buttonCrop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -31,34 +31,14 @@
         android:textAlignment="textStart"
         android:textColor="?attr/colorPrimary" />
 
-    <Button
-        android:id="@+id/buttonSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_save"
-        android:text="@string/ui_detail_save"
-        android:textAlignment="textStart"
-        android:textColor="?attr/colorPrimary" />
 
     <Button
-        android:id="@+id/buttonSareInsta"
+        android:id="@+id/buttonSare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_insta"
-        android:text="@string/ui_detail_insta"
-        android:textAlignment="textStart"
-        android:textColor="?attr/colorPrimary" />
-
-    <Button
-        android:id="@+id/buttonSareFb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@mipmap/ic_fb"
-        android:text="@string/ui_detail_share_fb"
+        android:drawableLeft="@mipmap/ic_share"
+        android:text="@string/ui_detail_share"
         android:textAlignment="textStart"
         android:textColor="?attr/colorPrimary" />
 
