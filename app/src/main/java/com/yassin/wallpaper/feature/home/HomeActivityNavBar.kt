@@ -49,11 +49,12 @@ class HomeActivityNavBar : SimpleActivity() {
         mToolbar = findViewById(R.id.toolbar)
         mPrivacy = findViewById(R.id.imgPrivacy)
         mPrivacy?.setOnClickListener {
-            val intent = Intent(
-                this,
-                PrivacyActivity::class.java
+            startActivity(
+                Intent(
+                    this,
+                    PrivacyActivity::class.java
+                )
             )
-            startActivity(intent)
         }
     }
 
@@ -123,9 +124,9 @@ class HomeActivityNavBar : SimpleActivity() {
         }
     }
 
-    fun showInterstitial() {
-        if (mInterstitialAd!!.isLoaded) {
-            mInterstitialAd!!.show()
+    private fun showInterstitial() {
+        if (mInterstitialAd?.isLoaded == true) {
+            mInterstitialAd?.show()
         }
     }
 

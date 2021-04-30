@@ -1,6 +1,7 @@
 package com.sfaxdroid.timer
 
 import android.annotation.TargetApi
+import android.app.Activity
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.ComponentName
@@ -116,11 +117,35 @@ class WallpaperSchedulerFragment : Fragment() {
             initBtnActive(true)
             initBtnClose(true)
         } else {
-            /*com.sfaxdroid.base.utils.Utils.showSnackMessage(
-                rootLayout,
-                getString(R.string.add_wallpaper_messages)
-            )*/
+            showMessageOKCancel(
+                requireContext().getString(R.string.add_wallpaper_messages),
+                { _: DialogInterface?, _: Int -> openWallpaperList() },
+                requireActivity()
+            )
         }
+    }
+
+    private fun openWallpaperList() {
+
+    }
+
+    private fun showMessageOKCancel(
+        message: String,
+        okListener: DialogInterface.OnClickListener,
+        ac: Activity
+    ) {
+        AlertDialog.Builder(ac)
+            .setMessage(message)
+            .setPositiveButton(
+                ac.getString(com.sfaxdroid.base.R.string.permission_accept_click_button),
+                okListener
+            )
+            .setNegativeButton(
+                ac.getString(com.sfaxdroid.base.R.string.permission_deny_click_button),
+                null
+            )
+            .create()
+            .show()
     }
 
     private fun initBtnClose(isJobActive: Boolean) {
