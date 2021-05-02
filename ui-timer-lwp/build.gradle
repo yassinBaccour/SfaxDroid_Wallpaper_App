@@ -43,5 +43,8 @@ dependencies {
     api Libs.hilt.hiltLib
     kapt Libs.hilt.hiltAndroidComplier
 
+    api Libs.hilt.hiltViewModel
     kapt Libs.hilt.hiltComplier
+
+    implementation project(':domain')
 }

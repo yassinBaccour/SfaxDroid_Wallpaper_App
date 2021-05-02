@@ -88,7 +88,6 @@ class HomeFragment : Fragment() {
 
         recycler_view_wallpapers?.apply {
             layoutManager = getLwpLayoutManager()
-            //setHasFixedSize(true)
             adapter = wallpapersListAdapter
             addOnItemTouchListener(
                 object : RecyclerView.OnItemTouchListener {
@@ -275,11 +274,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-
     private fun tagVisibility(visibility: Boolean) {
         recycler_view_tag.visibility = if (visibility) View.VISIBLE else View.GONE
     }
-
 
     companion object {
         fun newInstance(

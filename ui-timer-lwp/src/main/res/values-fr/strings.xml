@@ -24,4 +24,6 @@
     <string name="auto_change_on">le changement automatique marche</string>
     <string name="main_menu_scheduler_status">Current Status: %1$s</string>
     <string name="scheduler_new_days_title">Changer chaque :</string>
+    <string name="wallpaper_list">Choisir une image</string>
+    <string name="alert_box_message"> "Telecharger cette images ?"</string>
 </resources>

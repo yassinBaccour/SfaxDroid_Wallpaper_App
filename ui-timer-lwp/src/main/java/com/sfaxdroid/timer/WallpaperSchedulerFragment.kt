@@ -64,9 +64,9 @@ class WallpaperSchedulerFragment : Fragment() {
             if (!pendingJobs.isNullOrEmpty() && pendingJobs.size > 0) removeJob()
         }
         buttonAddLwp.setOnClickListener {
-            openAddWallpaperWithKeyActivity(
-                requireContext(), Constants.KEY_ADD_TIMER_LWP
-            )
+            loadFragment {
+                replace(container.id, WallpaperListFragment(), "PlayerFragment.TAG")
+            }
         }
         buttonLWPList.setOnClickListener {
             openAddWallpaperWithKeyActivity(
