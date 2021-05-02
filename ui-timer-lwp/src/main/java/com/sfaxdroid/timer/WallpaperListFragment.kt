@@ -58,10 +58,32 @@ class WallpaperListFragment : Fragment() {
     }
 
     private fun openDetail(url: String) {
-        showMessageOKCancel(url)
+        val exist = fileManager.getPermanentDirWithFile(url.getFileName()).exists()
+        if (exist) showDeleteAlert(url) else showDownloadAlert(url)
     }
 
-    private fun showMessageOKCancel(
+    private fun showDeleteAlert(
+        url: String
+    ) {
+        AlertDialog.Builder(requireContext())
+            .setMessage(getString(R.string.alert_box_message_delete))
+            .setPositiveButton(
+                requireContext().getString(com.sfaxdroid.base.R.string.permission_accept_click_button)
+            ) { _, _ ->
+                val info = fileManager.getTemporaryDirWithFile(url.getFileName())
+                if (info.exists())
+                    info.delete()
+                viewModel.loadFromStorage()
+            }
+            .setNegativeButton(
+                requireContext().getString(com.sfaxdroid.base.R.string.permission_deny_click_button)
+            ) { _, _ ->
+            }
+            .create()
+            .show()
+    }
+
+    private fun showDownloadAlert(
         url: String
     ) {
         AlertDialog.Builder(requireContext())
@@ -87,10 +109,20 @@ class WallpaperListFragment : Fragment() {
             .setNegativeButton(
                 requireContext().getString(com.sfaxdroid.base.R.string.permission_deny_click_button)
             ) { _, _ ->
-
             }
             .create()
             .show()
     }
 
+    companion object {
+        fun newInstance(
+            screenType: String,
+        ): WallpaperListFragment {
+            return WallpaperListFragment().apply {
+                arguments = Bundle().apply {
+                    putString(Constants.EXTRA_SCREEN_TYPE, screenType)
+                }
+            }
+        }
+    }
 }

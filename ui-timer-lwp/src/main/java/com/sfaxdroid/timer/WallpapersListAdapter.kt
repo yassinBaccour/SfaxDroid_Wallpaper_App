@@ -47,7 +47,7 @@ class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     ) {
         img.apply {
             loadUrl(wallpaperObject.thumbnailUrl)
-            setOnClickListener { openWallpaper(wallpaperObject.thumbnailUrl) }
+            setOnClickListener { openWallpaper(wallpaperObject.detailUrl) }
         }
     }
 }

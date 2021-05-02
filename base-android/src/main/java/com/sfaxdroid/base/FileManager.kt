@@ -13,6 +13,10 @@ interface FileManager {
         fileName: String
     ): File
 
+    fun getPermanentDirWithFile(
+        fileName: String
+    ): File
+
     fun getExternalFilesDir(): File
 
     fun getTemporaryDir(): File

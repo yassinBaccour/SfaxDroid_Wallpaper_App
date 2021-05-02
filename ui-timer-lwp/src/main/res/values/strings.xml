@@ -25,5 +25,6 @@
     <string name="main_menu_scheduler_status">Current Status: %1$s</string>
     <string name="scheduler_new_days_title">Change Wallpaper every :</string>
     <string name="wallpaper_list">Choose Wallpaper</string>
-    <string name="alert_box_message"> "Download This Wallpaper ?"</string>
+    <string name="alert_box_message">"Download This Wallpaper ?"</string>
+    <string name="alert_box_message_delete">"Delete From Timer Favorite list"</string>
 </resources>

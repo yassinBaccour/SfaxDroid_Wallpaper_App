@@ -64,20 +64,32 @@ class WallpaperSchedulerFragment : Fragment() {
             if (!pendingJobs.isNullOrEmpty() && pendingJobs.size > 0) removeJob()
         }
         buttonAddLwp.setOnClickListener {
-            loadFragment {
-                replace(container.id, WallpaperListFragment(), "PlayerFragment.TAG")
-            }
+            loadWallpaperListFragment()
         }
         buttonLWPList.setOnClickListener {
-            openAddWallpaperWithKeyActivity(
-                requireContext(), Constants.KEY_ADDED_LIST_TIMER_LWP
-            )
+            loadFragment {
+                replace(
+                    container.id,
+                    WallpaperListFragment.newInstance(Constants.KEY_ADDED_LIST_TIMER_LWP),
+                    "PlayerFragment.TAG"
+                )
+            }
         }
         buttonActive.setOnClickListener {
             activeService()
         }
         buttonClose.setOnClickListener {
             cancelService()
+        }
+    }
+
+    private fun loadWallpaperListFragment() {
+        loadFragment {
+            replace(
+                container.id,
+                WallpaperListFragment.newInstance(Constants.KEY_ADD_TIMER_LWP),
+                "PlayerFragment.TAG"
+            )
         }
     }
 
@@ -126,7 +138,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun openWallpaperList() {
-
+        loadWallpaperListFragment()
     }
 
     private fun showMessageOKCancel(
