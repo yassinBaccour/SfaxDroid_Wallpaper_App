@@ -16,7 +16,9 @@ class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         wallpaperObject: SimpleWallpaperView,
         openWallpaper: (BaseWallpaperView) -> Unit
     ) {
-        img.loadUrl(wallpaperObject.thumbnailUrl)
-        img.setOnClickListener { openWallpaper(wallpaperObject) }
+        img.apply {
+            loadUrl(wallpaperObject.thumbnailUrl)
+            setOnClickListener { openWallpaper(wallpaperObject) }
+        }
     }
 }

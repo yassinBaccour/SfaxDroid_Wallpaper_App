@@ -49,11 +49,12 @@ class HomeActivityNavBar : SimpleActivity() {
         mToolbar = findViewById(R.id.toolbar)
         mPrivacy = findViewById(R.id.imgPrivacy)
         mPrivacy?.setOnClickListener {
-            val intent = Intent(
-                this,
-                PrivacyActivity::class.java
+            startActivity(
+                Intent(
+                    this,
+                    PrivacyActivity::class.java
+                )
             )
-            startActivity(intent)
         }
     }
 
@@ -61,7 +62,7 @@ class HomeActivityNavBar : SimpleActivity() {
         MobileAds.initialize(this)
         mInterstitialAd = InterstitialAd(this)
         mInterstitialAd?.apply {
-            adUnitId = getString(R.string.intertitial)
+            adUnitId = ""
             loadAd(AdRequest.Builder().build())
             adListener = object : AdListener() {
                 override fun onAdClosed() {
@@ -123,9 +124,9 @@ class HomeActivityNavBar : SimpleActivity() {
         }
     }
 
-    fun showInterstitial() {
-        if (mInterstitialAd!!.isLoaded) {
-            mInterstitialAd!!.show()
+    private fun showInterstitial() {
+        if (mInterstitialAd?.isLoaded == true) {
+            mInterstitialAd?.show()
         }
     }
 
@@ -137,24 +138,6 @@ class HomeActivityNavBar : SimpleActivity() {
         if (nbOpenAds == 7) {
             rateApplication()
         }
-    }
-
-    fun checkUpdateNewWallpapers() {}
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed()
-        } else {
-            rateApplication()
-            Toast.makeText(
-                baseContext, R.string.exit_app_message,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        back_pressed = System.currentTimeMillis()
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
@@ -169,6 +152,5 @@ class HomeActivityNavBar : SimpleActivity() {
     companion object {
         var isAdsShow = false
         var nbOpenAds = 0
-        private var back_pressed: Long = 0
     }
 }

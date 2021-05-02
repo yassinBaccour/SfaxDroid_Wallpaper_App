@@ -7,6 +7,7 @@ class Constants {
         const val VALUE_TEXTURE_JSON_FILE_NAME = "texture.json"
         const val VALUE_TEXTURE_SCREEN_NAME = "TEXTURE"
         const val EXTRA_SCREEN_TYPE = "keyScreenType"
+        const val EXTRA_SCREEN_NAME = "keyScreenName"
         const val EXTRA_IMG_URL = "EXTRA_IMG_URL"
         const val PNG_BACKFROUND_FILE_NAME = "doua.jpg"
         const val KEY_ADDED_LIST_TIMER_LWP = "TimerLWPList"

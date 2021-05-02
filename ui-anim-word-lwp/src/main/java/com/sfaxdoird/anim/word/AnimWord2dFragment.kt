@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -19,8 +18,9 @@ import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.extension.changeDrawableButtonColor
+import com.sfaxdroid.base.extension.getDrawableWithTheme
+import com.sfaxdroid.base.extension.setCompoundDrawableFromId
 import com.sfaxdroid.base.utils.Utils
-import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_anim_word.*
 
@@ -71,12 +71,19 @@ class AnimWord2dFragment : Fragment() {
             buttonSizeFullScreen
         )
 
+        val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
+
         setTextViewTypeFace()
         initSizeListener()
         initTextViewListener()
-        initToolbar()
+        initToolbar(screenName)
         initTextSize()
 
+        val btnColorColor = pref?.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -1) ?: 0
+        buttonColor.changeDrawableButtonColor(
+            btnColorColor,
+            requireContext().getDrawableWithTheme(com.sfaxdroid.base.R.mipmap.ic_palette)
+        )
         buttonColor?.setOnClickListener { chooseColor() }
         fab.setOnClickListener { openLiveWallpapers() }
 
@@ -84,9 +91,30 @@ class AnimWord2dFragment : Fragment() {
             if (it) {
                 fab?.isEnabled = true
                 clickable = true
+            } else {
+                Utils.showAlert(requireContext(), ::retryDownload)
             }
         })
 
+        viewModel.progressValue.observe(viewLifecycleOwner, {
+            setProgressBytes(it.first, it.second)
+        })
+
+    }
+
+    private fun setProgressBytes(progress: Int, byte: Long) {
+        if (progress == 100) {
+            progress_bar_information?.visibility = View.INVISIBLE
+        }
+        if (progress != 0) {
+            progress_bar_information?.progress = progress
+        } else {
+            progress_bar_information?.progress = 0
+        }
+    }
+
+    private fun retryDownload() {
+        viewModel.load()
     }
 
     private fun getDrawableBySize(): Int {
@@ -100,16 +128,14 @@ class AnimWord2dFragment : Fragment() {
     }
 
     private fun setButtonDrawable(button: Button?) {
-        button?.setCompoundDrawablesWithIntrinsicBounds(
-            null,
-            resources.getDrawable(getDrawableBySize()), null, null
-        )
+        button?.setCompoundDrawableFromId(getDrawableBySize())
     }
 
     private fun initTextSize() {
         resetBtnSizeBackground()
+        val textSize = pref?.GetSetting("2dwallpapertextsize", 1) ?: 2
+        setButtonDrawable(buttonSizeList[textSize - 1])
     }
-
 
     private fun setTextViewTypeFace() {
         fontButtonList.forEachIndexed { index, button ->
@@ -134,6 +160,9 @@ class AnimWord2dFragment : Fragment() {
                 saveFontStyle(index, button)
             }
         }
+
+        val fontStyle = pref?.GetSetting("2dwallpaperfontstyle", 1) ?: 2
+        fontButtonList[fontStyle - 1].setTextColor(Color.GREEN)
     }
 
     private fun saveFontStyle(style: Int, textView: TextView) {
@@ -157,16 +186,16 @@ class AnimWord2dFragment : Fragment() {
     }
 
     private fun resetBtnSizeBackground() {
-        buttonSizeSmall.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_small))
-        buttonSizeMeduim.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_meduim))
-        buttonSizeBig.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_big))
-        buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableByVersion(R.mipmap.ic_size_full))
+        buttonSizeSmall.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_small))
+        buttonSizeMeduim.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_meduim))
+        buttonSizeBig.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_big))
+        buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_full))
     }
 
-    private fun initToolbar() {
+    private fun initToolbar(screenName: String?) {
         (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
-            title = getString(R.string.title_word_anim_lwp)
+            title = screenName
             setHomeButtonEnabled(true)
             setDisplayHomeAsUpEnabled(true)
         }
@@ -183,9 +212,10 @@ class AnimWord2dFragment : Fragment() {
             .setPositiveButton(
                 getString(R.string.btn_ok)
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
-                pref!!.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
+                pref?.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
                 buttonColor.changeDrawableButtonColor(
-                    selectedColor, resources.getDrawable(com.sfaxdroid.base.R.mipmap.ic_palette)
+                    selectedColor,
+                    requireContext().getDrawableWithTheme(com.sfaxdroid.base.R.mipmap.ic_palette)
                 )
             }
             .setNegativeButton(
@@ -193,13 +223,6 @@ class AnimWord2dFragment : Fragment() {
             ) { _: DialogInterface?, _: Int -> }
             .build()
             .show()
-    }
-
-    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == android.R.id.home) {
-            requireActivity().onBackPressed()
-        }
-        return super.onOptionsItemSelected(menuItem)
     }
 
     private fun openLiveWallpapers() {

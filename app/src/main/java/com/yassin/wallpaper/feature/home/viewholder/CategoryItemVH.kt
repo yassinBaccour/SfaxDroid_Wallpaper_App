@@ -13,7 +13,6 @@ import com.sfaxdroid.data.mappers.CategoryItem
 class CategoryItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val img: ImageView = itemView.findViewById(R.id.item_detail_image)
-    private val btnOpen: TextView = itemView.findViewById(R.id.item_detail_btn)
     private val title: TextView = itemView.findViewById(R.id.item_detail_title)
     private val desc: TextView = itemView.findViewById(R.id.item_detail_desc)
 
@@ -21,14 +20,15 @@ class CategoryItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         categoryItem: CategoryItem,
         openWallpaper: (BaseWallpaperView) -> Unit
     ) {
-        img.loadUrl(categoryItem.thumbnailUrl)
-        img.setOnClickListener { openWallpaper(categoryItem) }
-        btnOpen.setOnClickListener { openWallpaper(categoryItem) }
-        btnOpen.text = itemView.context.getString(R.string.open_cat)
+        itemView.setOnClickListener { openWallpaper(categoryItem) }
         title.text = categoryItem.name
         desc.text = categoryItem.desc
-        img.setBackgroundColor(Color.parseColor(categoryItem.color))
-        img.scaleType = ImageView.ScaleType.CENTER
+        img.apply {
+            loadUrl(categoryItem.thumbnailUrl)
+            setOnClickListener { openWallpaper(categoryItem) }
+            setBackgroundColor(Color.parseColor(categoryItem.color))
+            scaleType = ImageView.ScaleType.CENTER
+        }
     }
 
 }

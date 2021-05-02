@@ -8,10 +8,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
+import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.extension.changeDrawableButtonColor
 import com.sfaxdroid.base.utils.Utils
@@ -42,7 +44,9 @@ class WordImgFragment : Fragment() {
     private fun initEventAndData() {
         fab?.setOnClickListener { openLwp() }
         button_choose_color?.setOnClickListener { chooseColor() }
-        initToolbar()
+
+        val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
+        initToolbar(screenName)
 
         viewModel.progressInfo.observe(viewLifecycleOwner, {
             setProgressInformation(it)
@@ -61,10 +65,10 @@ class WordImgFragment : Fragment() {
         })
     }
 
-    private fun initToolbar() {
+    private fun initToolbar(screeName: String?) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
-            title = getString(R.string.title_word_anim_lwp)
+            title = screeName
             setHomeButtonEnabled(false)
             setDisplayHomeAsUpEnabled(true)
         }
@@ -85,7 +89,12 @@ class WordImgFragment : Fragment() {
                 pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
 
                 button_choose_color.changeDrawableButtonColor(
-                    selectedColor, resources.getDrawable(com.sfaxdroid.base.R.mipmap.ic_palette)
+                    selectedColor,
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        com.sfaxdroid.base.R.mipmap.ic_palette,
+                        requireContext().theme
+                    )
                 )
             }
             .setNegativeButton(
@@ -104,8 +113,8 @@ class WordImgFragment : Fragment() {
 
     private fun openLwp() {
         if (isClickable) {
-            com.sfaxdroid.base.Constants.ifBackgroundChanged = true
-            com.sfaxdroid.base.Constants.nbIncrementationAfterChange = 0
+            Constants.ifBackgroundChanged = true
+            Constants.nbIncrementationAfterChange = 0
             Utils.openLiveWallpaper<WordImgLiveWallpaper>(requireContext())
         }
     }

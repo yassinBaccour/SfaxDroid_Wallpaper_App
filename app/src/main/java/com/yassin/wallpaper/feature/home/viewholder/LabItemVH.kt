@@ -12,7 +12,6 @@ import com.sfaxdroid.data.mappers.CategoryItem
 class LabItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val img: ImageView = itemView.findViewById(R.id.item_detail_image)
-    private val btnOpen: TextView = itemView.findViewById(R.id.item_detail_btn)
     private val title: TextView = itemView.findViewById(R.id.item_detail_title)
     private val desc: TextView = itemView.findViewById(R.id.item_detail_desc)
 
@@ -21,9 +20,7 @@ class LabItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         openWallpaper: (BaseWallpaperView) -> Unit
     ) {
         img.loadUrl(wallpaperObject.thumbnailUrl)
-        img.setOnClickListener { openWallpaper(wallpaperObject) }
-        btnOpen.setOnClickListener { openWallpaper(wallpaperObject) }
-        btnOpen.text = itemView.context.getString(R.string.open_lwp)
+        itemView.setOnClickListener { openWallpaper(wallpaperObject) }
         title.text = wallpaperObject.name
         desc.text = wallpaperObject.desc
     }

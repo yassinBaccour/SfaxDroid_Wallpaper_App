@@ -1,6 +1,7 @@
 package com.sfaxdroid.timer
 
 import android.annotation.TargetApi
+import android.app.Activity
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.ComponentName
@@ -16,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
@@ -50,7 +52,8 @@ class WallpaperSchedulerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar()
+        val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
+        initToolbar(screenName)
         scheduler =
             requireContext().getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
 
@@ -61,20 +64,41 @@ class WallpaperSchedulerFragment : Fragment() {
             if (!pendingJobs.isNullOrEmpty() && pendingJobs.size > 0) removeJob()
         }
         buttonAddLwp.setOnClickListener {
-            openAddWallpaperWithKeyActivity(
-                requireContext(), Constants.KEY_ADD_TIMER_LWP
-            )
+            loadWallpaperListFragment()
         }
         buttonLWPList.setOnClickListener {
-            openAddWallpaperWithKeyActivity(
-                requireContext(), Constants.KEY_ADDED_LIST_TIMER_LWP
-            )
+            loadFragment {
+                replace(
+                    container.id,
+                    WallpaperListFragment.newInstance(Constants.KEY_ADDED_LIST_TIMER_LWP),
+                    "PlayerFragment.TAG"
+                )
+            }
         }
         buttonActive.setOnClickListener {
             activeService()
         }
         buttonClose.setOnClickListener {
             cancelService()
+        }
+    }
+
+    private fun loadWallpaperListFragment() {
+        loadFragment {
+            replace(
+                container.id,
+                WallpaperListFragment.newInstance(Constants.KEY_ADD_TIMER_LWP),
+                "PlayerFragment.TAG"
+            )
+        }
+    }
+
+    private fun initToolbar(screeName: String?) {
+        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.supportActionBar?.apply {
+            title = screeName
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
         }
     }
 
@@ -105,11 +129,35 @@ class WallpaperSchedulerFragment : Fragment() {
             initBtnActive(true)
             initBtnClose(true)
         } else {
-            /*com.sfaxdroid.base.utils.Utils.showSnackMessage(
-                rootLayout,
-                getString(R.string.add_wallpaper_messages)
-            )*/
+            showMessageOKCancel(
+                requireContext().getString(R.string.add_wallpaper_messages),
+                { _: DialogInterface?, _: Int -> openWallpaperList() },
+                requireActivity()
+            )
         }
+    }
+
+    private fun openWallpaperList() {
+        loadWallpaperListFragment()
+    }
+
+    private fun showMessageOKCancel(
+        message: String,
+        okListener: DialogInterface.OnClickListener,
+        ac: Activity
+    ) {
+        AlertDialog.Builder(ac)
+            .setMessage(message)
+            .setPositiveButton(
+                ac.getString(com.sfaxdroid.base.R.string.permission_accept_click_button),
+                okListener
+            )
+            .setNegativeButton(
+                ac.getString(com.sfaxdroid.base.R.string.permission_deny_click_button),
+                null
+            )
+            .create()
+            .show()
     }
 
     private fun initBtnClose(isJobActive: Boolean) {
@@ -196,9 +244,6 @@ class WallpaperSchedulerFragment : Fragment() {
     private fun removeJob() {
         scheduler?.cancelAll()
         initTxtStatus(false)
-    }
-
-    private fun initToolbar() {
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {

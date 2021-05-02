@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.webkit.MimeTypeMap
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,9 +21,9 @@ import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.R
 import com.sfaxdroid.base.extension.getFileName
 import com.sfaxdroid.detail.ActionTypeEnum
-import com.sfaxdroid.detail.IntentType
 import java.io.File
 import java.io.IOException
+
 
 class DetailUtils {
 
@@ -55,73 +56,44 @@ class DetailUtils {
                 })
         }
 
-        private fun getIntentNameFromType(intentType: IntentType): String {
-            return when (intentType) {
-                is IntentType.FACEBOOK -> {
-                    Constants.FB_PACKAGE
-                }
-                is IntentType.INSTAGRAM -> {
-                    Constants.INSTAGRAM_PACKAGE
-                }
-                is IntentType.SNAP -> {
-                    Constants.SNAP_PACKAGE
-                }
-            }
-        }
-
-        fun appInstalledOrNot(uri: String, context: Context): Boolean {
-            val mPackageManager: PackageManager = context.packageManager
-            val appInstalled: Boolean
-            appInstalled = try {
-                mPackageManager.getPackageInfo(
-                    uri,
-                    PackageManager.GET_ACTIVITIES
-                )
-                true
-            } catch (e: PackageManager.NameNotFoundException) {
-                false
-            }
-            return appInstalled
-        }
-
         fun shareFileWithIntentType(
             activity: Activity,
             file: File,
-            intentType: IntentType
+            appId: String
         ): Boolean {
-            return if (appInstalledOrNot(getIntentNameFromType(intentType), activity)
-            ) {
-                activity.startActivity(Intent(Intent.ACTION_SEND).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
-                    type = "ic_icon_image/*"
-                    putExtra(
-                        Intent.EXTRA_STREAM, FileProvider.getUriForFile(
-                            activity,
-                            activity.applicationContext.packageName + ".provider",
-                            file
-                        )
-                    )
-                    setPackage(
-                        getIntentNameFromType(
-                            intentType
-                        )
-                    )
-                })
-                true
-            } else false
+            val uri = FileProvider.getUriForFile(
+                activity,
+                "$appId.provider",
+                file!!
+            )
+            val mIntentShare = Intent(Intent.ACTION_SEND)
+            val mStrExtension =
+                MimeTypeMap.getFileExtensionFromUrl(uri.path)
+            val mStrMimeType =
+                MimeTypeMap.getSingleton().getMimeTypeFromExtension(mStrExtension)
+            if (mStrExtension.equals("", ignoreCase = true) || mStrMimeType == null) {
+                mIntentShare.type = "text*//*"
+            } else {
+                mIntentShare.type = mStrMimeType
+            }
+            mIntentShare.putExtra(Intent.EXTRA_STREAM, uri)
+            mIntentShare.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            activity.startActivity(mIntentShare)
+            return true
         }
 
-        fun shareAllFile(activity: Activity, file: File?) {
+        fun openNativeChooser(activity: Activity, file: File?, appId: String) {
             activity.startActivityForResult(
                 Intent.createChooser(
                     Intent(Intent.ACTION_ATTACH_DATA).apply {
                         setDataAndType(
                             FileProvider.getUriForFile(
-                                activity, activity.applicationContext.packageName
-                                        + ".provider", file!!
-                            ), "ic_icon_image/jpg"
+                                activity,
+                                "$appId.provider",
+                                file!!
+                            ), "image/jpeg"
                         )
-                        putExtra("mimeType", "ic_icon_image/jpg")
+                        putExtra("mimeType", "image/jpeg")
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     },
                     activity.getString(R.string.set_as_dialog_message)

@@ -28,6 +28,10 @@ class FileHandler @Inject constructor(@ApplicationContext private val context: C
         return File(getTemporaryDir(), fileName)
     }
 
+    override fun getPermanentDirWithFile(fileName: String): File {
+        return File(getPermanentDir(), fileName)
+    }
+
     override fun getExternalFilesDir(): File {
         return getTemporaryDir(context, context.getString(R.string.app_namenospace))
     }
@@ -71,8 +75,7 @@ class FileHandler @Inject constructor(@ApplicationContext private val context: C
             getTemporaryDir()
         val permanentDir =
             getPermanentDir()
-        val file: File
-        file = when (saveOption) {
+        val file: File = when (saveOption) {
             Constants.SAVE_PERMANENT -> File(permanentDir, fileName)
             Constants.SAVE_TEMPORARY -> File(temporaryDir, fileName)
             else -> File(temporaryDir, fileName)

@@ -5,6 +5,10 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../dependencies.gradle'
 apply from: '../spotless.gradle'
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
 
 android {
 
@@ -39,5 +43,8 @@ dependencies {
     api Libs.hilt.hiltLib
     kapt Libs.hilt.hiltAndroidComplier
 
+    api Libs.hilt.hiltViewModel
     kapt Libs.hilt.hiltComplier
+
+    implementation project(':domain')
 }

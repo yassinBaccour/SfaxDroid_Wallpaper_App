@@ -28,7 +28,10 @@ class AnimWord2dWallpaper : WallpaperService() {
         private val handler = Handler()
         private val mHolder = surfaceHolder
         private val filesDir =
-            getTemporaryDir(this@AnimWord2dWallpaper, getString(R.string.app_namenospace))
+            WordLwpUtils.getTemporaryDir(
+                this@AnimWord2dWallpaper,
+                getString(R.string.app_namenospace)
+            )
         private var screenHeight = 0
         private var screenWidth = 0
         private var background: Bitmap? = null
@@ -41,26 +44,8 @@ class AnimWord2dWallpaper : WallpaperService() {
             paintOption = Paint().apply { }
             paintOption.color = mColor
             paintOption.textSize = textSize * resources.displayMetrics.density
-            getTypeFace(fontStyle)?.let {
+            WordLwpUtils.getTypeFace(this@AnimWord2dWallpaper, fontStyle)?.let {
                 paintOption.typeface = it
-            }
-        }
-
-        private fun getTypeFace(mTypefaceNum: Int): Typeface? {
-            return try {
-                Typeface.createFromAsset(
-                    assets,
-                    "arabicfont$mTypefaceNum.ttf"
-                )
-            } catch (e: Exception) {
-                return try {
-                    Typeface.createFromAsset(
-                        assets,
-                        "arabicfont$mTypefaceNum.otf"
-                    )
-                } catch (e: Exception) {
-                    Typeface.DEFAULT
-                }
             }
         }
 
@@ -173,7 +158,7 @@ class AnimWord2dWallpaper : WallpaperService() {
         private fun draw2dImg(canvas: Canvas) {
 
             val header =
-                Constants.NAME_OF_ALLAH_TAB[currentPhoto]
+                Constants.quote_tab[currentPhoto]
 
             val bounds = Rect()
             paintOption.getTextBounds(header, 0, header.length, bounds)
@@ -192,20 +177,6 @@ class AnimWord2dWallpaper : WallpaperService() {
         }
     }
 
-
-    private fun getTemporaryDir(
-        context: Context,
-        appName: String
-    ): File {
-        val temporaryDir = File(
-            context.filesDir,
-            "$appName/temp"
-        )
-        if (!temporaryDir.exists()) {
-            temporaryDir.mkdirs()
-        }
-        return temporaryDir
-    }
 
     companion object {
         private var currentPhoto = 1

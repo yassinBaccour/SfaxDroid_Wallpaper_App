@@ -32,9 +32,19 @@ class ApplicationModule {
     fun provideFullUrl(): String = provideBaseUrl() + provideJsonVersion() + "/"
 
     @Provides
+    @Named("intertitial-key")
+    fun provideAdsIntertiatailKey(): String = BuildConfig.APP_INTERTITIAL_KEY
+
+    @Provides
     @Named("app-name")
     fun provideAppName(): AppName {
         return AppName.SfaxDroid
+    }
+
+    @Provides
+    @Named("app-id")
+    fun provideAppId(): String {
+        return BuildConfig.APPLICATION_ID
     }
 
     @Provides
