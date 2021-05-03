@@ -80,7 +80,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupAds() {
         MobileAds.initialize(this)
-        InterstitialAd(this).apply {
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd?.apply {
             adUnitId = intertitialKey
             loadAd(AdRequest.Builder().build())
             adListener = object : AdListener() {
