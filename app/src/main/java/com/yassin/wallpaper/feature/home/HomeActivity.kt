@@ -67,7 +67,7 @@ class HomeActivity : AppCompatActivity() {
         )
         currentNavController = controller
         currentNavController?.observe(this) { navController ->
-            navController.addOnDestinationChangedListener { _, destination, _ ->
+            navController.addOnDestinationChangedListener { _, _, _ ->
                 showInterstitial()
             }
         }
