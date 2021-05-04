@@ -56,8 +56,8 @@ class HomeActivity : AppCompatActivity() {
     private fun initView() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         val navGraphIds = listOf(
-            R.navigation.lwp_nav_graph,
             R.navigation.wallpaper_nav_graph,
+            R.navigation.lwp_nav_graph,
             R.navigation.category_nav_graph
         )
         val controller = bottomNav.setupWithNavController(
