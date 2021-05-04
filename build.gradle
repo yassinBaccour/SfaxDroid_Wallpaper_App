@@ -14,7 +14,7 @@ buildscript {
         classpath Libs.hilt.gradlePlugin
         classpath Libs.projectClasspath.spotless
         classpath Libs.projectClasspath.libCheckUpdate
-        //classpath Libs.google.crashlyticsGradle
+        classpath Libs.google.crashlyticsGradle
     }
 }
 
