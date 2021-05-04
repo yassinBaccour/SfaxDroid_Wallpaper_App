@@ -2,7 +2,6 @@ package com.sfaxdoird.anim.img
 
 import android.net.Uri
 import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -15,10 +14,13 @@ import com.thin.downloadmanager.DownloadManager
 import com.thin.downloadmanager.DownloadRequest
 import com.thin.downloadmanager.DownloadStatusListenerV1
 import com.thin.downloadmanager.ThinDownloadManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
+import javax.inject.Inject
 import javax.inject.Named
 
-class WordImgViewModel @ViewModelInject constructor(
+@HiltViewModel
+class WordImgViewModel @Inject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     fileManager: FileManager,
     deviceManager: DeviceManager,

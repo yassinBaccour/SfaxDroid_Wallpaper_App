@@ -1,6 +1,6 @@
 package com.sfaxdroid.timer
 
-import androidx.hilt.lifecycle.ViewModelInject
+import androidx.hilt.Assisted
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -14,13 +14,13 @@ import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.data.mappers.WallpaperToViewMapper
 import com.sfaxdroid.data.repositories.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
-import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class WallpaperListViewModel @ViewModelInject constructor(
-    @androidx.hilt.Assisted private val savedStateHandle: SavedStateHandle,
+@HiltViewModel
+class WallpaperListViewModel @Inject constructor(
+    @Assisted private val savedStateHandle: SavedStateHandle,
     var getAllWallpapersUseCase: GetAllWallpapersUseCase,
     var deviceManager: DeviceManager,
     var fileManager: FileManager

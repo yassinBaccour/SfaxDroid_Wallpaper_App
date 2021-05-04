@@ -27,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
     private var mInterstitialAd: InterstitialAd? = null
     private var currentNavController: LiveData<NavController>? = null
+    private var nbShowedPerSession = 0
 
     private lateinit var preferencesManager: PreferencesManager
 
@@ -55,8 +56,8 @@ class HomeActivity : AppCompatActivity() {
     private fun initView() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         val navGraphIds = listOf(
-            R.navigation.lwp_nav_graph,
             R.navigation.wallpaper_nav_graph,
+            R.navigation.lwp_nav_graph,
             R.navigation.category_nav_graph
         )
         val controller = bottomNav.setupWithNavController(
@@ -67,7 +68,7 @@ class HomeActivity : AppCompatActivity() {
         )
         currentNavController = controller
         currentNavController?.observe(this) { navController ->
-            navController.addOnDestinationChangedListener { _, destination, _ ->
+            navController.addOnDestinationChangedListener { _, _, _ ->
                 showInterstitial()
             }
         }
@@ -80,7 +81,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupAds() {
         MobileAds.initialize(this)
-        InterstitialAd(this).apply {
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd?.apply {
             adUnitId = intertitialKey
             loadAd(AdRequest.Builder().build())
             adListener = object : AdListener() {
@@ -141,10 +143,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showInterstitial() {
         nbOpenAds++
-        if (nbOpenAds == 4) {
+        if (nbOpenAds == 5 && nbShowedPerSession < 3) {
             nbOpenAds = 0
             if (mInterstitialAd?.isLoaded == true) {
                 mInterstitialAd?.show()
+                nbShowedPerSession++
             }
         }
     }

@@ -30,7 +30,7 @@ class WallpapersListAdapter(var openWallpaper: (String) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WallpaperImgVH {
         return WallpaperImgVH(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.list_item_square_wallpaper,
+                R.layout.list_item_wallpaper,
                 parent, false
             )
         )

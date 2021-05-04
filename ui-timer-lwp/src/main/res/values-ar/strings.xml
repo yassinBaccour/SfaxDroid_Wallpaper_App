@@ -24,7 +24,7 @@
     <string name="add_wallpaper_messages">يجب زيادة 4 صور أو كثر</string>
     <string name="main_menu_scheduler_status">خدمة التغيير: %1$s</string>
     <string name="scheduler_new_days_title">تغير الخلفية كل</string>
-    <string name="wallpaper_list">Choose Wallpaper</string>
-    <string name="alert_box_message"> "Download This Wallpaper ?"</string>
-    <string name="alert_box_message_delete">"Delete From Timer Favorite list"</string>
+    <string name="wallpaper_list">إختيار الخلفية</string>
+    <string name="alert_box_message"> "هل تريد تحميل الخلفية ؟"</string>
+    <string name="alert_box_message_delete">"حذف الخلفية من قائمة الصور"</string>
 </resources>

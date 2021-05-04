@@ -8,13 +8,13 @@ buildscript {
     }
 
     dependencies {
-        //classpath google.crashlyticsGradle
         classpath 'com.android.tools.build:gradle:7.0.0-alpha15'
         classpath Libs.kotlin.kotlinGradlePlugin
         classpath Libs.google.service
         classpath Libs.hilt.gradlePlugin
         classpath Libs.projectClasspath.spotless
         classpath Libs.projectClasspath.libCheckUpdate
+        classpath Libs.google.crashlyticsGradle
     }
 }
 

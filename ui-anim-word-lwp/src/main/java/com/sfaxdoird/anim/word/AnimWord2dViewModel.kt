@@ -2,7 +2,6 @@ package com.sfaxdoird.anim.word
 
 import android.net.Uri
 import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -14,8 +13,11 @@ import com.thin.downloadmanager.DownloadManager
 import com.thin.downloadmanager.DownloadRequest
 import com.thin.downloadmanager.DownloadStatusListenerV1
 import com.thin.downloadmanager.ThinDownloadManager
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AnimWord2dViewModel @ViewModelInject constructor(
+@HiltViewModel
+class AnimWord2dViewModel @Inject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle,
     var fileManager: FileManager,
     var deviceManager: DeviceManager
