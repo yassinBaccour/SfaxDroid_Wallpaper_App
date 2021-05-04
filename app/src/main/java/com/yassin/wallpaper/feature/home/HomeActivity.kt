@@ -27,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
     private var mInterstitialAd: InterstitialAd? = null
     private var currentNavController: LiveData<NavController>? = null
+    private var nbShowedPerSession = 0
 
     private lateinit var preferencesManager: PreferencesManager
 
@@ -142,10 +143,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showInterstitial() {
         nbOpenAds++
-        if (nbOpenAds == 4) {
+        if (nbOpenAds == 5 && nbShowedPerSession < 3) {
             nbOpenAds = 0
             if (mInterstitialAd?.isLoaded == true) {
                 mInterstitialAd?.show()
+                nbShowedPerSession++
             }
         }
     }
