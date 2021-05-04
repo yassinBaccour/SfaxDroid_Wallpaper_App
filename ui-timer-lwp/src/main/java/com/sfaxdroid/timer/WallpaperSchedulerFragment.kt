@@ -254,6 +254,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initTxtStatus(isActive: Boolean) {
+        progressBar?.visibility = if (isActive) View.VISIBLE else View.GONE
         txtNotForget?.visibility = if (isActive) View.VISIBLE else View.GONE
         txtstatus.text =
             if (isActive) getString(R.string.on_switch) else getString(R.string.off_switch)
