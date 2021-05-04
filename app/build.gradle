@@ -52,8 +52,8 @@ android {
         waterRippleLwp {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension "app"
-            versionCode 150000
-            versionName "5.0.0"
+            versionCode 80
+            versionName "8.0"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_SFAXDROID)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }
