@@ -73,6 +73,10 @@ class DetailsFragment : Fragment() {
         checkPermission()
         showLoading()
         loadWallpaper()
+        addStrictMode()
+    }
+
+    private fun addStrictMode() {
         if (Build.VERSION.SDK_INT >= 24) {
             try {
                 val m: Method = StrictMode::class.java.getMethod("disableDeathOnFileUriExposure")
