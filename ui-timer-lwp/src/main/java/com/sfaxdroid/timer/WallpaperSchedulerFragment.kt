@@ -173,7 +173,7 @@ class WallpaperSchedulerFragment : Fragment() {
                 null
             )
             setTextColor(
-                resources.getColor(if (isJobActive) Color.WHITE else R.color.timer_flu_green),
+                if (isJobActive) Color.WHITE else resources.getColor(R.color.timer_flu_green)
             )
         }
     }

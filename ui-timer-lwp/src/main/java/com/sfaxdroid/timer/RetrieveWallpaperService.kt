@@ -25,12 +25,12 @@ class RetrieveWallpaperService : JobService() {
     @Inject
     lateinit var deviceManager: DeviceManager
 
-    private val sharedPref: SharedPreferences =
-        PreferenceManager.getDefaultSharedPreferences(
-            applicationContext
-        )
 
     override fun onStartJob(params: JobParameters): Boolean {
+        val sharedPref: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(
+                baseContext
+            )
         GlobalScope.launch(Dispatchers.Default) {
             val nbFile = fileManager.getPermanentDirListFiles().size
             var currentWallpaper = sharedPref.getInt(Constants.CURRENT_WALLPAPER_KEY, 0)
@@ -58,7 +58,7 @@ class RetrieveWallpaperService : JobService() {
 
     private fun updateSchedulerSettings(currentWallpaper: Int) {
         val sharedPref =
-            PreferenceManager.getDefaultSharedPreferences(applicationContext)
+            PreferenceManager.getDefaultSharedPreferences(baseContext)
         val editor = sharedPref.edit()
         editor.putInt(Constants.CURRENT_WALLPAPER_KEY, currentWallpaper)
         editor.apply()

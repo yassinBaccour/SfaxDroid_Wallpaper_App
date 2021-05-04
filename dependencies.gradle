@@ -16,7 +16,6 @@ ext {
             libCheckUpdate : "com.github.ben-manes:gradle-versions-plugin:0.36.0"
     ]
 
-
     coroutines = "1.4.3"
     sfaxLibs.kotlin = [
             kotlinStdlib      : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
@@ -41,15 +40,14 @@ ext {
             firebaseAnalytics: "com.google.firebase:firebase-analytics-ktx:18.0.3"
     ]
 
-    hiltComp = "1.0.0-alpha03"
-    hiltVersion = "2.32-alpha"
+    hiltVersion = "2.35.1"
     sfaxLibs.hilt = [
-            gradlePlugin       : "com.google.dagger:hilt-android-gradle-plugin:2.31.2-alpha",
+            gradlePlugin       : "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion",
             hiltLib            : "com.google.dagger:hilt-android:$hiltVersion",
             hiltAndroidComplier: "com.google.dagger:hilt-android-compiler:$hiltVersion",
-            hiltComplier       : "androidx.hilt:hilt-compiler:$hiltComp",
-            hiltViewModel      : "androidx.hilt:hilt-lifecycle-viewmodel:$hiltComp",
             testing            : "com.google.dagger:hilt-android-testing:$hiltVersion",
+            hiltComplier       : "androidx.hilt:hilt-compiler:1.0.0-beta01",
+            hiltViewModel      : "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     ]
 
     sfaxLibs.retrofit = [
