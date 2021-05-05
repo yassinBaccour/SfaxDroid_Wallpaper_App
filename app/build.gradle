@@ -39,8 +39,8 @@ android {
     buildTypes {
         release {
             debuggable false
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -52,8 +52,8 @@ android {
         waterRippleLwp {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension "app"
-            versionCode 80
-            versionName "8.0"
+            versionCode 81
+            versionName "8.1"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_SFAXDROID)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }
