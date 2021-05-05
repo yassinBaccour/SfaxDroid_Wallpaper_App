@@ -1,29 +1,34 @@
 package com.yassin.wallpaper.feature.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.yassin.wallpaper.R
-import com.yassin.wallpaper.feature.other.PrivacyActivity
-import com.yassin.wallpaper.feature.home.HomeFragment.Companion.newInstance
 import com.yassin.wallpaper.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.extension.checkAppPermission
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import javax.inject.Named
 
+@AndroidEntryPoint
 class HomeActivityNavBar : SimpleActivity() {
 
     private var mToolbar: Toolbar? = null
     private var mPrivacy: ImageView? = null
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var preferencesManager: PreferencesManager
+
+    @Inject
+    @Named("intertitial-key")
+    lateinit var intertitialKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,31 +43,20 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun loadFragment() {
-        val mAllBackgroundFragment = newInstance("new.json", "MIXED")
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.content_main, mAllBackgroundFragment, "Home.class")
-        fragmentTransaction.commit()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navHostFragment.navController
     }
 
     private fun initView() {
         mToolbar = findViewById(R.id.toolbar)
-        mPrivacy = findViewById(R.id.imgPrivacy)
-        mPrivacy?.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    PrivacyActivity::class.java
-                )
-            )
-        }
     }
 
     private fun setupAds() {
         MobileAds.initialize(this)
         mInterstitialAd = InterstitialAd(this)
         mInterstitialAd?.apply {
-            adUnitId = ""
+            adUnitId = intertitialKey
             loadAd(AdRequest.Builder().build())
             adListener = object : AdListener() {
                 override fun onAdClosed() {

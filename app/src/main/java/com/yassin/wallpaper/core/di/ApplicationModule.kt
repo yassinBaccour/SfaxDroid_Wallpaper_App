@@ -38,7 +38,10 @@ class ApplicationModule {
     @Provides
     @Named("app-name")
     fun provideAppName(): AppName {
-        return AppName.SfaxDroid
+        return if (BuildConfig.FLAVOR == "scaryallwhotouch")
+            AppName.LiliaGame
+        else
+            AppName.SfaxDroid
     }
 
     @Provides

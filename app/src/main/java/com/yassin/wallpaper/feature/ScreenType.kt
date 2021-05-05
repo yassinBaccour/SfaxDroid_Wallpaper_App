@@ -8,4 +8,5 @@ sealed class ScreenType {
     object TEXTURE : ScreenType()
     object CatWallpaper : ScreenType()
     object TIMER : ScreenType()
+    object MIXED : ScreenType()
 }

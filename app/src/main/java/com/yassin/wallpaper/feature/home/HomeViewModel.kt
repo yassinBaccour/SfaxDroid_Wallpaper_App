@@ -58,6 +58,7 @@ class HomeViewModel @Inject constructor(
             "TEXTURE" -> ScreenType.TEXTURE
             "TIMER" -> ScreenType.TIMER
             "CAT_WALL" -> ScreenType.CatWallpaper
+            "MIXED" -> ScreenType.MIXED
             else -> ScreenType.Wall
         }
     }
@@ -113,6 +114,10 @@ class HomeViewModel @Inject constructor(
             ScreenType.CatWallpaper -> {
                 tagVisibility.value = false
                 getCatWallpapers(screenType, fileName)
+            }
+            ScreenType.MIXED -> {
+                tagVisibility.value = false
+                getWallpapers(screenType, fileName)
             }
         }
     }
@@ -219,6 +224,7 @@ class HomeViewModel @Inject constructor(
             is ScreenType.TEXTURE -> WallpapersListAdapter.TYPE_SQUARE_WALLPAPER
             is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
             is ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
+            is ScreenType.MIXED -> WallpapersListAdapter.TYPE_WALLPAPER
             else -> WallpapersListAdapter.TYPE_LWP
         }
     }
@@ -245,7 +251,6 @@ class HomeViewModel @Inject constructor(
         }
         return mixedListItem
     }
-
 
     fun getMixed() {
         /*
