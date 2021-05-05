@@ -22,7 +22,6 @@ import javax.inject.Named
 class HomeActivityNavBar : SimpleActivity() {
 
     private var mToolbar: Toolbar? = null
-    private var mPrivacy: ImageView? = null
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var preferencesManager: PreferencesManager
 

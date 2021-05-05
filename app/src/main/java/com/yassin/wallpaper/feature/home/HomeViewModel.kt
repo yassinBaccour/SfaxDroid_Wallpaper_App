@@ -116,7 +116,8 @@ class HomeViewModel @Inject constructor(
                 getCatWallpapers(screenType, fileName)
             }
             ScreenType.MIXED -> {
-                tagVisibility.value = false
+                tagVisibility.value = true
+                getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
         }
