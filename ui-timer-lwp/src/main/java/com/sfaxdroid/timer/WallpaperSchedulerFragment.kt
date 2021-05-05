@@ -254,7 +254,6 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initTxtStatus(isActive: Boolean) {
-        progressBar?.visibility = if (isActive) View.GONE else View.VISIBLE
         txtNotForget?.visibility = if (isActive) View.VISIBLE else View.GONE
         txtstatus.text =
             if (isActive) getString(R.string.on_switch) else getString(R.string.off_switch)
@@ -293,10 +292,7 @@ class WallpaperSchedulerFragment : Fragment() {
                     )
                     GlobalScope.launch(Dispatchers.Main) {
                         initTxtStatus(true)
-                        /*com.sfaxdroid.base.utils.Utils.showSnackMessage(
-                            rootLayout,
-                            getString(R.string.auto_change_on)
-                        )*/
+                        progressBar?.visibility = View.GONE
                     }
                 }
             }
