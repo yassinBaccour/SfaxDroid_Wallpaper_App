@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.StrictMode
 import android.provider.MediaStore
 import android.view.*
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -74,7 +75,6 @@ class DetailsFragment : Fragment() {
         showLoading()
         loadWallpaper()
         addStrictMode()
-
     }
 
     private fun addStrictMode() {
@@ -98,6 +98,7 @@ class DetailsFragment : Fragment() {
     private fun loadWallpaper() {
         val detailImage: TouchImageView = requireView().findViewById(R.id.detailImage)
         detailImage.loadUrlWithAction(currentUrl, ::hideLoading)
+        detailImage.scaleType = ImageView.ScaleType.CENTER_CROP
     }
 
     private fun checkPermission() {
@@ -190,7 +191,18 @@ class DetailsFragment : Fragment() {
         buttonCrop.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonSare.setOnClickListener { view -> menuSheetClick(view.id) }
+        buttonShowSize.setOnClickListener { changeFullScreenImageSize() }
         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    private fun changeFullScreenImageSize() {
+        if (detailImage.scaleType == ImageView.ScaleType.CENTER_CROP) {
+            detailImage.scaleType = ImageView.ScaleType.FIT_START
+            buttonShowSize.setImageResource(R.drawable.ic_fullscreen_size)
+        } else {
+            detailImage.scaleType = ImageView.ScaleType.CENTER_CROP
+            buttonShowSize.setImageResource(R.drawable.ic_real_size)
+        }
     }
 
     private fun deleteFile(url: String): Boolean {
@@ -469,7 +481,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    fun showSnackMsg(msg: String) {
+    private fun showSnackMsg(msg: String) {
         Utils.showSnackMessage(rootLayout, msg)
     }
 

@@ -19,6 +19,7 @@ import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.WindowInsetsControllerCompat
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 import javax.inject.Named
@@ -30,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
     private var mInterstitialAd: InterstitialAd? = null
     private var currentNavController: LiveData<NavController>? = null
     private var nbShowedPerSession = 0
+    private var isFirstAdsLoaded = false
 
     private lateinit var preferencesManager: PreferencesManager
 
@@ -79,7 +81,11 @@ class HomeActivity : AppCompatActivity() {
 
     private fun windowsMode(destFragment: String) {
         if (destFragment == "Wallpaper") {
-            showInterstitial()
+            if (!isFirstAdsLoaded) {
+                showInterstitialAds()
+            } else {
+                showInterstitial()
+            }
         }
         if (destFragment == "DetailsFragment") {
             hideSystemUI()
@@ -90,19 +96,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun hideSystemUI() {
         bottom_nav_view.visibility = View.GONE
-        window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_FULLSCREEN )
     }
 
     private fun showSystemUI() {
         bottom_nav_view.visibility = View.VISIBLE
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -168,21 +165,26 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setupToolBar() {
 
     }
 
     private fun showInterstitial() {
         nbOpenAds++
-        if (nbOpenAds == 5 && nbShowedPerSession < 3) {
+        if (nbOpenAds == 4 && nbShowedPerSession < 3) {
             nbOpenAds = 0
-            if (mInterstitialAd?.isLoaded == true) {
-                mInterstitialAd?.show()
-                nbShowedPerSession++
-            }
+            showInterstitialAds()
         }
     }
+
+    private fun showInterstitialAds() {
+        if (mInterstitialAd?.isLoaded == true) {
+            //mInterstitialAd?.show()
+            nbShowedPerSession++
+            isFirstAdsLoaded = true
+        }
+    }
+
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {

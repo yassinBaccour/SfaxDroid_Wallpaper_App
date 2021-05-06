@@ -31,11 +31,11 @@ ext {
     ]
 
     sfaxLibs.google = [
-            material         : "com.google.android.material:material:1.3.0",
+            material         : "com.google.android.material:material:1.4.0-alpha02",
             servicesAds      : "com.google.android.gms:play-services-ads:19.7.0",
             service          : "com.google.gms:google-services:4.3.5",
             crashlyticsGradle: "com.google.firebase:firebase-crashlytics-gradle:2.5.2",
-            core             : "com.google.android.play:core:1.9.0",
+            core             : "com.google.android.play:core:1.10.0",
             coreKtx          : "com.google.android.play:core-ktx:1.8.1",
             firebaseAnalytics: "com.google.firebase:firebase-analytics-ktx:18.0.3"
     ]
@@ -90,8 +90,8 @@ ext {
             annotation       : 'androidx.annotation:annotation:1.1.0',
             coordinatorlayout: "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
             constraintlayout : 'androidx.constraintlayout:constraintlayout:2.0.4',
-            appcompat        : 'androidx.appcompat:appcompat:1.3.0-beta01',
-            fragmentktx      : "androidx.fragment:fragment-ktx:1.3.0-rc02",
+            appcompat        : 'androidx.appcompat:appcompat:1.3.0-rc01',
+            fragmentktx      : "androidx.fragment:fragment-ktx:1.3.3",
             preference       : "androidx.preference:preference-ktx:1.1.1",
     ]
 
