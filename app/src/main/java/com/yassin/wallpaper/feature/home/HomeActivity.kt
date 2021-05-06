@@ -179,7 +179,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun showInterstitialAds() {
         if (mInterstitialAd?.isLoaded == true) {
-            //mInterstitialAd?.show()
+            mInterstitialAd?.show()
             nbShowedPerSession++
             isFirstAdsLoaded = true
         }
