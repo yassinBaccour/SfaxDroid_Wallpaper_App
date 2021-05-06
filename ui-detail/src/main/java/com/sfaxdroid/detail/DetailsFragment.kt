@@ -74,6 +74,7 @@ class DetailsFragment : Fragment() {
         showLoading()
         loadWallpaper()
         addStrictMode()
+
     }
 
     private fun addStrictMode() {
@@ -189,6 +190,7 @@ class DetailsFragment : Fragment() {
         buttonCrop.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonSare.setOnClickListener { view -> menuSheetClick(view.id) }
+        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun deleteFile(url: String): Boolean {
