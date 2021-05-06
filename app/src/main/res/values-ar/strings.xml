@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="screen_lwp">خلفيات متحركة</string>
+    <string name="screen_wallpaper">خلفيات</string>
+    <string name="screen_category">فئة</string>
+    <string name="screen_category_show">عرض الفئة</string>
+    <string name="open_lwp">فتح</string>
+    <string name="open_cat">فتح</string>
+    <string name="preview_desc">Write on your photos and add stickers, frames, filters and other stuff</string>
+    <string name="preview_title">My Title</string>
+    <string name="preview_btn_open">فتح</string>
+    <string name="rating_app_description">لتشجيعي علي برمجة التطبيقات العربية و الإسلامية الرجاء التقيم السريع</string>
+    <string name="rating_app_title">تقيم التطبيق</string>
+    <string name="rating_app_later">بعد</string>
+    <string name="rating_app_never">أبدا</string>
+    <string name="rating_app_yes_btn">التقيم</string>
+</resources>

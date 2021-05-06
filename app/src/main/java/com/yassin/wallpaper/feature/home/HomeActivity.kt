@@ -106,6 +106,7 @@ class HomeActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             reviewManager.launchReviewFlow(this@HomeActivity, task.result)
                                 .addOnCompleteListener {
+                                    preferencesManager["NbRun"] = 100
                                 }
                         } else {
                         }
