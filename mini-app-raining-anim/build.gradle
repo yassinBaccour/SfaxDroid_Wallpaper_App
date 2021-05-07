@@ -29,15 +29,6 @@ android {
         useIR = true
     }
 
-    buildFeatures {
-        compose true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.4.20'
-    }
-
     flavorDimensions "app"
 
     productFlavors {
@@ -62,8 +53,5 @@ android {
         implementation Libs.androidx.appcompat
         implementation Libs.google.material
         implementation Libs.androidx.preference
-        implementation Libs.compose.composeUi
-        implementation Libs.compose.composeMaterial
-        implementation Libs.compose.composeUiTooling
     }
 }
