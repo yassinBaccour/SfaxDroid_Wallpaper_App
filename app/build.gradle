@@ -209,15 +209,15 @@ android.applicationVariants.all { variant ->
     def name = variant.getName()
     buildConfigField "boolean", "enableDebugLogging", "false"
     if (name.contains("waterRippleLwp")) {
-        def googleServices = file("google-services.json")
+        def googleServices = file("src/waterRippleLwp/google-services.json")
         if (!googleServices.exists()) {
-            Files.copy(file("fake-ripple-google-services.json").toPath(), googleServices.toPath())
+            Files.copy(file("src/waterRippleLwp/fake-ripple-google-services.json").toPath(), googleServices.toPath())
         }
     }
     if (name.contains("scaryallwhotouch")) {
-        def googleServices = file("google-services.json")
+        def googleServices = file("src/scaryallwhotouch/google-services.json")
         if (!googleServices.exists()) {
-            Files.copy(file("fake-scary-google-services.json").toPath(), googleServices.toPath())
+            Files.copy(file("src/scaryallwhotouch/fake-scary-google-services.json").toPath(), googleServices.toPath())
         }
     }
 }
