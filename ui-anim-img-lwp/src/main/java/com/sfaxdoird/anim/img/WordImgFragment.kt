@@ -27,11 +27,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class WordImgFragment : Fragment() {
 
-    private lateinit var buttonChooseColor: Button
-    private lateinit var fab: Button
+    private lateinit var chooseColorBtn: Button
+    private lateinit var fabBtn: Button
     private lateinit var toolbar: Toolbar
-    private lateinit var progressInfo: TextView
-    private lateinit var progressBarInfo: ProgressBar
+    private lateinit var progressInfoTxt: TextView
+    private lateinit var downloadInfoTxt: TextView
+    private lateinit var progressBar: ProgressBar
 
     private var isClickable = false
 
@@ -47,17 +48,18 @@ class WordImgFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        buttonChooseColor = view.findViewById(R.id.button_choose_color)
-        fab = view.findViewById(R.id.fab)
+        chooseColorBtn = view.findViewById(R.id.button_choose_color)
+        fabBtn = view.findViewById(R.id.fab)
         toolbar = view.findViewById(R.id.toolbar)
-        progressInfo = view.findViewById(R.id.progress_information)
-        progressBarInfo = view.findViewById(R.id.progress_bar_information)
-        initEventAndData(view)
+        progressInfoTxt = view.findViewById(R.id.progress_information)
+        progressBar = view.findViewById(R.id.progress_bar_information)
+        downloadInfoTxt = view.findViewById(R.id.download_status_information_text)
+        initEventAndData()
     }
 
-    private fun initEventAndData(view: View) {
-        fab.setOnClickListener { openLwp() }
-        buttonChooseColor.setOnClickListener { chooseColor() }
+    private fun initEventAndData() {
+        fabBtn.setOnClickListener { openLwp() }
+        chooseColorBtn.setOnClickListener { chooseColor() }
 
         val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
         initToolbar(screenName)
@@ -73,10 +75,10 @@ class WordImgFragment : Fragment() {
             viewLifecycleOwner,
             {
                 if (it) {
-                    view.findViewById<TextView>(R.id.download_status_information_text)?.text =
+                    downloadInfoTxt.text =
                         getString(R.string.download_completed)
                     isClickable = it
-                    fab.isEnabled = it
+                    fabBtn.isEnabled = it
                 }
             }
         )
@@ -112,7 +114,7 @@ class WordImgFragment : Fragment() {
                 val pref = SharedPrefsUtils(requireContext())
                 pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
 
-                buttonChooseColor.changeDrawableButtonColor(
+                chooseColorBtn.changeDrawableButtonColor(
                     selectedColor,
                     ResourcesCompat.getDrawable(
                         resources,
@@ -144,7 +146,7 @@ class WordImgFragment : Fragment() {
     }
 
     private fun setProgressInformation(info: WordImgViewModel.ProgressionInfo) {
-        progressInfo.text = when (info) {
+        progressInfoTxt.text = when (info) {
             is WordImgViewModel.ProgressionInfo.IdOneCompleted -> info.info + context?.getString(R.string.download_completed)
             is WordImgViewModel.ProgressionInfo.IdTwoCompleted -> context?.getString(R.string.download_terminated_sucessful)
         }
@@ -152,17 +154,17 @@ class WordImgFragment : Fragment() {
 
     private fun setProgressBytes(progress: Int, byte: Long) {
         if (progress != 0) {
-            progressBarInfo.progress = progress
-            progressInfo.text = (
-                "$progress%  " +
-                    getBytesDownloaded(
-                        progress,
-                        byte
+            progressBar.progress = progress
+            progressInfoTxt.text = (
+                    "$progress%  " +
+                            getBytesDownloaded(
+                                progress,
+                                byte
+                            )
                     )
-                )
         } else {
-            progressBarInfo.progress = 0
-            progressInfo.text = getString(R.string.failed_dwn)
+            progressBar.progress = 0
+            progressInfoTxt.text = getString(R.string.failed_dwn)
         }
     }
 }
