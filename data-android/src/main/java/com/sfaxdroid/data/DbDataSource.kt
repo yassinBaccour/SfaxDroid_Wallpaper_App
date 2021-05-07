@@ -13,5 +13,4 @@ class DbDataSource @Inject constructor(private val wallpaperDao: WallpaperDao) :
     override fun insertAll(wallpapers: List<SfxWallpaper>): List<Long> {
         return wallpaperDao.insertAll(wallpapers)
     }
-
 }

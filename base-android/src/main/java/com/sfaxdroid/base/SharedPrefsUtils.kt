@@ -38,5 +38,4 @@ class SharedPrefsUtils(mContext: Context) {
     fun GetSetting(key: String?, value: Boolean): Boolean {
         return mPref.getBoolean(key, value)
     }
-
 }

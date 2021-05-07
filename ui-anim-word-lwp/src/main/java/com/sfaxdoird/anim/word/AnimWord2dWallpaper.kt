@@ -1,14 +1,16 @@
 package com.sfaxdoird.anim.word
 
-import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Rect
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.sfaxdroid.base.SharedPrefsUtils
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 
 @AndroidEntryPoint
 class AnimWord2dWallpaper : WallpaperService() {

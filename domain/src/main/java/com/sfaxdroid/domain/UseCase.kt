@@ -1,7 +1,8 @@
 package com.sfaxdroid.domain
 
 import com.sfaxdroid.data.repositories.Response
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 abstract class UseCase<out Type, in Params> where Type : Any {
 

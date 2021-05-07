@@ -129,8 +129,8 @@ class WordImgFragment : Fragment() {
     private fun setProgressBytes(progress: Int, byte: Long) {
         if (progress != 0) {
             progress_bar_information?.progress = progress
-            progress_information?.text = ("$progress%  "
-                    + getBytesDownloaded(
+            progress_information?.text = ("$progress%  " +
+                    getBytesDownloaded(
                 progress,
                 byte
             ))
@@ -138,7 +138,5 @@ class WordImgFragment : Fragment() {
             progress_bar_information?.progress = 0
             progress_information?.text = getString(R.string.failed_dwn)
         }
-
     }
-
 }

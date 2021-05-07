@@ -41,5 +41,4 @@ class WallpaperDataSource {
     fun providesDbDataSource(productDao: WallpaperDao): DbDataSource {
         return DbDataSource(productDao)
     }
-
 }

@@ -1,7 +1,6 @@
 package com.sfaxdroid.data
 
 import androidx.room.Database
-
 import androidx.room.RoomDatabase
 import com.sfaxdroid.data.entity.SfxWallpaper
 

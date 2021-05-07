@@ -1,7 +1,6 @@
 package com.sfaxdroid.app;
 
 import android.util.Log;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,8 +29,8 @@ public class DecompressZip {
         copyStream(is, os, buffer, BUFFER_SIZE);
     }
 
-    public static void copyStream(InputStream is, OutputStream os,
-                                  byte[] buffer, int bufferSize) throws IOException {
+    public static void copyStream(InputStream is, OutputStream os, byte[] buffer, int bufferSize)
+            throws IOException {
         try {
             for (; ; ) {
                 int count = is.read(buffer, 0, bufferSize);

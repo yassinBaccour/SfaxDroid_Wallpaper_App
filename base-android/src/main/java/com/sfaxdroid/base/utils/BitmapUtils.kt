@@ -1,10 +1,12 @@
 package com.sfaxdroid.base.utils
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.LightingColorFilter
+import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import com.sfaxdroid.base.R
 
 /**
  * Created by souna on 12/17/2017.

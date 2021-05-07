@@ -3,7 +3,11 @@ package com.sfaxdroid.base
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import java.io.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 
 class PreferencesManager(val context: Context, private var prefName: String) {
 
@@ -81,6 +85,4 @@ class PreferencesManager(val context: Context, private var prefName: String) {
     private fun getPref(): SharedPreferences {
         return context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
     }
-
-
 }

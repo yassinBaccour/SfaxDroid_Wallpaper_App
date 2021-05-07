@@ -18,5 +18,4 @@ abstract class SimpleActivity : AppCompatActivity() {
     open fun onViewCreated() {}
     abstract fun initEventAndData()
     abstract val layout: Int
-
 }

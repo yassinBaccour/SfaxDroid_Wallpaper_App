@@ -13,7 +13,6 @@ import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.utils.BitmapUtils
 import java.io.File
 
-
 class WordImgLiveWallpaper : WallpaperService() {
 
     override fun onCreateEngine(): Engine {
@@ -82,10 +81,11 @@ class WordImgLiveWallpaper : WallpaperService() {
             }
         }
 
-
         override fun onSurfaceChanged(
-            holder: SurfaceHolder, format: Int,
-            width: Int, height: Int
+            holder: SurfaceHolder,
+            format: Int,
+            width: Int,
+            height: Int
         ) {
             super.onSurfaceChanged(holder, format, width, height)
             BitmapFactory.decodeFile(
@@ -113,11 +113,15 @@ class WordImgLiveWallpaper : WallpaperService() {
             wordBmp?.apply {
                 recycle()
             }
-
         }
 
         override fun onOffsetsChanged(
-            xOffset: Float, yOffset: Float, xStep: Float, yStep: Float, xPixels: Int, yPixels: Int
+            xOffset: Float,
+            yOffset: Float,
+            xStep: Float,
+            yStep: Float,
+            xPixels: Int,
+            yPixels: Int
         ) {
             drawFrame()
         }
@@ -143,7 +147,7 @@ class WordImgLiveWallpaper : WallpaperService() {
                         ), screenWidth, screenHeight, true
                     )
                 }
-                //TODO maybe change color
+                // TODO maybe change color
                 wordBmp = BitmapUtils.changeImageColor(
                     BitmapFactory.decodeFile(
                         "$tempDir/$zipFolder/$prefix$currentPhoto.png",
@@ -194,7 +198,6 @@ class WordImgLiveWallpaper : WallpaperService() {
 
                 restore()
             }
-
         }
     }
 
