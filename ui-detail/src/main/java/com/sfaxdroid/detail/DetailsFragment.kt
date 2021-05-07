@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
@@ -32,17 +33,15 @@ import com.sfaxdroid.detail.utils.TouchImageView
 import com.soundcloud.android.crop.Crop
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_details.*
+import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import javax.inject.Inject
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.bottom_sheet.*
 import java.lang.Exception
 import java.lang.reflect.Method
+import javax.inject.Inject
 import javax.inject.Named
-
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -175,19 +174,17 @@ class DetailsFragment : Fragment() {
             peekHeight = 0
             isHideable = true
             addBottomSheetCallback(object :
-                BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED)
-                        fab?.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
-                    else
-                        fab?.setImageResource(R.mipmap.ic_add_white)
-                }
+                    BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if (newState == BottomSheetBehavior.STATE_EXPANDED)
+                            fab?.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
+                        else
+                            fab?.setImageResource(R.mipmap.ic_add_white)
+                    }
 
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-                }
-
-            })
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    }
+                })
         }
         buttonCrop.setOnClickListener { view -> menuSheetClick(view.id) }
         buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
@@ -282,7 +279,7 @@ class DetailsFragment : Fragment() {
                     deleteCurrentPicture()
                 }
                 ActionTypeEnum.SendLwp -> {
-                    //sendToRippleLwp();
+                    // sendToRippleLwp();
                 }
                 else -> beginCrop()
             }
@@ -391,7 +388,8 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onActivityResult(
-        requestCode: Int, resultCode: Int,
+        requestCode: Int,
+        resultCode: Int,
         result: Intent?
     ) {
         super.onActivityResult(requestCode, resultCode, result)
@@ -467,7 +465,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun onSendToRippleLwp() {
-        //sendToRippleLwp();
+        // sendToRippleLwp();
     }
 
     private fun onSaveError() {

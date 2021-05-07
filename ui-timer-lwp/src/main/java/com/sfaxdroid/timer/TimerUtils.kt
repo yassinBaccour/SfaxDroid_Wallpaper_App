@@ -44,14 +44,16 @@ class TimerUtils {
         }
 
         fun openAddWallpaperWithKeyActivity(context: Context, key: String) {
-            //todo https://developer.android.com/guide/navigation/navigation-deep-link
+            // todo https://developer.android.com/guide/navigation/navigation-deep-link
             try {
-                context.startActivity(Intent(
-                    context,
-                    Class.forName("com.yassin.wallpaper.feature.main.activity.GalleryActivity")
-                ).apply {
-                    putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, key)
-                })
+                context.startActivity(
+                    Intent(
+                        context,
+                        Class.forName("com.yassin.wallpaper.feature.main.activity.GalleryActivity")
+                    ).apply {
+                        putExtra(com.sfaxdroid.base.Constants.KEY_LWP_NAME, key)
+                    }
+                )
             } catch (ignored: ClassNotFoundException) {
             }
         }

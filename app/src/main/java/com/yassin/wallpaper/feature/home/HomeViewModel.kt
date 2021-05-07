@@ -1,24 +1,34 @@
 package com.yassin.wallpaper.feature.home
 
 import androidx.hilt.Assisted
-import androidx.lifecycle.*
-import com.yassin.wallpaper.feature.ScreenType
-import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.data.entity.TagResponse
 import com.sfaxdroid.data.entity.WallpaperResponse
-import com.sfaxdroid.data.mappers.*
+import com.sfaxdroid.data.mappers.BaseWallpaperView
+import com.sfaxdroid.data.mappers.SimpleWallpaperView
+import com.sfaxdroid.data.mappers.TagToTagViewMap
+import com.sfaxdroid.data.mappers.TagType
+import com.sfaxdroid.data.mappers.TagView
+import com.sfaxdroid.data.mappers.WallpaperToCategoryMapper
+import com.sfaxdroid.data.mappers.WallpaperToLwpMapper
+import com.sfaxdroid.data.mappers.WallpaperToViewMapper
 import com.sfaxdroid.data.repositories.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
+import com.yassin.wallpaper.feature.ScreenType
+import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -75,7 +85,6 @@ class HomeViewModel @Inject constructor(
                     tagVisibility.value = false
                 }
             }
-
         }
     }
 
@@ -119,8 +128,10 @@ class HomeViewModel @Inject constructor(
 
     private fun getLiveWallpapers(screenType: ScreenType) {
         viewModelScope.launch {
-            when (val data =
-                getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(byLanguage(fileName)))) {
+            when (
+                val data =
+                    getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(byLanguage(fileName)))
+            ) {
                 is Response.SUCESS -> {
                     wrapWallpapers(
                         wallpaperList = (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
@@ -132,7 +143,6 @@ class HomeViewModel @Inject constructor(
                 is Response.FAILURE -> {
                 }
             }
-
         }
     }
 
@@ -192,12 +202,15 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             when (val data = getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))) {
                 is Response.SUCESS -> {
-                    wrapWallpapers((data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
-                        WallpaperToViewMapper().map(
-                            wall,
-                            deviceManager.isSmallScreen()
-                        )
-                    }, screenType)
+                    wrapWallpapers(
+                        (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                            WallpaperToViewMapper().map(
+                                wall,
+                                deviceManager.isSmallScreen()
+                            )
+                        },
+                        screenType
+                    )
                 }
                 is Response.FAILURE -> {
                 }
@@ -246,7 +259,6 @@ class HomeViewModel @Inject constructor(
         return mixedListItem
     }
 
-
     fun getMixed() {
         /*
         if (isMixed) {
@@ -263,8 +275,5 @@ class HomeViewModel @Inject constructor(
             listItem.add(13, ItemWrapperList(cat, ArticleListAdapter.TYPE_CAROUSEL))
         }
         */
-
-
     }
-
 }

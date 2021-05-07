@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import com.yassin.wallpaper.R
-import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.data.entity.LiveWallpaper
@@ -24,7 +22,9 @@ import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.sky.SkyLiveWallpaper
+import com.yassin.wallpaper.R
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
+import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallpapers.*
 
@@ -81,7 +81,6 @@ class HomeFragment : Fragment() {
         viewModel.tagListLiveData.observe(viewLifecycleOwner) { list ->
             showFilter(list)
         }
-
     }
 
     private fun initView() {
@@ -97,13 +96,13 @@ class HomeFragment : Fragment() {
                 object : RecyclerView.OnItemTouchListener {
                     override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
                     override fun onInterceptTouchEvent(
-                        rv: RecyclerView, e:
-                        MotionEvent
+                        recyclerView: RecyclerView,
+                        motionEvent: MotionEvent
                     ): Boolean {
-                        if (e.action == MotionEvent.ACTION_DOWN &&
-                            rv.scrollState == RecyclerView.SCROLL_STATE_SETTLING
+                        if (motionEvent.action == MotionEvent.ACTION_DOWN &&
+                            recyclerView.scrollState == RecyclerView.SCROLL_STATE_SETTLING
                         ) {
-                            rv.stopScroll()
+                            recyclerView.stopScroll()
                         }
                         return false
                     }
@@ -123,7 +122,8 @@ class HomeFragment : Fragment() {
     private fun openByType(wallpaperObject: SimpleWallpaperView) {
         when (selectedLwpName) {
             Constants.KEY_WORD_IMG_LWP -> {
-                findNavController().navigate(R.id.navigate_to_word_img,
+                findNavController().navigate(
+                    R.id.navigate_to_word_img,
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
@@ -133,10 +133,12 @@ class HomeFragment : Fragment() {
                             Constants.EXTRA_SCREEN_NAME,
                             screenName
                         )
-                    })
+                    }
+                )
             }
             Constants.KEY_ANIM_2D_LWP -> {
-                findNavController().navigate(R.id.navigate_to_anim_2d,
+                findNavController().navigate(
+                    R.id.navigate_to_anim_2d,
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
@@ -146,7 +148,8 @@ class HomeFragment : Fragment() {
                             Constants.EXTRA_SCREEN_NAME,
                             screenName
                         )
-                    })
+                    }
+                )
             }
             Constants.KEY_RIPPLE_LWP -> {
                 showDetailViewActivity(wallpaperObject, Constants.KEY_RIPPLE_LWP)
@@ -174,12 +177,14 @@ class HomeFragment : Fragment() {
             }
             is CategoryItem -> {
                 HomeActivityNavBar.nbOpenAds++
-                findNavController().navigate(R.id.category_show_navigation_fg,
+                findNavController().navigate(
+                    R.id.category_show_navigation_fg,
                     Bundle().apply {
                         putString(Constants.EXTRA_JSON_FILE_NAME, wallpaperObject.file)
                         putString(Constants.EXTRA_SCREEN_NAME, wallpaperObject.name)
                         putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
-                    })
+                    }
+                )
             }
         }
     }
@@ -187,19 +192,23 @@ class HomeFragment : Fragment() {
     private fun navToTimer(screeName: String) {
         findNavController().navigate(
             R.id.navigate_to_timer,
-            Bundle().apply { putString(Constants.EXTRA_SCREEN_NAME, screeName) })
+            Bundle().apply { putString(Constants.EXTRA_SCREEN_NAME, screeName) }
+        )
     }
 
     private fun navToTexture(lwpName: String, screeName: String) {
-        findNavController().navigate(R.id.chooser_navigation_fg, Bundle().apply {
-            putString(
-                Constants.EXTRA_JSON_FILE_NAME,
-                Constants.VALUE_TEXTURE_JSON_FILE_NAME
-            )
-            putString(Constants.EXTRA_SCREEN_TYPE, Constants.VALUE_TEXTURE_SCREEN_NAME)
-            putString(Constants.KEY_LWP_NAME, lwpName)
-            putString(Constants.EXTRA_SCREEN_NAME, screeName)
-        })
+        findNavController().navigate(
+            R.id.chooser_navigation_fg,
+            Bundle().apply {
+                putString(
+                    Constants.EXTRA_JSON_FILE_NAME,
+                    Constants.VALUE_TEXTURE_JSON_FILE_NAME
+                )
+                putString(Constants.EXTRA_SCREEN_TYPE, Constants.VALUE_TEXTURE_SCREEN_NAME)
+                putString(Constants.KEY_LWP_NAME, lwpName)
+                putString(Constants.EXTRA_SCREEN_NAME, screeName)
+            }
+        )
     }
 
     private fun openLwp(
@@ -246,15 +255,18 @@ class HomeFragment : Fragment() {
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
         HomeActivityNavBar.nbOpenAds++
-        findNavController().navigate(R.id.navigate_to_details, Bundle().apply {
-            putString(
-                Constants.EXTRA_IMG_URL,
-                getFullUrl(wallpaperObject.detailUrl)
-            )
-            if (lwpName.isNotEmpty()) {
-                putString(Constants.KEY_LWP_NAME, lwpName)
+        findNavController().navigate(
+            R.id.navigate_to_details,
+            Bundle().apply {
+                putString(
+                    Constants.EXTRA_IMG_URL,
+                    getFullUrl(wallpaperObject.detailUrl)
+                )
+                if (lwpName.isNotEmpty()) {
+                    putString(Constants.KEY_LWP_NAME, lwpName)
+                }
             }
-        })
+        )
     }
 
     private fun getLwpLayoutManager(): LayoutManager {
@@ -297,5 +309,4 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
 }

@@ -8,7 +8,12 @@ import com.sfaxdoird.anim.img.R
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.FileManager
 import dagger.hilt.android.qualifiers.ApplicationContext
-import java.io.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -103,9 +108,11 @@ class FileHandler @Inject constructor(@ApplicationContext private val context: C
     }
 
     private fun scanFile(file: File) {
-        context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).apply {
-            data = Uri.fromFile(file)
-        })
+        context.sendBroadcast(
+            Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).apply {
+                data = Uri.fromFile(file)
+            }
+        )
     }
 
     private fun getListFiles(parentDir: File): List<File> {
@@ -149,7 +156,6 @@ class FileHandler @Inject constructor(@ApplicationContext private val context: C
         }
         return temporaryDir
     }
-
 
     private fun copyFile(
         sourceLocation: File,

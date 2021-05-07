@@ -9,7 +9,7 @@ import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
 import android.view.animation.DecelerateInterpolator
-import java.util.*
+import java.util.Locale
 
 class WallpaperAppService : WallpaperService() {
 

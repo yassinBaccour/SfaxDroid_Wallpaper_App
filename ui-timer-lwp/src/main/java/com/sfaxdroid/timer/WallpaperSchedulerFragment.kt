@@ -27,7 +27,9 @@ import com.sfaxdroid.timer.TimerUtils.Companion.openAddWallpaperWithKeyActivity
 import com.sfaxdroid.timer.TimerUtils.Companion.setWallpaperFromFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallpaper_scheduler.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -196,14 +198,18 @@ class WallpaperSchedulerFragment : Fragment() {
 
     private fun initTimeCheckBox(time: Long) {
         when (time) {
-            3600000L -> radioOneHoure?.isChecked =
-                true
-            3600000 * 6.toLong() -> radioSixHoure?.isChecked =
-                true
-            3600000 * 12.toLong() -> radioDouzeHoure?.isChecked =
-                true
-            3600000 * 24.toLong() -> radioOneDayHoure?.isChecked =
-                true
+            3600000L ->
+                radioOneHoure?.isChecked =
+                    true
+            3600000 * 6.toLong() ->
+                radioSixHoure?.isChecked =
+                    true
+            3600000 * 12.toLong() ->
+                radioDouzeHoure?.isChecked =
+                    true
+            3600000 * 24.toLong() ->
+                radioOneDayHoure?.isChecked =
+                    true
             else -> radioOneHoure?.isChecked = true
         }
     }
@@ -248,7 +254,7 @@ class WallpaperSchedulerFragment : Fragment() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
-            //finish()
+            // finish()
         }
         return super.onOptionsItemSelected(menuItem)
     }
@@ -300,5 +306,4 @@ class WallpaperSchedulerFragment : Fragment() {
             showDialogNoMinFiles()
         }
     }
-
 }

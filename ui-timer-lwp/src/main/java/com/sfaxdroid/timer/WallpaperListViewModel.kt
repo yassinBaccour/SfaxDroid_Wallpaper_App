@@ -36,8 +36,10 @@ class WallpaperListViewModel @Inject constructor(
             loadFromStorage()
         } else {
             viewModelScope.launch {
-                when (val data =
-                    getAllWallpapersUseCase(GetAllWallpapersUseCase.Param("new.json"))) {
+                when (
+                    val data =
+                        getAllWallpapersUseCase(GetAllWallpapersUseCase.Param("new.json"))
+                ) {
                     is Response.SUCESS -> {
                         wallpaperListLiveData.value =
                             (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->

@@ -25,7 +25,6 @@ class RetrieveWallpaperService : JobService() {
     @Inject
     lateinit var deviceManager: DeviceManager
 
-
     override fun onStartJob(params: JobParameters): Boolean {
         val sharedPref: SharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(

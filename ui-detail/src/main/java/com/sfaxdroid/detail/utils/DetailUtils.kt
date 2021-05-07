@@ -24,7 +24,6 @@ import com.sfaxdroid.detail.ActionTypeEnum
 import java.io.File
 import java.io.IOException
 
-
 class DetailUtils {
 
     companion object {
@@ -91,13 +90,15 @@ class DetailUtils {
                                 activity,
                                 "$appId.provider",
                                 file!!
-                            ), "image/jpeg"
+                            ),
+                            "image/jpeg"
                         )
                         putExtra("mimeType", "image/jpeg")
                         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     },
                     activity.getString(R.string.set_as_dialog_message)
-                ), 200
+                ),
+                200
             )
         }
 
@@ -122,21 +123,23 @@ class DetailUtils {
                         wallpaper.width,
                         wallpaper.height
                     )
-                    wallpaperManager.setBitmap(Bitmap.createBitmap(
-                        width,
-                        height,
-                        Bitmap.Config.ARGB_8888
-                    ).apply {
-                        setPixels(
-                            pixels,
-                            0,
-                            wallpaper.width,
-                            xPadding,
-                            yPadding,
-                            wallpaper.width,
-                            wallpaper.height
-                        )
-                    })
+                    wallpaperManager.setBitmap(
+                        Bitmap.createBitmap(
+                            width,
+                            height,
+                            Bitmap.Config.ARGB_8888
+                        ).apply {
+                            setPixels(
+                                pixels,
+                                0,
+                                wallpaper.width,
+                                xPadding,
+                                yPadding,
+                                wallpaper.width,
+                                wallpaper.height
+                            )
+                        }
+                    )
                     true
                 } else {
                     wallpaperManager.setBitmap(wallpaper)
@@ -146,7 +149,6 @@ class DetailUtils {
                 false
             }
         }
-
 
         fun checkPermission(
             activity: Activity?,

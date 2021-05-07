@@ -3,7 +3,11 @@ package com.sfaxdroid.detail.utils
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.Configuration
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Matrix
+import android.graphics.PointF
+import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build.VERSION
@@ -351,7 +355,7 @@ open class TouchImageView @JvmOverloads constructor(
                         val heightRatio = viewHeight.toFloat() / drawableHeight
                         minScale = if (touchScaleType == ScaleType.CENTER) {
                             Math.min(widthRatio, heightRatio)
-                        } else {  // CENTER_CROP
+                        } else { // CENTER_CROP
                             Math.min(widthRatio, heightRatio) / Math.max(widthRatio, heightRatio)
                         }
                     }
@@ -1403,5 +1407,4 @@ open class TouchImageView @JvmOverloads constructor(
         // If setMinZoom(AUTOMATIC_MIN_ZOOM), then we'll set the min scale to include the whole image.
         const val AUTOMATIC_MIN_ZOOM = -1.0f
     }
-
 }

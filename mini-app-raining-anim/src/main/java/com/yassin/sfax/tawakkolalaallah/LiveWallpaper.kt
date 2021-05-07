@@ -12,7 +12,6 @@ import com.sfaxdroid.mini.base.BaseConstants
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getBackground
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getRainingItem
 import com.yassin.sfax.tawakkolalaallah.ResourceUtils.Companion.getTouchingItem
-import java.util.*
 
 class LiveWallpaper : WallpaperService() {
 

@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.viewpager.widget.PagerAdapter
-import java.util.*
+import java.util.Locale
 
 
 class WallpaperPagerAdapter(private var context: Context, private var resourceId: Int) :
