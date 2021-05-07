@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.Toast
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
@@ -13,7 +15,6 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.mini.base.Utils
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMiniAppActivity() {
 
@@ -37,11 +38,11 @@ class MainActivity : BaseMiniAppActivity() {
             initAdMob()
         }
 
-        button_set_wallpaper.setOnClickListener {
+        findViewById<Button>(R.id.button_set_wallpaper).setOnClickListener {
             Utils.openLiveWallpaper<WallpaperAppService>(this)
         }
 
-        button_open_gallery.setOnClickListener {
+        findViewById<Button>(R.id.button_open_gallery).setOnClickListener {
             startActivity(
                 Intent(
                     applicationContext,
@@ -50,7 +51,7 @@ class MainActivity : BaseMiniAppActivity() {
             )
         }
 
-        button_privacy.setOnClickListener {
+        findViewById<Button>(R.id.button_privacy).setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(Constants.PRIVACY)
@@ -60,7 +61,7 @@ class MainActivity : BaseMiniAppActivity() {
             }
         }
 
-        btn_rating.setOnClickListener {
+        findViewById<Button>(R.id.btn_rating).setOnClickListener {
             val myAppLinkToMarket = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse("market://details?id=$packageName")
@@ -76,26 +77,27 @@ class MainActivity : BaseMiniAppActivity() {
             }
         }
 
+        val radioAnimation = findViewById<RadioGroup>(R.id.radio_animation)
         when (sharedPrefs?.getString(Constants.PREF_KEY_SPEED, "none")) {
             Constants.PREF_VALUE_SPEED_1 -> {
-                radio_animation.check(R.id.speed1)
+                radioAnimation.check(R.id.speed1)
             }
             Constants.PREF_VALUE_SPEED_2 -> {
-                radio_animation.check(R.id.speed2)
+                radioAnimation.check(R.id.speed2)
             }
             Constants.PREF_VALUE_SPEED_3 -> {
-                radio_animation.check(R.id.speed3)
+                radioAnimation.check(R.id.speed3)
             }
             Constants.PREF_VALUE_SPEED_4 -> {
-                radio_animation.check(R.id.speed4)
+                radioAnimation.check(R.id.speed4)
             }
             else -> {
-                radio_animation.check(R.id.speed3)
+                radioAnimation.check(R.id.speed3)
                 saveSpeed(Constants.PREF_VALUE_SPEED_3)
             }
         }
 
-        radio_animation.setOnCheckedChangeListener { _, checkedId ->
+        radioAnimation.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.speed1 -> {
                     saveSpeed(Constants.PREF_VALUE_SPEED_1)
@@ -112,20 +114,22 @@ class MainActivity : BaseMiniAppActivity() {
             }
         }
 
+        val radioQuality = findViewById<RadioGroup>(R.id.radio_quality)
+
         when (sharedPrefs?.getString(Constants.PREF_KEY_QUALITY, "none")) {
             Constants.PREF_VALUE_QUALITY_1 -> {
-                radio_quality.check(R.id.quality1)
+                radioQuality.check(R.id.quality1)
             }
             Constants.PREF_VALUE_QUALITY_2 -> {
-                radio_quality.check(R.id.quality2)
+                radioQuality.check(R.id.quality2)
             }
             else -> {
-                radio_quality.check(R.id.quality1)
+                radioQuality.check(R.id.quality1)
                 saveQuality(Constants.PREF_VALUE_QUALITY_1)
             }
         }
 
-        radio_quality.setOnCheckedChangeListener { _, checkedId ->
+        radioQuality.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.quality1 -> {
                     saveQuality(Constants.PREF_VALUE_QUALITY_1)
