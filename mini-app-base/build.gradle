@@ -12,12 +12,6 @@ android {
         targetSdkVersion androidTargetSdkVersion
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
-    }
-
 }
 
 dependencies {

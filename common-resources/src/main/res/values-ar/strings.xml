@@ -20,6 +20,7 @@
     <string name="set_wallpaper_success_message">تم تطبيق الخلفية بنجاح</string>
     <string name="set_wallpaper_not_success_message">خلل في تطبيق الخلفية </string>
     <string name="set_as_dialog_message">إستعمال</string>
+    <string name="create_animated_wallpapers">تطبيق الخلفية المتحركة</string>
 
     <string name="alert_error_download_title">مشكل في الاتصال</string>
     <string name="alert_error_download_desc">حدثت مشكلة في تحميل الصورة.</string>

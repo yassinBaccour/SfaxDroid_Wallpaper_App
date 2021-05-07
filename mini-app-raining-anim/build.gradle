@@ -29,6 +29,10 @@ android {
         useIR = true
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     flavorDimensions "app"
 
     productFlavors {
