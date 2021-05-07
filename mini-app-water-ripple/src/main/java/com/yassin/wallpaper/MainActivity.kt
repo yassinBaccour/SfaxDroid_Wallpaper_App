@@ -3,11 +3,14 @@ package com.yassin.wallpaper
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.RadioGroup
+import android.widget.TextView
 import com.sfaxdroid.engine.Constants
 import com.sfaxdroid.mini.base.BaseConstants
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.mini.base.Utils
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMiniAppActivity() {
 
@@ -15,12 +18,12 @@ class MainActivity : BaseMiniAppActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnSetWallpaper.setOnClickListener {
+        findViewById<Button>(R.id.btnSetWallpaper).setOnClickListener {
             clearCurrentWallpaper()
             Utils.openLiveWallpaper<WallpaperEngine>(this)
         }
 
-        imageViewPub.setOnClickListener {
+        findViewById<ImageView>(R.id.imageViewPub).setOnClickListener {
             Utils.openPub(this)
         }
 
@@ -29,13 +32,13 @@ class MainActivity : BaseMiniAppActivity() {
 
     private fun initViewByApp() {
         if (BuildConfig.FLAVOR == "green") {
-            imageViewLogo.visibility = View.GONE
+            findViewById<ImageView>(R.id.imageViewLogo).visibility = View.GONE
         }
         if (BuildConfig.FLAVOR != "pink") {
             initRadioButton()
         } else {
-            radioChooseWallpaper.visibility = View.INVISIBLE
-            textViewChoose.visibility = View.INVISIBLE
+            findViewById<RadioGroup>(R.id.radioChooseWallpaper).visibility = View.INVISIBLE
+            findViewById<TextView>(R.id.textViewChoose).visibility = View.INVISIBLE
         }
     }
 
@@ -47,7 +50,7 @@ class MainActivity : BaseMiniAppActivity() {
         )
 
         val editor = sharedPref.edit()
-
+        val radioChooseWallpaper = findViewById<RadioGroup>(R.id.radioChooseWallpaper)
         when (sharedPref.getString(Constants.CHANGE_IMAGE_KEY, "")) {
             Constants.CHANGE_IMAGE_VALUE_ONE -> {
                 radioChooseWallpaper.check(R.id.wallp1)
