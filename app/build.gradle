@@ -57,10 +57,6 @@ android {
             versionName "8.3"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_SFAXDROID)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
-            def googleServices = file("google-services.json")
-            if (!googleServices.exists()) {
-                Files.copy(file("fake-google-services.json").toPath(), googleServices.toPath())
-            }
         }
 
         scaryallwhotouch {
@@ -71,10 +67,6 @@ android {
             versionName "3.0"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
-            def googleServices = file("google-services.json")
-            if (!googleServices.exists()) {
-                Files.copy(file("fake-google-services.json").toPath(), googleServices.toPath())
-            }
         }
     }
 
@@ -213,6 +205,22 @@ dependencies {
     implementation project(':data-android')
 }
 
+android.applicationVariants.all { variant ->
+    def name = variant.getName()
+    buildConfigField "boolean", "enableDebugLogging", "false"
+    if (name.contains("waterRippleLwp")) {
+        def googleServices = file("google-services.json")
+        if (!googleServices.exists()) {
+            Files.copy(file("fake-ripple-google-services.json").toPath(), googleServices.toPath())
+        }
+    }
+    if (name.contains("scaryallwhotouch")) {
+        def googleServices = file("google-services.json")
+        if (!googleServices.exists()) {
+            Files.copy(file("fake-scary-google-services.json").toPath(), googleServices.toPath())
+        }
+    }
+}
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
