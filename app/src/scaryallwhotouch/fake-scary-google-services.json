@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "fake",
-    "firebase_url": "https://arabicwallpaper-fake.firebaseio.com",
-    "project_id": "arabicwallpaper-fake",
-    "storage_bucket": "arabicwallpaper-fake.appspot.com"
+    "project_number": "000000000000",
+    "firebase_url": "https://arabicwallpaper-00000.firebaseio.com",
+    "project_id": "arabicwallpaper-00000",
+    "storage_bucket": "arabicwallpaper-00000.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:fake:android:fake",
+        "mobilesdk_app_id": "1:000055578602:android:000076000025ba8e000093",
         "android_client_info": {
           "package_name": "com.liliagame.scarewhotouchme"
         }
       },
       "oauth_client": [
         {
-          "client_id": "fake-fake.apps.googleusercontent.com",
+          "client_id": "000055000002-0000dvthdos00005j70000d000000000.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "fake"
+          "current_key": "0000SyCzKwC0000jRp_0000B1Ea0000VKDo0000"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "fake.com",
+              "client_id": "000055500002-dogg0000dos00005j730000iher00000.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
