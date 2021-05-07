@@ -25,5 +25,4 @@ interface WsRepository {
     suspend fun getTags(
         file: String
     ): Response
-
 }

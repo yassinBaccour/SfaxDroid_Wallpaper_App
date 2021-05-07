@@ -1,7 +1,7 @@
 package com.sfaxdroid.data.mappers
 
 class SimpleWallpaperView(
-    url: String, var detailUrl: String = "",
+    url: String,
+    var detailUrl: String = ""
 ) :
-    BaseWallpaperView(url) {
-}
+    BaseWallpaperView(url)

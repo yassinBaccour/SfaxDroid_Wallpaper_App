@@ -23,7 +23,6 @@ open class BaseNetwork {
             }
         }
     }
-
 }
 
 sealed class Response {

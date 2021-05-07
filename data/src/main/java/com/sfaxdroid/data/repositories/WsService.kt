@@ -1,8 +1,8 @@
 package com.sfaxdroid.data.repositories
 
-import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
+import retrofit2.Retrofit
 
 @Singleton
 class WsService

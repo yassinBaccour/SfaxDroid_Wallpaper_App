@@ -7,5 +7,4 @@ class CategoryItem(
     var file: String,
     url: String
 ) :
-    BaseWallpaperView(url) {
-}
+    BaseWallpaperView(url)

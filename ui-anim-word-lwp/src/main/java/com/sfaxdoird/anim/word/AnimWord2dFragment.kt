@@ -99,7 +99,6 @@ class AnimWord2dFragment : Fragment() {
         viewModel.progressValue.observe(viewLifecycleOwner, {
             setProgressBytes(it.first, it.second)
         })
-
     }
 
     private fun setProgressBytes(progress: Int, byte: Long) {
@@ -232,6 +231,4 @@ class AnimWord2dFragment : Fragment() {
             Utils.openLiveWallpaper<AnimWord2dWallpaper>(requireContext())
         }
     }
-
-
 }

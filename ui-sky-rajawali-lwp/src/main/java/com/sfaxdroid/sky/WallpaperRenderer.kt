@@ -2,9 +2,9 @@ package com.sfaxdroid.sky
 
 import android.content.Context
 import android.view.MotionEvent
+import kotlin.math.abs
 import org.rajawali3d.math.vector.Vector3
 import org.rajawali3d.renderer.Renderer
-import kotlin.math.abs
 
 class WallpaperRenderer(context: Context, private val img: Int) : Renderer(context) {
 
@@ -118,5 +118,4 @@ class WallpaperRenderer(context: Context, private val img: Int) : Renderer(conte
         object BottomToTop : Position()
         object None : Position()
     }
-
 }

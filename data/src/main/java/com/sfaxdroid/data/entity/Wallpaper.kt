@@ -6,5 +6,5 @@ class Wallpaper(
     var url: String,
     var color: String?,
     var type: String?,
-    var file: String?,
+    var file: String?
 )

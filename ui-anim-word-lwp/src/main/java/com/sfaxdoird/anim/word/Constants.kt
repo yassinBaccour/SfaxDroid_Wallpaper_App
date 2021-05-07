@@ -1,6 +1,5 @@
 package com.sfaxdoird.anim.word
 
-
 object Constants {
     val quote_tab = listOf(
         "الرحمن",

@@ -71,8 +71,10 @@ class AnimWord2dWallpaper : WallpaperService() {
         }
 
         override fun onSurfaceChanged(
-            holder: SurfaceHolder, format: Int,
-            width: Int, height: Int
+            holder: SurfaceHolder,
+            format: Int,
+            width: Int,
+            height: Int
         ) {
             super.onSurfaceChanged(holder, format, width, height)
 
@@ -98,8 +100,12 @@ class AnimWord2dWallpaper : WallpaperService() {
         }
 
         override fun onOffsetsChanged(
-            xOffset: Float, yOffset: Float, xStep: Float,
-            yStep: Float, xPixels: Int, yPixels: Int
+            xOffset: Float,
+            yOffset: Float,
+            xStep: Float,
+            yStep: Float,
+            xPixels: Int,
+            yPixels: Int
         ) {
             drawFrame()
         }
@@ -108,22 +114,22 @@ class AnimWord2dWallpaper : WallpaperService() {
             if (event.action == MotionEvent.ACTION_DOWN) {
                 com.sfaxdroid.base.Constants.nbIncrementationAfterChange =
                     com.sfaxdroid.base.Constants.nbIncrementationAfterChange + 1
-                if (screenWidth > 0 && com.sfaxdroid.base.Constants.ifBackgroundChanged
-                    && com.sfaxdroid.base.Constants.nbIncrementationAfterChange == 5
+                if (screenWidth > 0 && com.sfaxdroid.base.Constants.ifBackgroundChanged &&
+                    com.sfaxdroid.base.Constants.nbIncrementationAfterChange == 5
                 ) {
                     com.sfaxdroid.base.Constants.nbIncrementationAfterChange = 0
                     com.sfaxdroid.base.Constants.ifBackgroundChanged = false
                     background = Bitmap.createScaledBitmap(
                         BitmapFactory.decodeFile(
-                            filesDir.toString() + "/"
-                                    + com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
+                            filesDir.toString() + "/" +
+                                    com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
                             options
                         ),
                         screenWidth, screenHeight, true
                     )
                 }
 
-                //todo maybe change color
+                // todo maybe change color
                 paintOption.color = mColor
                 if (currentPhoto == 98) {
                     currentPhoto = 0
@@ -178,7 +184,6 @@ class AnimWord2dWallpaper : WallpaperService() {
             canvas.restore()
         }
     }
-
 
     companion object {
         private var currentPhoto = 1

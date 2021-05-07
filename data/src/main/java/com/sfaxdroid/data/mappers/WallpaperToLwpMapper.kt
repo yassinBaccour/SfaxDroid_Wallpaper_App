@@ -23,5 +23,4 @@ class WallpaperToLwpMapper : SfaxDroidMapper<Wallpaper, LwpItem> {
             else -> LiveWallpaper.None
         }
     }
-
 }

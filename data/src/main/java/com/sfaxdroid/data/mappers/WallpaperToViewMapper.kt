@@ -15,5 +15,4 @@ class WallpaperToViewMapper : SfaxDroidMapper<Wallpaper, SimpleWallpaperView> {
         val urlByScreen = getUrlByScreenSize(urlToChange, isSmallScreen)
         return urlByScreen.replace("_preview", "")
     }
-
 }

@@ -8,5 +8,4 @@ class LwpItem(
     var type: LiveWallpaper,
     thumbnailUrl: String
 ) :
-    BaseWallpaperView(thumbnailUrl) {
-}
+    BaseWallpaperView(thumbnailUrl)
