@@ -1,5 +1,7 @@
 import groovy.xml.MarkupBuilder
 
+import java.nio.file.Files
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -8,7 +10,6 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../dependencies.gradle'
 apply from: '../spotless.gradle'
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'com.google.firebase.crashlytics'
 
 kapt {
     correctErrorTypes = true
@@ -204,4 +205,13 @@ dependencies {
     implementation project(':data-android')
 }
 
+def googleServices = file("google-services.json")
+if (!googleServices.exists()) {
+    // If there isn't a google-services.json available, we'll copy our fake version to the
+    // google-services.json
+    Files.copy(file("fake-google-services.json").toPath(), googleServices.toPath())
+}
+
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
