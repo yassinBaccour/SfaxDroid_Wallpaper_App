@@ -57,6 +57,10 @@ android {
             versionName "8.3"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_SFAXDROID)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
+            def googleServices = file("google-services.json")
+            if (!googleServices.exists()) {
+                Files.copy(file("fake-google-services.json").toPath(), googleServices.toPath())
+            }
         }
 
         scaryallwhotouch {
@@ -67,6 +71,10 @@ android {
             versionName "3.0"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
+            def googleServices = file("google-services.json")
+            if (!googleServices.exists()) {
+                Files.copy(file("fake-google-services.json").toPath(), googleServices.toPath())
+            }
         }
     }
 
@@ -205,12 +213,6 @@ dependencies {
     implementation project(':data-android')
 }
 
-def googleServices = file("google-services.json")
-if (!googleServices.exists()) {
-    // If there isn't a google-services.json available, we'll copy our fake version to the
-    // google-services.json
-    Files.copy(file("fake-google-services.json").toPath(), googleServices.toPath())
-}
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
