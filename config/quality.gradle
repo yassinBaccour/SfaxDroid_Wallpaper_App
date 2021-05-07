@@ -83,7 +83,7 @@ task detectInfer(type: Exec) {
     // Inform user if infer not present
     ignoreExitValue true
     doLast {
-        if(execResult.getExitValue() != 0) {
+        if (execResult.getExitValue() != 0) {
             throw new GradleException("Infer seems not installed. Please refer to http://fbinfer.com/docs/getting-started.html")
         }
     }
