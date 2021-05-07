@@ -1,6 +1,9 @@
 package com.sami.wallpapers
 
-import android.content.*
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -23,7 +26,10 @@ class MainActivity : BaseMiniAppActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPrefs =
-            getSharedPreferences(com.sfaxdroid.mini.base.BaseConstants.PREF_NAME, Context.MODE_PRIVATE)
+            getSharedPreferences(
+                com.sfaxdroid.mini.base.BaseConstants.PREF_NAME,
+                Context.MODE_PRIVATE
+            )
 
         setContentView(R.layout.activity_main)
 

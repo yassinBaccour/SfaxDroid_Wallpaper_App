@@ -16,6 +16,5 @@ class Constants {
         const val AD_MOB = "ca-app-pub-6263632629106733/9710395681"
         const val PRIVACY = "https://www.iubenda.com/privacy-policy/27298346"
         const val RESOURCE_PREFIX = "img_"
-
     }
 }

@@ -45,5 +45,3 @@ dependencies {
     implementation project(':mini-app-base')
     implementation Libs.google.servicesAds
 }
-
-

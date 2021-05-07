@@ -12,5 +12,4 @@ class ViewWallpaperActivity : Activity() {
         findViewById<ViewPager>(R.id.view_pager_wallpaper).adapter =
             WallpaperPagerAdapter(this, R.layout.item_wallpaper_detail)
     }
-
 }

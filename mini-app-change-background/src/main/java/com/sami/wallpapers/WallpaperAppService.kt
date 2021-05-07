@@ -72,8 +72,10 @@ class WallpaperAppService : WallpaperService() {
         }
 
         override fun onSurfaceChanged(
-            holder: SurfaceHolder, format: Int,
-            width: Int, height: Int
+            holder: SurfaceHolder,
+            format: Int,
+            width: Int,
+            height: Int
         ) {
             super.onSurfaceChanged(holder, format, width, height)
             mScreenWidth = width
@@ -96,11 +98,13 @@ class WallpaperAppService : WallpaperService() {
                 startWithTime(speed.toLong())
             } else {
                 startWithTime(
-                    (speed * decelerateInterpolator
-                        .getInterpolation(
-                            mTickCount
-                                    / frameMaxDigit.toFloat()
-                        )).toLong()
+                    (
+                        speed * decelerateInterpolator
+                            .getInterpolation(
+                                mTickCount /
+                                    frameMaxDigit.toFloat()
+                            )
+                        ).toLong()
                 )
             }
         }
@@ -120,12 +124,13 @@ class WallpaperAppService : WallpaperService() {
             BitmapFactory.decodeResource(
                 context.resources,
                 context.resources.getIdentifier(
-                    Constants.RESOURCE_PREFIX
-                            + String.format(
-                        "%05d",
-                        currentPosition % frameMaxDigit,
-                        Locale.US
-                    ), "drawable",
+                    Constants.RESOURCE_PREFIX +
+                        String.format(
+                            "%05d",
+                            currentPosition % frameMaxDigit,
+                            Locale.US
+                        ),
+                    "drawable",
                     context.packageName
                 ),
                 bitmapOptions
@@ -134,12 +139,12 @@ class WallpaperAppService : WallpaperService() {
                     Bitmap.createScaledBitmap(
                         it, mScreenWidth,
                         mScreenHeight, true
-                    ), transformationMatrix, null
+                    ),
+                    transformationMatrix, null
                 )
                 it.recycle()
             }
             mTickCount++
         }
-
     }
 }

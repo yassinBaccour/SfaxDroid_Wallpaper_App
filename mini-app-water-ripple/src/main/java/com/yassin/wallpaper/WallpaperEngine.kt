@@ -15,5 +15,4 @@ class WallpaperEngine : BaseWallpaperEngine() {
     override fun getWallpaperThree(): Int {
         return R.drawable.ic_wallpaper_three
     }
-
 }
