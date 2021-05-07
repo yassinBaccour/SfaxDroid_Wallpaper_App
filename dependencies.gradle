@@ -10,9 +10,14 @@ ext {
     def sfaxLibs = [:]
     Libs = sfaxLibs
 
+    def versions = [
+            ktlint: "0.40.0",
+    ]
+    ext.Versions = versions
+
     sfaxLibs.projectClasspath = [
             gradleBuildTool: "com.android.tools.build:gradle:7.0.0-alpha09",
-            spotless       : 'com.diffplug.spotless:spotless-plugin-gradle:5.10.0',
+            spotless       : 'com.diffplug.spotless:spotless-plugin-gradle:5.12.1',
             libCheckUpdate : "com.github.ben-manes:gradle-versions-plugin:0.36.0"
     ]
 

@@ -18,7 +18,11 @@ import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.data.entity.LiveWallpaper
-import com.sfaxdroid.data.mappers.*
+import com.sfaxdroid.data.mappers.BaseWallpaperView
+import com.sfaxdroid.data.mappers.CategoryItem
+import com.sfaxdroid.data.mappers.LwpItem
+import com.sfaxdroid.data.mappers.SimpleWallpaperView
+import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.sky.SkyLiveWallpaper
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import dagger.hilt.android.AndroidEntryPoint

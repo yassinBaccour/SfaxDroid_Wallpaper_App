@@ -1,4 +1,5 @@
 apply plugin: "com.diffplug.spotless"
+apply from: '../dependencies.gradle'
 
 spotless {
     java {
@@ -11,7 +12,9 @@ spotless {
     }
     kotlin {
         target '**/*.kt'
-        ktlint()
+        targetExclude("$buildDir/**/*.kt")
+        targetExclude('bin/**/*.kt')
+        ktlint(Versions.ktlint)
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()

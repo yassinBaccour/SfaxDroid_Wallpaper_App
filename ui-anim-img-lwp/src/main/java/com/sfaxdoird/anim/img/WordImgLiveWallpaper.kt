@@ -20,11 +20,13 @@ class WordImgLiveWallpaper : WallpaperService() {
         val color = pref.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
         val zipFolder = com.sfaxdroid.base.Constants.ZIP_FOLDER_NAME
         return ImgWordEngine(
-            color, getTemporaryDirWithFolder(
+            color,
+            getTemporaryDirWithFolder(
                 this,
                 folder = Constants.KEY_LWP_FOLDER_CONTAINER,
                 appName = getString(R.string.app_namenospace)
-            ), com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME, zipFolder
+            ),
+            com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME, zipFolder
         )
     }
 
@@ -50,7 +52,8 @@ class WordImgLiveWallpaper : WallpaperService() {
                 BitmapFactory.decodeFile(
                     "$tempDir/$zipFolder/$prefix$currentPhoto.png",
                     options
-                ), color
+                ),
+                color
             )
             paintOption = Paint().apply {
                 color = -0x1
@@ -144,7 +147,8 @@ class WordImgLiveWallpaper : WallpaperService() {
                         BitmapFactory.decodeFile(
                             "$tempDir/$backgroundFileName",
                             options
-                        ), screenWidth, screenHeight, true
+                        ),
+                        screenWidth, screenHeight, true
                     )
                 }
                 // TODO maybe change color
@@ -152,7 +156,8 @@ class WordImgLiveWallpaper : WallpaperService() {
                     BitmapFactory.decodeFile(
                         "$tempDir/$zipFolder/$prefix$currentPhoto.png",
                         options
-                    ), color, screenWidth / 2, screenHeight / 2
+                    ),
+                    color, screenWidth / 2, screenHeight / 2
                 )
                 if (currentPhoto == nbMaxPhoto) {
                     currentPhoto = 0

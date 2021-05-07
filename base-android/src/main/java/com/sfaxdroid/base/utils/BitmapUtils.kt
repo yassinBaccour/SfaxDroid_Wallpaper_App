@@ -32,9 +32,12 @@ object BitmapUtils {
                 )
             }
             val canvas = Canvas(resultBitmap)
-            canvas.drawBitmap(resultBitmap, 0f, 0f, Paint().apply {
-                colorFilter = LightingColorFilter(color, 1)
-            })
+            canvas.drawBitmap(
+                resultBitmap, 0f, 0f,
+                Paint().apply {
+                    colorFilter = LightingColorFilter(color, 1)
+                }
+            )
             resultBitmap
         } catch (e: Exception) {
             null
@@ -55,7 +58,8 @@ object BitmapUtils {
             changeImageColor(
                 convertDrawableToBitmap(
                     drawable
-                ), selectedColor
+                ),
+                selectedColor
             )
         )
     }

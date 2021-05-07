@@ -10,7 +10,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.provider.MediaStore
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -63,9 +66,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.activity_details, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.activity_details, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

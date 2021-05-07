@@ -122,7 +122,7 @@ class AnimWord2dWallpaper : WallpaperService() {
                     background = Bitmap.createScaledBitmap(
                         BitmapFactory.decodeFile(
                             filesDir.toString() + "/" +
-                                    com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
+                                com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
                             options
                         ),
                         screenWidth, screenHeight, true

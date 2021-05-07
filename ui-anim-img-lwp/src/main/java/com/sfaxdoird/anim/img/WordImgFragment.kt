@@ -48,21 +48,30 @@ class WordImgFragment : Fragment() {
         val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
         initToolbar(screenName)
 
-        viewModel.progressInfo.observe(viewLifecycleOwner, {
-            setProgressInformation(it)
-        })
-
-        viewModel.isCompleted.observe(viewLifecycleOwner, {
-            if (it) {
-                download_status_information_text?.text = getString(R.string.download_completed)
-                isClickable = it
-                fab?.isEnabled = it
+        viewModel.progressInfo.observe(
+            viewLifecycleOwner,
+            {
+                setProgressInformation(it)
             }
-        })
+        )
 
-        viewModel.progressValue.observe(viewLifecycleOwner, {
-            setProgressBytes(it.first, it.second)
-        })
+        viewModel.isCompleted.observe(
+            viewLifecycleOwner,
+            {
+                if (it) {
+                    download_status_information_text?.text = getString(R.string.download_completed)
+                    isClickable = it
+                    fab?.isEnabled = it
+                }
+            }
+        )
+
+        viewModel.progressValue.observe(
+            viewLifecycleOwner,
+            {
+                setProgressBytes(it.first, it.second)
+            }
+        )
     }
 
     private fun initToolbar(screeName: String?) {
@@ -129,11 +138,13 @@ class WordImgFragment : Fragment() {
     private fun setProgressBytes(progress: Int, byte: Long) {
         if (progress != 0) {
             progress_bar_information?.progress = progress
-            progress_information?.text = ("$progress%  " +
+            progress_information?.text = (
+                "$progress%  " +
                     getBytesDownloaded(
-                progress,
-                byte
-            ))
+                        progress,
+                        byte
+                    )
+                )
         } else {
             progress_bar_information?.progress = 0
             progress_information?.text = getString(R.string.failed_dwn)

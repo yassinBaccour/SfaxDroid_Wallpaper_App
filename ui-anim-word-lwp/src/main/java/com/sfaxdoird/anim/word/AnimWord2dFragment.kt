@@ -87,18 +87,24 @@ class AnimWord2dFragment : Fragment() {
         buttonColor?.setOnClickListener { chooseColor() }
         fab.setOnClickListener { openLiveWallpapers() }
 
-        viewModel.isCompleted.observe(viewLifecycleOwner, {
-            if (it) {
-                fab?.isEnabled = true
-                clickable = true
-            } else {
-                Utils.showAlert(requireContext(), ::retryDownload)
+        viewModel.isCompleted.observe(
+            viewLifecycleOwner,
+            {
+                if (it) {
+                    fab?.isEnabled = true
+                    clickable = true
+                } else {
+                    Utils.showAlert(requireContext(), ::retryDownload)
+                }
             }
-        })
+        )
 
-        viewModel.progressValue.observe(viewLifecycleOwner, {
-            setProgressBytes(it.first, it.second)
-        })
+        viewModel.progressValue.observe(
+            viewLifecycleOwner,
+            {
+                setProgressBytes(it.first, it.second)
+            }
+        )
     }
 
     private fun setProgressBytes(progress: Int, byte: Long) {

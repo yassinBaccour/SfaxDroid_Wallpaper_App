@@ -57,21 +57,25 @@ class Utils {
 
         inline fun <reified T : Any> openLiveWallpaper(context: Context) {
             try {
-                context.startActivity(Intent(
-                    WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
-                ).apply {
-                    putExtra(
-                        WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                        ComponentName(
-                            context,
-                            T::class.java
+                context.startActivity(
+                    Intent(
+                        WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
+                    ).apply {
+                        putExtra(
+                            WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                            ComponentName(
+                                context,
+                                T::class.java
+                            )
                         )
-                    )
-                })
+                    }
+                )
             } catch (exception: Exception) {
-                context.startActivity(Intent().apply {
-                    action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
-                })
+                context.startActivity(
+                    Intent().apply {
+                        action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
+                    }
+                )
             }
         }
     }
