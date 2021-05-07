@@ -1,0 +1,34 @@
+name: Tache Nocturne
+
+# * Détection s'il y a des mises à jour dans les librairies
+  #on:
+#schedule:
+    # * Tous les jours à minuit
+  #- cron: '0 0 * * *'
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Check dependency updates
+        run: ./gradlew dependencyUpdates
+
+      - name: Upload dependency updates report
+        uses: actions/upload-artifact@v2
+        with:
+          name: dependency-updates
+          path: build/dependencyUpdates
