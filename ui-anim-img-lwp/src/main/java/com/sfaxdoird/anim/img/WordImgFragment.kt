@@ -156,12 +156,12 @@ class WordImgFragment : Fragment() {
         if (progress != 0) {
             progressBar.progress = progress
             progressInfoTxt.text = (
-                    "$progress%  " +
-                            getBytesDownloaded(
-                                progress,
-                                byte
-                            )
+                "$progress%  " +
+                    getBytesDownloaded(
+                        progress,
+                        byte
                     )
+                )
         } else {
             progressBar.progress = 0
             progressInfoTxt.text = getString(R.string.failed_dwn)
