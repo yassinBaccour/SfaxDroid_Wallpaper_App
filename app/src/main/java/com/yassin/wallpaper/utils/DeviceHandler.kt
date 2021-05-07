@@ -13,8 +13,8 @@ class DeviceHandler @Inject constructor(@ApplicationContext private val context:
     DeviceManager {
 
     override fun isSmallScreen(): Boolean {
-        return getScreenHeightPixels(context) < 820
-                && getScreenWidthPixels(context) < 500
+        return getScreenHeightPixels(context) < 820 &&
+            getScreenWidthPixels(context) < 500
     }
 
     override fun getScreenHeightPixels(): Int {

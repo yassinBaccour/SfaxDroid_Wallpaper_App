@@ -1,11 +1,11 @@
 package com.yassin.wallpaper.feature.home.viewholder
 
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.View
-import com.yassin.wallpaper.feature.home.adapter.CarouselItemAdapter
-import com.yassin.wallpaper.feature.home.CarouselView
 import com.sfaxdroid.data.mappers.BaseWallpaperView
+import com.yassin.wallpaper.feature.home.CarouselView
+import com.yassin.wallpaper.feature.home.adapter.CarouselItemAdapter
 import kotlinx.android.synthetic.main.item_horizontal_scroll.view.*
 
 class HorizontalCarouselVH(itemView: View) : RecyclerView.ViewHolder(itemView) {

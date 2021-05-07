@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -13,17 +14,14 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.yassin.wallpaper.R
-import com.yassin.wallpaper.core.setupWithNavController
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
+import com.yassin.wallpaper.R
+import com.yassin.wallpaper.core.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.WindowInsetsControllerCompat
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 import javax.inject.Named
-
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -166,7 +164,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupToolBar() {
-
     }
 
     private fun showInterstitial() {
@@ -184,7 +181,6 @@ class HomeActivity : AppCompatActivity() {
             isFirstAdsLoaded = true
         }
     }
-
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {

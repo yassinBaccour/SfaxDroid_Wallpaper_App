@@ -2,7 +2,6 @@ package com.yassin.wallpaper.feature.home
 
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 
-
 class CarouselView(
     var title: String,
     var articleList: List<BaseWallpaperView> = arrayListOf(),

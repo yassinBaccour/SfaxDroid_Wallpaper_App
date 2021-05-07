@@ -4,19 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
-import com.yassin.wallpaper.R
-import com.yassin.wallpaper.feature.other.PrivacyActivity
-import com.yassin.wallpaper.feature.home.HomeFragment.Companion.newInstance
-import com.yassin.wallpaper.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.extension.checkAppPermission
+import com.yassin.wallpaper.R
+import com.yassin.wallpaper.feature.home.HomeFragment.Companion.newInstance
+import com.yassin.wallpaper.feature.other.PrivacyActivity
+import com.yassin.wallpaper.utils.Constants
 
 class HomeActivityNavBar : SimpleActivity() {
 
@@ -82,7 +81,6 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     fun initRatingApp() {
-
     }
 
     private fun manageNbRunApp() {
@@ -110,8 +108,10 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun rateApplication() {
-        if (preferencesManager[Constants.RATING_MESSAGE,
-                    Constants.RATING_YES]
+        if (preferencesManager[
+            Constants.RATING_MESSAGE,
+            Constants.RATING_YES
+        ]
             == Constants.RATING_YES
         ) {
         }

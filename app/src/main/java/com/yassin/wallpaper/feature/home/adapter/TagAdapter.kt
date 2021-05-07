@@ -28,7 +28,8 @@ class TagAdapter(
         )
 
     override fun onBindViewHolder(
-        holder: TagViewHolder, position: Int
+        holder: TagViewHolder,
+        position: Int
     ) {
         val item = mTagList[position]
         holder.bindView(item)
@@ -63,6 +64,5 @@ class TagAdapter(
         fun selectedBg() {
             itemView.background = itemView.context.getDrawable(R.drawable.round_corner_tag_selected)
         }
-
     }
 }

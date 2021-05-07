@@ -5,10 +5,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.yassin.wallpaper.R
 import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
+import com.yassin.wallpaper.R
 
 class CategoryItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -30,5 +30,4 @@ class CategoryItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
             scaleType = ImageView.ScaleType.CENTER
         }
     }
-
 }

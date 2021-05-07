@@ -17,7 +17,8 @@ class WallpaperSettings : AppCompatActivity() {
     }
 }
 
-class MyPreferenceFragment : PreferenceFragmentCompat(),
+class MyPreferenceFragment :
+    PreferenceFragmentCompat(),
     androidx.preference.Preference.OnPreferenceChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {

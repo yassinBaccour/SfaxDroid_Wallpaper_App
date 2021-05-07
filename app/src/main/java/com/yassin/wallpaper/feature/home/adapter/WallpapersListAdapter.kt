@@ -4,6 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sfaxdroid.data.mappers.BaseWallpaperView
+import com.sfaxdroid.data.mappers.CategoryItem
+import com.sfaxdroid.data.mappers.LwpItem
+import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.feature.home.CarouselView
 import com.yassin.wallpaper.feature.home.ItemWrapperList
@@ -12,10 +16,6 @@ import com.yassin.wallpaper.feature.home.viewholder.HorizontalCarouselVH
 import com.yassin.wallpaper.feature.home.viewholder.LabItemVH
 import com.yassin.wallpaper.feature.home.viewholder.LwpItemVH
 import com.yassin.wallpaper.feature.home.viewholder.WallpaperImgVH
-import com.sfaxdroid.data.mappers.BaseWallpaperView
-import com.sfaxdroid.data.mappers.CategoryItem
-import com.sfaxdroid.data.mappers.LwpItem
-import com.sfaxdroid.data.mappers.SimpleWallpaperView
 
 class WallpapersListAdapter(
     private var articleList: MutableList<ItemWrapperList<Any>>,
@@ -137,6 +137,4 @@ class WallpapersListAdapter(
         const val TYPE_CAT = 6
         const val TYPE_LAB = 7
     }
-
 }
-

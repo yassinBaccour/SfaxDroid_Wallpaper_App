@@ -12,17 +12,21 @@ class Utils {
 
         fun openPub(context: Context) {
             try {
-                context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse(BaseConstants.ADS_URL)
-                })
+                context.startActivity(
+                    Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse(BaseConstants.ADS_URL)
+                    }
+                )
             } catch (exception: Exception) {
             }
         }
 
         fun ratingApplication(context: Context) {
-            context.startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("market://details?id=" + context.packageName)
-            })
+            context.startActivity(
+                Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("market://details?id=" + context.packageName)
+                }
+            )
         }
 
         inline fun <reified T : Any> openLiveWallpaper(context: Context) {
@@ -38,11 +42,14 @@ class Utils {
                                 T::class.java
                             )
                         )
-                    })
+                    }
+                )
             } catch (exception: Exception) {
-                context.startActivity(Intent().apply {
-                    action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
-                })
+                context.startActivity(
+                    Intent().apply {
+                        action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
+                    }
+                )
                 Toast.makeText(
                     context, R.string.set_wallpaper_failure,
                     Toast.LENGTH_SHORT

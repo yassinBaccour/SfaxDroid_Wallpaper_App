@@ -63,7 +63,7 @@ fun BottomNavigationView.setupWithNavController(
                     FragmentManager.POP_BACK_STACK_INCLUSIVE
                 )
                 val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                        as NavHostFragment
+                    as NavHostFragment
 
                 if (firstFragmentTag != newlySelectedItemTag) {
                     fragmentManager.beginTransaction()
@@ -138,7 +138,7 @@ private fun BottomNavigationView.setupItemReselected(
     setOnNavigationItemReselectedListener { item ->
         val newlySelectedItemTag = graphIdToTagMap[item.itemId]
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
-                as NavHostFragment
+            as NavHostFragment
         val navController = selectedFragment.navController
         navController.popBackStack(
             navController.graph.startDestination,

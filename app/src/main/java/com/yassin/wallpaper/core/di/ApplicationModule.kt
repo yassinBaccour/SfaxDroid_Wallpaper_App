@@ -1,14 +1,14 @@
 package com.yassin.wallpaper.core.di
 
 import android.content.Context
-import com.yassin.wallpaper.BuildConfig
-import com.yassin.wallpaper.utils.AppName
-import com.yassin.wallpaper.utils.DeviceHandler
-import com.yassin.wallpaper.utils.FileHandler
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.PreferencesManager
+import com.yassin.wallpaper.BuildConfig
+import com.yassin.wallpaper.utils.AppName
+import com.yassin.wallpaper.utils.DeviceHandler
+import com.yassin.wallpaper.utils.FileHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

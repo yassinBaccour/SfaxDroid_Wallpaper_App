@@ -4,10 +4,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.yassin.wallpaper.R
 import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
+import com.yassin.wallpaper.R
 
 class LabItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -24,5 +24,4 @@ class LabItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         title.text = wallpaperObject.name
         desc.text = wallpaperObject.desc
     }
-
 }

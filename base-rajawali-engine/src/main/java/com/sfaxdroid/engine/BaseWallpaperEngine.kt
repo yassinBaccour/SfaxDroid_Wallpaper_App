@@ -6,7 +6,8 @@ import android.service.wallpaper.WallpaperService
 import com.sfaxdroid.mini.base.BaseConstants
 import rajawali.wallpaper.Wallpaper
 
-abstract class BaseWallpaperEngine : Wallpaper(),
+abstract class BaseWallpaperEngine :
+    Wallpaper(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var wallpaperRenderer: WallpaperRenderer? = null
@@ -75,7 +76,6 @@ abstract class BaseWallpaperEngine : Wallpaper(),
             }
         }
     }
-
 
     private fun setRippleSpeedKey(pref: SharedPreferences?) {
         when (pref?.getString(Constants.RIPPLE_SPEED_KEY, "")) {

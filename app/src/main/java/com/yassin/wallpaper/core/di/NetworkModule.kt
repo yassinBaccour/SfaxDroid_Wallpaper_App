@@ -1,17 +1,17 @@
 package com.yassin.wallpaper.core.di
 
-import com.yassin.wallpaper.utils.NetworkHandler
 import com.sfaxdroid.data.DeviceNetworkHandler
+import com.yassin.wallpaper.utils.NetworkHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
-import javax.inject.Named
-import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Named
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module

@@ -55,7 +55,6 @@ class WallpaperRenderer(context: Context, soundId: Int, wallpaperResource: Int) 
                 )
                 prepareAsync()
             }
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -77,10 +76,12 @@ class WallpaperRenderer(context: Context, soundId: Int, wallpaperResource: Int) 
             )
         )
 
-        addChild(Plane(11f, 6.30f, 1, 1).apply {
-            rotZ = -90f
-            material = planeMat
-        })
+        addChild(
+            Plane(11f, 6.30f, 1, 1).apply {
+                rotZ = -90f
+                material = planeMat
+            }
+        )
 
         mPostProcessingRenderer.quadSegments = 40
         mPostProcessingRenderer.quality = PostProcessingQuality.HIGH
@@ -142,7 +143,6 @@ class WallpaperRenderer(context: Context, soundId: Int, wallpaperResource: Int) 
                         )
                         prepare()
                     }
-
                 }
                 if (mediaPlayer?.isPlaying == false) mediaPlayer?.start()
             }
@@ -164,5 +164,4 @@ class WallpaperRenderer(context: Context, soundId: Int, wallpaperResource: Int) 
         mFilter?.rippleSpeed = `val`
         rippleSpeed = `val`
     }
-
 }

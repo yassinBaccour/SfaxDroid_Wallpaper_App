@@ -88,8 +88,10 @@ class LiveWallpaper : WallpaperService() {
         }
 
         override fun onSurfaceChanged(
-            holder: SurfaceHolder, format: Int,
-            width: Int, height: Int
+            holder: SurfaceHolder,
+            format: Int,
+            width: Int,
+            height: Int
         ) {
             super.onSurfaceChanged(holder, format, width, height)
             drawFrame()
@@ -102,8 +104,12 @@ class LiveWallpaper : WallpaperService() {
         }
 
         override fun onOffsetsChanged(
-            xOffset: Float, yOffset: Float, xStep: Float,
-            yStep: Float, xPixels: Int, yPixels: Int
+            xOffset: Float,
+            yOffset: Float,
+            xStep: Float,
+            yStep: Float,
+            xPixels: Int,
+            yPixels: Int
         ) {
             drawFrame()
         }
@@ -171,12 +177,13 @@ class LiveWallpaper : WallpaperService() {
         private fun drawTouchingItem(canvas: Canvas) {
             if (mTouchX >= 0 && mTouchY >= 0) {
                 canvas.drawBitmap(
-                    touchingItem, mTouchX - touchingItem.width / 2, mTouchY
-                            - touchingItem.height / 2, null
+                    touchingItem, mTouchX - touchingItem.width / 2,
+                    mTouchY -
+                        touchingItem.height / 2,
+                    null
                 )
                 canvas.restore()
             }
         }
-
     }
 }

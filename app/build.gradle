@@ -8,7 +8,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../dependencies.gradle'
-apply from: '../spotless.gradle'
 apply plugin: 'com.github.ben-manes.versions'
 
 kapt {
@@ -224,4 +223,3 @@ android.applicationVariants.all { variant ->
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-

@@ -29,37 +29,47 @@ class RateUs(var context: Context, var packageName: String) {
         Dialog(context).let { dialog ->
             dialog.setCanceledOnTouchOutside(true)
             dialog.setTitle(R.string.rating_box_title)
-            dialog.setContentView(LinearLayout(context).apply {
-                orientation = LinearLayout.VERTICAL
+            dialog.setContentView(
+                LinearLayout(context).apply {
+                    orientation = LinearLayout.VERTICAL
 
-                addView(TextView(context).apply {
-                    textSize = 16f
-                    setText(R.string.rating_box_description)
-                    width = 240
-                    setPadding(20, 0, 4, 10)
-                })
+                    addView(
+                        TextView(context).apply {
+                            textSize = 16f
+                            setText(R.string.rating_box_description)
+                            width = 240
+                            setPadding(20, 0, 4, 10)
+                        }
+                    )
 
-                addView(Button(context).apply {
-                    setText(R.string.rating_box_rate)
-                    setOnClickListener {
-                        startRateUs(context, packageName)
-                        dialog.dismiss()
-                    }
-                })
+                    addView(
+                        Button(context).apply {
+                            setText(R.string.rating_box_rate)
+                            setOnClickListener {
+                                startRateUs(context, packageName)
+                                dialog.dismiss()
+                            }
+                        }
+                    )
 
-                addView(Button(context).apply {
-                    setText(R.string.rating_box_later)
-                    setOnClickListener { dialog.dismiss() }
-                })
+                    addView(
+                        Button(context).apply {
+                            setText(R.string.rating_box_later)
+                            setOnClickListener { dialog.dismiss() }
+                        }
+                    )
 
-                addView(Button(context).apply {
-                    setText(R.string.rating_box_never)
-                    setOnClickListener {
-                        setSetting()
-                        dialog.dismiss()
-                    }
-                })
-            })
+                    addView(
+                        Button(context).apply {
+                            setText(R.string.rating_box_never)
+                            setOnClickListener {
+                                setSetting()
+                                dialog.dismiss()
+                            }
+                        }
+                    )
+                }
+            )
             dialog.show()
         }
     }
@@ -68,7 +78,8 @@ class RateUs(var context: Context, var packageName: String) {
         try {
             context.startActivity(
                 Intent(
-                    Intent.ACTION_VIEW, Uri
+                    Intent.ACTION_VIEW,
+                    Uri
                         .parse("market://details?id=$packageName")
                 )
             )

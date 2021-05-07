@@ -19,16 +19,16 @@ class NetworkHandler
         ) as ConnectivityManager
         if (Build.VERSION.SDK_INT < 23) {
             val networkInfo = manager.activeNetworkInfo
-            return networkInfo?.isConnected ?: false
-                    && (networkInfo?.type == ConnectivityManager.TYPE_WIFI || networkInfo?.type == ConnectivityManager.TYPE_MOBILE)
+            return networkInfo?.isConnected ?: false &&
+                (networkInfo?.type == ConnectivityManager.TYPE_WIFI || networkInfo?.type == ConnectivityManager.TYPE_MOBILE)
         } else {
             val network = manager.activeNetwork
             if (network != null) {
                 val capabilities = manager.getNetworkCapabilities(network)
                 return if (capabilities != null) {
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
-                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)
                 } else
                     false
             }
