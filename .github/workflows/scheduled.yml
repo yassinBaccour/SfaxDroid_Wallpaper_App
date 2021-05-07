@@ -1,16 +1,8 @@
 name: Tache Nocturne
 
-# * Détection s'il y a des mises à jour dans les librairies
-  #on:
-#schedule:
-    # * Tous les jours à minuit
-  #- cron: '0 0 * * *'
-
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  schedule:
+    - cron:  '0 0 * * *'
 
 jobs:
   build:
