@@ -4,7 +4,7 @@
     <string name="ui_detail_share_fb">Partager sur facebook</string>
     <string name="ui_detail_insta">Partager sur instagram</string>
     <string name="ui_detail_crop">Recadrer et appliquer le fond</string>
-    <string name="ui_detail_choose_wall">Appliquer avec l\'éditeur photo</string>
+    <string name="ui_detail_choose_wall">Appliquer sur l\'écrans</string>
     <string name="ui_detail_save">Sauvegarder avec mes photos</string>
     <string name="ui_detail_share">Partager</string>
     <string name="ui_detail_send_ripple">Utiliser dans l\'animation</string>

@@ -3,7 +3,7 @@
     <string name="ui_detail_title">Wallpaper Preview</string>
     <string name="ui_detail_share_fb">Share with FB</string>
     <string name="ui_detail_crop">Fast Crop And Set</string>
-    <string name="ui_detail_choose_wall">Open With Wallpaper Application</string>
+    <string name="ui_detail_choose_wall">Set as Wallpaper</string>
     <string name="ui_detail_save">Save to gallery</string>
     <string name="ui_detail_insta">Share with insta</string>
     <string name="ui_detail_share">Share</string>
