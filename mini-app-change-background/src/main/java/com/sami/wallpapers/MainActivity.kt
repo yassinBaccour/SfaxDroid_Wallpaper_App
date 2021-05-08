@@ -9,10 +9,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.Toast
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.mini.base.Utils
 
@@ -159,21 +160,27 @@ class MainActivity : BaseMiniAppActivity() {
         MobileAds.initialize(
             this
         ) { }
-        mInterstitialAd = InterstitialAd(this).apply {
-            adUnitId = Constants.AD_MOB
-            loadAd(AdRequest.Builder().build())
-            adListener = object : AdListener() {
-                override fun onAdClosed() {
-                    mInterstitialAd?.loadAd(AdRequest.Builder().build())
+
+        InterstitialAd.load(
+            this,
+            Constants.AD_MOB,
+            AdRequest.Builder().build(),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    mInterstitialAd = interstitialAd
                 }
             }
-        }
+        )
     }
 
     override fun onResume() {
         super.onResume()
-        if (canShowAds && mInterstitialAd?.isLoaded == true) {
-            mInterstitialAd?.show()
+        if (canShowAds && mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
         }
     }
 }

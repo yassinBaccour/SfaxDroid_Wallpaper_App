@@ -17,7 +17,7 @@ ext {
 
     sfaxLibs.projectClasspath = [
             gradleBuildTool: "com.android.tools.build:gradle:7.0.0-alpha09",
-            spotless       : 'com.diffplug.spotless:spotless-plugin-gradle:5.12.1',
+            spotless       : 'com.diffplug.spotless:spotless-plugin-gradle:5.12.3',
             libCheckUpdate : "com.github.ben-manes:gradle-versions-plugin:0.36.0"
     ]
 
@@ -29,15 +29,15 @@ ext {
             kotlinGradlePlugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     ]
 
-    daggerVersion = "2.27"
+    daggerVersion = "2.35"
     sfaxLibs.dagger = [
             dagger        : "com.google.dagger:dagger:$daggerVersion",
             daggerCompiler: "com.google.dagger:dagger-compiler:$daggerVersion",
     ]
 
     sfaxLibs.google = [
-            material         : "com.google.android.material:material:1.4.0-alpha02",
-            servicesAds      : "com.google.android.gms:play-services-ads:19.7.0",
+            material         : "com.google.android.material:material:1.4.0-beta01",
+            servicesAds      : "com.google.android.gms:play-services-ads:20.1.0",
             service          : "com.google.gms:google-services:4.3.5",
             crashlyticsGradle: "com.google.firebase:firebase-crashlytics-gradle:2.5.2",
             core             : "com.google.android.play:core:1.10.0",
@@ -51,16 +51,16 @@ ext {
             hiltLib            : "com.google.dagger:hilt-android:$hiltVersion",
             hiltAndroidComplier: "com.google.dagger:hilt-android-compiler:$hiltVersion",
             testing            : "com.google.dagger:hilt-android-testing:$hiltVersion",
-            hiltComplier       : "androidx.hilt:hilt-compiler:1.0.0-beta01",
+            hiltComplier       : "androidx.hilt:hilt-compiler:1.0.0",
             hiltViewModel      : "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     ]
 
     sfaxLibs.retrofit = [
-            retrofit          : "com.squareup.retrofit2:retrofit:2.8.1",
-            retrofit2Converter: "com.squareup.retrofit2:converter-gson:2.7.1",
+            retrofit          : "com.squareup.retrofit2:retrofit:2.9.0",
+            retrofit2Converter: "com.squareup.retrofit2:converter-gson:2.9.0",
     ]
 
-    glideVersion = "4.11.0"
+    glideVersion = "4.12.0"
     sfaxLibs.glide = [
             glideCompîler: "com.github.bumptech.glide:compiler:$glideVersion",
             glide        : "com.github.bumptech.glide:glide:$glideVersion",
@@ -75,7 +75,7 @@ ext {
             testing     : "androidx.room:room-testing:$roomVersion",
     ]
 
-    lifecycleVersion = "2.3.0"
+    lifecycleVersion = "2.3.1"
     lifecycleExtVersion = "2.2.0"
     sfaxLibs.lifecycle = [
             lifecycle        : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtVersion",
@@ -83,7 +83,7 @@ ext {
             livedataViewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     ]
 
-    navigationVersion = "2.3.4"
+    navigationVersion = "2.3.5"
     sfaxLibs.navigation = [
             fragmentNavktx: "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
             navigationKtx : "androidx.navigation:navigation-ui-ktx:$navigationVersion",
@@ -91,8 +91,8 @@ ext {
 
     sfaxLibs.androidx = [
             multidex         : "androidx.multidex:multidex:2.0.1",
-            recyclerview     : 'androidx.recyclerview:recyclerview:1.0.0',
-            annotation       : 'androidx.annotation:annotation:1.1.0',
+            recyclerview     : 'androidx.recyclerview:recyclerview:1.2.0',
+            annotation       : 'androidx.annotation:annotation:1.2.0',
             coordinatorlayout: "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
             constraintlayout : 'androidx.constraintlayout:constraintlayout:2.0.4',
             appcompat        : 'androidx.appcompat:appcompat:1.3.0-rc01',
@@ -101,7 +101,7 @@ ext {
     ]
 
     sfaxLibs.other = [
-            rajawali   : "org.rajawali3d:rajawali:1.1.970@aar",
+            rajawali   : "org.rajawali3d:rajawali:1.2.1970@aar",
             crashlytics: 'com.crashlytics.sdk.android:crashlytics:2.10.1',
             crop       : 'com.soundcloud.android:android-crop:1.0.1@aar',
             colorpicker: 'com.github.QuadFlask:colorpicker:0.0.15',

@@ -8,10 +8,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.sfaxdroid.base.PreferencesManager
@@ -106,16 +107,20 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupAds() {
         MobileAds.initialize(this)
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd?.apply {
-            adUnitId = intertitialKey
-            loadAd(AdRequest.Builder().build())
-            adListener = object : AdListener() {
-                override fun onAdClosed() {
-                    loadAd(AdRequest.Builder().build())
+        InterstitialAd.load(
+            this,
+            intertitialKey,
+            AdRequest.Builder().build(),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    mInterstitialAd = interstitialAd
                 }
             }
-        }
+        )
     }
 
     private fun ratingApp() {
@@ -175,8 +180,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showInterstitialAds() {
-        if (mInterstitialAd?.isLoaded == true) {
-            mInterstitialAd?.show()
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
             nbShowedPerSession++
             isFirstAdsLoaded = true
         }

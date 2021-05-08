@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 
 fun ImageView.loadUrl(url: String?) {
@@ -17,13 +17,16 @@ fun ImageView.loadUrl(url: String?) {
 
 fun ImageView.loadUrlWithAction(url: String?, doAfter: () -> Unit) {
     Glide.with(this).load(url)
-        .into(object : SimpleTarget<Drawable?>() {
+        .into(object : CustomTarget<Drawable?>() {
             override fun onResourceReady(
                 resource: Drawable,
                 transition: Transition<in Drawable?>?
             ) {
                 setImageDrawable(resource)
                 doAfter()
+            }
+
+            override fun onLoadCleared(placeholder: Drawable?) {
             }
         })
 }

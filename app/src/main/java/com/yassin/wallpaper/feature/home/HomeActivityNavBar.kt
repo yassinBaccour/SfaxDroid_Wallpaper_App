@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.extension.checkAppPermission
@@ -59,16 +60,20 @@ class HomeActivityNavBar : SimpleActivity() {
 
     private fun setupAds() {
         MobileAds.initialize(this)
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd?.apply {
-            adUnitId = ""
-            loadAd(AdRequest.Builder().build())
-            adListener = object : AdListener() {
-                override fun onAdClosed() {
-                    loadAd(AdRequest.Builder().build())
+        InterstitialAd.load(
+            this,
+            "",
+            AdRequest.Builder().build(),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    mInterstitialAd = interstitialAd
                 }
             }
-        }
+        )
     }
 
     override val layout: Int
@@ -125,8 +130,8 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun showInterstitial() {
-        if (mInterstitialAd?.isLoaded == true) {
-            mInterstitialAd?.show()
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
         }
     }
 
