@@ -142,8 +142,7 @@ class WallpaperSchedulerFragment : Fragment() {
         val allPendingJobs = scheduler?.allPendingJobs
 
         if (!allPendingJobs.isNullOrEmpty() && allPendingJobs.size > 0) {
-            val jobInfo = allPendingJobs[0]
-            initTimeCheckBox(jobInfo.intervalMillis)
+            initTimeCheckBox(allPendingJobs[0].intervalMillis)
             initTxtStatus(true)
             initBtnActive(true)
         } else {
