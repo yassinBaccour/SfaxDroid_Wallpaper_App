@@ -1,12 +1,10 @@
 package com.sfaxdoird.anim.word
 
 import android.net.Uri
-import androidx.hilt.Assisted
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.thin.downloadmanager.DefaultRetryPolicy
 import com.thin.downloadmanager.DownloadManager
@@ -18,9 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AnimWord2dViewModel @Inject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
-    var fileManager: FileManager,
-    var deviceManager: DeviceManager
+    private val savedStateHandle: SavedStateHandle,
+    var fileManager: FileManager
 ) :
     ViewModel(), DownloadStatusListenerV1 {
 

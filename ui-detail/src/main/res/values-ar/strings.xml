@@ -3,7 +3,7 @@
     <string name="ui_detail_title">تطبيق الخلفية</string>
     <string name="ui_detail_share_fb">النشر في الفيسبوك </string>
     <string name="ui_detail_insta">النشر في الإنستقرام </string>
-    <string name="ui_detail_crop">جعل الصورة خلفية</string>
+    <string name="ui_detail_crop">قص الصورة</string>
     <string name="ui_detail_choose_wall">تطبيق الخلفية</string>
     <string name="ui_detail_save">حفظ الصورة</string>
     <string name="ui_detail_share">النشر</string>

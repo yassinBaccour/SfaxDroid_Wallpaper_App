@@ -1,30 +1,31 @@
 package com.sfaxdroid.timer
 
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.extension.getFileName
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_wallpaper_list.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class WallpaperListFragment : Fragment() {
 
     private val viewModel: WallpaperListViewModel by viewModels()
-    private var wallpapersListAdapter: WallpapersListAdapter? = null
 
     @Inject
     lateinit var fileManager: FileManager
@@ -38,17 +39,18 @@ class WallpaperListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
-        wallpapersListAdapter = WallpapersListAdapter { url -> openDetail(url) }
-        recycler_view_wallpapers?.apply {
+        val wallpapersListAdapter = WallpapersListAdapter { url -> openDetail(url) }
+        view.findViewById<RecyclerView>(R.id.recycler_view_wallpapers).apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = wallpapersListAdapter
         }
         viewModel.wallpaperListLiveData.observe(viewLifecycleOwner) { list ->
-            wallpapersListAdapter?.update(list)
+            wallpapersListAdapter.update(list)
         }
     }
 
     private fun initToolbar() {
+        val toolbar = requireView().findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = getString(R.string.wallpaper_list)
@@ -92,17 +94,20 @@ class WallpaperListFragment : Fragment() {
                 requireContext().getString(com.sfaxdroid.base.R.string.permission_accept_click_button)
             ) { _, _ ->
                 Glide.with(requireContext()).asBitmap().load(url)
-                    .into(object : SimpleTarget<Bitmap?>() {
+                    .into(object : CustomTarget<Bitmap?>() {
                         override fun onResourceReady(
                             resource: Bitmap,
                             transition: Transition<in Bitmap?>?
                         ) {
-                            val isSaved = fileManager.saveBitmapToStorage(
+                            fileManager.saveBitmapToStorage(
                                 resource,
                                 url.getFileName(),
                                 Constants.SAVE_PERMANENT,
                             )
                             resource.recycle()
+                        }
+
+                        override fun onLoadCleared(placeholder: Drawable?) {
                         }
                     })
             }

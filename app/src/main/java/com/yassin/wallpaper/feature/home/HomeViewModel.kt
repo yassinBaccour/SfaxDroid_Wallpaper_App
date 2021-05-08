@@ -1,6 +1,5 @@
 package com.yassin.wallpaper.feature.home
 
-import androidx.hilt.Assisted
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -33,7 +32,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     var getAllWallpapersUseCase: GetAllWallpapersUseCase,
     var getLiveWallpapersUseCase: GetLiveWallpapersUseCase,
     var getCategoryUseCase: GetCategoryUseCase,

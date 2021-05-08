@@ -1,6 +1,5 @@
 package com.sfaxdroid.timer
 
-import androidx.hilt.Assisted
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -20,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WallpaperListViewModel @Inject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     var getAllWallpapersUseCase: GetAllWallpapersUseCase,
     var deviceManager: DeviceManager,
     var fileManager: FileManager

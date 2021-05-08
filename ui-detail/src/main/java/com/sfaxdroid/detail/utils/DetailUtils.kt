@@ -8,13 +8,14 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.webkit.MimeTypeMap
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.FileManager
@@ -38,7 +39,7 @@ class DetailUtils {
             Glide.with(context).asBitmap().load(
                 url
             )
-                .into(object : SimpleTarget<Bitmap?>() {
+                .into(object : CustomTarget<Bitmap?>() {
                     override fun onResourceReady(
                         resource: Bitmap,
                         transition: Transition<in Bitmap?>?
@@ -52,6 +53,9 @@ class DetailUtils {
                         doActionAfterSave(isSaved, action)
                         resource.recycle()
                     }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
                 })
         }
 
@@ -63,7 +67,7 @@ class DetailUtils {
             val uri = FileProvider.getUriForFile(
                 activity,
                 "$appId.provider",
-                file!!
+                file
             )
             val mIntentShare = Intent(Intent.ACTION_SEND)
             val mStrExtension =

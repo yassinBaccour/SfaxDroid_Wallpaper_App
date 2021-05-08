@@ -1,7 +1,6 @@
 package com.sfaxdoird.anim.img
 
 import android.net.Uri
-import androidx.hilt.Assisted
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -21,7 +20,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class WordImgViewModel @Inject constructor(
-    @Assisted private val savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     fileManager: FileManager,
     deviceManager: DeviceManager,
     @Named("domain-url") var domainUrl: String

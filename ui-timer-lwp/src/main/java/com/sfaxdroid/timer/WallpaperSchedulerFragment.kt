@@ -14,10 +14,15 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
@@ -26,7 +31,6 @@ import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.timer.TimerUtils.Companion.openAddWallpaperWithKeyActivity
 import com.sfaxdroid.timer.TimerUtils.Companion.setWallpaperFromFile
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_wallpaper_scheduler.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -44,6 +48,21 @@ class WallpaperSchedulerFragment : Fragment() {
     @Inject
     lateinit var deviceManager: DeviceManager
 
+    private lateinit var progressBar: ProgressBar
+    private lateinit var radioGroup: RadioGroup
+    private lateinit var buttonAddLwp: Button
+    private lateinit var buttonLWPList: Button
+    private lateinit var buttonActive: Button
+    private lateinit var buttonClose: Button
+    private lateinit var txtNotForget: TextView
+    private lateinit var txtstatus: TextView
+    private lateinit var container: FrameLayout
+    private lateinit var toolbar: Toolbar
+    private lateinit var radioOneHour: RadioButton
+    private lateinit var radioSixHour: RadioButton
+    private lateinit var radioTwelveHour: RadioButton
+    private lateinit var radioOneDay: RadioButton
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,9 +74,24 @@ class WallpaperSchedulerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
-        initToolbar(screenName)
         scheduler =
             requireContext().getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+
+        progressBar = view.findViewById(R.id.progressBar)
+        radioGroup = view.findViewById(R.id.radioGroup)
+        buttonAddLwp = view.findViewById(R.id.buttonAddLwp)
+        buttonLWPList = view.findViewById(R.id.buttonLWPList)
+        buttonActive = view.findViewById(R.id.buttonActive)
+        buttonClose = view.findViewById(R.id.buttonClose)
+        txtNotForget = view.findViewById(R.id.txtNotForget)
+        txtstatus = view.findViewById(R.id.txtstatus)
+        container = view.findViewById(R.id.container)
+        radioOneHour = view.findViewById(R.id.radioOneHoure)
+        radioSixHour = view.findViewById(R.id.radioSixHoure)
+        radioTwelveHour = view.findViewById(R.id.radioDouzeHoure)
+        radioOneDay = view.findViewById(R.id.radioOneDayHoure)
+        toolbar = view.findViewById(R.id.toolbar)
+        initToolbar(screenName)
 
         initViewWithJobStatus()
 
@@ -163,7 +197,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initBtnClose(isJobActive: Boolean) {
-        buttonClose?.apply {
+        buttonClose.apply {
             setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 ResourcesCompat.getDrawable(
@@ -181,7 +215,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initBtnActive(isJobActive: Boolean) {
-        buttonActive?.apply {
+        buttonActive.apply {
             setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 ResourcesCompat.getDrawable(
@@ -199,25 +233,25 @@ class WallpaperSchedulerFragment : Fragment() {
     private fun initTimeCheckBox(time: Long) {
         when (time) {
             3600000L ->
-                radioOneHoure?.isChecked =
+                radioOneHour.isChecked =
                     true
             3600000 * 6.toLong() ->
-                radioSixHoure?.isChecked =
+                radioSixHour.isChecked =
                     true
             3600000 * 12.toLong() ->
-                radioDouzeHoure?.isChecked =
+                radioTwelveHour.isChecked =
                     true
             3600000 * 24.toLong() ->
-                radioOneDayHoure?.isChecked =
+                radioOneDay.isChecked =
                     true
-            else -> radioOneHoure?.isChecked = true
+            else -> radioOneHour.isChecked = true
         }
     }
 
     private fun getSelectedTime(): Long {
 
         val radioSelectedButton =
-            view?.findViewById<View>(radioGroup?.checkedRadioButtonId!!) as RadioButton
+            view?.findViewById<View>(radioGroup.checkedRadioButtonId) as RadioButton
 
         return when (radioSelectedButton.text.toString()) {
             getString(R.string.one_houre) -> 3600000
@@ -260,7 +294,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initTxtStatus(isActive: Boolean) {
-        txtNotForget?.visibility = if (isActive) View.VISIBLE else View.GONE
+        txtNotForget.visibility = if (isActive) View.VISIBLE else View.GONE
         txtstatus.text =
             if (isActive) getString(R.string.on_switch) else getString(R.string.off_switch)
         txtstatus.setTextColor(
@@ -285,7 +319,7 @@ class WallpaperSchedulerFragment : Fragment() {
         ) ?: JobScheduler.RESULT_FAILURE
 
     private fun activeJob() {
-        progressBar?.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         if (fileManager.getPermanentDirListFiles().size > 3) {
             GlobalScope.launch(Dispatchers.Default) {
                 val status = scheduleJob()
@@ -298,7 +332,7 @@ class WallpaperSchedulerFragment : Fragment() {
                     )
                     GlobalScope.launch(Dispatchers.Main) {
                         initTxtStatus(true)
-                        progressBar?.visibility = View.GONE
+                        progressBar.visibility = View.GONE
                     }
                 }
             }
