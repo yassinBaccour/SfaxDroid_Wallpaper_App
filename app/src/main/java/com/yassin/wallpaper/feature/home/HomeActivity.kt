@@ -83,6 +83,7 @@ class HomeActivity : AppCompatActivity() {
             if (!isFirstAdsLoaded) {
                 showInterstitialAds()
             } else {
+                ratingApp()
                 showInterstitial()
             }
         }
@@ -138,7 +139,6 @@ class HomeActivity : AppCompatActivity() {
                                 .addOnCompleteListener {
                                     preferencesManager["NbRun"] = 100
                                 }
-                        } else {
                         }
                     }
             }
@@ -160,6 +160,7 @@ class HomeActivity : AppCompatActivity() {
         when (nbRun) {
             3 -> {
                 ratingApp()
+                preferencesManager["NbRun"] = 100
             }
             else -> {
                 nbRun += 1

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@android:color/transparent"
-        android:drawableStart="@mipmap/ic_chooser"
+        android:drawableLeft="@mipmap/ic_chooser"
         android:text="@string/ui_detail_choose_wall"
         android:textAlignment="textStart"
         android:textColor="?attr/colorPrimary" />
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:drawableStart="@mipmap/ic_crop"
+        android:drawableLeft="@mipmap/ic_crop"
         android:text="@string/ui_detail_crop"
         android:textAlignment="textStart"
         android:textColor="?attr/colorPrimary" />
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:drawableStart="@mipmap/ic_share"
+        android:drawableLeft="@mipmap/ic_share"
         android:text="@string/ui_detail_share"
         android:textAlignment="textStart"
         android:textColor="?attr/colorPrimary" />
