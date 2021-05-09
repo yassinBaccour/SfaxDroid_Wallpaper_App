@@ -15,7 +15,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="?attr/customTextColor" />
+        app:titleTextColor="?attr/customTextColor">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_privacy"
+            android:visibility="gone" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_tag"

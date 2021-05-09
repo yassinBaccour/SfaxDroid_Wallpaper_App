@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lite_nav_graph"
+    app:startDestination="@id/wallpaper_list_navigation_fg">
+
+    <fragment
+        android:id="@+id/wallpaper_list_navigation_fg"
+        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:label="@string/screen_wallpaper"
+        tools:layout="@layout/fragment_wallpapers">
+        <argument
+            android:name="keyJsonFileName"
+            android:defaultValue="new.json"
+            app:argType="string" />
+        <argument
+            android:name="keyScreenType"
+            android:defaultValue="MIXED"
+            app:argType="string" />
+        <action
+            android:id="@+id/navigate_to_details"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.sfaxdroid.detail.DetailsFragment"
+        android:label="DetailsFragment" />
+
+</navigation>

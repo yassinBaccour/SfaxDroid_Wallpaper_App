@@ -1,29 +1,33 @@
 package com.yassin.wallpaper.feature.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.yassin.wallpaper.R
+import com.yassin.wallpaper.utils.Constants
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.extension.checkAppPermission
-import com.yassin.wallpaper.R
-import com.yassin.wallpaper.feature.home.HomeFragment.Companion.newInstance
-import com.yassin.wallpaper.feature.other.PrivacyActivity
-import com.yassin.wallpaper.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import javax.inject.Named
 
+@AndroidEntryPoint
 class HomeActivityNavBar : SimpleActivity() {
 
     private var mToolbar: Toolbar? = null
-    private var mPrivacy: ImageView? = null
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var preferencesManager: PreferencesManager
+
+    @Inject
+    @Named("intertitial-key")
+    lateinit var intertitialKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,42 +42,27 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun loadFragment() {
-        val mAllBackgroundFragment = newInstance("new.json", "MIXED")
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.content_main, mAllBackgroundFragment, "Home.class")
-        fragmentTransaction.commit()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navHostFragment.navController
     }
 
     private fun initView() {
         mToolbar = findViewById(R.id.toolbar)
-        mPrivacy = findViewById(R.id.imgPrivacy)
-        mPrivacy?.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    PrivacyActivity::class.java
-                )
-            )
-        }
     }
 
     private fun setupAds() {
         MobileAds.initialize(this)
-        InterstitialAd.load(
-            this,
-            "",
-            AdRequest.Builder().build(),
-            object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    mInterstitialAd = null
-                }
-
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    mInterstitialAd = interstitialAd
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd?.apply {
+            adUnitId = intertitialKey
+            loadAd(AdRequest.Builder().build())
+            adListener = object : AdListener() {
+                override fun onAdClosed() {
+                    loadAd(AdRequest.Builder().build())
                 }
             }
-        )
+        }
     }
 
     override val layout: Int
@@ -86,6 +75,7 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     fun initRatingApp() {
+
     }
 
     private fun manageNbRunApp() {
@@ -113,10 +103,8 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun rateApplication() {
-        if (preferencesManager[
-            Constants.RATING_MESSAGE,
-            Constants.RATING_YES
-        ]
+        if (preferencesManager[Constants.RATING_MESSAGE,
+                    Constants.RATING_YES]
             == Constants.RATING_YES
         ) {
         }
@@ -130,8 +118,8 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun showInterstitial() {
-        if (mInterstitialAd != null) {
-            mInterstitialAd?.show(this)
+        if (mInterstitialAd?.isLoaded == true) {
+            mInterstitialAd?.show()
         }
     }
 
