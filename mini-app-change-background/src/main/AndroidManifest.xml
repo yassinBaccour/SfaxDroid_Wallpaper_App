@@ -12,18 +12,19 @@
         android:label="@string/app_name"
         android:theme="@style/Theme">
 
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="fullSensor" />
+
+        <activity android:name=".ViewWallpaperActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ViewWallpaperActivity" />
 
         <service
             android:name=".WallpaperAppService"
