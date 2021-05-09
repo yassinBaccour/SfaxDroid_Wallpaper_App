@@ -2,18 +2,18 @@ package com.yassin.wallpaper.feature.home
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
-import com.yassin.wallpaper.R
-import com.yassin.wallpaper.utils.Constants
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.extension.checkAppPermission
+import com.yassin.wallpaper.R
+import com.yassin.wallpaper.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
@@ -53,16 +53,20 @@ class HomeActivityNavBar : SimpleActivity() {
 
     private fun setupAds() {
         MobileAds.initialize(this)
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd?.apply {
-            adUnitId = intertitialKey
-            loadAd(AdRequest.Builder().build())
-            adListener = object : AdListener() {
-                override fun onAdClosed() {
-                    loadAd(AdRequest.Builder().build())
+        InterstitialAd.load(
+            this,
+            intertitialKey,
+            AdRequest.Builder().build(),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    mInterstitialAd = interstitialAd
                 }
             }
-        }
+        )
     }
 
     override val layout: Int
@@ -75,7 +79,6 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     fun initRatingApp() {
-
     }
 
     private fun manageNbRunApp() {
@@ -103,8 +106,10 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun rateApplication() {
-        if (preferencesManager[Constants.RATING_MESSAGE,
-                    Constants.RATING_YES]
+        if (preferencesManager[
+            Constants.RATING_MESSAGE,
+            Constants.RATING_YES
+        ]
             == Constants.RATING_YES
         ) {
         }
@@ -118,8 +123,8 @@ class HomeActivityNavBar : SimpleActivity() {
     }
 
     private fun showInterstitial() {
-        if (mInterstitialAd?.isLoaded == true) {
-            mInterstitialAd?.show()
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
         }
     }
 

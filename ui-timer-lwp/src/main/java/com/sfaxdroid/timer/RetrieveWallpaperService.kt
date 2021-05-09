@@ -60,6 +60,5 @@ class RetrieveWallpaperService : JobService() {
             putInt(Constants.CURRENT_WALLPAPER_KEY, currentWallpaper)
             apply()
         }
-
     }
 }

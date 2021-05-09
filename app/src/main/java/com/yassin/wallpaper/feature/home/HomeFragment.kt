@@ -25,9 +25,9 @@ import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.sky.SkyLiveWallpaper
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
+import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.yassin.wallpaper.utils.AppName
-import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallpapers.*
 import javax.inject.Inject
