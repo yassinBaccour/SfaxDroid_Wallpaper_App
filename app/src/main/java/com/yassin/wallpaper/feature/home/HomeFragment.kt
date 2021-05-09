@@ -1,5 +1,6 @@
 package com.yassin.wallpaper.feature.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -25,11 +26,19 @@ import com.sfaxdroid.sky.SkyLiveWallpaper
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
+import com.yassin.wallpaper.feature.other.PrivacyActivity
+import com.yassin.wallpaper.utils.AppName
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_wallpapers.*
+import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
+    @Inject
+    @Named("app-name")
+    lateinit var appName: AppName
 
     private var wallpapersListAdapter: WallpapersListAdapter? = null
 
@@ -64,7 +73,26 @@ class HomeFragment : Fragment() {
                 setDisplayHomeAsUpEnabled(true)
             }
         } else {
-            toolbar.visibility = View.GONE
+            if (appName == AppName.SfaxDroid)
+                toolbar.visibility = View.GONE
+            else {
+                (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+                (activity as AppCompatActivity?)?.supportActionBar?.apply {
+                    title = requireContext().getString(R.string.app_name)
+                    setHomeButtonEnabled(true)
+                    setDisplayHomeAsUpEnabled(false)
+                }
+                toolbar.visibility = View.VISIBLE
+                imgPrivacy.visibility = View.VISIBLE
+                imgPrivacy?.setOnClickListener {
+                    context?.startActivity(
+                        Intent(
+                            context,
+                            PrivacyActivity::class.java
+                        )
+                    )
+                }
+            }
         }
     }
 
@@ -272,7 +300,7 @@ class HomeFragment : Fragment() {
     private fun getLwpLayoutManager(): LayoutManager {
         return GridLayoutManager(
             context,
-            3
+            if (appName == AppName.SfaxDroid) 3 else 4
         ).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {

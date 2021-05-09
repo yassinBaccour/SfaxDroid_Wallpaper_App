@@ -56,10 +56,9 @@ class RetrieveWallpaperService : JobService() {
     override fun onStopJob(params: JobParameters) = false
 
     private fun updateSchedulerSettings(currentWallpaper: Int) {
-        val sharedPref =
-            PreferenceManager.getDefaultSharedPreferences(baseContext)
-        val editor = sharedPref.edit()
-        editor.putInt(Constants.CURRENT_WALLPAPER_KEY, currentWallpaper)
-        editor.apply()
+        PreferenceManager.getDefaultSharedPreferences(baseContext).edit().apply {
+            putInt(Constants.CURRENT_WALLPAPER_KEY, currentWallpaper)
+            apply()
+        }
     }
 }

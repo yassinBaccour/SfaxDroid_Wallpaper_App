@@ -9,21 +9,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.Toast
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.mini.base.Utils
 
 class MainActivity : BaseMiniAppActivity() {
 
-    private var mInterstitialAd: InterstitialAd? = null
-
     private var sharedPrefs: SharedPreferences? = null
-
-    private var canShowAds = (BuildConfig.FLAVOR == "big")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +25,6 @@ class MainActivity : BaseMiniAppActivity() {
             )
 
         setContentView(R.layout.activity_main)
-
-        if (canShowAds) {
-            initAdMob()
-        }
 
         findViewById<Button>(R.id.button_set_wallpaper).setOnClickListener {
             Utils.openLiveWallpaper<WallpaperAppService>(this)
@@ -153,34 +140,6 @@ class MainActivity : BaseMiniAppActivity() {
         sharedPrefs?.edit()?.apply {
             putString(Constants.PREF_KEY_SPEED, speed)
             apply()
-        }
-    }
-
-    private fun initAdMob() {
-        MobileAds.initialize(
-            this
-        ) { }
-
-        InterstitialAd.load(
-            this,
-            Constants.AD_MOB,
-            AdRequest.Builder().build(),
-            object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    mInterstitialAd = null
-                }
-
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    mInterstitialAd = interstitialAd
-                }
-            }
-        )
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (canShowAds && mInterstitialAd != null) {
-            mInterstitialAd?.show(this)
         }
     }
 }

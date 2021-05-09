@@ -14,12 +14,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
@@ -32,8 +38,6 @@ import com.sfaxdroid.detail.utils.DetailUtils.Companion.setWallpaper
 import com.sfaxdroid.detail.utils.TouchImageView
 import com.soundcloud.android.crop.Crop
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,6 +49,17 @@ import javax.inject.Named
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
+
+    private lateinit var btnCrop: Button
+    private lateinit var btnChooser: Button
+    private lateinit var btnShare: Button
+    private lateinit var btnShowSize: ImageView
+    private lateinit var imgWallpaperDetail: ImageView
+    private lateinit var rootLayout: CoordinatorLayout
+    private lateinit var progressBar: ProgressBar
+    private lateinit var fab: FloatingActionButton
+    private lateinit var toolbar: Toolbar
+    private lateinit var bottomSheet: LinearLayoutCompat
 
     private var from: String = ""
     private var currentUrl: String = ""
@@ -69,6 +84,18 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        btnCrop = view.findViewById(R.id.button_Crop)
+        btnChooser = view.findViewById(R.id.button_Chooser)
+        btnShare = view.findViewById(R.id.button_share)
+        btnShowSize = view.findViewById(R.id.button_show_size)
+        imgWallpaperDetail = view.findViewById(R.id.img_wallpaper)
+        rootLayout = view.findViewById(R.id.root_layout)
+        progressBar = view.findViewById(R.id.progress_bar_horizontal)
+        toolbar = view.findViewById(R.id.toolbar)
+        bottomSheet = view.findViewById(R.id.bottom_sheet)
+        fab = view.findViewById(R.id.button_fab)
+
         initToolbar()
         initFabButtonAndBottomSheet()
         checkPermission()
@@ -96,7 +123,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun loadWallpaper() {
-        val detailImage: TouchImageView = requireView().findViewById(R.id.detailImage)
+        val detailImage: TouchImageView = requireView().findViewById(R.id.img_wallpaper)
         detailImage.loadUrlWithAction(currentUrl, ::hideLoading)
         detailImage.scaleType = ImageView.ScaleType.CENTER_CROP
     }
@@ -160,15 +187,15 @@ class DetailsFragment : Fragment() {
     private fun initFabButtonAndBottomSheet() {
         if (from.isNotEmpty()) {
             when (from) {
-                Constants.KEY_ADD_TIMER_LWP -> fab?.setImageResource(R.mipmap.ic_download)
-                Constants.KEY_ADDED_LIST_TIMER_LWP -> fab?.setImageResource(R.mipmap.ic_delete)
-                Constants.KEY_RIPPLE_LWP -> fab?.setImageResource(R.mipmap.ic_ripple_fab)
+                Constants.KEY_ADD_TIMER_LWP -> fab.setImageResource(R.mipmap.ic_download)
+                Constants.KEY_ADDED_LIST_TIMER_LWP -> fab.setImageResource(R.mipmap.ic_delete)
+                Constants.KEY_RIPPLE_LWP -> fab.setImageResource(R.mipmap.ic_ripple_fab)
             }
         }
         fab.setOnClickListener { fabClick() }
 
         bottomSheetBehavior =
-            BottomSheetBehavior.from<View>(bottom_sheet)
+            BottomSheetBehavior.from<View>(bottomSheet)
         bottomSheetBehavior?.apply {
             state = BottomSheetBehavior.STATE_HIDDEN
             peekHeight = 0
@@ -177,29 +204,29 @@ class DetailsFragment : Fragment() {
                     BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
                         if (newState == BottomSheetBehavior.STATE_EXPANDED)
-                            fab?.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
+                            fab.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
                         else
-                            fab?.setImageResource(R.mipmap.ic_add_white)
+                            fab.setImageResource(R.mipmap.ic_add_white)
                     }
 
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
                     }
                 })
         }
-        buttonCrop.setOnClickListener { view -> menuSheetClick(view.id) }
-        buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
-        buttonSare.setOnClickListener { view -> menuSheetClick(view.id) }
-        buttonShowSize.setOnClickListener { changeFullScreenImageSize() }
+        btnCrop.setOnClickListener { view -> menuSheetClick(view.id) }
+        btnChooser.setOnClickListener { view -> menuSheetClick(view.id) }
+        btnShare.setOnClickListener { view -> menuSheetClick(view.id) }
+        btnShowSize.setOnClickListener { changeFullScreenImageSize() }
         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun changeFullScreenImageSize() {
-        if (detailImage.scaleType == ImageView.ScaleType.CENTER_CROP) {
-            detailImage.scaleType = ImageView.ScaleType.FIT_START
-            buttonShowSize.setImageResource(R.drawable.ic_fullscreen_size)
+        if (imgWallpaperDetail.scaleType == ImageView.ScaleType.CENTER_CROP) {
+            imgWallpaperDetail.scaleType = ImageView.ScaleType.FIT_START
+            btnShowSize.setImageResource(R.drawable.ic_fullscreen_size)
         } else {
-            detailImage.scaleType = ImageView.ScaleType.CENTER_CROP
-            buttonShowSize.setImageResource(R.drawable.ic_real_size)
+            imgWallpaperDetail.scaleType = ImageView.ScaleType.CENTER_CROP
+            btnShowSize.setImageResource(R.drawable.ic_real_size)
         }
     }
 
@@ -234,19 +261,19 @@ class DetailsFragment : Fragment() {
 
     private fun menuSheetClick(id: Int) {
         when (id) {
-            R.id.buttonCrop -> {
+            R.id.button_Crop -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.Crop,
                     currentUrl
                 )
             }
-            R.id.buttonChooser -> {
+            R.id.button_Chooser -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.OpenNativeChooser,
                     currentUrl
                 )
             }
-            R.id.buttonSare -> {
+            R.id.button_share -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.Share,
                     currentUrl
@@ -309,16 +336,6 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private fun setAsWallpaper(url: String, context: Context) {
-        hideLoading()
-        viewLifecycleOwner.lifecycleScope.launch {
-            val result = decodeAndSet(context, url)
-            if (result) showSnackMsg("Success") else showSnackMsg(
-                "Error"
-            )
-        }
-    }
-
     private suspend fun decodeAndSet(context: Context, url: String) = withContext(Dispatchers.IO) {
         decodeBitmapAndSetAsLiveWallpaper(
             fileManager.getTemporaryDirWithFile(
@@ -360,8 +377,7 @@ class DetailsFragment : Fragment() {
 
     private fun handleCropSuccess(result: Intent?, context: Context) {
         viewLifecycleOwner.lifecycleScope.launch {
-            val result = setWallpaper(result, context)
-            if (result) {
+            if (setWallpaper(result, context)) {
                 showSnackMsg(context.getString(R.string.set_wallpaper_success_message))
             } else {
                 showSnackMsg(context.getString(R.string.set_wallpaper_not_success_message))
@@ -485,11 +501,11 @@ class DetailsFragment : Fragment() {
     }
 
     private fun showLoading() {
-        progressBar?.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        progressBar?.visibility = View.GONE
+        progressBar.visibility = View.GONE
     }
 
     companion object {

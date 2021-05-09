@@ -91,6 +91,7 @@ class WallpaperSchedulerFragment : Fragment() {
         radioTwelveHour = view.findViewById(R.id.radioDouzeHoure)
         radioOneDay = view.findViewById(R.id.radioOneDayHoure)
         toolbar = view.findViewById(R.id.toolbar)
+
         initToolbar(screenName)
 
         initViewWithJobStatus()

@@ -2,7 +2,7 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rootLayout"
+    android:id="@+id/root_layout"
     style="@style/Theme.AppCompat.NoActionBar"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,7 +13,7 @@
         android:background="?attr/customBlackColor">
 
         <com.sfaxdroid.detail.utils.TouchImageView
-            android:id="@+id/detailImage"
+            android:id="@+id/img_wallpaper"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -34,7 +34,7 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                 <ImageView
-                    android:id="@+id/buttonShowSize"
+                    android:id="@+id/button_show_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -46,21 +46,20 @@
     </FrameLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar_horizontal"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/button_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_add_white"
         app:backgroundTint="@android:color/holo_blue_bright" />
-
 
     <include layout="@layout/bottom_sheet" />
 
