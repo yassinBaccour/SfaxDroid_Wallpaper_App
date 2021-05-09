@@ -14,7 +14,6 @@ import com.sfaxdroid.mini.base.Utils
 
 class MainActivity : BaseMiniAppActivity() {
 
-
     private var sharedPrefs: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
