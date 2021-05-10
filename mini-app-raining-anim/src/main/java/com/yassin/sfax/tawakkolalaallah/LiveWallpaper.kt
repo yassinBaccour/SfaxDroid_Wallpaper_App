@@ -30,7 +30,7 @@ class LiveWallpaper : WallpaperService() {
 
         private var background = ResourceUtils.getBitmap(
             applicationContext,
-            R.drawable.wallpaper1
+            R.drawable.wallpaper5
         )
 
         private var rainingItem = BitmapFactory.decodeResource(
