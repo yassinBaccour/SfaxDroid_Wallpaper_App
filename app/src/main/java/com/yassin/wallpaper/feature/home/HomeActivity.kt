@@ -83,7 +83,9 @@ class HomeActivity : AppCompatActivity() {
             if (!isFirstAdsLoaded) {
                 showInterstitialAds()
             } else {
-                ratingApp()
+                if (preferencesManager["ratingAppAtFirstInstall", true]) {
+                    ratingApp()
+                }
                 showInterstitial()
             }
         }
@@ -138,6 +140,7 @@ class HomeActivity : AppCompatActivity() {
                             reviewManager.launchReviewFlow(this@HomeActivity, task.result)
                                 .addOnCompleteListener {
                                     preferencesManager["NbRun"] = 100
+                                    preferencesManager["ratingAppAtFirstInstall"] = false
                                 }
                         }
                     }
@@ -146,11 +149,13 @@ class HomeActivity : AppCompatActivity() {
                 getString(R.string.rating_app_later)
             ) { _, _ ->
                 preferencesManager["NbRun"] = 0
+                preferencesManager["ratingAppAtFirstInstall"] = false
             }
             setNeutralButton(
                 getString(R.string.rating_app_never)
             ) { _, _ ->
                 preferencesManager["NbRun"] = 100
+                preferencesManager["ratingAppAtFirstInstall"] = false
             }
         }.create().show()
     }

@@ -201,17 +201,17 @@ class DetailsFragment : Fragment() {
             peekHeight = 0
             isHideable = true
             addBottomSheetCallback(object :
-                    BottomSheetBehavior.BottomSheetCallback() {
-                    override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        if (newState == BottomSheetBehavior.STATE_EXPANDED)
-                            fab.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
-                        else
-                            fab.setImageResource(R.mipmap.ic_add_white)
-                    }
+                BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED)
+                        fab.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
+                    else
+                        fab.setImageResource(R.mipmap.ic_add_white)
+                }
 
-                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    }
-                })
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                }
+            })
         }
         btnCrop.setOnClickListener { view -> menuSheetClick(view.id) }
         btnChooser.setOnClickListener { view -> menuSheetClick(view.id) }
