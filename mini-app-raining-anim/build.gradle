@@ -41,8 +41,8 @@ android {
         tawakkol {
             applicationIdSuffix = ".yassin.sfax.tawakkolalaallah"
             dimension "app"
-            versionCode 17
-            versionName "2.6"
+            versionCode 30
+            versionName "3.0"
         }
 
         flower {
