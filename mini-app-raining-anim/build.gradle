@@ -46,8 +46,8 @@ android {
         flower {
             applicationIdSuffix = ".yassin.sfax.sobhanallahlwp"
             dimension "app"
-            versionCode 17
-            versionName "2.6"
+            versionCode 30
+            versionName "11.0"
         }
     }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pref_sync_frequency">Choose models</string>
-    <string name="pref_sync_frequency_summary">choose a wallpapers models</string>
-    <string name="pref_update_setting">Models Settings</string>
-    <string name="setting_enable_rain">Enable Rain</string>
-    <string name="setting_enable_touch">Enable Touch</string>
+    <string name="pref_sync_frequency">اختر الموديلات</string>
+    <string name="pref_sync_frequency_summary">اختر نماذج خلفيات</string>
+    <string name="pref_update_setting">إعدادات</string>
+    <string name="setting_enable_rain">تمكين المطر</string>
+    <string name="setting_enable_touch">تمكين اللمس</string>
 </resources>
