@@ -3,6 +3,10 @@ package com.yassin.sfax.tawakkolalaallah
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.DisplayMetrics
+import android.view.Display
+
+import android.view.WindowManager
 
 class ResourceUtils {
     companion object {
@@ -114,50 +118,71 @@ class ResourceUtils {
             }
         }
 
+        fun getBitmap(context: Context, id: Int): Bitmap {
+            val mWindowManager =
+                context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val displayMetrics = DisplayMetrics()
+            mWindowManager.defaultDisplay.getMetrics(displayMetrics)
+
+            return BitmapFactory.decodeResource(
+                context.resources,
+                id
+            ).let {
+                Bitmap.createScaledBitmap(
+                    it,
+                    displayMetrics.widthPixels,
+                    displayMetrics.heightPixels,
+                    true
+                )
+            }
+        }
+
         fun getBackground(context: Context, pref: String): Bitmap {
+
+
             return when (pref) {
-                "Style 1" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 1" -> getBitmap(
+                    context,
                     R.drawable.wallpaper1
                 )
-                "Style 2" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 2" -> getBitmap(
+                    context,
                     R.drawable.wallpaper2
                 )
-                "Style 3" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 3" -> getBitmap(
+                    context,
                     R.drawable.wallpaper3
                 )
-                "Style 4" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 4" -> getBitmap(
+                    context,
                     R.drawable.wallpaper4
                 )
-                "Style 5" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 5" -> getBitmap(
+                    context,
                     R.drawable.wallpaper5
                 )
-                "Style 6" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 6" -> getBitmap(
+                    context,
                     R.drawable.wallpaper6
                 )
-                "Style 7" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 7" -> getBitmap(
+                    context,
                     R.drawable.wallpaper7
                 )
-                "Style 8" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 8" -> getBitmap(
+                    context,
                     R.drawable.wallpaper8
                 )
-                "Style 9" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 9" -> getBitmap(
+                    context,
                     R.drawable.wallpaper9
                 )
-                "Style 10" -> BitmapFactory.decodeResource(
-                    context.resources,
+                "Style 10" -> getBitmap(
+                    context,
                     R.drawable.wallpaper10
                 )
-                else -> BitmapFactory.decodeResource(
-                    context.resources,
+                else -> getBitmap(
+                    context,
                     R.drawable.wallpaper11
                 )
             }

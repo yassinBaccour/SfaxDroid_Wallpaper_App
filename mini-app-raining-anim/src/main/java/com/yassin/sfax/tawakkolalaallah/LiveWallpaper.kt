@@ -28,8 +28,8 @@ class LiveWallpaper : WallpaperService() {
         private val animatedItems: ArrayList<AnimatedItem> = ArrayList()
         private var newCloudIteration = 0
 
-        private var background = BitmapFactory.decodeResource(
-            resources,
+        private var background = ResourceUtils.getBitmap(
+            applicationContext,
             R.drawable.wallpaper1
         )
 
@@ -179,7 +179,7 @@ class LiveWallpaper : WallpaperService() {
                 canvas.drawBitmap(
                     touchingItem, mTouchX - touchingItem.width / 2,
                     mTouchY -
-                        touchingItem.height / 2,
+                            touchingItem.height / 2,
                     null
                 )
                 canvas.restore()
