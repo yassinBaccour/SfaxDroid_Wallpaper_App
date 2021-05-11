@@ -64,6 +64,16 @@ android {
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
         }
+
+        mixedWallpaper {
+            applicationIdSuffix = ".com.islamapp.scaryphonepro"
+            dimension "app"
+            resConfigs('ar', 'xxhdpi')
+            versionCode 30
+            versionName "3.0"
+            buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
+            manifestPlaceholders = [hostName: ""]
+        }
     }
 
     packagingOptions {
