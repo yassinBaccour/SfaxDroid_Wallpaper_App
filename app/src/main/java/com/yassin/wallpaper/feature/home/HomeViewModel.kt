@@ -83,23 +83,31 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun initInitialState() {
-        val cat = selectedLwpName.isNotEmpty() || screenType == "CAT_WALL"
-        val title = when (selectedLwpName) {
+        viewModelScope.launch {
+            setState {
+                copy(
+                    toolBarTitle = getScreenTitle(),
+                    isToolBarVisible = getToolBarVisibility(),
+                    isPrivacyButtonVisible = getPrivacyButtonVisibility(),
+                    setDisplayHomeAsUpEnabled = isWithToolBar()
+                )
+            }
+        }
+    }
+
+    private fun getPrivacyButtonVisibility() = !isWithToolBar() && appName == AppName.LiliaGame
+
+    private fun getToolBarVisibility() = if (isWithToolBar()) true else appName != AppName.SfaxDroid
+
+    private fun isWithToolBar() = selectedLwpName.isNotEmpty() || screenType == "CAT_WALL"
+
+    private fun getScreenTitle(): String {
+        return when (selectedLwpName) {
             Constants.KEY_WORD_IMG_LWP -> screenName
             Constants.KEY_ANIM_2D_LWP -> screenName
             else -> when (screenType) {
                 "CAT_WALL" -> screenName
                 else -> ""
-            }
-        }
-        viewModelScope.launch {
-            setState {
-                copy(
-                    toolBarTitle = title,
-                    isToolBarVisible = if (cat) true else appName != AppName.SfaxDroid,
-                    isPrivacyButtonVisible = !cat && appName == AppName.LiliaGame,
-                    setDisplayHomeAsUpEnabled = cat
-                )
             }
         }
     }
