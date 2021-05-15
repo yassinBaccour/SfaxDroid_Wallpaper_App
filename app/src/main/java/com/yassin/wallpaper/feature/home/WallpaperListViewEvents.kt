@@ -9,5 +9,9 @@ data class WallpaperListViewEvents(
     var itemsList: List<ItemWrapperList<Any>> = arrayListOf(),
     var tagList: List<TagView> = arrayListOf(),
     var isTagVisible: Boolean = false,
-    var isRefresh: Boolean = false
+    var isRefresh: Boolean = true,
+    var isToolBarVisible: Boolean = false,
+    var isPrivacyButtonVisible: Boolean = false,
+    var toolBarTitle: String = "",
+    var setDisplayHomeAsUpEnabled: Boolean = false,
 ) : UiState

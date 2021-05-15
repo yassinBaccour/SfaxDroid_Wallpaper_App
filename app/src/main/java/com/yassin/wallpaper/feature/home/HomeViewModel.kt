@@ -17,12 +17,14 @@ import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
 import com.yassin.wallpaper.feature.ScreenType
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
+import com.yassin.wallpaper.utils.AppName
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -33,7 +35,8 @@ class HomeViewModel @Inject constructor(
     var getCatWallpapersUseCase: GetCatWallpapersUseCase,
     var getTagUseCase: GetTagUseCase,
     var fileManager: FileManager,
-    var deviceManager: DeviceManager
+    var deviceManager: DeviceManager,
+    @Named("app-name") var appName: AppName
 ) :
     BaseViewModel<WallpaperListViewEvents>() {
 
@@ -48,7 +51,6 @@ class HomeViewModel @Inject constructor(
         get() = _uiEffects.receiveAsFlow()
 
     init {
-
         viewModelScope.launch {
             pendingActions.collect {
                 when (it) {
@@ -76,8 +78,31 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-
+        initView()
         loadWallpaperByScreenType()
+    }
+
+    private fun initView() {
+        val cat = selectedLwpName.isNotEmpty() || screenType == "CAT_WALL"
+        val title = when (selectedLwpName) {
+            Constants.KEY_WORD_IMG_LWP -> screenName
+            Constants.KEY_ANIM_2D_LWP -> screenName
+            else -> when (screenType) {
+                "CAT_WALL" -> screenName
+                else -> ""
+            }
+        }
+        val isToolBarVisible =
+            if (cat) true else appName != AppName.SfaxDroid
+        val isPrivacyBtnVisible = !cat && appName == AppName.LiliaGame
+        setState {
+            copy(
+                toolBarTitle = title,
+                isToolBarVisible = isToolBarVisible,
+                isPrivacyButtonVisible = isPrivacyBtnVisible,
+                setDisplayHomeAsUpEnabled = cat
+            )
+        }
     }
 
     private fun getType(type: String): ScreenType {
@@ -121,33 +146,33 @@ class HomeViewModel @Inject constructor(
     private fun loadWallpaperByScreenType() {
         when (val screenType = getType(screenType)) {
             is ScreenType.Lwp -> {
-                setState { copy(isTagVisible = false) }
+                setState { copy(isTagVisible = false, isRefresh = true) }
                 getLiveWallpapers(screenType)
             }
             is ScreenType.Wall -> {
-                setState { copy(isTagVisible = true) }
+                setState { copy(isTagVisible = true, isRefresh = true) }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
             is ScreenType.Cat -> {
-                setState { copy(isTagVisible = false) }
+                setState { copy(isTagVisible = false, isRefresh = true) }
                 getCategory(screenType)
             }
             ScreenType.TEXTURE -> {
-                setState { copy(isTagVisible = true) }
+                setState { copy(isTagVisible = true, isRefresh = true) }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
             ScreenType.TIMER -> {
-                setState { copy(isTagVisible = false) }
+                setState { copy(isTagVisible = false, isRefresh = true) }
                 getSavedWallpaperList(screenType)
             }
             ScreenType.CatWallpaper -> {
-                setState { copy(isTagVisible = false) }
+                setState { copy(isTagVisible = false, isRefresh = true) }
                 getCatWallpapers(screenType, fileName)
             }
             ScreenType.MIXED -> {
-                setState { copy(isTagVisible = false) }
+                setState { copy(isTagVisible = false, isRefresh = true) }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
@@ -169,6 +194,7 @@ class HomeViewModel @Inject constructor(
                     )
                 }
                 is Response.FAILURE -> {
+                    setState { copy(isRefresh = false) }
                 }
             }
         }
@@ -194,6 +220,7 @@ class HomeViewModel @Inject constructor(
                     )
                 }
                 is Response.FAILURE -> {
+                    setState { copy(isRefresh = false) }
                 }
             }
         }
@@ -214,6 +241,7 @@ class HomeViewModel @Inject constructor(
                     wrapWallpapers(wallpaperList, screenType)
                 }
                 is Response.FAILURE -> {
+                    setState { copy(isRefresh = false) }
                 }
             }
         }

@@ -5,5 +5,5 @@ import com.sfaxdroid.data.mappers.TagView
 
 sealed class WallpaperListAction {
     data class LoadTags(var tagView: TagView) : WallpaperListAction()
-    data class OpenItems(var wallpaperObject: BaseWallpaperView): WallpaperListAction()
+    data class OpenItems(var wallpaperObject: BaseWallpaperView) : WallpaperListAction()
 }
