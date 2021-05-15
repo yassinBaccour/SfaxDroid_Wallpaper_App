@@ -107,9 +107,9 @@ class HomeActivityNavBar : SimpleActivity() {
 
     private fun rateApplication() {
         if (preferencesManager[
-            Constants.RATING_MESSAGE,
-            Constants.RATING_YES
-        ]
+                    Constants.RATING_MESSAGE,
+                    Constants.RATING_YES
+            ]
             == Constants.RATING_YES
         ) {
         }

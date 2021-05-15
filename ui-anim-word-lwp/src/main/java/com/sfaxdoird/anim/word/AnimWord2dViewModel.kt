@@ -43,15 +43,15 @@ class AnimWord2dViewModel @Inject constructor(
             pendingActions.collect {
                 when (it) {
                     is AnimWorldAction.ChangeColor -> {
-                        pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, it.color)
+                        pref.setSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, it.color)
                         setState { copy(color = it.color) }
                     }
                     is AnimWorldAction.ChangeFont -> {
-                        pref.SetSetting("2dwallpaperfontstyle", it.style + 1)
+                        pref.setSetting("2dwallpaperfontstyle", it.style + 1)
                         setState { copy(style = it.style) }
                     }
                     is AnimWorldAction.ChangeSize -> {
-                        pref.SetSetting("2dwallpapertextsize", it.size + 1)
+                        pref.setSetting("2dwallpapertextsize", it.size + 1)
                         setState { copy(size = it.size) }
                     }
                     AnimWorldAction.DownloadData -> {

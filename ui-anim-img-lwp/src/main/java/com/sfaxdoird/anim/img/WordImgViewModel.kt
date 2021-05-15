@@ -171,7 +171,7 @@ internal class WordImgViewModel @Inject constructor(
     }
 
     private fun saveColor(color: Int) {
-        pref?.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, color)
+        pref?.setSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, color)
     }
 
 }

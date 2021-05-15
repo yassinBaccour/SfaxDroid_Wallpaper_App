@@ -17,9 +17,9 @@ class AnimWord2dWallpaper : WallpaperService() {
 
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)
-        val color = pref.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
-        val textSize = pref.GetSetting("2dwallpapertextsize", 1) * 20
-        val fontStyle = pref.GetSetting("2dwallpaperfontstyle", 1)
+        val color = pref.getSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
+        val textSize = pref.getSetting("2dwallpapertextsize", 1) * 20
+        val fontStyle = pref.getSetting("2dwallpaperfontstyle", 1)
         return AnimWord2dEngine(color, textSize, fontStyle)
     }
 
@@ -122,7 +122,7 @@ class AnimWord2dWallpaper : WallpaperService() {
                     background = Bitmap.createScaledBitmap(
                         BitmapFactory.decodeFile(
                             filesDir.toString() + "/" +
-                                com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
+                                    com.sfaxdroid.base.Constants.PNG_BACKFROUND_FILE_NAME,
                             options
                         ),
                         screenWidth, screenHeight, true

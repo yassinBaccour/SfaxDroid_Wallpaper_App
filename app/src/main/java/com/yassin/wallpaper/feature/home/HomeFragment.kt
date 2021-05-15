@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.extension.getFullUrl
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.BaseWallpaperView
@@ -56,7 +57,6 @@ class HomeFragment : Fragment() {
         initView()
 
         lifecycleScope.launchWhenCreated {
-
             viewModel.uiState.collect {
                 it.apply {
                     recycler_view_tag.visibility = if (isTagVisible) View.VISIBLE else View.GONE
@@ -80,17 +80,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.uiEffects.collect {
                 when (it) {
-                    is OpenCategory -> {
-                        HomeActivityNavBar.nbOpenAds++
-                        findNavController().navigate(
-                            R.id.category_show_navigation_fg,
-                            Bundle().apply {
-                                putString(Constants.EXTRA_JSON_FILE_NAME, it.wallpaperObject.file)
-                                putString(Constants.EXTRA_SCREEN_NAME, it.wallpaperObject.name)
-                                putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
-                            }
-                        )
-                    }
+                    is OpenCategory -> navigateToCategory(it)
                     is OpenLiveWallpaper -> openLwp(it.wallpaperObject)
                     is OpenWallpaperByType -> openByType(
                         it.simpleWallpaperView,
@@ -156,10 +146,6 @@ class HomeFragment : Fragment() {
         wallpapersListAdapter?.update(list)
     }
 
-    private fun getFullUrl(url: String): String {
-        return url.replace("_preview", "")
-    }
-
     private fun openByType(
         wallpaperObject: SimpleWallpaperView,
         selectedLwpName: String,
@@ -172,7 +158,7 @@ class HomeFragment : Fragment() {
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
-                            getFullUrl(wallpaperObject.detailUrl)
+                            wallpaperObject.detailUrl.getFullUrl()
                         )
                         putString(
                             Constants.EXTRA_SCREEN_NAME,
@@ -187,7 +173,7 @@ class HomeFragment : Fragment() {
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
-                            getFullUrl(wallpaperObject.detailUrl)
+                            wallpaperObject.detailUrl.getFullUrl()
                         )
                         putString(
                             Constants.EXTRA_SCREEN_NAME,
@@ -240,6 +226,18 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private fun navigateToCategory(openCategory: OpenCategory) {
+        HomeActivityNavBar.nbOpenAds++
+        findNavController().navigate(
+            R.id.category_show_navigation_fg,
+            Bundle().apply {
+                putString(Constants.EXTRA_JSON_FILE_NAME, openCategory.wallpaperObject.file)
+                putString(Constants.EXTRA_SCREEN_NAME, openCategory.wallpaperObject.name)
+                putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
+            }
+        )
+    }
+
     private fun navToTexture(lwpName: String, screeName: String) {
         findNavController().navigate(
             R.id.chooser_navigation_fg,
@@ -262,7 +260,7 @@ class HomeFragment : Fragment() {
             Bundle().apply {
                 putString(
                     Constants.EXTRA_IMG_URL,
-                    getFullUrl(wallpaperObject.detailUrl)
+                    wallpaperObject.detailUrl.getFullUrl()
                 )
                 if (lwpName.isNotEmpty()) {
                     putString(Constants.KEY_LWP_NAME, lwpName)

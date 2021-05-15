@@ -17,7 +17,7 @@ class WordImgLiveWallpaper : WallpaperService() {
 
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)
-        val color = pref.GetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
+        val color = pref.getSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, -4522170)
         val zipFolder = com.sfaxdroid.base.Constants.ZIP_FOLDER_NAME
         return ImgWordEngine(
             color,
