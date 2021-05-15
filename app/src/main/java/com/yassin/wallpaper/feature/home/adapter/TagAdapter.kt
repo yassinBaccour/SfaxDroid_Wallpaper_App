@@ -1,5 +1,6 @@
 package com.yassin.wallpaper.feature.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.sfaxdroid.data.mappers.TagView
 import com.yassin.wallpaper.R
 
 class TagAdapter(
-    private val mTagList: List<TagView>,
+    private var tagList: MutableList<TagView>,
     private val clickListener: (TagView) -> Unit
 ) :
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
@@ -31,7 +32,7 @@ class TagAdapter(
         holder: TagViewHolder,
         position: Int
     ) {
-        val item = mTagList[position]
+        val item = tagList[position]
         holder.bindView(item)
         if (selectedPosition == position) {
             holder.selectedBg()
@@ -45,7 +46,14 @@ class TagAdapter(
         }
     }
 
-    override fun getItemCount() = mTagList.size
+    override fun getItemCount() = tagList.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun update(list: List<TagView>) {
+        tagList.clear()
+        tagList = list.toMutableList()
+        notifyDataSetChanged()
+    }
 
     class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

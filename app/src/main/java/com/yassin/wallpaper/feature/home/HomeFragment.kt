@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sfaxdroid.base.Constants
@@ -42,6 +41,7 @@ class HomeFragment : Fragment() {
     lateinit var appName: AppName
 
     private var wallpapersListAdapter: WallpapersListAdapter? = null
+    private var wallpapersTagAdapter: TagAdapter? = null
 
     private val viewModel: HomeViewModel by viewModels()
 
@@ -59,20 +59,20 @@ class HomeFragment : Fragment() {
 
             viewModel.uiState.collect {
                 it.apply {
-                    updateList(itemsList)
-                    showFilter(tagList)
                     recycler_view_tag.visibility = if (isTagVisible) View.VISIBLE else View.GONE
                     progress_bar_wallpaper_list.visibility =
                         if (isRefresh) View.VISIBLE else View.GONE
                     toolbar.visibility = if (isToolBarVisible) View.VISIBLE else View.GONE
                     imgPrivacy.visibility = if (isPrivacyButtonVisible) View.VISIBLE else View.GONE
                     (activity as AppCompatActivity?)?.supportActionBar?.apply {
-                        title = if (toolBarTitle.isNullOrEmpty()) requireContext().getString(
+                        title = if (toolBarTitle.isEmpty()) requireContext().getString(
                             R.string.app_name
                         ) else toolBarTitle
                         setHomeButtonEnabled(true)
                         setDisplayHomeAsUpEnabled(setDisplayHomeAsUpEnabled)
                     }
+                    updateList(itemsList)
+                    showFilter(tagList)
                 }
             }
         }
@@ -133,6 +133,10 @@ class HomeFragment : Fragment() {
                     }
                 })
         }
+        wallpapersTagAdapter = TagAdapter(
+            arrayListOf()
+        ) { viewModel.submitAction(WallpaperListAction.LoadTags(it)) }
+        recycler_view_tag.adapter = wallpapersTagAdapter
 
         imgPrivacy?.setOnClickListener {
             context?.startActivity(
@@ -145,17 +149,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showFilter(tagList: List<TagView>) {
-        recycler_view_tag.apply {
-            isNestedScrollingEnabled = false
-            layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-            adapter = TagAdapter(
-                tagList
-            ) { viewModel.submitAction(WallpaperListAction.LoadTags(it)) }
-        }
+        wallpapersTagAdapter?.update(tagList)
     }
 
     private fun updateList(list: List<ItemWrapperList<Any>>) {

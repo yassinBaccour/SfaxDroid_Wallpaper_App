@@ -38,7 +38,7 @@ class HomeViewModel @Inject constructor(
     var deviceManager: DeviceManager,
     @Named("app-name") var appName: AppName
 ) :
-    BaseViewModel<WallpaperListViewEvents>() {
+    BaseViewModel<WallpaperListViewEvents>(WallpaperListViewEvents()) {
 
     var screenName = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_NAME).orEmpty()
     var screenType = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_TYPE).orEmpty()
@@ -78,11 +78,11 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-        initView()
+        initInitialState()
         loadWallpaperByScreenType()
     }
 
-    private fun initView() {
+    private fun initInitialState() {
         val cat = selectedLwpName.isNotEmpty() || screenType == "CAT_WALL"
         val title = when (selectedLwpName) {
             Constants.KEY_WORD_IMG_LWP -> screenName
@@ -92,16 +92,15 @@ class HomeViewModel @Inject constructor(
                 else -> ""
             }
         }
-        val isToolBarVisible =
-            if (cat) true else appName != AppName.SfaxDroid
-        val isPrivacyBtnVisible = !cat && appName == AppName.LiliaGame
-        setState {
-            copy(
-                toolBarTitle = title,
-                isToolBarVisible = isToolBarVisible,
-                isPrivacyButtonVisible = isPrivacyBtnVisible,
-                setDisplayHomeAsUpEnabled = cat
-            )
+        viewModelScope.launch {
+            setState {
+                copy(
+                    toolBarTitle = title,
+                    isToolBarVisible = if (cat) true else appName != AppName.SfaxDroid,
+                    isPrivacyButtonVisible = !cat && appName == AppName.LiliaGame,
+                    setDisplayHomeAsUpEnabled = cat
+                )
+            }
         }
     }
 
@@ -146,33 +145,47 @@ class HomeViewModel @Inject constructor(
     private fun loadWallpaperByScreenType() {
         when (val screenType = getType(screenType)) {
             is ScreenType.Lwp -> {
-                setState { copy(isTagVisible = false, isRefresh = true) }
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getLiveWallpapers(screenType)
             }
             is ScreenType.Wall -> {
-                setState { copy(isTagVisible = true, isRefresh = true) }
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = true, isRefresh = true) }
+                }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
             is ScreenType.Cat -> {
-                setState { copy(isTagVisible = false, isRefresh = true) }
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getCategory(screenType)
             }
             ScreenType.TEXTURE -> {
-                setState { copy(isTagVisible = true, isRefresh = true) }
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = true, isRefresh = true) }
+                }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
             ScreenType.TIMER -> {
-                setState { copy(isTagVisible = false, isRefresh = true) }
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getSavedWallpaperList(screenType)
             }
             ScreenType.CatWallpaper -> {
-                setState { copy(isTagVisible = false, isRefresh = true) }
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getCatWallpapers(screenType, fileName)
             }
             ScreenType.MIXED -> {
-                setState { copy(isTagVisible = false, isRefresh = true) }
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
@@ -302,11 +315,13 @@ class HomeViewModel @Inject constructor(
         wallpaperList: List<BaseWallpaperView>,
         screenType: ScreenType
     ) {
-        setState {
-            copy(
-                itemsList = getWrappedListWithType(wallpaperList, screenType),
-                isRefresh = false
-            )
+        viewModelScope.launch {
+            setState {
+                copy(
+                    itemsList = getWrappedListWithType(wallpaperList, screenType),
+                    isRefresh = false
+                )
+            }
         }
     }
 
@@ -342,10 +357,6 @@ class HomeViewModel @Inject constructor(
             listItem.add(13, ItemWrapperList(cat, ArticleListAdapter.TYPE_CAROUSEL))
         }
         */
-    }
-
-    override fun createInitialState(): WallpaperListViewEvents {
-        return WallpaperListViewEvents()
     }
 
     fun submitAction(uiAction: WallpaperListAction) {

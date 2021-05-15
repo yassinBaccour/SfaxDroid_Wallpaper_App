@@ -32,7 +32,7 @@ internal class WordImgViewModel @Inject constructor(
     @Named("domain-url") var domainUrl: String,
     @ApplicationContext context: Context
 ) :
-    BaseViewModel<AnimImgViewState>(), DownloadStatusListenerV1 {
+    BaseViewModel<AnimImgViewState>(AnimImgViewState()), DownloadStatusListenerV1 {
 
     //TODO MVI change with Flow appropriate function
     var progressValue = MutableLiveData<Pair<Int, Long>>()
@@ -113,15 +113,21 @@ internal class WordImgViewModel @Inject constructor(
         val id = request?.downloadId
 
         if (id == mDownloadId1) {
-            setState { copy(progressionInfo = ProgressionInfo.IdOneCompleted) }
+            viewModelScope.launch {
+                setState { copy(progressionInfo = ProgressionInfo.IdOneCompleted) }
+            }
             unzipAndDeleteZip()
             mDownloadId2 = downloadManager.add(requestWallpaper)
         }
 
         if (id == mDownloadId2) {
-            setState { copy(progressionInfo = ProgressionInfo.IdTwoCompleted) }
             viewModelScope.launch {
-                setState { copy(isCompleted = true) }
+                setState {
+                    copy(
+                        progressionInfo = ProgressionInfo.IdTwoCompleted,
+                        isCompleted = true
+                    )
+                }
             }
         }
     }
@@ -132,7 +138,9 @@ internal class WordImgViewModel @Inject constructor(
         errorMessage: String?
     ) {
         progressValue.value = Pair(0, 0)
-        setState { copy(isCompleted = false) }
+        viewModelScope.launch {
+            setState { copy(isCompleted = false) }
+        }
     }
 
     override fun onProgress(
@@ -166,7 +174,4 @@ internal class WordImgViewModel @Inject constructor(
         pref?.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, color)
     }
 
-    override fun createInitialState(): AnimImgViewState {
-        return AnimImgViewState()
-    }
 }

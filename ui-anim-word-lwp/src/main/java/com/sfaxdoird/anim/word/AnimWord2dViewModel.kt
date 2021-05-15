@@ -26,7 +26,7 @@ class AnimWord2dViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     var fileManager: FileManager
 ) :
-    BaseViewModel<AnimWorldViewState>(), DownloadStatusListenerV1 {
+    BaseViewModel<AnimWorldViewState>(AnimWorldViewState()), DownloadStatusListenerV1 {
 
     private var downloadId2 = 0
     private val downloadManager = ThinDownloadManager(Constants.DOWNLOAD_THREAD_POOL_SIZE)
@@ -90,7 +90,9 @@ class AnimWord2dViewModel @Inject constructor(
     }
 
     override fun onDownloadComplete(request: DownloadRequest) {
-        setState { copy(isCompleted = true) }
+        viewModelScope.launch {
+            setState { copy(isCompleted = true) }
+        }
     }
 
     override fun onDownloadFailed(
@@ -99,8 +101,8 @@ class AnimWord2dViewModel @Inject constructor(
         errorMessage: String
     ) {
         progressValue.value = Pair(0, 0)
-        setState { copy(isCompleted = false) }
         viewModelScope.launch {
+            setState { copy(isCompleted = false) }
             _uiEffects.emit(Retry)
         }
     }
@@ -112,10 +114,6 @@ class AnimWord2dViewModel @Inject constructor(
         progress: Int
     ) {
         progressValue.value = Pair(progress, totalBytes)
-    }
-
-    override fun createInitialState(): AnimWorldViewState {
-        return AnimWorldViewState()
     }
 
     fun submitAction(action: AnimWorldAction) {

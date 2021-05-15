@@ -23,7 +23,7 @@ class WallpaperListViewModel @Inject constructor(
     var getAllWallpapersUseCase: GetAllWallpapersUseCase,
     var deviceManager: DeviceManager,
     var fileManager: FileManager
-) : BaseViewModel<WallpaperListViewState>() {
+) : BaseViewModel<WallpaperListViewState>(WallpaperListViewState()) {
 
     var screen = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_TYPE).orEmpty()
     private var pendingActions = MutableSharedFlow<WallpaperListAction>()
@@ -107,10 +107,6 @@ class WallpaperListViewModel @Inject constructor(
         viewModelScope.launch {
             setState { copy(wallpaperList = wallpaperListLiveData) }
         }
-    }
-
-    override fun createInitialState(): WallpaperListViewState {
-        return WallpaperListViewState()
     }
 
     fun submitAction(action: WallpaperListAction) {
