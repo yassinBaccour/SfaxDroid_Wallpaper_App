@@ -77,7 +77,7 @@ class WallpaperSchedulerFragment : Fragment() {
         scheduler =
             requireContext().getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
 
-        progressBar = view.findViewById(R.id.progressBar)
+        progressBar = view.findViewById(R.id.progress_bar_list)
         radioGroup = view.findViewById(R.id.radioGroup)
         buttonAddLwp = view.findViewById(R.id.buttonAddLwp)
         buttonLWPList = view.findViewById(R.id.buttonLWPList)

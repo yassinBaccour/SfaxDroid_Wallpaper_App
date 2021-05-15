@@ -5,8 +5,9 @@ import com.sfaxdroid.data.repositories.WsRepository
 import javax.inject.Inject
 
 class GetAllWallpapersUseCase @Inject constructor(private val wsRepository: WsRepository) :
-    UseCase<Response, GetAllWallpapersUseCase.Param>() {
-    override suspend fun run(params: Param): Response {
+    ResultUseCase<GetAllWallpapersUseCase.Param, Response>() {
+
+    override suspend fun doWork(params: Param): Response {
         return wsRepository.getAllWallpaper(params.file)
     }
 

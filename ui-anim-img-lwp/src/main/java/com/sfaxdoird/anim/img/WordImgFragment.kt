@@ -15,14 +15,16 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.extension.changeDrawableButtonColor
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.base.utils.Utils.Companion.getBytesDownloaded
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WordImgFragment : Fragment() {
@@ -34,17 +36,13 @@ class WordImgFragment : Fragment() {
     private lateinit var downloadInfoTxt: TextView
     private lateinit var progressBar: ProgressBar
 
-    private var isClickable = false
-
     private val viewModel: WordImgViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_word_img_lwp, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_word_img_lwp, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,42 +51,54 @@ class WordImgFragment : Fragment() {
         toolbar = view.findViewById(R.id.toolbar)
         progressInfoTxt = view.findViewById(R.id.progress_information)
         progressBar = view.findViewById(R.id.progress_bar_information)
-        downloadInfoTxt = view.findViewById(R.id.download_status_information_text)
+        downloadInfoTxt = view.findViewById(R.id.download_status_information_subtitle)
         initEventAndData()
     }
 
     private fun initEventAndData() {
-        fabBtn.setOnClickListener { openLwp() }
-        chooseColorBtn.setOnClickListener { chooseColor() }
 
         val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
         initToolbar(screenName)
 
-        viewModel.progressInfo.observe(
-            viewLifecycleOwner,
-            {
-                setProgressInformation(it)
-            }
-        )
+        fabBtn.setOnClickListener { viewModel.submitAction(AnimImgAction.OpenLiveWallpaper) }
+        chooseColorBtn.setOnClickListener { chooseColor() }
 
-        viewModel.isCompleted.observe(
-            viewLifecycleOwner,
-            {
-                if (it) {
-                    downloadInfoTxt.text =
-                        getString(R.string.download_completed)
-                    isClickable = it
-                    fabBtn.isEnabled = it
-                }
-            }
-        )
-
+        //TODO find a solution to create a counter with MutableStateFlow
         viewModel.progressValue.observe(
             viewLifecycleOwner,
             {
                 setProgressBytes(it.first, it.second)
             }
         )
+
+        lifecycleScope.launch {
+            viewModel.uiState.collect {
+                it.apply {
+                    fabBtn.isEnabled = isCompleted
+                    downloadInfoTxt.text =
+                        if (isCompleted) getString(R.string.download_completed) else getString(R.string.download_resource_txt_witing)
+                    chooseColorBtn.changeDrawableButtonColor(
+                        color,
+                        ResourcesCompat.getDrawable(
+                            resources,
+                            com.sfaxdroid.base.R.mipmap.ic_palette,
+                            requireContext().theme
+                        )
+                    )
+                    setProgressInformation(progressionInfo)
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.uiEffects.collect {
+                when (it) {
+                    AnimImgEffect.GoToLiveWallpaper -> {
+                        openLwp()
+                    }
+                }
+            }
+        }
     }
 
     private fun initToolbar(screeName: String?) {
@@ -110,18 +120,7 @@ class WordImgFragment : Fragment() {
             .setPositiveButton(
                 getString(R.string.btn_ok)
             ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
-
-                val pref = SharedPrefsUtils(requireContext())
-                pref.SetSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, selectedColor)
-
-                chooseColorBtn.changeDrawableButtonColor(
-                    selectedColor,
-                    ResourcesCompat.getDrawable(
-                        resources,
-                        com.sfaxdroid.base.R.mipmap.ic_palette,
-                        requireContext().theme
-                    )
-                )
+                viewModel.submitAction(AnimImgAction.ChangeColor(selectedColor))
             }
             .setNegativeButton(
                 getString(R.string.btn_cancel)
@@ -138,17 +137,16 @@ class WordImgFragment : Fragment() {
     }
 
     private fun openLwp() {
-        if (isClickable) {
-            Constants.ifBackgroundChanged = true
-            Constants.nbIncrementationAfterChange = 0
-            Utils.openLiveWallpaper<WordImgLiveWallpaper>(requireContext())
-        }
+        Constants.ifBackgroundChanged = true
+        Constants.nbIncrementationAfterChange = 0
+        Utils.openLiveWallpaper<WordImgLiveWallpaper>(requireContext())
     }
 
-    private fun setProgressInformation(info: WordImgViewModel.ProgressionInfo) {
+    private fun setProgressInformation(info: ProgressionInfo) {
         progressInfoTxt.text = when (info) {
-            is WordImgViewModel.ProgressionInfo.IdOneCompleted -> info.info + context?.getString(R.string.download_completed)
-            is WordImgViewModel.ProgressionInfo.IdTwoCompleted -> context?.getString(R.string.download_terminated_sucessful)
+            is ProgressionInfo.IdOneCompleted -> context?.getString(R.string.download_resource_completed)
+            is ProgressionInfo.IdTwoCompleted -> context?.getString(R.string.download_terminated_sucessful)
+            ProgressionInfo.Idle -> ""
         }
     }
 
@@ -156,12 +154,12 @@ class WordImgFragment : Fragment() {
         if (progress != 0) {
             progressBar.progress = progress
             progressInfoTxt.text = (
-                "$progress%  " +
-                    getBytesDownloaded(
-                        progress,
-                        byte
+                    "$progress%  " +
+                            getBytesDownloaded(
+                                progress,
+                                byte
+                            )
                     )
-                )
         } else {
             progressBar.progress = 0
             progressInfoTxt.text = getString(R.string.failed_dwn)

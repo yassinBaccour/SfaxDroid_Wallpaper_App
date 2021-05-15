@@ -1,9 +1,11 @@
 package com.sfaxdroid.data.repositories
 
 import com.sfaxdroid.data.DeviceNetworkHandler
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class Network @Inject constructor(
+class WallpapersDataSource @Inject constructor(
     private val networkHandler: DeviceNetworkHandler,
     private val service: WsService
 ) :

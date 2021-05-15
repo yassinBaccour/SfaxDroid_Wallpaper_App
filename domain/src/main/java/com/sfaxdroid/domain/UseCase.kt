@@ -2,6 +2,8 @@ package com.sfaxdroid.domain
 
 import com.sfaxdroid.data.repositories.Response
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 abstract class UseCase<out Type, in Params> where Type : Any {
@@ -12,4 +14,14 @@ abstract class UseCase<out Type, in Params> where Type : Any {
         withContext(Dispatchers.IO) {
             run(params)
         }
+}
+
+abstract class ResultUseCase<in P, R> {
+    operator fun invoke(params: P): Flow<R> = flow {
+        emit(doWork(params))
+    }
+
+    suspend fun executeSync(params: P): R = doWork(params)
+
+    protected abstract suspend fun doWork(params: P): R
 }

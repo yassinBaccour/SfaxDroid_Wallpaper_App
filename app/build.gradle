@@ -138,6 +138,7 @@ dependencies {
     implementation Libs.glide.glide
     implementation Libs.other.crashlytics
     implementation Libs.google.firebaseAnalytics
+
     implementation project(':download-file-module')
     implementation project(':base-android')
     implementation project(':domain')
@@ -147,6 +148,7 @@ dependencies {
     implementation project(':ui-anim-word-lwp')
     implementation project(':ui-timer-lwp')
     implementation project(':data-android')
+
 }
 
 android.applicationVariants.all { variant ->
