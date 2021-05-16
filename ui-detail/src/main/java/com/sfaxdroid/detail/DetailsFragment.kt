@@ -85,8 +85,8 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btnCrop = view.findViewById(R.id.button_Crop)
-        btnChooser = view.findViewById(R.id.button_Chooser)
+        btnCrop = view.findViewById(R.id.button_crop)
+        btnChooser = view.findViewById(R.id.button_chooser)
         btnShare = view.findViewById(R.id.button_share)
         btnShowSize = view.findViewById(R.id.button_show_size)
         imgWallpaperDetail = view.findViewById(R.id.img_wallpaper)
@@ -261,13 +261,13 @@ class DetailsFragment : Fragment() {
 
     private fun menuSheetClick(id: Int) {
         when (id) {
-            R.id.button_Crop -> {
+            R.id.button_crop -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.Crop,
                     currentUrl
                 )
             }
-            R.id.button_Chooser -> {
+            R.id.button_chooser -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.OpenNativeChooser,
                     currentUrl

@@ -73,9 +73,9 @@ class AnimWord2dFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.uiState.collect {
                 it.apply {
-                    btnOpenLwp?.isEnabled = isCompleted
+                    btn_open_lwp?.isEnabled = isCompleted
                     clickable = isCompleted
-                    btnChangeColor.changeDrawableButtonColor(
+                    btn_change_color.changeDrawableButtonColor(
                         color,
                         requireContext().getDrawableWithTheme(com.sfaxdroid.base.R.mipmap.ic_palette)
                     )
@@ -90,8 +90,8 @@ class AnimWord2dFragment : Fragment() {
 
 
     private fun setOnclickToALlButton() {
-        btnChangeColor?.setOnClickListener { chooseColor() }
-        btnOpenLwp.setOnClickListener { viewModel.submitAction(AnimWorldAction.OpenLiveWallpaper) }
+        btn_change_color?.setOnClickListener { chooseColor() }
+        btn_open_lwp.setOnClickListener { viewModel.submitAction(AnimWorldAction.OpenLiveWallpaper) }
         fontButtonList.forEachIndexed { index, textView ->
             textView.setOnClickListener {
                 viewModel.submitAction(AnimWorldAction.ChangeFont(index, textView))
@@ -124,24 +124,24 @@ class AnimWord2dFragment : Fragment() {
 
     private fun setDefaultSize() {
         buttonSizeList = arrayListOf(
-            buttonSizeSmall,
-            buttonSizeMeduim,
-            buttonSizeBig,
-            buttonSizeFullScreen
+            button_size_small,
+            button_size_meduim,
+            button_size_big,
+            button_size_full_screen
         )
         resetBtnSizeBackground()
     }
 
     private fun setTextViewTypeFace() {
         fontButtonList = arrayListOf(
-            txtfont1,
-            txtfont2,
-            txtfont3,
-            txtfont4,
-            txtfont5,
-            txtfont6,
-            txtfont7,
-            txtfont8
+            txt_font1,
+            txt_font2,
+            txt_font3,
+            txt_font4,
+            txt_font5,
+            txt_font6,
+            txt_font7,
+            txt_font8
         )
 
         fontButtonList.forEachIndexed { index, button ->
@@ -172,10 +172,10 @@ class AnimWord2dFragment : Fragment() {
     }
 
     private fun resetBtnSizeBackground() {
-        buttonSizeSmall.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_small))
-        buttonSizeMeduim.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_meduim))
-        buttonSizeBig.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_big))
-        buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_full))
+        button_size_small.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_small))
+        button_size_meduim.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_meduim))
+        button_size_big.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_big))
+        button_size_full_screen.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_full))
     }
 
     private fun initToolbar() {

@@ -13,7 +13,7 @@ class PrivacyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_privacy)
-        privacyWebView?.apply {
+        privacy_web_view?.apply {
             webViewClient = WebViewClient()
             settings.javaScriptEnabled = true
             loadUrl("http://androidsporttv.com/privacypolicy/water/privacy.html")

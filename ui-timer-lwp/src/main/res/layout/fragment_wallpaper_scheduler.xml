@@ -18,7 +18,7 @@
         app:titleTextColor="?attr/customTextColor" />
 
     <ScrollView
-        android:id="@+id/rootLayout"
+        android:id="@+id/root_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="?attr/customBackgroundColor"
@@ -41,7 +41,7 @@
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/txtNotForget"
+                android:id="@+id/txt_not_forget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -61,7 +61,7 @@
                 android:textColor="?attr/customTextColor" />
 
             <TextView
-                android:id="@+id/txtstatus"
+                android:id="@+id/txt_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -86,7 +86,7 @@
                 <TableRow android:gravity="fill">
 
                     <Button
-                        android:id="@+id/buttonActive"
+                        android:id="@+id/button_active"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
                         android:layout_gravity="center"
@@ -105,7 +105,7 @@
                         android:background="#80ecf0f1" />
 
                     <Button
-                        android:id="@+id/buttonClose"
+                        android:id="@+id/button_close"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
                         android:layout_gravity="center"
@@ -145,7 +145,7 @@
                 android:weightSum="1">
 
                 <RadioButton
-                    android:id="@+id/radioOneHoure"
+                    android:id="@+id/radio_one_houre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -155,7 +155,7 @@
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioSixHoure"
+                    android:id="@+id/radio_six_houre"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -167,7 +167,7 @@
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioDouzeHoure"
+                    android:id="@+id/radio_half_day"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/radioOneDayHoure"
+                    android:id="@+id/radio_one_day_houre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -199,7 +199,7 @@
                 android:background="#80ecf0f1" />
 
             <View
-                android:id="@+id/divinerBottom"
+                android:id="@+id/diviner_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginLeft="10dp"
@@ -213,7 +213,7 @@
                 <TableRow android:gravity="fill">
 
                     <Button
-                        android:id="@+id/buttonAddLwp"
+                        android:id="@+id/button_add_lwp"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
                         android:layout_gravity="center"
@@ -232,7 +232,7 @@
                         android:background="#80ecf0f1" />
 
                     <Button
-                        android:id="@+id/buttonLWPList"
+                        android:id="@+id/button_lwp_list"
                         android:layout_width="0dp"
                         android:layout_height="110dp"
                         android:layout_gravity="center"

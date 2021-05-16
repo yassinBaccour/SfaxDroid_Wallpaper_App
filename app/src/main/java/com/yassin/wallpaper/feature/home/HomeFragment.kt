@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
                     progress_bar_wallpaper_list.visibility =
                         if (isRefresh) View.VISIBLE else View.GONE
                     toolbar.visibility = if (isToolBarVisible) View.VISIBLE else View.GONE
-                    imgPrivacy.visibility = if (isPrivacyButtonVisible) View.VISIBLE else View.GONE
+                    img_privacy.visibility = if (isPrivacyButtonVisible) View.VISIBLE else View.GONE
                     (activity as AppCompatActivity?)?.supportActionBar?.apply {
                         title = if (toolBarTitle.isEmpty()) requireContext().getString(
                             R.string.app_name
@@ -128,7 +128,7 @@ class HomeFragment : Fragment() {
         ) { viewModel.submitAction(WallpaperListAction.LoadTags(it)) }
         recycler_view_tag.adapter = wallpapersTagAdapter
 
-        imgPrivacy?.setOnClickListener {
+        img_privacy?.setOnClickListener {
             context?.startActivity(
                 Intent(
                     context,

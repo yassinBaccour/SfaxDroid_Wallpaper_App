@@ -47,7 +47,7 @@
             android:textColor="?attr/customTextColor" />
 
         <Button
-            android:id="@+id/btnChangeColor"
+            android:id="@+id/btn_change_color"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
@@ -78,7 +78,7 @@
             <TableRow android:gravity="fill">
 
                 <Button
-                    android:id="@+id/buttonSizeSmall"
+                    android:id="@+id/button_size_small"
                     android:layout_width="100dp"
                     android:layout_height="110dp"
                     android:layout_gravity="center"
@@ -97,7 +97,7 @@
                     android:background="#80ecf0f1" />
 
                 <Button
-                    android:id="@+id/buttonSizeMeduim"
+                    android:id="@+id/button_size_meduim"
                     android:layout_width="100dp"
                     android:layout_height="110dp"
                     android:layout_gravity="center"
@@ -116,7 +116,7 @@
                     android:background="#80ecf0f1" />
 
                 <Button
-                    android:id="@+id/buttonSizeBig"
+                    android:id="@+id/button_size_big"
                     android:layout_width="100dp"
                     android:layout_height="110dp"
                     android:layout_gravity="center"
@@ -135,7 +135,7 @@
                     android:background="#80ecf0f1" />
 
                 <Button
-                    android:id="@+id/buttonSizeFullScreen"
+                    android:id="@+id/button_size_full_screen"
                     android:layout_width="100dp"
                     android:layout_height="110dp"
                     android:layout_gravity="center"
@@ -176,12 +176,12 @@
         app:layout_constraintTop_toBottomOf="@+id/view_one" />
 
     <ScrollView
-        android:id="@+id/scrollviewfont"
+        android:id="@+id/scroll_view_font"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnOpenLwp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_open_lwp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_text_font">
@@ -192,7 +192,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtfont1"
+                android:id="@+id/txt_font1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -202,7 +202,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtfont2"
+                android:id="@+id/txt_font2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -212,7 +212,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtfont3"
+                android:id="@+id/txt_font3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -222,7 +222,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtfont4"
+                android:id="@+id/txt_font4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -232,7 +232,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtfont5"
+                android:id="@+id/txt_font5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -242,7 +242,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtfont6"
+                android:id="@+id/txt_font6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -252,7 +252,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtfont7"
+                android:id="@+id/txt_font7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -262,7 +262,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtfont8"
+                android:id="@+id/txt_font8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -275,7 +275,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnOpenLwp"
+        android:id="@+id/btn_open_lwp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

@@ -12,7 +12,7 @@ import com.yassin.wallpaper.R
 
 class WallpaperCarouselItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val img: ImageView = itemView.findViewById(R.id.imgCarrouselImage)
+    private val img: ImageView = itemView.findViewById(R.id.img_carrousel_image)
     private val title: TextView = itemView.findViewById(R.id.txt_carrousel_title)
     private val desc: TextView = itemView.findViewById(R.id.txt_carrousel_desc)
 
