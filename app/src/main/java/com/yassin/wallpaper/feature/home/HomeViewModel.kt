@@ -6,10 +6,8 @@ import com.sfaxdroid.base.BaseViewModel
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
-import com.sfaxdroid.data.entity.TagResponse
-import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.mappers.*
-import com.sfaxdroid.data.repositories.Response
+import com.sfaxdroid.data.entity.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
@@ -127,11 +125,10 @@ class HomeViewModel @Inject constructor(
 
     private fun getTag(screenType: ScreenType) {
         viewModelScope.launch {
-            when (val data =
+            when (val result =
                 getTagUseCase(GetTagUseCase.Param(getTagFileNameByType(screenType))).first()) {
-                is Response.SUCESS -> {
-                    val rep = data.response as TagResponse
-                    val tagList = rep.tagList.map { wall ->
+                is Response.SUCCESS -> {
+                    val tagList = result.response.tagList.map { wall ->
                         TagToTagViewMap().map(wall, deviceManager.isSmallScreen())
                     }
                     setState { copy(tagList = tagList, isTagVisible = true, isRefresh = false) }
@@ -206,9 +203,9 @@ class HomeViewModel @Inject constructor(
                 val data =
                     getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(byLanguage(fileName))).first()
             ) {
-                is Response.SUCESS -> {
+                is Response.SUCCESS -> {
                     wrapWallpapers(
-                        wallpaperList = (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                        wallpaperList = data.response.wallpaperList.wallpapers.map { wall ->
                             WallpaperToLwpMapper().map(wall, deviceManager.isSmallScreen())
                         },
                         screenType = screenType
@@ -232,9 +229,9 @@ class HomeViewModel @Inject constructor(
     private fun getCategory(screenType: ScreenType) {
         viewModelScope.launch {
             when (val data = getCategoryUseCase(GetCategoryUseCase.Param(fileName)).first()) {
-                is Response.SUCESS -> {
+                is Response.SUCCESS -> {
                     wrapWallpapers(
-                        wallpaperList = (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                        wallpaperList = data.response.wallpaperList.wallpapers.map { wall ->
                             WallpaperToCategoryMapper().map(wall, deviceManager.isSmallScreen())
                         },
                         screenType = screenType
@@ -249,16 +246,15 @@ class HomeViewModel @Inject constructor(
 
     private fun getCatWallpapers(screenType: ScreenType, fileName: String) {
         viewModelScope.launch {
-            when (val data =
+            when (val result =
                 getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName)).first()) {
-                is Response.SUCESS -> {
-                    val wallpaperList =
-                        (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(
-                                wall,
-                                deviceManager.isSmallScreen()
-                            )
-                        }
+                is Response.SUCCESS -> {
+                    val wallpaperList = result.response.wallpaperList.wallpapers.map { wall ->
+                        WallpaperToViewMapper().map(
+                            wall,
+                            deviceManager.isSmallScreen()
+                        )
+                    }
                     wrapWallpapers(wallpaperList, screenType)
                 }
                 is Response.FAILURE -> {
@@ -278,11 +274,11 @@ class HomeViewModel @Inject constructor(
 
     private fun getWallpapers(screenType: ScreenType, fileName: String) {
         viewModelScope.launch {
-            when (val data =
+            when (val result =
                 getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName)).first()) {
-                is Response.SUCESS -> {
+                is Response.SUCCESS -> {
                     wrapWallpapers(
-                        (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                        result.response.wallpaperList.wallpapers.map { wall ->
                             WallpaperToViewMapper().map(
                                 wall,
                                 deviceManager.isSmallScreen()

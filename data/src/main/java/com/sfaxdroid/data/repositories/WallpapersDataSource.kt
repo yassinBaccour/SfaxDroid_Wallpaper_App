@@ -1,63 +1,33 @@
 package com.sfaxdroid.data.repositories
 
-import com.sfaxdroid.data.DeviceNetworkHandler
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.sfaxdroid.data.entity.Response
+import com.sfaxdroid.data.entity.TagResponse
+import com.sfaxdroid.data.entity.WallpaperResponse
 import javax.inject.Inject
 
-class WallpapersDataSource @Inject constructor(
-    private val networkHandler: DeviceNetworkHandler,
-    private val service: WsService
-) :
-    BaseNetwork(), WsRepository {
+class WallpapersDataSource @Inject constructor(private val service: WsService) : WsRepository {
 
-    override suspend fun getLiveWallpapers(file: String): Response {
-        return when (networkHandler.isConnected()) {
-            true -> request(service.getLiveWallpapers(file), { Response.SUCESS(it.copy()) }, null)
-            false -> Response.FAILURE(Failure.NetworkConnection)
-        }
+    override suspend fun getLiveWallpapers(file: String): Response<WallpaperResponse> {
+        return service.getLiveWallpapers(file).executeWs().toResult()
     }
 
-    override suspend fun getAllWallpaper(file: String): Response {
-        return when (networkHandler.isConnected()) {
-            true -> request(service.getAllWallpapers(file), { Response.SUCESS(it.copy()) }, null)
-            false -> Response.FAILURE(Failure.NetworkConnection)
-        }
+    override suspend fun getAllWallpaper(file: String): Response<WallpaperResponse> {
+        return service.getAllWallpapers(file).executeWs().toResult()
     }
 
-    override suspend fun getLab(file: String): Response {
-        return when (networkHandler.isConnected()) {
-            true -> request(service.getLab(file), { Response.SUCESS(it.copy()) }, null)
-            false -> Response.FAILURE(Failure.NetworkConnection)
-        }
+    override suspend fun getLab(file: String): Response<WallpaperResponse> {
+        return service.getLab(file).executeWs().toResult()
     }
 
-    override suspend fun getCategory(file: String): Response {
-        return when (networkHandler.isConnected()) {
-            true -> request(service.getCategory(file), { Response.SUCESS(it.copy()) }, null)
-            false -> Response.FAILURE(Failure.NetworkConnection)
-        }
+    override suspend fun getCategory(file: String): Response<WallpaperResponse> {
+        return service.getCategory(file).executeWs().toResult()
     }
 
-    override suspend fun getCategoryWallpaper(file: String): Response {
-        return when (networkHandler.isConnected()) {
-            true -> request(
-                service.getCategoryWallpaper(file),
-                { Response.SUCESS(it.copy()) },
-                null
-            )
-            false -> Response.FAILURE(Failure.NetworkConnection)
-        }
+    override suspend fun getCategoryWallpaper(file: String): Response<WallpaperResponse> {
+        return service.getCategoryWallpaper(file).executeWs().toResult()
     }
 
-    override suspend fun getTags(file: String): Response {
-        return when (networkHandler.isConnected()) {
-            true -> request(
-                service.getTags(file),
-                { Response.SUCESS(it) },
-                null
-            )
-            false -> Response.FAILURE(Failure.NetworkConnection)
-        }
+    override suspend fun getTags(file: String): Response<TagResponse> {
+        return service.getTags(file).executeWs().toResult()
     }
 }

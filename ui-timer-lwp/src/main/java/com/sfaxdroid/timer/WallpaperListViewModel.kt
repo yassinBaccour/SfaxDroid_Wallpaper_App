@@ -8,9 +8,8 @@ import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.extension.getFileName
 import com.sfaxdroid.data.entity.Wallpaper
-import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.mappers.WallpaperToViewMapper
-import com.sfaxdroid.data.repositories.Response
+import com.sfaxdroid.data.entity.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -68,12 +67,12 @@ class WallpaperListViewModel @Inject constructor(
             viewModelScope.launch {
                 setState { copy(isRefresh = true) }
                 when (
-                    val data =
+                    val result =
                         getAllWallpapersUseCase(GetAllWallpapersUseCase.Param("new.json")).first()
                 ) {
-                    is Response.SUCESS -> {
+                    is Response.SUCCESS -> {
                         val wallpaperListLiveData =
-                            (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                            result.response.wallpaperList.wallpapers.map { wall ->
                                 WallpaperToViewMapper().map(
                                     wall,
                                     deviceManager.isSmallScreen()
