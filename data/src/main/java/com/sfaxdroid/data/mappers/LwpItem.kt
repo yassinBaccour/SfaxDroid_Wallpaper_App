@@ -3,9 +3,9 @@ package com.sfaxdroid.data.mappers
 import com.sfaxdroid.data.entity.LiveWallpaper
 
 class LwpItem(
-    var name: String,
-    var desc: String,
-    var type: LiveWallpaper,
+    val name: String,
+    val desc: String,
+    val type: LiveWallpaper,
     thumbnailUrl: String
 ) :
     BaseWallpaperView(thumbnailUrl)

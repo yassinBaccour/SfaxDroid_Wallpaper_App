@@ -1,3 +1,3 @@
 package com.sfaxdroid.data.mappers
 
-open class BaseWallpaperView(var thumbnailUrl: String)
+open class BaseWallpaperView(val thumbnailUrl: String)

@@ -1,3 +1,3 @@
 package com.sfaxdroid.data.entity
 
-class WallpaperList(var title: String, var wallpapers: List<Wallpaper>)
+class WallpaperList(val title: String, val wallpapers: List<Wallpaper>)

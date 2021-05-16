@@ -1,10 +1,10 @@
 package com.sfaxdroid.data.mappers
 
 class CategoryItem(
-    var name: String,
-    var desc: String,
-    var color: String,
-    var file: String,
+    val name: String,
+    val desc: String,
+    val color: String,
+    val file: String,
     url: String
 ) :
     BaseWallpaperView(url)
