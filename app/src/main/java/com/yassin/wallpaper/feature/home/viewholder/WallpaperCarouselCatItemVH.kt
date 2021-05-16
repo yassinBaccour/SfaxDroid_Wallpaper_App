@@ -6,8 +6,9 @@ import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.LwpItem
 import com.yassin.wallpaper.databinding.ListItemCarrouselBinding
+import com.yassin.wallpaper.databinding.ListItemCarrouselCatBinding
 
-class WallpaperCarouselItemVH(val binding: ListItemCarrouselBinding) :
+class WallpaperCarouselCatItemVH(val binding: ListItemCarrouselCatBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(

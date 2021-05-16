@@ -5,7 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.ListItemCarrouselBinding
+import com.yassin.wallpaper.databinding.ListItemCarrouselCatBinding
+import com.yassin.wallpaper.databinding.ListItemCategoryBinding
 import com.yassin.wallpaper.feature.home.CarouselTypeEnum
+import com.yassin.wallpaper.feature.home.viewholder.WallpaperCarouselCatItemVH
 import com.yassin.wallpaper.feature.home.viewholder.WallpaperCarouselItemVH
 
 class CarouselItemAdapter(
@@ -16,24 +20,19 @@ class CarouselItemAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
-            TYPE_LWP ->
-                return WallpaperCarouselItemVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_carrousel,
-                        parent, false
-                    )
-                )
             TYPE_CAT ->
                 return WallpaperCarouselItemVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_carrousel_cat,
-                        parent, false
+                    ListItemCarrouselBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
-            else -> return WallpaperCarouselItemVH(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.list_item_carrousel,
-                    parent, false
+            else -> return WallpaperCarouselCatItemVH(
+                ListItemCarrouselCatBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
             )
         }

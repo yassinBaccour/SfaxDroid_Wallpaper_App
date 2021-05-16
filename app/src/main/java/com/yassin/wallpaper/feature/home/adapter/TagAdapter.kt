@@ -2,13 +2,12 @@ package com.yassin.wallpaper.feature.home.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.data.mappers.TagView
 import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.InflateTagBinding
 
 class TagAdapter(
     private var tagList: MutableList<TagView>,
@@ -20,13 +19,13 @@ class TagAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         TagViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(
-                    R.layout.inflate_tag,
-                    parent,
-                    false
-                )
+            InflateTagBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
+
 
     override fun onBindViewHolder(
         holder: TagViewHolder,
@@ -55,22 +54,22 @@ class TagAdapter(
         notifyDataSetChanged()
     }
 
-    class TagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TagViewHolder(val binding: InflateTagBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val mTxtLabel: TextView = itemView.findViewById(R.id.item_content)
-        val mLayout: LinearLayout = itemView.findViewById(R.id.item_tag_main)
+        val mLayout: LinearLayout = binding.itemTagMain
 
         fun bindView(tagView: TagView) {
-            mTxtLabel.text = tagView.name
+            binding.itemContent.text = tagView.name
         }
 
         fun defaultBg() {
-            itemView.background =
+            binding.root.background =
                 itemView.context.getDrawable(R.drawable.round_corner_tag_unselected)
         }
 
         fun selectedBg() {
-            itemView.background = itemView.context.getDrawable(R.drawable.round_corner_tag_selected)
+            binding.root.background =
+                itemView.context.getDrawable(R.drawable.round_corner_tag_selected)
         }
     }
 }
