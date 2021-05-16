@@ -179,7 +179,7 @@ class LiveWallpaper : WallpaperService() {
                 canvas.drawBitmap(
                     touchingItem, mTouchX - touchingItem.width / 2,
                     mTouchY -
-                            touchingItem.height / 2,
+                        touchingItem.height / 2,
                     null
                 )
                 canvas.restore()

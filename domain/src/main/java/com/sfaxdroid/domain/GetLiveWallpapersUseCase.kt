@@ -19,5 +19,4 @@ class GetLiveWallpapersUseCase @Inject constructor(private val wsRepository: WsR
     class Param(
         val file: String
     )
-
 }

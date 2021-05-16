@@ -4,7 +4,6 @@ import com.sfaxdroid.data.entity.Response
 import retrofit2.Call
 import retrofit2.HttpException
 
-
 fun <T> Call<T>.executeWs(): retrofit2.Response<T> {
     val call = if (isExecuted) clone() else this
     return call.execute()

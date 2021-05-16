@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.DisplayMetrics
-
 import android.view.WindowManager
 
 class ResourceUtils {
@@ -137,7 +136,6 @@ class ResourceUtils {
         }
 
         fun getBackground(context: Context, pref: String): Bitmap {
-
 
             return when (pref) {
                 "Style 1" -> getBitmap(

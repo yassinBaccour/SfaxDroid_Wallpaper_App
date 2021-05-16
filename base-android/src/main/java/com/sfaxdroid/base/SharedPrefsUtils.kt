@@ -3,7 +3,7 @@ package com.sfaxdroid.base
 import android.content.Context
 import android.content.SharedPreferences
 
-//TODO Inject
+// TODO Inject
 class SharedPrefsUtils(context: Context) {
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(

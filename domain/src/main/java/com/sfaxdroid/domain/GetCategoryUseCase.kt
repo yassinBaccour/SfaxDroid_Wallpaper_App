@@ -1,7 +1,7 @@
 package com.sfaxdroid.domain
 
-import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.entity.Response
+import com.sfaxdroid.data.entity.WallpaperResponse
 import com.sfaxdroid.data.repositories.WsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,5 +19,4 @@ class GetCategoryUseCase @Inject constructor(private val wsRepository: WsReposit
     class Param(
         val file: String
     )
-
 }
