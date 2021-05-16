@@ -3,21 +3,16 @@ package com.sfaxdoird.anim.img
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
+import com.sfaxdoird.anim.img.databinding.FragmentWordImgLwpBinding
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.extension.changeDrawableButtonColor
 import com.sfaxdroid.base.utils.Utils
@@ -27,31 +22,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class WordImgFragment : Fragment() {
-
-    private lateinit var chooseColorBtn: Button
-    private lateinit var fabBtn: Button
-    private lateinit var toolbar: Toolbar
-    private lateinit var progressInfoTxt: TextView
-    private lateinit var downloadInfoTxt: TextView
-    private lateinit var progressBar: ProgressBar
+class WordImgFragment : Fragment(R.layout.fragment_word_img_lwp) {
 
     private val viewModel: WordImgViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_word_img_lwp, container, false)
+    private lateinit var binding: FragmentWordImgLwpBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        chooseColorBtn = view.findViewById(R.id.button_choose_color)
-        fabBtn = view.findViewById(R.id.fab)
-        toolbar = view.findViewById(R.id.toolbar)
-        progressInfoTxt = view.findViewById(R.id.progress_information)
-        progressBar = view.findViewById(R.id.progress_bar_information)
-        downloadInfoTxt = view.findViewById(R.id.download_status_information_subtitle)
+        binding = FragmentWordImgLwpBinding.bind(view)
         initEventAndData()
     }
 
@@ -60,8 +38,8 @@ class WordImgFragment : Fragment() {
         val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
         initToolbar(screenName)
 
-        fabBtn.setOnClickListener { viewModel.submitAction(AnimImgAction.OpenLiveWallpaper) }
-        chooseColorBtn.setOnClickListener { chooseColor() }
+        binding.fab.setOnClickListener { viewModel.submitAction(AnimImgAction.OpenLiveWallpaper) }
+        binding.buttonChooseColor.setOnClickListener { chooseColor() }
 
         //TODO find a solution to create a counter with MutableStateFlow
         viewModel.progressValue.observe(
@@ -74,10 +52,10 @@ class WordImgFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.uiState.collect {
                 it.apply {
-                    fabBtn.isEnabled = isCompleted
-                    downloadInfoTxt.text =
+                    binding.fab.isEnabled = isCompleted
+                    binding.downloadStatusInformationSubtitle.text =
                         if (isCompleted) getString(R.string.download_completed) else getString(R.string.download_resource_txt_witing)
-                    chooseColorBtn.changeDrawableButtonColor(
+                    binding.buttonChooseColor.changeDrawableButtonColor(
                         color,
                         ResourcesCompat.getDrawable(
                             resources,
@@ -102,7 +80,7 @@ class WordImgFragment : Fragment() {
     }
 
     private fun initToolbar(screeName: String?) {
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = screeName
             setHomeButtonEnabled(false)
@@ -143,7 +121,7 @@ class WordImgFragment : Fragment() {
     }
 
     private fun setProgressInformation(info: ProgressionInfo) {
-        progressInfoTxt.text = when (info) {
+        binding.progressInformation.text = when (info) {
             is ProgressionInfo.IdOneCompleted -> context?.getString(R.string.download_resource_completed)
             is ProgressionInfo.IdTwoCompleted -> context?.getString(R.string.download_terminated_sucessful)
             ProgressionInfo.Idle -> ""
@@ -152,8 +130,8 @@ class WordImgFragment : Fragment() {
 
     private fun setProgressBytes(progress: Int, byte: Long) {
         if (progress != 0) {
-            progressBar.progress = progress
-            progressInfoTxt.text = (
+            binding.progressBarInformation.progress = progress
+            binding.progressInformation.text = (
                     "$progress%  " +
                             getBytesDownloaded(
                                 progress,
@@ -161,8 +139,8 @@ class WordImgFragment : Fragment() {
                             )
                     )
         } else {
-            progressBar.progress = 0
-            progressInfoTxt.text = getString(R.string.failed_dwn)
+            binding.progressBarInformation.progress = 0
+            binding.progressInformation.text = getString(R.string.failed_dwn)
         }
     }
 }

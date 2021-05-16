@@ -4,43 +4,33 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
+import com.sfaxdoird.anim.word.databinding.FragmentAnimWordBinding
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.extension.changeDrawableButtonColor
 import com.sfaxdroid.base.extension.getDrawableWithTheme
 import com.sfaxdroid.base.extension.setCompoundDrawableFromId
 import com.sfaxdroid.base.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_anim_word.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AnimWord2dFragment : Fragment() {
+class AnimWord2dFragment : Fragment(R.layout.fragment_anim_word) {
 
-    private var toolbar: Toolbar? = null
-    private var clickable = false
+    private var isClickable = false
     private var fontButtonList = arrayListOf<TextView>()
     private var buttonSizeList = arrayListOf<Button>()
-
+    private lateinit var binding: FragmentAnimWordBinding
     private val viewModel: AnimWord2dViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_anim_word, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +47,7 @@ class AnimWord2dFragment : Fragment() {
         viewModel.progressValue.observe(
             viewLifecycleOwner,
             {
-                progress_bar_information?.progress = it.first
+                binding.progressBarInformation.progress = it.first
             }
         )
 
@@ -73,15 +63,15 @@ class AnimWord2dFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.uiState.collect {
                 it.apply {
-                    btn_open_lwp?.isEnabled = isCompleted
-                    clickable = isCompleted
-                    btn_change_color.changeDrawableButtonColor(
+                    binding.btnOpenLwp.isEnabled = isCompleted
+                    isClickable = isCompleted
+                    binding.btnChangeColor.changeDrawableButtonColor(
                         color,
                         requireContext().getDrawableWithTheme(com.sfaxdroid.base.R.mipmap.ic_palette)
                     )
                     setSizeDrawable(size)
                     setFontDrawable(style)
-                    progress_bar_information?.visibility =
+                    binding.progressBarInformation.visibility =
                         if (isCompleted) View.INVISIBLE else View.VISIBLE
                 }
             }
@@ -90,8 +80,8 @@ class AnimWord2dFragment : Fragment() {
 
 
     private fun setOnclickToALlButton() {
-        btn_change_color?.setOnClickListener { chooseColor() }
-        btn_open_lwp.setOnClickListener { viewModel.submitAction(AnimWorldAction.OpenLiveWallpaper) }
+        binding.btnChangeColor.setOnClickListener { chooseColor() }
+        binding.btnOpenLwp.setOnClickListener { viewModel.submitAction(AnimWorldAction.OpenLiveWallpaper) }
         fontButtonList.forEachIndexed { index, textView ->
             textView.setOnClickListener {
                 viewModel.submitAction(AnimWorldAction.ChangeFont(index, textView))
@@ -124,24 +114,24 @@ class AnimWord2dFragment : Fragment() {
 
     private fun setDefaultSize() {
         buttonSizeList = arrayListOf(
-            button_size_small,
-            button_size_meduim,
-            button_size_big,
-            button_size_full_screen
+            binding.buttonSizeSmall,
+            binding.buttonSizeMeduim,
+            binding.buttonSizeBig,
+            binding.buttonSizeFullScreen
         )
         resetBtnSizeBackground()
     }
 
     private fun setTextViewTypeFace() {
         fontButtonList = arrayListOf(
-            txt_font1,
-            txt_font2,
-            txt_font3,
-            txt_font4,
-            txt_font5,
-            txt_font6,
-            txt_font7,
-            txt_font8
+            binding.txtFont1,
+            binding.txtFont2,
+            binding.txtFont3,
+            binding.txtFont4,
+            binding.txtFont5,
+            binding.txtFont6,
+            binding.txtFont7,
+            binding.txtFont8
         )
 
         fontButtonList.forEachIndexed { index, button ->
@@ -172,16 +162,15 @@ class AnimWord2dFragment : Fragment() {
     }
 
     private fun resetBtnSizeBackground() {
-        button_size_small.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_small))
-        button_size_meduim.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_meduim))
-        button_size_big.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_big))
-        button_size_full_screen.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_full))
+        binding.buttonSizeSmall.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_small))
+        binding.buttonSizeMeduim.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_meduim))
+        binding.buttonSizeBig.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_big))
+        binding.buttonSizeFullScreen.setCompoundTopDrawables(requireContext().getDrawableWithTheme(R.mipmap.ic_size_full))
     }
 
     private fun initToolbar() {
         val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
-        toolbar = view?.findViewById(R.id.toolbar)
-        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = screenName
             setHomeButtonEnabled(true)
@@ -210,7 +199,7 @@ class AnimWord2dFragment : Fragment() {
     }
 
     private fun openLiveWallpapers() {
-        if (clickable) {
+        if (isClickable) {
             Constants.ifBackgroundChanged = true
             Constants.nbIncrementationAfterChange = 0
             Utils.openLiveWallpaper<AnimWord2dWallpaper>(requireContext())

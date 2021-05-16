@@ -2,10 +2,8 @@ package com.yassin.wallpaper.feature.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,18 +22,18 @@ import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.sky.SkyLiveWallpaper
 import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.FragmentWallpapersBinding
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.yassin.wallpaper.utils.AppName
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_wallpapers.*
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
 
     @Inject
     @Named("app-name")
@@ -45,25 +43,22 @@ class HomeFragment : Fragment() {
     private var wallpapersTagAdapter: TagAdapter? = null
 
     private val viewModel: HomeViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_wallpapers, container, false)
+    private lateinit var binding: FragmentWallpapersBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentWallpapersBinding.bind(view)
         initView()
-
         lifecycleScope.launchWhenCreated {
             viewModel.uiState.collect {
                 it.apply {
-                    recycler_view_tag.visibility = if (isTagVisible) View.VISIBLE else View.GONE
-                    progress_bar_wallpaper_list.visibility =
+                    binding.recyclerViewTag.visibility =
+                        if (isTagVisible) View.VISIBLE else View.GONE
+                    binding.progressBarWallpaperList.visibility =
                         if (isRefresh) View.VISIBLE else View.GONE
-                    toolbar.visibility = if (isToolBarVisible) View.VISIBLE else View.GONE
-                    img_privacy.visibility = if (isPrivacyButtonVisible) View.VISIBLE else View.GONE
+                    binding.toolbar.visibility = if (isToolBarVisible) View.VISIBLE else View.GONE
+                    binding.imgPrivacy.visibility =
+                        if (isPrivacyButtonVisible) View.VISIBLE else View.GONE
                     (activity as AppCompatActivity?)?.supportActionBar?.apply {
                         title = if (toolBarTitle.isEmpty()) requireContext().getString(
                             R.string.app_name
@@ -93,13 +88,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
 
         wallpapersListAdapter = WallpapersListAdapter(
             arrayListOf()
         ) { catItem -> openWallpaper(catItem) }
 
-        recycler_view_wallpapers?.apply {
+        binding.recyclerViewWallpapers.apply {
             layoutManager = getLwpLayoutManager()
             adapter = wallpapersListAdapter
             addOnItemTouchListener(
@@ -126,9 +121,9 @@ class HomeFragment : Fragment() {
         wallpapersTagAdapter = TagAdapter(
             arrayListOf()
         ) { viewModel.submitAction(WallpaperListAction.LoadTags(it)) }
-        recycler_view_tag.adapter = wallpapersTagAdapter
+        binding.recyclerViewTag.adapter = wallpapersTagAdapter
 
-        img_privacy?.setOnClickListener {
+        binding.imgPrivacy.setOnClickListener {
             context?.startActivity(
                 Intent(
                     context,

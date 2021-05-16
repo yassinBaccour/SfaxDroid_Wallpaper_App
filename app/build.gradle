@@ -2,7 +2,6 @@ import java.nio.file.Files
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../dependencies.gradle'
@@ -10,9 +9,6 @@ apply from: '../dependencies.gradle'
 kapt {
     correctErrorTypes = true
     useBuildCache = true
-}
-androidExtensions {
-    experimental = true
 }
 
 android {

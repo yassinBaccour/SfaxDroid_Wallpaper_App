@@ -2,7 +2,7 @@ package com.yassin.wallpaper.feature.home
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
@@ -10,20 +10,21 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.sfaxdroid.base.PreferencesManager
-import com.sfaxdroid.base.SimpleActivity
 import com.sfaxdroid.base.extension.checkAppPermission
-import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.ActivityHomeNavBinding
 import com.yassin.wallpaper.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class HomeActivityNavBar : SimpleActivity() {
+class HomeActivityNavBar : AppCompatActivity() {
 
-    private var mToolbar: Toolbar? = null
     private var mInterstitialAd: InterstitialAd? = null
-    private lateinit var preferencesManager: PreferencesManager
+    private lateinit var binding: ActivityHomeNavBinding
+
+    @Inject
+    lateinit var preferencesManager: PreferencesManager
 
     @Inject
     @Named("intertitial-key")
@@ -31,11 +32,8 @@ class HomeActivityNavBar : SimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        preferencesManager = PreferencesManager(this, "ccc")
+        binding = ActivityHomeNavBinding.inflate(layoutInflater)
         setupAds()
-        initView()
-        setupToolBar()
-        initRatingApp()
         manageNbRunApp()
         this.checkAppPermission()
         loadFragment()
@@ -43,12 +41,8 @@ class HomeActivityNavBar : SimpleActivity() {
 
     private fun loadFragment() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
         navHostFragment.navController
-    }
-
-    private fun initView() {
-        mToolbar = findViewById(R.id.toolbar)
     }
 
     private fun setupAds() {
@@ -69,16 +63,10 @@ class HomeActivityNavBar : SimpleActivity() {
         )
     }
 
-    override val layout: Int
-        get() = R.layout.activity_home_nav
-
     override fun onResume() {
         super.onResume()
         showFirstTimeAndOneTimeAds()
         showTimedAdsWhenIOpenPicture()
-    }
-
-    fun initRatingApp() {
     }
 
     private fun manageNbRunApp() {
@@ -99,10 +87,6 @@ class HomeActivityNavBar : SimpleActivity() {
                 preferencesManager["NbRun"] = nbRun
             }
         }
-    }
-
-    private fun setupToolBar() {
-        setSupportActionBar(mToolbar)
     }
 
     private fun rateApplication() {
@@ -144,8 +128,6 @@ class HomeActivityNavBar : SimpleActivity() {
         }
         return super.onOptionsItemSelected(menuItem)
     }
-
-    override fun initEventAndData() {}
 
     companion object {
         var isAdsShow = false

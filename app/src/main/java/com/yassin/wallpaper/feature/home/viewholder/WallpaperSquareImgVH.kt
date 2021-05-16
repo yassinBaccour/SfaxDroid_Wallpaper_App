@@ -4,9 +4,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
-import com.yassin.wallpaper.databinding.ListItemWallpaperBinding
+import com.yassin.wallpaper.databinding.ListItemSquareWallpaperBinding
 
-class WallpaperImgVH(var binding: ListItemWallpaperBinding) :
+class WallpaperSquareImgVH(var binding: ListItemSquareWallpaperBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
