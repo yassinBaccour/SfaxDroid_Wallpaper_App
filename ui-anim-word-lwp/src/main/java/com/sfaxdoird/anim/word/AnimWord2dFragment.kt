@@ -34,6 +34,7 @@ class AnimWord2dFragment : Fragment(R.layout.fragment_anim_word) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentAnimWordBinding.bind(view)
         initEventAndData()
     }
 
