@@ -2,12 +2,11 @@ package com.sfaxdroid.timer
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
+import com.sfaxdroid.timer.databinding.ListItemWallpaperBinding
 
 class WallpapersListAdapter(var openWallpaper: (String) -> Unit) :
     RecyclerView.Adapter<WallpaperImgVH>() {
@@ -29,23 +28,23 @@ class WallpapersListAdapter(var openWallpaper: (String) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WallpaperImgVH {
         return WallpaperImgVH(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.list_item_wallpaper,
-                parent, false
+            ListItemWallpaperBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }
 }
 
-class WallpaperImgVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    private val img: ImageView = itemView.findViewById(R.id.item_img_wallpaper)
+class WallpaperImgVH(var binding: ListItemWallpaperBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
         wallpaperObject: SimpleWallpaperView,
         openWallpaper: (String) -> Unit
     ) {
-        img.apply {
+        binding.itemImgWallpaper.apply {
             loadUrl(wallpaperObject.thumbnailUrl)
             setOnClickListener { openWallpaper(wallpaperObject.detailUrl) }
         }

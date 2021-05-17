@@ -1,23 +1,13 @@
 package com.yassin.wallpaper.feature.home
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sfaxdroid.base.BaseViewModel
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
-import com.sfaxdroid.data.entity.TagResponse
-import com.sfaxdroid.data.entity.WallpaperResponse
-import com.sfaxdroid.data.mappers.BaseWallpaperView
-import com.sfaxdroid.data.mappers.SimpleWallpaperView
-import com.sfaxdroid.data.mappers.TagToTagViewMap
-import com.sfaxdroid.data.mappers.TagType
-import com.sfaxdroid.data.mappers.TagView
-import com.sfaxdroid.data.mappers.WallpaperToCategoryMapper
-import com.sfaxdroid.data.mappers.WallpaperToLwpMapper
-import com.sfaxdroid.data.mappers.WallpaperToViewMapper
-import com.sfaxdroid.data.repositories.Response
+import com.sfaxdroid.data.mappers.*
+import com.sfaxdroid.data.entity.Response
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetCategoryUseCase
@@ -25,10 +15,14 @@ import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
 import com.yassin.wallpaper.feature.ScreenType
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
+import com.yassin.wallpaper.utils.AppName
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -39,24 +33,81 @@ class HomeViewModel @Inject constructor(
     var getCatWallpapersUseCase: GetCatWallpapersUseCase,
     var getTagUseCase: GetTagUseCase,
     var fileManager: FileManager,
-    var deviceManager: DeviceManager
+    var deviceManager: DeviceManager,
+    @Named("app-name") var appName: AppName
 ) :
-    ViewModel() {
+    BaseViewModel<WallpaperListViewEvents>(WallpaperListViewEvents()) {
 
-    var screen = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_TYPE).orEmpty()
+    var screenName = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_NAME).orEmpty()
+    var screenType = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_TYPE).orEmpty()
+    var selectedLwpName = savedStateHandle.get<String>(Constants.KEY_LWP_NAME).orEmpty()
     var fileName = savedStateHandle.get<String>(Constants.EXTRA_JSON_FILE_NAME).orEmpty()
+    var pendingActions: MutableSharedFlow<WallpaperListAction> = MutableSharedFlow()
+    private var _uiEffects = Channel<WallpaperListEffects>()
 
-    var wallpaperListLiveData: MutableLiveData<List<ItemWrapperList<Any>>> =
-        MutableLiveData()
-
-    var tagListLiveData: MutableLiveData<List<TagView>> =
-        MutableLiveData()
-
-    var tagVisibility: MutableLiveData<Boolean> =
-        MutableLiveData()
+    val uiEffects: Flow<WallpaperListEffects>
+        get() = _uiEffects.receiveAsFlow()
 
     init {
+        viewModelScope.launch {
+            pendingActions.collect {
+                when (it) {
+                    is WallpaperListAction.LoadTags -> {
+                        loadByTag(it.tagView)
+                    }
+                    is WallpaperListAction.OpenItems -> {
+                        when (it.wallpaperObject) {
+                            is SimpleWallpaperView -> {
+                                _uiEffects.send(
+                                    OpenWallpaperByType(
+                                        it.wallpaperObject as SimpleWallpaperView,
+                                        selectedLwpName, screenName
+                                    )
+                                )
+                            }
+                            is LwpItem -> {
+                                _uiEffects.send(OpenLiveWallpaper(it.wallpaperObject as LwpItem))
+                            }
+                            is CategoryItem -> {
+                                _uiEffects.send(OpenCategory(it.wallpaperObject as CategoryItem))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        initInitialState()
         loadWallpaperByScreenType()
+    }
+
+    private fun initInitialState() {
+        viewModelScope.launch {
+            setState {
+                copy(
+                    toolBarTitle = getScreenTitle(),
+                    isToolBarVisible = getToolBarVisibility(),
+                    isPrivacyButtonVisible = getPrivacyButtonVisibility(),
+                    setDisplayHomeAsUpEnabled = isWithToolBar()
+                )
+            }
+        }
+    }
+
+    private fun getPrivacyButtonVisibility() = !isWithToolBar() && appName == AppName.LiliaGame
+
+    private fun getToolBarVisibility() = if (isWithToolBar()) true else appName != AppName.SfaxDroid
+
+    private fun isWithToolBar() = selectedLwpName.isNotEmpty() || screenType == "CAT_WALL"
+
+    private fun getScreenTitle(): String {
+        return when (selectedLwpName) {
+            Constants.KEY_WORD_IMG_LWP -> screenName
+            Constants.KEY_ANIM_2D_LWP -> screenName
+            else -> when (screenType) {
+                "CAT_WALL" -> screenName
+                else -> ""
+            }
+        }
     }
 
     private fun getType(type: String): ScreenType {
@@ -74,15 +125,16 @@ class HomeViewModel @Inject constructor(
 
     private fun getTag(screenType: ScreenType) {
         viewModelScope.launch {
-            when (val data = getTagUseCase(GetTagUseCase.Param(getTagFileNameByType(screenType)))) {
-                is Response.SUCESS -> {
-                    val rep = data.response as TagResponse
-                    tagListLiveData.value = rep.tagList.map { wall ->
+            when (val result =
+                getTagUseCase(GetTagUseCase.Param(getTagFileNameByType(screenType))).first()) {
+                is Response.SUCCESS -> {
+                    val tagList = result.response.tagList.map { wall ->
                         TagToTagViewMap().map(wall, deviceManager.isSmallScreen())
                     }
+                    setState { copy(tagList = tagList, isTagVisible = true, isRefresh = false) }
                 }
                 is Response.FAILURE -> {
-                    tagVisibility.value = false
+                    setState { copy(isTagVisible = false, isRefresh = false) }
                 }
             }
         }
@@ -96,35 +148,49 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadWallpaperByScreenType() {
-        when (val screenType = getType(screen)) {
+        when (val screenType = getType(screenType)) {
             is ScreenType.Lwp -> {
-                tagVisibility.value = false
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getLiveWallpapers(screenType)
             }
             is ScreenType.Wall -> {
-                tagVisibility.value = true
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = true, isRefresh = true) }
+                }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
             is ScreenType.Cat -> {
-                tagVisibility.value = false
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getCategory(screenType)
             }
             ScreenType.TEXTURE -> {
-                tagVisibility.value = true
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = true, isRefresh = true) }
+                }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
             ScreenType.TIMER -> {
-                tagVisibility.value = false
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getSavedWallpaperList(screenType)
             }
             ScreenType.CatWallpaper -> {
-                tagVisibility.value = false
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getCatWallpapers(screenType, fileName)
             }
             ScreenType.MIXED -> {
-                tagVisibility.value = true
+                viewModelScope.launch {
+                    setState { copy(isTagVisible = false, isRefresh = true) }
+                }
                 getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
@@ -135,17 +201,18 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             when (
                 val data =
-                    getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(byLanguage(fileName)))
+                    getLiveWallpapersUseCase(GetLiveWallpapersUseCase.Param(byLanguage(fileName))).first()
             ) {
-                is Response.SUCESS -> {
+                is Response.SUCCESS -> {
                     wrapWallpapers(
-                        wallpaperList = (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                        wallpaperList = data.response.wallpaperList.wallpapers.map { wall ->
                             WallpaperToLwpMapper().map(wall, deviceManager.isSmallScreen())
                         },
                         screenType = screenType
                     )
                 }
                 is Response.FAILURE -> {
+                    setState { copy(isRefresh = false) }
                 }
             }
         }
@@ -161,16 +228,17 @@ class HomeViewModel @Inject constructor(
 
     private fun getCategory(screenType: ScreenType) {
         viewModelScope.launch {
-            when (val data = getCategoryUseCase(GetCategoryUseCase.Param(fileName))) {
-                is Response.SUCESS -> {
+            when (val data = getCategoryUseCase(GetCategoryUseCase.Param(fileName)).first()) {
+                is Response.SUCCESS -> {
                     wrapWallpapers(
-                        wallpaperList = (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                        wallpaperList = data.response.wallpaperList.wallpapers.map { wall ->
                             WallpaperToCategoryMapper().map(wall, deviceManager.isSmallScreen())
                         },
                         screenType = screenType
                     )
                 }
                 is Response.FAILURE -> {
+                    setState { copy(isRefresh = false) }
                 }
             }
         }
@@ -178,24 +246,25 @@ class HomeViewModel @Inject constructor(
 
     private fun getCatWallpapers(screenType: ScreenType, fileName: String) {
         viewModelScope.launch {
-            when (val data = getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName))) {
-                is Response.SUCESS -> {
-                    val wallpaperList =
-                        (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(
-                                wall,
-                                deviceManager.isSmallScreen()
-                            )
-                        }
+            when (val result =
+                getCatWallpapersUseCase(GetCatWallpapersUseCase.Param(fileName)).first()) {
+                is Response.SUCCESS -> {
+                    val wallpaperList = result.response.wallpaperList.wallpapers.map { wall ->
+                        WallpaperToViewMapper().map(
+                            wall,
+                            deviceManager.isSmallScreen()
+                        )
+                    }
                     wrapWallpapers(wallpaperList, screenType)
                 }
                 is Response.FAILURE -> {
+                    setState { copy(isRefresh = false) }
                 }
             }
         }
     }
 
-    fun loadByTag(tagView: TagView) {
+    private fun loadByTag(tagView: TagView) {
         when (tagView.type) {
             TagType.Category -> getCatWallpapers(ScreenType.Wall, tagView.fileName)
             TagType.Texture -> getWallpapers(ScreenType.Wall, tagView.fileName)
@@ -205,10 +274,11 @@ class HomeViewModel @Inject constructor(
 
     private fun getWallpapers(screenType: ScreenType, fileName: String) {
         viewModelScope.launch {
-            when (val data = getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName))) {
-                is Response.SUCESS -> {
+            when (val result =
+                getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName)).first()) {
+                is Response.SUCCESS -> {
                     wrapWallpapers(
-                        (data.response as WallpaperResponse).wallpaperList.wallpapers.map { wall ->
+                        result.response.wallpaperList.wallpapers.map { wall ->
                             WallpaperToViewMapper().map(
                                 wall,
                                 deviceManager.isSmallScreen()
@@ -218,6 +288,9 @@ class HomeViewModel @Inject constructor(
                     )
                 }
                 is Response.FAILURE -> {
+                    setState {
+                        copy(isRefresh = false)
+                    }
                 }
             }
         }
@@ -246,7 +319,14 @@ class HomeViewModel @Inject constructor(
         wallpaperList: List<BaseWallpaperView>,
         screenType: ScreenType
     ) {
-        wallpaperListLiveData.value = getWrappedListWithType(wallpaperList, screenType)
+        viewModelScope.launch {
+            setState {
+                copy(
+                    itemsList = getWrappedListWithType(wallpaperList, screenType),
+                    isRefresh = false
+                )
+            }
+        }
     }
 
     private fun getWrappedListWithType(
@@ -281,5 +361,11 @@ class HomeViewModel @Inject constructor(
             listItem.add(13, ItemWrapperList(cat, ArticleListAdapter.TYPE_CAROUSEL))
         }
         */
+    }
+
+    fun submitAction(uiAction: WallpaperListAction) {
+        viewModelScope.launch {
+            pendingActions.emit(uiAction)
+        }
     }
 }

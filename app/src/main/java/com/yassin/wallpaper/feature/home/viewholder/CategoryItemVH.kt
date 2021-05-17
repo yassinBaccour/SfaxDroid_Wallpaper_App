@@ -9,25 +9,24 @@ import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.ListItemCategoryBinding
 
-class CategoryItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    private val img: ImageView = itemView.findViewById(R.id.item_detail_image)
-    private val title: TextView = itemView.findViewById(R.id.item_detail_title)
-    private val desc: TextView = itemView.findViewById(R.id.item_detail_desc)
+class CategoryItemVH(var binding: ListItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
         categoryItem: CategoryItem,
         openWallpaper: (BaseWallpaperView) -> Unit
     ) {
-        itemView.setOnClickListener { openWallpaper(categoryItem) }
-        title.text = categoryItem.name
-        desc.text = categoryItem.desc
-        img.apply {
-            loadUrl(categoryItem.thumbnailUrl)
-            setOnClickListener { openWallpaper(categoryItem) }
-            setBackgroundColor(Color.parseColor(categoryItem.color))
-            scaleType = ImageView.ScaleType.CENTER
+        binding.apply {
+            itemDetailTitle.text = categoryItem.name
+            itemDetailDesc.text = categoryItem.desc
+            itemDetailImage.apply {
+                loadUrl(categoryItem.thumbnailUrl)
+                setOnClickListener { openWallpaper(categoryItem) }
+                setBackgroundColor(Color.parseColor(categoryItem.color))
+                scaleType = ImageView.ScaleType.CENTER
+            }
+            root.setOnClickListener { openWallpaper(categoryItem) }
         }
     }
 }

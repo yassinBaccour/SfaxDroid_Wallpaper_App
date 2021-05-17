@@ -1,6 +1,6 @@
 package com.sfaxdroid.data.mappers
 
-class TagView(var name: String, var fileName: String, var type: TagType)
+class TagView(val name: String, val fileName: String, val type: TagType)
 
 sealed class TagType {
     object Category : TagType()

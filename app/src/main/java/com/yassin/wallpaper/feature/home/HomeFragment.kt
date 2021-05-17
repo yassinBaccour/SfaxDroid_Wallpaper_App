@@ -2,122 +2,99 @@ package com.yassin.wallpaper.feature.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.extension.getFullUrl
 import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.BaseWallpaperView
-import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.sky.SkyLiveWallpaper
 import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.FragmentWallpapersBinding
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.yassin.wallpaper.utils.AppName
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_wallpapers.*
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
 
     @Inject
     @Named("app-name")
     lateinit var appName: AppName
 
     private var wallpapersListAdapter: WallpapersListAdapter? = null
-
-    private val selectedLwpName by lazy {
-        requireArguments().getString(Constants.KEY_LWP_NAME)
-    }
-    private val screenName by lazy {
-        requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
-    }
-    private val screenType by lazy {
-        requireArguments().getString(Constants.EXTRA_SCREEN_TYPE)
-    }
+    private var wallpapersTagAdapter: TagAdapter? = null
 
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var binding: FragmentWallpapersBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_wallpapers, container, false)
-
-    private fun initToolbar() {
-        if (!selectedLwpName.isNullOrEmpty() || screenType == "CAT_WALL") {
-            (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
-            (activity as AppCompatActivity?)?.supportActionBar?.apply {
-                title = when (selectedLwpName) {
-                    Constants.KEY_WORD_IMG_LWP -> screenName
-                    Constants.KEY_ANIM_2D_LWP -> screenName
-                    else -> if (screenType == "CAT_WALL") screenName else ""
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentWallpapersBinding.bind(view)
+        initView()
+        lifecycleScope.launchWhenCreated {
+            viewModel.uiState.collect {
+                it.apply {
+                    binding.recyclerViewTag.visibility =
+                        if (isTagVisible) View.VISIBLE else View.GONE
+                    binding.progressBarWallpaperList.visibility =
+                        if (isRefresh) View.VISIBLE else View.GONE
+                    binding.toolbar.visibility = if (isToolBarVisible) View.VISIBLE else View.GONE
+                    binding.imgPrivacy.visibility =
+                        if (isPrivacyButtonVisible) View.VISIBLE else View.GONE
+                    (activity as AppCompatActivity?)?.supportActionBar?.apply {
+                        title = if (toolBarTitle.isEmpty()) requireContext().getString(
+                            R.string.app_name
+                        ) else toolBarTitle
+                        setHomeButtonEnabled(true)
+                        setDisplayHomeAsUpEnabled(setDisplayHomeAsUpEnabled)
+                    }
+                    updateList(itemsList)
+                    showFilter(tagList)
                 }
-                setHomeButtonEnabled(true)
-                setDisplayHomeAsUpEnabled(true)
             }
-        } else {
-            if (appName == AppName.SfaxDroid)
-                toolbar.visibility = View.GONE
-            else {
-                (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
-                (activity as AppCompatActivity?)?.supportActionBar?.apply {
-                    title = requireContext().getString(R.string.app_name)
-                    setHomeButtonEnabled(true)
-                    setDisplayHomeAsUpEnabled(false)
-                }
-                toolbar.visibility = View.VISIBLE
-                imgPrivacy.visibility = View.VISIBLE
-                imgPrivacy?.setOnClickListener {
-                    context?.startActivity(
-                        Intent(
-                            context,
-                            PrivacyActivity::class.java
-                        )
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.uiEffects.collect {
+                when (it) {
+                    is OpenCategory -> navigateToCategory(it)
+                    is OpenLiveWallpaper -> openLwp(it.wallpaperObject)
+                    is OpenWallpaperByType -> openByType(
+                        it.simpleWallpaperView,
+                        it.parentName,
+                        it.screenName
                     )
                 }
             }
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
-        viewModel.wallpaperListLiveData.observe(viewLifecycleOwner) { list ->
-            showContent(list)
-        }
-        viewModel.tagVisibility.observe(viewLifecycleOwner) { visibility ->
-            tagVisibility(visibility)
-        }
-
-        viewModel.tagListLiveData.observe(viewLifecycleOwner) { list ->
-            showFilter(list)
-        }
-    }
-
     private fun initView() {
-        initToolbar()
+        (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
+
         wallpapersListAdapter = WallpapersListAdapter(
             arrayListOf()
         ) { catItem -> openWallpaper(catItem) }
 
-        recycler_view_wallpapers?.apply {
+        binding.recyclerViewWallpapers.apply {
             layoutManager = getLwpLayoutManager()
             adapter = wallpapersListAdapter
             addOnItemTouchListener(
@@ -141,13 +118,34 @@ class HomeFragment : Fragment() {
                     }
                 })
         }
+        wallpapersTagAdapter = TagAdapter(
+            arrayListOf()
+        ) { viewModel.submitAction(WallpaperListAction.LoadTags(it)) }
+        binding.recyclerViewTag.adapter = wallpapersTagAdapter
+
+        binding.imgPrivacy.setOnClickListener {
+            context?.startActivity(
+                Intent(
+                    context,
+                    PrivacyActivity::class.java
+                )
+            )
+        }
     }
 
-    private fun getFullUrl(url: String): String {
-        return url.replace("_preview", "")
+    private fun showFilter(tagList: List<TagView>) {
+        wallpapersTagAdapter?.update(tagList)
     }
 
-    private fun openByType(wallpaperObject: SimpleWallpaperView) {
+    private fun updateList(list: List<ItemWrapperList<Any>>) {
+        wallpapersListAdapter?.update(list)
+    }
+
+    private fun openByType(
+        wallpaperObject: SimpleWallpaperView,
+        selectedLwpName: String,
+        screenName: String
+    ) {
         when (selectedLwpName) {
             Constants.KEY_WORD_IMG_LWP -> {
                 findNavController().navigate(
@@ -155,7 +153,7 @@ class HomeFragment : Fragment() {
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
-                            getFullUrl(wallpaperObject.detailUrl)
+                            wallpaperObject.detailUrl.getFullUrl()
                         )
                         putString(
                             Constants.EXTRA_SCREEN_NAME,
@@ -170,7 +168,7 @@ class HomeFragment : Fragment() {
                     Bundle().apply {
                         putString(
                             Constants.EXTRA_URL_TO_DOWNLOAD,
-                            getFullUrl(wallpaperObject.detailUrl)
+                            wallpaperObject.detailUrl.getFullUrl()
                         )
                         putString(
                             Constants.EXTRA_SCREEN_NAME,
@@ -196,23 +194,22 @@ class HomeFragment : Fragment() {
 
     private fun openWallpaper(wallpaperObject: BaseWallpaperView) {
         HomeActivityNavBar.isAdsShow = true
-        when (wallpaperObject) {
-            is SimpleWallpaperView -> {
-                openByType(wallpaperObject)
+        viewModel.submitAction(WallpaperListAction.OpenItems(wallpaperObject))
+    }
+
+    private fun openLwp(wallpaperObject: LwpItem) {
+        when (wallpaperObject.type) {
+            is LiveWallpaper.WordImg -> {
+                navToTexture(Constants.KEY_WORD_IMG_LWP, wallpaperObject.name)
             }
-            is LwpItem -> {
-                openLwp(wallpaperObject)
+            is LiveWallpaper.SkyView -> {
+                Utils.openLiveWallpaper<SkyLiveWallpaper>(requireContext())
             }
-            is CategoryItem -> {
-                HomeActivityNavBar.nbOpenAds++
-                findNavController().navigate(
-                    R.id.category_show_navigation_fg,
-                    Bundle().apply {
-                        putString(Constants.EXTRA_JSON_FILE_NAME, wallpaperObject.file)
-                        putString(Constants.EXTRA_SCREEN_NAME, wallpaperObject.name)
-                        putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
-                    }
-                )
+            is LiveWallpaper.TimerLwp -> {
+                navToTimer(wallpaperObject.name)
+            }
+            is LiveWallpaper.Word2d -> {
+                navToTexture(Constants.KEY_ANIM_2D_LWP, wallpaperObject.name)
             }
         }
     }
@@ -221,6 +218,18 @@ class HomeFragment : Fragment() {
         findNavController().navigate(
             R.id.navigate_to_timer,
             Bundle().apply { putString(Constants.EXTRA_SCREEN_NAME, screeName) }
+        )
+    }
+
+    private fun navigateToCategory(openCategory: OpenCategory) {
+        HomeActivityNavBar.nbOpenAds++
+        findNavController().navigate(
+            R.id.category_show_navigation_fg,
+            Bundle().apply {
+                putString(Constants.EXTRA_JSON_FILE_NAME, openCategory.wallpaperObject.file)
+                putString(Constants.EXTRA_SCREEN_NAME, openCategory.wallpaperObject.name)
+                putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
+            }
         )
     }
 
@@ -239,48 +248,6 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun openLwp(
-        wallpaperObject: LwpItem,
-    ) {
-        when (wallpaperObject.type) {
-            is LiveWallpaper.WordImg -> {
-                navToTexture(Constants.KEY_WORD_IMG_LWP, wallpaperObject.name)
-            }
-            is LiveWallpaper.SkyView -> {
-                Utils.openLiveWallpaper<SkyLiveWallpaper>(requireContext())
-            }
-            is LiveWallpaper.TimerLwp -> {
-                navToTimer(wallpaperObject.name)
-            }
-            is LiveWallpaper.Word2d -> {
-                navToTexture(Constants.KEY_ANIM_2D_LWP, wallpaperObject.name)
-            }
-        }
-    }
-
-    private fun showContent(list: List<ItemWrapperList<Any>>) {
-        wallpapersListAdapter?.update(list)
-    }
-
-    private fun showFilter(tagList: List<TagView>) {
-        recycler_view_tag.apply {
-            isNestedScrollingEnabled = false
-            layoutManager = LinearLayoutManager(
-                context,
-                LinearLayoutManager.HORIZONTAL,
-                false
-            )
-            adapter = TagAdapter(
-                tagList,
-                ::onTagClickListener
-            )
-        }
-    }
-
-    private fun onTagClickListener(tagView: TagView) {
-        viewModel.loadByTag(tagView)
-    }
-
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
         HomeActivityNavBar.nbOpenAds++
         findNavController().navigate(
@@ -288,7 +255,7 @@ class HomeFragment : Fragment() {
             Bundle().apply {
                 putString(
                     Constants.EXTRA_IMG_URL,
-                    getFullUrl(wallpaperObject.detailUrl)
+                    wallpaperObject.detailUrl.getFullUrl()
                 )
                 if (lwpName.isNotEmpty()) {
                     putString(Constants.KEY_LWP_NAME, lwpName)
@@ -313,26 +280,6 @@ class HomeFragment : Fragment() {
                         WallpapersListAdapter.TYPE_CAROUSEL -> spanCount
                         else -> -1
                     }
-                }
-            }
-        }
-    }
-
-    private fun tagVisibility(visibility: Boolean) {
-        recycler_view_tag.visibility = if (visibility) View.VISIBLE else View.GONE
-    }
-
-    companion object {
-        fun newInstance(
-            fileName: String,
-            screenType: String,
-            lwpName: String? = null
-        ): HomeFragment {
-            return HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(Constants.EXTRA_JSON_FILE_NAME, fileName)
-                    putString(Constants.EXTRA_SCREEN_TYPE, screenType)
-                    putString(Constants.KEY_LWP_NAME, lwpName)
                 }
             }
         }

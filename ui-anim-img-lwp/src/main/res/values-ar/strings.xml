@@ -5,4 +5,5 @@
     <string name="download_resource_txt">تحميل الأدعية</string>
     <string name="download_resource_txt_witing">الرجاء إنتضار التحميل</string>
     <string name="failed_dwn">باءت بالفشل</string>
+    <string name="download_resource_completed">Download All Images package</string>
 </resources>

@@ -2,7 +2,7 @@ package com.sfaxdroid.data
 
 import android.content.Context
 import androidx.room.Room
-import com.sfaxdroid.data.repositories.Network
+import com.sfaxdroid.data.repositories.WallpapersDataSource
 import com.sfaxdroid.data.repositories.WsRepository
 import dagger.Module
 import dagger.Provides
@@ -16,7 +16,7 @@ class WallpaperDataSource {
 
     @Provides
     @Singleton
-    fun provideAppRepository(dataSource: Network): WsRepository {
+    fun provideAppRepository(dataSource: WallpapersDataSource): WsRepository {
         return dataSource
     }
 

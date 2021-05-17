@@ -3,55 +3,65 @@ package com.sfaxdroid.timer
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.extension.getFileName
+import com.sfaxdroid.timer.databinding.FragmentWallpaperListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class WallpaperListFragment : Fragment() {
+class WallpaperListFragment : Fragment(R.layout.fragment_wallpaper_list) {
 
     private val viewModel: WallpaperListViewModel by viewModels()
-
-    @Inject
-    lateinit var fileManager: FileManager
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_wallpaper_list, container, false)
+    lateinit var binding: FragmentWallpaperListBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentWallpaperListBinding.bind(view)
         initToolbar()
         val wallpapersListAdapter = WallpapersListAdapter { url -> openDetail(url) }
-        view.findViewById<RecyclerView>(R.id.recycler_view_wallpapers).apply {
+        binding.recyclerViewWallpapers.apply {
             layoutManager = GridLayoutManager(context, 3)
             adapter = wallpapersListAdapter
         }
-        viewModel.wallpaperListLiveData.observe(viewLifecycleOwner) { list ->
-            wallpapersListAdapter.update(list)
+
+        lifecycleScope.launch {
+            viewModel.uiState.collect {
+                it.apply {
+                    wallpapersListAdapter.update(wallpaperList)
+                    binding.progressBarList.visibility =
+                        if (isRefresh) View.VISIBLE else View.GONE
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiEffects.collect {
+                when (it) {
+                    is WallpaperListEffects.DeleteImage -> {
+                        showDeleteAlert(it.url)
+                    }
+                    is WallpaperListEffects.SaveImage -> {
+                        showDownloadAlert(it.url)
+                    }
+                }
+            }
         }
     }
 
     private fun initToolbar() {
-        val toolbar = requireView().findViewById<Toolbar>(R.id.toolbar)
-        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = getString(R.string.wallpaper_list)
             setHomeButtonEnabled(true)
@@ -60,8 +70,7 @@ class WallpaperListFragment : Fragment() {
     }
 
     private fun openDetail(url: String) {
-        val exist = fileManager.getPermanentDirWithFile(url.getFileName()).exists()
-        if (exist) showDeleteAlert(url) else showDownloadAlert(url)
+        viewModel.submitAction(WallpaperListAction.ImageItemClick(url))
     }
 
     private fun showDeleteAlert(
@@ -72,10 +81,7 @@ class WallpaperListFragment : Fragment() {
             .setPositiveButton(
                 requireContext().getString(com.sfaxdroid.base.R.string.permission_accept_click_button)
             ) { _, _ ->
-                val info = fileManager.getTemporaryDirWithFile(url.getFileName())
-                if (info.exists())
-                    info.delete()
-                viewModel.loadFromStorage()
+                viewModel.submitAction(WallpaperListAction.LoadFromStorage(url.getFileName()))
             }
             .setNegativeButton(
                 requireContext().getString(com.sfaxdroid.base.R.string.permission_deny_click_button)
@@ -99,12 +105,12 @@ class WallpaperListFragment : Fragment() {
                             resource: Bitmap,
                             transition: Transition<in Bitmap?>?
                         ) {
-                            fileManager.saveBitmapToStorage(
-                                resource,
-                                url.getFileName(),
-                                Constants.SAVE_PERMANENT,
+                            viewModel.submitAction(
+                                WallpaperListAction.SaveBitmap(
+                                    url.getFileName(),
+                                    resource
+                                )
                             )
-                            resource.recycle()
                         }
 
                         override fun onLoadCleared(placeholder: Drawable?) {

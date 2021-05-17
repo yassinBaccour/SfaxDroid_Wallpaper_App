@@ -4,22 +4,21 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.data.mappers.BaseWallpaperView
+import com.yassin.wallpaper.databinding.ItemHorizontalScrollBinding
 import com.yassin.wallpaper.feature.home.CarouselView
 import com.yassin.wallpaper.feature.home.adapter.CarouselItemAdapter
-import kotlinx.android.synthetic.main.item_horizontal_scroll.view.*
 
-class HorizontalCarouselVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    private var recyclerView = itemView.recycler_view_list
-    private var title = itemView.txt_view_emission
+class HorizontalCarouselVH(val binding: ItemHorizontalScrollBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bindView(
         carouselView: CarouselView,
         clickListener: (BaseWallpaperView) -> Unit
     ) {
+
         if (!carouselView.articleList.isNullOrEmpty()) {
-            title.text = carouselView.title
-            recyclerView.apply {
+            binding.txtViewEmission.text = carouselView.title
+            binding.recyclerViewList.apply {
                 isNestedScrollingEnabled = false
                 layoutManager = LinearLayoutManager(
                     context,

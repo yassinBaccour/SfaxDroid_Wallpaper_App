@@ -1,20 +1,14 @@
 package com.yassin.wallpaper.feature.home.viewholder
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.LwpItem
-import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.ListItemCarrouselBinding
 
-class WallpaperCarouselItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    private val img: ImageView = itemView.findViewById(R.id.imgCarrouselImage)
-    private val title: TextView = itemView.findViewById(R.id.txt_carrousel_title)
-    private val desc: TextView = itemView.findViewById(R.id.txt_carrousel_desc)
+class WallpaperCarouselItemVH(val binding: ListItemCarrouselBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
         wallpaperObject: BaseWallpaperView,
@@ -22,16 +16,21 @@ class WallpaperCarouselItemVH(itemView: View) : RecyclerView.ViewHolder(itemView
     ) {
         when (wallpaperObject) {
             is LwpItem -> {
-                title.text = wallpaperObject.name
-                desc.text = wallpaperObject.desc
+                binding.txtCarrouselTitle.text = wallpaperObject.name
+                binding.txtCarrouselDesc.text = wallpaperObject.desc
             }
             is CategoryItem -> {
-                title.text = wallpaperObject.name
-                desc.text = wallpaperObject.desc
+                binding.txtCarrouselTitle.text = wallpaperObject.name
+                binding.txtCarrouselDesc.text = wallpaperObject.desc
             }
         }
-        img.loadUrl(wallpaperObject.thumbnailUrl.replace("category_new", "category_preview_new"))
-        itemView.setOnClickListener {
+        binding.imgCarrouselImage.loadUrl(
+            wallpaperObject.thumbnailUrl.replace(
+                "category_new",
+                "category_preview_new"
+            )
+        )
+        binding.root.setOnClickListener {
             clickListener(wallpaperObject)
         }
     }

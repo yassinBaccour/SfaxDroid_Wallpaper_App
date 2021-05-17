@@ -10,19 +10,11 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
@@ -30,6 +22,7 @@ import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.timer.TimerUtils.Companion.openAddWallpaperWithKeyActivity
 import com.sfaxdroid.timer.TimerUtils.Companion.setWallpaperFromFile
+import com.sfaxdroid.timer.databinding.FragmentWallpaperSchedulerBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -38,7 +31,7 @@ import javax.inject.Inject
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 @AndroidEntryPoint
-class WallpaperSchedulerFragment : Fragment() {
+class WallpaperSchedulerFragment : Fragment(R.layout.fragment_wallpaper_scheduler) {
 
     private var scheduler: JobScheduler? = null
 
@@ -48,74 +41,38 @@ class WallpaperSchedulerFragment : Fragment() {
     @Inject
     lateinit var deviceManager: DeviceManager
 
-    private lateinit var progressBar: ProgressBar
-    private lateinit var radioGroup: RadioGroup
-    private lateinit var buttonAddLwp: Button
-    private lateinit var buttonLWPList: Button
-    private lateinit var buttonActive: Button
-    private lateinit var buttonClose: Button
-    private lateinit var txtNotForget: TextView
-    private lateinit var txtstatus: TextView
-    private lateinit var container: FrameLayout
-    private lateinit var toolbar: Toolbar
-    private lateinit var radioOneHour: RadioButton
-    private lateinit var radioSixHour: RadioButton
-    private lateinit var radioTwelveHour: RadioButton
-    private lateinit var radioOneDay: RadioButton
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_wallpaper_scheduler, container, false)
-    }
+    lateinit var binding: FragmentWallpaperSchedulerBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentWallpaperSchedulerBinding.bind(view)
         val screenName = requireArguments().getString(Constants.EXTRA_SCREEN_NAME)
         scheduler =
             requireContext().getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
 
-        progressBar = view.findViewById(R.id.progressBar)
-        radioGroup = view.findViewById(R.id.radioGroup)
-        buttonAddLwp = view.findViewById(R.id.buttonAddLwp)
-        buttonLWPList = view.findViewById(R.id.buttonLWPList)
-        buttonActive = view.findViewById(R.id.buttonActive)
-        buttonClose = view.findViewById(R.id.buttonClose)
-        txtNotForget = view.findViewById(R.id.txtNotForget)
-        txtstatus = view.findViewById(R.id.txtstatus)
-        container = view.findViewById(R.id.container)
-        radioOneHour = view.findViewById(R.id.radioOneHoure)
-        radioSixHour = view.findViewById(R.id.radioSixHoure)
-        radioTwelveHour = view.findViewById(R.id.radioDouzeHoure)
-        radioOneDay = view.findViewById(R.id.radioOneDayHoure)
-        toolbar = view.findViewById(R.id.toolbar)
-
         initToolbar(screenName)
-
         initViewWithJobStatus()
 
-        radioGroup.setOnCheckedChangeListener { _: RadioGroup?, _: Int ->
+        binding.radioGroup.setOnCheckedChangeListener { _: RadioGroup?, _: Int ->
             val pendingJobs = scheduler?.allPendingJobs
             if (!pendingJobs.isNullOrEmpty() && pendingJobs.size > 0) removeJob()
         }
-        buttonAddLwp.setOnClickListener {
+        binding.buttonAddLwp.setOnClickListener {
             loadWallpaperListFragment()
         }
-        buttonLWPList.setOnClickListener {
+        binding.buttonLwpList.setOnClickListener {
             loadFragment {
                 replace(
-                    container.id,
+                    binding.container.id,
                     WallpaperListFragment.newInstance(Constants.KEY_ADDED_LIST_TIMER_LWP),
                     "PlayerFragment.TAG"
                 )
             }
         }
-        buttonActive.setOnClickListener {
+        binding.buttonActive.setOnClickListener {
             activeService()
         }
-        buttonClose.setOnClickListener {
+        binding.buttonClose.setOnClickListener {
             cancelService()
         }
     }
@@ -123,7 +80,7 @@ class WallpaperSchedulerFragment : Fragment() {
     private fun loadWallpaperListFragment() {
         loadFragment {
             replace(
-                container.id,
+                binding.container.id,
                 WallpaperListFragment.newInstance(Constants.KEY_ADD_TIMER_LWP),
                 "PlayerFragment.TAG"
             )
@@ -131,7 +88,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initToolbar(screeName: String?) {
-        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = screeName
             setHomeButtonEnabled(true)
@@ -197,7 +154,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initBtnClose(isJobActive: Boolean) {
-        buttonClose.apply {
+        binding.buttonClose.apply {
             setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 ResourcesCompat.getDrawable(
@@ -215,7 +172,7 @@ class WallpaperSchedulerFragment : Fragment() {
     }
 
     private fun initBtnActive(isJobActive: Boolean) {
-        buttonActive.apply {
+        binding.buttonActive.apply {
             setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 ResourcesCompat.getDrawable(
@@ -233,26 +190,24 @@ class WallpaperSchedulerFragment : Fragment() {
     private fun initTimeCheckBox(time: Long) {
         when (time) {
             3600000L ->
-                radioOneHour.isChecked =
+                binding.radioOneHoure.isChecked =
                     true
             3600000 * 6.toLong() ->
-                radioSixHour.isChecked =
+                binding.radioSixHoure.isChecked =
                     true
             3600000 * 12.toLong() ->
-                radioTwelveHour.isChecked =
+                binding.radioHalfDay.isChecked =
                     true
             3600000 * 24.toLong() ->
-                radioOneDay.isChecked =
+                binding.radioOneDayHoure.isChecked =
                     true
-            else -> radioOneHour.isChecked = true
+            else -> binding.radioOneHoure.isChecked = true
         }
     }
 
     private fun getSelectedTime(): Long {
 
-        val radioSelectedButton =
-            view?.findViewById<View>(radioGroup.checkedRadioButtonId) as RadioButton
-
+        val radioSelectedButton = binding.radioGroup.checkedRadioButtonId as RadioButton
         return when (radioSelectedButton.text.toString()) {
             getString(R.string.one_houre) -> 3600000
             getString(
@@ -286,18 +241,11 @@ class WallpaperSchedulerFragment : Fragment() {
         initTxtStatus(false)
     }
 
-    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == android.R.id.home) {
-            // finish()
-        }
-        return super.onOptionsItemSelected(menuItem)
-    }
-
     private fun initTxtStatus(isActive: Boolean) {
-        txtNotForget.visibility = if (isActive) View.VISIBLE else View.GONE
-        txtstatus.text =
+        binding.txtNotForget.visibility = if (isActive) View.VISIBLE else View.GONE
+        binding.txtStatus.text =
             if (isActive) getString(R.string.on_switch) else getString(R.string.off_switch)
-        txtstatus.setTextColor(
+        binding.txtStatus.setTextColor(
             if (isActive) resources.getColor(R.color.timer_green) else resources.getColor(
                 R.color.timer_red
             )
@@ -319,7 +267,7 @@ class WallpaperSchedulerFragment : Fragment() {
         ) ?: JobScheduler.RESULT_FAILURE
 
     private fun activeJob() {
-        progressBar.visibility = View.VISIBLE
+        binding.progressBarList.visibility = View.VISIBLE
         if (fileManager.getPermanentDirListFiles().size > 3) {
             GlobalScope.launch(Dispatchers.Default) {
                 val status = scheduleJob()
@@ -332,7 +280,7 @@ class WallpaperSchedulerFragment : Fragment() {
                     )
                     GlobalScope.launch(Dispatchers.Main) {
                         initTxtStatus(true)
-                        progressBar.visibility = View.GONE
+                        binding.progressBarList.visibility = View.GONE
                     }
                 }
             }

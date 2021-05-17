@@ -2,7 +2,6 @@ import java.nio.file.Files
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply from: '../dependencies.gradle'
@@ -10,9 +9,6 @@ apply from: '../dependencies.gradle'
 kapt {
     correctErrorTypes = true
     useBuildCache = true
-}
-androidExtensions {
-    experimental = true
 }
 
 android {
@@ -49,8 +45,8 @@ android {
         waterRippleLwp {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension "app"
-            versionCode 85
-            versionName "8.5"
+            versionCode 86
+            versionName "8.6"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_SFAXDROID)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }
@@ -63,6 +59,16 @@ android {
             versionName "3.0"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
+        }
+
+        mixedWallpaper {
+            applicationIdSuffix = ".com.islamapp.scaryphonepro"
+            dimension "app"
+            resConfigs('ar', 'xxhdpi')
+            versionCode 30
+            versionName "3.0"
+            buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
+            manifestPlaceholders = [hostName: ""]
         }
     }
 
@@ -105,6 +111,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 
@@ -128,6 +138,7 @@ dependencies {
     implementation Libs.glide.glide
     implementation Libs.other.crashlytics
     implementation Libs.google.firebaseAnalytics
+
     implementation project(':download-file-module')
     implementation project(':base-android')
     implementation project(':domain')
@@ -137,6 +148,7 @@ dependencies {
     implementation project(':ui-anim-word-lwp')
     implementation project(':ui-timer-lwp')
     implementation project(':data-android')
+
 }
 
 android.applicationVariants.all { variant ->

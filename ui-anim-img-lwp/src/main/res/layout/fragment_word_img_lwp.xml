@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/download_status_information_text"
+        android:id="@+id/download_status_information_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -58,7 +58,7 @@
         android:textColor="?attr/customTextSubColor "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/download_status_information_text" />
+        app:layout_constraintTop_toBottomOf="@+id/download_status_information_subtitle" />
 
     <ProgressBar
         android:id="@+id/progress_bar_information"
@@ -101,15 +101,15 @@
         app:srcCompat="@mipmap/ic_palette" />
 
     <Button
-        app:backgroundTint="@android:color/white"
         android:id="@+id/fab"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:enabled="false"
-        android:textColor="?attr/customTextAccentColor"
         android:text="@string/create_animated_wallpapers"
+        android:textColor="?attr/customTextAccentColor"
+        app:backgroundTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -10,28 +10,21 @@ import android.os.Build
 import android.os.Bundle
 import android.os.StrictMode
 import android.provider.MediaStore
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.appcompat.widget.Toolbar
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.extension.getFileName
 import com.sfaxdroid.base.extension.loadUrlWithAction
 import com.sfaxdroid.base.utils.Utils
+import com.sfaxdroid.detail.databinding.ActivityDetailsBinding
 import com.sfaxdroid.detail.utils.DetailUtils
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.decodeBitmapAndSetAsLiveWallpaper
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.setWallpaper
@@ -48,18 +41,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class DetailsFragment : Fragment() {
-
-    private lateinit var btnCrop: Button
-    private lateinit var btnChooser: Button
-    private lateinit var btnShare: Button
-    private lateinit var btnShowSize: ImageView
-    private lateinit var imgWallpaperDetail: ImageView
-    private lateinit var rootLayout: CoordinatorLayout
-    private lateinit var progressBar: ProgressBar
-    private lateinit var fab: FloatingActionButton
-    private lateinit var toolbar: Toolbar
-    private lateinit var bottomSheet: LinearLayoutCompat
+class DetailsFragment : Fragment(R.layout.activity_details) {
 
     private var from: String = ""
     private var currentUrl: String = ""
@@ -76,26 +58,11 @@ class DetailsFragment : Fragment() {
     @Named("app-id")
     lateinit var appId: String
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.activity_details, container, false)
+    private lateinit var binding: ActivityDetailsBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        btnCrop = view.findViewById(R.id.button_Crop)
-        btnChooser = view.findViewById(R.id.button_Chooser)
-        btnShare = view.findViewById(R.id.button_share)
-        btnShowSize = view.findViewById(R.id.button_show_size)
-        imgWallpaperDetail = view.findViewById(R.id.img_wallpaper)
-        rootLayout = view.findViewById(R.id.root_layout)
-        progressBar = view.findViewById(R.id.progress_bar_horizontal)
-        toolbar = view.findViewById(R.id.toolbar)
-        bottomSheet = view.findViewById(R.id.bottom_sheet)
-        fab = view.findViewById(R.id.button_fab)
-
+        binding = ActivityDetailsBinding.bind(view)
         initToolbar()
         initFabButtonAndBottomSheet()
         checkPermission()
@@ -123,7 +90,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun loadWallpaper() {
-        val detailImage: TouchImageView = requireView().findViewById(R.id.img_wallpaper)
+        val detailImage: TouchImageView = binding.imgWallpaper
         detailImage.loadUrlWithAction(currentUrl, ::hideLoading)
         detailImage.scaleType = ImageView.ScaleType.CENTER_CROP
     }
@@ -135,7 +102,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun initToolbar() {
-        (activity as AppCompatActivity?)?.setSupportActionBar(toolbar)
+        (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = ""
             setHomeButtonEnabled(false)
@@ -187,15 +154,15 @@ class DetailsFragment : Fragment() {
     private fun initFabButtonAndBottomSheet() {
         if (from.isNotEmpty()) {
             when (from) {
-                Constants.KEY_ADD_TIMER_LWP -> fab.setImageResource(R.mipmap.ic_download)
-                Constants.KEY_ADDED_LIST_TIMER_LWP -> fab.setImageResource(R.mipmap.ic_delete)
-                Constants.KEY_RIPPLE_LWP -> fab.setImageResource(R.mipmap.ic_ripple_fab)
+                Constants.KEY_ADD_TIMER_LWP -> binding.buttonFab.setImageResource(R.mipmap.ic_download)
+                Constants.KEY_ADDED_LIST_TIMER_LWP -> binding.buttonFab.setImageResource(R.mipmap.ic_delete)
+                Constants.KEY_RIPPLE_LWP -> binding.buttonFab.setImageResource(R.mipmap.ic_ripple_fab)
             }
         }
-        fab.setOnClickListener { fabClick() }
+        binding.buttonFab.setOnClickListener { fabClick() }
 
         bottomSheetBehavior =
-            BottomSheetBehavior.from<View>(bottomSheet)
+            BottomSheetBehavior.from<View>(binding.sheetView.root)
         bottomSheetBehavior?.apply {
             state = BottomSheetBehavior.STATE_HIDDEN
             peekHeight = 0
@@ -204,29 +171,29 @@ class DetailsFragment : Fragment() {
                 BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     if (newState == BottomSheetBehavior.STATE_EXPANDED)
-                        fab.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
+                        binding.buttonFab.setImageResource(R.drawable.ic_baseline_arrow_drop_down_24)
                     else
-                        fab.setImageResource(R.mipmap.ic_add_white)
+                        binding.buttonFab.setImageResource(R.mipmap.ic_add_white)
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 }
             })
         }
-        btnCrop.setOnClickListener { view -> menuSheetClick(view.id) }
-        btnChooser.setOnClickListener { view -> menuSheetClick(view.id) }
-        btnShare.setOnClickListener { view -> menuSheetClick(view.id) }
-        btnShowSize.setOnClickListener { changeFullScreenImageSize() }
+        binding.sheetView.buttonCrop.setOnClickListener { view -> menuSheetClick(view.id) }
+        binding.sheetView.buttonChooser.setOnClickListener { view -> menuSheetClick(view.id) }
+        binding.sheetView.buttonShare.setOnClickListener { view -> menuSheetClick(view.id) }
+        binding.buttonShowSize.setOnClickListener { changeFullScreenImageSize() }
         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun changeFullScreenImageSize() {
-        if (imgWallpaperDetail.scaleType == ImageView.ScaleType.CENTER_CROP) {
-            imgWallpaperDetail.scaleType = ImageView.ScaleType.FIT_START
-            btnShowSize.setImageResource(R.drawable.ic_fullscreen_size)
+        if (binding.imgWallpaper.scaleType == ImageView.ScaleType.CENTER_CROP) {
+            binding.imgWallpaper.scaleType = ImageView.ScaleType.FIT_START
+            binding.buttonShowSize.setImageResource(R.drawable.ic_fullscreen_size)
         } else {
-            imgWallpaperDetail.scaleType = ImageView.ScaleType.CENTER_CROP
-            btnShowSize.setImageResource(R.drawable.ic_real_size)
+            binding.imgWallpaper.scaleType = ImageView.ScaleType.CENTER_CROP
+            binding.buttonShowSize.setImageResource(R.drawable.ic_real_size)
         }
     }
 
@@ -238,7 +205,10 @@ class DetailsFragment : Fragment() {
         if (deleteFile(currentUrl)) {
             finishWithResult()
         } else {
-            Utils.showSnackMessage(rootLayout, getString(R.string.ui_detail_failure_delete))
+            Utils.showSnackMessage(
+                binding.rootLayout,
+                getString(R.string.ui_detail_failure_delete)
+            )
         }
     }
 
@@ -261,13 +231,13 @@ class DetailsFragment : Fragment() {
 
     private fun menuSheetClick(id: Int) {
         when (id) {
-            R.id.button_Crop -> {
+            R.id.button_crop -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.Crop,
                     currentUrl
                 )
             }
-            R.id.button_Chooser -> {
+            R.id.button_chooser -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.OpenNativeChooser,
                     currentUrl
@@ -363,7 +333,10 @@ class DetailsFragment : Fragment() {
                 fileManager.getTemporaryDirWithFile(currentUrl.getFileName()), appId
             )
         ) {
-            Utils.showSnackMessage(rootLayout, getString(R.string.app_not_installer_message))
+            Utils.showSnackMessage(
+                binding.rootLayout,
+                getString(R.string.app_not_installer_message)
+            )
         }
     }
 
@@ -371,7 +344,7 @@ class DetailsFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             handleCropSuccess(result, requireContext())
         } else if (resultCode == Crop.RESULT_ERROR) {
-            Utils.showSnackMessage(rootLayout, Crop.getError(result).message.orEmpty())
+            Utils.showSnackMessage(binding.rootLayout, Crop.getError(result).message.orEmpty())
         }
     }
 
@@ -485,7 +458,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun onSaveError() {
-        Utils.showSnackMessage(rootLayout, getString(R.string.ui_detail_failure_delete))
+        Utils.showSnackMessage(binding.rootLayout, getString(R.string.ui_detail_failure_delete))
         hideLoading()
     }
 
@@ -497,15 +470,15 @@ class DetailsFragment : Fragment() {
     }
 
     private fun showSnackMsg(msg: String) {
-        Utils.showSnackMessage(rootLayout, msg)
+        Utils.showSnackMessage(binding.rootLayout, msg)
     }
 
     private fun showLoading() {
-        progressBar.visibility = View.VISIBLE
+        binding.progressBarHorizontal.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-        progressBar.visibility = View.GONE
+        binding.progressBarHorizontal.visibility = View.GONE
     }
 
     companion object {

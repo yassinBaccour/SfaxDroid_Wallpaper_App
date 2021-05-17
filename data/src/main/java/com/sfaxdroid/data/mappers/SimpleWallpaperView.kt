@@ -2,6 +2,6 @@ package com.sfaxdroid.data.mappers
 
 class SimpleWallpaperView(
     url: String,
-    var detailUrl: String = ""
+    val detailUrl: String = ""
 ) :
     BaseWallpaperView(url)

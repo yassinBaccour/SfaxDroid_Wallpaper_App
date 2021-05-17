@@ -9,13 +9,10 @@ import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.yassin.wallpaper.R
+import com.yassin.wallpaper.databinding.*
 import com.yassin.wallpaper.feature.home.CarouselView
 import com.yassin.wallpaper.feature.home.ItemWrapperList
-import com.yassin.wallpaper.feature.home.viewholder.CategoryItemVH
-import com.yassin.wallpaper.feature.home.viewholder.HorizontalCarouselVH
-import com.yassin.wallpaper.feature.home.viewholder.LabItemVH
-import com.yassin.wallpaper.feature.home.viewholder.LwpItemVH
-import com.yassin.wallpaper.feature.home.viewholder.WallpaperImgVH
+import com.yassin.wallpaper.feature.home.viewholder.*
 
 class WallpapersListAdapter(
     private var articleList: MutableList<ItemWrapperList<Any>>,
@@ -39,6 +36,10 @@ class WallpapersListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is WallpaperImgVH -> holder.bind(
+                articleList[position].`object` as SimpleWallpaperView,
+                openCategory
+            )
+            is WallpaperSquareImgVH -> holder.bind(
                 articleList[position].`object` as SimpleWallpaperView,
                 openCategory
             )
@@ -66,63 +67,71 @@ class WallpapersListAdapter(
 
             TYPE_WALLPAPER ->
                 return WallpaperImgVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_wallpaper,
-                        parent, false
+                    ListItemWallpaperBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
 
             TYPE_CAROUSEL -> return HorizontalCarouselVH(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.item_horizontal_scroll,
-                    parent, false
+                ItemHorizontalScrollBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
             )
 
             TYPE_ADS ->
                 return WallpaperImgVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_wallpaper,
-                        parent, false
+                    ListItemWallpaperBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
 
             TYPE_SQUARE_WALLPAPER ->
-                return WallpaperImgVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_square_wallpaper,
-                        parent, false
+                return WallpaperSquareImgVH(
+                    ListItemSquareWallpaperBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
 
             TYPE_LWP ->
                 return LwpItemVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_with_detail,
-                        parent, false
+                    ListItemWithDetailBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
 
             TYPE_CAT ->
                 return CategoryItemVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_category,
-                        parent, false
+                    ListItemCategoryBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
 
             TYPE_LAB ->
                 return LabItemVH(
-                    LayoutInflater.from(parent.context).inflate(
-                        R.layout.list_item_with_detail,
-                        parent, false
+                    ListItemWithDetailBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
                     )
                 )
 
             else -> return WallpaperImgVH(
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.list_item_wallpaper,
-                    parent, false
+                ListItemWallpaperBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
             )
         }

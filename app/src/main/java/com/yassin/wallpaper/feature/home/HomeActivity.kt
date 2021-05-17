@@ -13,14 +13,13 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.core.setupWithNavController
+import com.yassin.wallpaper.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -31,8 +30,10 @@ class HomeActivity : AppCompatActivity() {
     private var currentNavController: LiveData<NavController>? = null
     private var nbShowedPerSession = 0
     private var isFirstAdsLoaded = false
+    private lateinit var binding: ActivityHomeBinding
 
-    private lateinit var preferencesManager: PreferencesManager
+    @Inject
+    lateinit var preferencesManager: PreferencesManager
 
     @Inject
     @Named("intertitial-key")
@@ -40,12 +41,12 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupToolBar()
         if (savedInstanceState == null) {
             initView()
         }
-        preferencesManager = PreferencesManager(this, com.sfaxdroid.base.Constants.PREFERENCES_NAME)
         setupAds()
         manageNbRunApp()
         this.checkAppPermission()
@@ -57,16 +58,15 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         val navGraphIds = listOf(
             R.navigation.wallpaper_nav_graph,
             R.navigation.lwp_nav_graph,
             R.navigation.category_nav_graph
         )
-        val controller = bottomNav.setupWithNavController(
+        val controller = binding.bottomNavView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_host_fragment,
+            containerId = binding.navHostFragment.id,
             intent = intent
         )
         currentNavController = controller
@@ -97,11 +97,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun hideSystemUI() {
-        bottom_nav_view.visibility = View.GONE
+        binding.bottomNavView.visibility = View.GONE
     }
 
     private fun showSystemUI() {
-        bottom_nav_view.visibility = View.VISIBLE
+        binding.bottomNavView.visibility = View.VISIBLE
     }
 
     override fun onSupportNavigateUp(): Boolean {

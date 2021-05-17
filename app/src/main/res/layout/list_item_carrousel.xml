@@ -10,14 +10,14 @@
     card_view:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rootItemCarousel"
+        android:id="@+id/root_item_carousel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ecf0f1"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imgCarrouselImage"
+            android:id="@+id/img_carrousel_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@null"
@@ -38,7 +38,7 @@
             android:textColor="?attr/customTextAccentColor"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/imgCarrouselImage"
+            card_view:layout_constraintTop_toBottomOf="@+id/img_carrousel_image"
             tools:text="@string/preview_title" />
 
         <TextView

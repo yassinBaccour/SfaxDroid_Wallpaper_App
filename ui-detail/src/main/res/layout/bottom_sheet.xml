@@ -11,7 +11,7 @@
     tools:background="@android:color/white">
 
     <Button
-        android:id="@+id/button_Chooser"
+        android:id="@+id/button_chooser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -22,7 +22,7 @@
         android:textColor="?attr/colorPrimary" />
 
     <Button
-        android:id="@+id/button_Crop"
+        android:id="@+id/button_crop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
