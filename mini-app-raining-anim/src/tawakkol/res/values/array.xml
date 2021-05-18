@@ -2,17 +2,17 @@
 <resources>
     <string-array name="themeEntries">
 
-        <item name="1">Tawakalto ala allah 1</item>
-        <item name="2">Tawakalto ala allah 2</item>
-        <item name="3">Tawakalto ala allah 3</item>
-        <item name="4">Tawakalto ala allah 4</item>
-        <item name="5">Tawakalto ala allah 5</item>
-        <item name="6">Tawakalto ala allah 6</item>
-        <item name="7">Tawakalto ala allah 7</item>
-        <item name="8">Tawakalto ala allah 8</item>
-        <item name="9">Tawakalto ala allah 9</item>
-        <item name="10">Tawakalto ala allah 10</item>
-        <item name="11">Tawakalto ala allah 11</item>
+        <item name="1">الخلفية رقم ١</item>
+        <item name="2">الخلفية رقم ٢</item>
+        <item name="3">الخلفية رقم ٣</item>
+        <item name="4">الخلفية رقم ٤</item>
+        <item name="5">الخلفية رقم ٥</item>
+        <item name="6">الخلفية رقم ٦ </item>
+        <item name="7">الخلفية رقم ٧ </item>
+        <item name="8">الخلفية رقم ٨ </item>
+        <item name="9">الخلفية رقم ٩ </item>
+        <item name="10">الخلفية رقم ١٠ </item>
+        <item name="11">الخلفية رقم ١١ </item>
 
     </string-array>
     <string-array name="themeValues">

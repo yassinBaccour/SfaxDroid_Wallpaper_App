@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.data.mappers.TagView
 import com.yassin.wallpaper.R
@@ -63,13 +64,19 @@ class TagAdapter(
         }
 
         fun defaultBg() {
-            binding.root.background =
-                itemView.context.getDrawable(R.drawable.round_corner_tag_unselected)
+            binding.root.background = AppCompatResources.getDrawable(
+                itemView.context,
+                R.drawable.round_corner_tag_unselected
+            )
         }
 
         fun selectedBg() {
             binding.root.background =
-                itemView.context.getDrawable(R.drawable.round_corner_tag_selected)
+                AppCompatResources.getDrawable(
+                    itemView.context,
+                    R.drawable.round_corner_tag_selected
+                )
+
         }
     }
 }

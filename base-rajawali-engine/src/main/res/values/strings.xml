@@ -9,7 +9,7 @@
     <string name="setting_ripple_speed">Ripple Speed</string>
     <string name="setting_change_ripple_speed">Change Speed Of Ripples</string>
     <string name="setting_recommendations">Recommendations</string>
-    <string name="setting_rate_us">please Rate us</string>
+    <string name="setting_rate_us">Please Rate us</string>
     <string-array name="ripple_size">
         <item>Small</item>
         <item>Medium</item>

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="themeEntries">
-        <item name="1">sobhan allah 1</item>
-        <item name="2">sobhan allah 2</item>
-        <item name="3">sobhan allah 3</item>
-        <item name="4">sobhan allah 4</item>
-        <item name="5">sobhan allah 5</item>
-        <item name="6">sobhan allah 6</item>
+        <item name="1">الخلفية رقم ١</item>
+        <item name="2">الخلفية رقم ٢</item>
+        <item name="3">الخلفية رقم ٣</item>
+        <item name="4">الخلفية رقم ٤</item>
+        <item name="5">الخلفية رقم ٥</item>
+        <item name="6">الخلفية رقم ٦ </item>
     </string-array>
     <string-array name="themeValues">
+
         <item name="1">Style 1</item>
         <item name="2">Style 2</item>
         <item name="3">Style 3</item>
