@@ -50,9 +50,11 @@ class TagAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun update(list: List<TagView>) {
-        tagList.clear()
-        tagList = list.toMutableList()
-        notifyDataSetChanged()
+        if (list.isNotEmpty()) {
+            tagList.clear()
+            tagList = list.toMutableList()
+            notifyDataSetChanged()
+        }
     }
 
     class TagViewHolder(val binding: InflateTagBinding) : RecyclerView.ViewHolder(binding.root) {

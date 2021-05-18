@@ -11,8 +11,8 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
+import com.yassin.wallpaper.R
 import com.yassin.wallpaper.databinding.ActivityHomeNavBinding
-import com.yassin.wallpaper.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
@@ -34,14 +34,13 @@ class HomeActivityNavBar : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeNavBinding.inflate(layoutInflater)
         setupAds()
-        manageNbRunApp()
         this.checkAppPermission()
         loadFragment()
     }
 
     private fun loadFragment() {
         val navHostFragment =
-            supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
+            supportFragmentManager.findFragmentById(binding.singleNavHostFragment.id) as NavHostFragment
         navHostFragment.navController
     }
 
@@ -63,65 +62,6 @@ class HomeActivityNavBar : AppCompatActivity() {
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        showFirstTimeAndOneTimeAds()
-        showTimedAdsWhenIOpenPicture()
-    }
-
-    private fun manageNbRunApp() {
-
-        var nbRun = preferencesManager["NbRun", 0]
-        when {
-            preferencesManager["IsSecondRun", "null"] == "null" -> {
-
-                preferencesManager["IsSecondRun"] = "Second"
-                nbRun += 1
-                preferencesManager["NbRun"] = nbRun
-            }
-            nbRun == 3 -> {
-                preferencesManager["NbRun"] = 0
-            }
-            else -> {
-                nbRun += 1
-                preferencesManager["NbRun"] = nbRun
-            }
-        }
-    }
-
-    private fun rateApplication() {
-        if (preferencesManager[
-                    Constants.RATING_MESSAGE,
-                    Constants.RATING_YES
-            ]
-            == Constants.RATING_YES
-        ) {
-        }
-    }
-
-    private fun showFirstTimeAndOneTimeAds() {
-        if (isAdsShow) {
-            isAdsShow = false
-            showInterstitial()
-        }
-    }
-
-    private fun showInterstitial() {
-        if (mInterstitialAd != null) {
-            mInterstitialAd?.show(this)
-        }
-    }
-
-    private fun showTimedAdsWhenIOpenPicture() {
-        if (nbOpenAds == 4) {
-            nbOpenAds = 0
-            showInterstitial()
-        }
-        if (nbOpenAds == 7) {
-            rateApplication()
-        }
-    }
-
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
             finish()
@@ -129,8 +69,4 @@ class HomeActivityNavBar : AppCompatActivity() {
         return super.onOptionsItemSelected(menuItem)
     }
 
-    companion object {
-        var isAdsShow = false
-        var nbOpenAds = 0
-    }
 }

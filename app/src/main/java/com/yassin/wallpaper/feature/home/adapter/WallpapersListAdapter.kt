@@ -28,9 +28,11 @@ class WallpapersListAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun update(list: List<ItemWrapperList<Any>>) {
-        articleList.clear()
-        articleList = list.toMutableList()
-        notifyDataSetChanged()
+        if (list.isNotEmpty()) {
+            articleList.clear()
+            articleList = list.toMutableList()
+            notifyDataSetChanged()
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

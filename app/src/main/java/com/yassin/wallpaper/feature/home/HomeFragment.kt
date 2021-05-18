@@ -193,7 +193,6 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun openWallpaper(wallpaperObject: BaseWallpaperView) {
-        HomeActivityNavBar.isAdsShow = true
         viewModel.submitAction(WallpaperListAction.OpenItems(wallpaperObject))
     }
 
@@ -222,7 +221,6 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun navigateToCategory(openCategory: OpenCategory) {
-        HomeActivityNavBar.nbOpenAds++
         findNavController().navigate(
             R.id.category_show_navigation_fg,
             Bundle().apply {
@@ -249,7 +247,6 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
-        HomeActivityNavBar.nbOpenAds++
         findNavController().navigate(
             R.id.navigate_to_details,
             Bundle().apply {
