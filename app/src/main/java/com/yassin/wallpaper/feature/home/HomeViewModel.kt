@@ -140,10 +140,19 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun tagByLanguage(fileName: String): String {
+        return when (Locale.getDefault().language) {
+            "ar" -> fileName.replace("tags", "tags_ar")
+            "fr" -> fileName
+            "en" -> fileName
+            else -> fileName
+        }
+    }
+
     private fun getTagFileNameByType(screenType: ScreenType): String {
         return when (screenType) {
-            ScreenType.TEXTURE -> "texture_tags.json"
-            else -> "wallpaper_tags.json"
+            ScreenType.TEXTURE -> tagByLanguage("wallpaper_tags.json")
+            else -> tagByLanguage("wallpaper_tags.json")
         }
     }
 

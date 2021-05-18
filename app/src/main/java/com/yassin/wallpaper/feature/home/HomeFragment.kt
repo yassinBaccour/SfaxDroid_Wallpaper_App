@@ -254,6 +254,10 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
                     Constants.EXTRA_IMG_URL,
                     wallpaperObject.detailUrl.getFullUrl()
                 )
+                putBoolean(
+                    Constants.KEY_IS_FULL_SCREEN,
+                    appName == AppName.LiliaGame
+                )
                 if (lwpName.isNotEmpty()) {
                     putString(Constants.KEY_LWP_NAME, lwpName)
                 }
@@ -264,7 +268,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     private fun getLwpLayoutManager(): LayoutManager {
         return GridLayoutManager(
             context,
-            if (appName == AppName.SfaxDroid) 3 else 4
+            3
         ).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {

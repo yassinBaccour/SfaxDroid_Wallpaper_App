@@ -1,6 +1,7 @@
 package com.yassin.wallpaper.feature.home
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -9,7 +10,6 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.databinding.ActivityHomeNavBinding
@@ -18,13 +18,10 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @AndroidEntryPoint
-class HomeActivityNavBar : AppCompatActivity() {
+class HomeActivityNavBar : AppCompatActivity(R.layout.activity_home_nav) {
 
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var binding: ActivityHomeNavBinding
-
-    @Inject
-    lateinit var preferencesManager: PreferencesManager
 
     @Inject
     @Named("intertitial-key")
@@ -64,7 +61,7 @@ class HomeActivityNavBar : AppCompatActivity() {
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
-            finish()
+            onBackPressed()
         }
         return super.onOptionsItemSelected(menuItem)
     }
