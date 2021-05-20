@@ -1,12 +1,13 @@
 package com.yassin.wallpaper.core.di
 
 import android.content.Context
+import androidx.core.os.ConfigurationCompat
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.PreferencesManager
 import com.yassin.wallpaper.BuildConfig
-import com.yassin.wallpaper.utils.AppName
+import com.sfaxdroid.data.entity.AppName
 import com.yassin.wallpaper.utils.DeviceHandler
 import com.yassin.wallpaper.utils.FileHandler
 import dagger.Module
@@ -34,6 +35,13 @@ class ApplicationModule {
     @Provides
     @Named("intertitial-key")
     fun provideAdsIntertiatailKey(): String = BuildConfig.APP_INTERTITIAL_KEY
+
+    @Provides
+    @Named("isArabic")
+    fun getIsArabic(@ApplicationContext context: Context): Boolean {
+        val local = ConfigurationCompat.getLocales(context.resources.configuration)[0]
+        return local.language == "ar"
+    }
 
     @Provides
     @Named("app-name")

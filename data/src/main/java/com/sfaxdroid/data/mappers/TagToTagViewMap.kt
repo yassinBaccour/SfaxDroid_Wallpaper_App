@@ -10,6 +10,7 @@ class TagToTagViewMap : SfaxDroidMapper<Tag, TagView> {
     private fun getType(type: String): TagType {
         return when (type) {
             "category" -> TagType.Category
+            "categorySquare" -> TagType.CategorySquare
             "texture" -> TagType.Texture
             else -> TagType.Wallpaper
         }

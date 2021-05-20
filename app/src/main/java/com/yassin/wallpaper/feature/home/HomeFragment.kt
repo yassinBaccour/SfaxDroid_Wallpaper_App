@@ -26,7 +26,7 @@ import com.yassin.wallpaper.databinding.FragmentWallpapersBinding
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
-import com.yassin.wallpaper.utils.AppName
+import com.sfaxdroid.data.entity.AppName
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -137,7 +137,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
         wallpapersTagAdapter?.update(tagList)
     }
 
-    private fun updateList(list: List<ItemWrapperList<Any>>) {
+    private fun updateList(list: List<ItemWrapperList>) {
         wallpapersListAdapter?.update(list)
     }
 

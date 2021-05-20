@@ -18,11 +18,9 @@ class WallpaperCarouselCatItemVH(val binding: ListItemCarrouselCatBinding) :
         when (wallpaperObject) {
             is LwpItem -> {
                 binding.txtCarrouselTitle.text = wallpaperObject.name
-                binding.txtCarrouselDesc.text = wallpaperObject.desc
             }
             is CategoryItem -> {
                 binding.txtCarrouselTitle.text = wallpaperObject.name
-                binding.txtCarrouselDesc.text = wallpaperObject.desc
             }
         }
         binding.imgCarrouselImage.loadUrl(

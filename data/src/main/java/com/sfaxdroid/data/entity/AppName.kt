@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.utils
+package com.sfaxdroid.data.entity
 
 sealed class AppName {
     object SfaxDroid : AppName()
