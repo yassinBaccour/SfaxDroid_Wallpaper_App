@@ -27,5 +27,4 @@
         android:id="@+id/detailsFragment"
         android:name="com.sfaxdroid.detail.DetailsFragment"
         android:label="DetailsFragment" />
-
 </navigation>

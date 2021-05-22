@@ -6,7 +6,7 @@ import javax.annotation.concurrent.Immutable
 
 @Immutable
 data class WallpaperListViewEvents(
-    var itemsList: List<ItemWrapperList<Any>> = arrayListOf(),
+    var itemsList: List<ItemWrapperList> = arrayListOf(),
     var tagList: List<TagView> = arrayListOf(),
     var isTagVisible: Boolean = false,
     var isRefresh: Boolean = true,

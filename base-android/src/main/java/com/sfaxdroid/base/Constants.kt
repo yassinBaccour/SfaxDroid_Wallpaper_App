@@ -27,6 +27,7 @@ class Constants {
         const val MIN_HEIGHT = 1000
         const val SAVE_TEMPORARY = 0
         const val SAVE_PERMANENT = 1
+        const val KEY_IS_FULL_SCREEN = "KeyIsFullScreen"
         var ifBackgroundChanged = false
         var nbIncrementationAfterChange = 0
     }

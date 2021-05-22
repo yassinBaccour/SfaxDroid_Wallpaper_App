@@ -50,6 +50,9 @@ class CarouselItemAdapter(
             is WallpaperCarouselItemVH -> holder.bind(
                 list[position], clickListener
             )
+            is WallpaperCarouselCatItemVH -> holder.bind(
+                list[position], clickListener
+            )
         }
     }
 

@@ -46,6 +46,8 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
     private var from: String = ""
     private var currentUrl: String = ""
     private var fromRipple = false
+    private var isFullScreen = false
+
     private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
 
     @Inject
@@ -69,6 +71,18 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
         showLoading()
         loadWallpaper()
         addStrictMode()
+        hideSystemUI()
+    }
+
+    private fun hideSystemUI() {
+        isFullScreen = requireArguments().getBoolean(Constants.KEY_IS_FULL_SCREEN, false)
+        if (isFullScreen)
+            requireActivity().window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN)
     }
 
     private fun addStrictMode() {
@@ -85,7 +99,7 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        currentUrl = arguments?.getString(Constants.EXTRA_IMG_URL).orEmpty()
+        currentUrl = requireArguments().getString(Constants.EXTRA_IMG_URL).orEmpty()
         from = arguments?.getString(Constants.KEY_LWP_NAME).orEmpty()
     }
 

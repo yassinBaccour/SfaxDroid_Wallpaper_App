@@ -26,7 +26,7 @@ import com.yassin.wallpaper.databinding.FragmentWallpapersBinding
 import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
-import com.yassin.wallpaper.utils.AppName
+import com.sfaxdroid.data.entity.AppName
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -137,7 +137,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
         wallpapersTagAdapter?.update(tagList)
     }
 
-    private fun updateList(list: List<ItemWrapperList<Any>>) {
+    private fun updateList(list: List<ItemWrapperList>) {
         wallpapersListAdapter?.update(list)
     }
 
@@ -193,7 +193,6 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun openWallpaper(wallpaperObject: BaseWallpaperView) {
-        HomeActivityNavBar.isAdsShow = true
         viewModel.submitAction(WallpaperListAction.OpenItems(wallpaperObject))
     }
 
@@ -222,7 +221,6 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun navigateToCategory(openCategory: OpenCategory) {
-        HomeActivityNavBar.nbOpenAds++
         findNavController().navigate(
             R.id.category_show_navigation_fg,
             Bundle().apply {
@@ -249,13 +247,16 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun showDetailViewActivity(wallpaperObject: SimpleWallpaperView, lwpName: String = "") {
-        HomeActivityNavBar.nbOpenAds++
         findNavController().navigate(
             R.id.navigate_to_details,
             Bundle().apply {
                 putString(
                     Constants.EXTRA_IMG_URL,
                     wallpaperObject.detailUrl.getFullUrl()
+                )
+                putBoolean(
+                    Constants.KEY_IS_FULL_SCREEN,
+                    appName == AppName.LiliaGame
                 )
                 if (lwpName.isNotEmpty()) {
                     putString(Constants.KEY_LWP_NAME, lwpName)
@@ -267,7 +268,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     private fun getLwpLayoutManager(): LayoutManager {
         return GridLayoutManager(
             context,
-            if (appName == AppName.SfaxDroid) 3 else 4
+            3
         ).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {

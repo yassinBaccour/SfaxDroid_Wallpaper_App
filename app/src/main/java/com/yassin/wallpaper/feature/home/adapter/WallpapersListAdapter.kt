@@ -15,7 +15,7 @@ import com.yassin.wallpaper.feature.home.ItemWrapperList
 import com.yassin.wallpaper.feature.home.viewholder.*
 
 class WallpapersListAdapter(
-    private var articleList: MutableList<ItemWrapperList<Any>>,
+    private var articleList: MutableList<ItemWrapperList>,
     private val openCategory: (BaseWallpaperView) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -27,10 +27,12 @@ class WallpapersListAdapter(
     override fun getItemViewType(position: Int) = getElementType(position)
 
     @SuppressLint("NotifyDataSetChanged")
-    fun update(list: List<ItemWrapperList<Any>>) {
-        articleList.clear()
-        articleList = list.toMutableList()
-        notifyDataSetChanged()
+    fun update(list: List<ItemWrapperList>) {
+        if (list.isNotEmpty()) {
+            articleList.clear()
+            articleList = list.toMutableList()
+            notifyDataSetChanged()
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
