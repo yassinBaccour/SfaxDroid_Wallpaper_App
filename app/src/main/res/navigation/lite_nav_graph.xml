@@ -21,10 +21,87 @@
         <action
             android:id="@+id/navigate_to_details"
             app:destination="@id/detailsFragment" />
+
+        <action
+            android:id="@+id/navigate_to_timer"
+            app:destination="@id/wallpaper_scheduler_fragment" />
+
+        <action
+            android:id="@+id/action_lwp_navigation_fg_to_chooser_navigation_fg"
+            app:destination="@id/chooser_navigation_fg" />
+
     </fragment>
 
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.sfaxdroid.detail.DetailsFragment"
         android:label="DetailsFragment" />
+
+    <fragment
+        android:id="@+id/chooser_navigation_fg"
+        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:label="@string/screen_lwp"
+        tools:layout="@layout/fragment_wallpapers">
+        <argument
+            android:name="keyJsonFileName"
+            android:defaultValue="texture.json"
+            app:argType="string" />
+        <argument
+            android:name="keyScreenType"
+            android:defaultValue="NEW"
+            app:argType="string" />
+        <action
+            android:id="@+id/navigate_to_anim_2d"
+            app:destination="@id/anim_word_2d_fg" />
+        <action
+            android:id="@+id/navigate_to_word_img"
+            app:destination="@id/word_img_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/wallpaper_scheduler_fragment"
+        android:name="com.sfaxdroid.timer.WallpaperSchedulerFragment"
+        android:label="WallpaperSchedulerFragment"
+        tools:layout="@layout/fragment_wallpaper_scheduler">
+        <argument
+            android:name="keyJsonFileName"
+            android:defaultValue="texture.json"
+            app:argType="string" />
+        <argument
+            android:name="keyScreenType"
+            android:defaultValue="NEW"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_scheduler_to_list"
+            app:destination="@id/wall_list_navigation_fg" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/anim_word_2d_fg"
+        android:name="com.sfaxdoird.anim.word.AnimWord2dFragment"
+        android:label="AnimWord2dFragment"
+        tools:layout="@layout/fragment_anim_word" />
+    <fragment
+        android:id="@+id/word_img_fragment"
+        android:name="com.sfaxdoird.anim.img.WordImgFragment"
+        android:label="WordImgFragment"
+        tools:layout="@layout/fragment_word_img_lwp" />
+
+    <fragment
+        android:id="@+id/wall_list_navigation_fg"
+        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_wallpapers">
+        <action
+            android:id="@+id/action_list_to_detailsFragment"
+            app:destination="@id/detailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment2"
+        android:name="com.sfaxdroid.detail.DetailsFragment"
+        android:label="DetailsFragment">
+        <action
+            android:id="@+id/action_details_to_scheduler"
+            app:destination="@id/wallpaper_scheduler_fragment" />
+    </fragment>
 </navigation>
