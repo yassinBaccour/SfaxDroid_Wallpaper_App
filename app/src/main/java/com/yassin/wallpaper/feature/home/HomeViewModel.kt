@@ -369,12 +369,12 @@ class HomeViewModel @Inject constructor(
 
     private fun getWallpaper(response: Response<WallpaperResponse>): List<SimpleWallpaperView> {
         return when (response) {
-            is Response.FAILURE -> arrayListOf()
             is Response.SUCCESS -> {
                 response.response.wallpaperList.wallpapers.map { wall ->
                     WallpaperToViewMapper().map(wall, deviceManager.isSmallScreen())
                 }
             }
+            is Response.FAILURE -> arrayListOf()
         }
     }
 
