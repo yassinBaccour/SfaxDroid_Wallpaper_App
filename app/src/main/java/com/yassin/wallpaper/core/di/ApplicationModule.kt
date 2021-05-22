@@ -37,10 +37,10 @@ class ApplicationModule {
     fun provideAdsIntertiatailKey(): String = BuildConfig.APP_INTERTITIAL_KEY
 
     @Provides
-    @Named("isArabic")
-    fun getIsArabic(@ApplicationContext context: Context): Boolean {
+    @Named("appLanguage")
+    fun getIsArabic(@ApplicationContext context: Context): String {
         val local = ConfigurationCompat.getLocales(context.resources.configuration)[0]
-        return local.language == "ar"
+        return local.language
     }
 
     @Provides

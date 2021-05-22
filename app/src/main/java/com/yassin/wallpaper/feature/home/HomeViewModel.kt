@@ -22,7 +22,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -38,7 +37,7 @@ class HomeViewModel @Inject constructor(
     var fileManager: FileManager,
     var deviceManager: DeviceManager,
     @Named("app-name") var appName: AppName,
-    @Named("isArabic") var isArabic: Boolean
+    @Named("appLanguage") var appLanguage: String
 ) :
     BaseViewModel<WallpaperListViewEvents>(WallpaperListViewEvents()) {
 
@@ -145,7 +144,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun tagByLanguage(): String {
-        return if (isArabic) {
+        return if (appLanguage == "ar") {
             "wallpaper_tags_ar.json"
         } else "wallpaper_tags.json"
     }
@@ -229,7 +228,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun byLanguage(fileName: String): String {
-        return when (Locale.getDefault().language) {
+        return when (appLanguage) {
             "ar" -> fileName.replace("lwp", "lwp_ar")
             "fr" -> fileName.replace("lwp", "lwp_fr")
             else -> fileName
@@ -325,7 +324,7 @@ class HomeViewModel @Inject constructor(
     private fun getItemType(screenType: ScreenType, isSquare: Boolean = false): Int {
 
         val wallpaperCellViewTypeByApp =
-            if (appName == AppName.SfaxDroid || isSquare) WallpapersListAdapter.TYPE_SQUARE_WALLPAPER else WallpapersListAdapter.TYPE_WALLPAPER
+            if (isSquare) WallpapersListAdapter.TYPE_SQUARE_WALLPAPER else WallpapersListAdapter.TYPE_WALLPAPER
 
         return when (screenType) {
             is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
