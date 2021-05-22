@@ -21,7 +21,7 @@ android {
         targetSdkVersion androidTargetSdkVersion
         multiDexEnabled true
         buildConfigField("String", "APP_KEY", API_KEY)
-        buildConfigField("String", "JSON_VERSION", '"v2"')
+        buildConfigField("String", "JSON_VERSION", '"v3"')
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
@@ -45,8 +45,8 @@ android {
         waterRippleLwp {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension "app"
-            versionCode 87
-            versionName "8.7"
+            versionCode 88
+            versionName "8.8"
             buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_SFAXDROID)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }

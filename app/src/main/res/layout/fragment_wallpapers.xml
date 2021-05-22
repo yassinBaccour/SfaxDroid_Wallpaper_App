@@ -30,14 +30,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_tag"
-        android:nestedScrollingEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
+        android:nestedScrollingEnabled="false"
         android:orientation="horizontal"
         android:paddingStart="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:ignore="MissingDefaultResource" />
