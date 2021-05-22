@@ -330,6 +330,7 @@ class HomeViewModel @Inject constructor(
         return when (screenType) {
             is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
             is ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
+            is ScreenType.Lwp -> WallpapersListAdapter.TYPE_LWP
             else -> wallpaperCellViewTypeByApp
         }
     }
