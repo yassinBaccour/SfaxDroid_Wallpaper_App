@@ -21,7 +21,7 @@ android {
         targetSdkVersion androidTargetSdkVersion
         multiDexEnabled true
         buildConfigField("String", "APP_KEY", API_KEY)
-        buildConfigField("String", "JSON_VERSION", '"v2"')
+        buildConfigField("String", "JSON_VERSION", '"v3"')
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
