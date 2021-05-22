@@ -28,7 +28,9 @@ import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.sfaxdroid.data.entity.AppName
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -68,6 +70,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
                     }
                     updateList(itemsList)
                     showFilter(tagList)
+                    setTagListSelectedItem(tagSelectedPosition)
                 }
             }
         }
@@ -85,6 +88,10 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
                 }
             }
         }
+    }
+
+    private fun setTagListSelectedItem(position: Int) {
+        wallpapersTagAdapter?.setSelectedPosition(position)
     }
 
     private fun initView() {
@@ -119,7 +126,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
                 })
         }
         wallpapersTagAdapter = TagAdapter(
-            arrayListOf()
+            arrayListOf(), ::setSelectedPositionItem
         ) { viewModel.submitAction(WallpaperListAction.LoadTags(it)) }
         binding.recyclerViewTag.adapter = wallpapersTagAdapter
 
@@ -131,6 +138,11 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
                 )
             )
         }
+    }
+
+    private fun setSelectedPositionItem(position: Int) {
+        viewModel.submitAction(WallpaperListAction.UpdateTagSelectedPosition(position))
+        binding.recyclerViewWallpapers.scrollToPosition(0)
     }
 
     private fun showFilter(tagList: List<TagView>) {

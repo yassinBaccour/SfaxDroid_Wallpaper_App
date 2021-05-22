@@ -14,4 +14,5 @@ data class WallpaperListViewEvents(
     var isPrivacyButtonVisible: Boolean = false,
     var toolBarTitle: String = "",
     var setDisplayHomeAsUpEnabled: Boolean = false,
+    var tagSelectedPosition: Int = 0,
 ) : UiState

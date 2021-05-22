@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sfaxdroid.data.mappers.TagView
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.databinding.InflateTagBinding
+import java.text.FieldPosition
 
 class TagAdapter(
     private var tagList: MutableList<TagView>,
+    private val setSelectedItemPosition: (Int) -> Unit,
     private val clickListener: (TagView) -> Unit
 ) :
     RecyclerView.Adapter<TagAdapter.TagViewHolder>() {
@@ -42,11 +44,18 @@ class TagAdapter(
         holder.mLayout.setOnClickListener {
             clickListener(item)
             selectedPosition = position
+            setSelectedItemPosition(position)
             notifyDataSetChanged()
         }
     }
 
     override fun getItemCount() = tagList.size
+
+    fun setSelectedPosition(selectedPosition: Int) {
+        this.selectedPosition = selectedPosition
+    }
+
+    fun getSelectedPosition() = selectedPosition
 
     @SuppressLint("NotifyDataSetChanged")
     fun update(list: List<TagView>) {

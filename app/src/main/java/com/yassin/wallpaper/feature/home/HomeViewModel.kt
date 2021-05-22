@@ -58,6 +58,11 @@ class HomeViewModel @Inject constructor(
                     is WallpaperListAction.LoadTags -> {
                         loadByTag(it.tagView)
                     }
+                    is WallpaperListAction.UpdateTagSelectedPosition -> {
+                        setState {
+                            copy(tagSelectedPosition = it.position)
+                        }
+                    }
                     is WallpaperListAction.OpenItems -> {
                         when (it.wallpaperObject) {
                             is SimpleWallpaperView -> {
