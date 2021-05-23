@@ -16,6 +16,7 @@ class WallpaperImgVH(var binding: ListItemWallpaperBinding) :
         binding.itemImgWallpaper.apply {
             loadUrl(wallpaperObject.thumbnailUrl)
             setOnClickListener { openWallpaper(wallpaperObject) }
+            //Log.d("XX", "{  \"url\": \"" + wallpaperObject.thumbnailUrl + "\"},")
         }
     }
 }

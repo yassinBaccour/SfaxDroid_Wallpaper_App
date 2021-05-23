@@ -300,13 +300,14 @@ class HomeViewModel @Inject constructor(
             when (val result =
                 getAllWallpapersUseCase(GetAllWallpapersUseCase.Param(fileName)).first()) {
                 is Response.SUCCESS -> {
+                    val list = result.response.wallpaperList.wallpapers.map { wall ->
+                        WallpaperToViewMapper().map(
+                            wall,
+                            deviceManager.isSmallScreen()
+                        )
+                    }.shuffled()
                     wrapWallpapers(
-                        result.response.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(
-                                wall,
-                                deviceManager.isSmallScreen()
-                            )
-                        },
+                        list,
                         screenType
                     )
                 }
@@ -347,7 +348,11 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             setState {
                 copy(
-                    itemsList = getWrappedListWithType(wallpaperList, screenType, isSquare),
+                    itemsList = getWrappedListWithType(
+                        wallpaperList,
+                        screenType,
+                        isSquare
+                    ),
                     isRefresh = false
                 )
             }
