@@ -184,9 +184,8 @@ class HomeViewModel @Inject constructor(
             }
             ScreenType.TEXTURE -> {
                 viewModelScope.launch {
-                    setState { copy(isTagVisible = true, isRefresh = true) }
+                    setState { copy(isTagVisible = false, isRefresh = true) }
                 }
-                getTag(screenType)
                 getWallpapers(screenType, fileName)
             }
             ScreenType.TIMER -> {
