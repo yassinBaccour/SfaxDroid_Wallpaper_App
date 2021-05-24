@@ -400,6 +400,9 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
             beginCrop()
         } else if (requestCode == Crop.REQUEST_CROP) {
             handleCropResult(resultCode, result)
+        } else if (requestCode == 200 && resultCode == Activity.RESULT_CANCELED) {
+            beginCrop()
+        } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
         }
     }
 
@@ -415,7 +418,7 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
     private fun openNativeChooser() {
         hideLoading()
         DetailUtils.openNativeChooser(
-            requireActivity(),
+            this, requireContext(),
             fileManager.getTemporaryDirWithFile(currentUrl.getFileName()), appId
         )
     }

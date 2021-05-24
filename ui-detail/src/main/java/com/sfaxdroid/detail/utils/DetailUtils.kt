@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -85,13 +86,13 @@ class DetailUtils {
             return true
         }
 
-        fun openNativeChooser(activity: Activity, file: File?, appId: String) {
+        fun openNativeChooser(activity: Fragment, context: Context, file: File?, appId: String) {
             activity.startActivityForResult(
                 Intent.createChooser(
                     Intent(Intent.ACTION_ATTACH_DATA).apply {
                         setDataAndType(
                             FileProvider.getUriForFile(
-                                activity,
+                                context,
                                 "$appId.provider",
                                 file!!
                             ),
