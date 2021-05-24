@@ -401,7 +401,7 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
         } else if (requestCode == Crop.REQUEST_CROP) {
             handleCropResult(resultCode, result)
         } else if (requestCode == 200 && resultCode == Activity.RESULT_CANCELED) {
-            beginCrop()
+            //beginCrop()
         } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
         }
     }
