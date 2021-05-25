@@ -39,10 +39,11 @@ ext {
             material         : "com.google.android.material:material:1.4.0-beta01",
             servicesAds      : "com.google.android.gms:play-services-ads:20.1.0",
             service          : "com.google.gms:google-services:4.3.8",
-            crashlyticsGradle: "com.google.firebase:firebase-crashlytics-gradle:2.5.2",
+            crashlyticsGradle: "com.google.firebase:firebase-crashlytics-gradle:2.6.1",
             core             : "com.google.android.play:core:1.10.0",
             coreKtx          : "com.google.android.play:core-ktx:1.8.1",
-            firebaseAnalytics: "com.google.firebase:firebase-analytics-ktx:18.0.3"
+            firebaseAnalytics: "com.google.firebase:firebase-analytics-ktx:19.0.0",
+            crashlyticsLib   : 'com.google.firebase:firebase-crashlytics-ktx:18.0.0'
     ]
 
     hiltVersion = "2.35.1"
