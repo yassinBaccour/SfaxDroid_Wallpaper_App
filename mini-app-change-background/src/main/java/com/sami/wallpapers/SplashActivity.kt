@@ -19,9 +19,6 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         initAdMob()
-        if (canShowAds && mInterstitialAd != null) {
-            mInterstitialAd?.show(this)
-        }
     }
 
     private fun initAdMob() {
@@ -40,22 +37,28 @@ class SplashActivity : Activity() {
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     mInterstitialAd = interstitialAd
+                    interstitialAd.fullScreenContentCallback =
+                        object : FullScreenContentCallback() {
+                            override fun onAdDismissedFullScreenContent() {
+                                startActivity()
+                            }
+
+                            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                                startActivity()
+                            }
+
+                            override fun onAdShowedFullScreenContent() {
+                                mInterstitialAd = null
+                            }
+                        }
+                    if (canShowAds && mInterstitialAd != null) {
+                        mInterstitialAd?.show(this@SplashActivity)
+                    }
                 }
             }
         )
-        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                startActivity()
-            }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                startActivity()
-            }
 
-            override fun onAdShowedFullScreenContent() {
-                mInterstitialAd = null
-            }
-        }
     }
 
     private fun startActivity() {
