@@ -23,6 +23,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 
+import com.google.android.ump.ConsentInformation
+
+import com.google.android.ump.UserMessagingPlatform
+
+import com.google.android.ump.ConsentRequestParameters
+import com.google.android.ump.ConsentForm
+
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
@@ -31,13 +38,15 @@ class HomeActivity : AppCompatActivity() {
     private var nbShowedPerSession = 0
     private var isFirstAdsLoaded = false
     private lateinit var binding: ActivityHomeBinding
+    private var consentInformation: ConsentInformation? = null
+    private var consentForm: ConsentForm? = null
 
     @Inject
     lateinit var preferencesManager: PreferencesManager
 
     @Inject
-    @Named("intertitial-key")
-    lateinit var intertitialKey: String
+    @Named("interstitial-key")
+    lateinit var interstitialKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +56,43 @@ class HomeActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             initView()
         }
+        loadConsent()
+        MobileAds.initialize(this)
         setupAds()
         manageNbRunApp()
         this.checkAppPermission()
+    }
+
+    private fun loadConsent() {
+        val params = ConsentRequestParameters.Builder()
+            .setTagForUnderAgeOfConsent(false)
+            .build()
+        consentInformation = UserMessagingPlatform.getConsentInformation(this)
+        consentInformation?.requestConsentInfoUpdate(
+            this,
+            params,
+            {
+                if (consentInformation?.isConsentFormAvailable == true) {
+                    loadForm();
+                }
+            },
+            {
+            })
+    }
+
+    private fun loadForm() {
+        UserMessagingPlatform.loadConsentForm(
+            this,
+            { consentForm ->
+                this.consentForm = consentForm
+                if (consentInformation?.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
+                    consentForm.show(this) {
+                        loadForm()
+                    }
+                }
+            }
+        ) {
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -84,7 +127,7 @@ class HomeActivity : AppCompatActivity() {
                 showInterstitialAds()
             } else {
                 if (preferencesManager["ratingAppAtFirstInstall", true]) {
-                    ratingApp()
+                    ratingApp(fromFirstInstall = true)
                 }
                 showInterstitial()
             }
@@ -109,10 +152,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupAds() {
-        MobileAds.initialize(this)
         InterstitialAd.load(
             this,
-            intertitialKey,
+            interstitialKey,
             AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -126,7 +168,7 @@ class HomeActivity : AppCompatActivity() {
         )
     }
 
-    private fun ratingApp() {
+    private fun ratingApp(fromFirstInstall: Boolean) {
         AlertDialog.Builder(this).apply {
             setTitle(getString(R.string.rating_app_title))
             setMessage(getString(R.string.rating_app_description))
@@ -146,15 +188,11 @@ class HomeActivity : AppCompatActivity() {
                     }
             }
             setNegativeButton(
-                getString(R.string.rating_app_later)
+                if (fromFirstInstall) getString(R.string.rating_app_later) else getString(R.string.rating_app_never)
             ) { _, _ ->
-                preferencesManager["NbRun"] = 0
-                preferencesManager["ratingAppAtFirstInstall"] = false
-            }
-            setNeutralButton(
-                getString(R.string.rating_app_never)
-            ) { _, _ ->
-                preferencesManager["NbRun"] = 100
+                if (!fromFirstInstall) {
+                    preferencesManager["NbRun"] = 100
+                }
                 preferencesManager["ratingAppAtFirstInstall"] = false
             }
         }.create().show()
@@ -164,7 +202,7 @@ class HomeActivity : AppCompatActivity() {
         var nbRun = preferencesManager["NbRun", 0]
         when (nbRun) {
             3 -> {
-                ratingApp()
+                ratingApp(fromFirstInstall = false)
                 preferencesManager["NbRun"] = 100
             }
             else -> {
@@ -190,6 +228,7 @@ class HomeActivity : AppCompatActivity() {
             mInterstitialAd?.show(this)
             nbShowedPerSession++
             isFirstAdsLoaded = true
+            setupAds()
         }
     }
 

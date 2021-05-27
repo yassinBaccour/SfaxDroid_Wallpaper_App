@@ -45,9 +45,9 @@ android {
         waterRippleLwp {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension "app"
-            versionCode 89
-            versionName "8.9"
-            buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_SFAXDROID)
+            versionCode 90
+            versionName "9.0"
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_SFAXDROID)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }
 
@@ -57,7 +57,7 @@ android {
             resConfigs('ar', 'xxhdpi')
             versionCode 30
             versionName "3.0"
-            buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_LILIAGAME)
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
         }
 
@@ -67,7 +67,7 @@ android {
             resConfigs('ar', 'xxhdpi')
             versionCode 30
             versionName "3.0"
-            buildConfigField("String", "APP_INTERTITIAL_KEY", ADS_INTERTITIAL_KEY_LILIAGAME)
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_LILIAGAME)
             manifestPlaceholders = [hostName: ""]
         }
     }
@@ -135,6 +135,7 @@ dependencies {
     implementation Libs.google.servicesAds
     implementation Libs.google.core
     implementation Libs.google.coreKtx
+    implementation Libs.google.messagingPlatform
     implementation Libs.glide.glide
     implementation Libs.other.crashlytics
     implementation Libs.google.firebaseAnalytics
@@ -148,7 +149,6 @@ dependencies {
     implementation project(':ui-anim-word-lwp')
     implementation project(':ui-timer-lwp')
     implementation project(':data-android')
-
 }
 
 android.applicationVariants.all { variant ->

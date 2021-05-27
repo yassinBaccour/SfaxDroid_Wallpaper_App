@@ -33,8 +33,8 @@ class ApplicationModule {
     fun provideFullUrl(): String = provideBaseUrl() + provideJsonVersion() + "/"
 
     @Provides
-    @Named("intertitial-key")
-    fun provideAdsIntertiatailKey(): String = BuildConfig.APP_INTERTITIAL_KEY
+    @Named("interstitial-key")
+    fun provideAdsInterstitialKey(): String = BuildConfig.APP_INTERSTITIAL_KEY
 
     @Provides
     @Named("appLanguage")

@@ -1,7 +1,6 @@
 package com.yassin.wallpaper.feature.home
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -24,8 +23,8 @@ class HomeActivityNavBar : AppCompatActivity(R.layout.activity_home_nav) {
     private lateinit var binding: ActivityHomeNavBinding
 
     @Inject
-    @Named("intertitial-key")
-    lateinit var intertitialKey: String
+    @Named("interstitial-key")
+    lateinit var interstitialKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +44,7 @@ class HomeActivityNavBar : AppCompatActivity(R.layout.activity_home_nav) {
         MobileAds.initialize(this)
         InterstitialAd.load(
             this,
-            intertitialKey,
+            interstitialKey,
             AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
