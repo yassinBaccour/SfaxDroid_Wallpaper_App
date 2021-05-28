@@ -16,4 +16,5 @@ android {
 dependencies {
     api Libs.kotlin.kotlinStdlib
     api Libs.androidx.constraintlayout
+    api Libs.google.coreKtx
 }

@@ -1,5 +1,6 @@
 package com.sfaxdroid.mini.base
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.play.core.review.ReviewManagerFactory
 
 class RateUs(var context: Context, var packageName: String) {
 
@@ -37,7 +39,7 @@ class RateUs(var context: Context, var packageName: String) {
                         TextView(context).apply {
                             textSize = 16f
                             setText(R.string.rating_box_description)
-                            width = 240
+                            width = 540
                             setPadding(20, 0, 4, 10)
                         }
                     )
@@ -96,6 +98,20 @@ class RateUs(var context: Context, var packageName: String) {
         preferences.edit().apply {
             putBoolean(BaseConstants.PREF_RATE_APP_KEY, true)
             apply()
+        }
+    }
+
+    companion object {
+        fun startRateUsWithApi(activity: Activity) {
+            val reviewManager = ReviewManagerFactory.create(activity)
+            reviewManager.requestReviewFlow()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        reviewManager.launchReviewFlow(activity, task.result)
+                            .addOnCompleteListener {
+                            }
+                    }
+                }
         }
     }
 }

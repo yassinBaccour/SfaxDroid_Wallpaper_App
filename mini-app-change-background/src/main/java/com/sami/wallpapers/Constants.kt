@@ -12,6 +12,7 @@ class Constants {
         const val PREF_KEY_QUALITY = "prefquality"
         const val PREF_VALUE_QUALITY_1 = "quality1"
         const val PREF_VALUE_QUALITY_2 = "quality2"
+        const val PREF_KEY_NB_RUN = "nbRun"
 
         const val AD_MOB = "ca-app-pub-6263632629106733/9710395681"
         const val PRIVACY = "https://www.iubenda.com/privacy-policy/27298346"

@@ -1,6 +1,5 @@
 package com.sami.wallpapers
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,8 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioGroup
-import android.widget.Toast
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
+import com.sfaxdroid.mini.base.RateUs
 import com.sfaxdroid.mini.base.Utils
 
 class MainActivity : BaseMiniAppActivity() {
@@ -23,10 +22,12 @@ class MainActivity : BaseMiniAppActivity() {
                 com.sfaxdroid.mini.base.BaseConstants.PREF_NAME,
                 Context.MODE_PRIVATE
             )
-
         setContentView(R.layout.activity_main)
 
         findViewById<Button>(R.id.button_set_wallpaper).setOnClickListener {
+            var nbRun = pref["nbRun", 0]
+            nbRun++
+            pref["nbRun"] = nbRun
             Utils.openLiveWallpaper<WallpaperAppService>(this)
         }
 
@@ -50,19 +51,7 @@ class MainActivity : BaseMiniAppActivity() {
         }
 
         findViewById<Button>(R.id.btn_rating).setOnClickListener {
-            val myAppLinkToMarket = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$packageName")
-            )
-            try {
-                startActivity(myAppLinkToMarket)
-            } catch (e: ActivityNotFoundException) {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Unable to find market app",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+            RateUs.startRateUsWithApi(this)
         }
 
         val radioAnimation = findViewById<RadioGroup>(R.id.radio_animation)

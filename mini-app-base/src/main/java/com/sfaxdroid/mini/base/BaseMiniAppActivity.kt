@@ -3,14 +3,21 @@ package com.sfaxdroid.mini.base
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.WallpaperManager
+import android.os.Bundle
 import android.widget.Toast
 import java.io.IOException
 
 abstract class BaseMiniAppActivity : Activity() {
 
+    lateinit var pref: PreferencesManager
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pref = PreferencesManager(this, BaseConstants.PREF_NAME)
+    }
+
     override fun onBackPressed() {
         if (backPressed + 2000 > System.currentTimeMillis()) super.onBackPressed() else {
-            RateUs(this, packageName).appLaunched()
             Toast.makeText(
                 baseContext, R.string.back_press_message_info,
                 Toast.LENGTH_SHORT
@@ -27,6 +34,23 @@ abstract class BaseMiniAppActivity : Activity() {
             myWallpaperManager.clear()
         } catch (e: IOException) {
             e.printStackTrace()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        nbRatingManager()
+    }
+
+    private fun nbRatingManager() {
+        if (!pref["isRated", false]) {
+            var nbRun = pref["nbRun", 0]
+            if (nbRun == 2 || nbRun == 6 || nbRun == 10) {
+                pref["isRated"] = true
+                RateUs.startRateUsWithApi(this)
+            }
+            nbRun++
+            pref["nbRun"] = nbRun
         }
     }
 
