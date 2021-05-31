@@ -62,7 +62,7 @@ android {
         }
 
         mixedWallpaper {
-            applicationIdSuffix = ".com.islamapp.scaryphonepro"
+            applicationIdSuffix = ".islamapp.scaryphonepro"
             dimension "app"
             resConfigs('ar', 'xxhdpi')
             versionCode 30
@@ -70,6 +70,17 @@ android {
             buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_LILIAGAME)
             manifestPlaceholders = [hostName: ""]
         }
+
+        changedWallpaper {
+            applicationIdSuffix = ".sfaxman.islamwallpaper"
+            dimension "app"
+            resConfigs('ar', 'xxhdpi')
+            versionCode 20
+            versionName "3.0"
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_CHANGED)
+            manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
+        }
+
     }
 
     packagingOptions {

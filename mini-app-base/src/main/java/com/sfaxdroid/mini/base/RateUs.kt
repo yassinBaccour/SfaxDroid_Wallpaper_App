@@ -11,9 +11,8 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.play.core.review.ReviewManagerFactory
 
-class RateUs(var context: Context, var packageName: String) {
+class RateUs(var context: Context, var packageName: String, var appWith: Int) {
 
     private val preferences: SharedPreferences =
         context.getSharedPreferences(BaseConstants.PREF_NAME, 0)
@@ -34,13 +33,11 @@ class RateUs(var context: Context, var packageName: String) {
             dialog.setContentView(
                 LinearLayout(context).apply {
                     orientation = LinearLayout.VERTICAL
-
                     addView(
                         TextView(context).apply {
                             textSize = 16f
                             setText(R.string.rating_box_description)
-                            width = 540
-                            setPadding(20, 0, 4, 10)
+                            width = appWith / 2
                         }
                     )
 
@@ -103,15 +100,6 @@ class RateUs(var context: Context, var packageName: String) {
 
     companion object {
         fun startRateUsWithApi(activity: Activity) {
-            val reviewManager = ReviewManagerFactory.create(activity)
-            reviewManager.requestReviewFlow()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        reviewManager.launchReviewFlow(activity, task.result)
-                            .addOnCompleteListener {
-                            }
-                    }
-                }
         }
     }
 }

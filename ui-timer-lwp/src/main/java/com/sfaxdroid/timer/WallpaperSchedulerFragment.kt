@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
+import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.timer.TimerUtils.Companion.openAddWallpaperWithKeyActivity
 import com.sfaxdroid.timer.TimerUtils.Companion.setWallpaperFromFile
 import com.sfaxdroid.timer.databinding.FragmentWallpaperSchedulerBinding
@@ -28,6 +29,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
+
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 @AndroidEntryPoint
@@ -41,6 +44,10 @@ class WallpaperSchedulerFragment : Fragment(R.layout.fragment_wallpaper_schedule
     @Inject
     lateinit var deviceManager: DeviceManager
 
+    @Inject
+    @Named("app-name")
+    lateinit var appName: AppName
+
     lateinit var binding: FragmentWallpaperSchedulerBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +59,6 @@ class WallpaperSchedulerFragment : Fragment(R.layout.fragment_wallpaper_schedule
 
         initToolbar(screenName)
         initViewWithJobStatus()
-
         binding.radioGroup.setOnCheckedChangeListener { _: RadioGroup?, _: Int ->
             val pendingJobs = scheduler?.allPendingJobs
             if (!pendingJobs.isNullOrEmpty() && pendingJobs.size > 0) removeJob()
@@ -91,8 +97,8 @@ class WallpaperSchedulerFragment : Fragment(R.layout.fragment_wallpaper_schedule
         (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = screeName
-            setHomeButtonEnabled(true)
-            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(appName != AppName.ChangedWall)
+            setDisplayHomeAsUpEnabled(appName != AppName.ChangedWall)
         }
     }
 
@@ -206,9 +212,9 @@ class WallpaperSchedulerFragment : Fragment(R.layout.fragment_wallpaper_schedule
     }
 
     private fun getSelectedTime(): Long {
-
-        val radioSelectedButton = binding.radioGroup.checkedRadioButtonId as RadioButton
-        return when (radioSelectedButton.text.toString()) {
+        val radioSelectedButton = binding.radioGroup.checkedRadioButtonId
+        val timeBtn = binding.radioGroup.getChildAt(radioSelectedButton) as RadioButton?
+        return when (timeBtn?.text.toString()) {
             getString(R.string.one_houre) -> 3600000
             getString(
                 R.string.six_houre

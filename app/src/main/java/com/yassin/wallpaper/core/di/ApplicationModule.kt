@@ -48,6 +48,8 @@ class ApplicationModule {
     fun provideAppName(): AppName {
         return if (BuildConfig.FLAVOR == "scaryallwhotouch")
             AppName.LiliaGame
+        else if (BuildConfig.FLAVOR == "changedWallpaper")
+            AppName.ChangedWall
         else
             AppName.SfaxDroid
     }
@@ -68,6 +70,7 @@ class ApplicationModule {
         val name = when (appName) {
             AppName.LiliaGame -> "liliagame"
             AppName.SfaxDroid -> "sfaxdroid"
+            AppName.ChangedWall -> "sfaxdroid"
         }
 
         return PreferencesManager(

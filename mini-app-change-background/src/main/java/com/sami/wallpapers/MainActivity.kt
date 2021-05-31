@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioGroup
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
 import com.sfaxdroid.mini.base.RateUs
 import com.sfaxdroid.mini.base.Utils
@@ -51,7 +52,15 @@ class MainActivity : BaseMiniAppActivity() {
         }
 
         findViewById<Button>(R.id.btn_rating).setOnClickListener {
-            RateUs.startRateUsWithApi(this)
+            val reviewManager = ReviewManagerFactory.create(this)
+            reviewManager.requestReviewFlow()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        reviewManager.launchReviewFlow(this, task.result)
+                            .addOnCompleteListener {
+                            }
+                    }
+                }
         }
 
         val radioAnimation = findViewById<RadioGroup>(R.id.radio_animation)

@@ -3,21 +3,27 @@ package com.sfaxdroid.mini.base
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.WallpaperManager
+import android.content.res.Resources
+import android.graphics.Point
 import android.os.Bundle
+import android.view.Display
 import android.widget.Toast
 import java.io.IOException
 
 abstract class BaseMiniAppActivity : Activity() {
 
     lateinit var pref: PreferencesManager
+    var width: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pref = PreferencesManager(this, BaseConstants.PREF_NAME)
+        width = Resources.getSystem().displayMetrics.widthPixels
     }
 
     override fun onBackPressed() {
         if (backPressed + 2000 > System.currentTimeMillis()) super.onBackPressed() else {
+            RateUs(this, packageName, width).appLaunched()
             Toast.makeText(
                 baseContext, R.string.back_press_message_info,
                 Toast.LENGTH_SHORT

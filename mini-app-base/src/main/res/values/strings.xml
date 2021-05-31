@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="rating_box_description">\n إذا أعجبك هذا التطبيق ، يرجى التقييم ، التقييم يساعدني في تطوير المزيد من التطبيقات الإسلامية \n </string>
+    <string name="rating_box_description">\nإذا أعجبك هذا التطبيق ، يرجى التقييم ، التقييم يساعدني في تطوير المزيد من التطبيقات الإسلامية\n</string>
     <string name="rating_box_title">قيم التطبيق من فظلك</string>
     <string name="rating_box_later">ذكرني لاحقا</string>
     <string name="rating_box_never">لا تسأل مجددا</string>

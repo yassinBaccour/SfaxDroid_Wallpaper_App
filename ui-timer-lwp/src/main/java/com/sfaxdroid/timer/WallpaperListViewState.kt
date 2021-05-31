@@ -7,5 +7,6 @@ import javax.annotation.concurrent.Immutable
 @Immutable
 data class WallpaperListViewState(
     val wallpaperList: List<SimpleWallpaperView> = arrayListOf(),
-    val isRefresh: Boolean = false
+    val isRefresh: Boolean = false,
+    val nbImage: Int = 0
 ) : UiState

@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 
 inline fun Fragment.loadFragment(
-    isAddToBackStack: Boolean = false,
+    isAddToBackStack: Boolean = true,
     transitionPairs: Map<String, View> = mapOf(),
-    transaction: FragmentTransaction.() -> Unit
+    transaction: FragmentTransaction.() -> Unit,
 ) {
     val beginTransaction = childFragmentManager.beginTransaction()
     beginTransaction.transaction()
@@ -16,6 +16,6 @@ inline fun Fragment.loadFragment(
         beginTransaction.addSharedElement(view, name)
     }
 
-    if (isAddToBackStack) beginTransaction.addToBackStack(null)
+    if (isAddToBackStack) beginTransaction.addToBackStack("FragmentWallpaper")
     beginTransaction.commit()
 }

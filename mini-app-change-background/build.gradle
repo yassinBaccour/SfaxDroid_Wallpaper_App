@@ -14,7 +14,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -23,8 +25,8 @@ android {
         big {
             applicationIdSuffix = ".sami.abmmodeljdid"
             dimension "app"
-            versionCode 42
-            versionName "4.2"
+            versionCode 43
+            versionName "4.3"
         }
         mix {
             applicationIdSuffix = ".sfaxman.islamwallpaper"
@@ -43,4 +45,5 @@ android {
 dependencies {
     implementation project(':mini-app-base')
     implementation Libs.google.servicesAds
+    implementation Libs.google.coreKtx
 }

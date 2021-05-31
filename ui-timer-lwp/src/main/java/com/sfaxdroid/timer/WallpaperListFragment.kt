@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -55,6 +56,16 @@ class WallpaperListFragment : Fragment(R.layout.fragment_wallpaper_list) {
                     is WallpaperListEffects.SaveImage -> {
                         showDownloadAlert(it.url)
                     }
+                    WallpaperListEffects.SaveError -> Toast.makeText(
+                        context,
+                        "Error add Wallpaper",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    WallpaperListEffects.SaveSuccess -> Toast.makeText(
+                        context,
+                        "Wallpaper Added To Favorite List",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }

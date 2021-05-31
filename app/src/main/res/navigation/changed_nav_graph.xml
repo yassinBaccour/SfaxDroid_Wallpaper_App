@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/changed_nav_graph"
+    app:startDestination="@id/wallpaper_scheduler_fragment">
+
+    <fragment
+        android:id="@+id/wallpaper_scheduler_fragment"
+        android:name="com.sfaxdroid.timer.WallpaperSchedulerFragment"
+        android:label="WallpaperSchedulerFragment"
+        tools:layout="@layout/fragment_wallpaper_scheduler">
+        <argument
+            android:name="keyJsonFileName"
+            android:defaultValue="texture.json"
+            app:argType="string" />
+        <argument
+            android:name="keyScreenType"
+            android:defaultValue="NEW"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_scheduler_to_list"
+            app:destination="@id/wall_list_navigation_fg" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/wall_list_navigation_fg"
+        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_wallpapers">
+        <action
+            android:id="@+id/action_list_to_detailsFragment"
+            app:destination="@id/detailsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment2"
+        android:name="com.sfaxdroid.detail.DetailsFragment"
+        android:label="DetailsFragment">
+        <action
+            android:id="@+id/action_details_to_scheduler"
+            app:destination="@id/wallpaper_scheduler_fragment" />
+    </fragment>
+</navigation>

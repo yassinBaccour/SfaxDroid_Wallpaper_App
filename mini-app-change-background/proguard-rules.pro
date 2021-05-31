@@ -42,13 +42,6 @@
 -keepclassmembers class com.supersonicads.sdk.controller.SupersonicWebView$JSInterface {
     public *;
 }
--keep public class com.google.firebase.analytics.FirebaseAnalytics {
-    public *;
-}
-
--keep public class com.google.android.gms.measurement.AppMeasurement {
-    public *;
-}
 -keepclassmembers class * implements android.os.Parcelable {
     public static final android.os.Parcelable$Creator *;
 }

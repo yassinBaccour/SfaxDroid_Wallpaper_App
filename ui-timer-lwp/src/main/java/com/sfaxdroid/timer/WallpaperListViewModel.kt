@@ -1,5 +1,6 @@
 package com.sfaxdroid.timer
 
+import android.graphics.Bitmap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.sfaxdroid.base.BaseViewModel
@@ -31,24 +32,40 @@ class WallpaperListViewModel @Inject constructor(
     val uiEffects: Flow<WallpaperListEffects>
         get() = _uiEffects.asSharedFlow()
 
+
+    private suspend fun saveBitmap(bitmap: Bitmap, fileName: String) {
+        viewModelScope.launch {
+            setState { copy(isRefresh = true) }
+            val result = fileManager.saveBitmapToStorage(
+                bitmap,
+                fileName,
+                Constants.SAVE_PERMANENT,
+            )
+            bitmap.recycle()
+            if (result) {
+                val nbSavedImage = fileManager.getPermanentDirListFiles().size
+                setState { copy(nbImage = nbSavedImage, isRefresh = false) }
+                _uiEffects.emit(WallpaperListEffects.SaveSuccess)
+            } else {
+                _uiEffects.emit(WallpaperListEffects.SaveError)
+            }
+        }
+    }
+
+
     init {
 
         viewModelScope.launch {
             pendingActions.collect {
                 when (it) {
                     is WallpaperListAction.LoadFromStorage -> {
-                        val info = fileManager.getTemporaryDirWithFile(it.fileName)
+                        val info = fileManager.getPermanentDirWithFile(it.fileName)
                         if (info.exists())
                             info.delete()
                         loadFromStorage()
                     }
                     is WallpaperListAction.SaveBitmap -> {
-                        fileManager.saveBitmapToStorage(
-                            it.bitmap,
-                            it.fileName,
-                            Constants.SAVE_PERMANENT,
-                        )
-                        it.bitmap.recycle()
+                        saveBitmap(it.bitmap, it.fileName)
                     }
                     is WallpaperListAction.ImageItemClick -> {
                         val exist =
@@ -64,32 +81,36 @@ class WallpaperListViewModel @Inject constructor(
         if (screen == Constants.KEY_ADDED_LIST_TIMER_LWP) {
             loadFromStorage()
         } else {
-            viewModelScope.launch {
-                setState { copy(isRefresh = true) }
-                when (
-                    val result =
-                        getAllWallpapersUseCase(GetAllWallpapersUseCase.Param("new.json")).first()
-                ) {
-                    is Response.SUCCESS -> {
-                        val wallpaperListLiveData =
-                            result.response.wallpaperList.wallpapers.map { wall ->
-                                WallpaperToViewMapper().map(
-                                    wall,
-                                    deviceManager.isSmallScreen()
-                                )
-                            }
-                        viewModelScope.launch {
-                            setState {
-                                copy(
-                                    wallpaperList = wallpaperListLiveData,
-                                    isRefresh = false
-                                )
-                            }
+            loadFromWs()
+        }
+    }
+
+    private fun loadFromWs() {
+        viewModelScope.launch {
+            setState { copy(isRefresh = true) }
+            when (
+                val result =
+                    getAllWallpapersUseCase(GetAllWallpapersUseCase.Param("all.json")).first()
+            ) {
+                is Response.SUCCESS -> {
+                    val wallpaperListLiveData =
+                        result.response.wallpaperList.wallpapers.map { wall ->
+                            WallpaperToViewMapper().map(
+                                wall,
+                                deviceManager.isSmallScreen()
+                            )
+                        }
+                    viewModelScope.launch {
+                        setState {
+                            copy(
+                                wallpaperList = wallpaperListLiveData,
+                                isRefresh = false
+                            )
                         }
                     }
-                    is Response.FAILURE -> {
-                        setState { copy(isRefresh = false) }
-                    }
+                }
+                is Response.FAILURE -> {
+                    setState { copy(isRefresh = false) }
                 }
             }
         }
