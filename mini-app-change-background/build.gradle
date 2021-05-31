@@ -28,12 +28,6 @@ android {
             versionCode 43
             versionName "4.3"
         }
-        mix {
-            applicationIdSuffix = ".sfaxman.islamwallpaper"
-            dimension "app"
-            versionCode 144012
-            versionName "4.1.1"
-        }
     }
 
     lintOptions {
