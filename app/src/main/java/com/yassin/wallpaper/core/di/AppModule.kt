@@ -8,8 +8,10 @@ import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.PreferencesManager
 import com.yassin.wallpaper.BuildConfig
 import com.sfaxdroid.data.entity.AppName
+import com.sfaxdroid.data.entity.Logger
 import com.yassin.wallpaper.utils.DeviceHandler
 import com.yassin.wallpaper.utils.FileHandler
+import com.yassin.wallpaper.utils.SfaxDroidLogger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +22,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class ApplicationModule {
+class AppModule {
 
     @Provides
     fun provideBaseUrl(): String = BuildConfig.APP_KEY
@@ -79,15 +81,5 @@ class ApplicationModule {
         )
     }
 
-    @Provides
-    @Singleton
-    fun provideFileManager(fileHandler: FileHandler): FileManager {
-        return fileHandler
-    }
 
-    @Provides
-    @Singleton
-    fun provideDeviceManager(deviceHandler: DeviceHandler): DeviceManager {
-        return deviceHandler
-    }
 }
