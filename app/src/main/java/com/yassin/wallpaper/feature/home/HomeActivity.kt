@@ -60,7 +60,6 @@ class HomeActivity : AppCompatActivity() {
             initView()
         }
         loadConsent()
-        manageNbRunApp()
         ads.loadInterstitial(this)
         this.checkAppPermission()
     }
@@ -128,13 +127,13 @@ class HomeActivity : AppCompatActivity() {
     private fun windowsMode(destFragment: String) {
         if (destFragment == "Wallpaper") {
             wallpaperLoaded++
-            if (!isFirstAdsLoaded && wallpaperLoaded == 2) {
-                showInterstitialAds()
-            } else {
-                if (preferencesManager["ratingAppAtFirstInstall", true]) {
-                    ratingApp(fromFirstInstall = true)
+            if (wallpaperLoaded >= 2) {
+                if (!isFirstAdsLoaded) {
+                    showInterstitialAds()
+                } else {
+                    manageNbRunApp()
+                    showInterstitial()
                 }
-                showInterstitial()
             }
         }
         if (destFragment == "DetailsFragment") {
@@ -156,42 +155,23 @@ class HomeActivity : AppCompatActivity() {
         return currentNavController?.value?.navigateUp() ?: false
     }
 
-    private fun ratingApp(fromFirstInstall: Boolean) {
-        AlertDialog.Builder(this).apply {
-            setTitle(getString(R.string.rating_app_title))
-            setMessage(getString(R.string.rating_app_description))
-            setPositiveButton(
-                getString(R.string.rating_app_yes_btn)
-            ) { _, _ ->
-                val reviewManager = ReviewManagerFactory.create(this@HomeActivity)
-                reviewManager.requestReviewFlow()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            reviewManager.launchReviewFlow(this@HomeActivity, task.result)
-                                .addOnCompleteListener {
-                                    preferencesManager["NbRun"] = 100
-                                    preferencesManager["ratingAppAtFirstInstall"] = false
-                                }
+    private fun ratingApp() {
+        val reviewManager = ReviewManagerFactory.create(this@HomeActivity)
+        reviewManager.requestReviewFlow()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    reviewManager.launchReviewFlow(this@HomeActivity, task.result)
+                        .addOnCompleteListener {
                         }
-                    }
-            }
-            setNegativeButton(
-                if (fromFirstInstall) getString(R.string.rating_app_later) else getString(R.string.rating_app_never)
-            ) { _, _ ->
-                if (!fromFirstInstall) {
-                    preferencesManager["NbRun"] = 100
                 }
-                preferencesManager["ratingAppAtFirstInstall"] = false
             }
-        }.create().show()
     }
 
     private fun manageNbRunApp() {
         var nbRun = preferencesManager["NbRun", 0]
         when (nbRun) {
-            3 -> {
-                ratingApp(fromFirstInstall = false)
-                preferencesManager["NbRun"] = 100
+            0, 10, 20 -> {
+                ratingApp()
             }
             else -> {
                 nbRun += 1
