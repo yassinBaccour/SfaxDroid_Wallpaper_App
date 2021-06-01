@@ -23,7 +23,7 @@ class SfaxDroidAds @Inject constructor(
         MobileAds.initialize(application)
     }
 
-    private fun loadAds(context: Context) {
+    override fun loadInterstitial(context: Context) {
         InterstitialAd.load(
             context,
             interstitialKey,
@@ -43,7 +43,7 @@ class SfaxDroidAds @Inject constructor(
     override fun showInterstitial(activity: Activity) {
         if (mInterstitialAd != null) {
             mInterstitialAd?.show(activity)
-            loadAds(activity)
+            loadInterstitial(activity.baseContext)
         }
     }
 }

@@ -29,11 +29,11 @@ import com.google.android.ump.UserMessagingPlatform
 
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.ConsentForm
+import com.sfaxdroid.base.Ads
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    private var mInterstitialAd: InterstitialAd? = null
     private var currentNavController: LiveData<NavController>? = null
     private var nbShowedPerSession = 0
     private var isFirstAdsLoaded = false
@@ -43,6 +43,9 @@ class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var preferencesManager: PreferencesManager
+
+    @Inject
+    lateinit var ads: Ads
 
     @Inject
     @Named("interstitial-key")
@@ -57,9 +60,8 @@ class HomeActivity : AppCompatActivity() {
             initView()
         }
         loadConsent()
-        MobileAds.initialize(this)
-        setupAds()
         manageNbRunApp()
+        ads.loadInterstitial(this)
         this.checkAppPermission()
     }
 
@@ -121,9 +123,12 @@ class HomeActivity : AppCompatActivity() {
         currentNavController = controller
     }
 
+    var wallpaperLoaded = 0
+
     private fun windowsMode(destFragment: String) {
         if (destFragment == "Wallpaper") {
-            if (!isFirstAdsLoaded) {
+            wallpaperLoaded++
+            if (!isFirstAdsLoaded && wallpaperLoaded == 2) {
                 showInterstitialAds()
             } else {
                 if (preferencesManager["ratingAppAtFirstInstall", true]) {
@@ -149,23 +154,6 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
-    }
-
-    private fun setupAds() {
-        InterstitialAd.load(
-            this,
-            interstitialKey,
-            AdRequest.Builder().build(),
-            object : InterstitialAdLoadCallback() {
-                override fun onAdFailedToLoad(adError: LoadAdError) {
-                    mInterstitialAd = null
-                }
-
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    mInterstitialAd = interstitialAd
-                }
-            }
-        )
     }
 
     private fun ratingApp(fromFirstInstall: Boolean) {
@@ -224,12 +212,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun showInterstitialAds() {
-        if (mInterstitialAd != null) {
-            mInterstitialAd?.show(this)
-            nbShowedPerSession++
-            isFirstAdsLoaded = true
-            setupAds()
-        }
+        ads.showInterstitial(this)
+        nbShowedPerSession++
+        isFirstAdsLoaded = true
     }
 
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
