@@ -47,7 +47,7 @@ ext {
             messagingPlatform: 'com.google.android.ump:user-messaging-platform:1.0.0'
     ]
 
-    hiltVersion = "2.36"
+    hiltVersion = "2.37"
     sfaxLibs.hilt = [
             gradlePlugin       : "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion",
             hiltLib            : "com.google.dagger:hilt-android:$hiltVersion",
