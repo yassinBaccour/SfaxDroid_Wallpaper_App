@@ -29,7 +29,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MaterialTheme(colors = SfaxDroidColor) {
+            MaterialTheme(
+                colors = if (BuildConfig.FLAVOR == "flower") FlowerColor else TawakolColor
+            ) {
                 MainScreen()
             }
         }
@@ -45,7 +47,7 @@ class MainActivity : ComponentActivity() {
             Image(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(SfaxDroidColor.primary),
+                    .background(FlowerColor.primary),
                 painter = painterResource(R.drawable.wallpaper2),
                 contentDescription = null,
                 alignment = Alignment.TopCenter,
