@@ -21,7 +21,9 @@ class MainActivity : ComponentActivity() {
     @Preview
     @Composable
     private fun Preview() {
-        MainScreen()
+        SfaxDroidThemes {
+            MainScreen()
+        }
     }
 
 }
