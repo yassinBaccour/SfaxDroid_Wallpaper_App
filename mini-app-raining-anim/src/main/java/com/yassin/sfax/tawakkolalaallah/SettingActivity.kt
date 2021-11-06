@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import com.sfaxdroid.mini.base.BaseConstants
 
+//TODO Compose Migration
 class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +17,7 @@ class SettingActivity : AppCompatActivity() {
     }
 }
 
+//TODO Compose Migration
 class MyPreferenceFragment : PreferenceFragmentCompat() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
