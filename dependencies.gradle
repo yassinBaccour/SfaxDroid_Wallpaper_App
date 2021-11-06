@@ -117,6 +117,7 @@ ext {
 
     compose_version = '1.1.0-beta02'
     sfaxLibs.compose = [
+            material3       : "androidx.compose.material3:material3:1.0.0-alpha01",
             activityCompose : "androidx.activity:activity-compose:1.4.0",
             composeUi       : "androidx.compose.ui:ui:$compose_version",
             composeMaterial : "androidx.compose.material:material:$compose_version",
