@@ -12,6 +12,10 @@ android {
         targetSdkVersion androidTargetSdkVersion
     }
 
+    buildFeatures {
+        compose true
+    }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -23,6 +27,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.1'
     }
 
     kotlinOptions {
@@ -58,5 +66,14 @@ android {
         implementation Libs.androidx.appcompat
         implementation Libs.google.material
         implementation Libs.androidx.preference
+
+        implementation Libs.compose.activityCompose
+        implementation Libs.compose.composeUi
+        implementation Libs.compose.composeMaterial
+        implementation Libs.compose.composeUiTooling
+        implementation Libs.compose.compiler
+        implementation Libs.compose.runtime
+        implementation Libs.compose.foundation
+        implementation Libs.compose.layout
     }
 }

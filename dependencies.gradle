@@ -1,11 +1,11 @@
 ext {
-    androidBuildToolsVersion = '29.0.3'
-    androidCompileSdkVersion = 29
+    androidBuildToolsVersion = '30.0.2'
+    androidCompileSdkVersion = 31
     androidMinSdkVersion = 21
-    androidTargetSdkVersion = 29
-    compose_version = '1.0.0-beta02'
+    androidTargetSdkVersion = 31
 
-    kotlinVersion = "1.4.32"
+
+    kotlinVersion = "1.5.21"
 
     def sfaxLibs = [:]
     Libs = sfaxLibs
@@ -115,7 +115,9 @@ ext {
             leakCanary: 'com.squareup.leakcanary:leakcanary-android:2.1',
     ]
 
+    compose_version = '1.1.0-beta02'
     sfaxLibs.compose = [
+            activityCompose : "androidx.activity:activity-compose:1.4.0",
             composeUi       : "androidx.compose.ui:ui:$compose_version",
             composeMaterial : "androidx.compose.material:material:$compose_version",
             composeUiTooling: "androidx.compose.ui:ui-tooling:$compose_version",
