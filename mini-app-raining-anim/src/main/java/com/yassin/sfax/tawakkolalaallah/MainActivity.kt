@@ -30,7 +30,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme(
-                colors = if (BuildConfig.FLAVOR == "flower") FlowerColor else TawakolColor
+                colors = if (BuildConfig.FLAVOR == "flower") FlowerColor else TawakolColor,
+                typography = Typography
             ) {
                 MainScreen()
             }
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun MainScreen() {
         val context = LocalContext.current
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -53,6 +55,7 @@ class MainActivity : ComponentActivity() {
                 alignment = Alignment.TopCenter,
                 contentScale = ContentScale.FillBounds
             )
+
             Column(
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,26 +66,26 @@ class MainActivity : ComponentActivity() {
                         .padding(10.dp),
                     onClick = { Utils.openLiveWallpaper<LiveWallpaper>(context) }) {
                     Text(
-                        color = Color.White,
+                        style = Typography.h6,
                         text = stringResource(id = R.string.set_wallpaper_click_text),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
                     )
                 }
+
                 Button(modifier = Modifier.padding(10.dp),
                     onClick = { Utils.ratingApplication(context) }) {
                     Text(
-                        color = Color.White,
+                        style = Typography.h6,
                         text = stringResource(id = R.string.setting_rate_us),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
                     )
                 }
+
                 Spacer(
                     Modifier
                         .height(24.dp)
                 )
+
                 val img = painterResource(id = R.drawable.ic_pub)
+
                 Image(painter = img,
                     contentDescription = "",
                     modifier = Modifier
