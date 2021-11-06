@@ -63,8 +63,6 @@ android {
 
     dependencies {
         implementation project(':mini-app-base')
-        implementation Libs.androidx.appcompat
-        implementation Libs.google.material
         implementation Libs.androidx.preference
 
         implementation Libs.compose.activityCompose

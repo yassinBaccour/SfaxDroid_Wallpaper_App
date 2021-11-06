@@ -1,6 +1,5 @@
 package com.yassin.sfax.tawakkolalaallah
 
-import android.icu.number.Scale
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -29,12 +29,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyScreen()
+            MaterialTheme(colors = SfaxDroidColor) {
+                MainScreen()
+            }
         }
     }
 
     @Composable
-    private fun MyScreen() {
+    private fun MainScreen() {
         val context = LocalContext.current
         Box(
             modifier = Modifier
@@ -42,35 +44,36 @@ class MainActivity : ComponentActivity() {
         ) {
             Image(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .background(SfaxDroidColor.primary),
                 painter = painterResource(R.drawable.wallpaper2),
                 contentDescription = null,
-                contentScale = ContentScale.Fit,
-                alignment = Alignment.TopCenter
+                alignment = Alignment.TopCenter,
+                contentScale = ContentScale.FillBounds
             )
             Column(
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(),
+                modifier = Modifier.fillMaxSize()
             ) {
                 Button(
                     modifier = Modifier
                         .padding(10.dp),
                     onClick = { Utils.openLiveWallpaper<LiveWallpaper>(context) }) {
                     Text(
+                        color = Color.White,
                         text = stringResource(id = R.string.set_wallpaper_click_text),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp,
+                        fontSize = 20.sp,
                     )
                 }
                 Button(modifier = Modifier.padding(10.dp),
                     onClick = { Utils.ratingApplication(context) }) {
                     Text(
+                        color = Color.White,
                         text = stringResource(id = R.string.setting_rate_us),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 25.sp,
+                        fontSize = 20.sp,
                     )
                 }
                 Spacer(
@@ -78,22 +81,25 @@ class MainActivity : ComponentActivity() {
                         .height(24.dp)
                 )
                 val img = painterResource(id = R.drawable.ic_pub)
-                Image(painter = img, contentDescription = "", modifier = Modifier.clickable(
-                    enabled = true,
-                    onClickLabel = "Clickable image",
-                    onClick = {
-                        Utils.openPub(context)
-                    }
-                ))
+                Image(painter = img,
+                    contentDescription = "",
+                    modifier = Modifier
+                        .padding(0.dp, 0.dp, 0.dp, 10.dp)
+                        .clickable(
+                            enabled = true,
+                            onClickLabel = "Clickable image",
+                            onClick = {
+                                Utils.openPub(context)
+                            }
+                        ))
             }
         }
-
     }
 
     @Preview
     @Composable
-    private fun preview() {
-        MyScreen()
+    private fun Preview() {
+        MainScreen()
     }
 
 }
