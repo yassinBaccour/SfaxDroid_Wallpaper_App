@@ -129,6 +129,7 @@ ext {
             foundation      : "androidx.compose.foundation:foundation:$compose_version",
             layout          : "androidx.compose.foundation:foundation-layout:$compose_version",
             animation       : "androidx.compose.animation:animation:$compose_version",
+            navigation      : "androidx.navigation:navigation-compose:2.4.0-beta02",
             test            : "androidx.compose.ui:ui-test-junit4:$compose_version",
     ]
 

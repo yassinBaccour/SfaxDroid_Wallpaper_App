@@ -1,8 +1,7 @@
-package com.sami.wallpapers
+package com.sami.wallpapers.ui
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
-import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -13,6 +12,7 @@ import androidx.compose.ui.unit.sp
 
 val GrayColor = Color(127, 140, 141)
 val BlueDark = Color(44, 62, 80)
+val PrimaryDark = Color(104, 105, 105)
 
 val GrayThemeColor = lightColors(
     primary = GrayColor,
