@@ -39,113 +39,86 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
     val selectedSpeed = remember { mutableStateOf("") }
     val selectedQuality = remember { mutableStateOf("") }
-    LazyColumn(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(GrayThemeColor.primary)
     ) {
-        item {
-            Image(
-                modifier = Modifier
-                    .padding(0.dp, 20.dp, 0.dp, 0.dp)
-                    .fillMaxWidth(),
-                painter = painterResource(R.drawable.ic_title),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds
+        Image(
+            modifier = Modifier
+                .padding(0.dp, 20.dp, 0.dp, 0.dp)
+                .fillMaxWidth(),
+            painter = painterResource(R.drawable.ic_title),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds
+        )
+        AppButton(R.string.set_wallpaper_click_text) {
+            Utils.openLiveWallpaper<WallpaperAppService>(
+                context
             )
         }
-        item {
-            AppButton(R.string.set_wallpaper_click_text) {
-                Utils.openLiveWallpaper<WallpaperAppService>(
-                    context
-                )
-            }
+        AppButton(R.string.open_gallery) {
+            navHostController?.navigate("gallery_screen")
         }
-        item {
-            AppButton(R.string.open_gallery) {
-                navHostController?.navigate("gallery_screen")
-            }
+        AppButton(R.string.setting_rate_us) {
+            rateUs()
         }
-        item {
-            AppButton(R.string.setting_rate_us) {
-                rateUs()
-            }
-        }
-        item {
-            Text(
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(0.dp, 20.dp, 0.dp, 10.dp),
-                text = stringResource(id = R.string.setting_change_speed),
-                color = Color.White
-            )
-        }
-        item {
-            AppRow(
-                R.string.setting_speed_very_slow,
-                Constants.PREF_VALUE_SPEED_1,
-                selectedSpeed,
-                onSpeedClick
-            )
-        }
-        item {
-            AppRow(
-                R.string.setting_speed_slow,
-                Constants.PREF_VALUE_SPEED_2,
-                selectedSpeed,
-                onSpeedClick
-            )
-        }
-        item {
-            AppRow(
-                R.string.setting_speed_standard,
-                Constants.PREF_VALUE_SPEED_3,
-                selectedSpeed,
-                onSpeedClick
-            )
-        }
-        item {
-            AppRow(
-                R.string.setting_speed_very_fast,
-                Constants.PREF_VALUE_SPEED_4,
-                selectedSpeed,
-                onSpeedClick
-            )
-        }
-        item {
-            Text(
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(0.dp, 20.dp, 0.dp, 10.dp),
-                text = stringResource(id = R.string.setting_image_quality),
-                color = Color.White
-            )
-        }
-        item {
-            AppRow(
-                R.string.setting_quality_low,
-                Constants.PREF_VALUE_QUALITY_1,
-                selectedQuality,
-                onQualityClick
-            )
-        }
-        item {
-            AppRow(
-                R.string.setting_quality_hight,
-                Constants.PREF_VALUE_QUALITY_2,
-                selectedQuality,
-                onQualityClick
-            )
-        }
-        item {
-            AppButton(R.string.setting_privacy) {
-                privacy(context)
-            }
+        Text(
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 20.dp, 0.dp, 10.dp),
+            text = stringResource(id = R.string.setting_change_speed),
+            color = Color.White
+        )
+        AppRow(
+            R.string.setting_speed_very_slow,
+            Constants.PREF_VALUE_SPEED_1,
+            selectedSpeed,
+            onSpeedClick
+        )
+        AppRow(
+            R.string.setting_speed_slow,
+            Constants.PREF_VALUE_SPEED_2,
+            selectedSpeed,
+            onSpeedClick
+        )
+        AppRow(
+            R.string.setting_speed_standard,
+            Constants.PREF_VALUE_SPEED_3,
+            selectedSpeed,
+            onSpeedClick
+        )
+        AppRow(
+            R.string.setting_speed_very_fast,
+            Constants.PREF_VALUE_SPEED_4,
+            selectedSpeed,
+            onSpeedClick
+        )
+        Text(
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 20.dp, 0.dp, 10.dp),
+            text = stringResource(id = R.string.setting_image_quality),
+            color = Color.White
+        )
+        AppRow(
+            R.string.setting_quality_low,
+            Constants.PREF_VALUE_QUALITY_1,
+            selectedQuality,
+            onQualityClick
+        )
+        AppRow(
+            R.string.setting_quality_hight,
+            Constants.PREF_VALUE_QUALITY_2,
+            selectedQuality,
+            onQualityClick
+        )
+        AppButton(R.string.setting_privacy) {
+            privacy(context)
         }
     }
-
 }
 
 private fun privacy(context: Context) {
