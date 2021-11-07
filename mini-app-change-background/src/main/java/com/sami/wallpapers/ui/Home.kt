@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,14 +46,15 @@ fun HomeScreen(
             .verticalScroll(scrollState)
             .background(GrayThemeColor.primary)
     ) {
+        Spacer(modifier = Modifier.height(20.dp))
         Image(
             modifier = Modifier
-                .padding(0.dp, 20.dp, 0.dp, 0.dp)
                 .fillMaxWidth(),
             painter = painterResource(R.drawable.ic_title),
             contentDescription = null,
             contentScale = ContentScale.FillBounds
         )
+        Spacer(modifier = Modifier.height(20.dp))
         AppButton(R.string.set_wallpaper_click_text) {
             Utils.openLiveWallpaper<WallpaperAppService>(
                 context
@@ -116,6 +118,7 @@ fun HomeScreen(
             selectedQuality,
             onQualityClick
         )
+        Spacer(modifier = Modifier.height(20.dp))
         AppButton(R.string.setting_privacy) {
             privacy(context)
         }
@@ -137,7 +140,7 @@ fun AppButton(textId: Int, onClick: () -> Unit) {
     Button(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(30.dp, 5.dp, 30.dp, 0.dp),
+            .padding(30.dp, 5.dp, 30.dp, 5.dp),
         colors = ButtonDefaults.buttonColors(PrimaryDark),
         onClick = { onClick() }) {
         Text(
@@ -157,7 +160,7 @@ fun AppRow(
     Row(
         horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
             .fillMaxWidth()
-            .padding(33.dp, 0.dp, 33.dp, 0.dp)
+            .padding(33.dp, 10.dp, 33.dp, 0.dp)
     ) {
         RadioButton(
             selected = selectedSpeed.value == value,
@@ -165,10 +168,13 @@ fun AppRow(
                 onClick(value)
                 selectedSpeed.value = value
             })
-        Text(text = stringResource(id = title), color = Color.White, modifier = Modifier.clickable {
-            onClick(value)
-            selectedSpeed.value = value
-        })
+        Text(
+            text = stringResource(id = title),
+            color = Color.White,
+            modifier = Modifier.clickable {
+                onClick(value)
+                selectedSpeed.value = value
+            })
     }
 }
 
