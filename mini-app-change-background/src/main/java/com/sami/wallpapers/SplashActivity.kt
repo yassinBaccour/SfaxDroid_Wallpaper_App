@@ -1,8 +1,9 @@
 package com.sami.wallpapers
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -11,13 +12,18 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
-private var mInterstitialAd: InterstitialAd? = null
-private var canShowAds = (BuildConfig.FLAVOR == "big")
+class SplashActivity : ComponentActivity() {
 
-class SplashActivity : Activity() {
+    private var mInterstitialAd: InterstitialAd? = null
+    private var canShowAds = (BuildConfig.FLAVOR == "big")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContent {
+            SfaxDroidThemes {
+                SplashScreen()
+            }
+        }
         initAdMob()
     }
 
@@ -57,8 +63,6 @@ class SplashActivity : Activity() {
                 }
             }
         )
-
-
     }
 
     private fun startActivity() {
