@@ -42,6 +42,7 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(scrollState)
             .background(GrayThemeColor.primary)
     ) {
         Image(

@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             SfaxDroidThemes {
+                //HomeScreen(::rateUs, ::saveSpeed, ::saveQuality)
                 ComposeNavigation()
             }
         }
