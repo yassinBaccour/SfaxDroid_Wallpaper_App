@@ -40,4 +40,5 @@ dependencies {
     implementation project(':mini-app-base')
     implementation Libs.google.servicesAds
     implementation Libs.google.coreKtx
+    implementation Libs.androidx.workManager
 }
