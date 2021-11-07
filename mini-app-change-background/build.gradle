@@ -12,6 +12,19 @@ android {
         targetSdkVersion androidTargetSdkVersion
     }
 
+    buildFeatures {
+        compose true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.1'
+    }
+
     buildTypes {
         release {
             minifyEnabled true

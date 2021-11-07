@@ -16,4 +16,14 @@ android {
 dependencies {
     api Libs.kotlin.kotlinStdlib
     api Libs.androidx.constraintlayout
+
+    api Libs.compose.activityCompose
+    api Libs.compose.composeUi
+    api Libs.compose.composeMaterial
+    api Libs.compose.composeUiTooling
+    api Libs.compose.compiler
+    api Libs.compose.runtime
+    api Libs.compose.foundation
+    api Libs.compose.layout
+    api Libs.compose.material3
 }

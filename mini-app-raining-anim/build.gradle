@@ -64,14 +64,5 @@ android {
     dependencies {
         implementation project(':mini-app-base')
         implementation Libs.androidx.preference
-        implementation Libs.compose.activityCompose
-        implementation Libs.compose.composeUi
-        implementation Libs.compose.composeMaterial
-        implementation Libs.compose.composeUiTooling
-        implementation Libs.compose.compiler
-        implementation Libs.compose.runtime
-        implementation Libs.compose.foundation
-        implementation Libs.compose.layout
-        implementation Libs.compose.material3
     }
 }
