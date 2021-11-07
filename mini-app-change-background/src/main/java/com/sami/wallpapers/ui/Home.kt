@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.RadioButton
@@ -20,10 +19,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.sami.wallpapers.*
 import com.sami.wallpapers.R
@@ -49,7 +49,8 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(20.dp))
         Image(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .height(220.dp),
             painter = painterResource(R.drawable.ic_title),
             contentDescription = null,
             contentScale = ContentScale.FillBounds
@@ -72,7 +73,9 @@ fun HomeScreen(
                 .fillMaxWidth()
                 .padding(0.dp, 20.dp, 0.dp, 10.dp),
             text = stringResource(id = R.string.setting_change_speed),
-            color = Color.White
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp
         )
         AppRow(
             R.string.setting_speed_very_slow,
@@ -104,7 +107,9 @@ fun HomeScreen(
                 .fillMaxWidth()
                 .padding(0.dp, 20.dp, 0.dp, 10.dp),
             text = stringResource(id = R.string.setting_image_quality),
-            color = Color.White
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp
         )
         AppRow(
             R.string.setting_quality_low,
