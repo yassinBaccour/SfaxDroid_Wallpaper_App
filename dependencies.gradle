@@ -16,7 +16,7 @@ ext {
     ext.Versions = versions
 
     sfaxLibs.projectClasspath = [
-            gradleBuildTool: "com.android.tools.build:gradle:7.0.0-alpha09",
+            gradleBuildTool: "com.android.tools.build:gradle:7.2.0-alpha03",
             spotless       : 'com.diffplug.spotless:spotless-plugin-gradle:5.12.5',
             libCheckUpdate : "com.github.ben-manes:gradle-versions-plugin:0.36.0"
     ]
@@ -36,7 +36,7 @@ ext {
     ]
 
     sfaxLibs.google = [
-            material         : "com.google.android.material:material:1.4.0-beta01",
+            material         : "com.google.android.material:material:1.4.0",
             servicesAds      : "com.google.android.gms:play-services-ads:20.1.0",
             service          : "com.google.gms:google-services:4.3.8",
             crashlyticsGradle: "com.google.firebase:firebase-crashlytics-gradle:2.6.1",
@@ -97,7 +97,7 @@ ext {
             annotation       : "androidx.annotation:annotation:1.2.0",
             coordinatorlayout: "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
             constraintlayout : "androidx.constraintlayout:constraintlayout:2.0.4",
-            appcompat        : "androidx.appcompat:appcompat:1.3.0-rc01",
+            appcompat        : "androidx.appcompat:appcompat:1.4.0-rc01",
             fragmentktx      : "androidx.fragment:fragment-ktx:1.3.3",
             preference       : "androidx.preference:preference-ktx:1.1.1",
             workManager      : "androidx.work:work-runtime-ktx:2.7.0"
