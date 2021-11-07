@@ -1,5 +1,6 @@
 package com.sami.wallpapers.ui
 
+import android.app.WallpaperManager
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -17,7 +18,7 @@ import java.util.*
 fun Gallery() {
     val iterator = (1..50).iterator()
     val context = LocalContext.current
-    LazyRow(modifier = Modifier.fillMaxHeight(), ) {
+    LazyRow(modifier = Modifier.fillMaxHeight()) {
         iterator.forEach {
             val drawableRes = context.resources.getIdentifier(
                 Constants.RESOURCE_PREFIX + String.format("%05d", it, Locale.US), "drawable",
@@ -34,5 +35,10 @@ fun Gallery() {
                 )
             }
         }
+    }
+
+    fun setAsWallpaper(resourceName: Int) {
+        WallpaperManager
+            .getInstance(context).setResource(resourceName)
     }
 }
