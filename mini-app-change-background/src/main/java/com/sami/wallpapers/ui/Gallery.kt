@@ -12,12 +12,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.sami.wallpapers.Constants
 import java.util.*
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Gallery() {
+fun Gallery(navHostController: NavHostController? = null) {
     val iterator = (1..98).iterator()
     val context = LocalContext.current
     LazyVerticalGrid(
@@ -31,7 +32,7 @@ fun Gallery() {
             item {
                 Image(
                     modifier = Modifier.clickable {
-                        //TODO navigate to detail Screen
+                        navHostController?.navigate("detail_screen")
                     },
                     painter = painterResource(drawableRes),
                     contentDescription = null,

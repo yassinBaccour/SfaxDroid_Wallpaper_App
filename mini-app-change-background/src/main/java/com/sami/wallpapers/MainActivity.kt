@@ -19,10 +19,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.play.core.review.ReviewManagerFactory
-import com.sami.wallpapers.ui.Gallery
-import com.sami.wallpapers.ui.HomeScreen
-import com.sami.wallpapers.ui.SfaxDroidThemes
-import com.sami.wallpapers.ui.SplashScreen
+import com.sami.wallpapers.ui.*
 
 class MainActivity : ComponentActivity() {
 
@@ -67,6 +64,9 @@ class MainActivity : ComponentActivity() {
             }
             composable("gallery_screen") {
                 Gallery()
+            }
+            composable("detail_screen") {
+                Detail()
             }
         }
     }
