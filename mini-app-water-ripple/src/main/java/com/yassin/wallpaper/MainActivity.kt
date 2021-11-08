@@ -29,19 +29,21 @@ class MainActivity : BaseMiniAppActivity() {
     }
 
     private fun changeThemes(value: String) {
-        val sharedPref = getSharedPreferences(
+        getSharedPreferences(
             BaseConstants.PREF_NAME,
             Context.MODE_PRIVATE
-        )
-        sharedPref.edit().run {
-            {
-                putString(
-                    Constants.CHANGE_IMAGE_KEY,
-                    value
-                )
-                apply()
+        ).let {
+            it.edit().run {
+                {
+                    putString(
+                        Constants.CHANGE_IMAGE_KEY,
+                        value
+                    )
+                    apply()
+                }
             }
         }
+
     }
 
 
