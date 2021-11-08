@@ -2,99 +2,59 @@ package com.yassin.wallpaper
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RadioGroup
-import android.widget.TextView
+import androidx.activity.compose.setContent
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.sfaxdroid.engine.Constants
 import com.sfaxdroid.mini.base.BaseConstants
 import com.sfaxdroid.mini.base.BaseMiniAppActivity
-import com.sfaxdroid.mini.base.Utils
 
 class MainActivity : BaseMiniAppActivity() {
 
+    @Preview
+    @Composable
+    fun Preview() {
+        Main(::changeThemes)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        findViewById<Button>(R.id.btnSetWallpaper).setOnClickListener {
-            clearCurrentWallpaper()
-            Utils.openLiveWallpaper<WallpaperEngine>(this)
-        }
-
-        findViewById<ImageView>(R.id.imageViewPub).setOnClickListener {
-            Utils.openPub(this)
-        }
-
-        initViewByApp()
-    }
-
-    private fun initViewByApp() {
-        if (BuildConfig.FLAVOR == "green") {
-            findViewById<ImageView>(R.id.imageViewLogo).visibility = View.GONE
-        }
-        if (BuildConfig.FLAVOR != "pink") {
-            initRadioButton()
-        } else {
-            findViewById<RadioGroup>(R.id.radioChooseWallpaper).visibility = View.INVISIBLE
-            findViewById<TextView>(R.id.textViewChoose).visibility = View.INVISIBLE
+        setContent {
+            SfaxDroidThemes {
+                Main(::changeThemes)
+            }
         }
     }
 
-    private fun initRadioButton() {
-
+    private fun changeThemes(value: String) {
         val sharedPref = getSharedPreferences(
             BaseConstants.PREF_NAME,
             Context.MODE_PRIVATE
         )
-
         val editor = sharedPref.edit()
-        val radioChooseWallpaper = findViewById<RadioGroup>(R.id.radioChooseWallpaper)
-        when (sharedPref.getString(Constants.CHANGE_IMAGE_KEY, "")) {
-            Constants.CHANGE_IMAGE_VALUE_ONE -> {
-                radioChooseWallpaper.check(R.id.wallp1)
-            }
-            Constants.CHANGE_IMAGE_VALUE_TWO -> {
-                radioChooseWallpaper.check(R.id.wallp2)
-            }
-            Constants.CHANGE_IMAGE_VALUE_THREE -> {
-                radioChooseWallpaper.check(R.id.wallp3)
-            }
-            else -> {
-                radioChooseWallpaper.check(R.id.wallp1)
-                editor.putString(
-                    Constants.CHANGE_IMAGE_KEY,
-                    Constants.CHANGE_IMAGE_VALUE_ONE
-                )
-                editor.apply()
-            }
-        }
-        radioChooseWallpaper
-            .setOnCheckedChangeListener { _, checkedId ->
-                when (checkedId) {
-                    R.id.wallp1 -> {
-                        editor.putString(
-                            Constants.CHANGE_IMAGE_KEY,
-                            Constants.CHANGE_IMAGE_VALUE_ONE
-                        )
-                        editor.apply()
-                    }
-                    R.id.wallp2 -> {
-                        editor.putString(
-                            Constants.CHANGE_IMAGE_KEY,
-                            Constants.CHANGE_IMAGE_VALUE_TWO
-                        )
-                        editor.apply()
-                    }
-                    R.id.wallp3 -> {
-                        editor.putString(
-                            Constants.CHANGE_IMAGE_KEY,
-                            Constants.CHANGE_IMAGE_VALUE_THREE
-                        )
-                        editor.apply()
-                    }
-                }
-            }
+        editor.putString(
+            Constants.CHANGE_IMAGE_KEY,
+            value
+        )
+        editor.apply()
     }
+
+
+    @Composable
+    fun SfaxDroidThemes(content: @Composable () -> Unit) {
+        MaterialTheme(
+            colors = FlowerColor,
+            typography = AppTypography
+        ) {
+            content()
+        }
+    }
+
 }

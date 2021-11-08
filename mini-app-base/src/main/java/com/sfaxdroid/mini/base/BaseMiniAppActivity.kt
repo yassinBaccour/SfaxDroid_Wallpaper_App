@@ -8,9 +8,10 @@ import android.graphics.Point
 import android.os.Bundle
 import android.view.Display
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import java.io.IOException
 
-abstract class BaseMiniAppActivity : Activity() {
+abstract class BaseMiniAppActivity : AppCompatActivity() {
 
     lateinit var pref: PreferencesManager
     var width: Int = 0
