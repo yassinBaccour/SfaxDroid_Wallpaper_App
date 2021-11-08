@@ -78,21 +78,21 @@ class MainActivity : BaseMiniAppActivity() {
                             Constants.CHANGE_IMAGE_KEY,
                             Constants.CHANGE_IMAGE_VALUE_ONE
                         )
-                        editor.commit()
+                        editor.apply()
                     }
                     R.id.wallp2 -> {
                         editor.putString(
                             Constants.CHANGE_IMAGE_KEY,
                             Constants.CHANGE_IMAGE_VALUE_TWO
                         )
-                        editor.commit()
+                        editor.apply()
                     }
                     R.id.wallp3 -> {
                         editor.putString(
                             Constants.CHANGE_IMAGE_KEY,
                             Constants.CHANGE_IMAGE_VALUE_THREE
                         )
-                        editor.commit()
+                        editor.apply()
                     }
                 }
             }
