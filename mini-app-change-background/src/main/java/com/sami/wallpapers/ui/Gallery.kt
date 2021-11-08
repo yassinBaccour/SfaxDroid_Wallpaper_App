@@ -32,7 +32,7 @@ fun Gallery(navHostController: NavHostController? = null) {
             item {
                 Image(
                     modifier = Modifier.clickable {
-                        navHostController?.navigate("detail_screen")
+                        navHostController?.navigate("detail_screen/$drawableRes")
                     },
                     painter = painterResource(drawableRes),
                     contentDescription = null,
@@ -40,10 +40,5 @@ fun Gallery(navHostController: NavHostController? = null) {
                 )
             }
         }
-    }
-
-    fun setAsWallpaper(resourceName: Int) {
-        WallpaperManager
-            .getInstance(context).setResource(resourceName)
     }
 }

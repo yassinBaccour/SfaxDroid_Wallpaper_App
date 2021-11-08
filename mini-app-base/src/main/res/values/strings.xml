@@ -7,6 +7,7 @@
     <string name="rating_box_rate">قيم التطبيق</string>
     <string name="back_press_message_info">اضغط مرتين على الزر للخروج</string>
     <string name="set_wallpaper_click_text">تطبيق الخلفية المتحرك</string>
+    <string name="set_basic_wallpaper_click_text">تطبيق الخلفية المتحرك</string>
     <string name="open_gallery">مجموعة الخلفيات</string>
     <string name="setting_rate_us">رجاء التقييم التطبيقة</string>
     <string name="set_wallpaper_failure">خلل في تطبيق الخلفية </string>

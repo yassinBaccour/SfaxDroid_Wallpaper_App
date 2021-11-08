@@ -8,8 +8,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -63,10 +65,13 @@ class MainActivity : ComponentActivity() {
                 HomeScreen(::rateUs, ::saveSpeed, ::saveQuality, navHostController)
             }
             composable("gallery_screen") {
-                Gallery()
+                Gallery(navHostController)
             }
-            composable("detail_screen") {
-                Detail()
+            composable(
+                "detail_screen/{photoId}",
+                arguments = listOf(navArgument("photoId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                Detail(backStackEntry.arguments?.getInt("photoId"))
             }
         }
     }
