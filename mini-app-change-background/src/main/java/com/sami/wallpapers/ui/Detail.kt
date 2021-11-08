@@ -52,6 +52,6 @@ fun setAsWallpaper(resourceName: Int, context: Context) {
 @Preview
 @Composable
 fun DetailPreview() {
-    Detail(1000)
+    Detail(R.drawable.img_00005)
 }
 
