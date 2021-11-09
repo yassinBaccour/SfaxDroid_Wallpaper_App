@@ -9,7 +9,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 val BlueColor = Color(41, 128, 185)
-val GreenColor = Color(39, 174, 96)
 
 val FlowerColor = darkColors(
     primary = BlueColor,

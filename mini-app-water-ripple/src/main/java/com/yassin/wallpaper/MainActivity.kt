@@ -18,7 +18,6 @@ class MainActivity : BaseMiniAppActivity() {
         Main(::changeThemes)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -33,19 +32,14 @@ class MainActivity : BaseMiniAppActivity() {
             BaseConstants.PREF_NAME,
             Context.MODE_PRIVATE
         ).let {
-            it.edit().run {
-                {
-                    putString(
-                        Constants.CHANGE_IMAGE_KEY,
-                        value
-                    )
-                    apply()
-                }
-            }
+            val editor = it.edit()
+            editor.putString(
+                Constants.CHANGE_IMAGE_KEY,
+                value
+            )
+            editor.apply()
         }
-
     }
-
 
     @Composable
     fun SfaxDroidThemes(content: @Composable () -> Unit) {
@@ -56,5 +50,4 @@ class MainActivity : BaseMiniAppActivity() {
             content()
         }
     }
-
 }
