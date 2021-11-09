@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
     private var mInterstitialAd: InterstitialAd? = null
     private var canShowAds = (BuildConfig.FLAVOR == "big")
     private var sharedPrefs: SharedPreferences? = null
+    private lateinit var itemViewModel: CheckedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +40,18 @@ class MainActivity : ComponentActivity() {
 
         var speed = sharedPrefs?.getString(Constants.PREF_KEY_SPEED, "none")
         var quality = sharedPrefs?.getString(Constants.PREF_KEY_QUALITY, "none")
+        itemViewModel = CheckedViewModel()
 
         setContent {
             SfaxDroidThemes {
                 //HomeScreen(::rateUs, ::saveSpeed, ::saveQuality)
-                ComposeNavigation()
+                ComposeNavigation(itemViewModel)
             }
         }
     }
 
     @Composable
-    fun ComposeNavigation() {
+    fun ComposeNavigation(itemViewModel: CheckedViewModel) {
         val navHostController = rememberNavController()
         LaunchedEffect(Unit) {
             //initAdMob(navHostController)
@@ -62,7 +64,7 @@ class MainActivity : ComponentActivity() {
                 SplashScreen()
             }
             composable("home_screen") {
-                HomeScreen(::rateUs, ::saveSpeed, ::saveQuality, navHostController)
+                HomeScreen(itemViewModel, ::rateUs, ::saveSpeed, ::saveQuality, navHostController)
             }
             composable("gallery_screen") {
                 Gallery(navHostController)

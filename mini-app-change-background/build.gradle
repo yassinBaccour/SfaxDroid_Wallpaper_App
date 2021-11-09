@@ -55,4 +55,5 @@ dependencies {
     implementation Libs.google.coreKtx
     implementation Libs.androidx.workManager
     implementation Libs.compose.navigation
+    implementation Libs.compose.viewModel
 }

@@ -9,10 +9,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -31,6 +29,7 @@ import com.sfaxdroid.mini.base.Utils
 
 @Composable
 fun HomeScreen(
+    checkedViewModel: CheckedViewModel,
     rateUs: () -> Unit,
     onSpeedClick: (speed: String) -> Unit,
     onQualityClick: (speed: String) -> Unit,
@@ -40,6 +39,9 @@ fun HomeScreen(
     val scrollState = rememberScrollState()
     val selectedSpeed = remember { mutableStateOf("") }
     val selectedQuality = remember { mutableStateOf("") }
+
+    val state by checkedViewModel.counterLiveDate.observeAsState(WallpaperPref("de", "ze")) // 3.
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -78,29 +80,29 @@ fun HomeScreen(
             fontSize = 18.sp
         )
         AppRow(
+            checkedViewModel,
             R.string.setting_speed_very_slow,
             Constants.PREF_VALUE_SPEED_1,
-            selectedSpeed,
-            onSpeedClick
-        )
+            state.speed
+        ) { speed -> checkedViewModel.setSpeed(speed) }
         AppRow(
+            checkedViewModel,
             R.string.setting_speed_slow,
             Constants.PREF_VALUE_SPEED_2,
-            selectedSpeed,
-            onSpeedClick
-        )
+            state.speed
+        ) { speed -> checkedViewModel.setSpeed(speed) }
         AppRow(
+            checkedViewModel,
             R.string.setting_speed_standard,
             Constants.PREF_VALUE_SPEED_3,
-            selectedSpeed,
-            onSpeedClick
-        )
+            state.speed
+        ) { speed -> checkedViewModel.setSpeed(speed) }
         AppRow(
+            checkedViewModel,
             R.string.setting_speed_very_fast,
             Constants.PREF_VALUE_SPEED_4,
-            selectedSpeed,
-            onSpeedClick
-        )
+            state.speed
+        ) { speed -> checkedViewModel.setSpeed(speed) }
         Text(
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -112,17 +114,17 @@ fun HomeScreen(
             fontSize = 18.sp
         )
         AppRow(
+            checkedViewModel,
             R.string.setting_quality_low,
             Constants.PREF_VALUE_QUALITY_1,
-            selectedQuality,
-            onQualityClick
-        )
+            state.quality
+        ) { speed -> checkedViewModel.setQuality(speed) }
         AppRow(
+            checkedViewModel,
             R.string.setting_quality_hight,
             Constants.PREF_VALUE_QUALITY_2,
-            selectedQuality,
-            onQualityClick
-        )
+            state.quality
+        ) { speed -> checkedViewModel.setQuality(speed) }
         Spacer(modifier = Modifier.height(20.dp))
         AppButton(R.string.setting_privacy) {
             privacy(context)
@@ -157,9 +159,10 @@ fun AppButton(textId: Int, onClick: () -> Unit) {
 
 @Composable
 fun AppRow(
+    checkedViewModel: CheckedViewModel,
     title: Int,
     value: String,
-    selectedSpeed: MutableState<String>,
+    selectedSpeed: String,
     onClick: (speed: String) -> Unit
 ) {
     Row(
@@ -168,17 +171,14 @@ fun AppRow(
             .padding(33.dp, 10.dp, 33.dp, 0.dp)
     ) {
         RadioButton(
-            selected = selectedSpeed.value == value,
-            onClick = {
-                onClick(value)
-                selectedSpeed.value = value
-            })
+            selected = selectedSpeed == value,
+            onClick = { onClick(value) }
+        )
         Text(
             text = stringResource(id = title),
             color = Color.White,
             modifier = Modifier.clickable {
                 onClick(value)
-                selectedSpeed.value = value
             })
     }
 }
@@ -187,7 +187,7 @@ fun AppRow(
 @Composable
 private fun Preview() {
     SfaxDroidThemes {
-        HomeScreen(::rateUs, ::onSpeedClick, ::onSpeedClick)
+        HomeScreen(CheckedViewModel(), ::rateUs, ::onSpeedClick, ::onSpeedClick)
     }
 }
 

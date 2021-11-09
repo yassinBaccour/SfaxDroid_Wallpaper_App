@@ -24,4 +24,5 @@ dependencies {
     api Libs.compose.runtime
     api Libs.compose.foundation
     api Libs.compose.layout
+    api Libs.compose.livedata
 }
