@@ -33,11 +33,13 @@ class MainActivity : BaseMiniAppActivity() {
             Context.MODE_PRIVATE
         ).let {
             val editor = it.edit()
-            editor.putString(
-                Constants.CHANGE_IMAGE_KEY,
-                value
-            )
-            editor.apply()
+            editor.apply {
+                putString(
+                    Constants.CHANGE_IMAGE_KEY,
+                    value
+                )
+                apply()
+            }
         }
     }
 
