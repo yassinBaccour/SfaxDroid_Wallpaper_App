@@ -1,5 +1,5 @@
 ext {
-    androidBuildToolsVersion = '30.0.2'
+    androidBuildToolsVersion = '31.0.0'
     androidCompileSdkVersion = 30
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 30
@@ -29,7 +29,7 @@ ext {
             kotlinGradlePlugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     ]
 
-    daggerVersion = "2.35"
+    daggerVersion = "2.41"
     sfaxLibs.dagger = [
             dagger        : "com.google.dagger:dagger:$daggerVersion",
             daggerCompiler: "com.google.dagger:dagger-compiler:$daggerVersion",
@@ -38,7 +38,7 @@ ext {
     sfaxLibs.google = [
             material         : "com.google.android.material:material:1.4.0",
             servicesAds      : "com.google.android.gms:play-services-ads:20.1.0",
-            service          : "com.google.gms:google-services:4.3.8",
+            service          : "com.google.gms:google-services:4.3.10",
             crashlyticsGradle: "com.google.firebase:firebase-crashlytics-gradle:2.6.1",
             core             : "com.google.android.play:core:1.10.0",
             coreKtx          : "com.google.android.play:core-ktx:1.8.1",
@@ -47,7 +47,7 @@ ext {
             messagingPlatform: 'com.google.android.ump:user-messaging-platform:1.0.0'
     ]
 
-    hiltVersion = "2.37"
+    hiltVersion = "2.41"
     sfaxLibs.hilt = [
             gradlePlugin       : "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion",
             hiltLib            : "com.google.dagger:hilt-android:$hiltVersion",
@@ -116,7 +116,7 @@ ext {
             leakCanary: 'com.squareup.leakcanary:leakcanary-android:2.1',
     ]
 
-    compose_version = '1.0.1'
+    compose_version = '1.2.0-alpha08'
     sfaxLibs.compose = [
             material3       : "androidx.compose.material3:material3:1.0.0-alpha01",
             activityCompose : "androidx.activity:activity-compose:1.3.1",
