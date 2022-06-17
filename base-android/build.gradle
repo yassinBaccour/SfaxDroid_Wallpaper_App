@@ -33,7 +33,6 @@ android {
 
 dependencies {
     api project(':base')
-    api project(':common-layouts')
     api project(':common-resources')
     kapt Libs.glide.glideCompîler
     api Libs.androidx.constraintlayout
