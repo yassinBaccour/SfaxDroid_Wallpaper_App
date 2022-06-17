@@ -42,7 +42,17 @@ android {
 
     productFlavors {
 
-        waterRippleLwp {
+        githubDemo {
+            applicationIdSuffix = ".app.demo"
+            dimension "app"
+            versionCode 1
+            versionName "1.0"
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_SFAXDROID)
+            manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
+            isDefault true
+        }
+
+        accountOne {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension "app"
             versionCode 92
@@ -51,7 +61,7 @@ android {
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }
 
-        scaryallwhotouch {
+        accountTwo {
             applicationIdSuffix = ".liliagame.scarewhotouchme"
             dimension "app"
             resConfigs('ar', 'xxhdpi')
@@ -146,16 +156,22 @@ dependencies {
 android.applicationVariants.all { variant ->
     def name = variant.getName()
     buildConfigField "boolean", "enableDebugLogging", "false"
-    if (name.contains("waterRippleLwp")) {
-        def googleServices = file("src/waterRippleLwp/google-services.json")
+    if (name.contains("accountOne")) {
+        def googleServices = file("src/accountOne/google-services.json")
         if (!googleServices.exists()) {
-            Files.copy(file("src/waterRippleLwp/fake-ripple-google-services.json").toPath(), googleServices.toPath())
+            Files.copy(file("src/accountOne/fake-ripple-google-services.json").toPath(), googleServices.toPath())
         }
     }
-    if (name.contains("scaryallwhotouch")) {
-        def googleServices = file("src/scaryallwhotouch/google-services.json")
+    if (name.contains("accountTwo")) {
+        def googleServices = file("src/accountTwo/google-services.json")
         if (!googleServices.exists()) {
-            Files.copy(file("src/scaryallwhotouch/fake-scary-google-services.json").toPath(), googleServices.toPath())
+            Files.copy(file("src/accountTwo/fake-scary-google-services.json").toPath(), googleServices.toPath())
+        }
+    }
+    if (name.contains("demo")) {
+        def googleServices = file("src/githubDemo/google-services.json")
+        if (!googleServices.exists()) {
+            Files.copy(file("src/githubDemo/fake-scary-google-services.json").toPath(), googleServices.toPath())
         }
     }
 }
