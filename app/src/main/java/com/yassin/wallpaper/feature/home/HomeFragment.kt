@@ -220,6 +220,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
             is LiveWallpaper.Word2d -> {
                 navToTexture(Constants.KEY_ANIM_2D_LWP, wallpaperObject.name)
             }
+            else -> {}
         }
     }
 

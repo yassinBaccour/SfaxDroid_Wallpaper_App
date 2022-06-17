@@ -205,7 +205,7 @@ class HomeViewModel @Inject constructor(
                     setState { copy(isTagVisible = false, isRefresh = true) }
                 }
                 getTag(screenType)
-                getMixed()
+                getCatWallpapers(screenType, fileName)
             }
         }
     }
