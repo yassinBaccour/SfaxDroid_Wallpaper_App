@@ -1,6 +1,6 @@
 package com.sfaxdoird.anim.img
 
-object Constants {
+internal object Constants {
     const val URL_ZIP_FILE_PNG = "zip/doua.zip"
     const val URL_ZIP_FILE_MINI_PNG = "zip/douamini.zip"
     const val PNG_ZIP_FILE_NAME = "doua.zip"

@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory
 import java.io.File
 import java.io.IOException
 
-class TimerUtils {
+internal class TimerUtils {
 
     companion object {
         fun setWallpaperFromFile(

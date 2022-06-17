@@ -8,7 +8,7 @@ import com.sfaxdroid.base.extension.loadUrl
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.timer.databinding.ListItemWallpaperBinding
 
-class WallpapersListAdapter(var openWallpaper: (String) -> Unit) :
+internal class WallpapersListAdapter(var openWallpaper: (String) -> Unit) :
     RecyclerView.Adapter<WallpaperImgVH>() {
 
     var wallpaperList: MutableList<SimpleWallpaperView> = arrayListOf()

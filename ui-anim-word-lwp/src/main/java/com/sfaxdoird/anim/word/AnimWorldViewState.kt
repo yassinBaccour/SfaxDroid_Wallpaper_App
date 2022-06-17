@@ -4,7 +4,7 @@ import com.sfaxdroid.bases.UiState
 import javax.annotation.concurrent.Immutable
 
 @Immutable
-data class AnimWorldViewState(
+internal data class AnimWorldViewState(
     val color: Int = -786456,
     val isOpenLwpButtonEnable: Boolean = false,
     val isCompleted: Boolean = false,

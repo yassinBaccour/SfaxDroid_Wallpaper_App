@@ -26,7 +26,7 @@ import com.sfaxdroid.detail.ActionTypeEnum
 import java.io.File
 import java.io.IOException
 
-class DetailUtils {
+internal class DetailUtils {
 
     companion object {
 

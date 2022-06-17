@@ -46,11 +46,10 @@ class AnimWord2dFragment : Fragment(R.layout.fragment_anim_word) {
 
         //TODO MutableSharedFlow
         viewModel.progressValue.observe(
-            viewLifecycleOwner,
-            {
-                binding.progressBarInformation.progress = it.first
-            }
-        )
+            viewLifecycleOwner
+        ) {
+            binding.progressBarInformation.progress = it.first
+        }
 
         lifecycleScope.launchWhenStarted {
             viewModel.uiEffects.collect {

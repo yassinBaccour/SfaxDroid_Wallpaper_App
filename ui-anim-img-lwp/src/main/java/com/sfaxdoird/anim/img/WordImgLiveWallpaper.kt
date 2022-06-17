@@ -13,7 +13,7 @@ import com.sfaxdroid.base.SharedPrefsUtils
 import com.sfaxdroid.base.utils.BitmapUtils
 import java.io.File
 
-class WordImgLiveWallpaper : WallpaperService() {
+internal class WordImgLiveWallpaper : WallpaperService() {
 
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)

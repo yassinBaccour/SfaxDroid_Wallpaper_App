@@ -3,7 +3,7 @@ package com.sfaxdoird.anim.img
 import android.content.Context
 import java.io.File
 
-object Utils {
+internal object Utils {
     @JvmStatic
     fun getTemporaryDirWithFolder(
         context: Context,

@@ -13,7 +13,7 @@ import com.sfaxdroid.base.SharedPrefsUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AnimWord2dWallpaper : WallpaperService() {
+internal class AnimWord2dWallpaper : WallpaperService() {
 
     override fun onCreateEngine(): Engine {
         val pref = SharedPrefsUtils(this)

@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WallpaperListViewModel @Inject constructor(
+internal class WallpaperListViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     var getAllWallpapersUseCase: GetAllWallpapersUseCase,
     var deviceManager: DeviceManager,

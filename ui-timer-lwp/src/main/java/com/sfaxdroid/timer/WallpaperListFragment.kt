@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class WallpaperListFragment : Fragment(R.layout.fragment_wallpaper_list) {
+internal class WallpaperListFragment : Fragment(R.layout.fragment_wallpaper_list) {
 
     private val viewModel: WallpaperListViewModel by viewModels()
     lateinit var binding: FragmentWallpaperListBinding

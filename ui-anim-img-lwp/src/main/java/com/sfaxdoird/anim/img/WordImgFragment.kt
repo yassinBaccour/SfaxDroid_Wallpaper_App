@@ -43,11 +43,10 @@ class WordImgFragment : Fragment(R.layout.fragment_word_img_lwp) {
 
         //TODO find a solution to create a counter with MutableStateFlow
         viewModel.progressValue.observe(
-            viewLifecycleOwner,
-            {
-                setProgressBytes(it.first, it.second)
-            }
-        )
+            viewLifecycleOwner
+        ) {
+            setProgressBytes(it.first, it.second)
+        }
 
         lifecycleScope.launch {
             viewModel.uiState.collect {

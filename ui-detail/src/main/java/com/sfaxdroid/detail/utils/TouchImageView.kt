@@ -29,7 +29,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import com.sfaxdroid.detail.R
 
 @Suppress("unused")
-open class TouchImageView @JvmOverloads constructor(
+internal open class TouchImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0

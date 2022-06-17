@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 @AndroidEntryPoint
-class RetrieveWallpaperService : JobService() {
+internal class RetrieveWallpaperService : JobService() {
 
     @Inject
     lateinit var fileManager: FileManager

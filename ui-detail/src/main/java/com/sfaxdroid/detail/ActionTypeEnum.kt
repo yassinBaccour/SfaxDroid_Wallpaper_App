@@ -1,6 +1,6 @@
 package com.sfaxdroid.detail
 
-sealed class ActionTypeEnum {
+internal sealed class ActionTypeEnum {
     object OpenNativeChooser : ActionTypeEnum()
     object MovePerDir : ActionTypeEnum()
     object Crop : ActionTypeEnum()
