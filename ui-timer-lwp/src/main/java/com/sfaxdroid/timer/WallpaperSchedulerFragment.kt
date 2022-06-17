@@ -97,8 +97,8 @@ class WallpaperSchedulerFragment : Fragment(R.layout.fragment_wallpaper_schedule
         (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity?)?.supportActionBar?.apply {
             title = screeName
-            setHomeButtonEnabled(appName != AppName.ChangedWall)
-            setDisplayHomeAsUpEnabled(appName != AppName.ChangedWall)
+            setHomeButtonEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
         }
     }
 

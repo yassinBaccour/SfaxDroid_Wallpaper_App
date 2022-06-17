@@ -101,9 +101,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getPrivacyButtonVisibility() = !isWithToolBar() && appName == AppName.LiliaGame
+    private fun getPrivacyButtonVisibility() = !isWithToolBar() && appName == AppName.AccountTwo
 
-    private fun getToolBarVisibility() = if (isWithToolBar()) true else appName != AppName.SfaxDroid
+    private fun getToolBarVisibility() = if (isWithToolBar()) true else appName != AppName.AccountOne
 
     private fun isWithToolBar() = selectedLwpName.isNotEmpty() || screenType == "CAT_WALL"
 
@@ -287,7 +287,7 @@ class HomeViewModel @Inject constructor(
             TagType.CategorySquare -> getCatWallpapers(ScreenType.Wall, tagView.fileName, true)
             TagType.Texture -> getWallpapers(ScreenType.Wall, tagView.fileName)
             else -> {
-                if (tagView.fileName.contains("new") && appName == AppName.LiliaGame)
+                if (tagView.fileName.contains("new") && appName == AppName.AccountTwo)
                     getMixed()
                 else getWallpapers(ScreenType.Wall, tagView.fileName)
             }

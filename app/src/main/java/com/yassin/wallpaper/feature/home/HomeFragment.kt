@@ -268,7 +268,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
                 )
                 putBoolean(
                     Constants.KEY_IS_FULL_SCREEN,
-                    appName == AppName.LiliaGame
+                    appName == AppName.AccountTwo
                 )
                 if (lwpName.isNotEmpty()) {
                     putString(Constants.KEY_LWP_NAME, lwpName)

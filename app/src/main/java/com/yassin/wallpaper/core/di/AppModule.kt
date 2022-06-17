@@ -3,15 +3,9 @@ package com.yassin.wallpaper.core.di
 import android.content.Context
 import androidx.core.os.ConfigurationCompat
 import com.sfaxdroid.base.Constants
-import com.sfaxdroid.base.DeviceManager
-import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.PreferencesManager
 import com.yassin.wallpaper.BuildConfig
 import com.sfaxdroid.data.entity.AppName
-import com.sfaxdroid.data.entity.Logger
-import com.yassin.wallpaper.utils.DeviceHandler
-import com.yassin.wallpaper.utils.FileHandler
-import com.yassin.wallpaper.utils.SfaxDroidLogger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,12 +42,10 @@ class AppModule {
     @Provides
     @Named("app-name")
     fun provideAppName(): AppName {
-        return if (BuildConfig.FLAVOR == "scaryallwhotouch")
-            AppName.LiliaGame
-        else if (BuildConfig.FLAVOR == "changedWallpaper")
-            AppName.ChangedWall
+        return if (BuildConfig.FLAVOR == "accountTwo")
+            AppName.AccountTwo
         else
-            AppName.SfaxDroid
+            AppName.AccountOne
     }
 
     @Provides
@@ -70,9 +62,8 @@ class AppModule {
     ): PreferencesManager {
 
         val name = when (appName) {
-            AppName.LiliaGame -> "liliagame"
-            AppName.SfaxDroid -> "sfaxdroid"
-            AppName.ChangedWall -> "sfaxdroid"
+            AppName.AccountTwo -> "liliagame"
+            AppName.AccountOne -> "sfaxdroid"
         }
 
         return PreferencesManager(

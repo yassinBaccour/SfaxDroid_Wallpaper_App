@@ -11,7 +11,7 @@ class WallpaperToLwpMapper @Inject constructor(@Named("app-name") var appName: A
 
     override fun map(from: Wallpaper?, isSmallScreen: Boolean): LwpItem {
         val url = getUrlByScreenSize(from?.url ?: "", isSmallScreen)
-        val urlByApp = if (appName == AppName.LiliaGame) {
+        val urlByApp = if (appName == AppName.AccountTwo) {
             url.replace(".jpg", "_land.jpg")
         } else {
             url
