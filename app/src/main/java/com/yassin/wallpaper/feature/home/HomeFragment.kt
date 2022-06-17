@@ -27,6 +27,7 @@ import com.yassin.wallpaper.feature.home.adapter.TagAdapter
 import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.sfaxdroid.data.entity.AppName
+import com.sfaxdroid.data.mappers.ItemWrapperList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject

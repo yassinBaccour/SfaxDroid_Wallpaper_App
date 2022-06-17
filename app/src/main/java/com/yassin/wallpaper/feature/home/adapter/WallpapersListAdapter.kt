@@ -8,10 +8,9 @@ import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
-import com.yassin.wallpaper.R
 import com.yassin.wallpaper.databinding.*
 import com.yassin.wallpaper.feature.home.CarouselView
-import com.yassin.wallpaper.feature.home.ItemWrapperList
+import com.sfaxdroid.data.mappers.ItemWrapperList
 import com.yassin.wallpaper.feature.home.viewholder.*
 
 class WallpapersListAdapter(
