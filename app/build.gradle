@@ -42,16 +42,6 @@ android {
 
     productFlavors {
 
-        githubDemo {
-            applicationIdSuffix = ".app.demo"
-            dimension "app"
-            versionCode 1
-            versionName "1.0"
-            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_SFAXDROID)
-            manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
-            isDefault true
-        }
-
         accountOne {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension "app"
@@ -166,12 +156,6 @@ android.applicationVariants.all { variant ->
         def googleServices = file("src/accountTwo/google-services.json")
         if (!googleServices.exists()) {
             Files.copy(file("src/accountTwo/fake-scary-google-services.json").toPath(), googleServices.toPath())
-        }
-    }
-    if (name.contains("demo")) {
-        def googleServices = file("src/githubDemo/google-services.json")
-        if (!googleServices.exists()) {
-            Files.copy(file("src/githubDemo/fake-scary-google-services.json").toPath(), googleServices.toPath())
         }
     }
 }
