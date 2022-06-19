@@ -4,6 +4,7 @@ import com.sfaxdroid.base.Ads
 import com.sfaxdroid.base.AppInitializer
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
+import com.sfaxdroid.base.PrivacyManager
 import com.sfaxdroid.data.entity.Logger
 import com.yassin.wallpaper.core.appInitializers.AdsInitializer
 import com.yassin.wallpaper.core.appInitializers.TimberInitializer
@@ -11,6 +12,7 @@ import com.yassin.wallpaper.utils.DeviceHandler
 import com.yassin.wallpaper.utils.FileHandler
 import com.yassin.wallpaper.utils.SfaxDroidAds
 import com.yassin.wallpaper.utils.SfaxDroidLogger
+import com.yassin.wallpaper.utils.SfaxDroidPrivacy
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -33,6 +35,10 @@ abstract class AppModuleBinds {
     @Singleton
     @Binds
     abstract fun provideAds(sfaxDroidAds: SfaxDroidAds): Ads
+
+    @Singleton
+    @Binds
+    abstract fun providePrivacy(sfaxDroidPrivacy: SfaxDroidPrivacy): PrivacyManager
 
     @Singleton
     @Binds

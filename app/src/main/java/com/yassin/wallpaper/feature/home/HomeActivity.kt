@@ -4,15 +4,9 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
@@ -30,6 +24,7 @@ import com.google.android.ump.UserMessagingPlatform
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.ConsentForm
 import com.sfaxdroid.base.Ads
+import com.sfaxdroid.base.PrivacyManager
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -38,14 +33,15 @@ class HomeActivity : AppCompatActivity() {
     private var nbShowedPerSession = 0
     private var isFirstAdsLoaded = false
     private lateinit var binding: ActivityHomeBinding
-    private var consentInformation: ConsentInformation? = null
-    private var consentForm: ConsentForm? = null
 
     @Inject
     lateinit var preferencesManager: PreferencesManager
 
     @Inject
     lateinit var ads: Ads
+
+    @Inject
+    lateinit var privacyManager: PrivacyManager
 
     @Inject
     @Named("interstitial-key")
@@ -59,41 +55,9 @@ class HomeActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             initView()
         }
-        loadConsent()
+        privacyManager.loadConsent(this)
         ads.loadInterstitial(this)
         this.checkAppPermission()
-    }
-
-    private fun loadConsent() {
-        val params = ConsentRequestParameters.Builder()
-            .setTagForUnderAgeOfConsent(false)
-            .build()
-        consentInformation = UserMessagingPlatform.getConsentInformation(this)
-        consentInformation?.requestConsentInfoUpdate(
-            this,
-            params,
-            {
-                if (consentInformation?.isConsentFormAvailable == true) {
-                    loadForm();
-                }
-            },
-            {
-            })
-    }
-
-    private fun loadForm() {
-        UserMessagingPlatform.loadConsentForm(
-            this,
-            { consentForm ->
-                this.consentForm = consentForm
-                if (consentInformation?.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
-                    consentForm.show(this) {
-                        loadForm()
-                    }
-                }
-            }
-        ) {
-        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
