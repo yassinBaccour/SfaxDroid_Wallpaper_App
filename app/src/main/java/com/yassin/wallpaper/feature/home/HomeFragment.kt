@@ -23,8 +23,8 @@ import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.sky.SkyLiveWallpaper
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.databinding.FragmentWallpapersBinding
-import com.yassin.wallpaper.feature.home.adapter.TagAdapter
-import com.yassin.wallpaper.feature.home.adapter.WallpapersListAdapter
+import com.sfaxdroid.list.adapter.TagAdapter
+import com.sfaxdroid.list.adapter.WallpapersListAdapter
 import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.mappers.ItemWrapperList
@@ -43,7 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     private var wallpapersListAdapter: WallpapersListAdapter? = null
     private var wallpapersTagAdapter: TagAdapter? = null
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: com.sfaxdroid.list.WallpaperListViewModel by viewModels()
     private lateinit var binding: FragmentWallpapersBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,9 +77,9 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
         lifecycleScope.launchWhenStarted {
             viewModel.uiEffects.collect {
                 when (it) {
-                    is OpenCategory -> navigateToCategory(it)
-                    is OpenLiveWallpaper -> openLwp(it.wallpaperObject)
-                    is OpenWallpaperByType -> openByType(
+                    is com.sfaxdroid.list.OpenCategory -> navigateToCategory(it)
+                    is com.sfaxdroid.list.OpenLiveWallpaper -> openLwp(it.wallpaperObject)
+                    is com.sfaxdroid.list.OpenWallpaperByType -> openByType(
                         it.simpleWallpaperView,
                         it.parentName,
                         it.screenName
@@ -126,7 +126,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
         }
         wallpapersTagAdapter = TagAdapter(
             arrayListOf(), ::setSelectedPositionItem
-        ) { viewModel.submitAction(WallpaperListAction.LoadTags(it)) }
+        ) { viewModel.submitAction(com.sfaxdroid.list.WallpaperListAction.LoadTags(it)) }
         binding.recyclerViewTag.adapter = wallpapersTagAdapter
 
         binding.imgPrivacy.setOnClickListener {
@@ -140,7 +140,11 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun setSelectedPositionItem(position: Int) {
-        viewModel.submitAction(WallpaperListAction.UpdateTagSelectedPosition(position))
+        viewModel.submitAction(
+            com.sfaxdroid.list.WallpaperListAction.UpdateTagSelectedPosition(
+                position
+            )
+        )
         binding.recyclerViewWallpapers.scrollToPosition(0)
     }
 
@@ -204,7 +208,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun openWallpaper(wallpaperObject: BaseWallpaperView) {
-        viewModel.submitAction(WallpaperListAction.OpenItems(wallpaperObject))
+        viewModel.submitAction(com.sfaxdroid.list.WallpaperListAction.OpenItems(wallpaperObject))
     }
 
     private fun openLwp(wallpaperObject: LwpItem) {
@@ -232,7 +236,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
         )
     }
 
-    private fun navigateToCategory(openCategory: OpenCategory) {
+    private fun navigateToCategory(openCategory: com.sfaxdroid.list.OpenCategory) {
         findNavController().navigate(
             R.id.category_show_navigation_fg,
             Bundle().apply {
