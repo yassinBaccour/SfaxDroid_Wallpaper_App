@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/wall_list_navigation_fg"
-        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_wallpapers">
         <action

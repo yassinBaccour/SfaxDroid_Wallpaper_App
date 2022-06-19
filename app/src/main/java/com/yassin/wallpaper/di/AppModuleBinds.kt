@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.core.di
+package com.yassin.wallpaper.di
 
 import com.sfaxdroid.base.Ads
 import com.sfaxdroid.base.AppInitializer
@@ -6,8 +6,8 @@ import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.base.PrivacyManager
 import com.sfaxdroid.data.entity.Logger
-import com.yassin.wallpaper.core.appInitializers.AdsInitializer
-import com.yassin.wallpaper.core.appInitializers.TimberInitializer
+import com.yassin.wallpaper.appInitializers.AdsInitializer
+import com.yassin.wallpaper.appInitializers.TimberInitializer
 import com.yassin.wallpaper.utils.DeviceHandler
 import com.yassin.wallpaper.utils.FileHandler
 import com.yassin.wallpaper.utils.SfaxDroidAds

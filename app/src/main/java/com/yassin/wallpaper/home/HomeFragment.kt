@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.feature.home
+package com.yassin.wallpaper.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -25,7 +25,6 @@ import com.yassin.wallpaper.R
 import com.yassin.wallpaper.databinding.FragmentWallpapersBinding
 import com.sfaxdroid.list.adapter.TagAdapter
 import com.sfaxdroid.list.adapter.WallpapersListAdapter
-import com.yassin.wallpaper.feature.other.PrivacyActivity
 import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import dagger.hilt.android.AndroidEntryPoint

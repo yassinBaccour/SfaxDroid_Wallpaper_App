@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.core.di
+package com.yassin.wallpaper.di
 
 import android.content.Context
 import androidx.core.os.ConfigurationCompat
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class AppModule {
+object AppModule {
 
     @Provides
     fun provideBaseUrl(): String = BuildConfig.APP_KEY

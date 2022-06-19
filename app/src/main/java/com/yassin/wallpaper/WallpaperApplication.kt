@@ -1,8 +1,7 @@
 package com.yassin.wallpaper
 
 import android.app.Application
-import com.google.firebase.FirebaseApp
-import com.yassin.wallpaper.core.appInitializers.AppInitializers
+import com.yassin.wallpaper.appInitializers.AppInitializers
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 

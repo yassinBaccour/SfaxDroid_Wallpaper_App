@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.core
+package com.yassin.wallpaper
 
 import android.content.Intent
 import android.util.SparseArray

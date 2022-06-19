@@ -13,7 +13,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name="com.yassin.wallpaper.feature.home.HomeActivityNavBar"
+            android:name="com.yassin.wallpaper.home.HomeActivityNavBar"
             android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait">

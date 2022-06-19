@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.feature.home
+package com.yassin.wallpaper.home
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -11,18 +11,12 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
 import com.yassin.wallpaper.R
-import com.yassin.wallpaper.core.setupWithNavController
+import com.yassin.wallpaper.setupWithNavController
 import com.yassin.wallpaper.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import javax.inject.Named
 
-import com.google.android.ump.ConsentInformation
-
-import com.google.android.ump.UserMessagingPlatform
-
-import com.google.android.ump.ConsentRequestParameters
-import com.google.android.ump.ConsentForm
 import com.sfaxdroid.base.Ads
 import com.sfaxdroid.base.PrivacyManager
 

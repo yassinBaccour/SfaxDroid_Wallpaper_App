@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/lwp_navigation_fg"
-        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.home.HomeFragment"
         android:label="@string/screen_lwp"
         tools:layout="@layout/fragment_wallpapers">
         <argument
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/chooser_navigation_fg"
-        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.home.HomeFragment"
         android:label="@string/screen_lwp"
         tools:layout="@layout/fragment_wallpapers">
         <argument
@@ -79,7 +79,7 @@
 
     <fragment
         android:id="@+id/wall_list_navigation_fg"
-        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_wallpapers">
         <action

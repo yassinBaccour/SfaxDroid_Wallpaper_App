@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.core.appInitializers
+package com.yassin.wallpaper.appInitializers
 
 import android.app.Application
 import com.sfaxdroid.app.BuildConfig

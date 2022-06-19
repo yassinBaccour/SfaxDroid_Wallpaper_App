@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.feature.home
+package com.yassin.wallpaper.home
 
 import android.os.Bundle
 import android.view.MenuItem

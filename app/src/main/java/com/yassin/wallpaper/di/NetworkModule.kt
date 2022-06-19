@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.core.di
+package com.yassin.wallpaper.di
 
 import com.sfaxdroid.data.DeviceNetworkHandler
 import com.yassin.wallpaper.utils.NetworkHandler
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class NetworkModule {
+object NetworkModule {
 
     @Provides
     @Singleton

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/category_navigation_fg"
-        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.home.HomeFragment"
         android:label="@string/screen_category"
         tools:layout="@layout/fragment_wallpapers">
         <argument
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/category_show_navigation_fg"
-        android:name="com.yassin.wallpaper.feature.home.HomeFragment"
+        android:name="com.yassin.wallpaper.home.HomeFragment"
         android:label="@string/screen_category_show"
         tools:layout="@layout/fragment_wallpapers">
         <argument

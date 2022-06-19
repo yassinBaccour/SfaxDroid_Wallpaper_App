@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.feature.other
+package com.yassin.wallpaper.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
