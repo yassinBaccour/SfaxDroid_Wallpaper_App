@@ -16,23 +16,8 @@ android {
         targetSdkVersion androidTargetSdkVersion
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
     buildFeatures {
         viewBinding = true
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
     }
 
 }
@@ -48,7 +33,6 @@ dependencies {
     api Libs.hilt.hiltLib
     kapt Libs.hilt.hiltAndroidComplier
 
-    api Libs.hilt.hiltViewModel
     kapt Libs.hilt.hiltComplier
     implementation Libs.kotlin.coroutinesAndroid
 

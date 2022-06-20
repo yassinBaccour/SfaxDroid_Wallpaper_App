@@ -115,7 +115,6 @@ dependencies {
     implementation Libs.navigation.fragmentNavktx
     implementation Libs.navigation.navigationKtx
     implementation Libs.hilt.hiltLib
-    implementation Libs.hilt.hiltViewModel
     implementation Libs.androidx.appcompat
     implementation Libs.androidx.multidex
     implementation Libs.androidx.recyclerview

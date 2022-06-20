@@ -18,23 +18,10 @@ android {
         targetSdkVersion androidTargetSdkVersion
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
-    }
-
     buildFeatures {
         viewBinding = true
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 
 }
 
@@ -47,7 +34,6 @@ dependencies {
     implementation Libs.navigation.navigationKtx
 
     api Libs.hilt.hiltLib
-    api Libs.hilt.hiltViewModel
 
     kapt Libs.hilt.hiltComplier
     kapt Libs.hilt.hiltAndroidComplier

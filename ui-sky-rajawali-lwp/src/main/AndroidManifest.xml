@@ -6,7 +6,8 @@
             android:name="com.sfaxdroid.sky.SkyLiveWallpaper"
             android:enabled="true"
             android:label="Sky Name Of Allah"
-            android:permission="android.permission.BIND_WALLPAPER">
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>

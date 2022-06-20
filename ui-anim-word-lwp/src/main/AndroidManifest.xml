@@ -6,7 +6,8 @@
             android:name="com.sfaxdoird.anim.word.AnimWord2dWallpaper"
             android:icon="?attr/customLauncherIcon"
             android:label="@string/lwp_anim_2d_name"
-            android:permission="android.permission.BIND_WALLPAPER">
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
