@@ -104,6 +104,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.1'
     }
 }
 
@@ -129,6 +134,14 @@ dependencies {
     implementation Libs.google.firebaseAnalytics
     implementation Libs.google.firebaseCrashlytics
     implementation Libs.debugging.timber
+
+    implementation Libs.compose.composeUi
+    implementation Libs.compose.composeMaterial
+    implementation Libs.compose.composeUiTooling
+    implementation Libs.compose.layout
+    implementation Libs.compose.livedata
+    implementation Libs.compose.navigation
+    implementation Libs.compose.navAnimation
 
     implementation project(':download-file-module')
     implementation project(':base-android')

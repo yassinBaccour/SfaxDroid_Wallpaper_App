@@ -140,10 +140,10 @@ private fun BottomNavigationView.setupItemReselected(
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
                 as NavHostFragment
         val navController = selectedFragment.navController
-        navController.popBackStack(
+      /*  navController.popBackStack(
             navController.graph.startDestination,
             false
-        )
+        )*/
     }
 }
 

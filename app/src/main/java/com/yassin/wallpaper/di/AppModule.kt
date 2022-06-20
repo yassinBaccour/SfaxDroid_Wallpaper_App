@@ -36,7 +36,7 @@ object AppModule {
     @Named("appLanguage")
     fun getIsArabic(@ApplicationContext context: Context): String {
         val local = ConfigurationCompat.getLocales(context.resources.configuration)[0]
-        return local.language
+        return local?.language ?: "fr"
     }
 
     @Provides
