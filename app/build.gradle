@@ -126,9 +126,8 @@ dependencies {
     implementation Libs.google.coreKtx
     implementation Libs.google.messagingPlatform
     implementation Libs.glide.glide
-    implementation Libs.other.crashlytics
     implementation Libs.google.firebaseAnalytics
-    implementation Libs.google.crashlyticsLib
+    implementation Libs.google.firebaseCrashlytics
     implementation Libs.debugging.timber
 
     implementation project(':download-file-module')
