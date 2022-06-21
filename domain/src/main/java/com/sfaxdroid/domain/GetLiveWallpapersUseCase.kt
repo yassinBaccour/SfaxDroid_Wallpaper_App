@@ -6,13 +6,17 @@ import com.sfaxdroid.data.repositories.WsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class GetLiveWallpapersUseCase @Inject constructor(private val wsRepository: WsRepository) :
     ResultUseCase<GetLiveWallpapersUseCase.Param, Response<WallpaperResponse>>() {
 
-    override suspend fun doWork(params: Param): Response<WallpaperResponse> {
-        return withContext(Dispatchers.IO) {
-            wsRepository.getLiveWallpapers(params.file)
+    override suspend fun doWork(params: Param): Flow<Response<WallpaperResponse>> {
+        return flow {
+            emit(withContext(Dispatchers.IO) {
+                wsRepository.getLiveWallpapers(params.file)
+            })
         }
     }
 

@@ -139,9 +139,9 @@ dependencies {
     implementation Libs.compose.composeMaterial
     implementation Libs.compose.composeUiTooling
     implementation Libs.compose.layout
-    implementation Libs.compose.livedata
     implementation Libs.compose.navigation
     implementation Libs.compose.navAnimation
+    implementation Libs.compose.coil
 
     implementation project(':download-file-module')
     implementation project(':base-android')

@@ -10,6 +10,9 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
+import com.sfaxdroid.list.ui.CategoryList
+import com.sfaxdroid.list.ui.LiveWallpaperList
+import com.sfaxdroid.list.ui.WallpaperList
 
 sealed class Screen(val route: String) {
     object Wallpaper : Screen("wallpaper")
@@ -74,15 +77,16 @@ private fun NavGraphBuilder.addCatAsStartDestination(
     }
 }
 
-
 @ExperimentalAnimationApi
-fun NavGraphBuilder.addCategory(
+fun NavGraphBuilder.addWallpaper(
     navController: NavController,
     root: String,
     list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
-        ComposeList()
+        WallpaperList {
+            navController.navigate(it)
+        }
     }
 }
 
@@ -93,18 +97,22 @@ fun NavGraphBuilder.addLiveWallpaper(
     list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
-        ComposeList()
+        LiveWallpaperList {
+            navController.navigate("")
+        }
     }
 }
 
 @ExperimentalAnimationApi
-fun NavGraphBuilder.addWallpaper(
+fun NavGraphBuilder.addCategory(
     navController: NavController,
     root: String,
     list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
-        ComposeList()
+        CategoryList {
+            navController.navigate(it)
+        }
     }
 }
 

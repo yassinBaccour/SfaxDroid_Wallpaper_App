@@ -6,7 +6,7 @@ import com.sfaxdroid.data.mappers.TagView
 import javax.annotation.concurrent.Immutable
 
 @Immutable
-data class WallpaperListViewEvents(
+data class WallpaperListState(
     var itemsList: List<ItemWrapperList> = arrayListOf(),
     var tagList: List<TagView> = arrayListOf(),
     var isTagVisible: Boolean = false,
