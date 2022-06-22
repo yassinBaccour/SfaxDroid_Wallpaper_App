@@ -49,6 +49,7 @@ internal fun MainHome(onTabChanged: (String) -> Unit) {
             selectedNavigation = currentSelectedItem,
             onNavigationSelected = { selected ->
                 onTabChanged(selected.route)
+                navController.navigate(selected.route)
             },
             modifier = Modifier.fillMaxWidth()
         )

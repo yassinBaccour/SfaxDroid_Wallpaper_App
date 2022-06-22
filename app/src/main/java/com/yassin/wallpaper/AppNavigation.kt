@@ -1,5 +1,6 @@
 package com.yassin.wallpaper
 
+import android.os.Bundle
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -7,9 +8,16 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
+import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.extension.getFullUrl
+import com.sfaxdroid.data.entity.AppName
+import com.sfaxdroid.data.entity.LiveWallpaper
+import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
 import com.sfaxdroid.list.ui.WallpaperList
@@ -46,7 +54,12 @@ private fun NavGraphBuilder.addWallpaperAsStartDestination(
         route = Screen.Wallpaper.route,
         startDestination = "home/" + Screen.Wallpaper.route,
     ) {
-        addWallpaper(navController, "home/" + Screen.Wallpaper.route, arrayListOf())
+        addWallpaper(
+            navController, "home/" + Screen.Wallpaper.route, listOf(
+                navArgument("keyJsonFileName") {
+                    defaultValue = "new.json"
+                })
+        )
         addDetail(navController, "home/" + Screen.Detail.route, arrayListOf())
     }
 }
@@ -84,8 +97,15 @@ fun NavGraphBuilder.addWallpaper(
     list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
-        WallpaperList {
-            navController.navigate(it)
+        WallpaperList { baseWallpaperView, selectedLwpName, screenName, appName ->
+            val wallpaper = baseWallpaperView as SimpleWallpaperView
+            openWallpaperByType(
+                navController,
+                wallpaper,
+                selectedLwpName,
+                screenName,
+                appName
+            )
         }
     }
 }
@@ -98,7 +118,21 @@ fun NavGraphBuilder.addLiveWallpaper(
 ) {
     composable(root, arguments = list) {
         LiveWallpaperList {
-            navController.navigate("")
+            when (it.type) {
+                is LiveWallpaper.WordImg -> {
+                    //navToTexture(Constants.KEY_WORD_IMG_LWP, wallpaperObject.name)
+                }
+                is LiveWallpaper.SkyView -> {
+                    //Utils.openLiveWallpaper<SkyLiveWallpaper>(requireContext())
+                }
+                is LiveWallpaper.TimerLwp -> {
+                    //navToTimer(wallpaperObject.name)
+                }
+                is LiveWallpaper.Word2d -> {
+                    //navToTexture(Constants.KEY_ANIM_2D_LWP, wallpaperObject.name)
+                }
+                else -> {}
+            }
         }
     }
 }
@@ -111,7 +145,11 @@ fun NavGraphBuilder.addCategory(
 ) {
     composable(root, arguments = list) {
         CategoryList {
-            navController.navigate(it)
+            Bundle().apply {
+                putString(Constants.EXTRA_JSON_FILE_NAME, it.file)
+                putString(Constants.EXTRA_SCREEN_NAME, it.name)
+                putString(Constants.EXTRA_SCREEN_TYPE, "CAT_WALL")
+            }
         }
     }
 }
@@ -124,5 +162,95 @@ fun NavGraphBuilder.addDetail(
 ) {
     composable(root, arguments = list) {
 
+    }
+}
+
+private fun openWallpaperByType(
+    navController: NavController,
+    wallpaperObject: SimpleWallpaperView,
+    selectedLwpName: String,
+    screenName: String,
+    appName: AppName
+) {
+    when (selectedLwpName) {
+        Constants.KEY_WORD_IMG_LWP -> {
+            Bundle().apply {
+                putString(
+                    Constants.EXTRA_URL_TO_DOWNLOAD,
+                    wallpaperObject.detailUrl.getFullUrl()
+                )
+                putString(
+                    Constants.EXTRA_SCREEN_NAME,
+                    screenName
+                )
+            }
+        }
+        Constants.KEY_ANIM_2D_LWP -> {
+            Bundle().apply {
+                putString(
+                    Constants.EXTRA_URL_TO_DOWNLOAD,
+                    wallpaperObject.detailUrl.getFullUrl()
+                )
+                putString(
+                    Constants.EXTRA_SCREEN_NAME,
+                    screenName
+                )
+            }
+        }
+        Constants.KEY_RIPPLE_LWP -> {
+            Bundle().apply {
+                putString(
+                    Constants.EXTRA_IMG_URL,
+                    wallpaperObject.detailUrl.getFullUrl()
+                )
+                putBoolean(
+                    Constants.KEY_IS_FULL_SCREEN,
+                    appName == AppName.AccountTwo
+                )
+                if (selectedLwpName.isNotEmpty()) {
+                    putString(Constants.KEY_LWP_NAME, selectedLwpName)
+                }
+            }
+        }
+        Constants.KEY_ADD_TIMER_LWP -> {
+            showDetailViewActivity(
+                navController,
+                wallpaperObject,
+                Constants.KEY_ADD_TIMER_LWP,
+                appName
+            )
+        }
+        Constants.KEY_ADDED_LIST_TIMER_LWP -> {
+            showDetailViewActivity(
+                navController,
+                wallpaperObject,
+                Constants.KEY_ADDED_LIST_TIMER_LWP,
+                appName
+            )
+        }
+        else -> {
+            showDetailViewActivity(navController, wallpaperObject, appName = appName)
+        }
+    }
+}
+
+private fun showDetailViewActivity(
+    navController: NavController,
+    wallpaperObject: SimpleWallpaperView,
+    lwpName: String = "",
+    appName: AppName
+) {
+    Bundle().apply {
+        putString(
+            Constants.EXTRA_IMG_URL,
+            wallpaperObject.detailUrl.getFullUrl()
+        )
+        putBoolean(
+            Constants.KEY_IS_FULL_SCREEN,
+            appName == AppName.AccountTwo
+        )
+        if (lwpName.isNotEmpty()) {
+            putString(Constants.KEY_LWP_NAME, lwpName)
+        }
     }
 }

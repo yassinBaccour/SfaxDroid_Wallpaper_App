@@ -88,31 +88,6 @@ internal class WallpaperListViewModel @Inject constructor(
     private fun loadFromWs() {
         viewModelScope.launch {
             setState { copy(isRefresh = true) }
-            when (
-                val result =
-                    getAllWallpapersUseCase(GetAllWallpapersUseCase.Param("all.json")).first()
-            ) {
-                is Response.SUCCESS -> {
-                    val wallpaperListLiveData =
-                        result.response.wallpaperList.wallpapers.map { wall ->
-                            WallpaperToViewMapper().map(
-                                wall,
-                                deviceManager.isSmallScreen()
-                            )
-                        }
-                    viewModelScope.launch {
-                        setState {
-                            copy(
-                                wallpaperList = wallpaperListLiveData,
-                                isRefresh = false
-                            )
-                        }
-                    }
-                }
-                is Response.FAILURE -> {
-                    setState { copy(isRefresh = false) }
-                }
-            }
         }
     }
 
