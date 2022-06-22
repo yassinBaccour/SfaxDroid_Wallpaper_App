@@ -72,7 +72,12 @@ private fun NavGraphBuilder.addLwpAsStartDestination(
         route = Screen.LiveWallpaper.route,
         startDestination = "home/" + Screen.LiveWallpaper.route,
     ) {
-        addLiveWallpaper(navController, "home/" + Screen.LiveWallpaper.route, arrayListOf())
+        addLiveWallpaper(
+            navController, "home/" + Screen.LiveWallpaper.route, listOf(
+                navArgument("keyJsonFileName") {
+                    defaultValue = "lwp.json"
+                })
+        )
     }
 }
 
@@ -84,7 +89,10 @@ private fun NavGraphBuilder.addCatAsStartDestination(
         route = Screen.Category.route,
         startDestination = "home/" + Screen.Category.route,
     ) {
-        addCategory(navController, "home/" + Screen.Category.route, arrayListOf())
+        addCategory(navController, "home/" + Screen.Category.route, listOf(
+            navArgument("keyJsonFileName") {
+                defaultValue = "category.json"
+            }))
         addWallpaper(navController, "home/" + Screen.Wallpaper.route, arrayListOf())
         addDetail(navController, "home/" + Screen.Detail.route, arrayListOf())
     }
