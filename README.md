@@ -31,6 +31,17 @@ I have other application in other account with different theme (cars, wallpaper,
 - Architecture Components: Room Lifecycle, Navigation
 - Uses Kotlin Coroutines.
 
+## Migrating
+- First Play Store version -> 2013
+- Ui -> JetPack Compose
+- Java -> Kotlin (2019)
+- MVC -> MVP -> MVVM  (2019)
+- Dagger -> Hilt  (2021)
+- AsyncTask -> RXJava -> Coroutines  (2021)
+- Jenkins -> Github Action  (2021)
+- ADS -> 200k $  (2014)
+- Eclipse -> Android Studio  (2014)
+
 ## Development setup
 Require the latest Android Studio 4.2 Canary to be able to build the app.
 ### Code style
