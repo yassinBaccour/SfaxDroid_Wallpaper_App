@@ -7,7 +7,7 @@ import com.sfaxdroid.data.entity.Response
 import com.sfaxdroid.data.mappers.WallpaperToCategoryMapper
 import com.sfaxdroid.domain.GetCategoryUseCase
 import com.sfaxdroid.bases.ScreenType
-import com.sfaxdroid.list.WallpaperListState
+import com.sfaxdroid.list.WallpaperViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,7 +22,7 @@ internal class CategoryViewModel @Inject constructor(
 ) : BaseViewModel(savedStateHandle) {
 
     val state = getCategoryUseCase.flow.map {
-        val itemsList = getWrappedListWithType(
+        WallpaperViewState(getWrappedListWithType(
             when (it) {
                 is Response.FAILURE -> arrayListOf()
                 is Response.SUCCESS -> it.response.wallpaperList.wallpapers.map { wall ->
@@ -30,12 +30,11 @@ internal class CategoryViewModel @Inject constructor(
                 }
             },
             ScreenType.Cat
-        )
-        WallpaperListState(itemsList, isRefresh = false)
+        ), isRefresh = false)
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = WallpaperListState(isRefresh = true),
+        initialValue = WallpaperViewState.Empty,
     )
 
     init {

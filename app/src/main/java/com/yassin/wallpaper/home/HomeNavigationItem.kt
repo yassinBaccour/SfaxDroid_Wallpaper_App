@@ -1,9 +1,9 @@
 package com.yassin.wallpaper.home
 
-import com.yassin.wallpaper.Screen
+import com.sfaxdroid.bases.NavScreen
 
 class HomeNavigationItem(
-    val screen: Screen,
+    val screen: NavScreen,
     val labelResId: Int,
     val contentDescriptionResId: Int,
     val iconImageVector: Int,

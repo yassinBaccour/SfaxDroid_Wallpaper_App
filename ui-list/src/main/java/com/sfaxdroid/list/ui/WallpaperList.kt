@@ -26,7 +26,7 @@ import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import com.sfaxdroid.data.mappers.TagView
-import com.sfaxdroid.list.WallpaperListState
+import com.sfaxdroid.list.WallpaperViewState
 import com.sfaxdroid.list.rememberFlowWithLifecycle
 import com.sfaxdroid.list.viewmodels.WallpapersViewModel
 
@@ -43,9 +43,23 @@ internal fun WallpaperList(
     openDetail: (BaseWallpaperView, String, String, AppName) -> Unit
 ) {
     val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
-        initial = WallpaperListState()
+        initial = WallpaperViewState()
     )
 
+    WallpaperList(
+        state,
+        openDetail = openDetail,
+        updateSelectedPosition = { viewModel.updateSelectedPosition(it) },
+        getWallpaperByTag = { viewModel.getWallpaperByTag(it) })
+}
+
+@Composable
+internal fun WallpaperList(
+    state: WallpaperViewState,
+    openDetail: (BaseWallpaperView, String, String, AppName) -> Unit,
+    updateSelectedPosition: (Int) -> Unit,
+    getWallpaperByTag: (TagView) -> Unit,
+) {
     Column(Modifier.background(MaterialTheme.colors.primary)) {
 
         if (state.isTagVisible)
@@ -55,12 +69,12 @@ internal fun WallpaperList(
                 tagList = state.tagList,
                 selectedItem = state.tagSelectedPosition
             ) { tagView, pos ->
-                viewModel.updateSelectedPosition(pos)
-                viewModel.getWallpaperByTag(tagView)
+                updateSelectedPosition(pos)
+                getWallpaperByTag(tagView)
             }
 
         InitWallpaperList(state.itemsList) {
-            openDetail(it, "", "", AppName.AccountOne)
+            openDetail(it, state.selectedLwpName, state.screenName, AppName.AccountOne)
         }
     }
 }

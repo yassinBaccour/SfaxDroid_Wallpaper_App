@@ -2,23 +2,18 @@ package com.sfaxdroid.list.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.sfaxdroid.data.entity.AppName
-import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.LwpItem
-import com.sfaxdroid.list.WallpaperListState
+import com.sfaxdroid.list.WallpaperViewState
 import com.sfaxdroid.list.rememberFlowWithLifecycle
 import com.sfaxdroid.list.viewmodels.LwpViewModel
 
@@ -33,8 +28,16 @@ internal fun LiveWallpaperList(
     openLiveWallpaper: (wallpaperObject: LwpItem) -> Unit
 ) {
     val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
-        initial = WallpaperListState()
+        initial = WallpaperViewState()
     )
+    LiveWallpaperList(viewState = state, openLiveWallpaper = openLiveWallpaper)
+}
+
+@Composable
+internal fun LiveWallpaperList(
+    viewState: WallpaperViewState,
+    openLiveWallpaper: (wallpaperObject: LwpItem) -> Unit
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,8 +45,8 @@ internal fun LiveWallpaperList(
         contentPadding = PaddingValues(5.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        items(state.itemsList.size) { message ->
-            val obj = state.itemsList[message]
+        items(viewState.itemsList.size) { message ->
+            val obj = viewState.itemsList[message]
             GenerateItem(obj) {
                 openLiveWallpaper(it as LwpItem)
             }

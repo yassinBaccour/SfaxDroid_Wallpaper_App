@@ -6,9 +6,9 @@ import com.sfaxdroid.data.mappers.TagView
 import javax.annotation.concurrent.Immutable
 
 @Immutable
-internal data class WallpaperListState(
-    var itemsList: List<ItemWrapperList> = arrayListOf(),
-    var tagList: List<TagView> = arrayListOf(),
+internal data class WallpaperViewState(
+    var itemsList: List<ItemWrapperList> = emptyList(),
+    var tagList: List<TagView> = emptyList(),
     var isTagVisible: Boolean = false,
     var isRefresh: Boolean = true,
     var isToolBarVisible: Boolean = false,
@@ -16,9 +16,11 @@ internal data class WallpaperListState(
     var toolBarTitle: String = "",
     var setDisplayHomeAsUpEnabled: Boolean = false,
     var tagSelectedPosition: Int = 0,
-    var isError: Boolean = false
+    var isError: Boolean = false,
+    var screenName: String = "",
+    var selectedLwpName: String = ""
 ) : UiState {
     companion object {
-        val Empty = WallpaperListState()
+        val Empty = WallpaperViewState()
     }
 }

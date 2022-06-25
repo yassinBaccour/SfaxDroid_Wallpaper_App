@@ -8,26 +8,19 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.extension.getFullUrl
+import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
 import com.sfaxdroid.list.ui.WallpaperList
-
-sealed class Screen(val route: String) {
-    object Wallpaper : Screen("wallpaper")
-    object LiveWallpaper : Screen("liveWallpaper")
-    object Category : Screen("category")
-    object Detail : Screen("detail")
-}
 
 @ExperimentalAnimationApi
 @Composable
@@ -37,7 +30,7 @@ internal fun AppNavigation(
 ) {
     AnimatedNavHost(
         navController = navController,
-        startDestination = Screen.Wallpaper.route,
+        startDestination = NavScreen.Wallpaper.route,
         modifier = modifier,
     ) {
         addWallpaperAsStartDestination(navController)
@@ -51,16 +44,16 @@ private fun NavGraphBuilder.addWallpaperAsStartDestination(
     navController: NavController
 ) {
     navigation(
-        route = Screen.Wallpaper.route,
-        startDestination = "home/" + Screen.Wallpaper.route,
+        route = NavScreen.Wallpaper.route,
+        startDestination = "home/" + NavScreen.Wallpaper.route,
     ) {
         addWallpaper(
-            navController, "home/" + Screen.Wallpaper.route, listOf(
+            navController, "home/" + NavScreen.Wallpaper.route, listOf(
                 navArgument("keyJsonFileName") {
                     defaultValue = "4k.json"
                 })
         )
-        addDetail(navController, "home/" + Screen.Detail.route, arrayListOf())
+        addDetail(navController, "home/" + NavScreen.Detail.route, arrayListOf())
     }
 }
 
@@ -69,11 +62,11 @@ private fun NavGraphBuilder.addLwpAsStartDestination(
     navController: NavController
 ) {
     navigation(
-        route = Screen.LiveWallpaper.route,
-        startDestination = "home/" + Screen.LiveWallpaper.route,
+        route = NavScreen.LiveWallpaper.route,
+        startDestination = "home/" + NavScreen.LiveWallpaper.route,
     ) {
         addLiveWallpaper(
-            navController, "home/" + Screen.LiveWallpaper.route, listOf(
+            navController, "home/" + NavScreen.LiveWallpaper.route, listOf(
                 navArgument("keyJsonFileName") {
                     defaultValue = "lwp.json"
                 })
@@ -86,17 +79,17 @@ private fun NavGraphBuilder.addCatAsStartDestination(
     navController: NavController
 ) {
     navigation(
-        route = Screen.Category.route,
-        startDestination = "home/" + Screen.Category.route,
+        route = NavScreen.Category.route,
+        startDestination = "home/" + NavScreen.Category.route,
     ) {
         addCategory(
-            navController, "home/" + Screen.Category.route, listOf(
+            navController, "home/" + NavScreen.Category.route, listOf(
                 navArgument("keyJsonFileName") {
                     defaultValue = "category.json"
                 })
         )
-        addWallpaper(navController, "home/" + Screen.Wallpaper.route, arrayListOf())
-        addDetail(navController, "home/" + Screen.Detail.route, arrayListOf())
+        addWallpaper(navController, "home/" + NavScreen.Wallpaper.route, arrayListOf())
+        addDetail(navController, "home/" + NavScreen.Detail.route, arrayListOf())
     }
 }
 

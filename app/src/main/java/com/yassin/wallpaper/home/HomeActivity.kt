@@ -11,6 +11,8 @@ import javax.inject.Inject
 import com.sfaxdroid.base.Ads
 import com.sfaxdroid.base.PrivacyManager
 import com.sfaxdroid.base.SfaxDroidRating
+import com.sfaxdroid.data.entity.AppName
+import javax.inject.Named
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -31,7 +33,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SfaxDroidTheme {
-                MainHome {
+                MainHome(AppName.AccountOne) {
                     windowsMode(it)
                 }
             }

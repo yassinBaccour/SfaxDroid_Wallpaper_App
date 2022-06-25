@@ -7,7 +7,7 @@ import com.sfaxdroid.data.entity.Response
 import com.sfaxdroid.data.mappers.WallpaperToLwpMapper
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.bases.ScreenType
-import com.sfaxdroid.list.WallpaperListState
+import com.sfaxdroid.list.WallpaperViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import javax.inject.Named
@@ -31,11 +31,11 @@ internal class LwpViewModel @Inject constructor(
             }
             is Response.FAILURE -> arrayListOf()
         }, ScreenType.Lwp)
-        WallpaperListState(itemsList, isRefresh = false, isError = itemsList.isEmpty())
+        WallpaperViewState(itemsList, isRefresh = false, isError = itemsList.isEmpty())
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = WallpaperListState(isRefresh = true, isError = false),
+        initialValue = WallpaperViewState.Empty,
     )
 
     init {

@@ -12,11 +12,10 @@ import com.sfaxdroid.data.mappers.WallpaperToViewMapper
 import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
 import com.sfaxdroid.bases.ScreenType
-import com.sfaxdroid.list.WallpaperListState
+import com.sfaxdroid.list.WallpaperViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import javax.inject.Named
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -35,14 +34,13 @@ internal class WallpapersViewModel @Inject constructor(
 
     private var selectedLwpName = savedStateHandle.get<String>(Constants.KEY_LWP_NAME).orEmpty()
     private val selectedItem = MutableStateFlow(0)
-    private val selectedItemFlow: Flow<Int>
-        get() = selectedItem
 
     val state = combine(
         getCatWallpapersUseCase.flow,
         getTagUseCase.flow,
-        selectedItemFlow
+        selectedItem
     ) { wallpaper, tags, selected ->
+
         val list = when (wallpaper) {
             is Response.SUCCESS -> {
                 getWrappedListWithType(
@@ -65,21 +63,24 @@ internal class WallpapersViewModel @Inject constructor(
             is Response.FAILURE -> arrayListOf()
         }
 
-        WallpaperListState(
+        WallpaperViewState(
             itemsList = list,
             tagList = tagsList,
             isRefresh = false,
             isTagVisible = appName == AppName.AccountOne,
             tagSelectedPosition = selected
         )
+
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = WallpaperListState(
-            isRefresh = false, toolBarTitle = getScreenTitle(),
+        initialValue = WallpaperViewState(
+            toolBarTitle = getScreenTitle(),
             isToolBarVisible = getToolBarVisibility(),
             isPrivacyButtonVisible = getPrivacyButtonVisibility(),
-            setDisplayHomeAsUpEnabled = isWithToolBar()
+            setDisplayHomeAsUpEnabled = isWithToolBar(),
+            screenName = screenName,
+            selectedLwpName = selectedLwpName
         )
     )
 
@@ -94,7 +95,7 @@ internal class WallpapersViewModel @Inject constructor(
 
     fun updateSelectedPosition(pos: Int) {
         viewModelScope.launch {
-            selectedItem.value = pos
+            this@WallpapersViewModel.selectedItem.emit(pos)
         }
     }
 

@@ -15,7 +15,7 @@ import com.sfaxdroid.domain.GetTagUseCase
 import com.sfaxdroid.list.ui.CarouselTypeEnum
 import com.sfaxdroid.list.ui.CarouselView
 import com.sfaxdroid.bases.ScreenType
-import com.sfaxdroid.list.WallpaperListState
+import com.sfaxdroid.list.WallpaperViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import javax.inject.Named
@@ -82,12 +82,12 @@ internal class MixedScreenViewModel @Inject constructor(
             is Response.FAILURE -> arrayListOf()
         }
 
-        WallpaperListState(itemsList = list, tagList = tagsList, isRefresh = false)
+        WallpaperViewState(itemsList = list, tagList = tagsList, isRefresh = false)
 
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = WallpaperListState(isRefresh = true),
+        initialValue = WallpaperViewState(isRefresh = true),
     )
 
     init {
