@@ -1,7 +1,6 @@
 package com.sfaxdroid.list.viewmodels
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.DeviceManager
@@ -12,8 +11,7 @@ import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.data.mappers.WallpaperToViewMapper
 import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
-import com.sfaxdroid.list.ListUtils.getWrappedListWithType
-import com.sfaxdroid.list.ScreenType
+import com.sfaxdroid.bases.ScreenType
 import com.sfaxdroid.list.WallpaperListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -26,19 +24,16 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class WallpapersViewModel @Inject constructor(
+internal class WallpapersViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getTagUseCase: GetTagUseCase,
     var getCatWallpapersUseCase: GetCatWallpapersUseCase,
     var deviceManager: DeviceManager,
     @Named("appLanguage") var appLanguage: String,
     @Named("app-name") var appName: AppName
-) : ViewModel() {
+) : BaseViewModel(savedStateHandle) {
 
-    private var fileName = savedStateHandle.get<String>(Constants.EXTRA_JSON_FILE_NAME).orEmpty()
-    private var screenType = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_TYPE).orEmpty()
     private var selectedLwpName = savedStateHandle.get<String>(Constants.KEY_LWP_NAME).orEmpty()
-    private var screenName = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_NAME).orEmpty()
     private val selectedItem = MutableStateFlow(0)
     private val selectedItemFlow: Flow<Int>
         get() = selectedItem

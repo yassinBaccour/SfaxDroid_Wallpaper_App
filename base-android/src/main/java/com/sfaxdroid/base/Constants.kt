@@ -1,7 +1,6 @@
 package com.sfaxdroid.base
 
-class Constants {
-    companion object {
+object Constants {
         const val EXTRA_URL_TO_DOWNLOAD = "URLTODOWNLOAD"
         const val EXTRA_JSON_FILE_NAME = "keyJsonFileName"
         const val VALUE_TEXTURE_JSON_FILE_NAME = "texture.json"
@@ -25,5 +24,9 @@ class Constants {
         const val KEY_IS_FULL_SCREEN = "KeyIsFullScreen"
         var ifBackgroundChanged = false
         var nbIncrementationAfterChange = 0
-    }
+
+        const val TYPE_WALLPAPER = 1
+        const val TYPE_CAROUSEL = 2
+        const val TYPE_LWP = 3
+        const val TYPE_CAT = 4
 }

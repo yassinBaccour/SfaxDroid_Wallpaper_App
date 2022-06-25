@@ -1,9 +1,8 @@
 package com.sfaxdroid.list.viewmodels
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sfaxdroid.base.Constants
+import com.sfaxdroid.base.Constants.TYPE_CAROUSEL
 import com.sfaxdroid.base.DeviceManager
 import com.sfaxdroid.data.entity.Response
 import com.sfaxdroid.data.mappers.ItemWrapperList
@@ -13,11 +12,9 @@ import com.sfaxdroid.data.mappers.WallpaperToViewMapper
 import com.sfaxdroid.domain.GetAllWallpapersUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
-import com.sfaxdroid.list.CarouselTypeEnum
-import com.sfaxdroid.list.CarouselView
-import com.sfaxdroid.list.ListUtils.TYPE_CAROUSEL
-import com.sfaxdroid.list.ListUtils.getWrappedListWithType
-import com.sfaxdroid.list.ScreenType
+import com.sfaxdroid.list.ui.CarouselTypeEnum
+import com.sfaxdroid.list.ui.CarouselView
+import com.sfaxdroid.bases.ScreenType
 import com.sfaxdroid.list.WallpaperListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -27,7 +24,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel
-class MixedScreenViewModel @Inject constructor(
+internal class MixedScreenViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getAllWallpapersUseCase: GetAllWallpapersUseCase,
     getLiveWallpapersUseCase: GetLiveWallpapersUseCase,
@@ -35,10 +32,7 @@ class MixedScreenViewModel @Inject constructor(
     var wallpaperToLwpMapper: WallpaperToLwpMapper,
     var deviceManager: DeviceManager,
     @Named("appLanguage") var appLanguage: String
-) : ViewModel() {
-
-    private var fileName = savedStateHandle.get<String>(Constants.EXTRA_JSON_FILE_NAME).orEmpty()
-    private var screenType = savedStateHandle.get<String>(Constants.EXTRA_SCREEN_TYPE).orEmpty()
+) : BaseViewModel(savedStateHandle) {
 
     val state = combine(
         getAllWallpapersUseCase.flow,
@@ -75,7 +69,7 @@ class MixedScreenViewModel @Inject constructor(
         mixedListItem.add(
             ItemWrapperList(
                 CarouselView("Live Wallpaper 4K", lwpList, CarouselTypeEnum.LWP),
-                 TYPE_CAROUSEL
+                TYPE_CAROUSEL
             )
         )
 

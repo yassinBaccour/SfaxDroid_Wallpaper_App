@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -18,29 +19,28 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.sfaxdroid.base.Constants.TYPE_CAROUSEL
+import com.sfaxdroid.base.Constants.TYPE_CAT
+import com.sfaxdroid.base.Constants.TYPE_LWP
+import com.sfaxdroid.base.Constants.TYPE_WALLPAPER
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
-import com.sfaxdroid.list.CarouselView
-import com.sfaxdroid.list.ListUtils.TYPE_CAROUSEL
-import com.sfaxdroid.list.ListUtils.TYPE_CAT
-import com.sfaxdroid.list.ListUtils.TYPE_LWP
-import com.sfaxdroid.list.ListUtils.TYPE_WALLPAPER
 
 @Composable
 fun GenerateItem(obj: ItemWrapperList, openImageDetail: (BaseWallpaperView) -> Unit) {
     when (obj.itemType) {
 
-         TYPE_WALLPAPER -> {
+        TYPE_WALLPAPER -> {
             val item = obj.`object` as SimpleWallpaperView
             ImageCard(item.thumbnailUrl) {
                 openImageDetail(item)
             }
         }
 
-         TYPE_CAROUSEL -> {
+        TYPE_CAROUSEL -> {
             val item = obj.`object` as CarouselView
             HorizontalCarouselCard(item) {
             }
@@ -80,12 +80,13 @@ fun ImageCard(url: String, openImage: () -> Unit) {
 fun ImageWithTitleCard(url: String, name: String, desc: String, openImage: () -> Unit) {
     Card(
         Modifier
-            .padding(top = 5.dp)
             .clickable {
                 openImage()
             }
             .fillMaxWidth()
-            .height(170.dp), elevation = 4.dp
+            .height(170.dp),
+        elevation = 4.dp,
+        shape = RoundedCornerShape(0.dp)
     ) {
         Row(
             modifier = Modifier

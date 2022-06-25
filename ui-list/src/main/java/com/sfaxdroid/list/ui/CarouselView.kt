@@ -1,4 +1,4 @@
-package com.sfaxdroid.list
+package com.sfaxdroid.list.ui
 
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 

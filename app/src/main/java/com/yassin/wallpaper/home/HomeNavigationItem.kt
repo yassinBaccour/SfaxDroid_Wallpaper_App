@@ -1,6 +1,5 @@
 package com.yassin.wallpaper.home
 
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.yassin.wallpaper.Screen
 
 class HomeNavigationItem(

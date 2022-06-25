@@ -89,10 +89,12 @@ private fun NavGraphBuilder.addCatAsStartDestination(
         route = Screen.Category.route,
         startDestination = "home/" + Screen.Category.route,
     ) {
-        addCategory(navController, "home/" + Screen.Category.route, listOf(
-            navArgument("keyJsonFileName") {
-                defaultValue = "category.json"
-            }))
+        addCategory(
+            navController, "home/" + Screen.Category.route, listOf(
+                navArgument("keyJsonFileName") {
+                    defaultValue = "category.json"
+                })
+        )
         addWallpaper(navController, "home/" + Screen.Wallpaper.route, arrayListOf())
         addDetail(navController, "home/" + Screen.Detail.route, arrayListOf())
     }

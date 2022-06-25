@@ -1,4 +1,4 @@
-package com.sfaxdroid.list
+package com.sfaxdroid.bases
 
 sealed class ScreenType {
     object Lwp : ScreenType()
