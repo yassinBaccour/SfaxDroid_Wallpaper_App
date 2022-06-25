@@ -16,9 +16,9 @@ abstract class ResultUseCase<in P, R> {
 
     //Remove distinctUntilChanged() until add Room DataBase to filter new element in DB
     val flow: Flow<R> = paramState
-        .distinctUntilChanged()
+        //.distinctUntilChanged()
         .flatMapLatest { doWork(it) }
-        .distinctUntilChanged()
+        //.distinctUntilChanged()
 
     operator fun invoke(params: P) {
         paramState.tryEmit(params)

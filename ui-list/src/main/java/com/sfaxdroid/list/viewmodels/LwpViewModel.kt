@@ -30,16 +30,17 @@ class LwpViewModel @Inject constructor(
     var fileName = savedStateHandle.get<String>(Constants.EXTRA_JSON_FILE_NAME).orEmpty()
 
     var state = getLiveWallpapersUseCase.flow.map {
-        WallpaperListState(itemsList = getWrappedListWithType(when (it) {
+        val itemsList = getWrappedListWithType(when (it) {
             is Response.SUCCESS -> it.response.wallpaperList.wallpapers.map { wall ->
                 wallpaperToLwpMapper.map(wall, deviceManager.isSmallScreen())
             }
             is Response.FAILURE -> arrayListOf()
-        }, ScreenType.Lwp), isRefresh = false)
+        }, ScreenType.Lwp)
+        WallpaperListState(itemsList, isRefresh = false, isError = itemsList.isEmpty())
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = WallpaperListState(isRefresh = true),
+        initialValue = WallpaperListState(isRefresh = true, isError = false),
     )
 
     init {

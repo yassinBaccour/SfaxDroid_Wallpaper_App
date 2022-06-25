@@ -15,10 +15,10 @@ import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
 import com.sfaxdroid.list.CarouselTypeEnum
 import com.sfaxdroid.list.CarouselView
+import com.sfaxdroid.list.ListUtils.TYPE_CAROUSEL
 import com.sfaxdroid.list.ListUtils.getWrappedListWithType
 import com.sfaxdroid.list.ScreenType
 import com.sfaxdroid.list.WallpaperListState
-import com.sfaxdroid.list.adapter.WallpapersListAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import javax.inject.Named
@@ -75,7 +75,7 @@ class MixedScreenViewModel @Inject constructor(
         mixedListItem.add(
             ItemWrapperList(
                 CarouselView("Live Wallpaper 4K", lwpList, CarouselTypeEnum.LWP),
-                WallpapersListAdapter.TYPE_CAROUSEL
+                 TYPE_CAROUSEL
             )
         )
 

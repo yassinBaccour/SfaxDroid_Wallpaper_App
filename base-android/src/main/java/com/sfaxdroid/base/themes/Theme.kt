@@ -1,8 +1,9 @@
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.yassin.wallpaper.DarkColors
-import com.yassin.wallpaper.LightColors
+import com.sfaxdroid.base.themes.appTypography
+import com.sfaxdroid.base.themes.DarkColors
+import com.sfaxdroid.base.themes.LightColors
 
 @Composable
 fun SfaxDroidTheme(
@@ -11,6 +12,7 @@ fun SfaxDroidTheme(
 ) {
     MaterialTheme(
         colors = if (useDarkColors) DarkColors else LightColors,
+        typography = appTypography,
         content = content
     )
 }

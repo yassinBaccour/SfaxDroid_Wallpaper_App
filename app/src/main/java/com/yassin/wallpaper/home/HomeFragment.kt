@@ -1,6 +1,5 @@
 package com.yassin.wallpaper.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -24,11 +23,9 @@ import com.sfaxdroid.sky.SkyLiveWallpaper
 import com.yassin.wallpaper.R
 import com.yassin.wallpaper.databinding.FragmentWallpapersBinding
 import com.sfaxdroid.list.adapter.TagAdapter
-import com.sfaxdroid.list.adapter.WallpapersListAdapter
-import com.sfaxdroid.data.entity.AppName
+ import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -39,8 +36,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     @Named("app-name")
     lateinit var appName: AppName
 
-    private var wallpapersListAdapter: WallpapersListAdapter? = null
-    private var wallpapersTagAdapter: TagAdapter? = null
+     private var wallpapersTagAdapter: TagAdapter? = null
 
     private val viewModel: com.sfaxdroid.list.WallpaperListViewModel by viewModels()
     private lateinit var binding: FragmentWallpapersBinding
@@ -95,13 +91,8 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     private fun initView() {
         (activity as AppCompatActivity?)?.setSupportActionBar(binding.toolbar)
 
-        wallpapersListAdapter = WallpapersListAdapter(
-            arrayListOf()
-        ) { catItem -> openWallpaper(catItem) }
 
         binding.recyclerViewWallpapers.apply {
-            layoutManager = getLwpLayoutManager()
-            adapter = wallpapersListAdapter
             addOnItemTouchListener(
                 object : RecyclerView.OnItemTouchListener {
                     override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
@@ -129,12 +120,6 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
         binding.recyclerViewTag.adapter = wallpapersTagAdapter
 
         binding.imgPrivacy.setOnClickListener {
-            context?.startActivity(
-                Intent(
-                    context,
-                    PrivacyActivity::class.java
-                )
-            )
         }
     }
 
@@ -152,8 +137,7 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
     }
 
     private fun updateList(list: List<ItemWrapperList>) {
-        wallpapersListAdapter?.update(list)
-    }
+     }
 
     private fun openByType(
         wallpaperObject: SimpleWallpaperView,
@@ -280,24 +264,4 @@ class HomeFragment : Fragment(R.layout.fragment_wallpapers) {
         )
     }
 
-    private fun getLwpLayoutManager(): LayoutManager {
-        return GridLayoutManager(
-            context,
-            3
-        ).apply {
-            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (wallpapersListAdapter?.getItemViewType(position)) {
-                        WallpapersListAdapter.TYPE_SQUARE_WALLPAPER -> 1
-                        WallpapersListAdapter.TYPE_WALLPAPER -> 1
-                        WallpapersListAdapter.TYPE_ADS -> spanCount
-                        WallpapersListAdapter.TYPE_LWP -> spanCount
-                        WallpapersListAdapter.TYPE_CAT -> spanCount
-                        WallpapersListAdapter.TYPE_CAROUSEL -> spanCount
-                        else -> -1
-                    }
-                }
-            }
-        }
-    }
 }

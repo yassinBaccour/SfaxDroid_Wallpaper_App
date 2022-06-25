@@ -57,7 +57,7 @@ private fun NavGraphBuilder.addWallpaperAsStartDestination(
         addWallpaper(
             navController, "home/" + Screen.Wallpaper.route, listOf(
                 navArgument("keyJsonFileName") {
-                    defaultValue = "new.json"
+                    defaultValue = "4k.json"
                 })
         )
         addDetail(navController, "home/" + Screen.Detail.route, arrayListOf())

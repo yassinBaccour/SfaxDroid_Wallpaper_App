@@ -86,7 +86,6 @@ class TagAdapter(
                     itemView.context,
                     R.drawable.round_corner_tag_selected
                 )
-
         }
     }
 }

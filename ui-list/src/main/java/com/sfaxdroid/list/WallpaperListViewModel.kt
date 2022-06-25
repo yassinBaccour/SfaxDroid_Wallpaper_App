@@ -14,9 +14,7 @@ import com.sfaxdroid.domain.GetCatWallpapersUseCase
 import com.sfaxdroid.domain.GetLiveWallpapersUseCase
 import com.sfaxdroid.domain.GetTagUseCase
 import com.sfaxdroid.data.entity.AppName
-import com.sfaxdroid.list.adapter.WallpapersListAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -229,8 +227,6 @@ class WallpaperListViewModel @Inject constructor(
             TagType.Category -> getCatWallpapers(ScreenType.Wall, tagView.fileName)
             TagType.CategorySquare -> getCatWallpapers(ScreenType.Wall, tagView.fileName, true)
             TagType.Texture -> getWallpapers(ScreenType.Wall, tagView.fileName)
-            else -> {
-            }
         }
     }
 
@@ -244,19 +240,6 @@ class WallpaperListViewModel @Inject constructor(
             SimpleWallpaperView(it.path.orEmpty())
         }
         wrapWallpapers(list, screenType)
-    }
-
-    private fun getItemType(screenType: ScreenType, isSquare: Boolean = false): Int {
-
-        val wallpaperCellViewTypeByApp =
-            if (isSquare) WallpapersListAdapter.TYPE_SQUARE_WALLPAPER else WallpapersListAdapter.TYPE_WALLPAPER
-
-        return when (screenType) {
-            is ScreenType.Cat -> WallpapersListAdapter.TYPE_CAT
-            is ScreenType.Lab -> WallpapersListAdapter.TYPE_LAB
-            is ScreenType.Lwp -> WallpapersListAdapter.TYPE_LWP
-            else -> wallpaperCellViewTypeByApp
-        }
     }
 
     private fun wrapWallpapers(
@@ -285,12 +268,6 @@ class WallpaperListViewModel @Inject constructor(
     ): MutableList<ItemWrapperList> {
         val mixedListItem: MutableList<ItemWrapperList> = arrayListOf()
         wallpaperList.forEach {
-            mixedListItem.add(
-                ItemWrapperList(
-                    it,
-                    getItemType(screenType, isSquare)
-                )
-            )
         }
         return mixedListItem
     }

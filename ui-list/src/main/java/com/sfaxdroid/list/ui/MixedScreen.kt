@@ -1,6 +1,5 @@
 package com.sfaxdroid.list.ui
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,5 +22,4 @@ internal fun MixedScreen(
     val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
         initial = WallpaperListState()
     )
-    Text(text = state.itemsList.size.toString())
 }

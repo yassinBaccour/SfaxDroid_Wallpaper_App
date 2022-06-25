@@ -16,4 +16,9 @@ data class WallpaperListState(
     var toolBarTitle: String = "",
     var setDisplayHomeAsUpEnabled: Boolean = false,
     var tagSelectedPosition: Int = 0,
-) : UiState
+    var isError: Boolean = false
+) : UiState {
+    companion object {
+        val Empty = WallpaperListState()
+    }
+}

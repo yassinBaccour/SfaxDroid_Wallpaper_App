@@ -142,6 +142,7 @@ dependencies {
     implementation Libs.compose.navigation
     implementation Libs.compose.navAnimation
     implementation Libs.compose.coil
+    implementation Libs.compose.icon
 
     implementation project(':download-file-module')
     implementation project(':base-android')

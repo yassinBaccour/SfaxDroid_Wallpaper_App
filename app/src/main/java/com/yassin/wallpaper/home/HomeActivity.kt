@@ -1,5 +1,6 @@
 package com.yassin.wallpaper.home
 
+import SfaxDroidTheme
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -29,8 +30,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainHome {
-                windowsMode(it)
+            SfaxDroidTheme {
+                MainHome {
+                    windowsMode(it)
+                }
             }
         }
         privacyManager.loadConsent(this)

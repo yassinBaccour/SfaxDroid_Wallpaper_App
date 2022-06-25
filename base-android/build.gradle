@@ -16,6 +16,15 @@ android {
         targetSdkVersion androidTargetSdkVersion
     }
 
+    buildFeatures {
+        viewBinding = true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.1'
+    }
+
 }
 
 dependencies {
@@ -31,4 +40,12 @@ dependencies {
     api Libs.lifecycle.livedataViewmodel
     api Libs.lifecycle.lifecycle
     api Libs.androidx.fragmentktx
+
+    implementation Libs.compose.composeUi
+    implementation Libs.compose.composeMaterial
+    implementation Libs.compose.composeUiTooling
+    implementation Libs.compose.layout
+    implementation Libs.compose.navigation
+    implementation Libs.compose.navAnimation
+    implementation Libs.compose.coil
 }
