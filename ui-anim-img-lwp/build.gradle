@@ -18,6 +18,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.1'
     }
 
 }
@@ -35,5 +40,15 @@ dependencies {
 
     kapt Libs.hilt.hiltComplier
     implementation Libs.kotlin.coroutinesAndroid
+
+    implementation Libs.compose.composeUi
+    implementation Libs.compose.composeMaterial
+    implementation Libs.compose.layout
+    implementation Libs.compose.navigation
+    implementation Libs.compose.navAnimation
+    implementation Libs.compose.toolingPreview
+    implementation Libs.compose.coil
+    debugImplementation  Libs.compose.composeUiTooling
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
 }

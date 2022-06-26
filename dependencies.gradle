@@ -119,6 +119,7 @@ ext {
             composeUi       : "androidx.compose.ui:ui:$compose_version",
             composeMaterial : "androidx.compose.material:material:$compose_version",
             composeUiTooling: "androidx.compose.ui:ui-tooling:$compose_version",
+            toolingPreview: "androidx.compose.ui:ui-tooling:$compose_version",
             compiler        : "androidx.compose.compiler:compiler:$compose_version",
             runtime         : "androidx.compose.runtime:runtime:$compose_version",
             livedata        : "androidx.compose.runtime:runtime-livedata:$compose_version",
