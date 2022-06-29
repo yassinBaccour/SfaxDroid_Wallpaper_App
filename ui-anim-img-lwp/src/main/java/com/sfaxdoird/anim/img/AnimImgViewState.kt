@@ -1,6 +1,5 @@
 package com.sfaxdoird.anim.img
 
-import com.sfaxdroid.bases.UiState
 import javax.annotation.concurrent.Immutable
 
 @Immutable
@@ -10,7 +9,7 @@ internal data class AnimImgViewState(
     val isCompleted: Boolean = false,
     val progressionInfo: ProgressionInfo = ProgressionInfo.Idle,
     val progressValue: Pair<Int, Long> = Pair(0, 0)
-) : UiState {
+) {
     companion object {
         val Empty = AnimImgViewState()
     }

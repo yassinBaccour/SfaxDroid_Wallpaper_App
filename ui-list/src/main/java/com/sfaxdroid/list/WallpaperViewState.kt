@@ -19,7 +19,7 @@ internal data class WallpaperViewState(
     var isError: Boolean = false,
     var screenName: String = "",
     var selectedLwpName: String = ""
-) : UiState {
+) {
     companion object {
         val Empty = WallpaperViewState()
     }

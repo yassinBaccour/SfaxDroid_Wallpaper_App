@@ -12,6 +12,8 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Palette
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -31,18 +33,13 @@ import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.list.rememberFlowWithLifecycle
 
 @Composable
-fun WorldImg(
-    selectColor: () -> Unit,
-    selectLiveWallpaper: () -> Unit
-) {
-    WorldImg(viewModel = hiltViewModel(), selectColor, selectLiveWallpaper)
+fun WorldImg() {
+    WorldImg(viewModel = hiltViewModel())
 }
 
 @Composable
 internal fun WorldImg(
-    viewModel: WordImgViewModel,
-    selectColor: () -> Unit,
-    selectLiveWallpaper: () -> Unit
+    viewModel: WordImgViewModel
 ) {
 
     val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
@@ -51,7 +48,7 @@ internal fun WorldImg(
 
     val context = LocalContext.current
 
-    WorldImg(state, selectColor = selectColor, selectLiveWallpaper = {
+    WorldImg(state, selectColor = {}, selectLiveWallpaper = {
         Constants.ifBackgroundChanged = true
         Constants.nbIncrementationAfterChange = 0
         Utils.openLiveWallpaper<LwpService>(context)
@@ -106,7 +103,7 @@ internal fun WorldImg(
         )
         Spacer(Modifier.height(10.dp))
         AsyncImage(
-            model = R.mipmap.ic_palette,
+            model = Icons.Filled.Palette,
             contentDescription = "",
             modifier = Modifier
                 .size(60.dp)
@@ -150,5 +147,5 @@ private fun chooseColor(context: Context) {
 @Preview
 @Composable
 fun WorldImgPreview() {
-    WorldImg({}, {})
+    WorldImg()
 }
