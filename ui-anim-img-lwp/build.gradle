@@ -48,6 +48,7 @@ dependencies {
     implementation Libs.compose.navAnimation
     implementation Libs.compose.toolingPreview
     implementation Libs.compose.coil
+    implementation Libs.compose.icon
     debugImplementation  Libs.compose.composeUiTooling
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sfaxdroid.app.ZipUtils
 import com.sfaxdroid.base.*
@@ -32,7 +33,7 @@ internal class WordImgViewModel @Inject constructor(
     @Named("domain-url") var domainUrl: String,
     @ApplicationContext context: Context
 ) :
-    BaseViewModel<AnimImgViewState>(AnimImgViewState()), DownloadStatusListenerV1 {
+    ViewModel(), DownloadStatusListenerV1 {
 
     private var downloadManager: ThinDownloadManager =
         ThinDownloadManager(Constants.DOWNLOAD_THREAD_POOL_SIZE)
