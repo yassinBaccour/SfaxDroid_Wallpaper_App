@@ -30,6 +30,7 @@ I have other application in other account with different theme (cars, wallpaper,
 - Uses Hilt for dependency injection
 - Architecture Components: Room Lifecycle, Navigation
 - Uses Kotlin Coroutines.
+- Compose migration in Feature/compose branch
 
 ## Migrating
 - First Play Store version -> 2013
