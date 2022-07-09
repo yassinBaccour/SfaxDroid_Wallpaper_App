@@ -31,6 +31,4 @@ dependencies {
 
     api Libs.hilt.hiltLib
     kapt Libs.hilt.hiltAndroidComplier
-
-    kapt Libs.hilt.hiltComplier
 }

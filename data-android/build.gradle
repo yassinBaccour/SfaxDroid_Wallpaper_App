@@ -28,6 +28,7 @@ dependencies {
     api project(':data')
 
     implementation Libs.room.roomKtx
-    kapt Libs.room.roomCompiler
     api Libs.room.room
+    kapt Libs.room.roomCompiler
+
 }
