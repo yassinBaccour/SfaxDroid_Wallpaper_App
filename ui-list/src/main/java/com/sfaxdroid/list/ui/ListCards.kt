@@ -30,7 +30,7 @@ import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 
 @Composable
-fun GenerateItem(obj: ItemWrapperList, openImageDetail: (BaseWallpaperView) -> Unit) {
+internal fun GenerateItem(obj: ItemWrapperList, openImageDetail: (BaseWallpaperView) -> Unit) {
     when (obj.itemType) {
 
         TYPE_WALLPAPER -> {
