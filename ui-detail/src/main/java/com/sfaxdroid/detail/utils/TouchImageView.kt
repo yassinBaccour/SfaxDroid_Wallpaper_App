@@ -840,18 +840,18 @@ internal open class TouchImageView @JvmOverloads constructor(
      * to the view's listener.
      */
     private inner class GestureListener : SimpleOnGestureListener() {
-        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+        override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
             // Pass on to the OnDoubleTapListener if it is present, otherwise let the View handle the click.
             return doubleTapListener?.onSingleTapConfirmed(e) ?: performClick()
         }
 
-        override fun onLongPress(e: MotionEvent?) {
+        override fun onLongPress(e: MotionEvent) {
             performLongClick()
         }
 
         override fun onFling(
-            e1: MotionEvent?,
-            e2: MotionEvent?,
+            e1: MotionEvent,
+            e2: MotionEvent,
             velocityX: Float,
             velocityY: Float
         ): Boolean {
@@ -862,7 +862,7 @@ internal open class TouchImageView @JvmOverloads constructor(
             return super.onFling(e1, e2, velocityX, velocityY)
         }
 
-        override fun onDoubleTap(e: MotionEvent?): Boolean {
+        override fun onDoubleTap(e: MotionEvent): Boolean {
             var consumed = false
             if (e != null && isZoomEnabled) {
                 doubleTapListener?.let {
@@ -879,7 +879,7 @@ internal open class TouchImageView @JvmOverloads constructor(
             return consumed
         }
 
-        override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
+        override fun onDoubleTapEvent(e: MotionEvent): Boolean {
             return doubleTapListener?.onDoubleTapEvent(e) ?: false
         }
     }

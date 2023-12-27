@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_wallpapers">
         <argument
             android:name="keyJsonFileName"
-            android:defaultValue="new.json"
+            android:defaultValue="4.json"
             app:argType="string" />
         <argument
             android:name="keyScreenType"
-            android:defaultValue="NEW"
+            android:defaultValue="CAT"
             app:argType="string" />
         <action
             app:launchSingleTop="true"

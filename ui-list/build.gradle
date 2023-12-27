@@ -19,8 +19,13 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        compose true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion composeCompiler
+    }
+    namespace 'com.sfaxdroid.list'
 }
 
 dependencies {
@@ -30,8 +35,17 @@ dependencies {
 
     api Libs.hilt.hiltLib
     kapt Libs.hilt.hiltAndroidComplier
+    
+    implementation Libs.compose.composeUi
+    implementation Libs.compose.composeMaterial
+    debugImplementation  Libs.compose.composeUiTooling
+    implementation Libs.compose.toolingPreview
+    implementation Libs.compose.layout
+    implementation Libs.compose.navigation
+    implementation Libs.compose.navAnimation
+    implementation Libs.compose.coil
 
-    kapt Libs.hilt.hiltComplier
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     implementation project(':domain')
 

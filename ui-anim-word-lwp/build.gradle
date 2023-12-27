@@ -21,7 +21,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
+    namespace 'com.sfaxdoird.anim.word'
 
 }
 
@@ -34,7 +34,5 @@ dependencies {
     implementation Libs.navigation.navigationKtx
 
     api Libs.hilt.hiltLib
-
-    kapt Libs.hilt.hiltComplier
     kapt Libs.hilt.hiltAndroidComplier
 }

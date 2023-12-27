@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sfaxdroid.app.ZipUtils
 import com.sfaxdroid.base.*
@@ -15,33 +16,24 @@ import com.thin.downloadmanager.DownloadStatusListenerV1
 import com.thin.downloadmanager.ThinDownloadManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Named
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 
 @HiltViewModel
 internal class WordImgViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
-    fileManager: FileManager,
-    deviceManager: DeviceManager,
+    private val savedStateHandle: SavedStateHandle,
+    private val fileManager: FileManager,
+    private val deviceManager: DeviceManager,
     @Named("domain-url") var domainUrl: String,
     @ApplicationContext context: Context
 ) :
-    BaseViewModel<AnimImgViewState>(AnimImgViewState()), DownloadStatusListenerV1 {
-
-    //TODO MVI change with Flow appropriate function
-    var progressValue = MutableLiveData<Pair<Int, Long>>()
-
-    private val pendingActions = MutableSharedFlow<AnimImgAction>()
-    private val _uiEffects = MutableSharedFlow<AnimImgEffect>(extraBufferCapacity = 100)
-
-    val uiEffects: Flow<AnimImgEffect>
-        get() = _uiEffects.asSharedFlow()
+    ViewModel(), DownloadStatusListenerV1 {
 
     private var downloadManager: ThinDownloadManager =
         ThinDownloadManager(Constants.DOWNLOAD_THREAD_POOL_SIZE)
@@ -55,23 +47,31 @@ internal class WordImgViewModel @Inject constructor(
     //TODO MVI add lazy
     var pref: SharedPrefsUtils? = SharedPrefsUtils(context)
 
-    init {
-        viewModelScope.launch {
-            pendingActions.collect {
-                when (it) {
-                    is AnimImgAction.ChangeColor -> {
-                        saveColor(it.color)
-                        setState { copy(color = it.color) }
-                    }
-                    AnimImgAction.OpenLiveWallpaper -> {
-                        viewModelScope.launch {
-                            _uiEffects.emit(AnimImgEffect.GoToLiveWallpaper)
-                        }
-                    }
-                }
-            }
-        }
+    private val selectedColor = MutableStateFlow(0)
+    private val progressValueFlow = MutableStateFlow<Pair<Int, Long>>(Pair(0, 0))
+    private val progressInfoFlow = MutableStateFlow<ProgressionInfo>(ProgressionInfo.Idle)
 
+    val state = combine(
+        selectedColor,
+        progressValueFlow,
+        progressInfoFlow
+    ) { color, progressValue, progressInfo ->
+        AnimImgViewState(
+            color = color,
+            progressValue = progressValue,
+            progressionInfo = progressInfo
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = AnimImgViewState.Empty
+    )
+
+    init {
+        startDownload()
+    }
+
+    private fun startDownload() {
         val lwpFolder =
             fileManager.getTemporaryDirWithFolder(com.sfaxdoird.anim.img.Constants.KEY_LWP_FOLDER_CONTAINER)
 
@@ -114,7 +114,7 @@ internal class WordImgViewModel @Inject constructor(
 
         if (id == mDownloadId1) {
             viewModelScope.launch {
-                setState { copy(progressionInfo = ProgressionInfo.IdOneCompleted) }
+                progressInfoFlow.emit(ProgressionInfo.IdOneCompleted)
             }
             unzipAndDeleteZip()
             mDownloadId2 = downloadManager.add(requestWallpaper)
@@ -122,12 +122,7 @@ internal class WordImgViewModel @Inject constructor(
 
         if (id == mDownloadId2) {
             viewModelScope.launch {
-                setState {
-                    copy(
-                        progressionInfo = ProgressionInfo.IdTwoCompleted,
-                        isCompleted = true
-                    )
-                }
+                progressInfoFlow.emit(ProgressionInfo.IdTwoCompleted)
             }
         }
     }
@@ -137,9 +132,8 @@ internal class WordImgViewModel @Inject constructor(
         errorCode: Int,
         errorMessage: String?
     ) {
-        progressValue.value = Pair(0, 0)
         viewModelScope.launch {
-            setState { copy(isCompleted = false) }
+            progressInfoFlow.emit(ProgressionInfo.Error)
         }
     }
 
@@ -149,7 +143,9 @@ internal class WordImgViewModel @Inject constructor(
         downloadedBytes: Long,
         progress: Int
     ) {
-        progressValue.value = Pair(progress, totalBytes)
+        viewModelScope.launch {
+            progressValueFlow.emit(Pair(progress, totalBytes))
+        }
     }
 
     private fun unzipAndDeleteZip() {
@@ -166,12 +162,11 @@ internal class WordImgViewModel @Inject constructor(
         backgroundFile = null
     }
 
-    fun submitAction(action: AnimImgAction) {
-        viewModelScope.launch { pendingActions.emit(action) }
-    }
-
-    private fun saveColor(color: Int) {
+    fun saveColor(color: Int) {
         pref?.setSetting(com.sfaxdroid.bases.Constants.WALLPAPER_COLOR, color)
+        viewModelScope.launch {
+            selectedColor.emit(color)
+        }
     }
 
 }

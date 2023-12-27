@@ -1,9 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sfaxdoird.anim.img">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
         <service
-            android:name="com.sfaxdoird.anim.img.WordImgLiveWallpaper"
+            android:name="com.sfaxdoird.anim.img.LwpService"
             android:icon="?attr/customLauncherIcon"
             android:label="@string/lwp_word_img_name"
             android:permission="android.permission.BIND_WALLPAPER"

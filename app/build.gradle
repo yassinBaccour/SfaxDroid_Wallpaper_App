@@ -47,30 +47,26 @@ android {
             dimension "app"
             versionCode 92
             versionName "9.2"
-            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_SFAXDROID)
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }
 
         accountTwo {
             applicationIdSuffix = ".liliagame.scarewhotouchme"
             dimension "app"
-            resConfigs('ar', 'xxhdpi')
+            resourceConfigurations += ['ar', 'xxhdpi']
             versionCode 30
             versionName "3.0"
-            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_LILIAGAME)
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
         }
     }
-
     packagingOptions {
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'LICENSE.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/MANIFEST.MF'
+        resources {
+            excludes += ['META-INF/ASL2.0', 'META-INF/LICENSE', 'META-INF/NOTICE', 'LICENSE.txt', 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/MANIFEST.MF']
+        }
     }
+
 
     sourceSets {
         main {
@@ -83,14 +79,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    lintOptions {
-        abortOnError false
-        checkReleaseBuilds false
-        checkDependencies true
-        ignoreTestSources true
-        disable 'StringFormatMatches'
-        disable 'Instantiatable'
-    }
 
     testOptions {
         unitTests {
@@ -104,6 +92,19 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion composeCompiler
+    }
+    namespace 'com.yassin.wallpaper'
+    lint {
+        abortOnError false
+        checkDependencies true
+        checkReleaseBuilds false
+        disable 'StringFormatMatches', 'Instantiatable'
+        ignoreTestSources true
     }
 }
 
@@ -129,6 +130,16 @@ dependencies {
     implementation Libs.google.firebaseAnalytics
     implementation Libs.google.firebaseCrashlytics
     implementation Libs.debugging.timber
+
+    implementation Libs.compose.composeUi
+    implementation Libs.compose.composeMaterial
+    debugImplementation  Libs.compose.composeUiTooling
+    implementation Libs.compose.toolingPreview
+    implementation Libs.compose.layout
+    implementation Libs.compose.navigation
+    implementation Libs.compose.navAnimation
+    implementation Libs.compose.coil
+    implementation Libs.compose.icon
 
     implementation project(':download-file-module')
     implementation project(':base-android')

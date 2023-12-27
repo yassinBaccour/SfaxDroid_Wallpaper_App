@@ -21,17 +21,14 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    namespace 'com.sfaxdroid.timer'
 
 }
 
 dependencies {
     implementation project(':base-android')
     implementation Libs.kotlin.coroutinesAndroid
-
     api Libs.hilt.hiltLib
     kapt Libs.hilt.hiltAndroidComplier
-
-    kapt Libs.hilt.hiltComplier
-
     implementation project(':domain')
 }

@@ -9,12 +9,12 @@ import retrofit2.http.Path
 internal interface ApiClient {
 
     @GET("{file}")
-    fun getLiveWallpapers(
+    fun getAllWallpapers(
         @Path("file") guid: String
     ): Call<WallpaperResponse>
 
     @GET("{file}")
-    fun getAllWallpapers(
+    fun getLiveWallpapers(
         @Path("file") guid: String
     ): Call<WallpaperResponse>
 
