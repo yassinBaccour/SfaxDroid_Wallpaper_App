@@ -54,7 +54,7 @@ android {
         accountTwo {
             applicationIdSuffix = ".liliagame.scarewhotouchme"
             dimension "app"
-            resConfigs 'ar', 'xxhdpi'
+            resourceConfigurations += ['ar', 'xxhdpi']
             versionCode 30
             versionName "3.0"
             buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
