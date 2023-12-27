@@ -2,7 +2,7 @@ ext {
     androidCompileSdkVersion = 33
     androidMinSdkVersion = 21
     androidTargetSdkVersion = 33
-    composeCompiler = "1.1.1"
+    composeCompiler = "1.2.0"
 
     def sfaxLibs = [:]
     Libs = sfaxLibs
@@ -18,7 +18,7 @@ ext {
             libCheckUpdate : "com.github.ben-manes:gradle-versions-plugin:+"
     ]
 
-    kotlinVersion = "1.6.10"
+    kotlinVersion = "1.7.0"
     coroutines = "1.6.3"
     sfaxLibs.kotlin = [
             kotlinStdlib      : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
@@ -114,7 +114,7 @@ ext {
             leakCanary: 'com.squareup.leakcanary:leakcanary-android:2.1',
     ]
 
-    compose_version = '1.2.0-beta01'
+    compose_version = '1.2.0'
     sfaxLibs.compose = [
             composeUi       : "androidx.compose.ui:ui:$compose_version",
             composeMaterial : "androidx.compose.material:material:$compose_version",

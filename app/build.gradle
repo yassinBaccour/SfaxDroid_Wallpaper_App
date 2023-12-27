@@ -54,23 +54,19 @@ android {
         accountTwo {
             applicationIdSuffix = ".liliagame.scarewhotouchme"
             dimension "app"
-            resConfigs('ar', 'xxhdpi')
+            resConfigs 'ar', 'xxhdpi'
             versionCode 30
             versionName "3.0"
             buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
         }
     }
-
     packagingOptions {
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'LICENSE.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/MANIFEST.MF'
+        resources {
+            excludes += ['META-INF/ASL2.0', 'META-INF/LICENSE', 'META-INF/NOTICE', 'LICENSE.txt', 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/MANIFEST.MF']
+        }
     }
+
 
     sourceSets {
         main {
@@ -83,14 +79,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    lintOptions {
-        abortOnError false
-        checkReleaseBuilds false
-        checkDependencies true
-        ignoreTestSources true
-        disable 'StringFormatMatches'
-        disable 'Instantiatable'
-    }
 
     testOptions {
         unitTests {
@@ -109,6 +97,14 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion composeCompiler
+    }
+    namespace 'com.yassin.wallpaper'
+    lint {
+        abortOnError false
+        checkDependencies true
+        checkReleaseBuilds false
+        disable 'StringFormatMatches', 'Instantiatable'
+        ignoreTestSources true
     }
 }
 

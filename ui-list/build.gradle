@@ -25,6 +25,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion composeCompiler
     }
+    namespace 'com.sfaxdroid.list'
 }
 
 dependencies {

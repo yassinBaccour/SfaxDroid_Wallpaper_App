@@ -24,6 +24,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion composeCompiler
     }
+    namespace 'com.sfaxdoird.anim.img'
 
 }
 

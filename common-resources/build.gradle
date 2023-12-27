@@ -10,4 +10,5 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
     }
+    namespace 'com.commun.resources'
 }

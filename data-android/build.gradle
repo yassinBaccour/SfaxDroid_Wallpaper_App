@@ -15,6 +15,7 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
     }
+    namespace 'com.sfaxdroid.data'
 
 }
 
