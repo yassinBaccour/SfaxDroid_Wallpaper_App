@@ -47,7 +47,7 @@ android {
             dimension "app"
             versionCode 92
             versionName "9.2"
-            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_SFAXDROID)
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~1726613607"]
         }
 
@@ -57,7 +57,7 @@ android {
             resConfigs('ar', 'xxhdpi')
             versionCode 30
             versionName "3.0"
-            buildConfigField("String", "APP_INTERSTITIAL_KEY", ADS_INTERSTITIAL_KEY_LILIAGAME)
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
             manifestPlaceholders = [hostName: "ca-app-pub-6263632629106733~4067989099"]
         }
     }
