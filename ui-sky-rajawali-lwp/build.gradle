@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply from: '../dependencies.gradle'
+
 
 android {
 
-    compileSdkVersion androidCompileSdkVersion
+    compileSdkVersion libs.versions.androidCompileSdkVersion.get().toInteger()
 
     defaultConfig {
-        minSdkVersion androidMinSdkVersion
-        targetSdkVersion androidTargetSdkVersion
+        minSdkVersion libs.versions.androidMinSdkVersion.get().toInteger()
+        targetSdkVersion libs.versions.androidTargetSdkVersion.get().toInteger()
     }
 
     sourceSets {
@@ -25,5 +25,5 @@ android {
 }
 
 dependencies {
-    implementation Libs.other.rajawali
+    implementation libs.rajawali
 }

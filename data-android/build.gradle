@@ -20,16 +20,14 @@ android {
 }
 
 dependencies {
-    implementation Libs.kotlin.kotlinStdlib
-
-    implementation Libs.hilt.hiltLib
-    kapt Libs.hilt.hiltAndroidComplier
+    implementation libs.kotlin.stdlib
+    implementation libs.hilt.lib
+    kapt libs.hilt.compiler
 
     implementation project(':base-android')
     api project(':data')
 
-    implementation Libs.room.roomKtx
-    api Libs.room.room
-    kapt Libs.room.roomCompiler
-
+    implementation libs.room.ktx
+    api libs.room
+    kapt libs.room.compiler
 }

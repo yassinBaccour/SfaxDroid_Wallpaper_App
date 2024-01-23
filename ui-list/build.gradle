@@ -31,21 +31,20 @@ android {
 dependencies {
 
     implementation project(':base-android')
-    implementation Libs.kotlin.coroutinesAndroid
+    implementation libs.kotlinx.coroutines.android
 
-    api Libs.hilt.hiltLib
-    kapt Libs.hilt.hiltAndroidComplier
+    api libs.hilt.lib
+    kapt libs.hilt.android.compiler
     
-    implementation Libs.compose.composeUi
-    implementation Libs.compose.composeMaterial
-    debugImplementation  Libs.compose.composeUiTooling
-    implementation Libs.compose.toolingPreview
-    implementation Libs.compose.layout
-    implementation Libs.compose.navigation
-    implementation Libs.compose.navAnimation
-    implementation Libs.compose.coil
-
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    implementation libs.compose.ui
+    implementation libs.compose.material
+    debugImplementation  libs.compose.ui.tooling
+    implementation libs.compose.ui.tooling
+    implementation libs.compose.layout
+    implementation libs.compose.navigation
+    implementation libs.compose.animation
+    implementation libs.coil
+    implementation libs.androidx.hilt.navigation.compose
 
     implementation project(':domain')
 

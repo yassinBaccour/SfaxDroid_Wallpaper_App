@@ -27,8 +27,8 @@ android {
 
 dependencies {
     implementation project(':base-android')
-    implementation Libs.kotlin.coroutinesAndroid
-    api Libs.hilt.hiltLib
-    kapt Libs.hilt.hiltAndroidComplier
+    implementation libs.kotlinx.coroutines.android
+    api libs.hilt.lib
+    kapt libs.hilt.android.compiler
     implementation project(':domain')
 }

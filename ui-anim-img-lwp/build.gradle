@@ -29,27 +29,27 @@ android {
 }
 
 dependencies {
-    implementation Libs.other.colorpicker
+    implementation libs.colorpicker
     implementation project(':base-android')
     implementation project(':download-file-module')
 
-    implementation Libs.navigation.fragmentNavktx
-    implementation Libs.navigation.navigationKtx
+    implementation libs.fragment.nav.ktx
+    implementation libs.navigation.ktx
 
-    api Libs.hilt.hiltLib
-    kapt Libs.hilt.hiltAndroidComplier
+    api libs.hilt.lib
+    kapt libs.hilt.android.compiler
 
-    implementation Libs.kotlin.coroutinesAndroid
+    implementation libs.kotlinx.coroutines.android
 
-    implementation Libs.compose.composeUi
-    implementation Libs.compose.composeMaterial
-    implementation Libs.compose.layout
-    implementation Libs.compose.navigation
-    implementation Libs.compose.navAnimation
-    implementation Libs.compose.toolingPreview
-    implementation Libs.compose.coil
-    implementation Libs.compose.icon
-    debugImplementation  Libs.compose.composeUiTooling
-    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    implementation libs.compose.ui
+    implementation libs.compose.material
+    implementation libs.compose.layout
+    implementation libs.compose.navigation
+    implementation libs.compose.animation
+    implementation libs.compose.ui.tooling
+    implementation libs.coil
+    implementation libs.icon
+    debugImplementation  libs.compose.ui.tooling
+    implementation libs.androidx.hilt.navigation.compose
 
 }

@@ -15,5 +15,5 @@ android {
 }
 
 dependencies {
-    api Libs.other.download
+    api libs.thin.download.manager
 }
