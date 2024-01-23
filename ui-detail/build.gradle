@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    kapt Libs.glide.glideCompîler
+    kapt Libs.glide.glideCompiler
     implementation project(':data')
     implementation project(':base-android')
     implementation Libs.other.crop
