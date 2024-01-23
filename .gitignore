@@ -94,3 +94,7 @@ screenshots/**/*.png
 test_output
 
 *.env*
+/.idea/.gitignore
+/.idea/kotlinc.xml
+/.idea/migrations.xml
+/.idea/vcs.xml
