@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.library")
+    id(libs.plugins.android.lib.get().pluginId)
     id("kotlin-android")
     id("kotlin-kapt")
 }
@@ -26,8 +26,8 @@ dependencies {
     implementation( libs.hilt.lib)
     kapt (libs.hilt.compiler)
 
-    implementation (project(":base-android"))
-    api (project(":data"))
+    implementation (projects.baseAndroid)
+    api (projects.data)
 
     implementation( libs.room.ktx)
     api( libs.room)

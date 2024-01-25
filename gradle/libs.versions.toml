@@ -1,5 +1,6 @@
 [versions]
 gradle = "8.2.1"
+androidPluginVersion = "8.2"
 androidBuildToolsVersion = '31.0.0'
 androidCompileSdkVersion = "33"
 androidMinSdkVersion = "21"
@@ -144,3 +145,9 @@ icon = { group = "androidx.compose.material", name = "material-icons-extended", 
 
 
 [plugins]
+spotless = { id = "com.diffplug.spotless", version.ref = "spotlessVersion" }
+lib-check-update-versions = { id = "com.github.ben-manes.versions", version.ref = "libCheckUpdateVersion" }
+android-lib = { id = "com.android.library" ,version.ref = "androidPluginVersion"}
+kotlin-android = {id="kotlin-android"}
+kotlin-kapt = {id="kotlin-kapt"}
+

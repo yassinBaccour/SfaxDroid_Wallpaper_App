@@ -1,7 +1,7 @@
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    id(libs.plugins.android.lib.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
     kotlin("kapt")
 }
 kapt {
@@ -20,8 +20,8 @@ android {
 }
 
 dependencies {
-    implementation (project(":data-android"))
-    api (project(":data"))
+    implementation (projects.dataAndroid)
+    api (projects.data)
     implementation (libs.hilt.lib)
     kapt( libs.hilt.compiler)
 

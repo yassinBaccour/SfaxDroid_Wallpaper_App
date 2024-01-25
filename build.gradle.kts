@@ -1,4 +1,6 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import java.util.Locale
+
 buildscript {
 
     //apply from: rootProject.file('dependencies.gradle')
@@ -20,8 +22,8 @@ buildscript {
 }
 
 plugins {
-    id("com.diffplug.spotless") version "6.24.0"
-    id("com.github.ben-manes.versions") version "0.51.0"
+    alias(libs.plugins.spotless)
+    alias(libs.plugins.lib.check.update.versions)
 }
 
 allprojects {
@@ -74,7 +76,8 @@ subprojects {
 }
 
 fun isNonStable(version: String): Boolean {
-    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase(Locale.getDefault())
+        .contains(it) }
     val regex = "^[0-9,.v-]+(-r)?$".toRegex()
     val isStable = stableKeyword || regex.matches(version)
     return isStable.not()

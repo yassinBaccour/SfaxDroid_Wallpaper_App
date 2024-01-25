@@ -1,8 +1,8 @@
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    id(libs.plugins.android.lib.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 kapt {
@@ -33,8 +33,8 @@ android {
 }
 
 dependencies {
-    api(project(":base"))
-    api(project(":common-resources"))
+    api(projects.base)
+    api(projects.commonResources)
     kapt(libs.glide.compiler)
     api(libs.androidx.constraintlayout)
     api(libs.androidx.appcompat)

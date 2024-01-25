@@ -1,8 +1,8 @@
 
 plugins{
     id("dagger.hilt.android.plugin")
-    id("com.android.library")
-    kotlin("android")
+    id(libs.plugins.android.lib.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
     kotlin("kapt")
 }
 
@@ -34,7 +34,7 @@ android {
 
 dependencies {
 
-    implementation( project(":base-android"))
+    implementation( projects.baseAndroid)
     implementation( libs.kotlinx.coroutines.android)
 
     api (libs.hilt.lib)
@@ -50,6 +50,6 @@ dependencies {
     implementation( libs.coil)
     implementation( libs.androidx.hilt.navigation.compose)
 
-    implementation( project(":domain"))
+    implementation( projects.domain)
 
 }

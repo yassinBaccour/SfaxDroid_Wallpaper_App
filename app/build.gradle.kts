@@ -132,15 +132,16 @@ dependencies {
     implementation(libs.google.crashlytics.lib)
     implementation(libs.timber)
 
-    implementation(project(":download-file-module"))
-    implementation(project(":base-android"))
-    implementation(project(":domain"))
-    implementation(project(":ui-detail"))
-    implementation(project(":ui-sky-rajawali-lwp"))
-    implementation(project(":ui-anim-img-lwp"))
-    implementation(project(":ui-anim-word-lwp"))
-    implementation(project(":ui-timer-lwp"))
-    implementation(project(":data-android"))
+
+    implementation(projects.downloadFileModule)
+    implementation(projects.baseAndroid)
+    implementation(projects.domain)
+    implementation(projects.uiDetail)
+    implementation(projects.uiSkyRajawaliLwp)
+    implementation(projects.uiAnimImgLwp)
+    implementation(projects.uiAnimWordLwp)
+    implementation(projects.uiTimerLwp)
+    implementation(projects.dataAndroid)
 }
 
 android.applicationVariants.all{

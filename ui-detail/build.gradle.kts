@@ -1,7 +1,7 @@
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    id(libs.plugins.android.lib.get().pluginId)
+    id(libs.plugins.kotlin.android.get().pluginId)
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -27,8 +27,8 @@ android {
 
 dependencies {
     kapt (libs.glide.compiler)
-    implementation (project(":data"))
-    implementation (project(":base-android"))
+    implementation (projects.data)
+    implementation (projects.baseAndroid)
     implementation (libs.crop)
     implementation (libs.androidx.recyclerview)
     api (libs.hilt.lib)

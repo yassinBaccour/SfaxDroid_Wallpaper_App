@@ -2,7 +2,7 @@
 plugins{
     id("kotlin-android")
     id("kotlin-kapt")
-    id("com.android.library")
+    id(libs.plugins.android.lib.get().pluginId)
     id("dagger.hilt.android.plugin")
     id("kotlin-android-extensions")
 }
@@ -29,8 +29,8 @@ android {
 
 dependencies {
     implementation (libs.colorpicker)
-    implementation (project(":base-android"))
-    implementation (project(":download-file-module"))
+    implementation (projects.baseAndroid)
+    implementation (projects.downloadFileModule)
 
     implementation (libs.fragment.nav.ktx)
     implementation (libs.navigation.ktx)
