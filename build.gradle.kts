@@ -24,6 +24,8 @@ buildscript {
 plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.lib.check.update.versions)
+    alias(libs.plugins.ksp)
+
 }
 
 allprojects {

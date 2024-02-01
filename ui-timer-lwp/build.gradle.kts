@@ -4,6 +4,7 @@ plugins {
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
     id("dagger.hilt.android.plugin")
+    alias(libs.plugins.ksp)
 }
 kapt {
     correctErrorTypes = true

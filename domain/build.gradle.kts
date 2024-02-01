@@ -3,6 +3,7 @@ plugins {
     id(libs.plugins.android.lib.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     kotlin("kapt")
+    alias(libs.plugins.ksp)
 }
 kapt {
     correctErrorTypes = true

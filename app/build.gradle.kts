@@ -6,6 +6,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    alias(libs.plugins.ksp)
 }
 
 
@@ -19,12 +20,11 @@ kapt {
 android {
 
     namespace = "com.yassin.wallpaper.WallpaperApplication"
-    compileSdk = 33 // ktebthom bl yed khater ma 7abech ya9ra li fi wst el dependencies.gradle
-
+    compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
     defaultConfig {
         applicationId = "com"
-        minSdk = 21
-        targetSdk = 33
+        minSdk = libs.versions.androidMinSdkVersion.get().toInt()
+        targetSdk = libs.versions.androidTargetSdkVersion.get().toInt()
         multiDexEnabled = true
         buildConfigField("String", "APP_KEY", "API_KEY")
         buildConfigField("String", "JSON_VERSION", "\"v3\"")
@@ -131,8 +131,6 @@ dependencies {
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.crashlytics.lib)
     implementation(libs.timber)
-
-
     implementation(projects.downloadFileModule)
     implementation(projects.baseAndroid)
     implementation(projects.domain)

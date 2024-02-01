@@ -1,13 +1,12 @@
 [versions]
 gradle = "8.2.1"
-androidPluginVersion = "8.2"
-androidBuildToolsVersion = '31.0.0'
+androidPluginVersion = "8.2.1"
 androidCompileSdkVersion = "33"
 androidMinSdkVersion = "21"
 androidTargetSdkVersion = "33"
 kotlinVersion = "1.7.0"
 ktlint = "0.40.0"
-
+kspVersion = "1.8.10-1.0.9"
 spotlessVersion    = '6.7.2'
 libCheckUpdateVersion = "+"
 coroutinesVersion = "1.6.3"
@@ -88,7 +87,7 @@ hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref =
 hilt-view-model = { group = "androidx.hilt", name = "hilt-lifecycle-viewmodel", version.ref = "hiltViewModelVersion" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "sfaxLibsRetrofitVersion" }
 retrofit2-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "sfaxLibsRetrofit2ConverterVersion" }
-glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glideVersion" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "ksp", version.ref = "glideVersion" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion" }
 room = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 room-compiler= { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
@@ -150,4 +149,6 @@ lib-check-update-versions = { id = "com.github.ben-manes.versions", version.ref 
 android-lib = { id = "com.android.library" ,version.ref = "androidPluginVersion"}
 kotlin-android = {id="kotlin-android"}
 kotlin-kapt = {id="kotlin-kapt"}
+ksp = {id ="com.google.devtools.ksp" ,version.ref = "kspVersion"}
+
 

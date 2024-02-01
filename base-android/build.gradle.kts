@@ -3,12 +3,10 @@ plugins {
     id(libs.plugins.android.lib.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id(libs.plugins.kotlin.kapt.get().pluginId)
+    alias(libs.plugins.ksp)
 }
 
-kapt {
-    correctErrorTypes = true
-    useBuildCache = true
-}
+
 
 android {
 
@@ -35,7 +33,7 @@ android {
 dependencies {
     api(projects.base)
     api(projects.commonResources)
-    kapt(libs.glide.compiler)
+    ksp(libs.glide.compiler)
     api(libs.androidx.constraintlayout)
     api(libs.androidx.appcompat)
     api(libs.glide)

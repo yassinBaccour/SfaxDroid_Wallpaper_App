@@ -3,6 +3,7 @@ plugins {
     id(libs.plugins.android.lib.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     kotlin("kapt")
+    alias(libs.plugins.ksp)
     id("dagger.hilt.android.plugin")
 }
 kapt {
@@ -26,7 +27,7 @@ android {
 }
 
 dependencies {
-    kapt (libs.glide.compiler)
+    ksp (libs.glide.compiler)
     implementation (projects.data)
     implementation (projects.baseAndroid)
     implementation (libs.crop)

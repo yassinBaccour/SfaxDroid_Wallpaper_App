@@ -5,6 +5,7 @@ plugins{
     id(libs.plugins.android.lib.get().pluginId)
     id("dagger.hilt.android.plugin")
     id("kotlin-android-extensions")
+    alias(libs.plugins.ksp)
 }
 kapt {
     correctErrorTypes = true
