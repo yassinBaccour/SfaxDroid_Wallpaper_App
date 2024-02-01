@@ -4,6 +4,7 @@
     <string name="screen_wallpaper">Wallpaper</string>
     <string name="screen_category">Category</string>
     <string name="screen_category_show">Category Show</string>
+    <string name="screen_pixa_wall" translatable="false">Pixabay Wallpaper</string> <!-- make it translatable later on -->
     <string name="open_lwp">Open Lwp</string>
     <string name="open_cat">Open</string>
     <string name="preview_desc">Write on your photos and add stickers, frames, filters and other stuff</string>

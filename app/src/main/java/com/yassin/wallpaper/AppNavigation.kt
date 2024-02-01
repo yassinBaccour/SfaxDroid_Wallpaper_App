@@ -36,8 +36,11 @@ internal fun AppNavigation(
         addWallpaperAsStartDestination(navController)
         addLwpAsStartDestination(navController)
         addCatAsStartDestination(navController)
+        addPixaAsStartDestination(navController)
     }
 }
+
+
 
 @ExperimentalAnimationApi
 private fun NavGraphBuilder.addWallpaperAsStartDestination(
@@ -57,6 +60,18 @@ private fun NavGraphBuilder.addWallpaperAsStartDestination(
     }
 }
 
+@ExperimentalAnimationApi
+private fun NavGraphBuilder.addPixaAsStartDestination(
+    navController: NavController
+) {
+    navigation(
+        route = NavScreen.Wallpaper.route,
+        startDestination = "home/" + NavScreen.Wallpaper.route,
+    ) {
+        addPixaWallpaper(
+            navController, "home/" + NavScreen.Pixabay.route)
+    }
+}
 @ExperimentalAnimationApi
 private fun NavGraphBuilder.addLwpAsStartDestination(
     navController: NavController
@@ -112,6 +127,19 @@ fun NavGraphBuilder.addWallpaper(
         }
     }
 }
+
+@ExperimentalAnimationApi
+fun NavGraphBuilder.addPixaWallpaper(
+    navController: NavController,
+    root: String
+) {
+    composable(root) {
+        Screen()
+
+    }
+}
+
+
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addLiveWallpaper(

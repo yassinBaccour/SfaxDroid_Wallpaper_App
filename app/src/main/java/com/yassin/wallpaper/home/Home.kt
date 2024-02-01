@@ -118,6 +118,9 @@ private fun NavController.currentScreenAsState(): State<NavScreen> {
                 destination.hierarchy.any { it.route == NavScreen.Category.route } -> {
                     selectedItem.value = NavScreen.Category
                 }
+                destination.hierarchy.any { it.route == NavScreen.Pixabay.route } -> {
+                    selectedItem.value = NavScreen.Pixabay
+                }
             }
         }
         addOnDestinationChangedListener(listener)
@@ -151,5 +154,13 @@ private val HomeNavigationItems = listOf(
         contentDescriptionResId = R.string.screen_category,
         iconImageVector = R.drawable.ic_category,
         iconImageVectorSelected = R.drawable.ic_category_selected
+    ),
+    HomeNavigationItem(
+        screen = NavScreen.Pixabay,
+        labelResId = R.string.screen_pixa_wall,
+        contentDescriptionResId = R.string.screen_pixa_wall,
+        iconImageVector = R.drawable.ic_nature,
+        iconImageVectorSelected = R.drawable.ic_lwp_selected
     )
+
 )

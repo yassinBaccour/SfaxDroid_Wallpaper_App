@@ -5,4 +5,5 @@ sealed class NavScreen(val route: String) {
     object LiveWallpaper : NavScreen("liveWallpaper")
     object Category : NavScreen("category")
     object Detail : NavScreen("detail")
+    object Pixabay : NavScreen("pixabay")
 }
