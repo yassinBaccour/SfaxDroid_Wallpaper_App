@@ -5,31 +5,38 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yassin.wallpaper.Model.PixaPicture
+import com.yassin.wallpaper.Model.PixaResponse
 import com.yassin.wallpaper.network.ApiService
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
-const val pixaBayApiKey = "19985524-f627984e6e929e47e060fd2ff"
-const val pixaBaySearchTerm = "nature"
+const val pixaBaySearchTerm = "landscape"
 const val pixaBayImageType = "photo"
-const val pixaBayOrientation = "vertical"
+//const val pixaBayOrientation = "vertical"
+const val pixaBayPerPage = "200"
+const val pixaBayCategory = "nature"
+const val pixaBaySafeSearch = "true"
 class PictureViewModel: ViewModel(){
 
-    var pictureListResponse:List<PixaPicture> by mutableStateOf(listOf())
+    var pixaApiResponse:PixaResponse by mutableStateOf(PixaResponse(0,0, listOf()))
     var errorMessage:String by mutableStateOf("")
     fun getPictureList(){
         viewModelScope.launch {
             val apiService = ApiService.getInstance()
             try {
                 val response = apiService.getImages(
-                    pixaBayApiKey,
                     pixaBaySearchTerm,
                     pixaBayImageType,
-                    pixaBayOrientation
+                    //pixaBayOrientation,
+                    pixaBayPerPage,
+                    pixaBayCategory,
+                    pixaBaySafeSearch
                 )
-                pictureListResponse = response
+                pixaApiResponse = response
+                Timber.e("response: ${response.hits.size}")
             }catch (e:Exception){
                 errorMessage = e.message.toString()
+                Timber.e("error: $errorMessage")
             }
         }
     }

@@ -21,6 +21,7 @@ import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
 import com.sfaxdroid.list.ui.WallpaperList
+import com.yassin.wallpaper.view.PixaScreen
 
 @ExperimentalAnimationApi
 @Composable
@@ -31,7 +32,7 @@ internal fun AppNavigation(
     AnimatedNavHost(
         navController = navController,
         startDestination = NavScreen.Wallpaper.route,
-        modifier = modifier,
+        modifier = modifier
     ) {
         addWallpaperAsStartDestination(navController)
         addLwpAsStartDestination(navController)
@@ -60,18 +61,6 @@ private fun NavGraphBuilder.addWallpaperAsStartDestination(
     }
 }
 
-@ExperimentalAnimationApi
-private fun NavGraphBuilder.addPixaAsStartDestination(
-    navController: NavController
-) {
-    navigation(
-        route = NavScreen.Wallpaper.route,
-        startDestination = "home/" + NavScreen.Wallpaper.route,
-    ) {
-        addPixaWallpaper(
-            navController, "home/" + NavScreen.Pixabay.route)
-    }
-}
 @ExperimentalAnimationApi
 private fun NavGraphBuilder.addLwpAsStartDestination(
     navController: NavController
@@ -109,6 +98,24 @@ private fun NavGraphBuilder.addCatAsStartDestination(
 }
 
 @ExperimentalAnimationApi
+private fun NavGraphBuilder.addPixaAsStartDestination(
+    navController: NavController
+) {
+    navigation(
+        route = NavScreen.Pixabay.route,
+        startDestination = "home/" + NavScreen.Pixabay.route,
+    ) {
+        addPixaWallpaper(
+            navController, "home/" + NavScreen.Pixabay.route, listOf(
+                navArgument("keyJsonFileName") {
+                    defaultValue = "pixa.json"
+                })
+        )
+
+    }
+}
+
+@ExperimentalAnimationApi
 fun NavGraphBuilder.addWallpaper(
     navController: NavController,
     root: String,
@@ -127,19 +134,6 @@ fun NavGraphBuilder.addWallpaper(
         }
     }
 }
-
-@ExperimentalAnimationApi
-fun NavGraphBuilder.addPixaWallpaper(
-    navController: NavController,
-    root: String
-) {
-    composable(root) {
-        Screen()
-
-    }
-}
-
-
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addLiveWallpaper(
@@ -193,6 +187,16 @@ fun NavGraphBuilder.addDetail(
 ) {
     composable(root, arguments = list) {
 
+    }
+}
+@ExperimentalAnimationApi
+fun NavGraphBuilder.addPixaWallpaper(
+    navController: NavController,
+    root: String,
+    list: List<NamedNavArgument>
+) {
+    composable(root, arguments = list) {
+        PixaScreen()
     }
 }
 

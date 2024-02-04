@@ -160,7 +160,6 @@ private val HomeNavigationItems = listOf(
         labelResId = R.string.screen_pixa_wall,
         contentDescriptionResId = R.string.screen_pixa_wall,
         iconImageVector = R.drawable.ic_nature,
-        iconImageVectorSelected = R.drawable.ic_lwp_selected
+        iconImageVectorSelected = R.drawable.ic_nature_selected
     )
-
 )
