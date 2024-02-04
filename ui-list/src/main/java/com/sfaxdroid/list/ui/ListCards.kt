@@ -22,11 +22,13 @@ import coil.compose.AsyncImage
 import com.sfaxdroid.base.Constants.TYPE_CAROUSEL
 import com.sfaxdroid.base.Constants.TYPE_CAT
 import com.sfaxdroid.base.Constants.TYPE_LWP
+import com.sfaxdroid.base.Constants.TYPE_PIXA
 import com.sfaxdroid.base.Constants.TYPE_WALLPAPER
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import com.sfaxdroid.data.mappers.LwpItem
+import com.sfaxdroid.data.mappers.PixaItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 
 @Composable
@@ -59,6 +61,7 @@ internal fun GenerateItem(obj: ItemWrapperList, openImageDetail: (BaseWallpaperV
                 openImageDetail(item)
             }
         }
+
     }
 }
 

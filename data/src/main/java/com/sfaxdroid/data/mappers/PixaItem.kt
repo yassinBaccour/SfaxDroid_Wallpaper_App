@@ -1,6 +1,6 @@
-package com.yassin.wallpaper.Model
+package com.sfaxdroid.data.mappers
 
-data class PixaPicture(
+data class PixaItem(
     val collections: Int,
     val comments: Int,
     val downloads: Int,

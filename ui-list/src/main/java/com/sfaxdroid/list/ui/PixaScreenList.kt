@@ -1,4 +1,4 @@
-package com.yassin.wallpaper.view
+package com.sfaxdroid.list.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,9 +16,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.yassin.wallpaper.Model.PixaPicture
-import com.yassin.wallpaper.viewModel.PictureViewModel
-import timber.log.Timber
+import com.sfaxdroid.data.mappers.PixaItem
+import com.sfaxdroid.list.viewmodels.PictureViewModel
+
 
 val pictureViewModel by lazy { PictureViewModel() }
 
@@ -42,7 +42,7 @@ fun PixaScreen() {
 
 
 @Composable
-fun PictureItem(picture: PixaPicture) {
+fun PictureItem(picture: PixaItem) {
 
     AsyncImage(
         modifier = Modifier
@@ -58,16 +58,14 @@ fun PictureItem(picture: PixaPicture) {
 
 
 @Composable
-fun Pictures(pictureList: List<PixaPicture>) {
+fun Pictures(pictureList: List<PixaItem>) {
 
     LazyVerticalGrid(
         modifier = Modifier.fillMaxSize(),
         columns = GridCells.Adaptive(124.dp)
     ) {
-        Timber.d("PictureListSize: ${pictureList.size}")
         items(pictureList.size) { index ->
             PictureItem(pictureList[index])
-            Timber.d("PictureItemIndex: $index")
         }
     }
 }

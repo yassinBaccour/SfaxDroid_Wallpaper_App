@@ -21,7 +21,7 @@ import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
 import com.sfaxdroid.list.ui.WallpaperList
-import com.yassin.wallpaper.view.PixaScreen
+import com.sfaxdroid.list.ui.PixaScreen
 
 @ExperimentalAnimationApi
 @Composable
