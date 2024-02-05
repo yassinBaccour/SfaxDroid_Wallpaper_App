@@ -11,8 +11,6 @@ import kotlinx.coroutines.launch
 
 const val pixaBaySearchTerm = "landscape"
 const val pixaBayImageType = "photo"
-
-//const val pixaBayOrientation = "vertical"
 const val pixaBayPerPage = "200"
 const val pixaBayCategory = "nature"
 const val pixaBaySafeSearch = "true"
@@ -28,7 +26,6 @@ class PictureViewModel : ViewModel() {
                 val response = apiService.getImages(
                     pixaBaySearchTerm,
                     pixaBayImageType,
-                    //pixaBayOrientation,
                     pixaBayPerPage,
                     pixaBayCategory,
                     pixaBaySafeSearch

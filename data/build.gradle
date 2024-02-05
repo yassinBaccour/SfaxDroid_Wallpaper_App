@@ -16,3 +16,4 @@ dependencies {
     api Libs.kotlin.coroutinesCore
     api Libs.room.roomCommon
 }
+

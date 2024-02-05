@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.core.os.ConfigurationCompat
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.PreferencesManager
-import com.yassin.wallpaper.BuildConfig
 import com.sfaxdroid.data.entity.AppName
+import com.yassin.wallpaper.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +20,7 @@ object AppModule {
 
     @Provides
     fun provideBaseUrl(): String = BuildConfig.APP_KEY
+
 
     @Provides
     fun provideJsonVersion(): String = BuildConfig.JSON_VERSION

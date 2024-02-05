@@ -21,6 +21,7 @@ android {
         targetSdkVersion androidTargetSdkVersion
         multiDexEnabled true
         buildConfigField("String", "APP_KEY", API_KEY)
+        buildConfigField("String", "API_KEY_PIXABAY", API_KEY_PIXA_BAY)
         buildConfigField("String", "JSON_VERSION", '"v3"')
         javaCompileOptions {
             annotationProcessorOptions {

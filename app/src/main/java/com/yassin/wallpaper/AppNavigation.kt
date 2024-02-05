@@ -20,8 +20,8 @@ import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
-import com.sfaxdroid.list.ui.WallpaperList
 import com.sfaxdroid.list.ui.PixaScreen
+import com.sfaxdroid.list.ui.WallpaperList
 
 @ExperimentalAnimationApi
 @Composable
@@ -40,7 +40,6 @@ internal fun AppNavigation(
         addPixaAsStartDestination(navController)
     }
 }
-
 
 
 @ExperimentalAnimationApi
@@ -111,7 +110,6 @@ private fun NavGraphBuilder.addPixaAsStartDestination(
                     defaultValue = "pixa.json"
                 })
         )
-
     }
 }
 
@@ -147,15 +145,19 @@ fun NavGraphBuilder.addLiveWallpaper(
                 is LiveWallpaper.WordImg -> {
                     //navToTexture(Constants.KEY_WORD_IMG_LWP, wallpaperObject.name)
                 }
+
                 is LiveWallpaper.SkyView -> {
                     //Utils.openLiveWallpaper<SkyLiveWallpaper>(requireContext())
                 }
+
                 is LiveWallpaper.TimerLwp -> {
                     //navToTimer(wallpaperObject.name)
                 }
+
                 is LiveWallpaper.Word2d -> {
                     //navToTexture(Constants.KEY_ANIM_2D_LWP, wallpaperObject.name)
                 }
+
                 else -> {}
             }
         }
@@ -189,6 +191,7 @@ fun NavGraphBuilder.addDetail(
 
     }
 }
+
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addPixaWallpaper(
     navController: NavController,
@@ -220,6 +223,7 @@ private fun openWallpaperByType(
                 )
             }
         }
+
         Constants.KEY_ANIM_2D_LWP -> {
             Bundle().apply {
                 putString(
@@ -232,6 +236,7 @@ private fun openWallpaperByType(
                 )
             }
         }
+
         Constants.KEY_RIPPLE_LWP -> {
             Bundle().apply {
                 putString(
@@ -247,6 +252,7 @@ private fun openWallpaperByType(
                 }
             }
         }
+
         Constants.KEY_ADD_TIMER_LWP -> {
             showDetailViewActivity(
                 navController,
@@ -255,6 +261,7 @@ private fun openWallpaperByType(
                 appName
             )
         }
+
         Constants.KEY_ADDED_LIST_TIMER_LWP -> {
             showDetailViewActivity(
                 navController,
@@ -263,6 +270,7 @@ private fun openWallpaperByType(
                 appName
             )
         }
+
         else -> {
             showDetailViewActivity(navController, wallpaperObject, appName = appName)
         }
