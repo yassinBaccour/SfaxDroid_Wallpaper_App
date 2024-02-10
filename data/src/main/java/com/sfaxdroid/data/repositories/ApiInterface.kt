@@ -11,9 +11,9 @@ import retrofit2.http.Query
 interface ApiService {
 
 
-    @GET("?key=19985524-f627984e6e929e47e060fd2ff")
-
+    @GET("/api/")
     suspend fun getImages(
+        @Query("key") apiKey: String,
         @Query("q") searchTerm: String,
         @Query("image_type") imageType: String,
         @Query("per_page") perPage: String,
@@ -22,9 +22,8 @@ interface ApiService {
     ): PixaResponse
 
     companion object {
-        //const val PIXABAY_API_KEY = BuildConfig.
-        const val BASE_URL = "https://pixabay.com/api/"
-        var apiService: ApiService? = null
+        private const val BASE_URL = "https://pixabay.com"
+        private var apiService: ApiService? = null
         fun getInstance(): ApiService {
             if (apiService == null) {
                 apiService = Retrofit.Builder()

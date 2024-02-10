@@ -34,6 +34,10 @@ object AppModule {
     fun provideAdsInterstitialKey(): String = BuildConfig.APP_INTERSTITIAL_KEY
 
     @Provides
+    @Named("pixabay-key")
+    fun providePixaKey(): String = BuildConfig.API_KEY_PIXABAY
+
+    @Provides
     @Named("appLanguage")
     fun getIsArabic(@ApplicationContext context: Context): String {
         val local = ConfigurationCompat.getLocales(context.resources.configuration)[0]

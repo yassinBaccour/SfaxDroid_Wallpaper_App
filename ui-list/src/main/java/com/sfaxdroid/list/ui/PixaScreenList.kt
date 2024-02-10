@@ -13,19 +13,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.sfaxdroid.data.mappers.PixaItem
-import com.sfaxdroid.list.viewmodels.PictureViewModel
+import com.sfaxdroid.list.viewmodels.PixaViewModel
 
 
-val pictureViewModel by lazy { PictureViewModel() }
 
-@Preview
+
+
 @Composable
-fun PixaScreen() {
-    pictureViewModel.getPictureList()
+fun PixaWallpaperList() {
+    PixaWallpaperList(pixaViewModel = hiltViewModel())
+
+}
+
+@Composable
+fun PixaWallpaperList(pixaViewModel: PixaViewModel) {
+    pixaViewModel.getPictureList()
     Surface(
         modifier = Modifier
             .background(Color.Blue)
@@ -35,7 +41,7 @@ fun PixaScreen() {
         elevation = 8.dp,
         shape = RoundedCornerShape(2)
     ) {
-        Pictures(pictureViewModel.pixaApiResponse.hits)
+        Pictures(pixaViewModel.pixaApiResponse.hits)
     }
 
 }

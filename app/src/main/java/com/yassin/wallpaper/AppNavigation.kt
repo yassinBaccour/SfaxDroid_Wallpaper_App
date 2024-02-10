@@ -20,7 +20,7 @@ import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
-import com.sfaxdroid.list.ui.PixaScreen
+import com.sfaxdroid.list.ui.PixaWallpaperList
 import com.sfaxdroid.list.ui.WallpaperList
 
 @ExperimentalAnimationApi
@@ -199,7 +199,7 @@ fun NavGraphBuilder.addPixaWallpaper(
     list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
-        PixaScreen()
+        PixaWallpaperList()
     }
 }
 
