@@ -1,4 +1,4 @@
-package com.sfaxdroid.list.viewmodels
+package com.sfaxdroid.list.pixa
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,12 +13,16 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class PixaViewModel
+class PixaBayViewModel
 @Inject constructor(
     private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase
 ) : ViewModel() {
 
     var pixaApiResponse: PixaResponse by mutableStateOf(PixaResponse(0, 0, listOf()))
+
+    init {
+        getPictureList()
+    }
 
     fun getPictureList() {
         viewModelScope.launch {

@@ -8,6 +8,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -15,12 +16,15 @@ import com.google.accompanist.navigation.animation.navigation
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.extension.getFullUrl
 import com.sfaxdroid.bases.NavScreen
+import com.sfaxdroid.bases.decodeUrl
+import com.sfaxdroid.bases.encodeUrl
 import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
+import com.sfaxdroid.list.detail.WallpaperDetail
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
-import com.sfaxdroid.list.ui.PixaWallpaperList
+import com.sfaxdroid.list.pixa.PixaBayWallpapers
 import com.sfaxdroid.list.ui.WallpaperList
 
 @ExperimentalAnimationApi
@@ -51,12 +55,13 @@ private fun NavGraphBuilder.addWallpaperAsStartDestination(
         startDestination = "home/" + NavScreen.Wallpaper.route,
     ) {
         addWallpaper(
-            navController, "home/" + NavScreen.Wallpaper.route, listOf(
-                navArgument("keyJsonFileName") {
-                    defaultValue = "4k.json"
-                })
+            navController,
+            "home/" + NavScreen.Wallpaper.route,
+            listOf(navArgument("keyJsonFileName") {
+                defaultValue = "4k.json"
+            })
         )
-        addDetail(navController, "home/" + NavScreen.Detail.route, arrayListOf())
+        addDetail(navController, "home/" + NavScreen.Detail.route)
     }
 }
 
@@ -69,10 +74,11 @@ private fun NavGraphBuilder.addLwpAsStartDestination(
         startDestination = "home/" + NavScreen.LiveWallpaper.route,
     ) {
         addLiveWallpaper(
-            navController, "home/" + NavScreen.LiveWallpaper.route, listOf(
-                navArgument("keyJsonFileName") {
-                    defaultValue = "lwp.json"
-                })
+            navController,
+            "home/" + NavScreen.LiveWallpaper.route,
+            listOf(navArgument("keyJsonFileName") {
+                defaultValue = "lwp.json"
+            })
         )
     }
 }
@@ -86,13 +92,14 @@ private fun NavGraphBuilder.addCatAsStartDestination(
         startDestination = "home/" + NavScreen.Category.route,
     ) {
         addCategory(
-            navController, "home/" + NavScreen.Category.route, listOf(
-                navArgument("keyJsonFileName") {
-                    defaultValue = "category.json"
-                })
+            navController,
+            "home/" + NavScreen.Category.route,
+            listOf(navArgument("keyJsonFileName") {
+                defaultValue = "category.json"
+            })
         )
         addWallpaper(navController, "home/" + NavScreen.Wallpaper.route, arrayListOf())
-        addDetail(navController, "home/" + NavScreen.Detail.route, arrayListOf())
+        addDetail(navController, "home/" + NavScreen.Detail.route)
     }
 }
 
@@ -102,33 +109,22 @@ private fun NavGraphBuilder.addPixaAsStartDestination(
 ) {
     navigation(
         route = NavScreen.Pixabay.route,
-        startDestination = "home/" + NavScreen.Pixabay.route,
+        startDestination = NavScreen.Pixabay.route + "home",
     ) {
-        addPixaWallpaper(
-            navController, "home/" + NavScreen.Pixabay.route, listOf(
-                navArgument("keyJsonFileName") {
-                    defaultValue = "pixa.json"
-                })
-        )
-        addDetail(navController, "home/" + NavScreen.Detail.route, arrayListOf())
+        addPixaWallpaper(navController, NavScreen.Pixabay.route + "home")
+        addDetail(navController, NavScreen.Pixabay.route + NavScreen.Detail.route + "/{url}")
     }
 }
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addWallpaper(
-    navController: NavController,
-    root: String,
-    list: List<NamedNavArgument>
+    navController: NavController, root: String, list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
         WallpaperList { baseWallpaperView, selectedLwpName, screenName, appName ->
             val wallpaper = baseWallpaperView as SimpleWallpaperView
             openWallpaperByType(
-                navController,
-                wallpaper,
-                selectedLwpName,
-                screenName,
-                appName
+                navController, wallpaper, selectedLwpName, screenName, appName
             )
         }
     }
@@ -136,9 +132,7 @@ fun NavGraphBuilder.addWallpaper(
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addLiveWallpaper(
-    navController: NavController,
-    root: String,
-    list: List<NamedNavArgument>
+    navController: NavController, root: String, list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
         LiveWallpaperList {
@@ -167,9 +161,7 @@ fun NavGraphBuilder.addLiveWallpaper(
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addCategory(
-    navController: NavController,
-    root: String,
-    list: List<NamedNavArgument>
+    navController: NavController, root: String, list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
         CategoryList {
@@ -184,23 +176,22 @@ fun NavGraphBuilder.addCategory(
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addDetail(
-    navController: NavController,
-    root: String,
-    list: List<NamedNavArgument>
+    navController: NavController, root: String
 ) {
-    composable(root, arguments = list) {
-
+    composable(
+        root,
+        arguments = listOf(navArgument("url") { type = NavType.StringType })
+    ) { backStackEntry ->
+        WallpaperDetail(backStackEntry.arguments?.getString("url")?.decodeUrl())
     }
 }
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.addPixaWallpaper(
-    navController: NavController,
-    root: String,
-    list: List<NamedNavArgument>
+    navController: NavController, root: String
 ) {
-    composable(root, arguments = list) {
-        PixaWallpaperList(navController)
+    composable(root) {
+        PixaBayWallpapers(navController)
     }
 }
 
@@ -215,12 +206,10 @@ private fun openWallpaperByType(
         Constants.KEY_WORD_IMG_LWP -> {
             Bundle().apply {
                 putString(
-                    Constants.EXTRA_URL_TO_DOWNLOAD,
-                    wallpaperObject.detailUrl.getFullUrl()
+                    Constants.EXTRA_URL_TO_DOWNLOAD, wallpaperObject.detailUrl.getFullUrl()
                 )
                 putString(
-                    Constants.EXTRA_SCREEN_NAME,
-                    screenName
+                    Constants.EXTRA_SCREEN_NAME, screenName
                 )
             }
         }
@@ -228,12 +217,10 @@ private fun openWallpaperByType(
         Constants.KEY_ANIM_2D_LWP -> {
             Bundle().apply {
                 putString(
-                    Constants.EXTRA_URL_TO_DOWNLOAD,
-                    wallpaperObject.detailUrl.getFullUrl()
+                    Constants.EXTRA_URL_TO_DOWNLOAD, wallpaperObject.detailUrl.getFullUrl()
                 )
                 putString(
-                    Constants.EXTRA_SCREEN_NAME,
-                    screenName
+                    Constants.EXTRA_SCREEN_NAME, screenName
                 )
             }
         }
@@ -241,12 +228,10 @@ private fun openWallpaperByType(
         Constants.KEY_RIPPLE_LWP -> {
             Bundle().apply {
                 putString(
-                    Constants.EXTRA_IMG_URL,
-                    wallpaperObject.detailUrl.getFullUrl()
+                    Constants.EXTRA_IMG_URL, wallpaperObject.detailUrl.getFullUrl()
                 )
                 putBoolean(
-                    Constants.KEY_IS_FULL_SCREEN,
-                    appName == AppName.AccountTwo
+                    Constants.KEY_IS_FULL_SCREEN, appName == AppName.AccountTwo
                 )
                 if (selectedLwpName.isNotEmpty()) {
                     putString(Constants.KEY_LWP_NAME, selectedLwpName)
@@ -256,19 +241,13 @@ private fun openWallpaperByType(
 
         Constants.KEY_ADD_TIMER_LWP -> {
             showDetailViewActivity(
-                navController,
-                wallpaperObject,
-                Constants.KEY_ADD_TIMER_LWP,
-                appName
+                navController, wallpaperObject, Constants.KEY_ADD_TIMER_LWP, appName
             )
         }
 
         Constants.KEY_ADDED_LIST_TIMER_LWP -> {
             showDetailViewActivity(
-                navController,
-                wallpaperObject,
-                Constants.KEY_ADDED_LIST_TIMER_LWP,
-                appName
+                navController, wallpaperObject, Constants.KEY_ADDED_LIST_TIMER_LWP, appName
             )
         }
 
@@ -286,12 +265,10 @@ private fun showDetailViewActivity(
 ) {
     Bundle().apply {
         putString(
-            Constants.EXTRA_IMG_URL,
-            wallpaperObject.detailUrl.getFullUrl()
+            Constants.EXTRA_IMG_URL, wallpaperObject.detailUrl.getFullUrl()
         )
         putBoolean(
-            Constants.KEY_IS_FULL_SCREEN,
-            appName == AppName.AccountTwo
+            Constants.KEY_IS_FULL_SCREEN, appName == AppName.AccountTwo
         )
         if (lwpName.isNotEmpty()) {
             putString(Constants.KEY_LWP_NAME, lwpName)
