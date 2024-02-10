@@ -110,6 +110,7 @@ private fun NavGraphBuilder.addPixaAsStartDestination(
                     defaultValue = "pixa.json"
                 })
         )
+        addDetail(navController, "home/" + NavScreen.Detail.route, arrayListOf())
     }
 }
 
@@ -199,7 +200,7 @@ fun NavGraphBuilder.addPixaWallpaper(
     list: List<NamedNavArgument>
 ) {
     composable(root, arguments = list) {
-        PixaWallpaperList()
+        PixaWallpaperList(navController)
     }
 }
 

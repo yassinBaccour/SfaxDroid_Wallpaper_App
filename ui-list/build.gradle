@@ -34,8 +34,8 @@ dependencies {
     implementation Libs.kotlin.coroutinesAndroid
 
     api Libs.hilt.hiltLib
+    implementation project(':ui-detail')
     kapt Libs.hilt.hiltAndroidComplier
-    
     implementation Libs.compose.composeUi
     implementation Libs.compose.composeMaterial
     debugImplementation  Libs.compose.composeUiTooling
