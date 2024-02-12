@@ -17,14 +17,13 @@ import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.extension.getFullUrl
 import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.bases.decodeUrl
-import com.sfaxdroid.bases.encodeUrl
 import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 import com.sfaxdroid.list.detail.WallpaperDetail
+import com.sfaxdroid.list.pixa.PixaBayWallpapers
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
-import com.sfaxdroid.list.pixa.PixaBayWallpapers
 import com.sfaxdroid.list.ui.WallpaperList
 
 @ExperimentalAnimationApi

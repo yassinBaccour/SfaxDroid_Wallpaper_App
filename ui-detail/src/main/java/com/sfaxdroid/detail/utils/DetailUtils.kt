@@ -26,7 +26,7 @@ import com.sfaxdroid.detail.ActionTypeEnum
 import java.io.File
 import java.io.IOException
 
-internal class DetailUtils {
+ class DetailUtils {
 
     companion object {
 
@@ -51,6 +51,9 @@ internal class DetailUtils {
                                 url.getFileName(),
                                 Constants.SAVE_TEMPORARY,
                             )
+                        if (action == ActionTypeEnum.SetAsWallpaper && isSaved) {
+                            setWallpaper(resource,context, Constants.MIN_WIDTH)
+                        }
                         doActionAfterSave(isSaved, action)
                         resource.recycle()
                     }
@@ -113,7 +116,7 @@ internal class DetailUtils {
                     WallpaperManager.getInstance(context)
                 val width = wallpaperManager.desiredMinimumWidth
                 val height = wallpaperManager.desiredMinimumHeight
-                if (width > wallpaper.width && height > wallpaper.height && screenWidthPixels < Constants.MIN_WIDHT
+                if (width > wallpaper.width && height > wallpaper.height && screenWidthPixels < Constants.MIN_WIDTH
                 ) {
                     val xPadding = Math.max(0, width - wallpaper.width) / 2
                     val yPadding = Math.max(0, height - wallpaper.height) / 2

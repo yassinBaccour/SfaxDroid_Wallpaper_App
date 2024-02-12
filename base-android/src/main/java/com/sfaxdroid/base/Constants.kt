@@ -18,7 +18,7 @@ object Constants {
         const val ZIP_FOLDER_NAME = "DouaFolder"
         const val PREFERENCES_NAME = "AllahWaterRippleLwp"
         const val DOWNLOAD_THREAD_POOL_SIZE = 4
-        const val MIN_WIDHT = 600
+        const val MIN_WIDTH = 600
         const val SAVE_TEMPORARY = 0
         const val SAVE_PERMANENT = 1
         const val KEY_IS_FULL_SCREEN = "KeyIsFullScreen"

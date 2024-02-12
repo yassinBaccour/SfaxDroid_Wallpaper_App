@@ -27,6 +27,7 @@ import com.sfaxdroid.base.utils.Utils
 import com.sfaxdroid.detail.databinding.ActivityDetailsBinding
 import com.sfaxdroid.detail.utils.DetailUtils
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.decodeBitmapAndSetAsLiveWallpaper
+import com.sfaxdroid.detail.utils.DetailUtils.Companion.saveToFileToTempsDirAndChooseAction
 import com.sfaxdroid.detail.utils.DetailUtils.Companion.setWallpaper
 import com.sfaxdroid.detail.utils.TouchImageView
 import com.soundcloud.android.crop.Crop
@@ -35,7 +36,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.lang.Exception
 import java.lang.reflect.Method
 import javax.inject.Inject
 import javax.inject.Named
@@ -154,10 +154,12 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
                 ActionTypeEnum.MovePerDir,
                 currentUrl
             )
+
             Constants.KEY_ADDED_LIST_TIMER_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.Delete,
                 currentUrl
             )
+
             Constants.KEY_RIPPLE_LWP -> saveTempsDorAndDoAction(
                 ActionTypeEnum.SendLwp,
                 currentUrl
@@ -251,12 +253,14 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
                     currentUrl
                 )
             }
+
             R.id.button_chooser -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.OpenNativeChooser,
                     currentUrl
                 )
             }
+
             R.id.button_share -> {
                 saveTempsDorAndDoAction(
                     ActionTypeEnum.Share,
@@ -276,9 +280,11 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
                 ActionTypeEnum.OpenNativeChooser -> {
                     openNativeChooser()
                 }
+
                 ActionTypeEnum.Share -> {
                     createIntent()
                 }
+
                 ActionTypeEnum.MovePerDir -> {
                     saveFileToPermanentGallery(
                         currentUrl,
@@ -286,17 +292,20 @@ class DetailsFragment : Fragment(R.layout.activity_details) {
                         ::onRequestPermissions
                     )
                 }
+
                 ActionTypeEnum.Delete -> {
                     deleteCurrentPicture()
                 }
+
                 ActionTypeEnum.SendLwp -> {
                     // sendToRippleLwp();
                 }
+
                 else -> beginCrop()
             }
         } else {
             hideLoading()
-            DetailUtils.saveToFileToTempsDirAndChooseAction(
+            saveToFileToTempsDirAndChooseAction(
                 currentUrl,
                 actionToDo,
                 requireContext(),
