@@ -1,6 +1,5 @@
 package com.sfaxdroid.list.detail
 
-import android.util.DisplayMetrics
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -14,13 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sfaxdroid.base.FileManager
 import com.sfaxdroid.detail.ActionTypeEnum
 import com.sfaxdroid.detail.utils.DetailUtils
 
 
 @Composable
-fun SetAsWallButton(url: String?,viewModel: DetailViewModel) {
+fun SetAsWallButton(url: String?, viewModel: DetailViewModel) {
     val context = LocalContext.current
 
     Button(shape = RoundedCornerShape(15),
@@ -32,11 +30,11 @@ fun SetAsWallButton(url: String?,viewModel: DetailViewModel) {
                         ActionTypeEnum
                             .SetAsWallpaper,
                         context,
-                        viewModel.fileManager){
-                            isSaved, action ->
-                            if (isSaved) {
+                        viewModel.fileManager
+                    ) { isSaved, action ->
+                        if (isSaved) {
 
-                            }
+                        }
                     }
             }
         }) {

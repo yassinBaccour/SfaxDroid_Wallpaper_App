@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    val fileManager: FileManager
+    val fileManager: FileManager,
 ) :ViewModel(){
 
 }

@@ -26,7 +26,7 @@ import com.sfaxdroid.detail.ActionTypeEnum
 import java.io.File
 import java.io.IOException
 
- class DetailUtils {
+class DetailUtils {
 
     companion object {
 
@@ -52,7 +52,11 @@ import java.io.IOException
                                 Constants.SAVE_TEMPORARY,
                             )
                         if (action == ActionTypeEnum.SetAsWallpaper && isSaved) {
-                            setWallpaper(resource,context, Constants.MIN_WIDTH)
+
+                            val displayMetrics = context.resources.displayMetrics
+                            val widthPx = displayMetrics.widthPixels
+                            setWallpaper(resource, context, widthPx)
+
                         }
                         doActionAfterSave(isSaved, action)
                         resource.recycle()
