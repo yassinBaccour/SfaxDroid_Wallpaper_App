@@ -38,13 +38,12 @@ dependencies {
     kapt Libs.hilt.hiltAndroidComplier
     implementation Libs.compose.composeUi
     implementation Libs.compose.composeMaterial
-    debugImplementation  Libs.compose.composeUiTooling
+    debugImplementation Libs.compose.composeUiTooling
     implementation Libs.compose.toolingPreview
     implementation Libs.compose.layout
     implementation Libs.compose.navigation
     implementation Libs.compose.navAnimation
     implementation Libs.compose.coil
-
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     implementation project(':domain')

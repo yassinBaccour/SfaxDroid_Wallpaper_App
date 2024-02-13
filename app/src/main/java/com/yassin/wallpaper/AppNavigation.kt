@@ -181,7 +181,7 @@ fun NavGraphBuilder.addDetail(
         root,
         arguments = listOf(navArgument("url") { type = NavType.StringType })
     ) { backStackEntry ->
-        WallpaperDetail(backStackEntry.arguments?.getString("url")?.decodeUrl())
+        WallpaperDetail(navController,backStackEntry.arguments?.getString("url")?.decodeUrl())
     }
 }
 
