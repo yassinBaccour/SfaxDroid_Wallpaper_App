@@ -13,6 +13,6 @@ fun PixaBayWallpapers(navController: NavController) {
 
 @Composable
 fun PixaBayWallpapers(pixaBayViewModel: PixaBayViewModel, navController: NavController) {
-    PixaBayGrid(pixaBayViewModel.pixaApiResponse.hits, navController)
+    PixaBayGrid(pixaBayViewModel.pixaApiResponse.hits.shuffled(), navController)
 }
 

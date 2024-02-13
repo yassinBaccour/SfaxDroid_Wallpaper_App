@@ -4,20 +4,20 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.bases.encodeUrl
 import com.sfaxdroid.data.mappers.PixaItem
-import okio.ByteString.Companion.encodeUtf8
 
 @Composable
 fun PixaBayGridItem(picture: PixaItem, navController: NavController) {
-    AsyncImage(
+    SubcomposeAsyncImage(
         modifier = Modifier
             .fillMaxWidth()
             .padding(0.125.dp)
@@ -25,8 +25,11 @@ fun PixaBayGridItem(picture: PixaItem, navController: NavController) {
             .clickable {
                 navController.navigate(NavScreen.Pixabay.route + NavScreen.Detail.route + "/" + picture.largeImageURL.encodeUrl())
             },
+        loading = {
+            CircularProgressIndicator()
+        },
         contentScale = ContentScale.Crop,
-        model = picture.previewURL,
+        model = picture.webformatURL.replace("_640.", "_180."),
         contentDescription = "this image has " + picture.likes + " likes"
     )
 }
