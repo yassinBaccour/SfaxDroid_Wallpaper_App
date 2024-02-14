@@ -13,7 +13,7 @@ import javax.inject.Inject
 internal class DetailViewModel @Inject constructor(
     private val fileManager: FileManager,
 ) : ViewModel() {
-    fun setAsWallpaper(url: String, context: Context) {
+    internal fun setAsWallpaper(url: String, context: Context) {
         DetailUtils.saveToFileToTempsDirAndChooseAction(
             url = url,
             action = ActionTypeEnum.SetAsWallpaper,

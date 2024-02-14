@@ -20,9 +20,9 @@ internal class WallpaperGridViewModel
     private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase
 ) : ViewModel() {
 
-    private var wallapapersResponse = MutableStateFlow(PixaResponse.empty)
+    private var wallapaperResponse = MutableStateFlow(PixaResponse.empty)
     private val selectedItem = MutableStateFlow(0)
-    val state = combine(wallapapersResponse, selectedItem) { wallpaper, selected ->
+    val state = combine(wallapaperResponse, selectedItem) { wallpaper, selected ->
         WallpapersUiState(
             wallpapersList = wallpaper.hits, tags = arrayListOf(
                 TagView("Mixed", "Mixed"),
@@ -41,7 +41,7 @@ internal class WallpaperGridViewModel
     }
 
     private fun getPictureList() = viewModelScope.launch {
-        wallapapersResponse.value = getPixaWallpapersUseCase.getResult()
+        wallapaperResponse.value = getPixaWallpapersUseCase.getResult()
     }
 
     fun selectItem(index: Int) = viewModelScope.launch {
