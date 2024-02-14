@@ -80,7 +80,7 @@ internal fun WallpaperList(
 }
 
 @Composable
- private fun InitWallpaperList(
+private fun InitWallpaperList(
     itemsList: List<ItemWrapperList>,
     openImageDetail: (BaseWallpaperView) -> Unit
 ) {
@@ -99,7 +99,7 @@ internal fun WallpaperList(
 }
 
 @Composable
-private fun InitTagList(
+fun InitTagList(
     modifier: Modifier,
     tagList: List<TagView>,
     selectedItem: Int,

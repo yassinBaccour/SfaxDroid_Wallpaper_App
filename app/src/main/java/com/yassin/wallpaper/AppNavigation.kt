@@ -20,8 +20,8 @@ import com.sfaxdroid.bases.decodeUrl
 import com.sfaxdroid.data.entity.AppName
 import com.sfaxdroid.data.entity.LiveWallpaper
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
-import com.sfaxdroid.list.detail.WallpaperDetail
-import com.sfaxdroid.list.pixa.PixaBayWallpapers
+import com.sfaxdroid.list.pixabay.detail.WallpaperDetail
+import com.sfaxdroid.list.pixabay.list.WallpaperGrid
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
 import com.sfaxdroid.list.ui.WallpaperList
@@ -181,7 +181,7 @@ fun NavGraphBuilder.addDetail(
         root,
         arguments = listOf(navArgument("url") { type = NavType.StringType })
     ) { backStackEntry ->
-        WallpaperDetail(navController,backStackEntry.arguments?.getString("url")?.decodeUrl())
+        WallpaperDetail(navController, backStackEntry.arguments?.getString("url")?.decodeUrl())
     }
 }
 
@@ -190,7 +190,7 @@ fun NavGraphBuilder.addPixaWallpaper(
     navController: NavController, root: String
 ) {
     composable(root) {
-        PixaBayWallpapers(navController)
+        WallpaperGrid(navController)
     }
 }
 

@@ -10,20 +10,17 @@ const val pixaBayImageType = "photo"
 const val pixaBayPerPage = "200"
 const val pixaBayCategory = "nature"
 const val pixaBaySafeSearch = "true"
+
 class GetPixaWallpapersUseCase
-    @Inject constructor(
-        @Named("pixabay-key") private val pixaBayApiKey: String
-    ) {
-    suspend fun getResult(): PixaResponse {
-        val apiService = ApiService.getInstance()
-        val response = apiService.getImages(
-            pixaBayApiKey,
-            pixaBaySearchTerm,
-            pixaBayImageType,
-            pixaBayPerPage,
-            pixaBayCategory,
-            pixaBaySafeSearch
-        )
-        return response
-    }
+@Inject constructor(
+    @Named("pixabay-key") private val pixaBayApiKey: String
+) {
+    suspend fun getResult() = ApiService.getInstance().getImages(
+        pixaBayApiKey,
+        pixaBaySearchTerm,
+        pixaBayImageType,
+        pixaBayPerPage,
+        pixaBayCategory,
+        pixaBaySafeSearch
+    )
 }

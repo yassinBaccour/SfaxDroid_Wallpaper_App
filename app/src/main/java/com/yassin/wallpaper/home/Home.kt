@@ -120,8 +120,6 @@ private fun NavController.currentScreenAsState(): State<NavScreen> {
                 }
                 destination.hierarchy.any { it.route == NavScreen.Pixabay.route } ->
                     selectedItem.value = NavScreen.Pixabay
-
-
             }
         }
         addOnDestinationChangedListener(listener)
