@@ -7,16 +7,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.data.mappers.PixaItem
 
 @Composable
-fun PixaBayGrid(pictureList: List<PixaItem>, navController: NavController) {
+internal fun PixaBayGrid(pictureList: List<PixaItem>, navController: NavController) {
     LazyVerticalGrid(
         modifier = Modifier.fillMaxSize(),
         columns = GridCells.Adaptive(124.dp)
     ) {
         items(pictureList.size) { index ->
-            PixaBayGridItem(pictureList[index], navController)
+            PixaBayGridItem(pictureList[index]){
+                 url -> navController.navigate(NavScreen.Pixabay.route + NavScreen.Detail.route + "/" + url)
+            }
         }
     }
 }

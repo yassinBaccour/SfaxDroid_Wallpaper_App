@@ -27,7 +27,7 @@ fun BoxScope.TopNavBar(navController: NavController) {
         modifier = Modifier
             .fillMaxWidth()
             .align(Alignment.TopCenter)
-            .background(Color(0x4F9C27B0)),
+            .background(Color.Transparent),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     )

@@ -9,4 +9,5 @@
     <string name="ui_detail_share">النشر</string>
     <string name="ui_detail_send_ripple">إستعمال كخلفية تموج</string>
     <string name="ui_detail_failure_delete">حذف</string>
+    <string name="ui_detail_fromPixabay">Pixabay.com من</string>
 </resources>

@@ -9,4 +9,5 @@
     <string name="ui_detail_share">Share</string>
     <string name="ui_detail_send_ripple">Use as ripple LWP</string>
     <string name="ui_detail_failure_delete">Error Deleting file</string>
+    <string name="ui_detail_fromPixabay">From Pixabay.com</string>
 </resources>

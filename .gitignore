@@ -98,3 +98,7 @@ test_output
 /.idea/kotlinc.xml
 /.idea/migrations.xml
 /.idea/vcs.xml
+.idea/assetWizardSettings.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+.idea/inspectionProfiles/Project_Default.xml

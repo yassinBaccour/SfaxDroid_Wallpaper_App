@@ -9,4 +9,5 @@
     <string name="ui_detail_share">Partager</string>
     <string name="ui_detail_send_ripple">Utiliser dans l\'animation</string>
     <string name="ui_detail_failure_delete">Supprimer</string>
+    <string name="ui_detail_fromPixabay">De Pixabay.com</string>
 </resources>

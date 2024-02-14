@@ -16,14 +16,14 @@ import com.sfaxdroid.bases.encodeUrl
 import com.sfaxdroid.data.mappers.PixaItem
 
 @Composable
-fun PixaBayGridItem(picture: PixaItem, navController: NavController) {
+fun PixaBayGridItem(picture: PixaItem,onWallpaperClick: (String) -> Unit) {
     SubcomposeAsyncImage(
         modifier = Modifier
             .fillMaxWidth()
             .padding(0.125.dp)
             .height(220.45.dp)
             .clickable {
-                navController.navigate(NavScreen.Pixabay.route + NavScreen.Detail.route + "/" + picture.largeImageURL.encodeUrl())
+                onWallpaperClick(picture.largeImageURL.encodeUrl())
             },
         loading = {
             CircularProgressIndicator()

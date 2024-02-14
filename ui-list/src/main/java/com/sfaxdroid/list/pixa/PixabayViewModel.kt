@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class PixaBayViewModel
+internal class PixabayViewModel
 @Inject constructor(
     private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase
 ) : ViewModel() {

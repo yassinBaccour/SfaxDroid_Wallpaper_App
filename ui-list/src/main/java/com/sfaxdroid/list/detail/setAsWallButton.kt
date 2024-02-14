@@ -1,6 +1,5 @@
 package com.sfaxdroid.list.detail
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
@@ -16,15 +15,11 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.sfaxdroid.detail.ActionTypeEnum
 import com.sfaxdroid.detail.utils.DetailUtils
-
 
 @Composable
 fun BoxScope.SetAsWallButton(url: String?, viewModel: DetailViewModel) {
@@ -37,29 +32,26 @@ fun BoxScope.SetAsWallButton(url: String?, viewModel: DetailViewModel) {
             .padding(bottom = 60.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
-
-
-    ){
-        Button(shape = RoundedCornerShape(15),
+    ) {
+        Button(
+            shape = RoundedCornerShape(15),
             onClick = {
-                if (url != null) {
-                    DetailUtils
-                        .saveToFileToTempsDirAndChooseAction(
-                            url,
-                            ActionTypeEnum
-                                .SetAsWallpaper,
-                            context,
-                            viewModel.fileManager
-                        ) { isSaved, action ->
-                            if (isSaved) {
-
-                            }
+                url?.let {
+                    DetailUtils.saveToFileToTempsDirAndChooseAction(
+                        it,
+                        ActionTypeEnum.SetAsWallpaper,
+                        context,
+                        viewModel.fileManager
+                    ) { isSaved, action ->
+                        if (isSaved) {
                         }
+                    }
                 }
-            }) {
+            }
+        ) {
             Icon(
                 imageVector = Icons.Filled.Favorite,
-                contentDescription = "set as wallpaper",
+                contentDescription = null,
                 modifier = Modifier.padding(end = 8.dp)
             )
             Text(

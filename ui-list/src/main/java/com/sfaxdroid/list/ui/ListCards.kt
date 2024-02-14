@@ -22,48 +22,35 @@ import coil.compose.AsyncImage
 import com.sfaxdroid.base.Constants.TYPE_CAROUSEL
 import com.sfaxdroid.base.Constants.TYPE_CAT
 import com.sfaxdroid.base.Constants.TYPE_LWP
-import com.sfaxdroid.base.Constants.TYPE_PIXA
 import com.sfaxdroid.base.Constants.TYPE_WALLPAPER
 import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import com.sfaxdroid.data.mappers.LwpItem
-import com.sfaxdroid.data.mappers.PixaItem
 import com.sfaxdroid.data.mappers.SimpleWallpaperView
 
 @Composable
 internal fun GenerateItem(obj: ItemWrapperList, openImageDetail: (BaseWallpaperView) -> Unit) {
     when (obj.itemType) {
-
         TYPE_WALLPAPER -> {
             val item = obj.`object` as SimpleWallpaperView
-            ImageCard(item.thumbnailUrl) {
-                openImageDetail(item)
-            }
+            ImageCard(item.thumbnailUrl) { openImageDetail(item) }
         }
 
         TYPE_CAROUSEL -> {
             val item = obj.`object` as CarouselView
-            HorizontalCarouselCard(item) {
-            }
+            HorizontalCarouselCard(item) {}
         }
 
         TYPE_LWP -> {
             val item = obj.`object` as LwpItem
-            ImageWithTitleCard(item.thumbnailUrl, item.name, item.desc) {
-                openImageDetail(item)
-            }
+            ImageWithTitleCard(item.thumbnailUrl, item.name, item.desc) { openImageDetail(item) }
         }
 
         TYPE_CAT -> {
             val item = obj.`object` as CategoryItem
-            ImageWithTitleCard(item.thumbnailUrl, item.name, item.desc) {
-                openImageDetail(item)
-            }
+            ImageWithTitleCard(item.thumbnailUrl, item.name, item.desc) { openImageDetail(item) }
         }
-
-
-
     }
 }
 
@@ -75,9 +62,7 @@ fun ImageCard(url: String, openImage: () -> Unit) {
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .size(128.dp)
-            .clickable {
-                openImage()
-            }
+            .clickable { openImage() }
     )
 }
 
@@ -85,17 +70,13 @@ fun ImageCard(url: String, openImage: () -> Unit) {
 fun ImageWithTitleCard(url: String, name: String, desc: String, openImage: () -> Unit) {
     Card(
         Modifier
-            .clickable {
-                openImage()
-            }
+            .clickable { openImage() }
             .fillMaxWidth()
             .height(170.dp),
         elevation = 4.dp,
         shape = RoundedCornerShape(0.dp)
     ) {
-        Row(
-            modifier = Modifier
-        ) {
+        Row(modifier = Modifier) {
             AsyncImage(
                 model = url,
                 contentDescription = "",
@@ -118,20 +99,16 @@ fun ImageWithTitleCard(url: String, name: String, desc: String, openImage: () ->
                     style = MaterialTheme.typography.subtitle2
                 )
             }
-
         }
     }
 }
 
 @Composable
 fun HorizontalCarouselCard(carouselView: CarouselView, openImage: () -> Unit) {
-
 }
-
 
 @Preview
 @Composable
 fun LiveWallpaperCardPreview() {
-    ImageWithTitleCard("", "", "") {
-    }
+    ImageWithTitleCard("", "", "") {}
 }
