@@ -2,6 +2,7 @@ package com.sfaxdroid.list.pixabay.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sfaxdroid.data.entity.PixaSearch
 import com.sfaxdroid.data.mappers.PixaResponse
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.domain.GetPixaWallpapersUseCase
@@ -20,11 +21,11 @@ internal class WallpaperGridViewModel
     private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase
 ) : ViewModel() {
 
-    private var wallapaperResponse = MutableStateFlow(PixaResponse.empty)
+    private var wallapaperResponseHits = MutableStateFlow(PixaResponse.empty.hits)
     private val selectedItem = MutableStateFlow(0)
-    val state = combine(wallapaperResponse, selectedItem) { wallpaper, selected ->
+    val state = combine(wallapaperResponseHits, selectedItem) { wallpaper, selected ->
         WallpapersUiState(
-            wallpapersList = wallpaper.hits, tags = arrayListOf(
+            wallpapersList = wallpaper, tags = arrayListOf(
                 TagView("Mixed", "Mixed"),
                 TagView("Nature", "Nature"),
                 TagView("Cars", "Cars")
@@ -41,7 +42,7 @@ internal class WallpaperGridViewModel
     }
 
     private fun getPictureList() = viewModelScope.launch {
-        wallapaperResponse.value = getPixaWallpapersUseCase.getResult()
+        wallapaperResponseHits.value = getPixaWallpapersUseCase.getResult()
     }
 
     fun selectItem(index: Int) = viewModelScope.launch {
@@ -49,7 +50,13 @@ internal class WallpaperGridViewModel
     }
 
     fun provideWallpaper(tagView: TagView) {
-        //CALL ws
+        viewModelScope.launch {
+            if (tagView.name == "Nature"){
+                wallapaperResponseHits.value = getPixaWallpapersUseCase.getResult(PixaSearch("landscape", "nature"))
+            }else if (tagView.name == "Cars"){
+                wallapaperResponseHits.value = getPixaWallpapersUseCase.getResult(PixaSearch("cars", "transportation"))
+            }else getPictureList()
+        }
     }
 
 }
