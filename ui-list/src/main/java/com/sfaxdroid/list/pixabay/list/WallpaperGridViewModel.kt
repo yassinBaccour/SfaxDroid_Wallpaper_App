@@ -51,14 +51,17 @@ constructor(private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase) : Vi
         if (pixaTagWithSearchData.tag.name == "Mixed") {
             provideMixedWallpaper()
         } else {
-            getPictureList(listOf(pixaTagWithSearchData))
+            getPictureList(pixaTagWithSearchData)
         }
     }
 
     private fun provideMixedWallpaper() {
         tagsWithSearchData =
             listOf(
-                PixaTagWithSearchData(TagView("Mixed", "Mixed"), PixaSearch("nature,cars", "")),
+                PixaTagWithSearchData(
+                    TagView("Mixed", "Mixed"),
+                    PixaSearch("landscape,cars", "")
+                ),
                 PixaTagWithSearchData(
                     TagView("Nature", "Nature"),
                     PixaSearch("landscape", "nature")
