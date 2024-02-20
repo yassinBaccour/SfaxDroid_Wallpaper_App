@@ -9,25 +9,21 @@ import javax.inject.Named
 const val pixaBayImageType = "photo"
 const val pixaBayPerPage = "200"
 const val pixaBaySafeSearch = "true"
+const val pixaBayPage = "1"
 
 class GetPixaWallpapersUseCase
 @Inject
 constructor(@Named("pixabay-key") private val pixaBayApiKey: String) {
-    suspend fun getResult(pixaTagWithSearchDataList: List<PixaTagWithSearchData>): List<PixaItem> {
-        var ret = mutableListOf<PixaItem>()
-        pixaTagWithSearchDataList.forEach { s ->
-            val response =
-                ApiService.getInstance()
-                    .getImages(
-                        apiKey = pixaBayApiKey,
-                        category = s.search.category,
-                        imageType = pixaBayImageType,
-                        perPage = pixaBayPerPage,
-                        searchTerm = s.search.searchTerm,
-                        safeSearch = pixaBaySafeSearch
-                    )
-            ret.addAll(response.hits)
-        }
-        return ret
+    suspend fun getResult(pixaTagWithSearchData: PixaTagWithSearchData): List<PixaItem> {
+        return ApiService.getInstance()
+            .getImages(
+                apiKey = pixaBayApiKey,
+                category = pixaTagWithSearchData.search.category,
+                imageType = pixaBayImageType,
+                perPage = pixaBayPerPage,
+                searchTerm = pixaTagWithSearchData.search.searchTerm,
+                safeSearch = pixaBaySafeSearch,
+                page = pixaBayPage
+            ).hits
     }
 }
