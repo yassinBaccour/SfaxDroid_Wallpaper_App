@@ -40,9 +40,9 @@ constructor(private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase) : Vi
         provideMixedWallpaper()
     }
 
-    private fun getPictureList(tagWithSearchDataList: List<PixaTagWithSearchData>) =
+    private fun getPictureList(tagWithSearchData: PixaTagWithSearchData) =
         viewModelScope.launch {
-            wallapaperResponseHits.value = getPixaWallpapersUseCase.getResult(tagWithSearchDataList)
+            wallapaperResponseHits.value = getPixaWallpapersUseCase.getResult(tagWithSearchData)
         }
 
     fun selectItem(index: Int) = viewModelScope.launch { selectedItem.value = index }
