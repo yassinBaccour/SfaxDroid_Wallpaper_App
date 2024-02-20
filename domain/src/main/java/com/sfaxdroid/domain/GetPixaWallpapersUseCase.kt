@@ -1,5 +1,6 @@
 package com.sfaxdroid.domain
 
+import com.sfaxdroid.data.entity.PixaSearch
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
 import com.sfaxdroid.data.mappers.PixaItem
 import com.sfaxdroid.data.repositories.ApiService
@@ -24,6 +25,19 @@ constructor(@Named("pixabay-key") private val pixaBayApiKey: String) {
                 searchTerm = pixaTagWithSearchData.search.searchTerm,
                 safeSearch = pixaBaySafeSearch,
                 page = pixaBayPage
+            ).hits
+    }
+
+    suspend fun getResultTest(search: PixaSearch,page:Int): List<PixaItem> {
+        return ApiService.getInstance()
+            .getImages(
+                apiKey = pixaBayApiKey,
+                category = search.category,
+                imageType = pixaBayImageType,
+                perPage = search.perPage,
+                searchTerm = search.searchTerm,
+                safeSearch = pixaBaySafeSearch,
+                page = page.toString()
             ).hits
     }
 }

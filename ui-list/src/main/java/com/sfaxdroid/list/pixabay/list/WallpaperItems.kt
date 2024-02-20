@@ -14,7 +14,7 @@ import com.sfaxdroid.bases.encodeUrl
 import com.sfaxdroid.data.mappers.PixaItem
 
 @Composable
-internal fun WallpaperItems(picture: PixaItem, onWallpaperClick: (String) -> Unit) {
+internal fun WallpaperItem(picture: PixaItem, onWallpaperClick: (String) -> Unit) {
     SubcomposeAsyncImage(
         modifier = Modifier
             .fillMaxWidth()

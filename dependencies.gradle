@@ -1,7 +1,7 @@
 ext {
-    androidCompileSdkVersion = 33
+    androidCompileSdkVersion = 34
     androidMinSdkVersion = 21
-    androidTargetSdkVersion = 33
+    androidTargetSdkVersion = 34
     composeCompiler = "1.2.0"
 
     def sfaxLibs = [:]

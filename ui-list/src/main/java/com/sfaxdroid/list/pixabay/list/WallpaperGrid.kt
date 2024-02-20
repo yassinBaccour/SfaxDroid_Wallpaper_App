@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.data.mappers.PixaItem
 import com.sfaxdroid.list.rememberFlowWithLifecycle
@@ -39,15 +41,24 @@ internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (St
             viewModel.provideWallpaper(tagWithSearchData)
             viewModel.selectItem(pos)
         }
-        WallpaperGrid(pictureList = state.wallpapersList.shuffled(), openWallpaper = openWallpaper)
+        WallpaperGrid(pictureList = state.wallpapersList.collectAsLazyPagingItems(), openWallpaper = openWallpaper)
     }
 }
 
-@Composable
+/*@Composable
 internal fun WallpaperGrid(pictureList: List<PixaItem>, openWallpaper: (String) -> Unit) {
     LazyVerticalGrid(modifier = Modifier.fillMaxSize(), columns = GridCells.Adaptive(124.dp)) {
         items(pictureList.size) { index ->
-            WallpaperItems(pictureList[index]) { url -> openWallpaper(url) }
+            WallpaperItem(pictureList[index]) { url -> openWallpaper(url) }
+        }
+    }
+}*/
+
+@Composable
+internal fun WallpaperGrid(pictureList: LazyPagingItems<PixaItem>, openWallpaper: (String) -> Unit) {
+    LazyVerticalGrid(modifier = Modifier.fillMaxSize(), columns = GridCells.Adaptive(124.dp)) {
+        items(count = pictureList.itemCount){ index ->
+            pictureList[index]?.let { WallpaperItem(it) { url -> openWallpaper(url) } }
         }
     }
 }

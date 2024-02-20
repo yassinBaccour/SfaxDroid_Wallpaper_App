@@ -1,5 +1,11 @@
 [versions]
+hilt-navigation-compose = "1.0.0"
+paging-compose = "3.3.0-alpha03"
+paging-runtime = "3.2.1"
 
 [libraries]
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging-compose" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging-runtime" }
 
 [plugins]
