@@ -18,7 +18,8 @@ interface ApiService {
         @Query("image_type") imageType: String,
         @Query("per_page") perPage: String,
         @Query("category") category: String,
-        @Query("safesearch") safeSearch: String
+        @Query("safesearch") safeSearch: String,
+        @Query("page") page: String
     ): PixaResponse
 
     companion object {
