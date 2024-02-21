@@ -20,7 +20,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,16 +33,17 @@ internal class WallpaperGridViewModel
 constructor(
     private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase,
 ) : ViewModel() {
-    lateinit var tagsWithSearchData: List<PixaTagWithSearchData>
+    private lateinit var tagsWithSearchData: List<PixaTagWithSearchData>
     private val selectedItem = MutableStateFlow(0)
     private lateinit var pixaItemListFlow : Flow<PagingData<PixaItem>>
+    private lateinit var flowOfItemListFlow : Flow<Flow<PagingData<PixaItem>>>
 
 
 
     val state =
-        combine(pixaItemListFlow, selectedItem) { wallpapers, selected ->
+        combine(flowOfItemListFlow, selectedItem) { wallpapers, selected ->
             WallpapersUiState(
-                wallpapersList = wallpapers,
+                wallpapers,
                 selectedItem = selected,
                 tagsWithSearchData = tagsWithSearchData
             )
@@ -64,6 +67,7 @@ constructor(
             pixaItemListFlow = Pager(PagingConfig(pageSize = 20)) {
                 PixaPagingSource(getPixaWallpapersUseCase, searchData)
             }.flow.cachedIn(viewModelScope)
+            flowOfItemListFlow = flowOf(pixaItemListFlow)
             }
 
     fun selectItem(index: Int) = viewModelScope.launch { selectedItem.value = index }

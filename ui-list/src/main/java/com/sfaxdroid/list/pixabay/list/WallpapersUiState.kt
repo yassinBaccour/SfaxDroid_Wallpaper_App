@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 data class WallpapersUiState(
-    val wallpapersList: Flow<PagingData<PixaItem>> = flowOf(),
+    val wallpaperListFlow: Flow<PagingData<PixaItem>> = flowOf(),
     val tagsWithSearchData: List<PixaTagWithSearchData> = arrayListOf(),
     val selectedItem: Int = 0
 )
