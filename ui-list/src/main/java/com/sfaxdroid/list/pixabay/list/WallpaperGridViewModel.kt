@@ -15,6 +15,7 @@ import com.sfaxdroid.domain.GetPixaWallpapersUseCase
 import com.sfaxdroid.list.pixabay.PixaPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -31,7 +32,7 @@ constructor(
 ) : ViewModel() {
     private lateinit var tagsWithSearchData: List<PixaTagWithSearchData>
     private val selectedItem = MutableStateFlow(0)
-    private lateinit var pixaItemListFlow: MutableStateFlow<PagingData<PixaItem>>
+    private lateinit var pixaItemListFlow: Flow<PagingData<PixaItem>>
 
 
     val state =
@@ -55,14 +56,9 @@ constructor(
 
     private fun getPictureList(searchData: PixaSearch) =
         viewModelScope.launch {
-            Pager(PagingConfig(pageSize = 20)) {
+            pixaItemListFlow= Pager(PagingConfig(pageSize = 20)) {
                 PixaPagingSource(getPixaWallpapersUseCase, searchData)
-            }.flow.cachedIn(viewModelScope).collect {
-                    pixaItemListFlow.value = it
-                }
-            delay(3000)
-            Log.d("WallpaperGridViewModel", "getPictureList: $pixaItemListFlow")
-
+            }.flow.cachedIn(viewModelScope)
         }
 
     fun selectItem(index: Int) = viewModelScope.launch { selectedItem.value = index }
