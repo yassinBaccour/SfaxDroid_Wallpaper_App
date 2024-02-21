@@ -38,7 +38,7 @@ internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (St
             tagsWithSearchData = state.tagsWithSearchData,
             selectedItem = 0
         ) { tagWithSearchData, pos ->
-            viewModel.provideWallpaper(tagWithSearchData)
+            viewModel.provideWallpaper(tagWithSearchData.search)
             viewModel.selectItem(pos)
         }
         WallpaperGrid(pictureList = state.wallpapersList.collectAsLazyPagingItems(), openWallpaper = openWallpaper)

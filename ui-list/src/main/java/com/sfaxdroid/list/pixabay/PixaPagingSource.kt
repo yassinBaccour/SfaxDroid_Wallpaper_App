@@ -4,12 +4,10 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sfaxdroid.data.entity.PixaSearch
 import com.sfaxdroid.data.mappers.PixaItem
-import com.sfaxdroid.data.repositories.ApiService
 import com.sfaxdroid.domain.GetPixaWallpapersUseCase
 import okio.IOException
 import retrofit2.HttpException
 import javax.inject.Inject
-import javax.inject.Named
 
 class PixaPagingSource @Inject constructor(
     private val useCase: GetPixaWallpapersUseCase,
@@ -24,7 +22,7 @@ class PixaPagingSource @Inject constructor(
         return try {
             val currentPage = params.key ?: FIRST_PAGE
             val response = useCase
-                .getResultTest(
+                .getResult(
                     search = search,
                     page = currentPage
                 )

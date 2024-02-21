@@ -1,17 +1,23 @@
 package com.sfaxdroid.list.pixabay.list
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.sfaxdroid.data.entity.PixaSearch
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
+import com.sfaxdroid.data.mappers.PixaItem
 import com.sfaxdroid.data.mappers.PixaResponse
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.domain.GetPixaWallpapersUseCase
 import com.sfaxdroid.list.pixabay.PixaPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -26,51 +32,15 @@ constructor(
     private val getPixaWallpapersUseCase: GetPixaWallpapersUseCase,
 ) : ViewModel() {
     lateinit var tagsWithSearchData: List<PixaTagWithSearchData>
-    private var wallapaperResponseHits = MutableStateFlow(PixaResponse.empty.hits)
     private val selectedItem = MutableStateFlow(0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    val pixaItemListFlow= Pager(PagingConfig(pageSize = 20)) {
-        PixaPagingSource(getPixaWallpapersUseCase, PixaSearch("landscape", "nature", "20"))
-    }.flow.cachedIn(viewModelScope)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private lateinit var pixaItemListFlow : Flow<PagingData<PixaItem>>
 
 
 
     val state =
-        combine(wallapaperResponseHits, selectedItem) { wallpaper, selected ->
+        combine(pixaItemListFlow, selectedItem) { wallpapers, selected ->
             WallpapersUiState(
-                wallpapersList = pixaItemListFlow,
+                wallpapersList = wallpapers,
                 selectedItem = selected,
                 tagsWithSearchData = tagsWithSearchData
             )
@@ -82,25 +52,27 @@ constructor(
             )
 
     init {
-        provideMixedWallpaper()
+        initTagsWithSearchData()
+        viewModelScope.launch {
+            getPictureList(PixaSearch("landscape,car", "", "20"))
+        }
+
     }
 
-    private fun getPictureList(tagWithSearchData: PixaTagWithSearchData) =
+    private fun getPictureList(searchData: PixaSearch) =
         viewModelScope.launch {
-            wallapaperResponseHits.value = getPixaWallpapersUseCase.getResult(tagWithSearchData)
-        }
+            pixaItemListFlow = Pager(PagingConfig(pageSize = 20)) {
+                PixaPagingSource(getPixaWallpapersUseCase, searchData)
+            }.flow.cachedIn(viewModelScope)
+            }
 
     fun selectItem(index: Int) = viewModelScope.launch { selectedItem.value = index }
 
-    fun provideWallpaper(pixaTagWithSearchData: PixaTagWithSearchData) {
-        if (pixaTagWithSearchData.tag.name == "Mixed") {
-            provideMixedWallpaper()
-        } else {
-            getPictureList(pixaTagWithSearchData)
-        }
+    fun provideWallpaper(searchData: PixaSearch) {
+            getPictureList(searchData)
     }
 
-    private fun provideMixedWallpaper() {
+    private fun initTagsWithSearchData() {
         tagsWithSearchData =
             listOf(
                 PixaTagWithSearchData(
@@ -116,6 +88,7 @@ constructor(
                     PixaSearch("sports+car", "transportation", "20")
                 ),
             )
-        getPictureList(tagsWithSearchData[0])
     }
+
+
 }
