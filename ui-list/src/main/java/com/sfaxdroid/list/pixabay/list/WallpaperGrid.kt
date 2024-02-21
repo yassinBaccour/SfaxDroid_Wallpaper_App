@@ -45,15 +45,6 @@ internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (St
     }
 }
 
-/*@Composable
-internal fun WallpaperGrid(pictureList: List<PixaItem>, openWallpaper: (String) -> Unit) {
-    LazyVerticalGrid(modifier = Modifier.fillMaxSize(), columns = GridCells.Adaptive(124.dp)) {
-        items(pictureList.size) { index ->
-            WallpaperItem(pictureList[index]) { url -> openWallpaper(url) }
-        }
-    }
-}*/
-
 @Composable
 internal fun WallpaperGrid(pictureList: LazyPagingItems<PixaItem>, openWallpaper: (String) -> Unit) {
     LazyVerticalGrid(modifier = Modifier.fillMaxSize(), columns = GridCells.Adaptive(124.dp)) {

@@ -1,8 +1,6 @@
 package com.sfaxdroid.list.pixabay.list
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -12,15 +10,13 @@ import androidx.paging.cachedIn
 import com.sfaxdroid.data.entity.PixaSearch
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
 import com.sfaxdroid.data.mappers.PixaItem
-import com.sfaxdroid.data.mappers.PixaResponse
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.domain.GetPixaWallpapersUseCase
 import com.sfaxdroid.list.pixabay.PixaPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
@@ -35,13 +31,11 @@ constructor(
 ) : ViewModel() {
     private lateinit var tagsWithSearchData: List<PixaTagWithSearchData>
     private val selectedItem = MutableStateFlow(0)
-    private lateinit var pixaItemListFlow : Flow<PagingData<PixaItem>>
-    private lateinit var flowOfItemListFlow : Flow<Flow<PagingData<PixaItem>>>
-
+    private lateinit var pixaItemListFlow: MutableStateFlow<PagingData<PixaItem>>
 
 
     val state =
-        combine(flowOfItemListFlow, selectedItem) { wallpapers, selected ->
+        combine(flowOf(pixaItemListFlow), selectedItem) { wallpapers, selected ->
             WallpapersUiState(
                 wallpapers,
                 selectedItem = selected,
@@ -56,24 +50,25 @@ constructor(
 
     init {
         initTagsWithSearchData()
-        viewModelScope.launch {
-            getPictureList(PixaSearch("landscape,car", "", "20"))
-        }
-
+        getPictureList(PixaSearch("landscape,car", "", "20"))
     }
 
     private fun getPictureList(searchData: PixaSearch) =
         viewModelScope.launch {
-            pixaItemListFlow = Pager(PagingConfig(pageSize = 20)) {
+            Pager(PagingConfig(pageSize = 20)) {
                 PixaPagingSource(getPixaWallpapersUseCase, searchData)
-            }.flow.cachedIn(viewModelScope)
-            flowOfItemListFlow = flowOf(pixaItemListFlow)
-            }
+            }.flow.cachedIn(viewModelScope).collect {
+                    pixaItemListFlow.value = it
+                }
+            delay(3000)
+            Log.d("WallpaperGridViewModel", "getPictureList: $pixaItemListFlow")
+
+        }
 
     fun selectItem(index: Int) = viewModelScope.launch { selectedItem.value = index }
 
     fun provideWallpaper(searchData: PixaSearch) {
-            getPictureList(searchData)
+        getPictureList(searchData)
     }
 
     private fun initTagsWithSearchData() {
