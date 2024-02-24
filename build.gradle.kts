@@ -1,12 +1,10 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import java.util.Locale
 
 buildscript {
 
-    //apply from: rootProject.file('dependencies.gradle')
 
     repositories {
-        mavenCentral()
+        jcenter()
         google()
     }
 
@@ -21,28 +19,20 @@ buildscript {
     }
 }
 
-plugins {
-    alias(libs.plugins.spotless)
-    alias(libs.plugins.lib.check.update.versions)
-    alias(libs.plugins.ksp)
-
-}
+apply(plugin = "com.github.ben-manes.versions")
 
 allprojects {
     repositories {
-        mavenCentral()
+        jcenter()
         maven("https://jitpack.io")
         maven("https://maven.google.com")
         google()
     }
 }
 
-
 subprojects {
     apply(plugin = "com.diffplug.spotless")
-
-
-    spotless {
+    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         java {
             target("**/*.java")
             googleJavaFormat().aosp()
@@ -73,7 +63,6 @@ subprojects {
             trimTrailingWhitespace()
             endWithNewline()
         }
-
     }
 }
 
@@ -84,30 +73,3 @@ fun isNonStable(version: String): Boolean {
     val isStable = stableKeyword || regex.matches(version)
     return isStable.not()
 }
-
-/*
-tasks.withType<DependencyUpdatesTask>  {
-    rejectVersionIf {
-        isNonStable(candidate.version)
-    }
-    rejectVersionIf {
-        isNonStable(candidate.version) && !isNonStable(currentVersion)
-    }
-
-    resolutionStrategy {
-        componentSelection {
-            all {
-                if (isNonStable(candidate.version) && !isNonStable(currentVersion)) {
-                    reject("Release candidate")
-                }
-            }
-        }
-    }
-
-    outputFormatter = "html"
-    outputDir = "build/dependencyUpdates"
-    reportfileName = "report"
-}*/
-
-
-

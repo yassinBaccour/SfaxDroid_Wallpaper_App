@@ -1,10 +1,10 @@
-
 plugins {
     id(libs.plugins.android.lib.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
-    kotlin("kapt")
+    id("kotlin-kapt")
     alias(libs.plugins.ksp)
 }
+
 kapt {
     correctErrorTypes = true
     useBuildCache = true
@@ -12,7 +12,6 @@ kapt {
 
 android {
     compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
-
     defaultConfig {
         minSdk = libs.versions.androidMinSdkVersion.get().toInt()
         targetSdk = libs.versions.androidTargetSdkVersion.get().toInt()
@@ -21,9 +20,8 @@ android {
 }
 
 dependencies {
-    implementation (projects.dataAndroid)
-    api (projects.data)
-    implementation (libs.hilt.lib)
-    kapt( libs.hilt.compiler)
-
+    implementation(projects.dataAndroid)
+    api(projects.data)
+    implementation(libs.hilt.lib)
+    kapt(libs.hilt.android.compiler)
 }

@@ -1,13 +1,15 @@
 [versions]
 gradle = "8.2.1"
 androidPluginVersion = "8.2.1"
-androidCompileSdkVersion = "33"
+navAnimVersion = "0.24.8-beta"
+androidCompileSdkVersion = "34"
 androidMinSdkVersion = "21"
-androidTargetSdkVersion = "33"
+coilComposeVersion = "2.1.0"
+androidTargetSdkVersion = "34"
 kotlinVersion = "1.7.0"
 ktlint = "0.40.0"
-kspVersion = "1.8.10-1.0.9"
-spotlessVersion    = '6.7.2'
+kspVersion = "1.7.0-1.0.6"
+spotlessVersion    = '6.24.0'
 libCheckUpdateVersion = "+"
 coroutinesVersion = "1.6.3"
 daggerVersion = "2.42"
@@ -21,12 +23,12 @@ googleFirebaseAnalyticsVersion = "21.0.0"
 googleFirebaseCrashlyticsVersion = "18.2.11"
 googleFirebaseMessagingVersion = "2.0.0"
 hiltVersion = "2.42"
-hiltComplierVersion = "1.0.0"
+hiltCompilerVersion = "1.0.0"
 hiltViewModelVersion = "1.0.0-alpha03"
 sfaxLibsRetrofitVersion = "2.9.0"
 sfaxLibsRetrofit2ConverterVersion = "2.9.0"
-glideVersion = "4.12.0"
-roomVersion = "2.3.0-beta02"
+glideVersion = "4.16.0"
+roomVersion = "2.4.0"
 lifecycleVersion = "2.3.1"
 lifecycleExtVersion = "2.2.0"
 navigationVersion = "2.3.5"
@@ -47,7 +49,6 @@ downloadVersion = "1.4.0"
 timberVersion = "4.7.1"
 leakCanaryVersion = "2.1"
 composeVersion = "1.2.0"
-material3Version = "1.0.0-alpha01" #not found in dep.gradle
 activityComposeVersion = "1.3.1"
 composeNavigationVersion = "2.4.2"
 composeViewModelVersion = "2.1.0"
@@ -56,10 +57,9 @@ testRunnerVersion = "1.2.0"
 espressoVersion = "3.2.0"
 coreVersion = "1.3.0"
 rulesVersion = "1.3.0"
-coilComposeVersion = "2.1.0"
-[libraries]
 
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltComplierVersion" }
+[libraries]
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompilerVersion" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 gradle-build-tool = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
 spotless = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotlessVersion" }
@@ -83,13 +83,12 @@ hilt-gradle-plugin = { group = "com.google.dagger", name = "hilt-android-gradle-
 hilt-lib = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hiltVersion" }
-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltComplierVersion" }
-hilt-view-model = { group = "androidx.hilt", name = "hilt-lifecycle-viewmodel", version.ref = "hiltViewModelVersion" }
+hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltCompilerVersion" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "sfaxLibsRetrofitVersion" }
 retrofit2-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "sfaxLibsRetrofit2ConverterVersion" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "ksp", version.ref = "glideVersion" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion" }
-room = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
 room-compiler= { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
 room-common = { group = "androidx.room", name = "room-common", version.ref = "roomVersion" }
@@ -115,11 +114,11 @@ colorpicker = { group = "com.github.QuadFlask", name = "colorpicker", version.re
 thin-download-manager = { group = "com.mani", name = "ThinDownloadManager", version.ref = "downloadVersion" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
 leak-canary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakCanaryVersion" }
-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3Version" }
+compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeVersion" }
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityComposeVersion" }
 compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "composeVersion" }
-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeVersion" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "composeVersion" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "composeVersion" }
 compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "composeVersion" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeVersion" }
 compose-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "composeVersion" }
@@ -135,13 +134,9 @@ test-runner = { group = "androidx.test", name = "runner", version.ref = "testRun
 test-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoVersion" }
 test-core = { group = "androidx.test", name = "core", version.ref = "coreVersion" }
 test-rules = { group = "androidx.test", name = "rules", version.ref = "rulesVersion" }
-coil   = {group="io.coil-kt",name="coil-compose",version.ref="coilComposeVersion"}
-icon = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeVersion" }
-
-
-
-
-
+compose-coil   = {group="io.coil-kt",name="coil-compose",version.ref="coilComposeVersion"}
+compose-icon = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeVersion" }
+compose-nav-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "navAnimVersion" }
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotlessVersion" }
@@ -150,5 +145,4 @@ android-lib = { id = "com.android.library" ,version.ref = "androidPluginVersion"
 kotlin-android = {id="kotlin-android"}
 kotlin-kapt = {id="kotlin-kapt"}
 ksp = {id ="com.google.devtools.ksp" ,version.ref = "kspVersion"}
-
 

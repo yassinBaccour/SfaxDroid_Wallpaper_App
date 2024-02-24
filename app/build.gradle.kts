@@ -9,26 +9,21 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-
-
-
 kapt {
     correctErrorTypes = true
     useBuildCache = true
 }
 
 android {
-
-    namespace = "com.yassin.wallpaper.WallpaperApplication"
+    namespace = "com.yassin.wallpaper"
     compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
     defaultConfig {
         applicationId = "com"
         minSdk = libs.versions.androidMinSdkVersion.get().toInt()
         targetSdk = libs.versions.androidTargetSdkVersion.get().toInt()
         multiDexEnabled = true
-        buildConfigField("String", "APP_KEY", "API_KEY")
+        buildConfigField("String", "APP_KEY", "\"https://www.google.com\"")
         buildConfigField("String", "JSON_VERSION", "\"v3\"")
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
@@ -42,8 +37,8 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -51,13 +46,12 @@ android {
     flavorDimensions("app")
 
     productFlavors {
-
         create("accountOne") {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension = "app"
             versionCode = 92
             versionName = "9.2"
-            buildConfigField("String", "APP_INTERSTITIAL_KEY", "ADS_INTERSTITIAL_KEY_SFAXDROID")
+            buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
             manifestPlaceholders["hostName"] = "ca-app-pub-6263632629106733~1726613607"
         }
 
@@ -93,20 +87,27 @@ android {
         targetCompatibility =JavaVersion.VERSION_1_8
     }
 
-
-
-    
-
     kotlinOptions {
         jvmTarget = "1.8"
     }
 
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeVersion.get()
+    }
+
+    lintOptions {
+        isAbortOnError = false
+        isCheckDependencies = true
+        isCheckReleaseBuilds = false
+        disable("StringFormatMatches","Instantiatable")
+        isIgnoreTestSources = true
     }
 }
-
 
 dependencies {
     kapt(libs.hilt.android.compiler)
@@ -115,7 +116,6 @@ dependencies {
     implementation(libs.fragment.nav.ktx)
     implementation(libs.navigation.ktx)
     implementation(libs.hilt.lib)
-    implementation(libs.hilt.view.model)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.recyclerview)
@@ -127,10 +127,18 @@ dependencies {
     implementation(libs.google.core.ktx)
     implementation(libs.google.messaging.platform)
     implementation(libs.glide)
-    implementation(libs.google.crashlytics.gradle)
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.crashlytics.lib)
     implementation(libs.timber)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.layout)
+    implementation(libs.compose.navigation)
+    implementation(libs.compose.nav.animation)
+    implementation(libs.compose.coil)
+    implementation(libs.compose.icon)
     implementation(projects.downloadFileModule)
     implementation(projects.baseAndroid)
     implementation(projects.domain)
@@ -139,6 +147,7 @@ dependencies {
     implementation(projects.uiAnimImgLwp)
     implementation(projects.uiAnimWordLwp)
     implementation(projects.uiTimerLwp)
+    implementation(projects.uiList)
     implementation(projects.dataAndroid)
 }
 
@@ -159,4 +168,3 @@ android.applicationVariants.all{
         }
     }
 }
-
