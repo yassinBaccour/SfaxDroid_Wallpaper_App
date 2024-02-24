@@ -9,16 +9,12 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-
-
-
 kapt {
     correctErrorTypes = true
     useBuildCache = true
 }
 
 android {
-
     namespace = "com.yassin.wallpaper"
     compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
     defaultConfig {
@@ -28,7 +24,6 @@ android {
         multiDexEnabled = true
         buildConfigField("String", "APP_KEY", "\"https://www.google.com\"")
         buildConfigField("String", "JSON_VERSION", "\"v3\"")
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
@@ -51,7 +46,6 @@ android {
     flavorDimensions("app")
 
     productFlavors {
-
         create("accountOne") {
             applicationIdSuffix = ".sami.rippel.allah"
             dimension = "app"
@@ -93,10 +87,6 @@ android {
         targetCompatibility =JavaVersion.VERSION_1_8
     }
 
-
-
-
-
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -117,13 +107,9 @@ android {
         disable("StringFormatMatches","Instantiatable")
         isIgnoreTestSources = true
     }
-
-
 }
 
-
 dependencies {
-
     kapt(libs.hilt.android.compiler)
     kapt(libs.hilt.compiler)
     implementation(libs.kotlinx.coroutines.android)
@@ -163,7 +149,6 @@ dependencies {
     implementation(projects.uiTimerLwp)
     implementation(projects.uiList)
     implementation(projects.dataAndroid)
-
 }
 
 android.applicationVariants.all{

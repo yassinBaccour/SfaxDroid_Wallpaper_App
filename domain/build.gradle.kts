@@ -1,10 +1,10 @@
-
 plugins {
     id(libs.plugins.android.lib.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
     id("kotlin-kapt")
     alias(libs.plugins.ksp)
 }
+
 kapt {
     correctErrorTypes = true
     useBuildCache = true
@@ -20,9 +20,8 @@ android {
 }
 
 dependencies {
-    implementation (projects.dataAndroid)
-    api (projects.data)
-    implementation (libs.hilt.lib)
-    kapt( libs.hilt.android.compiler)
-
+    implementation(projects.dataAndroid)
+    api(projects.data)
+    implementation(libs.hilt.lib)
+    kapt(libs.hilt.android.compiler)
 }
