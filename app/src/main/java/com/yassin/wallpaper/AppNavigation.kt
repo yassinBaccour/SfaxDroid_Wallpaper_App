@@ -33,7 +33,7 @@ internal fun AppNavigation(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {
-    NavHost(
+    AnimatedNavHost(
         navController = navController,
         startDestination = NavScreen.Wallpaper.route,
         modifier = modifier
