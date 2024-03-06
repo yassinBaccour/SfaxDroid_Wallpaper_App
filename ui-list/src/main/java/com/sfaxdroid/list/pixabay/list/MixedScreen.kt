@@ -27,57 +27,55 @@ import coil.compose.AsyncImage
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
 
 @Composable
-fun MixedScreen(
+internal fun MixedScreen(
     tagsWithSearchData: List<PixaTagWithSearchData>,
     onTagClick: (PixaTagWithSearchData, Int) -> Unit
-) {
-    LazyColumn {
-        items(tagsWithSearchData.size) { index ->
-            MixedItem(tagsWithSearchData[index], index + 1, onTagClick)
-        }
+) = LazyColumn {
+    items(tagsWithSearchData.size) { index ->
+        MixedItem(tagsWithSearchData[index], index + 1, onTagClick)
     }
 }
 
+
 @Composable
-fun MixedItem(
+private fun MixedItem(
     tagWithSearchData: PixaTagWithSearchData,
     index: Int,
     onTagClick: (PixaTagWithSearchData, Int) -> Unit
-) {
-    Box(
-        modifier =
-        Modifier.fillMaxWidth().height(220.dp).background(Color.Black).clickable {
-            onTagClick(tagWithSearchData, index)
-            Log.d("MixedScreen", "MixedScreen: $index")
-        }
+) = Box(modifier = Modifier
+    .fillMaxWidth()
+    .height(220.dp)
+    .background(Color.Black)
+    .clickable {
+        onTagClick(tagWithSearchData, index)
+    }) {
+    AsyncImage(
+        model = tagWithSearchData.tagImgUrl.collectAsState().value,
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier.fillMaxSize(),
+        alpha = 0.8f,
+    )
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        AsyncImage(
-            model = tagWithSearchData.tagImgUrl.collectAsState().value,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize(),
-            alpha = 0.8f,
+        Text(
+            text = tagWithSearchData.tag.name,
+            color = Color.White,
+            fontSize = 35.sp,
+            fontStyle = FontStyle.Italic,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(5.dp),
         )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = tagWithSearchData.tag.name,
-                color = Color.White,
-                fontSize = 35.sp,
-                fontStyle = FontStyle.Italic,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(5.dp),
-            )
-            Text(
-                text = "High Quality Wallpapers",
-                color = Color.White,
-                fontSize = 15.sp,
-                fontStyle = FontStyle.Italic,
-                fontFamily = FontFamily.Monospace
-            )
-        }
+        Text(
+            text = "High Quality Wallpapers",
+            color = Color.White,
+            fontSize = 15.sp,
+            fontStyle = FontStyle.Italic,
+            fontFamily = FontFamily.Monospace
+        )
     }
 }
+

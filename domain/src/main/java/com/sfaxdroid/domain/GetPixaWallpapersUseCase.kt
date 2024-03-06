@@ -14,8 +14,8 @@ const val pixaBayPage = "1"
 class GetPixaWallpapersUseCase
 @Inject
 constructor(@Named("pixabay-key") private val pixaBayApiKey: String) {
-    suspend fun getResult(search: PixaSearch): List<PixaItem> {
-        return ApiService.getInstance()
+    suspend fun getResult(search: PixaSearch) =
+        ApiService.getInstance()
             .getImages(
                 apiKey = pixaBayApiKey,
                 category = search.category,
@@ -26,12 +26,12 @@ constructor(@Named("pixabay-key") private val pixaBayApiKey: String) {
                 page = pixaBayPage
             )
             .hits
-    }
 
-    suspend fun getUrl(id: String): String {
-        return ApiService.getInstance()
+
+    suspend fun getUrl(id: String) =
+        ApiService.getInstance()
             .getUrl(apiKey = pixaBayApiKey, id = id)
             .hits[0]
             .largeImageURL
-    }
+
 }

@@ -26,30 +26,26 @@ fun WallpaperGrid(navController: NavController) {
 @Composable
 internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (String) -> Unit) {
 
-    val state by
-    rememberFlowWithLifecycle(flow = viewModel.state)
-        .collectAsState(initial = WallpapersUiState())
+    val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(initial = WallpapersUiState())
     Column {
         InitPixaTagList(
             modifier = Modifier.height(50.dp),
             tagsWithSearchData = state.tagsWithSearchData,
             selectedItem = 0
         ) { tagWithSearchData, pos ->
-            viewModel.provideWallpaper(tagWithSearchData)
-            viewModel.selectItem(pos)
+            viewModel.updateScreen(tagWithSearchData,pos)
+
         }
-        if (state.selectedItem == 0) {
-            MixedScreen(tagsWithSearchData = state.tagsWithSearchData.drop(1)) {
-                    tagWithSearchData,
-                    pos ->
-                viewModel.provideWallpaper(tagWithSearchData)
-                viewModel.selectItem(pos)
+        when (state.selectedItem) {
+            0 -> MixedScreen(tagsWithSearchData = state.tagsWithSearchData.drop(1)) { tagWithSearchData, pos ->
+                viewModel.updateScreen(tagWithSearchData,pos)
             }
-        } else {
-            WallpaperGrid(
-                pictureList = state.wallpapersList.shuffled(),
-                openWallpaper = openWallpaper
-            )
+            else -> {
+                WallpaperGrid(
+                    pictureList = state.wallpapersList.shuffled(), openWallpaper = openWallpaper
+                )
+
+            }
         }
     }
 }
