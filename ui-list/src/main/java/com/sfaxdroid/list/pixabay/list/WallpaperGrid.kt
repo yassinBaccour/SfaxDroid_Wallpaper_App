@@ -29,7 +29,6 @@ internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (St
     val state by
     rememberFlowWithLifecycle(flow = viewModel.state)
         .collectAsState(initial = WallpapersUiState())
-
     Column {
         InitPixaTagList(
             modifier = Modifier.height(50.dp),
@@ -39,7 +38,19 @@ internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (St
             viewModel.provideWallpaper(tagWithSearchData)
             viewModel.selectItem(pos)
         }
-        WallpaperGrid(pictureList = state.wallpapersList.shuffled(), openWallpaper = openWallpaper)
+        if (state.selectedItem == 0) {
+            MixedScreen(tagsWithSearchData = state.tagsWithSearchData.drop(1)) {
+                    tagWithSearchData,
+                    pos ->
+                viewModel.provideWallpaper(tagWithSearchData)
+                viewModel.selectItem(pos)
+            }
+        } else {
+            WallpaperGrid(
+                pictureList = state.wallpapersList.shuffled(),
+                openWallpaper = openWallpaper
+            )
+        }
     }
 }
 

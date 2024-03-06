@@ -1,6 +1,6 @@
 package com.sfaxdroid.domain
 
-import com.sfaxdroid.data.entity.PixaTagWithSearchData
+import com.sfaxdroid.data.entity.PixaSearch
 import com.sfaxdroid.data.mappers.PixaItem
 import com.sfaxdroid.data.repositories.ApiService
 import javax.inject.Inject
@@ -14,16 +14,24 @@ const val pixaBayPage = "1"
 class GetPixaWallpapersUseCase
 @Inject
 constructor(@Named("pixabay-key") private val pixaBayApiKey: String) {
-    suspend fun getResult(pixaTagWithSearchData: PixaTagWithSearchData): List<PixaItem> {
+    suspend fun getResult(search: PixaSearch): List<PixaItem> {
         return ApiService.getInstance()
             .getImages(
                 apiKey = pixaBayApiKey,
-                category = pixaTagWithSearchData.search.category,
+                category = search.category,
                 imageType = pixaBayImageType,
                 perPage = pixaBayPerPage,
-                searchTerm = pixaTagWithSearchData.search.searchTerm,
+                searchTerm = search.searchTerm,
                 safeSearch = pixaBaySafeSearch,
                 page = pixaBayPage
-            ).hits
+            )
+            .hits
+    }
+
+    suspend fun getUrl(id: String): String {
+        return ApiService.getInstance()
+            .getUrl(apiKey = pixaBayApiKey, id = id)
+            .hits[0]
+            .largeImageURL
     }
 }
