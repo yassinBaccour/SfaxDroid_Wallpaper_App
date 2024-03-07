@@ -24,6 +24,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.ui.util)
+    implementation(libs.accompanist.pager)
     implementation(projects.baseAndroid)
     implementation(libs.kotlinx.coroutines.android)
     api(libs.hilt.lib)

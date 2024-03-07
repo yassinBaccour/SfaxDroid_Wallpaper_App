@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sfaxdroid.base.Constants.MIXED
 import com.sfaxdroid.base.utils.TagUtils
+import com.sfaxdroid.base.utils.TopWallsUtils
 import com.sfaxdroid.data.entity.PixaSearch
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
+import com.sfaxdroid.data.entity.TopWall
 import com.sfaxdroid.data.mappers.PixaResponse
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.domain.GetPixaWallpapersUseCase
@@ -23,25 +25,46 @@ internal class WallpaperGridViewModel
     private lateinit var tagsWithSearchData: List<PixaTagWithSearchData>
     private var tagNameToId = mutableMapOf<String, String>()
     private var wallapaperResponseHits = MutableStateFlow(PixaResponse.empty.hits)
+    private var topWallListFlow = MutableStateFlow(listOf<TopWall>())
     private val selectedItem = MutableStateFlow(0)
-    val state = combine(wallapaperResponseHits, selectedItem) { wallpaper, selected ->
+    val state = combine(
+        topWallListFlow,
+        wallapaperResponseHits,
+        selectedItem
+    ) { topWalls, wallpaper, selected ->
         WallpapersUiState(
+            topWalls = topWalls,
             wallpapersList = wallpaper,
             selectedItem = selected,
             tagsWithSearchData = tagsWithSearchData
         )
     }.stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = WallpapersUiState(),
-        )
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = WallpapersUiState(),
+    )
 
     init {
         tagNameToId = TagUtils().mapTagNameToId()
-        viewModelScope.launch { provideMixedWallpaper() }
+        provideMixedWallpaper()
+        provideTopWalls()
     }
 
-    fun updateScreen(tagWithSearchData: PixaTagWithSearchData, pos: Int) {
+    private fun provideTopWalls() = viewModelScope.launch {
+        val topWallPicListFlow =
+            getPixaWallpapersUseCase.getResult(PixaSearch("wallpaper", "", "10"))
+        topWallPicListFlow.onEach {
+            topWallListFlow.value += (
+                TopWall(
+                    it, TopWallsUtils().getCatchyString(it.downloads, it.likes, it.views)
+                )
+            )
+
+
+        }
+    }
+
+    internal fun updateScreen(tagWithSearchData: PixaTagWithSearchData, pos: Int) {
         provideWallpaper(tagWithSearchData)
         selectItem(pos)
     }
@@ -52,14 +75,12 @@ internal class WallpaperGridViewModel
 
     private fun selectItem(index: Int) = viewModelScope.launch { selectedItem.value = index }
 
-    @Suppress("IMPLICIT_CAST_TO_ANY")
     private fun provideWallpaper(pixaTagWithSearchData: PixaTagWithSearchData) =
         if (pixaTagWithSearchData.tag.name == MIXED) {
             provideMixedWallpaper()
         } else {
             getPictureList(pixaTagWithSearchData.search)
         }
-
 
     private fun getTagImgUrl(tag: String): MutableStateFlow<String> {
         val url = MutableStateFlow("")
@@ -69,48 +90,49 @@ internal class WallpaperGridViewModel
         return url
     }
 
-    private fun provideMixedWallpaper() {
-        tagsWithSearchData = listOf(
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Mixed"),
-                tag = TagView("Mixed", "Mixed"),
-                search = PixaSearch("", "")
-            ),
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Music"),
-                tag = TagView("Music", "Music"),
-                search = PixaSearch("music+background", "music")
-            ),
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Nature"),
-                tag = TagView("Nature", "Nature"),
-                search = PixaSearch("landscape", "nature")
-            ),
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Cats"),
-                tag = TagView("Cats", "Cats"),
-                search = PixaSearch("domestic+cat", "animals")
-            ),
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Cars"),
-                tag = TagView("Cars", "Cars"),
-                search = PixaSearch("sports+car", "transportation")
-            ),
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Dogs"),
-                tag = TagView("Dogs", "Dogs"),
-                search = PixaSearch("dogs", "animals")
-            ),
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Buildings"),
-                tag = TagView("Buildings", "Buildings"),
-                search = PixaSearch("city", "buildings")
-            ),
-            PixaTagWithSearchData(
-                tagImgUrl = getTagImgUrl("Travel"),
-                tag = TagView("Travel", "Travel"),
-                search = PixaSearch("vacation", "travel")
-            ),
-        )
-    }
+    private fun provideMixedWallpaper() =
+        viewModelScope.launch {
+            tagsWithSearchData = listOf(
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Mixed"),
+                    tag = TagView("Mixed", "Mixed"),
+                    search = PixaSearch("", "", "200")
+                ),
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Music"),
+                    tag = TagView("Music", "Music"),
+                    search = PixaSearch("music+background", "music", "200")
+                ),
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Nature"),
+                    tag = TagView("Nature", "Nature"),
+                    search = PixaSearch("landscape", "nature", "200")
+                ),
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Cats"),
+                    tag = TagView("Cats", "Cats"),
+                    search = PixaSearch("domestic+cat", "animals", "200")
+                ),
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Cars"),
+                    tag = TagView("Cars", "Cars"),
+                    search = PixaSearch("sports+car", "transportation", "200")
+                ),
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Dogs"),
+                    tag = TagView("Dogs", "Dogs"),
+                    search = PixaSearch("dogs", "animals", "200")
+                ),
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Buildings"),
+                    tag = TagView("Buildings", "Buildings"),
+                    search = PixaSearch("city", "buildings", "200")
+                ),
+                PixaTagWithSearchData(
+                    tagImgUrl = getTagImgUrl("Travel"),
+                    tag = TagView("Travel", "Travel"),
+                    search = PixaSearch("vacation", "travel", "200")
+                ),
+            )
+        }
 }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,17 +26,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
-
+import com.sfaxdroid.data.entity.TopWall
 @Composable
 internal fun MixedScreen(
+    topWalls: List<TopWall>,
     tagsWithSearchData: List<PixaTagWithSearchData>,
-    onTagClick: (PixaTagWithSearchData, Int) -> Unit
-) = LazyColumn {
-    items(tagsWithSearchData.size) { index ->
-        MixedItem(tagsWithSearchData[index], index + 1, onTagClick)
+    onTagClick: (PixaTagWithSearchData, Int) -> Unit,
+    openWallpaper: (String) -> Unit
+) {
+    Log.d("MixedScreen", "box color: ${MaterialTheme.colors.background}")
+    Box(modifier = Modifier.fillMaxSize()
+        .background(Color(0xFF161E24))){
+        LazyColumn {
+            item {
+                TopWalls(
+                    topWallList = topWalls,
+                    openWallpaper = openWallpaper)
+            }
+            items(tagsWithSearchData.size) { index ->
+                MixedItem(tagsWithSearchData[index], index + 1, onTagClick)
+            }
+        }
     }
 }
-
 
 @Composable
 private fun MixedItem(
@@ -78,4 +91,3 @@ private fun MixedItem(
         )
     }
 }
-
