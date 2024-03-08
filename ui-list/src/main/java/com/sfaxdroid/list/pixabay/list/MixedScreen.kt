@@ -1,6 +1,5 @@
 package com.sfaxdroid.list.pixabay.list
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,12 +18,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.sfaxdroid.base.Constants.BG_COLOR
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
 import com.sfaxdroid.data.entity.TopWall
 @Composable
@@ -34,9 +35,8 @@ internal fun MixedScreen(
     onTagClick: (PixaTagWithSearchData, Int) -> Unit,
     openWallpaper: (String) -> Unit
 ) {
-    Log.d("MixedScreen", "box color: ${MaterialTheme.colors.background}")
     Box(modifier = Modifier.fillMaxSize()
-        .background(Color(0xFF161E24))){
+        .background(Color(BG_COLOR))){
         LazyColumn {
             item {
                 TopWalls(
@@ -57,7 +57,12 @@ private fun MixedItem(
     onTagClick: (PixaTagWithSearchData, Int) -> Unit
 ) = Box(modifier = Modifier
     .fillMaxWidth()
-    .height(220.dp)
+    .height(
+        LocalConfiguration
+            .current
+            .screenHeightDp
+            .dp / 3.5f
+    )
     .background(Color.Black)
     .clickable {
         onTagClick(tagWithSearchData, index)

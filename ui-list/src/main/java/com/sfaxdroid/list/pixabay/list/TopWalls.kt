@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +36,12 @@ import com.sfaxdroid.data.entity.TopWall
 internal fun TopWalls(topWallList: List<TopWall>, openWallpaper: (String) -> Unit) {
     val pagerState = rememberPagerState()
     HorizontalPager(
-        modifier = Modifier.height(200.dp),
+        modifier = Modifier.height(
+            LocalConfiguration
+                .current
+                .screenHeightDp
+                .dp / 3.25f
+        ),
         count = topWallList.size,
         state = pagerState,
         contentPadding = PaddingValues(end = 16.dp, start = 16.dp, top = 16.dp),
