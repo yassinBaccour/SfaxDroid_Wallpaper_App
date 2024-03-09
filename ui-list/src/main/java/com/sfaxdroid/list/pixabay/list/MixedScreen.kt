@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,7 +23,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.sfaxdroid.base.Constants.BG_COLOR
 import com.sfaxdroid.data.entity.PixaTagWithSearchData
 import com.sfaxdroid.data.entity.TopWall
@@ -67,7 +66,7 @@ private fun MixedItem(
     .clickable {
         onTagClick(tagWithSearchData, index)
     }) {
-    AsyncImage(
+    SubcomposeAsyncImage(
         model = tagWithSearchData.tagImgUrl.collectAsState().value,
         contentDescription = null,
         contentScale = ContentScale.Crop,

@@ -18,18 +18,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.sfaxdroid.bases.encodeUrl
 import com.sfaxdroid.data.entity.TopWall
+import com.sfaxdroid.list.R
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -80,12 +82,15 @@ internal fun TopWallItem(item: TopWall, modifier: Modifier = Modifier, pageOffse
             openWallpaper(item.pixaItem.largeImageURL.encodeUrl())
         }
     ) {
-
-            AsyncImage(
+            SubcomposeAsyncImage(
                 model = item.pixaItem.webformatURL,
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
                 alpha = 0.6f,
+                loading = {
+                    LoadingImg(previewURL = item.pixaItem.previewURL)
+                }
             )
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -101,7 +106,7 @@ internal fun TopWallItem(item: TopWall, modifier: Modifier = Modifier, pageOffse
                     modifier = Modifier.padding(5.dp)
                 )
                 Text(
-                    text = "On Pixabay.com",
+                    text = stringResource(R.string.on_pixabay_com),
                     color = Color.White,
                     fontSize = 15.sp,
                     fontStyle = FontStyle.Italic,

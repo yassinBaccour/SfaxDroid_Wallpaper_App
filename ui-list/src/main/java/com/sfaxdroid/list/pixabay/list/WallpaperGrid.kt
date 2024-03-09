@@ -22,7 +22,6 @@ fun WallpaperGrid(navController: NavController) =
         navController.navigate(NavScreen.Pixabay.route + NavScreen.Detail.route + "/" + it)
     }
 
-
 @Composable
 internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (String) -> Unit) {
 
@@ -59,7 +58,7 @@ internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (St
 internal fun WallpaperGrid(pictureList: List<PixaItem>, openWallpaper: (String) -> Unit) =
     LazyVerticalGrid(modifier = Modifier.fillMaxSize(), columns = GridCells.Adaptive(124.dp)) {
         items(pictureList.size) { index ->
-            WallpaperItems(pictureList[index]) { url -> openWallpaper(url) }
+            WallpaperItem(pictureList[index]) { url -> openWallpaper(url) }
         }
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="wallpaper_source">From Pixabay.com</string>
-    <string name="set_as_wallpaper">set as wallpaper</string>
+    <string name="wallpaper_source" >From Pixabay.com</string>
+    <string name="set_as_wallpaper" >set as wallpaper</string>
+    <string name="on_pixabay_com" >On Pixabay.com</string>
 </resources>
