@@ -68,6 +68,7 @@ testRunnerVersion = "1.5.2"
 espressoVersion = "3.5.1"
 coreVersion = "1.5.0"
 rulesVersion = "1.5.0"
+accompanist = "0.30.0"
 
 [libraries]
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
