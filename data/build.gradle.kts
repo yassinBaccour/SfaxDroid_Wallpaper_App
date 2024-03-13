@@ -1,11 +1,11 @@
 plugins {
     `java-library`
     kotlin("jvm")
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 dependencies {
-    ksp(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
     api(libs.retrofit2.converter)
     api(libs.annotation)
     api(libs.kotlinx.coroutines.core)

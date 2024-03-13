@@ -9,10 +9,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.navigation
 import androidx.navigation.navArgument
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.navigation
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.extension.getFullUrl
 import com.sfaxdroid.bases.NavScreen
@@ -25,6 +24,8 @@ import com.sfaxdroid.list.pixabay.list.WallpaperGrid
 import com.sfaxdroid.list.ui.CategoryList
 import com.sfaxdroid.list.ui.LiveWallpaperList
 import com.sfaxdroid.list.ui.WallpaperList
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 
 @ExperimentalAnimationApi
 @Composable
@@ -32,7 +33,7 @@ internal fun AppNavigation(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {
-    AnimatedNavHost(
+    NavHost(
         navController = navController,
         startDestination = NavScreen.Wallpaper.route,
         modifier = modifier

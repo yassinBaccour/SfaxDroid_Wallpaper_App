@@ -2,7 +2,6 @@ plugins {
     id(libs.plugins.android.lib.get().pluginId)
     id("kotlin-android")
     id("kotlin-kapt")
-    alias(libs.plugins.ksp)
 }
 
 kapt {
@@ -18,7 +17,7 @@ android {
 dependencies {
     api(projects.base)
     api(projects.commonResources)
-    ksp(libs.glide.compiler)
+    kapt(libs.glide.compiler)
     api(libs.androidx.constraintlayout)
     api(libs.androidx.appcompat)
     api(libs.glide)

@@ -28,8 +28,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.data.entity.AppName
 import com.yassin.wallpaper.AppNavigation
@@ -40,7 +40,7 @@ import com.yassin.wallpaper.R
 @Composable
 internal fun MainHome(appName: AppName, onTabChanged: (String) -> Unit) {
 
-    val navController = rememberAnimatedNavController()
+    val navController = rememberNavController()
 
     Scaffold(bottomBar = {
         if (appName == AppName.AccountOne) {

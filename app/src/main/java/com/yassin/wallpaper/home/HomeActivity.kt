@@ -32,10 +32,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SfaxDroidTheme {
-                MainHome(AppName.AccountOne) {
-                    windowsMode(it)
-                }
+            MainHome(AppName.AccountOne) {
+                windowsMode(it)
             }
         }
         privacyManager.loadConsent(this)

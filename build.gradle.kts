@@ -2,10 +2,6 @@ import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.BasePlugin
 import java.util.Locale
 
-plugins {
-    alias(libs.plugins.ksp) apply false
-}
-
 buildscript {
     repositories {
         google()

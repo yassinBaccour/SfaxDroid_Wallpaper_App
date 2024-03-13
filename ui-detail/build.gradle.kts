@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
 }
 
@@ -13,8 +13,8 @@ android {
 }
 
 dependencies {
-    ksp(libs.glide.compiler)
-    ksp(libs.hilt.android.compiler)
+    kapt(libs.glide.compiler)
+    kapt(libs.hilt.android.compiler)
     api(libs.hilt.lib)
     implementation(projects.data)
     implementation(projects.baseAndroid)

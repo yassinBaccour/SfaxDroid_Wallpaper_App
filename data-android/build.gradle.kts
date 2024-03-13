@@ -1,7 +1,7 @@
 plugins{
     id("com.android.library")
     id("kotlin-android")
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 android {
@@ -9,8 +9,8 @@ android {
 }
 
 dependencies {
-    ksp(libs.hilt.android.compiler)
-    ksp(libs.room.compiler)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.room.compiler)
     api(projects.data)
     api(libs.room.runtime)
     implementation(libs.kotlin.stdlib)

@@ -2,7 +2,7 @@ plugins {
     id("com.android.library")
     id("kotlin-android")
     id("dagger.hilt.android.plugin")
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 android {
@@ -14,7 +14,7 @@ android {
 }
 
 dependencies {
-    ksp(libs.hilt.android.compiler)
+    kapt(libs.hilt.android.compiler)
     api(libs.hilt.lib)
     implementation(libs.colorpicker)
     implementation(projects.baseAndroid)

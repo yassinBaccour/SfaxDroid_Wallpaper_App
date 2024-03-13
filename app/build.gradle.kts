@@ -3,11 +3,10 @@ import java.nio.file.Files
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 kapt {
@@ -98,8 +97,8 @@ android {
 }
 
 dependencies {
-    ksp(libs.hilt.android.compiler)
-    ksp(libs.hilt.compiler)
+    kapt(libs.hilt.android.compiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.fragment.nav.ktx)
     implementation(libs.navigation.ktx)

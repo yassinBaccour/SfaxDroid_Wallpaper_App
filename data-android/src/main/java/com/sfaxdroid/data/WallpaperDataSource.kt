@@ -19,26 +19,4 @@ class WallpaperDataSource {
     fun provideAppRepository(dataSource: WallpapersDataSource): WsRepository {
         return dataSource
     }
-
-    @Singleton
-    @Provides
-    fun providesRoomDatabase(context: Context): SfaxDroidRoomDatabase {
-        return Room.databaseBuilder(
-            context,
-            SfaxDroidRoomDatabase::class.java,
-            "SfaxDroid"
-        ).build()
-    }
-
-    @Singleton
-    @Provides
-    fun providesWallpaperDao(database: SfaxDroidRoomDatabase): WallpaperDao {
-        return database.wallpaperDao()
-    }
-
-    @Singleton
-    @Provides
-    fun providesDbDataSource(productDao: WallpaperDao): DbDataSource {
-        return DbDataSource(productDao)
-    }
 }
