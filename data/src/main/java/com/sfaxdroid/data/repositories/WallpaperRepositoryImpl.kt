@@ -6,10 +6,10 @@ import com.sfaxdroid.data.entity.TagResponse
 import com.sfaxdroid.data.entity.WallpaperResponse
 import javax.inject.Inject
 
-class WallpapersDataSource @Inject constructor(
-    private val service: WsService,
+class WallpaperRepositoryImpl @Inject constructor(
+    private val service: WallpaperService,
     private val logger: Logger
-) : WsRepository {
+) : WallpaperRepository {
 
     override suspend fun getLiveWallpapers(file: String): Response<WallpaperResponse> {
         return service.getLiveWallpapers(file).executeWs().toResult(logger)
