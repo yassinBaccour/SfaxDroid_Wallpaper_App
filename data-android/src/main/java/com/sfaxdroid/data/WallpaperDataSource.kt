@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class WallpaperModule {
+class WallpaperDataSource {
 
     @Provides
     @Singleton
