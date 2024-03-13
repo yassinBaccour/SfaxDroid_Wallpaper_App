@@ -1,4 +1,5 @@
 import java.nio.file.Files
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -16,11 +17,11 @@ kapt {
 
 android {
     namespace = "com.yassin.wallpaper"
-    compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "com"
-        minSdk = libs.versions.androidMinSdkVersion.get().toInt()
-        targetSdk = libs.versions.androidTargetSdkVersion.get().toInt()
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
         multiDexEnabled = true
         buildConfigField("String", "APP_KEY", "\"https://www.google.com\"")
         buildConfigField("String", "JSON_VERSION", "\"v3\"")
@@ -51,7 +52,11 @@ android {
             dimension = "app"
             versionCode = 92
             versionName = "9.2"
-            buildConfigField("String", "APP_INTERSTITIAL_KEY", "\"ca-app-pub-6263632629106733/3118481881\"")
+            buildConfigField(
+                "String",
+                "APP_INTERSTITIAL_KEY",
+                "\"ca-app-pub-6263632629106733/3118481881\""
+            )
             buildConfigField("String", "API_KEY_PIXABAY", "\"19985524-f627984e6e929e47e060fd2ff\"")
             manifestPlaceholders["hostName"] = "ca-app-pub-6263632629106733~1726613607"
         }
@@ -78,41 +83,23 @@ android {
     }
 
     sourceSets {
-        getByName("main"){
+        getByName("main") {
             jniLibs.srcDir("libs")
         }
-    }
-
-    compileOptions {
-        sourceCompatibility= JavaVersion.VERSION_1_8
-        targetCompatibility =JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeVersion.get()
-    }
-
-    lintOptions {
-        isAbortOnError = false
-        isCheckDependencies = true
-        isCheckReleaseBuilds = false
-        disable("StringFormatMatches","Instantiatable")
-        isIgnoreTestSources = true
-    }
+    composeOptions { kotlinCompilerExtensionVersion = libs.versions.composecompiler.get() }
 }
 
 dependencies {
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.fragment.nav.ktx)
     implementation(libs.navigation.ktx)
@@ -152,20 +139,26 @@ dependencies {
     implementation(projects.dataAndroid)
 }
 
-android.applicationVariants.all{
+android.applicationVariants.all {
     val variant = this
     val name = variant.name
     buildConfigField("boolean", "enableDebugLogging", "false")
     if (name.contains("accountOne")) {
         val googleServices = file("src/accountOne/google-services.json")
         if (!googleServices.exists()) {
-            Files.copy(file("src/accountOne/fake-ripple-google-services.json").toPath(), googleServices.toPath())
+            Files.copy(
+                file("src/accountOne/fake-ripple-google-services.json").toPath(),
+                googleServices.toPath()
+            )
         }
     }
     if (name.contains("accountTwo")) {
         val googleServices = file("src/accountTwo/google-services.json")
         if (!googleServices.exists()) {
-            Files.copy(file("src/accountTwo/fake-scary-google-services.json").toPath(), googleServices.toPath())
+            Files.copy(
+                file("src/accountTwo/fake-scary-google-services.json").toPath(),
+                googleServices.toPath()
+            )
         }
     }
 }

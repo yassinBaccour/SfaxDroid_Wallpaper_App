@@ -4,25 +4,17 @@ plugins {
     id("kotlin-kapt")
     alias(libs.plugins.ksp)
 }
+
 kapt {
     correctErrorTypes = true
     useBuildCache = true
 }
+
 android {
-    compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.androidMinSdkVersion.get().toInt()
-        targetSdk = libs.versions.androidTargetSdkVersion.get().toInt()
-    }
-    buildFeatures {
-        viewBinding = true
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeVersion.get()
-    }
     namespace = "com.sfaxdroid.base"
+    composeOptions { kotlinCompilerExtensionVersion = libs.versions.composecompiler.get() }
 }
+
 dependencies {
     api(projects.base)
     api(projects.commonResources)

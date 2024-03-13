@@ -1,38 +1,26 @@
 plugins {
     id("com.android.library")
-    id(libs.plugins.kotlin.android.get().pluginId)
-    kotlin("kapt")
+    id("kotlin-android")
     id("dagger.hilt.android.plugin")
     alias(libs.plugins.ksp)
 }
 
-kapt {
-    correctErrorTypes = true
-    useBuildCache = true
-}
-
 android {
-    compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.androidMinSdkVersion.get().toInt()
-        targetSdk = libs.versions.androidTargetSdkVersion.get().toInt()
-    }
     buildFeatures {
-        viewBinding = true
         compose = true
     }
-    composeOptions { kotlinCompilerExtensionVersion = libs.versions.composeVersion.get() }
+    composeOptions { kotlinCompilerExtensionVersion = libs.versions.composecompiler.get() }
     namespace = "com.sfaxdoird.anim.img"
 }
 
 dependencies {
+    ksp(libs.hilt.android.compiler)
+    api(libs.hilt.lib)
     implementation(libs.colorpicker)
     implementation(projects.baseAndroid)
     implementation(projects.downloadFileModule)
     implementation(libs.fragment.nav.ktx)
     implementation(libs.navigation.ktx)
-    api(libs.hilt.lib)
-    kapt(libs.hilt.android.compiler)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
@@ -42,6 +30,5 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.coil)
     implementation(libs.compose.icon)
-    debugImplementation(libs.compose.ui.tooling)
     implementation(libs.androidx.hilt.navigation.compose)
 }

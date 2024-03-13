@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sfaxdroid.data.mappers.LwpItem
 import com.sfaxdroid.list.WallpaperViewState
-import com.sfaxdroid.list.rememberFlowWithLifecycle
 import com.sfaxdroid.list.viewmodels.LwpViewModel
 
 @Composable
@@ -27,7 +26,7 @@ internal fun LiveWallpaperList(
     viewModel: LwpViewModel,
     openLiveWallpaper: (wallpaperObject: LwpItem) -> Unit
 ) {
-    val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
+    val state by  viewModel.state.collectAsState(
         initial = WallpaperViewState()
     )
     LiveWallpaperList(viewState = state, openLiveWallpaper = openLiveWallpaper)

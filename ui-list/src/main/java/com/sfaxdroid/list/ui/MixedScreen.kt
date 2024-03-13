@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import com.sfaxdroid.list.WallpaperViewState
-import com.sfaxdroid.list.rememberFlowWithLifecycle
 import com.sfaxdroid.list.viewmodels.MixedScreenViewModel
 
 @Composable
@@ -16,10 +15,9 @@ fun MixedScreen(openDetail: (ItemWrapperList) -> Unit) {
 
 @Composable
 internal fun MixedScreen(
-    viewModel: MixedScreenViewModel,
-    openDetail: (ItemWrapperList) -> Unit
+    viewModel: MixedScreenViewModel, openDetail: (ItemWrapperList) -> Unit
 ) {
-    val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
+    val state by viewModel.state.collectAsState(
         initial = WallpaperViewState()
     )
     MixedScreen(viewState = state, openDetail = openDetail)
@@ -27,8 +25,7 @@ internal fun MixedScreen(
 
 @Composable
 internal fun MixedScreen(
-    viewState: WallpaperViewState,
-    openDetail: (ItemWrapperList) -> Unit
+    viewState: WallpaperViewState, openDetail: (ItemWrapperList) -> Unit
 ) {
 
 }

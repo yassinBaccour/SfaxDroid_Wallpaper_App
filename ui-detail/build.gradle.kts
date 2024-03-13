@@ -1,32 +1,23 @@
 plugins {
-    id(libs.plugins.android.lib.get().pluginId)
-    id(libs.plugins.kotlin.android.get().pluginId)
-    kotlin("kapt")
+    id("com.android.library")
+    id("kotlin-android")
     alias(libs.plugins.ksp)
     id("dagger.hilt.android.plugin")
 }
 
-kapt {
-    correctErrorTypes = true
-    useBuildCache = true
-}
-
 android {
-    compileSdk = libs.versions.androidCompileSdkVersion.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.androidMinSdkVersion.get().toInt()
-        targetSdk = libs.versions.androidTargetSdkVersion.get().toInt()
+    buildFeatures {
+        viewBinding = true
     }
-    buildFeatures { viewBinding = true }
     namespace = "com.sfaxdroid.detail"
 }
 
 dependencies {
     ksp(libs.glide.compiler)
+    ksp(libs.hilt.android.compiler)
+    api(libs.hilt.lib)
     implementation(projects.data)
     implementation(projects.baseAndroid)
     implementation("com.soundcloud.android:android-crop:1.0.1@aar")
     implementation(libs.androidx.recyclerview)
-    api(libs.hilt.lib)
-    kapt(libs.hilt.android.compiler)
 }

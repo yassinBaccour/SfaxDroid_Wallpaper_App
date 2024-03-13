@@ -1,13 +1,17 @@
+import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.BasePlugin
 import java.util.Locale
 
+plugins {
+    alias(libs.plugins.ksp) apply false
+}
+
 buildscript {
-
-
     repositories {
-        jcenter()
         google()
+        gradlePluginPortal()
+        mavenCentral()
     }
-
     dependencies {
         classpath(libs.gradle.build.tool)
         classpath(libs.kotlin.gradle.plugin)
@@ -23,14 +27,31 @@ apply(plugin = "com.github.ben-manes.versions")
 
 allprojects {
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
         maven("https://jitpack.io")
         maven("https://maven.google.com")
-        google()
     }
 }
 
 subprojects {
+    plugins.withId(rootProject.libs.plugins.hilt.get().pluginId) {
+        extensions.getByType<dagger.hilt.android.plugin.HiltExtension>().enableAggregatingTask =
+            false
+    }
+    plugins.withType<BasePlugin>().configureEach {
+        extensions.configure<BaseExtension> {
+            compileSdkVersion(libs.versions.compileSdk.get().toInt())
+            defaultConfig {
+                minSdk = libs.versions.minSdkVersion.get().toInt()
+                targetSdk = libs.versions.targetSdkVersion.get().toInt()
+            }
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
+            }
+        }
+    }
     apply(plugin = "com.diffplug.spotless")
     configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         java {
@@ -56,7 +77,6 @@ subprojects {
             trimTrailingWhitespace()
             endWithNewline()
         }
-
         format("xml") {
             target("**/*.xml")
             indentWithSpaces()

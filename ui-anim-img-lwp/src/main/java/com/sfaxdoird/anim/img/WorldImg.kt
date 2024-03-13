@@ -30,7 +30,6 @@ import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.sfaxdroid.base.Constants
 import com.sfaxdroid.base.utils.Utils
-import com.sfaxdroid.list.rememberFlowWithLifecycle
 
 @Composable
 fun WorldImg() {
@@ -42,7 +41,7 @@ internal fun WorldImg(
     viewModel: WordImgViewModel
 ) {
 
-    val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
+    val state by viewModel.state.collectAsState(
         initial = AnimImgViewState.Empty
     )
 
@@ -133,7 +132,7 @@ private fun chooseColor(context: Context) {
         .density(12)
         .setPositiveButton(
             context.getString(R.string.btn_ok)
-        ) { _: DialogInterface?, selectedColor: Int, _: Array<Int?>? ->
+        ) { _: DialogInterface?, _: Int, _: Array<Int?>? ->
             //viewModel.submitAction(AnimImgAction.ChangeColor(selectedColor))
         }
         .setNegativeButton(

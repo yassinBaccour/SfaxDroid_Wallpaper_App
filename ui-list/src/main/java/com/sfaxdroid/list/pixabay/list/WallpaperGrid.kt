@@ -14,7 +14,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.data.mappers.PixaItem
-import com.sfaxdroid.list.rememberFlowWithLifecycle
 
 @Composable
 fun WallpaperGrid(navController: NavController) {
@@ -26,9 +25,7 @@ fun WallpaperGrid(navController: NavController) {
 @Composable
 internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (String) -> Unit) {
 
-    val state by
-    rememberFlowWithLifecycle(flow = viewModel.state)
-        .collectAsState(initial = WallpapersUiState())
+    val state by viewModel.state.collectAsState(initial = WallpapersUiState())
 
     Column {
         InitPixaTagList(

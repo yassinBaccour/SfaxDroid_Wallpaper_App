@@ -27,7 +27,6 @@ import com.sfaxdroid.data.mappers.BaseWallpaperView
 import com.sfaxdroid.data.mappers.ItemWrapperList
 import com.sfaxdroid.data.mappers.TagView
 import com.sfaxdroid.list.WallpaperViewState
-import com.sfaxdroid.list.rememberFlowWithLifecycle
 import com.sfaxdroid.list.viewmodels.WallpapersViewModel
 
 @Composable
@@ -42,7 +41,7 @@ internal fun WallpaperList(
     viewModel: WallpapersViewModel,
     openDetail: (BaseWallpaperView, String, String, AppName) -> Unit
 ) {
-    val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
+    val state by viewModel.state.collectAsState(
         initial = WallpaperViewState()
     )
 

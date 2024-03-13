@@ -6,7 +6,7 @@ import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.SfaxDroidRating
 import javax.inject.Inject
 
-class Rating @Inject constructor(var preferencesManager: PreferencesManager) : SfaxDroidRating {
+class Rating @Inject constructor(private var preferencesManager: PreferencesManager) : SfaxDroidRating {
 
     override fun ratingApp(activity: Activity) {
         val reviewManager = ReviewManagerFactory.create(activity)

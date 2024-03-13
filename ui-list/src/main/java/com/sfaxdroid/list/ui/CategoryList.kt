@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sfaxdroid.data.mappers.CategoryItem
 import com.sfaxdroid.list.WallpaperViewState
-import com.sfaxdroid.list.rememberFlowWithLifecycle
 import com.sfaxdroid.list.viewmodels.CategoryViewModel
 
 @Composable
@@ -27,7 +26,7 @@ internal fun CategoryList(
     viewModel: CategoryViewModel,
     openWallpaper: (wallpaperObject: CategoryItem) -> Unit
 ) {
-    val state by rememberFlowWithLifecycle(flow = viewModel.state).collectAsState(
+    val state by viewModel.state.collectAsState(
         initial = WallpaperViewState()
     )
     CategoryList(viewState = state, openWallpaper = openWallpaper)
