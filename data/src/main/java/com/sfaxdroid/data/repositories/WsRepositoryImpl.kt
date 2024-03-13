@@ -1,12 +1,9 @@
 package com.sfaxdroid.data.repositories
 
 import com.sfaxdroid.data.entity.Logger
-import com.sfaxdroid.data.entity.Response
-import com.sfaxdroid.data.entity.TagResponse
-import com.sfaxdroid.data.entity.WallpaperResponse
 import javax.inject.Inject
 
-class WallpapersDataSource @Inject constructor(
+class WsRepositoryImpl @Inject constructor(
     private val service: WsService,
     private val logger: Logger
 ) : WsRepository {
