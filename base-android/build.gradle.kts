@@ -16,6 +16,7 @@ android {
 
 dependencies {
     api(projects.base)
+    api(projects.data)
     api(projects.commonResources)
     kapt(libs.glide.compiler)
     api(libs.androidx.constraintlayout)

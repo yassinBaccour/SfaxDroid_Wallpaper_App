@@ -6,10 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-
-
 interface ApiService {
-
 
     @GET("/api/")
     suspend fun getImages(
@@ -22,19 +19,23 @@ interface ApiService {
         @Query("page") page: String
     ): PixaResponse
 
+    @GET("/api/")
+    suspend fun getUrl(@Query("key") apiKey: String, @Query("id") id: String): PixaResponse
+
     companion object {
         private const val BASE_URL = "https://pixabay.com"
         private var apiService: ApiService? = null
+
         fun getInstance(): ApiService {
             if (apiService == null) {
-                apiService = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(ApiService::class.java)
+                apiService =
+                    Retrofit.Builder()
+                        .baseUrl(BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                        .create(ApiService::class.java)
             }
-            return apiService?: throw IllegalStateException("ApiService not initialized")
+            return apiService ?: throw IllegalStateException("ApiService not initialized")
         }
     }
-
 }

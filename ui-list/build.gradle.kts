@@ -15,6 +15,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.ui.util)
+    implementation(libs.accompanist.pager)
     api(libs.hilt.lib)
     kapt(libs.hilt.android.compiler)
     implementation(projects.baseAndroid)

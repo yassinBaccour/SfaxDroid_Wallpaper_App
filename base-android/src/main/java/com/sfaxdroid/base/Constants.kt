@@ -29,5 +29,6 @@ object Constants {
         const val TYPE_CAROUSEL = 2
         const val TYPE_LWP = 3
         const val TYPE_CAT = 4
-        const val TYPE_PIXA = 5
+        const val MIXED = "Mixed"
+        const val BG_COLOR = 0xFF161E24
 }

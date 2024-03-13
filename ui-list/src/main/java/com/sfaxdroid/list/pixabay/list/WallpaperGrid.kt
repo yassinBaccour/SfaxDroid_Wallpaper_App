@@ -16,11 +16,10 @@ import com.sfaxdroid.bases.NavScreen
 import com.sfaxdroid.data.mappers.PixaItem
 
 @Composable
-fun WallpaperGrid(navController: NavController) {
+fun WallpaperGrid(navController: NavController) =
     WallpaperGrid(viewModel = hiltViewModel()) {
         navController.navigate(NavScreen.Pixabay.route + NavScreen.Detail.route + "/" + it)
     }
-}
 
 @Composable
 internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (String) -> Unit) {
@@ -33,18 +32,33 @@ internal fun WallpaperGrid(viewModel: WallpaperGridViewModel, openWallpaper: (St
             tagsWithSearchData = state.tagsWithSearchData,
             selectedItem = 0
         ) { tagWithSearchData, pos ->
-            viewModel.provideWallpaper(tagWithSearchData)
-            viewModel.selectItem(pos)
+            viewModel.updateScreen(tagWithSearchData, pos)
         }
-        WallpaperGrid(pictureList = state.wallpapersList.shuffled(), openWallpaper = openWallpaper)
+        when (state.selectedItem) {
+            0 -> {
+                MixedScreen(
+                    topWalls = state.topWalls,
+                    tagsWithSearchData = state.tagsWithSearchData.drop(1),
+                    onTagClick = { tagWithSearchData, pos ->
+                        viewModel.updateScreen(tagWithSearchData, pos)
+                    },
+                    openWallpaper =openWallpaper
+                )
+            }
+            else -> {
+                WallpaperGrid(
+                    pictureList = state.wallpapersList.shuffled(), openWallpaper = openWallpaper
+                )
+            }
+        }
     }
 }
 
 @Composable
-internal fun WallpaperGrid(pictureList: List<PixaItem>, openWallpaper: (String) -> Unit) {
+internal fun WallpaperGrid(pictureList: List<PixaItem>, openWallpaper: (String) -> Unit) =
     LazyVerticalGrid(modifier = Modifier.fillMaxSize(), columns = GridCells.Adaptive(124.dp)) {
         items(pictureList.size) { index ->
-            WallpaperItems(pictureList[index]) { url -> openWallpaper(url) }
+            WallpaperItem(pictureList[index]) { url -> openWallpaper(url) }
         }
     }
-}
+

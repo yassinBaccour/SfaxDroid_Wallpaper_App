@@ -70,7 +70,9 @@ coreVersion = "1.5.0"
 rulesVersion = "1.5.0"
 
 [libraries]
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompilerVersion" }
+androidx-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "composeVersion" }
 androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3Version" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 gradle-build-tool = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
