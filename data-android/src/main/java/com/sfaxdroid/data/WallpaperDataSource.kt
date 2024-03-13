@@ -1,7 +1,9 @@
 package com.sfaxdroid.data
 
-import com.sfaxdroid.data.repositories.WallpaperRepositoryImpl
-import com.sfaxdroid.data.repositories.WallpaperRepository
+import android.content.Context
+import androidx.room.Room
+import com.sfaxdroid.data.repositories.WallpapersDataSource
+import com.sfaxdroid.data.repositories.WsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +16,7 @@ class WallpaperDataSource {
 
     @Provides
     @Singleton
-    fun provideAppRepository(dataSource: WallpaperRepositoryImpl): WallpaperRepository {
+    fun provideAppRepository(dataSource: WallpapersDataSource): WsRepository {
         return dataSource
     }
 }
