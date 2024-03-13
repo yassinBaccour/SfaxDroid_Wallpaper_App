@@ -4,7 +4,7 @@ import com.sfaxdroid.data.entity.Response
 import com.sfaxdroid.data.entity.TagResponse
 import com.sfaxdroid.data.entity.WallpaperResponse
 
-interface WsRepository {
+interface WallpaperRepository {
 
     suspend fun getLiveWallpapers(
         file: String
