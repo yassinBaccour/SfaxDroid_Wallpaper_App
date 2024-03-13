@@ -30,4 +30,6 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(projects.domain)
     implementation(projects.uiDetail)
+    implementation(libs.paging.runtime)
+    implementation (libs.androidx.material3)
 }

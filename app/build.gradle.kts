@@ -136,6 +136,7 @@ dependencies {
     implementation(projects.uiTimerLwp)
     implementation(projects.uiList)
     implementation(projects.dataAndroid)
+    implementation (libs.androidx.material3)
 }
 
 android.applicationVariants.all {

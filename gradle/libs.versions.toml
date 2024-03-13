@@ -5,6 +5,7 @@ androidPluginVersion = "8.3.0"
 kotlinVersion = "1.9.22"
 ktlint = "0.40.0"
 
+material3Version = "1.2.1"
 navAnimVersion = "0.30.0"
 compileSdk = "34"
 minSdkVersion = "21"
@@ -18,6 +19,7 @@ activityComposeVersion = "1.8.2"
 composeNavigationVersion = "2.7.7"
 composeViewModelVersion = "2.7.0"
 
+pagingRuntimeVersion = "3.2.1"
 targetSdkVersion = "34"
 
 kspVersion = "1.9.0-1.0.12"
@@ -69,8 +71,10 @@ rulesVersion = "1.5.0"
 
 [libraries]
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltCompilerVersion" }
+androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3Version" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 gradle-build-tool = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
+paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRuntimeVersion" }
 spotless = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotlessVersion" }
 lib-check-update = { group = "com.github.ben-manes", name = "gradle-versions-plugin", version.ref = "libCheckUpdateVersion" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlinVersion" }

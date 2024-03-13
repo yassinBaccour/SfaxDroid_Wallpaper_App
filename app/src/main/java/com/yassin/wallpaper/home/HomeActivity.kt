@@ -4,6 +4,7 @@ import SfaxDroidTheme
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.MaterialTheme
 import com.sfaxdroid.base.PreferencesManager
 import com.sfaxdroid.base.extension.checkAppPermission
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,6 +12,7 @@ import javax.inject.Inject
 import com.sfaxdroid.base.Ads
 import com.sfaxdroid.base.PrivacyManager
 import com.sfaxdroid.base.SfaxDroidRating
+import com.sfaxdroid.base.themes.DarkColors
 import com.sfaxdroid.data.entity.AppName
 import javax.inject.Named
 
@@ -32,8 +34,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainHome(AppName.AccountOne) {
-                windowsMode(it)
+            MaterialTheme(colors = DarkColors) {
+                MainHome(AppName.AccountOne) {
+                    windowsMode(it)
+                }
             }
         }
         privacyManager.loadConsent(this)
