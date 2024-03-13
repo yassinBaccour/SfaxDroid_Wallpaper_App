@@ -6,9 +6,9 @@ import javax.inject.Singleton
 
 @Singleton
 class WsService
-@Inject constructor(retrofit: Retrofit) : ApiClient {
+@Inject constructor(retrofit: Retrofit) : WallpaperService {
 
-    private val articleApi by lazy { retrofit.create(ApiClient::class.java) }
+    private val articleApi by lazy { retrofit.create(WallpaperService::class.java) }
 
     override fun getLiveWallpapers(guid: String) = articleApi.getLiveWallpapers(guid)
 

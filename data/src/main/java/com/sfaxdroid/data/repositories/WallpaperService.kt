@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-internal interface ApiClient {
+internal interface WallpaperService {
 
     @GET("{file}")
     fun getAllWallpapers(
