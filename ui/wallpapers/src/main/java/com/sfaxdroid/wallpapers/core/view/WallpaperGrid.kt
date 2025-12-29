@@ -21,7 +21,7 @@ internal fun WallpaperGrid(
     ) {
         wallpapers.forEach { wallpaper ->
             WallpaperItem(
-                Modifier.weight(1f),
+                modifier = Modifier.weight(1f),
                 wallpaper = wallpaper,
                 onClick = { openDetail.invoke(wallpaper.detailUrl) }
             )
