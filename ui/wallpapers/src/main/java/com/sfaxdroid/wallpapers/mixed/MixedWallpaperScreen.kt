@@ -11,16 +11,21 @@ import com.sfaxdroid.wallpapers.core.GroupUiModel
 import com.sfaxdroid.wallpapers.core.view.WallpaperContentList
 
 @Composable
-fun MixedWallpaperScreen(openDetail: (String) -> Unit) =
-    MixedWallpaperScreen(viewModel = hiltViewModel(), openDetail)
+fun MixedWallpaperScreen(openDetail: (String) -> Unit, openTag: (String) -> Unit) =
+    MixedWallpaperScreen(viewModel = hiltViewModel(), openDetail = openDetail, openTag = openTag)
 
 @Composable
-private fun MixedWallpaperScreen(viewModel: MixedWallpaperViewModel, openDetail: (String) -> Unit) {
+private fun MixedWallpaperScreen(
+    viewModel: MixedWallpaperViewModel,
+    openDetail: (String) -> Unit,
+    openTag: (String) -> Unit
+) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     when (state) {
         is MixedWallpaperUiState.Success -> MixedWallpaperContent(
             state = (state as MixedWallpaperUiState.Success).sections,
-            openDetail = openDetail
+            openDetail = openDetail,
+            openTag = openTag
         )
 
         MixedWallpaperUiState.Loading -> {}
@@ -29,12 +34,17 @@ private fun MixedWallpaperScreen(viewModel: MixedWallpaperViewModel, openDetail:
 }
 
 @Composable
-private fun MixedWallpaperContent(state: List<GroupUiModel>, openDetail: (String) -> Unit) {
+private fun MixedWallpaperContent(
+    state: List<GroupUiModel>,
+    openDetail: (String) -> Unit,
+    openTag: (String) -> Unit
+) {
     Scaffold { innerPadding ->
         WallpaperContentList(
             modifier = Modifier.padding(innerPadding),
             state = state,
-            openDetail = openDetail
+            openDetail = openDetail,
+            openTag = openTag
         )
     }
 }

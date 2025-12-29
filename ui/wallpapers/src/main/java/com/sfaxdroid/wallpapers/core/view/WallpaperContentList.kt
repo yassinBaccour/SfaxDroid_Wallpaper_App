@@ -8,17 +8,22 @@ import androidx.compose.ui.Modifier
 import com.sfaxdroid.wallpapers.core.GroupUiModel
 
 @Composable
-internal fun WallpaperContentList(modifier: Modifier = Modifier, state: List<GroupUiModel>, openDetail: (String) -> Unit) {
-        LazyColumn(
-            modifier = modifier,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            items(state) {
-                when (it) {
-                    is GroupUiModel.CARROUSEL -> {}
-                    is GroupUiModel.GRID -> WallpaperGrid(it.list, openDetail)
-                    is GroupUiModel.TAG -> WallpaperTags(it.list)
-                }
+internal fun WallpaperContentList(
+    modifier: Modifier = Modifier,
+    state: List<GroupUiModel>,
+    openDetail: (String) -> Unit,
+    openTag: (String) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        items(state) {
+            when (it) {
+                is GroupUiModel.CARROUSEL -> {}
+                is GroupUiModel.GRID -> WallpaperGrid(it.list, openDetail)
+                is GroupUiModel.TAG -> WallpaperTags(it.list, openTag)
             }
         }
+    }
 }

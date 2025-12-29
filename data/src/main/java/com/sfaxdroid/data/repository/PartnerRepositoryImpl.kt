@@ -28,7 +28,7 @@ internal class PartnerRepositoryImpl @Inject constructor(
                     orientation = ORIENTATION
                 )
             },
-            transform = { mapper.map(it) }
+            transform = { mapper.map(it, searchTerm) }
         )
 
     companion object {

@@ -13,15 +13,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun WallpaperTags(tags: List<String>) {
+internal fun WallpaperTags(tags: List<String>, openTag: (String) -> Unit) {
     FlowRow(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp).padding(bottom = 10.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp)
+            .padding(bottom = 10.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         tags.forEach { tags ->
             Button(
-                onClick = {},
+                onClick = { openTag.invoke(tags) },
                 contentPadding = PaddingValues(horizontal = 1.dp, vertical = 1.dp)
             ) {
                 Text(

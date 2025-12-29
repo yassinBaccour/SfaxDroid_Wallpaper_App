@@ -36,4 +36,5 @@ internal class MixedWallpaperViewModel @Inject constructor(
             onFailure = { MixedWallpaperUiState.Failure })
         _state.update { result }
     }
+
 }
