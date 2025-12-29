@@ -2,7 +2,6 @@ package com.sfaxdroid.detail.ui
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding

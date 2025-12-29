@@ -23,9 +23,7 @@ internal class TagScreenViewModel @Inject constructor(
 
     private val _state = MutableStateFlow<TagUiState>(TagUiState.Loading)
 
-    val uiState = _state.onStart {
-        getCustomUrlProduct("")
-    }.stateIn(
+    val uiState = _state.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000L),
         initialValue = MixedWallpaperUiState.Loading

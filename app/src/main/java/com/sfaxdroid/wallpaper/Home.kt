@@ -10,6 +10,7 @@ import androidx.navigation3.ui.NavDisplay
 import com.sfaxdroid.detail.ui.WallpaperDetail
 import com.sfaxdroid.wallpaper.ui.theme.WallpaperAppTheme
 import com.sfaxdroid.wallpapers.mixed.MixedWallpaperScreen
+import com.sfaxdroid.wallpapers.tag.TagScreen
 
 @Composable
 fun HomeScreen() {
@@ -25,6 +26,11 @@ fun HomeScreen() {
             entryProvider = entryProvider {
                 entry<Destination.Wallpaper> {
                     MixedWallpaperScreen {
+                        backStack += Destination.Detail(it)
+                    }
+                }
+                entry<Destination.Tag> { key ->
+                    TagScreen(key.tag) {
                         backStack += Destination.Detail(it)
                     }
                 }
