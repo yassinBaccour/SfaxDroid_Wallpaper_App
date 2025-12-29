@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sfaxdroid.wallpapers.core.GroupUiModel
+import com.sfaxdroid.wallpapers.core.view.FailureScreenMinimal
+import com.sfaxdroid.wallpapers.core.view.LoadingContent
 import com.sfaxdroid.wallpapers.core.view.WallpaperContentList
 import com.sfaxdroid.wallpapers.mixed.MixedWallpaperUiState
 
@@ -30,7 +32,7 @@ private fun WallpaperScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
-        viewModel.getCustomUrlProduct(tag, true)
+        viewModel.getCustomUrlProduct(tag, false)
     }
     when (state) {
         is TagUiState.Success -> TagScreenContent(
@@ -39,8 +41,8 @@ private fun WallpaperScreen(
             openTag = openTag
         )
 
-        TagUiState.Loading -> {}
-        TagUiState.Failure -> {}
+        TagUiState.Loading -> LoadingContent()
+        TagUiState.Failure -> FailureScreenMinimal { viewModel.getCustomUrlProduct(tag, false) }
     }
 }
 

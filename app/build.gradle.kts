@@ -7,12 +7,9 @@ plugins {
 }
 
 android {
-    namespace = "com.sfaxdroid.wallpaper"
 
     defaultConfig {
-        applicationId = "com.sfaxdroid.wallpaper"
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = "com"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -24,16 +21,35 @@ android {
                 "proguard-rules.pro"
             )
         }
-
     }
+
     buildFeatures {
         buildConfig = true
         compose = true
     }
+
+    flavorDimensions += listOf("app")
+
+    productFlavors {
+        create("wallpaperAppOne") {
+            applicationIdSuffix = ".sami.rippel.allah"
+            versionCode = 160034
+            versionName = "6.6.3"
+            dimension = "app"
+        }
+        create("wallpaperAppTwo") {
+            applicationIdSuffix = ".liliagame.scarewhotouchme"
+            versionCode = 160034
+            versionName = "6.6.3"
+            dimension = "app"
+        }
+    }
+
+    namespace = "com.sfaxdroid.wallpaper"
+
 }
 
 dependencies {
-
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.ui.wallpapers)
@@ -51,7 +67,6 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.hilt.library)
     implementation(libs.okhttp)
-
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
@@ -68,4 +83,5 @@ android.applicationVariants.all {
     buildConfigField("String", "SFAXDROID_BASE_URL", "\"http://vps-eeb86c7c.vps.ovh.net\"")
     buildConfigField("String", "PARTNERS_BASE_URL", "\"https://pixabay.com\"")
     buildConfigField("String", "PARTNERS_API_KEY", "\"19985524-f627984e6e929e47e060fd2ff\"")
+    buildConfigField("String", "JSON_V", "\"1\"")
 }

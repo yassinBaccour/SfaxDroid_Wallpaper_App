@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sfaxdroid.wallpapers.core.GroupUiModel
+import com.sfaxdroid.wallpapers.core.view.FailureScreenMinimal
+import com.sfaxdroid.wallpapers.core.view.LoadingContent
 import com.sfaxdroid.wallpapers.core.view.WallpaperContentList
 
 @Composable
@@ -28,8 +30,8 @@ private fun MixedWallpaperScreen(
             openTag = openTag
         )
 
-        MixedWallpaperUiState.Loading -> {}
-        MixedWallpaperUiState.Failure -> {}
+        MixedWallpaperUiState.Loading -> LoadingContent()
+        MixedWallpaperUiState.Failure -> FailureScreenMinimal(viewModel::getCustomUrlProduct)
     }
 }
 

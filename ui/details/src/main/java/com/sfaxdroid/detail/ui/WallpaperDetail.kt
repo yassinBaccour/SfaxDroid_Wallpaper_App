@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun WallpaperDetail(url: String) {
+fun WallpaperDetail(url: String, tag: List<String>, source: String) {
     val context = LocalContext.current
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
@@ -86,4 +86,4 @@ fun WallpaperDetail(url: String) {
 
 @Preview
 @Composable
-fun WallpaperDetailPreview() = WallpaperDetail("")
+fun WallpaperDetailPreview() = WallpaperDetail("", listOf(), "")

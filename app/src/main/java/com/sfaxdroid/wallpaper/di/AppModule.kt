@@ -20,7 +20,8 @@ class AppModule {
     fun provideAppConfig() = AppConfig(
         partnerBaseUrl = BuildConfig.PARTNERS_BASE_URL,
         partnerApiKey = BuildConfig.PARTNERS_API_KEY,
-        sfaxDroidBaseUrl = BuildConfig.SFAXDROID_BASE_URL
+        sfaxDroidBaseUrl = BuildConfig.SFAXDROID_BASE_URL,
+        jsonVersion = BuildConfig.JSON_V
     )
 
     @Singleton

@@ -26,18 +26,22 @@ fun HomeScreen() {
             entryProvider = entryProvider {
                 entry<Destination.Wallpaper> {
                     MixedWallpaperScreen(
-                        openDetail = { backStack += Destination.Detail(it) },
+                        openDetail = { backStack += Destination.Detail(it, listOf(), "") },
                         openTag = { backStack += Destination.Tag(it) }
                     )
                 }
                 entry<Destination.Tag> { key ->
                     TagScreen(
                         tag = key.tag,
-                        openDetail = { backStack += Destination.Detail(it) },
+                        openDetail = { backStack += Destination.Detail(it, listOf(), "") },
                         openTag = { backStack += Destination.Tag(it) })
                 }
                 entry<Destination.Detail> { key ->
-                    WallpaperDetail(key.url)
+                    WallpaperDetail(
+                        url = key.url,
+                        tag = key.tag,
+                        source = key.source
+                    )
                 }
             }
         )
