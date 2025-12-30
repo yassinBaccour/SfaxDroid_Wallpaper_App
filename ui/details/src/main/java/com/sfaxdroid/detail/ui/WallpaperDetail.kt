@@ -1,7 +1,9 @@
 package com.sfaxdroid.detail.ui
 
+import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import androidx.annotation.RequiresPermission
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -32,6 +34,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
+@RequiresPermission(Manifest.permission.SET_WALLPAPER)
 fun WallpaperDetail(url: String, tag: List<String>, source: String) {
     val context = LocalContext.current
     var isLoading by remember { mutableStateOf(false) }
@@ -86,4 +89,5 @@ fun WallpaperDetail(url: String, tag: List<String>, source: String) {
 
 @Preview
 @Composable
+@RequiresPermission(Manifest.permission.SET_WALLPAPER)
 fun WallpaperDetailPreview() = WallpaperDetail("", listOf(), "")

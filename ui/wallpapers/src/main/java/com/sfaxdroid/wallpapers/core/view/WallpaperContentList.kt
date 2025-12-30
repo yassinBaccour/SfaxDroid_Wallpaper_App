@@ -10,7 +10,7 @@ import com.sfaxdroid.wallpapers.core.GroupUiModel
 @Composable
 internal fun WallpaperContentList(
     modifier: Modifier = Modifier,
-    state: List<GroupUiModel>,
+    group: List<GroupUiModel>,
     openDetail: (String) -> Unit,
     openTag: (String) -> Unit
 ) {
@@ -18,7 +18,7 @@ internal fun WallpaperContentList(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(state) {
+        items(group) {
             when (it) {
                 is GroupUiModel.CARROUSEL -> {}
                 is GroupUiModel.GRID -> WallpaperGrid(it.list, openDetail)

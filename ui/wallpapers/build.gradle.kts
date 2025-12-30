@@ -28,6 +28,7 @@ dependencies {
     implementation(libs.hilt.library)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.coil.compose)
+    implementation(libs.compose.icon)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

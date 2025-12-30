@@ -1,10 +1,19 @@
 package com.sfaxdroid.wallpapers.mixed
 
+import androidx.appcompat.R
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sfaxdroid.wallpapers.core.GroupUiModel
@@ -35,16 +44,21 @@ private fun MixedWallpaperScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MixedWallpaperContent(
     state: List<GroupUiModel>,
     openDetail: (String) -> Unit,
     openTag: (String) -> Unit
 ) {
-    Scaffold { innerPadding ->
+    Scaffold(topBar = {
+        TopAppBar(
+            title = { Text(text = "My Wallpapers") }
+        )
+    }) { innerPadding ->
         WallpaperContentList(
             modifier = Modifier.padding(innerPadding),
-            state = state,
+            group = state,
             openDetail = openDetail,
             openTag = openTag
         )

@@ -1,7 +1,14 @@
 package com.sfaxdroid.wallpapers.tag
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -12,15 +19,20 @@ import com.sfaxdroid.wallpapers.core.GroupUiModel
 import com.sfaxdroid.wallpapers.core.view.FailureScreenMinimal
 import com.sfaxdroid.wallpapers.core.view.LoadingContent
 import com.sfaxdroid.wallpapers.core.view.WallpaperContentList
-import com.sfaxdroid.wallpapers.mixed.MixedWallpaperUiState
 
 @Composable
-fun TagScreen(tag: String, openDetail: (String) -> Unit, openTag: (String) -> Unit) =
+fun TagScreen(
+    tag: String,
+    openDetail: (String) -> Unit,
+    openTag: (String) -> Unit,
+    goBack: () -> Unit
+) =
     WallpaperScreen(
         viewModel = hiltViewModel(),
         tag = tag,
         openDetail = openDetail,
-        openTag = openTag
+        openTag = openTag,
+        goBack = goBack
     )
 
 @Composable
@@ -28,7 +40,8 @@ private fun WallpaperScreen(
     viewModel: TagScreenViewModel,
     tag: String,
     openDetail: (String) -> Unit,
-    openTag: (String) -> Unit
+    openTag: (String) -> Unit,
+    goBack: () -> Unit,
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
@@ -36,9 +49,11 @@ private fun WallpaperScreen(
     }
     when (state) {
         is TagUiState.Success -> TagScreenContent(
-            state = (state as TagUiState.Success).sections,
+            group = (state as TagUiState.Success).sections,
+            title = tag,
             openDetail = openDetail,
-            openTag = openTag
+            openTag = openTag,
+            goBack = goBack
         )
 
         TagUiState.Loading -> LoadingContent()
@@ -46,16 +61,31 @@ private fun WallpaperScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TagScreenContent(
-    state: List<GroupUiModel>,
+    group: List<GroupUiModel>,
+    title: String,
     openDetail: (String) -> Unit,
-    openTag: (String) -> Unit
+    openTag: (String) -> Unit,
+    goBack: () -> Unit
 ) {
-    Scaffold { innerPadding ->
+    Scaffold(topBar = {
+        TopAppBar(
+            title = { Text(text = title) },
+            navigationIcon = {
+                IconButton(onClick = { goBack.invoke() }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Back"
+                    )
+                }
+            }
+        )
+    }) { innerPadding ->
         WallpaperContentList(
             modifier = Modifier.padding(innerPadding),
-            state = state,
+            group = group,
             openDetail = openDetail,
             openTag = openTag
         )

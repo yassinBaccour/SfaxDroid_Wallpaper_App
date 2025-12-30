@@ -34,7 +34,8 @@ fun HomeScreen() {
                     TagScreen(
                         tag = key.tag,
                         openDetail = { backStack += Destination.Detail(it, listOf(), "") },
-                        openTag = { backStack += Destination.Tag(it) })
+                        openTag = { backStack += Destination.Tag(it) },
+                        goBack = { backStack.removeLastOrNull() })
                 }
                 entry<Destination.Detail> { key ->
                     WallpaperDetail(
