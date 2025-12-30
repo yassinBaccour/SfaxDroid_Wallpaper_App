@@ -1,6 +1,7 @@
 package com.sfaxdroid.detail.ui
 
 import android.Manifest
+import android.app.WallpaperManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.annotation.RequiresPermission
@@ -27,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import kotlinx.coroutines.Dispatchers
@@ -60,9 +62,7 @@ fun WallpaperDetail(url: String, tag: List<String>, source: String) {
                     coroutineScope.launch {
                         isLoading = true
                         try {
-                            withContext(Dispatchers.IO) {
-                                WallpaperUtils.setWallpaperWithChooser(context, it)
-                            }
+                            WallpaperUtils.setWallpaperWithChooser(context, it)
                         } finally {
                             isLoading = false
                         }
