@@ -13,11 +13,12 @@ import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 internal fun SectionTitle(
+    modifier: Modifier = Modifier,
     title: String,
     onSeeAllClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

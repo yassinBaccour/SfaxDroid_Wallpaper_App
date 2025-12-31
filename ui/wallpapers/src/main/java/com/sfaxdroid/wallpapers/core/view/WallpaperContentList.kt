@@ -68,11 +68,7 @@ internal fun GridSection(
     openDetail: (String) -> Unit
 ) {
     Column {
-        Text(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            text = title,
-            style = MaterialTheme.typography.titleMedium
-        )
+        SectionTitle(title = title) {}
         Spacer(Modifier.height(15.dp))
         WallpaperGrid(wallpapers, openDetail)
         BetweenSectionSpacer()

@@ -22,7 +22,7 @@ internal fun HorizontalWallpaperList(
             .fillMaxWidth()
             .padding(horizontal = 10.dp)
     ) {
-        SectionTitle("Editor Choice"){}
+        SectionTitle(title = "Editor Choice") {}
         Spacer(Modifier.height(10.dp))
         LazyRow {
             items(wallpapers) {
