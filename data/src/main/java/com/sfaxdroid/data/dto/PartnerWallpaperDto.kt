@@ -1,5 +1,8 @@
 package com.sfaxdroid.data.dto
 
+import androidx.annotation.Keep
+
+@Keep
 data class PartnerWallpaperDto(
     val collections: Int,
     val comments: Int,

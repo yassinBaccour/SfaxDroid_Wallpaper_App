@@ -1,8 +1,10 @@
 package com.sfaxdroid.wallpapers.core.view
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -14,26 +16,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun WallpaperTags(tags: List<String>, openTag: (String) -> Unit) {
-    FlowRow(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 10.dp)
-            .padding(bottom = 10.dp),
-        verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp)
-    ) {
-        tags.forEach { tags ->
-            Button(
-                modifier = Modifier.height(30.dp),
-                onClick = { openTag.invoke(tags) },
-                contentPadding = PaddingValues(horizontal = 1.dp, vertical = 1.dp)
-            ) {
-                Text(
-                    text = tags,
-                    style = MaterialTheme.typography.bodySmall
-                )
+internal fun WallpaperTags(title: String, tags: List<String>, openTag: (String) -> Unit) {
+    Column {
+        Text(
+            modifier = Modifier.padding(horizontal = 10.dp),
+            text = title,
+            style = MaterialTheme.typography.titleMedium
+        )
+        Spacer(Modifier.height(15.dp))
+        FlowRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            tags.forEach { tags ->
+                Button(
+                    modifier = Modifier.height(30.dp),
+                    onClick = { openTag.invoke(tags) },
+                    contentPadding = PaddingValues(horizontal = 1.dp, vertical = 1.dp)
+                ) {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 5.dp),
+                        text = tags,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
             }
         }
+        BetweenSectionSpacer()
     }
 }

@@ -1,6 +1,8 @@
 package com.sfaxdroid.data.dto
 
+import androidx.annotation.Keep
 
+@Keep
 class SfaxDroidWallpaperDto(
     val id: String,
     val title: String,

@@ -15,7 +15,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -33,7 +34,7 @@ android {
     productFlavors {
         create("wallpaperAppOne") {
             applicationIdSuffix = ".sami.rippel.allah"
-            versionCode = 100
+            versionCode = 101
             versionName = "10.0.0"
             dimension = "app"
         }

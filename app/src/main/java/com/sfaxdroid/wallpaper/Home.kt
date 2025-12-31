@@ -42,7 +42,7 @@ fun HomeScreen() {
                         url = key.url,
                         tag = key.tag,
                         source = key.source
-                    )
+                    ) { backStack.removeLastOrNull() }
                 }
             }
         )

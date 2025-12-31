@@ -5,9 +5,12 @@ import android.app.WallpaperManager
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.Color
 import androidx.annotation.RequiresPermission
+import androidx.core.graphics.ColorUtils.calculateLuminance
 import kotlin.math.max
 import androidx.core.graphics.scale
+import androidx.palette.graphics.Palette
 
 internal object WallpaperUtils {
 
@@ -22,6 +25,25 @@ internal object WallpaperUtils {
 
         val wallpaperManager = WallpaperManager.getInstance(context)
         wallpaperManager.setBitmap(croppedBitmap)
+    }
+
+
+    fun isColorDark(bitmap: Bitmap): Boolean {
+        val color = extractTopStartColor(bitmap)
+        return calculateLuminance(color) < 0.2
+    }
+
+    private fun extractTopStartColor(bitmap: Bitmap, size: Int = 48): Int {
+        val width = minOf(size, bitmap.width)
+        val height = minOf(size, bitmap.height)
+
+        val cropped = Bitmap.createBitmap(bitmap, 0, 0, width, height)
+
+        val palette = Palette.from(cropped)
+            .maximumColorCount(8)
+            .generate()
+
+        return palette.getDominantColor(Color.BLACK)
     }
 
     private fun cropBitmapToScreen(bitmap: Bitmap, screenWidth: Int, screenHeight: Int): Bitmap {

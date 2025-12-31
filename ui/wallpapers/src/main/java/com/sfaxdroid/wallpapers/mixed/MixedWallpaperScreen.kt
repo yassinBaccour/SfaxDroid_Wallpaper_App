@@ -51,11 +51,7 @@ private fun MixedWallpaperContent(
     openDetail: (String) -> Unit,
     openTag: (String) -> Unit
 ) {
-    Scaffold(topBar = {
-        TopAppBar(
-            title = { Text(text = "My Wallpapers") }
-        )
-    }) { innerPadding ->
+    Scaffold { innerPadding ->
         WallpaperContentList(
             modifier = Modifier.padding(innerPadding),
             group = state,

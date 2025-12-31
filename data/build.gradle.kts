@@ -9,4 +9,5 @@ dependencies {
     kapt(libs.hilt.compiler)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gsonConverter)
+    implementation(libs.androidx.annotation.jvm)
 }
