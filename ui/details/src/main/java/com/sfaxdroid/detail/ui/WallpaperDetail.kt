@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.WallpaperManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -62,8 +63,15 @@ fun WallpaperDetail(url: String, tag: List<String>, source: String) {
                     coroutineScope.launch {
                         isLoading = true
                         try {
-                            WallpaperUtils.setWallpaperWithChooser(context, it)
+                            withContext(Dispatchers.IO) {
+                                WallpaperUtils.setWallpaperWithChooser(context, it)
+                            }
                         } finally {
+                            Toast.makeText(
+                                context,
+                                "Wallpaper set successfully",
+                                Toast.LENGTH_LONG
+                            ).show()
                             isLoading = false
                         }
                     }
