@@ -1,6 +1,7 @@
 package com.sfaxdroid.wallpapers.mixed
 
 import com.sfaxdroid.domain.entity.WallpaperGroup
+import com.sfaxdroid.domain.entity.WallpaperTheme
 import com.sfaxdroid.wallpapers.core.GroupUiModel
 import com.sfaxdroid.wallpapers.core.WallpaperUiModel
 import com.sfaxdroid.wallpapers.core.mapper.toUiModel
@@ -13,7 +14,7 @@ internal class MixedWallpaperUiModelMapper @Inject constructor() {
         mutableListOf(
             GroupUiModel.HOME_HEADER,
             GroupUiModel.CARROUSEL(
-                wallpaperGroup.first { it.title == "New" }.wallpapers.shuffled().take(10)
+                wallpaperGroup.first { it.theme == WallpaperTheme.NEW }.wallpapers.shuffled().take(10)
                     .map { it.toUiModel() }, "New"
             ),
             GroupUiModel.TAG(wallpaperGroup.map { Pair(it.title, "Arabic") }.distinct()),
@@ -36,7 +37,6 @@ internal class MixedWallpaperUiModelMapper @Inject constructor() {
     }
 
     private fun getWallpaperTagCategoryPairs(): List<Pair<String, String>> = listOf(
-
         "Nature" to "nature",
         "Mountains" to "nature",
         "Forest" to "nature",

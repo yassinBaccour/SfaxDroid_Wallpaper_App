@@ -5,10 +5,15 @@ import com.sfaxdroid.domain.entity.WallpaperGroup
 import javax.inject.Inject
 
 internal class WallpaperGroupDtoMapper @Inject constructor(
-    private val wallpaperDtoMapper: WallpaperDtoMapper
+    private val wallpaperDtoMapper: WallpaperDtoMapper,
+    private val wallpaperThemeMapper: WallpaperThemeMapper
 ) {
     fun map(from: SfaxDroidWallpaperResponseDto) = from.categories.map {
-        WallpaperGroup(it.title, wallpaperDtoMapper.map(it))
+        WallpaperGroup(
+            title = it.title,
+            wallpapers = wallpaperDtoMapper.map(it),
+            theme = wallpaperThemeMapper.map(it.path)
+        )
     }
 }
 

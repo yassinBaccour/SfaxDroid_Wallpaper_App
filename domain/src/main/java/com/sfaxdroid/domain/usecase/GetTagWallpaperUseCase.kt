@@ -2,6 +2,7 @@ package com.sfaxdroid.domain.usecase
 
 import com.sfaxdroid.domain.entity.Wallpaper
 import com.sfaxdroid.domain.entity.WallpaperGroup
+import com.sfaxdroid.domain.entity.WallpaperTheme
 import com.sfaxdroid.domain.repository.PartnerServerRepository
 import com.sfaxdroid.domain.repository.SfaxDroidServerRepository
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class GetTagWallpaperUseCase @Inject constructor(
         val group = mutableListOf<WallpaperGroup>()
         if (tag.first.isEmpty()) {
             val mixed = getMixedWallpaper(sfaxDroidServerRepository.getWallpapers())
-            group.add(WallpaperGroup(title = "", wallpapers = mixed))
+            group.add(WallpaperGroup(title = "", wallpapers = mixed, WallpaperTheme.MIXED))
         } else {
             sfaxDroidServerRepository.getWallpapers().firstOrNull { it.title == tag.first }?.also {
                 group.add(it)
