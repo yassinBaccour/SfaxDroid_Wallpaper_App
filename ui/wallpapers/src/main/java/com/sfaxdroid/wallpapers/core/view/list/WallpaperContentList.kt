@@ -42,7 +42,7 @@ internal fun WallpaperContentList(
                         .fillMaxWidth()
                         .padding(horizontal = 10.dp)
                         .padding(bottom = 20.dp),
-                    text = "Designer Islamic Wallpaper",
+                    text = stringResource(R.string.header),
                     style = MaterialTheme.typography.headlineSmall
                 )
 

@@ -9,9 +9,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.sfaxdroid.wallpapers.R
 import com.sfaxdroid.wallpapers.core.WallpaperUiModel
 
 @Composable

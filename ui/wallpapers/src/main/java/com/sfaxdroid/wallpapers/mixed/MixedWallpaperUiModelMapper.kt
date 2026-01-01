@@ -17,9 +17,9 @@ internal class MixedWallpaperUiModelMapper @Inject constructor() {
                     .map { it.toUiModel() }, "New"
             ),
             GroupUiModel.TAG(wallpaperGroup.map { Pair(it.title, "Arabic") }.distinct()),
-            GroupUiModel.OF_THE_DAY(getMixedWallpaper(wallpaperGroup).take(9), "All"),
+            GroupUiModel.OF_THE_DAY(getMixedWallpaper(wallpaperGroup).take(9), ""),
             GroupUiModel.PARTNER_TAG(getWallpaperTagCategoryPairs()),
-            GroupUiModel.RANDOM_GRID(getMixedWallpaper(wallpaperGroup), "All")
+            GroupUiModel.RANDOM_GRID(getMixedWallpaper(wallpaperGroup), "")
         )
 
     private fun getMixedWallpaper(wallpaperGroup: List<WallpaperGroup>): List<WallpaperUiModel> {

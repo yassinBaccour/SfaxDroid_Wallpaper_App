@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="header">Designer Islamic Wallpaper</string>
     <string name="loading_error">Loading Error</string>
     <string name="try_again">Try again</string>
     <string name="popular_tags">Popular Tags</string>
