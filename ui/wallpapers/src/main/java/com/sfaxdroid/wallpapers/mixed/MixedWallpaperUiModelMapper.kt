@@ -65,7 +65,6 @@ internal class MixedWallpaperUiModelMapper @Inject constructor() {
         "Birds" to "animals",
 
         "Technology" to "computer",
-        "Cyberpunk" to "computer",
         "Futuristic" to "computer",
 
         "Gaming" to "computer",
