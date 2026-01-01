@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="header">خلفيات إسلامية</string>
+    <string name="loading_error">خطأ في التحميل</string>
+    <string name="try_again">حاول مرة أخرى</string>
+    <string name="popular_tags">الخلفيات الشائعة</string>
+    <string name="partner_tags">خلفيات الشريك</string>
+    <string name="random_wallpaper">خلفيات عشوائية</string>
+    <string name="wallpaper_of_the_day">خلفية اليوم</string>
+    <string name="editor_choice">اختيار المحرر</string>
+    <string name="show_more">عرض المزيد</string>
+</resources>

@@ -13,7 +13,7 @@ import com.sfaxdroid.wallpapers.mixed.MixedWallpaperScreen
 import com.sfaxdroid.wallpapers.tag.TagScreen
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(rateApp: () -> Unit) {
     val backStack = remember { mutableStateListOf<Any>(Destination.Wallpaper) }
     WallpaperAppTheme {
         NavDisplay(
@@ -32,6 +32,7 @@ fun HomeScreen() {
                     )
                 }
                 entry<Destination.Tag> { key ->
+                    rateApp.invoke()
                     TagScreen(
                         title = key.title,
                         tag = key.tag,
