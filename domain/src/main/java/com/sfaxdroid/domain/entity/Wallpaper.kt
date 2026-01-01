@@ -4,5 +4,6 @@ data class Wallpaper(
     val label: String,
     val detailUrl: String,
     val previewUrl: String,
-    val tag: List<String>
+    val tag: List<String>,
+    val source: String
 )

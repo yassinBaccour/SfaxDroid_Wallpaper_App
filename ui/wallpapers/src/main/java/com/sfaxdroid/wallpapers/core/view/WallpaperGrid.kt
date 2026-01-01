@@ -11,7 +11,7 @@ import com.sfaxdroid.wallpapers.core.WallpaperUiModel
 @Composable
 internal fun WallpaperGrid(
     wallpapers: List<WallpaperUiModel>,
-    openDetail: (String) -> Unit
+    openDetail: (String, List<String>, String) -> Unit
 ) {
     FlowRow(
         modifier = Modifier.padding(horizontal = 4.dp),
@@ -23,7 +23,7 @@ internal fun WallpaperGrid(
             WallpaperItem(
                 modifier = Modifier.weight(1f),
                 wallpaper = wallpaper,
-                onClick = { openDetail.invoke(wallpaper.detailUrl) }
+                onClick = { openDetail.invoke(wallpaper.detailUrl, wallpaper.tag, wallpaper.source) }
             )
         }
     }

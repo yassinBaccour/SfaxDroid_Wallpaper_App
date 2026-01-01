@@ -16,13 +16,15 @@ internal class WallpaperDtoMapper @Inject constructor(private val appConfig: App
                 label = "${dto.title}_$index",
                 detailUrl = fullUrl,
                 previewUrl = previewUrl,
-                tag = listOf()
+                tag = listOf(),
+                source = SOURCE
             )
         }
     }
 
     private fun buildWallpaperUrls(dto: SfaxDroidWallpaperDto, index: Int): Pair<String, String> {
-        val baseUrl = appConfig.sfaxDroidBaseUrl + WALLPAPER_DIR + dto.path + "/" + dto.fileName + index
+        val baseUrl =
+            appConfig.sfaxDroidBaseUrl + WALLPAPER_DIR + dto.path + "/" + dto.fileName + index
         val fullUrl = baseUrl + IMAGE_EXTENSION
         val previewUrl = baseUrl + PREVIEW_SUFFIX
         return Pair(fullUrl, previewUrl)
@@ -32,5 +34,6 @@ internal class WallpaperDtoMapper @Inject constructor(private val appConfig: App
         const val WALLPAPER_DIR = "/wallpapers/images/"
         const val PREVIEW_SUFFIX = "_preview.jpg"
         const val IMAGE_EXTENSION = ".jpg"
+        const val SOURCE = "SfaxDroid"
     }
 }

@@ -26,9 +26,16 @@ fun HomeScreen(rateApp: () -> Unit) {
             entryProvider = entryProvider {
                 entry<Destination.Wallpaper> {
                     MixedWallpaperScreen(
-                        openDetail = { backStack += Destination.Detail(it, listOf(), "") },
-                        openTag = {  title, tag , showPartner ->
-                            backStack += Destination.Tag(title, tag, showPartner) }
+                        openDetail = { url, tags, source ->
+                            backStack += Destination.Detail(url = url, tag = tags, source = source)
+                        },
+                        openTag = { title, tag, showPartner ->
+                            backStack += Destination.Tag(
+                                title = title,
+                                tag = tag,
+                                loadFromPartner = showPartner
+                            )
+                        }
                     )
                 }
                 entry<Destination.Tag> { key ->
@@ -37,9 +44,15 @@ fun HomeScreen(rateApp: () -> Unit) {
                         title = key.title,
                         tag = key.tag,
                         loadFromPartner = key.loadFromPartner,
-                        openDetail = { backStack += Destination.Detail(it, listOf(), "") },
-                        openTag = {  title, tag , showPartner ->
-                            backStack += Destination.Tag(title, tag, showPartner)
+                        openDetail = { url, tags, source ->
+                            backStack += Destination.Detail(url = url, tag = tags, source = source)
+                        },
+                        openTag = { title, tag, showPartner ->
+                            backStack += Destination.Tag(
+                                title = title,
+                                tag = tag,
+                                loadFromPartner = showPartner
+                            )
                         },
                         goBack = { backStack.removeLastOrNull() })
                 }

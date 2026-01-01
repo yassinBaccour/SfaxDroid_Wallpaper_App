@@ -1,6 +1,6 @@
 package com.sfaxdroid.wallpapers.core
 
-internal data class WallpaperUiModel(val previewUrl: String, val detailUrl: String)
+internal data class WallpaperUiModel(val previewUrl: String, val detailUrl: String, val tag: List<String>, val source: String)
 
 internal sealed class GroupUiModel {
     data object HOME_HEADER : GroupUiModel()

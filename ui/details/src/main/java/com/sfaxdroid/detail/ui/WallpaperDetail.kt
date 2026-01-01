@@ -3,10 +3,11 @@ package com.sfaxdroid.detail.ui
 import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresPermission
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -15,11 +16,14 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Wallpaper
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +32,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -79,18 +84,7 @@ fun WallpaperDetail(url: String, tag: List<String>, source: String, goBack: () -
                 isImageDark = isColorDark(bitmap!!)
             }
         )
-        IconButton(
-            onClick = { goBack.invoke() },
-            modifier = Modifier
-                .statusBarsPadding()
-                .align(Alignment.TopStart)
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = null,
-                tint = if (isImageDark) Color.White else Color.Black
-            )
-        }
+        GoBackButton(goBack = goBack, isImageDark = isImageDark)
         FloatingActionButton(
             onClick = {
                 if (isSetWallpaperLoading) return@FloatingActionButton
@@ -127,10 +121,52 @@ fun WallpaperDetail(url: String, tag: List<String>, source: String, goBack: () -
                 Icon(Icons.Default.Wallpaper, contentDescription = null)
             }
         }
+        SourceIndicator(source)
+    }
+}
+
+@Composable
+private fun BoxScope.SourceIndicator(source: String) {
+    if (source != PUBLISHER_NAME) {
+        Card(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .navigationBarsPadding()
+                .padding(16.dp)
+                .alpha(0.8f)
+        ) {
+            Text(
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                text = stringResource(R.string.source) + " : " + PARTNER_NAME,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
+}
+
+@Composable
+private fun BoxScope.GoBackButton(
+    goBack: () -> Unit,
+    isImageDark: Boolean
+) {
+    IconButton(
+        onClick = { goBack.invoke() },
+        modifier = Modifier
+            .statusBarsPadding()
+            .align(Alignment.TopStart)
+    ) {
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = null,
+            tint = if (isImageDark) Color.White else Color.Black
+        )
     }
 }
 
 @Preview
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
-fun WallpaperDetailPreview() = WallpaperDetail("", listOf(), "") {}
+internal fun WallpaperDetailPreview() = WallpaperDetail("", listOf(), "") {}
+
+const val PARTNER_NAME = "Pixabay"
+const val PUBLISHER_NAME = "SfaxDroid"

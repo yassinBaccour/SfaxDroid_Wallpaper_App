@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="wallpaper_set_successfully">Wallpaper set successfully</string>
+    <string name="source">Source</string>
 </resources>

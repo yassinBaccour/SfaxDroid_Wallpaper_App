@@ -25,7 +25,7 @@ fun TagScreen(
     title: String,
     tag: Pair<String, String>,
     loadFromPartner: Boolean = false,
-    openDetail: (String) -> Unit,
+    openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit
 ) =
@@ -45,7 +45,7 @@ private fun WallpaperScreen(
     title: String,
     tag: Pair<String, String>,
     loadFromPartner: Boolean = false,
-    openDetail: (String) -> Unit,
+    openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit,
 ) {
@@ -72,7 +72,7 @@ private fun WallpaperScreen(
 private fun TagScreenContent(
     group: List<GroupUiModel>,
     title: String,
-    openDetail: (String) -> Unit,
+    openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit
 ) {

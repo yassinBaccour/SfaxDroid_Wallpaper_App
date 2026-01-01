@@ -28,7 +28,7 @@ import com.sfaxdroid.wallpapers.core.view.WallpaperTags
 internal fun WallpaperContentList(
     modifier: Modifier = Modifier,
     group: List<GroupUiModel>,
-    openDetail: (String) -> Unit,
+    openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit
 ) {
     LazyColumn(
@@ -102,7 +102,7 @@ internal fun WallpaperContentList(
 internal fun GridSection(
     title: String,
     wallpapers: List<WallpaperUiModel>,
-    openDetail: (String) -> Unit,
+    openDetail: (String, List<String>, String) -> Unit,
     openTag: () -> Unit
 ) {
     Column {

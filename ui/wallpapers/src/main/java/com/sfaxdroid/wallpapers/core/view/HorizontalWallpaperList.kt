@@ -16,7 +16,7 @@ import com.sfaxdroid.wallpapers.core.WallpaperUiModel
 internal fun HorizontalWallpaperList(
     title: String,
     wallpapers: List<WallpaperUiModel>,
-    openDetail: (String) -> Unit,
+    openDetail: (String, List<String>, String) -> Unit,
     openTag: () -> Unit
 ) {
     Column(
@@ -33,7 +33,13 @@ internal fun HorizontalWallpaperList(
                         .height(200.dp)
                         .padding(start = if (index == 0) 8.dp else 0.dp, end = 5.dp),
                     wallpaper = wallpaper,
-                    onClick = { openDetail.invoke(wallpaper.detailUrl) }
+                    onClick = {
+                        openDetail.invoke(
+                            wallpaper.detailUrl,
+                            wallpaper.tag,
+                            wallpaper.source
+                        )
+                    }
                 )
             }
         }

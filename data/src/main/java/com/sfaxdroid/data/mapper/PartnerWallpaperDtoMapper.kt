@@ -16,7 +16,8 @@ class PartnerWallpaperDtoMapper @Inject constructor() {
                 previewUrl = it.previewURL,
                 detailUrl = it.largeImageURL,
                 tag = it.tags.split(",")
-                    .map { tag -> tag.trim() })
+                    .map { tag -> tag.trim() },
+                source = it.user)
         },
         theme= WallpaperTheme.OTHER
     )
