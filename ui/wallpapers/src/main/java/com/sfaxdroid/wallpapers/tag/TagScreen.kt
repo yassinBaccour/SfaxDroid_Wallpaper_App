@@ -22,14 +22,18 @@ import com.sfaxdroid.wallpapers.core.view.list.WallpaperContentList
 
 @Composable
 fun TagScreen(
-    tag: String,
+    title: String,
+    tag: Pair<String, String>,
+    loadFromPartner: Boolean = false,
     openDetail: (String) -> Unit,
-    openTag: (Pair<String, String>) -> Unit,
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit
 ) =
     WallpaperScreen(
         viewModel = hiltViewModel(),
+        title = title,
         tag = tag,
+        loadFromPartner = loadFromPartner,
         openDetail = openDetail,
         openTag = openTag,
         goBack = goBack
@@ -38,26 +42,28 @@ fun TagScreen(
 @Composable
 private fun WallpaperScreen(
     viewModel: TagScreenViewModel,
-    tag: String,
+    title: String,
+    tag: Pair<String, String>,
+    loadFromPartner: Boolean = false,
     openDetail: (String) -> Unit,
-    openTag: (Pair<String, String>) -> Unit,
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit,
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
-        viewModel.getCustomUrlProduct(tag, false)
+        viewModel.getCustomUrlProduct(tag, loadFromPartner)
     }
     when (state) {
         is TagUiState.Success -> TagScreenContent(
             group = (state as TagUiState.Success).sections,
-            title = tag,
+            title = title,
             openDetail = openDetail,
             openTag = openTag,
             goBack = goBack
         )
 
         TagUiState.Loading -> LoadingContent()
-        TagUiState.Failure -> FailureScreenMinimal { viewModel.getCustomUrlProduct(tag, false) }
+        TagUiState.Failure -> FailureScreenMinimal { viewModel.getCustomUrlProduct(tag, loadFromPartner) }
     }
 }
 
@@ -67,7 +73,7 @@ private fun TagScreenContent(
     group: List<GroupUiModel>,
     title: String,
     openDetail: (String) -> Unit,
-    openTag: (Pair<String, String>) -> Unit,
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit
 ) {
     Scaffold(topBar = {
@@ -77,7 +83,7 @@ private fun TagScreenContent(
                 IconButton(onClick = { goBack.invoke() }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back"
+                        contentDescription = null
                     )
                 }
             }

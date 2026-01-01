@@ -14,14 +14,14 @@ import com.sfaxdroid.wallpapers.core.view.LoadingContent
 import com.sfaxdroid.wallpapers.core.view.list.WallpaperContentList
 
 @Composable
-fun MixedWallpaperScreen(openDetail: (String) -> Unit, openTag: (Pair<String, String>) -> Unit) =
+fun MixedWallpaperScreen(openDetail: (String) -> Unit, openTag: (String, Pair<String, String>, Boolean) -> Unit) =
     MixedWallpaperScreen(viewModel = hiltViewModel(), openDetail = openDetail, openTag = openTag)
 
 @Composable
 private fun MixedWallpaperScreen(
     viewModel: MixedWallpaperViewModel,
     openDetail: (String) -> Unit,
-    openTag: (Pair<String, String>) -> Unit
+    openTag: (String, Pair<String, String>, Boolean) -> Unit
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     when (state) {
@@ -41,7 +41,7 @@ private fun MixedWallpaperScreen(
 private fun MixedWallpaperContent(
     state: List<GroupUiModel>,
     openDetail: (String) -> Unit,
-    openTag: (Pair<String, String>) -> Unit
+    openTag: (String, Pair<String, String>, Boolean) -> Unit
 ) {
     Scaffold { innerPadding ->
         WallpaperContentList(

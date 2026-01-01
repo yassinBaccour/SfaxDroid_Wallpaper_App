@@ -29,7 +29,7 @@ internal fun WallpaperContentList(
     modifier: Modifier = Modifier,
     group: List<GroupUiModel>,
     openDetail: (String) -> Unit,
-    openTag: (Pair<String, String>) -> Unit
+    openTag: (String, Pair<String, String>, Boolean) -> Unit
 ) {
     LazyColumn(
         modifier = modifier,
@@ -46,10 +46,14 @@ internal fun WallpaperContentList(
                     style = MaterialTheme.typography.headlineSmall
                 )
 
-                is GroupUiModel.CARROUSEL -> HorizontalWallpaperList(
-                    wallpapers = item.list,
-                    openDetail = openDetail
-                ) { openTag.invoke(Pair(item.showMoreTag, "Arabic")) }
+                is GroupUiModel.CARROUSEL -> {
+                    val title = stringResource(R.string.editor_choice)
+                    HorizontalWallpaperList(
+                        title = title,
+                        wallpapers = item.list,
+                        openDetail = openDetail
+                    ) { openTag.invoke(title, Pair(item.showMoreTag, "Arabic"), false) }
+                }
 
                 is GroupUiModel.GRID -> WallpaperGrid(
                     wallpapers = item.list,
@@ -59,26 +63,36 @@ internal fun WallpaperContentList(
                 is GroupUiModel.TAG -> WallpaperTags(
                     title = stringResource(R.string.popular_tags),
                     tags = item.list,
-                    openTag = openTag
+                    openTag = { openTag.invoke(it.first, it, false) }
                 )
 
-                is GroupUiModel.RANDOM_GRID -> GridSection(
-                    title = stringResource(R.string.random_wallpaper),
-                    wallpapers = item.list,
-                    openDetail = openDetail
-                ) { openTag.invoke(Pair(item.showMoreTag, "Arabic")) }
+                is GroupUiModel.RANDOM_GRID -> {
+                    val title = stringResource(R.string.random_wallpaper)
+                    GridSection(
+                        title = title,
+                        wallpapers = item.list,
+                        openDetail = openDetail
+                    ) {
+                        openTag.invoke(title, Pair(item.showMoreTag, "Arabic"), false)
+                    }
+                }
+                is GroupUiModel.OF_THE_DAY -> {
+                    val title = stringResource(R.string.wallpaper_of_the_day)
+                    GridSection(
+                        title = title,
+                        wallpapers = item.list,
+                        openDetail = openDetail
+                    ) { openTag.invoke(title, Pair(item.showMoreTag, "Arabic"), false) }
+                }
 
-                is GroupUiModel.OF_THE_DAY -> GridSection(
-                    title = stringResource(R.string.wallpaper_of_the_day),
-                    wallpapers = item.list,
-                    openDetail = openDetail
-                ) { openTag.invoke(Pair(item.showMoreTag, "Arabic")) }
-
-                is GroupUiModel.PARTNER_TAG -> PartnerTags(
-                    title = stringResource(R.string.partner_tags),
-                    tags = item.list,
-                    openTag = openTag
-                )
+                is GroupUiModel.PARTNER_TAG -> {
+                    val title = stringResource(R.string.partner_tags)
+                    PartnerTags(
+                        title = title,
+                        tags = item.list,
+                        openTag = { openTag.invoke(it.first, it, true) }
+                    )
+                }
             }
         }
     }

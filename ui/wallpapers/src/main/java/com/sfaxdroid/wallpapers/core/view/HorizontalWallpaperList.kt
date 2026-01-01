@@ -16,6 +16,7 @@ import com.sfaxdroid.wallpapers.core.WallpaperUiModel
 
 @Composable
 internal fun HorizontalWallpaperList(
+    title: String,
     wallpapers: List<WallpaperUiModel>,
     openDetail: (String) -> Unit,
     openTag: () -> Unit
@@ -24,7 +25,7 @@ internal fun HorizontalWallpaperList(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        SectionTitle(title = stringResource(R.string.editor_choice), openTag = openTag)
+        SectionTitle(title = title, openTag = openTag)
         Spacer(Modifier.height(10.dp))
         LazyRow {
             itemsIndexed(wallpapers) { index, wallpaper ->

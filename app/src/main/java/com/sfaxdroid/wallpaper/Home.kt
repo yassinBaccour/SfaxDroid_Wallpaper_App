@@ -27,14 +27,19 @@ fun HomeScreen() {
                 entry<Destination.Wallpaper> {
                     MixedWallpaperScreen(
                         openDetail = { backStack += Destination.Detail(it, listOf(), "") },
-                        openTag = { backStack += Destination.Tag(it) }
+                        openTag = {  title, tag , showPartner ->
+                            backStack += Destination.Tag(title, tag, showPartner) }
                     )
                 }
                 entry<Destination.Tag> { key ->
                     TagScreen(
-                        tag = key.tag.first,
+                        title = key.title,
+                        tag = key.tag,
+                        loadFromPartner = key.loadFromPartner,
                         openDetail = { backStack += Destination.Detail(it, listOf(), "") },
-                        openTag = { backStack += Destination.Tag(it) },
+                        openTag = {  title, tag , showPartner ->
+                            backStack += Destination.Tag(title, tag, showPartner)
+                        },
                         goBack = { backStack.removeLastOrNull() })
                 }
                 entry<Destination.Detail> { key ->

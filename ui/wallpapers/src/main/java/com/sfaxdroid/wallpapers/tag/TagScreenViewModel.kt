@@ -26,7 +26,7 @@ internal class TagScreenViewModel @Inject constructor(
         initialValue = MixedWallpaperUiState.Loading
     )
 
-    internal fun getCustomUrlProduct(tag: String, partnerSource: Boolean) = viewModelScope.launch {
+    internal fun getCustomUrlProduct(tag: Pair<String, String>, partnerSource: Boolean) = viewModelScope.launch {
         val result = getTagWallpaperUseCase.execute(tag, partnerSource).fold(
             onSuccess = { wallpaper ->
                 TagUiState.Success(tagUiModelMapper.map(wallpaper))

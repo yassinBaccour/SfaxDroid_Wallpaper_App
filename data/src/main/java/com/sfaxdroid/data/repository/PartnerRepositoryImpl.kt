@@ -14,7 +14,7 @@ internal class PartnerRepositoryImpl @Inject constructor(
     private val appConfig: AppConfig
 ) : PartnerServerRepository {
 
-    override suspend fun getWallpapers(searchTerm: String) =
+    override suspend fun getWallpapers(searchTerm: String, category: String) =
         apiRequester.request(
             call = {
                 partnerApiService.getWallpapers(
@@ -24,7 +24,7 @@ internal class PartnerRepositoryImpl @Inject constructor(
                     perPage = PHOTO_PER_PAGE,
                     safeSearch = SAFE_SEARCH,
                     page = PAGE,
-                    category = CATEGORY,
+                    category = "$category,$CATEGORY,$WALLPAPER",
                     orientation = ORIENTATION
                 )
             },
@@ -38,5 +38,6 @@ internal class PartnerRepositoryImpl @Inject constructor(
         const val PHOTO_PER_PAGE = "100"
         const val ORIENTATION = "vertical"
         const val CATEGORY = "backgrounds"
+        const val WALLPAPER = "wallpaper"
     }
 }
