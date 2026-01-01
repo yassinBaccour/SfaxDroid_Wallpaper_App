@@ -18,13 +18,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sfaxdroid.wallpapers.core.GroupUiModel
 import com.sfaxdroid.wallpapers.core.view.FailureScreenMinimal
 import com.sfaxdroid.wallpapers.core.view.LoadingContent
-import com.sfaxdroid.wallpapers.core.view.WallpaperContentList
+import com.sfaxdroid.wallpapers.core.view.list.WallpaperContentList
 
 @Composable
 fun TagScreen(
     tag: String,
     openDetail: (String) -> Unit,
-    openTag: (String) -> Unit,
+    openTag: (Pair<String, String>) -> Unit,
     goBack: () -> Unit
 ) =
     WallpaperScreen(
@@ -40,7 +40,7 @@ private fun WallpaperScreen(
     viewModel: TagScreenViewModel,
     tag: String,
     openDetail: (String) -> Unit,
-    openTag: (String) -> Unit,
+    openTag: (Pair<String, String>) -> Unit,
     goBack: () -> Unit,
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -67,7 +67,7 @@ private fun TagScreenContent(
     group: List<GroupUiModel>,
     title: String,
     openDetail: (String) -> Unit,
-    openTag: (String) -> Unit,
+    openTag: (Pair<String, String>) -> Unit,
     goBack: () -> Unit
 ) {
     Scaffold(topBar = {

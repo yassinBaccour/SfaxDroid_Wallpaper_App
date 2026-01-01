@@ -6,33 +6,35 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.sfaxdroid.wallpapers.R
 import com.sfaxdroid.wallpapers.core.WallpaperUiModel
 
 @Composable
 internal fun HorizontalWallpaperList(
     wallpapers: List<WallpaperUiModel>,
-    openDetail: (String) -> Unit
+    openDetail: (String) -> Unit,
+    openTag: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp)
     ) {
-        SectionTitle(title = "Editor Choice") {}
+        SectionTitle(title = stringResource(R.string.editor_choice), openTag = openTag)
         Spacer(Modifier.height(10.dp))
         LazyRow {
-            items(wallpapers) {
+            itemsIndexed(wallpapers) { index, wallpaper ->
                 WallpaperItem(
                     modifier = Modifier
                         .weight(1f)
                         .height(200.dp)
-                        .padding(end = 5.dp),
-                    wallpaper = it,
-                    onClick = { openDetail.invoke(it.detailUrl) }
+                        .padding(start = if (index == 0) 8.dp else 0.dp, end = 5.dp),
+                    wallpaper = wallpaper,
+                    onClick = { openDetail.invoke(wallpaper.detailUrl) }
                 )
             }
         }

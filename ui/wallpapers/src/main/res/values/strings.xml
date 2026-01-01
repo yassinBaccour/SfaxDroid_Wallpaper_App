@@ -3,6 +3,9 @@
     <string name="loading_error">Loading Error</string>
     <string name="try_again">Try again</string>
     <string name="popular_tags">Popular Tags</string>
+    <string name="partner_tags">Partner Tag</string>
     <string name="random_wallpaper">Random Wallpaper</string>
     <string name="wallpaper_of_the_day">Wallpaper of the day</string>
+    <string name="editor_choice">Editor Choice</string>
+    <string name="show_more">Show more</string>
 </resources>

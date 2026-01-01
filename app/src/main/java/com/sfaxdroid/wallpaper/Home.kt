@@ -32,7 +32,7 @@ fun HomeScreen() {
                 }
                 entry<Destination.Tag> { key ->
                     TagScreen(
-                        tag = key.tag,
+                        tag = key.tag.first,
                         openDetail = { backStack += Destination.Detail(it, listOf(), "") },
                         openTag = { backStack += Destination.Tag(it) },
                         goBack = { backStack.removeLastOrNull() })

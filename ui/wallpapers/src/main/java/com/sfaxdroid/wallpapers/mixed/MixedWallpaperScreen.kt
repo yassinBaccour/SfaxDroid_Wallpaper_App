@@ -1,35 +1,27 @@
 package com.sfaxdroid.wallpapers.mixed
 
-import androidx.appcompat.R
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sfaxdroid.wallpapers.core.GroupUiModel
 import com.sfaxdroid.wallpapers.core.view.FailureScreenMinimal
 import com.sfaxdroid.wallpapers.core.view.LoadingContent
-import com.sfaxdroid.wallpapers.core.view.WallpaperContentList
+import com.sfaxdroid.wallpapers.core.view.list.WallpaperContentList
 
 @Composable
-fun MixedWallpaperScreen(openDetail: (String) -> Unit, openTag: (String) -> Unit) =
+fun MixedWallpaperScreen(openDetail: (String) -> Unit, openTag: (Pair<String, String>) -> Unit) =
     MixedWallpaperScreen(viewModel = hiltViewModel(), openDetail = openDetail, openTag = openTag)
 
 @Composable
 private fun MixedWallpaperScreen(
     viewModel: MixedWallpaperViewModel,
     openDetail: (String) -> Unit,
-    openTag: (String) -> Unit
+    openTag: (Pair<String, String>) -> Unit
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     when (state) {
@@ -49,7 +41,7 @@ private fun MixedWallpaperScreen(
 private fun MixedWallpaperContent(
     state: List<GroupUiModel>,
     openDetail: (String) -> Unit,
-    openTag: (String) -> Unit
+    openTag: (Pair<String, String>) -> Unit
 ) {
     Scaffold { innerPadding ->
         WallpaperContentList(
