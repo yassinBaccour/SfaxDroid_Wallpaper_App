@@ -7,16 +7,25 @@ import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Wallpaper
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,6 +36,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +57,13 @@ import kotlinx.coroutines.withContext
 
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
-fun WallpaperDetail(url: String, tag: List<String>, source: String, goBack: () -> Unit) {
+fun WallpaperDetail(
+    url: String,
+    tag: List<String>,
+    source: String,
+    goBack: () -> Unit,
+    openTag: (String) -> Unit
+) {
 
     val context = LocalContext.current
     var isSetWallpaperLoading by remember { mutableStateOf(false) }
@@ -83,6 +99,12 @@ fun WallpaperDetail(url: String, tag: List<String>, source: String, goBack: () -
             }
         )
         GoBackButton(goBack = goBack, isImageDark = isImageDark)
+        MoreInformationButton(
+            tags = tag,
+            isImageDark = isImageDark,
+            source = source,
+            openTag = openTag
+        )
         FloatingActionButton(
             onClick = {
                 if (isSetWallpaperLoading) return@FloatingActionButton
@@ -124,6 +146,28 @@ fun WallpaperDetail(url: String, tag: List<String>, source: String, goBack: () -
 }
 
 @Composable
+private fun TagsContent(tags: List<String>, openTag: (String) -> Unit) {
+    LazyRow {
+        items(tags) {
+            FilledTonalButton(
+                modifier = Modifier
+                    .height(30.dp)
+                    .padding(start = 8.dp)
+                    .alpha(0.8f),
+                onClick = { openTag.invoke(it) },
+                contentPadding = PaddingValues(horizontal = 1.dp, vertical = 1.dp)
+            ) {
+                Text(
+                    modifier = Modifier.padding(horizontal = 5.dp),
+                    text = it,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+        }
+    }
+}
+
+@Composable
 private fun BoxScope.SourceIndicator(source: String) {
     if (source != PUBLISHER_NAME) {
         Card(
@@ -161,10 +205,45 @@ private fun BoxScope.GoBackButton(
     }
 }
 
+@Composable
+private fun BoxScope.MoreInformationButton(
+    tags: List<String>,
+    isImageDark: Boolean,
+    source: String,
+    openTag: (String) -> Unit
+) {
+    if (source != PUBLISHER_NAME) {
+        var showMore by rememberSaveable { mutableStateOf(false) }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .statusBarsPadding()
+                .align(Alignment.TopEnd),
+            horizontalAlignment = Alignment.End
+        ) {
+            IconButton(
+                onClick = { showMore = !showMore }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowDropDown,
+                    contentDescription = null,
+                    tint = if (isImageDark) Color.White else Color.Black
+                )
+            }
+            if (showMore) {
+                TagsContent(tags, openTag)
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
-internal fun WallpaperDetailPreview() = WallpaperDetail("", listOf(), "") {}
+internal fun WallpaperDetailPreview() = WallpaperDetail(
+    url = "",
+    tag = listOf(),
+    source = "",
+    goBack = {}) {}
 
 const val PARTNER_NAME = "Pixabay"
 const val PUBLISHER_NAME = "SfaxDroid"

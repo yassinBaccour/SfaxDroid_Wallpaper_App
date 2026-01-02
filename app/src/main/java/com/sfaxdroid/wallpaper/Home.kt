@@ -60,8 +60,16 @@ fun HomeScreen(rateApp: () -> Unit) {
                     WallpaperDetail(
                         url = key.url,
                         tag = key.tag,
-                        source = key.source
-                    ) { backStack.removeLastOrNull() }
+                        source = key.source,
+                        goBack = { backStack.removeLastOrNull() },
+                        openTag = { tag ->
+                            backStack += Destination.Tag(
+                                title = tag,
+                                tag = Pair(tag, ""),
+                                loadFromPartner = true
+                            )
+                        }
+                    )
                 }
             }
         )
