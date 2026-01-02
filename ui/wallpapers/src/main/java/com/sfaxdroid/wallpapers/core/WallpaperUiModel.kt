@@ -10,4 +10,5 @@ internal sealed class GroupUiModel {
     data class GRID(val list: List<WallpaperUiModel>, val showMoreTag: String = "") : GroupUiModel()
     data class RANDOM_GRID(val list: List<WallpaperUiModel>, val showMoreTag: String = "") : GroupUiModel()
     data class OF_THE_DAY(val list: List<WallpaperUiModel>, val showMoreTag: String = "") : GroupUiModel()
+    data class PARTNER_TAG_CARROUSEL(val list: List<Pair<String, String>>) : GroupUiModel()
 }

@@ -21,6 +21,8 @@ import com.sfaxdroid.wallpapers.core.view.BetweenSectionSpacer
 import com.sfaxdroid.wallpapers.core.view.HorizontalWallpaperList
 import com.sfaxdroid.wallpapers.core.view.PartnerTags
 import com.sfaxdroid.wallpapers.core.view.SectionTitle
+import com.sfaxdroid.wallpapers.core.view.TagCarrousel
+import com.sfaxdroid.wallpapers.core.view.TagRows
 import com.sfaxdroid.wallpapers.core.view.WallpaperGrid
 import com.sfaxdroid.wallpapers.core.view.WallpaperTags
 
@@ -76,6 +78,7 @@ internal fun WallpaperContentList(
                         openTag.invoke(title, Pair(item.showMoreTag, "Arabic"), false)
                     }
                 }
+
                 is GroupUiModel.OF_THE_DAY -> {
                     val title = stringResource(R.string.wallpaper_of_the_day)
                     GridSection(
@@ -93,6 +96,10 @@ internal fun WallpaperContentList(
                         openTag = { openTag.invoke(it.first, it, true) }
                     )
                 }
+
+                is GroupUiModel.PARTNER_TAG_CARROUSEL -> TagCarrousel(
+                    item.list,
+                    openTag = { openTag.invoke(it.first, it, true) })
             }
         }
     }
