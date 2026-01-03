@@ -16,15 +16,17 @@ internal fun PartnerTags(
     tags: List<Pair<String, String>>,
     openTag: (Pair<String, String>) -> Unit
 ) {
-    Column {
-        Text(
-            modifier = Modifier.padding(horizontal = 10.dp),
-            text = title,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Spacer(Modifier.height(15.dp))
-        TagRows(tags, openTag)
-        BetweenSectionSpacer()
+    if (tags.isNotEmpty()) {
+        Column {
+            Text(
+                modifier = Modifier.padding(horizontal = 10.dp),
+                text = title,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(Modifier.height(15.dp))
+            TagRows(tags, openTag)
+            BetweenSectionSpacer()
+        }
     }
 }
 

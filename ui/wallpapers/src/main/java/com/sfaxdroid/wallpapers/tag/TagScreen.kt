@@ -51,7 +51,7 @@ private fun WallpaperScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
-        viewModel.getCustomUrlProduct(tag, loadFromPartner)
+        viewModel.getWallpaperByTag(tag, loadFromPartner)
     }
     when (state) {
         is TagUiState.Success -> TagScreenContent(
@@ -61,7 +61,7 @@ private fun WallpaperScreen(
             openTag = openTag,
             goBack = goBack,
             loadTag = { _, tag ->
-                viewModel.loadNewTag(
+                viewModel.getNewWallpaperByTag(
                     tag = tag,
                     partnerSource = loadFromPartner
                 )
@@ -70,7 +70,7 @@ private fun WallpaperScreen(
 
         TagUiState.Loading -> LoadingContent()
         TagUiState.Failure -> FailureScreenMinimal {
-            viewModel.getCustomUrlProduct(
+            viewModel.getWallpaperByTag(
                 tag = tag,
                 partnerSource = loadFromPartner
             )

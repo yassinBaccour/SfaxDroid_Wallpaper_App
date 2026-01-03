@@ -3,7 +3,6 @@ package com.sfaxdroid.wallpapers.tag
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sfaxdroid.domain.usecase.GetTagWallpaperUseCase
-import com.sfaxdroid.wallpapers.core.GroupUiModel
 import com.sfaxdroid.wallpapers.mixed.MixedWallpaperUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,30 +29,24 @@ internal class TagScreenViewModel @Inject constructor(
         initialValue = MixedWallpaperUiState.Loading
     )
 
-    internal fun getCustomUrlProduct(tag: Pair<String, String>, partnerSource: Boolean) =
+    internal fun getWallpaperByTag(tag: Pair<String, String>, partnerSource: Boolean) =
         viewModelScope.launch {
             val result = getTagWallpaperUseCase.execute(tag, partnerSource).fold(
                 onSuccess = { wallpaper ->
-                    if (tags.value.isEmpty()) {
-                        tags.value = wallpaperToTagMapper.map(wallpaper)
-                    }
-                    TagUiState.Success(tagUiModelMapper.map(wallpaper, tags.value))
+                    val tagList = wallpaperToTagMapper.map(wallpaper)
+                    tags.value = tagList
+                    TagUiState.Success(tagUiModelMapper.toUiModel(wallpaper, tagList))
                 },
                 onFailure = { TagUiState.Failure })
             _state.update { result }
         }
 
-    internal fun loadNewTag(tag: Pair<String, String>, partnerSource: Boolean) =
+    internal fun getNewWallpaperByTag(tag: Pair<String, String>, partnerSource: Boolean) =
         viewModelScope.launch {
-            _state.value = TagUiState.Success(
-                listOf(
-                    GroupUiModel.PARTNER_TAG_CARROUSEL(tags.value),
-                    GroupUiModel.LOADING_GRID
-                )
-            )
+            _state.value = TagUiState.Success(tagUiModelMapper.toLoadingUiModel(tags.value))
             val result = getTagWallpaperUseCase.execute(tag, partnerSource).fold(
                 onSuccess = { wallpaper ->
-                    TagUiState.Success(tagUiModelMapper.map(wallpaper, tags.value))
+                    TagUiState.Success(tagUiModelMapper.toUiModel(wallpaper, tags.value))
                 },
                 onFailure = { TagUiState.Failure })
             _state.update { result }

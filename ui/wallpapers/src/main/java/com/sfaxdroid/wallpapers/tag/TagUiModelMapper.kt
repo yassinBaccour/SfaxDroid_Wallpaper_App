@@ -8,11 +8,16 @@ import javax.inject.Inject
 
 internal class TagUiModelMapper @Inject constructor() {
 
-    fun map(wallpaperGroup: List<WallpaperGroup>, tag: List<Pair<String, String>>) =
+    fun toUiModel(wallpaperGroup: List<WallpaperGroup>, tag: List<Pair<String, String>>) =
         listOf(
             GroupUiModel.PARTNER_TAG_CARROUSEL(tag),
             GroupUiModel.GRID(getWallpapers(wallpaperGroup))
         )
+
+    fun toLoadingUiModel(tag: List<Pair<String, String>>) = listOf(
+        GroupUiModel.PARTNER_TAG_CARROUSEL(tag),
+        GroupUiModel.LOADING_GRID
+    )
 
     private fun getWallpapers(wallpaperGroup: List<WallpaperGroup>): List<WallpaperUiModel> {
         return wallpaperGroup.asSequence()
