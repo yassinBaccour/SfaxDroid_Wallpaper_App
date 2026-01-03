@@ -13,15 +13,16 @@ internal class MixedWallpaperUiModelMapper @Inject constructor() {
     fun map(wallpaperGroup: List<WallpaperGroup>) =
         mutableListOf(
             GroupUiModel.HOME_HEADER,
-            GroupUiModel.CARROUSEL(
-                wallpaperGroup.first { it.theme == WallpaperTheme.NEW }.wallpapers.shuffled().take(10)
-                    .map { it.toUiModel() }, "New"
-            ),
-            GroupUiModel.TAG(wallpaperGroup.map { Pair(it.title, "Arabic") }.distinct()),
+            GroupUiModel.CARROUSEL(getCarrouselWallpaper(wallpaperGroup), "New"),
+            GroupUiModel.TAG(wallpaperGroup.map { Pair(it.title, "") }.distinct()),
             GroupUiModel.OF_THE_DAY(getMixedWallpaper(wallpaperGroup).take(9), ""),
             GroupUiModel.PARTNER_TAG(getWallpaperTagCategoryPairs()),
             GroupUiModel.RANDOM_GRID(getMixedWallpaper(wallpaperGroup), "")
         )
+
+    private fun getCarrouselWallpaper(wallpaperGroup: List<WallpaperGroup>) =
+        wallpaperGroup.first { it.theme == WallpaperTheme.NEW }.wallpapers.shuffled().take(10)
+            .map { it.toUiModel() }
 
     private fun getMixedWallpaper(wallpaperGroup: List<WallpaperGroup>): List<WallpaperUiModel> {
         return wallpaperGroup.asSequence()
