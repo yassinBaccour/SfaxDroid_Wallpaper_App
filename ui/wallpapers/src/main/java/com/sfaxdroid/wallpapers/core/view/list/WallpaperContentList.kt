@@ -19,6 +19,7 @@ import com.sfaxdroid.wallpapers.core.GroupUiModel
 import com.sfaxdroid.wallpapers.core.WallpaperUiModel
 import com.sfaxdroid.wallpapers.core.view.BetweenSectionSpacer
 import com.sfaxdroid.wallpapers.core.view.HorizontalWallpaperList
+import com.sfaxdroid.wallpapers.core.view.LoadingGrid
 import com.sfaxdroid.wallpapers.core.view.PartnerTags
 import com.sfaxdroid.wallpapers.core.view.SectionTitle
 import com.sfaxdroid.wallpapers.core.view.TagCarrousel
@@ -31,7 +32,8 @@ internal fun WallpaperContentList(
     modifier: Modifier = Modifier,
     group: List<GroupUiModel>,
     openDetail: (String, List<String>, String) -> Unit,
-    openTag: (String, Pair<String, String>, Boolean) -> Unit
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
+    loadTag: (String, Pair<String, String>) -> Unit
 ) {
     LazyColumn(
         modifier = modifier,
@@ -99,7 +101,9 @@ internal fun WallpaperContentList(
 
                 is GroupUiModel.PARTNER_TAG_CARROUSEL -> TagCarrousel(
                     item.list,
-                    openTag = { openTag.invoke(it.first, it, true) })
+                    openTag = { loadTag.invoke(it.first, it) })
+
+                GroupUiModel.LOADING_GRID -> LoadingGrid()
             }
         }
     }

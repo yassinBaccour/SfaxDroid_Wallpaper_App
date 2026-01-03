@@ -47,7 +47,7 @@ private fun WallpaperScreen(
     loadFromPartner: Boolean = false,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
-    goBack: () -> Unit,
+    goBack: () -> Unit
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
@@ -59,11 +59,22 @@ private fun WallpaperScreen(
             title = title,
             openDetail = openDetail,
             openTag = openTag,
-            goBack = goBack
+            goBack = goBack,
+            loadTag = { _, tag ->
+                viewModel.loadNewTag(
+                    tag = tag,
+                    partnerSource = loadFromPartner
+                )
+            }
         )
 
         TagUiState.Loading -> LoadingContent()
-        TagUiState.Failure -> FailureScreenMinimal { viewModel.getCustomUrlProduct(tag, loadFromPartner) }
+        TagUiState.Failure -> FailureScreenMinimal {
+            viewModel.getCustomUrlProduct(
+                tag = tag,
+                partnerSource = loadFromPartner
+            )
+        }
     }
 }
 
@@ -74,7 +85,8 @@ private fun TagScreenContent(
     title: String,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
-    goBack: () -> Unit
+    goBack: () -> Unit,
+    loadTag: (String, Pair<String, String>) -> Unit
 ) {
     Scaffold(topBar = {
         TopAppBar(
@@ -93,7 +105,8 @@ private fun TagScreenContent(
             modifier = Modifier.padding(innerPadding),
             group = group,
             openDetail = openDetail,
-            openTag = openTag
+            openTag = openTag,
+            loadTag = loadTag
         )
     }
 }
