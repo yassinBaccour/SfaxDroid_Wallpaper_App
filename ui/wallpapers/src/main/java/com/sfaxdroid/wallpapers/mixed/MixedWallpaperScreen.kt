@@ -16,22 +16,25 @@ import com.sfaxdroid.wallpapers.core.view.list.WallpaperContentList
 @Composable
 fun MixedWallpaperScreen(
     openDetail: (String, List<String>, String) -> Unit,
-    openTag: (String, Pair<String, String>, Boolean) -> Unit
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
+    openSkyBox: () -> Unit
 ) =
-    MixedWallpaperScreen(viewModel = hiltViewModel(), openDetail = openDetail, openTag = openTag)
+    MixedWallpaperScreen(viewModel = hiltViewModel(), openDetail = openDetail, openTag = openTag, openSkyBox = openSkyBox)
 
 @Composable
 private fun MixedWallpaperScreen(
     viewModel: MixedWallpaperViewModel,
     openDetail: (String, List<String>, String) -> Unit,
-    openTag: (String, Pair<String, String>, Boolean) -> Unit
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
+    openSkyBox: () -> Unit
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     when (state) {
         is MixedWallpaperUiState.Success -> MixedWallpaperContent(
             state = (state as MixedWallpaperUiState.Success).sections,
             openDetail = openDetail,
-            openTag = openTag
+            openTag = openTag,
+            openSkyBox = openSkyBox
         )
 
         MixedWallpaperUiState.Loading -> LoadingContent()
@@ -44,7 +47,8 @@ private fun MixedWallpaperScreen(
 private fun MixedWallpaperContent(
     state: List<GroupUiModel>,
     openDetail: (String, List<String>, String) -> Unit,
-    openTag: (String, Pair<String, String>, Boolean) -> Unit
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
+    openSkyBox: () -> Unit
 ) {
     Scaffold { innerPadding ->
         WallpaperContentList(
@@ -52,7 +56,8 @@ private fun MixedWallpaperContent(
             group = state,
             openDetail = openDetail,
             openTag = openTag,
-            loadTag = { x, y -> }
+            loadTag = { x, y -> },
+            openSkyBox = openSkyBox
         )
     }
 }

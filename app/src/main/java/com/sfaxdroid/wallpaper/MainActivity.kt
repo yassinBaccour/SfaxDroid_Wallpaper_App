@@ -1,11 +1,16 @@
 package com.sfaxdroid.wallpaper
 
+import android.app.WallpaperManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.sfaxdroid.sky.SkyBoxLiveWallpaper
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -18,8 +23,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            HomeScreen {
-                reviewApp()
+            HomeScreen(rateApp = { reviewApp() }) {
+                openLiveWallpaper<SkyBoxLiveWallpaper>(this)
             }
         }
     }
@@ -30,6 +35,30 @@ class MainActivity : ComponentActivity() {
         request.addOnCompleteListener {
             val reviewFlow = manager.launchReviewFlow(this, it.result)
             reviewFlow.addOnCompleteListener {}
+        }
+    }
+
+    inline fun <reified T : Any> openLiveWallpaper(context: Context) {
+        try {
+            context.startActivity(
+                Intent(
+                    WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
+                ).apply {
+                    putExtra(
+                        WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                        ComponentName(
+                            context,
+                            T::class.java
+                        )
+                    )
+                }
+            )
+        } catch (_: Exception) {
+            context.startActivity(
+                Intent().apply {
+                    action = WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER
+                }
+            )
         }
     }
 

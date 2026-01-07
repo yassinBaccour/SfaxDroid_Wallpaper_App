@@ -106,7 +106,8 @@ private fun TagScreenContent(
             group = group,
             openDetail = openDetail,
             openTag = openTag,
-            loadTag = loadTag
+            loadTag = loadTag,
+            openSkyBox = {}
         )
     }
 }

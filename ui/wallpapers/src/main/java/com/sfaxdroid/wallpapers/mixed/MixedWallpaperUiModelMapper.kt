@@ -17,6 +17,7 @@ internal class MixedWallpaperUiModelMapper @Inject constructor() {
             GroupUiModel.TAG(wallpaperGroup.map { Pair(it.title, "") }.distinct()),
             GroupUiModel.OF_THE_DAY(getMixedWallpaper(wallpaperGroup).take(9), ""),
             GroupUiModel.PARTNER_TAG(getWallpaperTagCategoryPairs()),
+            GroupUiModel.SkyBox,
             GroupUiModel.RANDOM_GRID(getMixedWallpaper(wallpaperGroup), "")
         )
 

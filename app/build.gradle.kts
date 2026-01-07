@@ -51,6 +51,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.ui.skybox)
     implementation(projects.data)
     implementation(projects.domain)
     implementation(projects.ui.wallpapers)
