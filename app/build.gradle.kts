@@ -34,8 +34,8 @@ android {
     productFlavors {
         create("wallpaperAppOne") {
             applicationIdSuffix = ".sami.rippel.allah"
-            versionCode = 102
-            versionName = "10.1.0"
+            versionCode = 103
+            versionName = "10.2.0"
             dimension = "app"
         }
         create("wallpaperAppTwo") {
