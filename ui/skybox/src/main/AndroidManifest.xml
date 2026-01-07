@@ -1,0 +1,26 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature
+        android:name="android.software.live_wallpaper"
+        android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00030002"
+        android:required="true" />
+
+    <application>
+        <service
+            android:name="com.sfaxdroid.sky.SkyBoxLiveWallpaper"
+            android:enabled="true"
+            android:exported="true"
+            android:label="Sky Name Of Allah"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/sky_wallpaper" />
+        </service>
+    </application>
+</manifest>

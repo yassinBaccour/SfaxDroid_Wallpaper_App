@@ -13,6 +13,7 @@ composeBom = "2025.12.01"
 compileSdk = "36"
 minSdk = "24"
 okhttp = "5.3.2"
+rajawali = "1.2.1970"
 retrofitVersion = "3.0.0"
 targetSdk = "36"
 dagger = "2.57.2"
@@ -50,6 +51,7 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+rajawali = { module = "org.rajawali3d:rajawali", version.ref = "rajawali" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 retrofit-gsonConverter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 coil-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
