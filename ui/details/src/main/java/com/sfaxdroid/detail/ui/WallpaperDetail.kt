@@ -90,7 +90,10 @@ internal fun WallpaperDetail(
         viewModel.events.flowWithLifecycle(lifecycleOwner.lifecycle).collect {
             when (it) {
                 is WallpaperDetailEvent.OpenTag -> openTag(it.tag)
-                is WallpaperDetailEvent.ShowMessage -> showToast(context, it.message)
+                is WallpaperDetailEvent.ShowMessage -> showToast(
+                    context = context,
+                    textId = it.message
+                )
             }
         }
     }
