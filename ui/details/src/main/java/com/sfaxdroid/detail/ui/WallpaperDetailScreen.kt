@@ -57,7 +57,7 @@ import com.sfaxdroid.details.R
 
 
 @Composable
-fun WallpaperDetail(
+fun WallpaperDetailScreen(
     detail: Destination.Detail,
     goBack: () -> Unit,
     openTag: (String) -> Unit
@@ -67,7 +67,7 @@ fun WallpaperDetail(
             factory.create(detail)
         }
     )
-    WallpaperDetail(
+    WallpaperDetailScreen(
         viewModel = viewModel,
         goBack = goBack,
         openTag = openTag
@@ -76,7 +76,7 @@ fun WallpaperDetail(
 
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
-internal fun WallpaperDetail(
+internal fun WallpaperDetailScreen(
     viewModel: WallpaperDetailViewModel,
     goBack: () -> Unit,
     openTag: (String) -> Unit
@@ -265,9 +265,9 @@ private fun showToast(context: Context, textId: Int) = Toast.makeText(
 @Preview
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
-internal fun WallpaperDetailPreview() = WallpaperDetailContent(
+private fun WallpaperDetailPreview() = WallpaperDetailContent(
     wallpaperDetailUiModel = WallpaperDetailUiState(),
-    goBack = {}, openTag = {}, setWallpaper = {}, addBitmap = { })
+    goBack = {}, openTag = {}, setWallpaper = {}, addBitmap = {})
 
 const val PARTNER_NAME = "Pixabay"
 const val PUBLISHER_NAME = "SfaxDroid"
