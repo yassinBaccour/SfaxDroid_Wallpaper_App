@@ -43,9 +43,7 @@ fun HomeScreen(rateApp: () -> Unit, openSkyBox: () -> Unit) {
                 entry<Destination.Tag> { key ->
                     rateApp.invoke()
                     TagScreen(
-                        title = key.title,
-                        tag = key.tag,
-                        loadFromPartner = key.loadFromPartner,
+                        key = key,
                         openDetail = { url, tags, source ->
                             backStack += Destination.Detail(url = url, tag = tags, source = source)
                         },

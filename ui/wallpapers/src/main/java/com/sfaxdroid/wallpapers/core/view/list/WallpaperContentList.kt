@@ -24,7 +24,6 @@ import com.sfaxdroid.wallpapers.core.view.PartnerTags
 import com.sfaxdroid.wallpapers.core.view.SectionTitle
 import com.sfaxdroid.wallpapers.core.view.SkyBoxCard
 import com.sfaxdroid.wallpapers.core.view.TagCarrousel
-import com.sfaxdroid.wallpapers.core.view.TagRows
 import com.sfaxdroid.wallpapers.core.view.WallpaperGrid
 import com.sfaxdroid.wallpapers.core.view.WallpaperTags
 
@@ -34,7 +33,7 @@ internal fun WallpaperContentList(
     group: List<GroupUiModel>,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
-    loadTag: (String, Pair<String, String>) -> Unit,
+    loadTag: (Pair<String, String>) -> Unit,
     openSkyBox: () -> Unit
 ) {
     LazyColumn(
@@ -103,7 +102,7 @@ internal fun WallpaperContentList(
 
                 is GroupUiModel.PARTNER_TAG_CARROUSEL -> TagCarrousel(
                     item.list,
-                    openTag = { loadTag.invoke(it.first, it) })
+                    openTag = { loadTag.invoke(it) })
 
                 GroupUiModel.LOADING_GRID -> LoadingGrid()
                 GroupUiModel.SkyBox -> SkyBoxCard(openSkyBox)

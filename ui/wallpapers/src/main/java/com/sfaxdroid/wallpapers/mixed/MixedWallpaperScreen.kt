@@ -19,7 +19,12 @@ fun MixedWallpaperScreen(
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
     openSkyBox: () -> Unit
 ) =
-    MixedWallpaperScreen(viewModel = hiltViewModel(), openDetail = openDetail, openTag = openTag, openSkyBox = openSkyBox)
+    MixedWallpaperScreen(
+        viewModel = hiltViewModel(),
+        openDetail = openDetail,
+        openTag = openTag,
+        openSkyBox = openSkyBox
+    )
 
 @Composable
 private fun MixedWallpaperScreen(
@@ -56,7 +61,7 @@ private fun MixedWallpaperContent(
             group = state,
             openDetail = openDetail,
             openTag = openTag,
-            loadTag = { x, y -> },
+            loadTag = {},
             openSkyBox = openSkyBox
         )
     }

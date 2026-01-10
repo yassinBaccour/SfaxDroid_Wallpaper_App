@@ -10,87 +10,69 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.sfaxdroid.wallpapers.core.GroupUiModel
+import com.sfaxdroid.commion.ui.compose.Destination
 import com.sfaxdroid.wallpapers.core.view.FailureScreenMinimal
 import com.sfaxdroid.wallpapers.core.view.LoadingContent
 import com.sfaxdroid.wallpapers.core.view.list.WallpaperContentList
 
 @Composable
 fun TagScreen(
-    title: String,
-    tag: Pair<String, String>,
-    loadFromPartner: Boolean = false,
-    openDetail: (String, List<String>, String) -> Unit,
-    openTag: (String, Pair<String, String>, Boolean) -> Unit,
-    goBack: () -> Unit
-) =
-    WallpaperScreen(
-        viewModel = hiltViewModel(),
-        title = title,
-        tag = tag,
-        loadFromPartner = loadFromPartner,
-        openDetail = openDetail,
-        openTag = openTag,
-        goBack = goBack
-    )
-
-@Composable
-private fun WallpaperScreen(
-    viewModel: TagScreenViewModel,
-    title: String,
-    tag: Pair<String, String>,
-    loadFromPartner: Boolean = false,
+    key: Destination.Tag,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
-    LaunchedEffect(Unit) {
-        viewModel.getWallpaperByTag(tag, loadFromPartner)
-    }
+    val viewModel = hiltViewModel<TagScreenViewModel, TagScreenViewModel.Factory>(
+        creationCallback = { factory ->
+            factory.create(key)
+        }
+    )
+    TagScreen(
+        viewModel = viewModel,
+        openDetail = openDetail,
+        openTag = openTag,
+        goBack = goBack
+    )
+}
+
+@Composable
+private fun TagScreen(
+    viewModel: TagScreenViewModel,
+    openDetail: (String, List<String>, String) -> Unit,
+    openTag: (String, Pair<String, String>, Boolean) -> Unit,
+    goBack: () -> Unit
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
     when (state) {
-        is TagUiState.Success -> TagScreenContent(
-            group = (state as TagUiState.Success).sections,
-            title = title,
+        is TagState.Success -> TagContent(
+            state = state as TagState.Success,
             openDetail = openDetail,
             openTag = openTag,
             goBack = goBack,
-            loadTag = { _, tag ->
-                viewModel.getNewWallpaperByTag(
-                    tag = tag,
-                    partnerSource = loadFromPartner
-                )
-            }
+            loadTag = viewModel::getNewWallpaperByTag
         )
 
-        TagUiState.Loading -> LoadingContent()
-        TagUiState.Failure -> FailureScreenMinimal {
-            viewModel.getWallpaperByTag(
-                tag = tag,
-                partnerSource = loadFromPartner
-            )
-        }
+        TagState.Loading -> LoadingContent()
+        TagState.Failure -> FailureScreenMinimal(viewModel::getWallpaperByTag)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TagScreenContent(
-    group: List<GroupUiModel>,
-    title: String,
+private fun TagContent(
+    state: TagState.Success,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
     goBack: () -> Unit,
-    loadTag: (String, Pair<String, String>) -> Unit
+    loadTag: (Pair<String, String>) -> Unit
 ) {
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text(text = title) },
+            title = { Text(text = state.title) },
             navigationIcon = {
                 IconButton(onClick = { goBack.invoke() }) {
                     Icon(
@@ -103,7 +85,7 @@ private fun TagScreenContent(
     }) { innerPadding ->
         WallpaperContentList(
             modifier = Modifier.padding(innerPadding),
-            group = group,
+            group = state.sections,
             openDetail = openDetail,
             openTag = openTag,
             loadTag = loadTag,

@@ -2,53 +2,78 @@ package com.sfaxdroid.wallpapers.tag
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sfaxdroid.commion.ui.compose.Destination
 import com.sfaxdroid.domain.usecase.GetTagWallpaperUseCase
 import com.sfaxdroid.wallpapers.mixed.MixedWallpaperUiState
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-internal class TagScreenViewModel @Inject constructor(
+@HiltViewModel(assistedFactory = TagScreenViewModel.Factory::class)
+internal class TagScreenViewModel @AssistedInject constructor(
+    @Assisted val navKey: Destination.Tag,
     private val getTagWallpaperUseCase: GetTagWallpaperUseCase,
     private val tagUiModelMapper: TagUiModelMapper,
     private val wallpaperToTagMapper: WallpaperToTagMapper
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<TagUiState>(TagUiState.Loading)
+    @AssistedFactory
+    interface Factory {
+        fun create(navKey: Destination.Tag): TagScreenViewModel
+    }
+
+    private val _state = MutableStateFlow<TagState>(TagState.Loading)
 
     private val tags = MutableStateFlow<List<Pair<String, String>>>(listOf())
 
-    val uiState = _state.stateIn(
+    val state = _state.onStart {
+        getWallpaperByTag()
+    }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000L),
         initialValue = MixedWallpaperUiState.Loading
     )
 
-    internal fun getWallpaperByTag(tag: Pair<String, String>, partnerSource: Boolean) =
+    internal fun getWallpaperByTag() =
         viewModelScope.launch {
-            val result = getTagWallpaperUseCase.execute(tag, partnerSource).fold(
+            val result = getTagWallpaperUseCase.execute(
+                tag = navKey.tag,
+                partnerSource = navKey.loadFromPartner
+            ).fold(
                 onSuccess = { wallpaper ->
                     val tagList = wallpaperToTagMapper.map(wallpaper)
                     tags.value = tagList
-                    TagUiState.Success(tagUiModelMapper.toUiModel(wallpaper, tagList))
+                    TagState.Success(
+                        title = navKey.title,
+                        sections = tagUiModelMapper.toUiModel(wallpaper, tagList),
+                        loadFromPartner = navKey.loadFromPartner,
+                        tags = navKey.tag
+                    )
                 },
-                onFailure = { TagUiState.Failure })
+                onFailure = { TagState.Failure })
             _state.update { result }
         }
 
-    internal fun getNewWallpaperByTag(tag: Pair<String, String>, partnerSource: Boolean) =
+    internal fun getNewWallpaperByTag(tag: Pair<String, String>) {
+        _state.update {
+            val currentState = _state.value as TagState.Success
+            currentState.copy(sections = tagUiModelMapper.toLoadingUiModel(tags.value))
+        }
         viewModelScope.launch {
-            _state.value = TagUiState.Success(tagUiModelMapper.toLoadingUiModel(tags.value))
-            val result = getTagWallpaperUseCase.execute(tag, partnerSource).fold(
+            val result = getTagWallpaperUseCase.execute(tag, navKey.loadFromPartner).fold(
                 onSuccess = { wallpaper ->
-                    TagUiState.Success(tagUiModelMapper.toUiModel(wallpaper, tags.value))
+                    val currentState = _state.value as TagState.Success
+                    currentState.copy(sections = tagUiModelMapper.toUiModel(wallpaper, tags.value))
                 },
-                onFailure = { TagUiState.Failure })
+                onFailure = { TagState.Failure })
             _state.update { result }
         }
+    }
 }
