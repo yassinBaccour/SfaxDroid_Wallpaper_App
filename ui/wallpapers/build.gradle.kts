@@ -13,6 +13,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.commonUiCompose)
     implementation(projects.domain)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.core.ktx)

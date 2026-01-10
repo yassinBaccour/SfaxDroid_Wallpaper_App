@@ -51,6 +51,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.commonUiCompose)
     implementation(projects.ui.skybox)
     implementation(projects.data)
     implementation(projects.domain)

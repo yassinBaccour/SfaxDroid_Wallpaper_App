@@ -1,4 +1,4 @@
-package com.sfaxdroid.wallpaper
+package com.sfaxdroid.commion.ui.compose
 
 sealed interface Destination {
     data object Wallpaper : Destination

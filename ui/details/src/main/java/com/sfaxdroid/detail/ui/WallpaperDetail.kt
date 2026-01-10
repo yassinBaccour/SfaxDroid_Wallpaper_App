@@ -1,6 +1,7 @@
 package com.sfaxdroid.detail.ui
 
 import android.Manifest
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.widget.Toast
@@ -22,7 +23,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Wallpaper
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
@@ -32,10 +32,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -47,91 +46,108 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.sfaxdroid.detail.ui.WallpaperUtils.isColorDark
+import com.sfaxdroid.commion.ui.compose.Destination
 import com.sfaxdroid.details.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
+
+@Composable
+fun WallpaperDetail(
+    detail: Destination.Detail,
+    goBack: () -> Unit,
+    openTag: (String) -> Unit
+) {
+    val viewModel = hiltViewModel<WallpaperDetailViewModel, WallpaperDetailViewModel.Factory>(
+        creationCallback = { factory ->
+            factory.create(detail)
+        }
+    )
+    WallpaperDetail(
+        viewModel = viewModel,
+        goBack = goBack,
+        openTag = openTag
+    )
+}
 
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
-fun WallpaperDetail(
-    url: String,
-    tag: List<String>,
-    source: String,
+internal fun WallpaperDetail(
+    viewModel: WallpaperDetailViewModel,
     goBack: () -> Unit,
     openTag: (String) -> Unit
 ) {
 
     val context = LocalContext.current
-    var isSetWallpaperLoading by remember { mutableStateOf(false) }
-    var isImageLoading by remember { mutableStateOf(true) }
-    val coroutineScope = rememberCoroutineScope()
-    var bitmap by remember { mutableStateOf<Bitmap?>(null) }
-    val text = stringResource(R.string.wallpaper_set_successfully)
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-    var isImageDark by remember { mutableStateOf(true) }
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(Unit) {
+        viewModel.events.flowWithLifecycle(lifecycleOwner.lifecycle).collect {
+            when (it) {
+                is WallpaperDetailEvent.OpenTag -> openTag(it.tag)
+                is WallpaperDetailEvent.ShowMessage -> showToast(context, it.message)
+            }
+        }
+    }
+
+    WallpaperDetailContent(
+        wallpaperDetailUiModel = state,
+        goBack = goBack,
+        openTag = openTag,
+        setWallpaper = { viewModel.setAsWallpaper(context) },
+        addBitmap = viewModel::addBitmap
+    )
+
+}
+
+@Composable
+@RequiresPermission(Manifest.permission.SET_WALLPAPER)
+internal fun WallpaperDetailContent(
+    wallpaperDetailUiModel: WallpaperDetailUiState,
+    goBack: () -> Unit,
+    openTag: (String) -> Unit,
+    setWallpaper: () -> Unit,
+    addBitmap: (Bitmap) -> Unit
+) {
+
+    val context = LocalContext.current
 
     Box {
-        if (isImageLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .size(24.dp)
-                    .align(Alignment.Center),
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                strokeWidth = 2.5.dp
-            )
-        }
         AsyncImage(
             model = ImageRequest.Builder(context)
-                .data(url)
+                .data(wallpaperDetailUiModel.url)
                 .allowHardware(false)
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.FillHeight,
             modifier = Modifier.fillMaxSize(),
             onSuccess = { result ->
-                isImageLoading = false
-                bitmap = (result.result.drawable as BitmapDrawable).bitmap
-                isImageDark = isColorDark(bitmap!!)
+                addBitmap.invoke((result.result.drawable as BitmapDrawable).bitmap)
             }
         )
-        GoBackButton(goBack = goBack, isImageDark = isImageDark)
+        GoBackButton(goBack = goBack, isImageDark = wallpaperDetailUiModel.isImageDark)
         MoreInformationButton(
-            tags = tag,
-            isImageDark = isImageDark,
-            source = source,
+            tags = wallpaperDetailUiModel.tag,
+            isImageDark = wallpaperDetailUiModel.isImageDark,
+            source = wallpaperDetailUiModel.source,
             openTag = openTag
         )
         FloatingActionButton(
             onClick = {
-                if (isSetWallpaperLoading) return@FloatingActionButton
-                bitmap?.let {
-                    coroutineScope.launch {
-                        isSetWallpaperLoading = true
-                        try {
-                            withContext(Dispatchers.IO) {
-                                WallpaperUtils.setWallpaperWithChooser(context, it)
-                            }
-                        } finally {
-                            Toast.makeText(
-                                context,
-                                text,
-                                Toast.LENGTH_LONG
-                            ).show()
-                            isSetWallpaperLoading = false
-                        }
-                    }
-                }
+                if (wallpaperDetailUiModel.isWallpaperLoading) return@FloatingActionButton
+                setWallpaper.invoke()
             },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .navigationBarsPadding()
                 .padding(16.dp)
         ) {
-            if (isSetWallpaperLoading) {
+            if (wallpaperDetailUiModel.isWallpaperLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier.size(24.dp),
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -141,9 +157,10 @@ fun WallpaperDetail(
                 Icon(Icons.Default.Wallpaper, contentDescription = null)
             }
         }
-        SourceIndicator(source)
+        SourceIndicator(wallpaperDetailUiModel.source)
     }
 }
+
 
 @Composable
 private fun TagsContent(tags: List<String>, openTag: (String) -> Unit) {
@@ -236,14 +253,18 @@ private fun BoxScope.MoreInformationButton(
     }
 }
 
+private fun showToast(context: Context, textId: Int) = Toast.makeText(
+    context,
+    context.getString(textId),
+    Toast.LENGTH_LONG
+).show()
+
 @Preview
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
-internal fun WallpaperDetailPreview() = WallpaperDetail(
-    url = "",
-    tag = listOf(),
-    source = "",
-    goBack = {}) {}
+internal fun WallpaperDetailPreview() = WallpaperDetailContent(
+    wallpaperDetailUiModel = WallpaperDetailUiState(),
+    goBack = {}, openTag = {}, setWallpaper = {}, addBitmap = { })
 
 const val PARTNER_NAME = "Pixabay"
 const val PUBLISHER_NAME = "SfaxDroid"

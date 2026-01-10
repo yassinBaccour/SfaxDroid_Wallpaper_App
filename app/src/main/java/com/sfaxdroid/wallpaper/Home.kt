@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDe
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import com.sfaxdroid.commion.ui.compose.Destination
 import com.sfaxdroid.detail.ui.WallpaperDetail
 import com.sfaxdroid.wallpaper.ui.theme.WallpaperAppTheme
 import com.sfaxdroid.wallpapers.mixed.MixedWallpaperScreen
@@ -59,9 +60,7 @@ fun HomeScreen(rateApp: () -> Unit, openSkyBox: () -> Unit) {
                 }
                 entry<Destination.Detail> { key ->
                     WallpaperDetail(
-                        url = key.url,
-                        tag = key.tag,
-                        source = key.source,
+                        detail = key,
                         goBack = { backStack.removeLastOrNull() },
                         openTag = { tag ->
                             backStack += Destination.Tag(

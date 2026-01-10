@@ -27,8 +27,7 @@ internal object WallpaperUtils {
         wallpaperManager.setBitmap(croppedBitmap)
     }
 
-
-    fun isColorDark(bitmap: Bitmap): Boolean {
+    internal fun isColorDark(bitmap: Bitmap): Boolean {
         val color = extractTopStartColor(bitmap)
         return calculateLuminance(color) < 0.2
     }
