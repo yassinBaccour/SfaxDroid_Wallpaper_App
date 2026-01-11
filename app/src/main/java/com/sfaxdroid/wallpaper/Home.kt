@@ -54,7 +54,7 @@ fun HomeScreen(rateApp: () -> Unit, openSkyBox: () -> Unit) {
                                 loadFromPartner = showPartner
                             )
                         },
-                        goBack = { backStack.removeLastOrNull() })
+                        navigationBack = { backStack.removeLastOrNull() })
                 }
                 entry<Destination.Detail> { key ->
                     WallpaperDetailScreen(

@@ -24,7 +24,7 @@ fun TagScreen(
     key: Destination.Tag,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
-    goBack: () -> Unit
+    navigationBack: () -> Unit
 ) {
     val viewModel = hiltViewModel<TagScreenViewModel, TagScreenViewModel.Factory>(
         creationCallback = { factory ->
@@ -35,7 +35,7 @@ fun TagScreen(
         viewModel = viewModel,
         openDetail = openDetail,
         openTag = openTag,
-        goBack = goBack
+        navigationBack = navigationBack
     )
 }
 
@@ -44,7 +44,7 @@ private fun TagScreen(
     viewModel: TagScreenViewModel,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
-    goBack: () -> Unit
+    navigationBack: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     when (state) {
@@ -52,7 +52,7 @@ private fun TagScreen(
             state = state as TagState.Success,
             openDetail = openDetail,
             openTag = openTag,
-            goBack = goBack,
+            navigationBack = navigationBack,
             loadTag = viewModel::getNewWallpaperByTag
         )
 
@@ -67,14 +67,14 @@ private fun TagContent(
     state: TagState.Success,
     openDetail: (String, List<String>, String) -> Unit,
     openTag: (String, Pair<String, String>, Boolean) -> Unit,
-    goBack: () -> Unit,
+    navigationBack: () -> Unit,
     loadTag: (Pair<String, String>) -> Unit
 ) {
     Scaffold(topBar = {
         TopAppBar(
             title = { Text(text = state.title) },
             navigationIcon = {
-                IconButton(onClick = { goBack.invoke() }) {
+                IconButton(onClick = { navigationBack.invoke() }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = null

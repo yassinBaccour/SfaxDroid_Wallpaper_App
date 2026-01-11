@@ -29,11 +29,11 @@ internal class TagScreenViewModel @AssistedInject constructor(
         fun create(navKey: Destination.Tag): TagScreenViewModel
     }
 
-    private val _state = MutableStateFlow<TagState>(TagState.Loading)
+    private val wallpaperTagState = MutableStateFlow<TagState>(TagState.Loading)
 
     private val tags = MutableStateFlow<List<Pair<String, String>>>(listOf())
 
-    val state = _state.onStart {
+    val state = wallpaperTagState.onStart {
         getWallpaperByTag()
     }.stateIn(
         scope = viewModelScope,
@@ -58,22 +58,22 @@ internal class TagScreenViewModel @AssistedInject constructor(
                     )
                 },
                 onFailure = { TagState.Failure })
-            _state.update { result }
+            wallpaperTagState.update { result }
         }
 
     internal fun getNewWallpaperByTag(tag: Pair<String, String>) {
-        _state.update {
-            val currentState = _state.value as TagState.Success
+        wallpaperTagState.update {
+            val currentState = wallpaperTagState.value as TagState.Success
             currentState.copy(sections = tagUiModelMapper.toLoadingUiModel(tags.value))
         }
         viewModelScope.launch {
             val result = getTagWallpaperUseCase.execute(tag, navKey.loadFromPartner).fold(
                 onSuccess = { wallpaper ->
-                    val currentState = _state.value as TagState.Success
+                    val currentState = wallpaperTagState.value as TagState.Success
                     currentState.copy(sections = tagUiModelMapper.toUiModel(wallpaper, tags.value))
                 },
                 onFailure = { TagState.Failure })
-            _state.update { result }
+            wallpaperTagState.update { result }
         }
     }
 }
