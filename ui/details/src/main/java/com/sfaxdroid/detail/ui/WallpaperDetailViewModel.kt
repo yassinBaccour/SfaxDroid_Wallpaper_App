@@ -34,7 +34,13 @@ internal class WallpaperDetailViewModel @AssistedInject constructor(@Assisted va
     private val eventsChannel = Channel<WallpaperDetailEvent>(UNLIMITED)
     internal val events = eventsChannel.receiveAsFlow()
 
-    private val _state = MutableStateFlow(WallpaperDetailUiState(url = navKey.url, tag = navKey.tag, source = navKey.source))
+    private val _state = MutableStateFlow(
+        WallpaperDetailUiState(
+            url = navKey.url,
+            tag = navKey.tag,
+            source = navKey.source
+        )
+    )
     val uiState = _state.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000L),
@@ -62,6 +68,18 @@ internal class WallpaperDetailViewModel @AssistedInject constructor(@Assisted va
                 setLoadingState(false)
             }
         }
+    }
+
+    internal fun openTag(tag: String) {
+        eventsChannel.trySend(
+            WallpaperDetailEvent.NavigateToDestination(
+                Destination.Tag(
+                    title = tag,
+                    tag = Pair(tag, ""),
+                    loadFromPartner = true
+                )
+            )
+        )
     }
 
     private fun setLoadingState(isLoading: Boolean) = _state.update { current ->

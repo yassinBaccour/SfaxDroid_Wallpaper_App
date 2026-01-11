@@ -54,13 +54,15 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sfaxdroid.commion.ui.compose.Destination
 import com.sfaxdroid.details.R
+import kotlinx.coroutines.flow.Flow
 
 
+@RequiresPermission(Manifest.permission.SET_WALLPAPER)
 @Composable
 fun WallpaperDetailScreen(
     detail: Destination.Detail,
-    goBack: () -> Unit,
-    openTag: (String) -> Unit
+    navigationBack: () -> Unit,
+    onNavigateToDestination: (Destination) -> Unit
 ) {
     val viewModel = hiltViewModel<WallpaperDetailViewModel, WallpaperDetailViewModel.Factory>(
         creationCallback = { factory ->
@@ -69,8 +71,8 @@ fun WallpaperDetailScreen(
     )
     WallpaperDetailScreen(
         viewModel = viewModel,
-        goBack = goBack,
-        openTag = openTag
+        navigationBack = navigationBack,
+        navigateTo = onNavigateToDestination
     )
 }
 
@@ -78,30 +80,19 @@ fun WallpaperDetailScreen(
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
 internal fun WallpaperDetailScreen(
     viewModel: WallpaperDetailViewModel,
-    goBack: () -> Unit,
-    openTag: (String) -> Unit
+    navigationBack: () -> Unit,
+    navigateTo: (Destination) -> Unit
 ) {
 
     val context = LocalContext.current
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-    LaunchedEffect(Unit) {
-        viewModel.events.flowWithLifecycle(lifecycleOwner.lifecycle).collect {
-            when (it) {
-                is WallpaperDetailEvent.OpenTag -> openTag(it.tag)
-                is WallpaperDetailEvent.ShowMessage -> showToast(
-                    context = context,
-                    textId = it.message
-                )
-            }
-        }
-    }
+    WallpaperDetailEventListener(events = viewModel.events, navigateTo = navigateTo)
 
     WallpaperDetailContent(
         wallpaperDetailUiModel = state,
-        goBack = goBack,
-        openTag = openTag,
+        navigationBack = navigationBack,
+        openTag = viewModel::openTag,
         setWallpaper = { viewModel.setAsWallpaper(context) },
         addBitmap = viewModel::addBitmap
     )
@@ -112,7 +103,7 @@ internal fun WallpaperDetailScreen(
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
 internal fun WallpaperDetailContent(
     wallpaperDetailUiModel: WallpaperDetailUiState,
-    goBack: () -> Unit,
+    navigationBack: () -> Unit,
     openTag: (String) -> Unit,
     setWallpaper: () -> Unit,
     addBitmap: (Bitmap) -> Unit
@@ -133,7 +124,7 @@ internal fun WallpaperDetailContent(
                 addBitmap.invoke((result.result.drawable as BitmapDrawable).bitmap)
             }
         )
-        GoBackButton(goBack = goBack, isImageDark = wallpaperDetailUiModel.isImageDark)
+        NavigationBackButton(navigationBack = navigationBack, isImageDark = wallpaperDetailUiModel.isImageDark)
         MoreInformationButton(
             tags = wallpaperDetailUiModel.tag,
             isImageDark = wallpaperDetailUiModel.isImageDark,
@@ -207,12 +198,12 @@ private fun BoxScope.SourceIndicator(source: String) {
 }
 
 @Composable
-private fun BoxScope.GoBackButton(
-    goBack: () -> Unit,
+private fun BoxScope.NavigationBackButton(
+    navigationBack: () -> Unit,
     isImageDark: Boolean
 ) {
     IconButton(
-        onClick = { goBack.invoke() },
+        onClick = { navigationBack.invoke() },
         modifier = Modifier
             .statusBarsPadding()
             .align(Alignment.TopStart)
@@ -262,12 +253,32 @@ private fun showToast(context: Context, textId: Int) = Toast.makeText(
     Toast.LENGTH_LONG
 ).show()
 
+@Composable
+private fun WallpaperDetailEventListener(
+    events: Flow<WallpaperDetailEvent>,
+    navigateTo: (Destination) -> Unit
+) {
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(Unit) {
+        events.flowWithLifecycle(lifecycleOwner.lifecycle).collect {
+            when (it) {
+                is WallpaperDetailEvent.NavigateToDestination -> navigateTo(it.destination)
+                is WallpaperDetailEvent.ShowMessage -> showToast(
+                    context = context,
+                    textId = it.message
+                )
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 @RequiresPermission(Manifest.permission.SET_WALLPAPER)
 private fun WallpaperDetailPreview() = WallpaperDetailContent(
     wallpaperDetailUiModel = WallpaperDetailUiState(),
-    goBack = {}, openTag = {}, setWallpaper = {}, addBitmap = {})
+    navigationBack = {}, openTag = {}, setWallpaper = {}, addBitmap = {})
 
 const val PARTNER_NAME = "Pixabay"
 const val PUBLISHER_NAME = "SfaxDroid"

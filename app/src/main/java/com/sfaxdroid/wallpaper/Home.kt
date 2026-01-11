@@ -61,11 +61,7 @@ fun HomeScreen(rateApp: () -> Unit, openSkyBox: () -> Unit) {
                         detail = key,
                         goBack = { backStack.removeLastOrNull() },
                         openTag = { tag ->
-                            backStack += Destination.Tag(
-                                title = tag,
-                                tag = Pair(tag, ""),
-                                loadFromPartner = true
-                            )
+                            backStack += tag
                         }
                     )
                 }
