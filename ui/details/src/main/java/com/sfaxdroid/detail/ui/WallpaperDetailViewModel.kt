@@ -34,14 +34,14 @@ internal class WallpaperDetailViewModel @AssistedInject constructor(@Assisted va
     private val eventsChannel = Channel<WallpaperDetailEvent>(UNLIMITED)
     internal val events = eventsChannel.receiveAsFlow()
 
-    private val _state = MutableStateFlow(
+    private val wallpaperDetailState = MutableStateFlow(
         WallpaperDetailUiState(
             url = navKey.url,
             tag = navKey.tag,
             source = navKey.source
         )
     )
-    val uiState = _state.stateIn(
+    val state = wallpaperDetailState.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000L),
         initialValue = WallpaperDetailUiState()
@@ -50,7 +50,7 @@ internal class WallpaperDetailViewModel @AssistedInject constructor(@Assisted va
     internal fun addBitmap(bitmap: Bitmap) {
         viewModelScope.launch {
             val isDark = isColorDark(bitmap)
-            _state.update { current ->
+            wallpaperDetailState.update { current ->
                 current.copy(wallpaper = bitmap, isImageDark = isDark, isWallpaperLoading = false)
             }
         }
@@ -61,7 +61,7 @@ internal class WallpaperDetailViewModel @AssistedInject constructor(@Assisted va
             setLoadingState(true)
             try {
                 withContext(Dispatchers.IO) {
-                    WallpaperUtils.setWallpaperWithChooser(context, _state.value.wallpaper!!)
+                    WallpaperUtils.setWallpaperWithChooser(context, wallpaperDetailState.value.wallpaper!!)
                 }
             } finally {
                 eventsChannel.trySend(WallpaperDetailEvent.ShowMessage(R.string.wallpaper_set_successfully))
@@ -82,7 +82,7 @@ internal class WallpaperDetailViewModel @AssistedInject constructor(@Assisted va
         )
     }
 
-    private fun setLoadingState(isLoading: Boolean) = _state.update { current ->
+    private fun setLoadingState(isLoading: Boolean) = wallpaperDetailState.update { current ->
         current.copy(isWallpaperLoading = isLoading)
     }
 

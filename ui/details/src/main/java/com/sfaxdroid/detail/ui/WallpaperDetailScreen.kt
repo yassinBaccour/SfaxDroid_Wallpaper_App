@@ -85,7 +85,7 @@ internal fun WallpaperDetailScreen(
 ) {
 
     val context = LocalContext.current
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     WallpaperDetailEventListener(events = viewModel.events, navigateTo = navigateTo)
 
